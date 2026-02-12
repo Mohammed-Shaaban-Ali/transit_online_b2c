@@ -18,7 +18,9 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { FLIGHT_BOOKING_KEY } from "@/constants";
 import { FlightRoute } from "@/components/shared/FlightCardUtils/FlightRoute";
-
+import FlightBookingForm from "@/components/shared/booking/FlightBookingForm";
+import FlightBookingConfirmation from "@/components/shared/booking/FlightBookingConfirmation";
+import type { FlightBookingFormValues } from "@/components/shared/booking/FlightBookingForm";
 
 export interface FlightBookingData {
   departureFareKey: string;
@@ -45,6 +47,14 @@ const FlightBookingPage = () => {
   const { formatDate } = useFlightUtils();
   const [flightData, setFlightData] = useState<FlightBookingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Booking flow: "form" | "confirmation"
+  const [step, setStep] = useState<"form" | "confirmation">("form");
+  const [bookingId, setBookingId] = useState("");
+  const [formData, setFormData] = useState<FlightBookingFormValues | null>(
+    null
+  );
 
   // Read flight data from sessionStorage
   useEffect(() => {
@@ -61,12 +71,38 @@ const FlightBookingPage = () => {
     }
   }, []);
 
+  const handleBookingSubmit = async (data: FlightBookingFormValues) => {
+    setIsSubmitting(true);
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      // Generate booking ID
+      const generatedId = `FLT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+
+      setBookingId(generatedId);
+      setFormData(data);
+      setStep("confirmation");
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      console.error("Booking error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="container my-24">
         <div className="space-y-4">
           <div className="h-8 bg-gray-200 rounded-lg w-64 animate-pulse" />
-          <div className="h-64 bg-gray-200 rounded-lg animate-pulse" />
+          <div className="h-48 bg-gray-200 rounded-lg animate-pulse" />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 h-64 bg-gray-200 rounded-lg animate-pulse" />
+            <div className="h-48 bg-gray-200 rounded-lg animate-pulse" />
+          </div>
         </div>
       </div>
     );
@@ -77,11 +113,14 @@ const FlightBookingPage = () => {
       <div className="container my-24">
         <div className="flex flex-col items-center justify-center text-center">
           <FaPlane className="text-gray-300 text-6xl mb-4" />
-          <h2 className="text-24 font-bold mb-2">
-            {t("noFlightData")}
-          </h2>
-          <p className="text-gray-400 mb-6 max-w-md mx-auto">{t("noFlightDataDescription")}</p>
-          <Button onClick={() => router.push("/flights")} className="rounded-full h-12 px-8">
+          <h2 className="text-24 font-bold mb-2">{t("noFlightData")}</h2>
+          <p className="text-gray-400 mb-6 max-w-md mx-auto">
+            {t("noFlightDataDescription")}
+          </p>
+          <Button
+            onClick={() => router.push("/flights")}
+            className="rounded-full h-12 px-8"
+          >
             {t("backToSearch")}
           </Button>
         </div>
@@ -91,7 +130,6 @@ const FlightBookingPage = () => {
 
   const departureFlight = flightData.departureFlightData;
   const returnFlight = flightData.returnFlightData;
-
 
   // Get departure date
   const departureDate = departureFlight?.legs?.[0]?.departure_info?.date
@@ -107,28 +145,51 @@ const FlightBookingPage = () => {
   const returnDate = returnFlight?.legs?.[returnFlight.legs.length - 1]
     ?.arrival_info?.date
     ? formatDate(
-      returnFlight.legs[returnFlight.legs.length - 1].arrival_info.date
-    )
+        returnFlight.legs[returnFlight.legs.length - 1].arrival_info.date
+      )
     : null;
+
+  // Show Confirmation
+  if (step === "confirmation" && formData) {
+    return (
+      <FlightBookingConfirmation
+        bookingId={bookingId}
+        departureFrom={departureFromCode}
+        departureTo={departureToCode}
+        departureDate={departureDate}
+        returnDate={returnDate}
+        cabinClass={flightData.cabinClass}
+        adults={flightData.adults}
+        children={flightData.children}
+        infants={flightData.infants}
+        buyPrice={flightData.buyPrice}
+        formData={formData}
+        departureFlightData={departureFlight}
+        returnFlightData={returnFlight}
+        flightData={flightData}
+      />
+    );
+  }
 
   return (
     <div className="container my-24">
-
       <h1 className="text-28 font-bold mb-6">{t("title")}</h1>
 
-      {/* Flight Card - Same layout as CartPage FlightCard */}
+      {/* ===== Flight Details - Full Width Top Section ===== */}
       <div
-        className="bg-white border border-gray-200 rounded-lg p-2 sm:p-4
-                    relative flex flex-col gap-4 transition-all duration-300"
+        className="bg-white border border-gray-200 rounded-2xl p-2 sm:p-4
+                    relative flex flex-col gap-4 transition-all duration-300 mb-6"
       >
         <div className="flex items-center justify-between gap-5 flex-wrap">
-          {/* Top Info Bar: Departure/Return, Cabin Class, and Passengers */}
+          {/* Top Info Bar */}
           <div className="flex flex-wrap items-center gap-3 px-2 mb-1">
             {/* Departure Date */}
             {departureDate && (
               <div className="flex items-center gap-2">
                 <FaCalendarAlt size={13} className="text-gray-500" />
-                <span className="text-12 text-gray-500">{tFlightCard("departure")}:</span>
+                <span className="text-12 text-gray-500">
+                  {tFlightCard("departure")}:
+                </span>
                 <span className="text-12 font-medium text-gray-700">
                   {departureDate}
                 </span>
@@ -141,7 +202,9 @@ const FlightBookingPage = () => {
                 <div className="h-6 w-px bg-gray-300"></div>
                 <div className="flex items-center gap-2">
                   <FaCalendarAlt size={13} className="text-gray-500" />
-                  <span className="text-12 text-gray-500">{tFlightCard("return")}:</span>
+                  <span className="text-12 text-gray-500">
+                    {tFlightCard("return")}:
+                  </span>
                   <span className="text-12 font-medium text-gray-700">
                     {returnDate}
                   </span>
@@ -153,11 +216,12 @@ const FlightBookingPage = () => {
 
             {departureFromCode && departureToCode && (
               <div className="flex items-center gap-1.5">
-                <span className="text-12 text-gray-500">{tFlightCard("from")}:</span>
+                <span className="text-12 text-gray-500">
+                  {tFlightCard("from")}:
+                </span>
                 <span className="text-12 font-medium text-gray-700">
                   {departureFromCode}
                 </span>
-
                 {returnDate && returnDate !== departureDate ? (
                   <FaExchangeAlt size={12} className="text-gray-600" />
                 ) : (
@@ -166,7 +230,9 @@ const FlightBookingPage = () => {
                     className="text-gray-600 rtl:rotate-180"
                   />
                 )}
-                <span className="text-12 text-gray-500">{tFlightCard("to")}:</span>
+                <span className="text-12 text-gray-500">
+                  {tFlightCard("to")}:
+                </span>
                 <span className="text-12 font-medium text-gray-700">
                   {departureToCode}
                 </span>
@@ -178,9 +244,13 @@ const FlightBookingPage = () => {
             {flightData.cabinClass && (
               <div className="flex items-center gap-2">
                 <FaPlane size={13} className="text-gray-500" />
-                <span className="text-12 text-gray-500">{tFlightCard("cabin")}</span>
+                <span className="text-12 text-gray-500">
+                  {tFlightCard("cabin")}
+                </span>
                 <span className="text-12 font-medium text-gray-700">
-                  {flightData.cabinClass === "BUSINESS" ? tFlightCard("business") : tFlightCard("economy")}
+                  {flightData.cabinClass === "BUSINESS"
+                    ? tFlightCard("business")
+                    : tFlightCard("economy")}
                 </span>
               </div>
             )}
@@ -200,7 +270,9 @@ const FlightBookingPage = () => {
                   value: flightData.children,
                 },
                 {
-                  icon: <MdChildFriendly size={12} className="text-gray-500" />,
+                  icon: (
+                    <MdChildFriendly size={12} className="text-gray-500" />
+                  ),
                   label: `${flightData.infants} ${flightData.infants === 1 ? tFlightCard("infant") : tFlightCard("infants")}`,
                   value: flightData.infants,
                 },
@@ -222,9 +294,10 @@ const FlightBookingPage = () => {
             </div>
           </div>
           {/* Price Section */}
-          <div className="flex items-center  justify-end">
+          <div className="flex items-center justify-end">
             <PriceCell price={flightData.buyPrice} />
-          </div></div>
+          </div>
+        </div>
 
         {/* Flights Container */}
         <div className="flex flex-col gap-3 rounded-xl p-2.5 border border-primary/30">
@@ -249,8 +322,74 @@ const FlightBookingPage = () => {
             </div>
           )}
         </div>
+      </div>
 
+      {/* ===== Form + Price Summary Grid ===== */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left: Booking Form */}
+        <div className="lg:col-span-2">
+          <FlightBookingForm
+            adults={flightData.adults}
+            children={flightData.children}
+            infants={flightData.infants}
+            isSubmitting={isSubmitting}
+            onSubmit={handleBookingSubmit}
+          />
+        </div>
 
+        {/* Right: Price Summary (Sticky) */}
+        <div className="lg:col-span-1">
+          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden sticky top-12">
+            <div className="px-4 md:px-5 py-3 bg-gray-100 border-b border-gray-200">
+              <h3 className="text-16 font-bold">{t("priceSummary")}</h3>
+            </div>
+
+            <div className="p-4 flex flex-col gap-4">
+              {/* Route */}
+              <div className="flex items-center justify-between text-14 font-medium text-gray-500">
+                <span>{t("route")}</span>
+                <div className="flex items-center gap-1.5 font-bold text-gray-700">
+                  <span>{departureFromCode}</span>
+                  {returnDate ? (
+                    <FaExchangeAlt size={11} className="text-gray-400" />
+                  ) : (
+                    <FaArrowRightLong
+                      size={11}
+                      className="text-gray-400 rtl:rotate-180"
+                    />
+                  )}
+                  <span>{departureToCode}</span>
+                </div>
+              </div>
+
+              {/* Passengers */}
+              <div className="flex items-center justify-between text-14 font-medium text-gray-500">
+                <span>{t("passengers")}</span>
+                <span>
+                  {flightData.adults + flightData.children + flightData.infants}
+                </span>
+              </div>
+
+              {/* Cabin */}
+              <div className="flex items-center justify-between text-14 font-medium text-gray-500">
+                <span>{tFlightCard("cabin")}</span>
+                <span>
+                  {flightData.cabinClass === "BUSINESS"
+                    ? tFlightCard("business")
+                    : tFlightCard("economy")}
+                </span>
+              </div>
+
+              <div className="border-t border-dashed border-gray-300" />
+
+              {/* Total Price */}
+              <div className="flex items-center justify-between">
+                <span className="text-16 font-bold">{t("totalPrice")}</span>
+                <PriceCell price={flightData.buyPrice} />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

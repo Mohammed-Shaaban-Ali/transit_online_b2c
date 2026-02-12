@@ -19,6 +19,9 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { formatePrice } from "@/utils/formatePrice";
 import { HOTEL_BOOKING_KEY } from "@/constants";
+import HotelBookingForm from "@/components/shared/booking/HotelBookingForm";
+import BookingConfirmation from "@/components/shared/booking/BookingConfirmation";
+import type { BookingFormValues } from "@/components/shared/booking/HotelBookingForm";
 
 interface HotelBookingData {
   hotelId: string;
@@ -40,6 +43,12 @@ const HotelBookingPage = () => {
   const router = useRouter();
   const [hotelData, setHotelData] = useState<HotelBookingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Booking flow: "form" | "confirmation"
+  const [step, setStep] = useState<"form" | "confirmation">("form");
+  const [bookingId, setBookingId] = useState("");
+  const [formData, setFormData] = useState<BookingFormValues | null>(null);
 
   useEffect(() => {
     try {
@@ -54,14 +63,36 @@ const HotelBookingPage = () => {
     }
   }, []);
 
+  const handleBookingSubmit = async (data: BookingFormValues) => {
+    setIsSubmitting(true);
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      // Generate booking ID
+      const generatedId = `HTL-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+
+      setBookingId(generatedId);
+      setFormData(data);
+      setStep("confirmation");
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      console.error("Booking error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="container my-24">
         <div className="space-y-4">
           <div className="h-8 bg-gray-200 rounded-lg w-64 animate-pulse" />
+          <div className="h-48 bg-gray-200 rounded-2xl animate-pulse" />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-4">
-              <div className="h-72 bg-gray-200 rounded-2xl animate-pulse" />
               <div className="h-48 bg-gray-200 rounded-2xl animate-pulse" />
             </div>
             <div className="h-64 bg-gray-200 rounded-2xl animate-pulse" />
@@ -93,6 +124,30 @@ const HotelBookingPage = () => {
     );
   }
 
+  // Show Confirmation
+  if (step === "confirmation" && formData) {
+    const totalPrice =
+      Number(hotelData.package?.price?.finalPrice || 0) * hotelData.nights;
+
+    return (
+      <BookingConfirmation
+        bookingId={bookingId}
+        hotelName={hotelData.hotelName}
+        hotelImage={hotelData.hotelImage}
+        starRating={hotelData.starRating}
+        checkIn={hotelData.checkIn}
+        checkOut={hotelData.checkOut}
+        nights={hotelData.nights}
+        adults={hotelData.adults}
+        childrenCount={hotelData.children}
+        totalPrice={totalPrice}
+        formData={formData}
+        rooms={hotelData.package?.rooms || []}
+      />
+    );
+  }
+
+  // Show Form + Hotel Details
   const item = hotelData;
   const pkg = item.package;
   const packageImages =
@@ -125,124 +180,116 @@ const HotelBookingPage = () => {
       {/* Header */}
       <h1 className="text-28 font-bold mb-6">{t("title")}</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* ===== Left Column: Hotel Info + Room Details ===== */}
-        <div className="lg:col-span-2 flex flex-col gap-5">
-          {/* Hotel Main Card */}
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-            {/* Hotel Image with overlay info */}
-            <div className="relative w-full h-[260px] md:h-[340px] overflow-hidden">
-              {item.hotelImage && (
-                <Image
-                  fill
-                  className="object-cover"
-                  src={item.hotelImage}
-                  alt={item.hotelName}
-                  priority
-                />
-              )}
-              {/* Gradient overlay for readability */}
-              <div className="absolute inset-x-0 bottom-0 h-28 bg-linear-to-t from-black/70 to-transparent" />
-              <div className="absolute bottom-3 start-3 end-3 flex flex-wrap items-center justify-between gap-1.5">
-                <h2 className="text-22 font-bold text-white drop-shadow-sm">
-                  {item.hotelName}
-                </h2>
-                <StarRating rating={item.starRating} />
-              </div>
+      {/* ===== Hotel Details - Full Width Top Section ===== */}
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden mb-6">
+        <div className="flex flex-col md:flex-row">
+          {/* Hotel Image */}
+          <div className="relative w-full md:w-[320px] h-[200px] md:h-auto shrink-0 overflow-hidden">
+            {item.hotelImage && (
+              <Image
+                fill
+                className="object-cover"
+                src={item.hotelImage}
+                alt={item.hotelName}
+                priority
+              />
+            )}
+          </div>
+
+          {/* Hotel Info */}
+          <div className="flex-1 p-4 md:p-5 flex flex-col gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h2 className="text-20 font-bold">{item.hotelName}</h2>
+              <StarRating rating={item.starRating} />
             </div>
 
             {/* Info Badges */}
-            <div className="p-4">
-              <div className="flex flex-wrap items-center gap-2.5">
-                {infoBadges.map((badge) => (
+            <div className="flex flex-wrap items-center gap-2">
+              {infoBadges.map((badge) => (
+                <div
+                  key={badge.key}
+                  className="flex items-center gap-1.5 bg-primary/5 text-primary rounded-lg px-3 py-2 text-13 font-medium"
+                >
+                  {badge.icon}
+                  <span>{badge.label}</span>
+                </div>
+              ))}
+              {pkg?.refundability !== undefined &&
+                (pkg.refundability === 1 ? (
+                  <span className="inline-flex items-center gap-1 text-green-600 text-13 bg-green-50 rounded-lg px-3 py-2">
+                    {pkg.refundableText || t("refundable")}
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-red-600 text-13 bg-red-50 rounded-lg px-3 py-2">
+                    {pkg.refundableText || t("nonRefundable")}
+                  </span>
+                ))}
+            </div>
+            {/* Package Images */}
+            {packageImages.length > 0 && (
+              <div className="mt-2">
+                <PackageImages isSmall={true} selectedImages={packageImages} />
+              </div>
+            )}
+            {/* Room Summary */}
+            {pkg?.rooms?.length > 0 && (
+              <div className="flex flex-col gap-2 mt-1">
+                {pkg.rooms.map((room: any, idx: number) => (
                   <div
-                    key={badge.key}
-                    className="flex items-center gap-1.5 bg-primary/5 text-primary rounded-lg px-3 py-2 text-13 font-medium"
+                    key={room.id || idx}
+                    className="bg-gray-50 rounded-xl p-3 border border-gray-200"
                   >
-                    {badge.icon}
-                    <span>{badge.label}</span>
+                    <h4 className="text-16 font-bold mb-2 line-clamp-1">
+                      {room.roomName}
+                    </h4>
+                    <div className="grid grid-cols-2 gap-3 text-14">
+                      {room.roomType && (
+                        <div className="flex items-center gap-2">
+                          <IoMdBed
+                            size={18}
+                            className="text-primary min-w-[18px]"
+                          />
+                          <span className="text-gray-600">
+                            {tHotelsCard("bedType")} {room.roomType}
+                          </span>
+                        </div>
+                      )}
+                      {room.roomBasis && (
+                        <div className="flex items-center gap-2">
+                          <FaUtensils
+                            size={13}
+                            className="text-primary min-w-[13px]"
+                          />
+                          <span className="text-gray-600">
+                            {tHotelsCard("meals")} {room.roomBasis}
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 ))}
-                {/* Refundability */}
-                {pkg?.refundability !== undefined && (
-                  pkg.refundability === 1 ? (
-                    <span className="inline-flex items-center gap-1 text-green-600 text-13
-                      bg-green-50 rounded-lg px-3 py-2 ">
-                      {pkg.refundableText || t("refundable")}
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-1
-                      text-red-600 text-13 bg-red-50 rounded-lg px-3 py-2 ">
-                      {pkg.refundableText || t("nonRefundable")}
-                    </span>
-                  )
-                )}
               </div>
+            )}
 
-              {/* Room Details Card */}
-              <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden mt-4">
-                {/* Section Header */}
-                <div className="flex items-center gap-2 px-4 md:px-5 py-3 bg-gray-100 border-b border-gray-200">
-                  <MdMeetingRoom size={18} className="text-primary" />
-                  <h3 className="text-16 font-bold">{t("roomDetails")}</h3>
-                </div>
 
-                <div className="p-4 md:p-5">
-                  {/* Package Images */}
-                  {packageImages.length > 0 && (
-                    <div className="mb-4">
-                      <PackageImages isSmall={false} selectedImages={packageImages} />
-                    </div>
-                  )}
-
-                  {/* Rooms List */}
-                  <div className="flex flex-col gap-3">
-                    {pkg?.rooms?.map((room: any, idx: number) => (
-                      <div
-                        key={room.id || idx}
-                        className="bg-gray-50 rounded-xl p-3 md:p-4 border border-gray-200"
-                      >
-                        <h4 className="text-18 font-bold mb-3">{room.roomName}</h4>
-                        <div className="flex flex-wrap gap-4">
-                          {room.roomType && (
-                            <div className="flex items-center gap-2 text-14 text-gray-600">
-                              <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center">
-                                <IoMdBed size={18} className="text-primary" />
-                              </div>
-                              <div>
-                                <div className="text-11 text-gray-400">
-                                  {tHotelsCard("bedType")}
-                                </div>
-                                <div className="font-medium">{room.roomType}</div>
-                              </div>
-                            </div>
-                          )}
-                          {room.roomBasis && (
-                            <div className="flex items-center gap-2 text-14 text-gray-600">
-                              <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center">
-                                <FaUtensils size={14} className="text-primary" />
-                              </div>
-                              <div>
-                                <div className="text-11 text-gray-400">
-                                  {tHotelsCard("meals")}
-                                </div>
-                                <div className="font-medium">{room.roomBasis}</div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
+        </div>
+      </div>
 
-
+      {/* ===== Form + Price Summary Grid ===== */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left: Contact Info + Guest Info Form */}
+        <div className="lg:col-span-2">
+          <HotelBookingForm
+            adults={item.adults}
+            children={item.children}
+            rooms={pkg?.rooms || []}
+            isSubmitting={isSubmitting}
+            onSubmit={handleBookingSubmit}
+          />
         </div>
 
-        {/* ===== Right Column: Price Summary ===== */}
+        {/* Right: Price Summary (Sticky) */}
         <div className="lg:col-span-1">
           <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden sticky top-12">
             {/* Summary Header */}
