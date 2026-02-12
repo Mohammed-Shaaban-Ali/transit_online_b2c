@@ -1,0 +1,670 @@
+{
+    "HomePage": {
+        "title": "مرحبا بك في الصفحة الرئيسية!"
+    },
+    "HotelsPage": {
+        "title": "الفنادق",
+        "imageAlt": "صورة رئيسية للفنادق"
+    },
+    "Home": {
+        "Lastsearched": {
+            "title": "آخر عمليات البحث",
+            "imageAlt": "آخر عمليات البحث",
+            "destination": "{city}",
+            "passengers": "{adults} بالغ، {children} طفل",
+            "date": "{date}"
+        },
+        "PopularDestinations": {
+            "title": "الأكثر شعبية",
+            "subtitle": "الوجهات",
+            "destination": "{name}",
+            "activities": "{tours} جولة، {activities} نشاط"
+        },
+        "RecommendedHotel": {
+            "title": "الأكثر توصية",
+            "subtitle": "الفنادق",
+            "imageAlt": "فندق",
+            "addToFavorites": "إضافة إلى المفضلة",
+            "hotelName": "{name}",
+            "hotelDescription": "{description}",
+            "night": "ليلة",
+            "location": "{location}"
+        },
+        "OurPackages": {
+            "title": "باقاتنا",
+            "subtitle": "",
+            "description": "استمتع بأفضل العروض والباقات",
+            "imageAlt": "باقة",
+            "packageName": "اسم الباقة",
+            "activities": "{tours} جولة، {activities} نشاط"
+        },
+        "Hero": {
+            "title": "دعنا نستكشف العالم",
+            "hotel": "الفنادق",
+            "flight": "الطيران",
+            "imageAlt": "صورة رئيسية"
+        }
+    },
+    "Components": {
+        "HeaderShared": {
+            "viewMore": "عرض المزيد"
+        },
+        "Parts": {
+            "Map": {
+                "show_on_map": "عرض على الخريطة",
+                "show_hotels_on_map": "عرض {count} فندق على الخريطة",
+                "hotels_found": "تم العثور على {count} فندق",
+                "hotels_found_with_location": "تم العثور على {count} أماكن إقامة في {location}",
+                "hotel_locations": "مواقع الفنادق"
+            }
+        },
+        "HotelSearchBox": {
+            "search": "بحث",
+            "searching": "جاري البحث...",
+            "validation": {
+                "countryRequired": "البلد مطلوب",
+                "countryEmpty": "لا يمكن أن يكون البلد فارغًا",
+                "checkInRequired": "تاريخ الوصول مطلوب",
+                "checkInPast": "لا يمكن أن يكون تاريخ الوصول في الماضي",
+                "checkOutRequired": "تاريخ الذهاب مطلوب",
+                "checkOutAfterCheckIn": "يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول",
+                "locationRequired": "يرجى اختيار موقع"
+            },
+            "LocationSearch": {
+                "destination": "الوجهة",
+                "loading": "جاري التحميل...",
+                "noResults": "لم يتم العثور على نتائج"
+            },
+            "CheckIn": {
+                "label": "تاريخ الوصول"
+            },
+            "CheckOut": {
+                "label": "تاريخ الذهاب"
+            },
+            "GuestSearch": {
+                "guestsAndRooms": "الضيوف والغرف",
+                "roomNo": "الغرفة رقم {number}",
+                "removeRoom": "إزالة الغرفة",
+                "adults": "البالغون:",
+                "children": "الأطفال:",
+                "childAge": "عمر الطفل {number}",
+                "year": "سنة",
+                "years": "سنوات",
+                "old": "من العمر",
+                "guest": "ضيف",
+                "guests": "ضيوف",
+                "room": "غرفة",
+                "rooms": "غرف",
+                "adultsLabel": "بالغ",
+                "select": "تحديد",
+                "guestsInRooms": "{guests} {guestLabel} في {rooms} {roomLabel}",
+                "adultsInRooms": "{adults} {adultsLabel} في {rooms} {roomLabel}"
+            }
+        },
+        "FlightSearchBox": {
+            "search": "بحث",
+            "validation": {
+                "fromAirportRequired": "مطار الذهاب مطلوب",
+                "toAirportRequired": "مطار الوصول مطلوب",
+                "departureDateRequired": "تاريخ الذهاب مطلوب",
+                "departureDatePast": "لا يمكن أن يكون تاريخ الذهاب في الماضي",
+                "returnDateRequired": "تاريخ العودة مطلوب للرحلة ذهاب وعودة",
+                "returnDateAfter": "يجب أن يكون تاريخ العودة بعد تاريخ الذهاب",
+                "airportsMustBeDifferent": "يجب أن يكون مطار الذهاب مختلف عن مطار الوصول"
+            },
+            "FromAirport": {
+                "label": "من",
+                "loading": "جاري التحميل...",
+                "noResults": "لم يتم العثور على نتائج"
+            },
+            "ToAirport": {
+                "label": "إلى",
+                "loading": "جاري التحميل...",
+                "noResults": "لم يتم العثور على نتائج"
+            },
+            "FlightDatePicker": {
+                "departure": "الذهاب",
+                "departureReturn": "الذهاب - العودة",
+                "selectDates": "اختر التواريخ",
+                "selectReturn": "اختر تاريخ العودة",
+                "roundTrip": "ذهاب وعودة",
+                "oneWay": "ذهاب فقط",
+                "done": "تم",
+                "return": "العودة"
+            },
+            "FlightPassenger": {
+                "passengers": "الركاب",
+                "guests": "ضيوف",
+                "adults": "بالغون",
+                "children": "أطفال",
+                "infants": "رضع",
+                "adultsDescription": "12+ سنة",
+                "childrenDescription": "2-11 سنة",
+                "infantsDescription": "أقل من سنتين",
+                "cabinClass": "فئة المقصورة",
+                "economy": "اقتصادية",
+                "business": "رجال الأعمال",
+                "apply": "تطبيق"
+            }
+        },
+        "Navbar": {
+            "logout": "تسجيل الخروج",
+            "myBooking": "حجوزاتي",
+            "home": "الرئيسية",
+            "hotels": "الفنادق",
+            "flights": "الطيران",
+            "toggleMenu": "تبديل القائمة"
+        },
+        "Footer": {
+            "home": "الرئيسية",
+            "hotels": "الفنادق",
+            "flights": "الطيران",
+            "description": "لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد. لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد، لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد، لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد",
+            "location": "السعودية، الرياض"
+        },
+        "LocaleSwitcher": {
+            "arabic": "العربية",
+            "english": "الإنجليزية"
+        },
+        "PriceCell": {
+            "night": "ليلة",
+            "nights": "ليله"
+        }
+    },
+    "HotelsList": {
+        "searchPrompt": {
+            "title": "ابدأ البحث عن الفنادق",
+            "description": "يرجى استخدام صندوق البحث أعلاه للعثور على الفنادق. أدخل وجهتك وتواريخ الوصول والذهاب وعدد الضيوف للبدء."
+        },
+        "NoHotelsFound": {
+            "title": "لم يتم العثور على فنادق",
+            "description": "لم نتمكن من العثور على أي فنادق تطابق معايير البحث الخاصة بك. جرب تعديل الفلاتر الخاصة بك.",
+            "resetFilters": "إعادة تعيين الفلاتر"
+        },
+        "HotelCard": {
+            "hotelName": "اسم الفندق",
+            "breakfastIncluded": "الإفطار مشمول",
+            "night": "ليلة",
+            "nights": "ليله",
+            "adult": "بالغ",
+            "adults": "بالغون",
+            "child": "طفل",
+            "children": "أطفال"
+        },
+        "Sidebar": {
+            "searchHotel": "البحث عن فندق",
+            "starRating": "التصنيف بالنجوم",
+            "hotelChain": "سلسلة الفنادق",
+            "propertyType": "نوع العقار",
+            "sortBy": "ترتيب حسب",
+            "budgetPerNight": "ميزانيتك لكل ليلة",
+            "facilities": "المرافق"
+        },
+        "MobileSidebar": {
+            "filters": "الفلاتر",
+            "close": "إغلاق",
+            "search": "ابحث عن فندق معين",
+            "sort": "ترتيب",
+            "sortBy": "ترتيب حسب",
+            "sortPriceLow": "الأقل سعراً",
+            "sortPriceHigh": "الأعلى سعراً",
+            "sortRatingLow": "الأقل تقييماً",
+            "sortRatingHigh": "الأعلى تقييماً"
+        },
+        "PriceSlider": {
+            "minPrice": "الحد الأدنى للسعر $",
+            "maxPrice": "الحد الأقصى للسعر $"
+        },
+        "SearchBox": {
+            "placeholder": "مثال: Best Western"
+        },
+        "Filters": {
+            "showMore": "عرض المزيد",
+            "showLess": "عرض أقل"
+        },
+        "error": {
+            "title": "خطأ في تحميل الفنادق",
+            "titleFlight": "خطأ في تحميل الطيران",
+            "description": "حدثت مشكلة أثناء تحميل نتائج الفنادق. يرجى المحاولة مرة أخرى لاحقاً."
+        }
+    },
+    "SingleHotel": {
+        "error": {
+            "title": "خطأ",
+            "message": "حدث خطأ أثناء تحميل تفاصيل الفندق",
+            "tryAgain": "يرجى المحاولة مرة أخرى لاحقًا",
+            "goHome": "الذهاب  إلى الرئيسية",
+            "searchHotels": "البحث عن الفنادق"
+        },
+        "overview": "نظرة عامة",
+        "map": "الخريطة",
+        "showMore": "عرض المزيد",
+        "showLess": "عرض أقل"
+    },
+    "AvailableRooms": {
+        "noRooms": "لا توجد غرف متاحة في الوقت الحالي",
+        "title": "الغرف المتاحة",
+        "bedType": "نوع السرير:",
+        "meals": "الوجبات:",
+        "onlyOnePackage": "باقة واحدة فقط",
+        "packagesAvailable": "باقات متاحة",
+        "guests": "الضيوف",
+        "adult": "بالغ",
+        "adults": "بالغون",
+        "child": "طفل",
+        "children": "أطفال",
+        "nights": "ليله",
+        "startWith": "يبدأ من",
+        "roomOptions": "خيارات الغرفة",
+        "package": "باقة",
+        "refundable": "قابل للاسترداد",
+        "nonRefundable": "غير قابل للاسترداد",
+        "selectPackage": "متابعة الحجز",
+        "packageImages": "صور الباقة",
+        "packageImage": "باقة",
+        "packageImageAlt": "صورة الباقة {index}",
+        "more": "اخرى",
+        "validation": {
+            "datesRequired": "يرجى اختيار تواريخ الوصول والذهاب"
+        }
+    },
+    "Facilities": {
+        "title": "المرافق",
+        "noFacilities": "لا توجد مرافق متاحة",
+        "facility": "مرفق"
+    },
+    "GalleryOne": {
+        "seeAllPhotos": "عرض جميع الصور",
+        "hotelImageAlt": "صورة الفندق {index}"
+    },
+    "SuccessDialog": {
+        "roomAdded": "تم إضافة الغرفة إلى السلة بنجاح",
+        "flightAdded": "تم إضافة الرحلة إلى السلة بنجاح",
+        "roomMessage": "يمكنك الذهاب  إلى السلة لإكمال عملية إنشاء هذه الغرفة",
+        "flightMessage": "يمكنك الذهاب  إلى السلة لإكمال عملية إنشاء هذه الرحلة",
+        "goToCart": "الذهاب  إلى السلة",
+        "goBack": "استكمال البحث"
+    },
+    "Flights": {
+        "title": "الطيران",
+        "imageAlt": "صورة رئيسية للرحلات"
+    },
+    "FlightsList": {
+        "searchPrompt": {
+            "title": "ابدأ البحث عن الطيران",
+            "description": "يرجى استخدام صندوق البحث أعلاه للعثور على الطيران. أدخل مطارات الذهاب والوصول والتواريخ وعدد الركاب للبدء."
+        },
+        "noFlights": {
+            "title": "لم يتم العثور على رحلات",
+            "description": "لم يتم العثور على رحلات. يرجى تجربة معايير بحث مختلفة."
+        },
+        "loadingMore": "جاري تحميل المزيد من الطيران...",
+        "error": {
+            "title": "خطأ في تحميل الطيران",
+            "description": "حدث خطأ أثناء تحميل نتائج الطيران. يرجى المحاولة مرة أخرى."
+        },
+        "noResults": {
+            "title": "لم يتم العثور على رحلات",
+            "description": "لم نتمكن من العثور على أي رحلات تطابق معايير البحث الخاصة بك. يرجى تعديل الفلاتر أو البحث مرة أخرى."
+        }
+    },
+    "FlightSidebar": {
+        "filterResults": "تصفية النتائج",
+        "flightsFound": "تم العثور على {count} {flightLabel}",
+        "flight": "رحلة",
+        "flights": "رحلات",
+        "stops": "التوقفات",
+        "travelTime": "وقت السفر",
+        "providers": "مزودو الخدمة",
+        "sortBy": "ترتيب حسب",
+        "priceRange": "نطاق السعر",
+        "airlines": "شركات الطيران",
+        "direct": "مباشر",
+        "flightNumber": "رقم الرحلة",
+        "filterByFlightNumber": "تصفية برقم الرحلة"
+    },
+    "FlightMobileSidebar": {
+        "filterFlights": "تصفية الطيران"
+    },
+    "RouteDisplay": {
+        "flights": "رحلات"
+    },
+    "SelectedFlightView": {
+        "backToList": "العودة إلى قائمة الطيران",
+        "noReturnFlights": "لا توجد رحلات عودة تطابق الفلاتر الخاصة بك. يرجى تعديل الفلاتر."
+    },
+    "FlightPriceSlider": {
+        "minPrice": "الحد الأدنى للسعر",
+        "maxPrice": "الحد الأقصى للسعر"
+    },
+    "TimeFilter": {
+        "goingTimeFrom": "وقت الذهاب من {city}",
+        "arrivalTimeTo": "وقت الوصول إلى {city}",
+        "before6am": "قبل الساعة 6 صباحًا",
+        "6am12pm": "6 صباحًا - 12 ظهرًا",
+        "12pm6pm": "12 ظهرًا - 6 مساءً",
+        "after6pm": "بعد الساعة 6 مساءً"
+    },
+    "FlightProperties": {
+        "loading": "جاري التحميل..."
+    },
+    "FlightDetails": {
+        "offerSelection": "اختيار العرض",
+        "selectedDepartureFlight": "1. رحلة الذهاب المحتارة",
+        "selectedReturnFlight": "2. رحلة العودة المحتارة",
+        "backToDeparture": "العودة إلى الذهاب",
+        "loading": "جاري التحميل...",
+        "loadingDetails": "يرجى الانتظار بينما نقوم بتحميل تفاصيل الرحلة...",
+        "errorTitle": "خطأ في تحميل تفاصيل الرحلة",
+        "errorDescription": "حدث خطأ أثناء تحميل تفاصيل الرحلة. يرجى المحاولة مرة أخرى لاحقًا.",
+        "totalPrice": "السعر الإجمالي",
+        "buyPrice": "سعر الشراء",
+        "sellPrice": "سعر البيع",
+        "enterSellPrice": "أدخل سعر البيع",
+        "addToCart": "إضافة إلى السلة",
+        "continue": "استمر",
+        "updateFlight": "تحديث الرحلة",
+        "updating": "جاري التحديث...",
+        "updateSuccess": "تم تحديث الرحلة بنجاح",
+        "updateError": "فشل تحديث الرحلة",
+        "failedToAdd": "فشل في إضافة الرحلة إلى السلة",
+        "chooseDepartureTravelPackage": "اختر الباقة المناسبة لرحلة الذهاب",
+        "chooseReturnTravelPackage": "اختر الباقة المناسبة لرحلة العودة",
+        "expiredFlightsMessage": "هذا البحث غير متاح حالاً بسبب انتهاء صلاحيته. يرجى تحديث البحث لرؤية النتائج المحدثة.",
+        "continueToBooking": "استمرار إلى الحجز"
+    },
+    "HotelBooking": {
+        "title": "تفاصيل حجز الفندق",
+        "noHotelData": "لم يتم اختيار فندق",
+        "noHotelDataDescription": "يبدو أنك لم تختر فندقاً بعد. يرجى العودة إلى صفحة البحث واختيار فندق.",
+        "backToSearch": "العودة إلى البحث",
+        "roomDetails": "تفاصيل الغرفة",
+        "priceSummary": "ملخص السعر",
+        "pricePerNight": "السعر لكل ليلة",
+        "totalPrice": "السعر الإجمالي",
+        "refundable": "قابل للاسترداد",
+        "nonRefundable": "غير قابل للاسترداد"
+    },
+    "FlightBooking": {
+        "title": "تفاصيل حجز الرحلة",
+        "noFlightData": "لم يتم اختيار رحلة",
+        "noFlightDataDescription": "يبدو أنك لم تختر رحلة بعد. يرجى العودة إلى صفحة البحث واختيار رحلة.",
+        "backToSearch": "العودة إلى البحث"
+    },
+    "DefaultOfferDisplay": {
+        "departureFlight": "رحلة الذهاب",
+        "returnFlight": "رحلة العودة",
+        "defaultOffer": "العرض الافتراضي",
+        "selected": "مختاره",
+        "selectPackage": "اختر الباقة",
+        "travelEssentials": "أساسيات السفر",
+        "cabinBaggage": "أمتعة المقصورة",
+        "checkedBaggage": "الأمتعة المسجلة",
+        "notIncluded": "غير متضمن"
+    },
+    "OfferCard": {
+        "selected": "مختاره",
+        "selectPackage": "اختر الباقة",
+        "travelEssentials": "أساسيات السفر",
+        "cabinBaggage": "أمتعة المقصورة",
+        "checkedBaggage": "الأمتعة المسجلة",
+        "returnPackage": "باقة العودة",
+        "travelPackage": "باقة السفر"
+    },
+    "CartPage": {
+        "bookingInformation": "معلومات الحجز",
+        "title": "العنوان",
+        "client": "العميل",
+        "quotation": "ربط بعرض السعر",
+        "titleRequired": "العنوان مطلوب",
+        "clientRequired": "العميل مطلوب",
+        "setSellPriceError": "يرجى تعيين سعر البيع لجميع العناصر",
+        "submitBookingError": "فشل في إرسال الحجز"
+    },
+    "CartEmpty": {
+        "title": "سلة التسوق الخاصة بك فارغة",
+        "description": "أضف فنادق أو رحلات إلى سلة التسوق للمتابعة",
+        "browseFlights": "تصفح الطيران",
+        "browseHotels": "تصفح الفنادق"
+    },
+    "SuccessfulBooking": {
+        "title": "تم إرسال الحجز بنجاح!",
+        "description": "تم إنشاء وإرسال عرض الأسعار الخاص بك. تم مسح السلة.",
+        "browseMoreHotels": "الذهاب إلى الرئيسية",
+        "createNewBooking": "إنشاء حجز جديد"
+    },
+    "ContractView": {
+        "userContractFor": "العقد الخاص بالمستخدم",
+        "copyForWhatsApp": "نسخ للواتساب",
+        "copied": "تم النسخ!",
+        "copiedToClipboard": "تم النسخ للحافظة",
+        "hotels": "الفنادق",
+        "flights": "الطيران",
+        "night": "ليلة",
+        "nights": "ليالي",
+        "adult": "بالغ",
+        "adults": "بالغين",
+        "child": "طفل",
+        "children": "أطفال",
+        "infant": "رضيع",
+        "infants": "رضع",
+        "bedType": "نوع السرير",
+        "meals": "الوجبات",
+        "departure": "الذهاب",
+        "return": "العودة",
+        "totalPrice": "السعر الإجمالي",
+        "SummaryCard": {
+            "bookingDetails": "تفاصيل الحجز",
+            "contractStatus": "حالة العقد",
+            "status_pending": "قيد الانتظار",
+            "status_approved": "معتمد",
+            "status_confirmed": "مؤكد",
+            "status_cancelled": "ملغى",
+            "status_deleted": "محذوف",
+            "bookingNumber": "رقم الحجز",
+            "bookingDate": "تاريخ الحجز",
+            "phoneNumber": "رقم الهاتف",
+            "employeeName": "اسم الموظف",
+            "totalPrice": "السعر الإجمالي",
+            "totalBuyPrice": "السعر الإجمالي للشراء",
+            "notAvailable": "---"
+        }
+    },
+    "SummaryCard": {
+        "totalBuy": "إجمالي الشراء",
+        "totalSell": "إجمالي البيع",
+        "sending": "جاري الإرسال...",
+        "createContract": "إنشاء عقد"
+    },
+    "RemoveAllDialog": {
+        "removeAll": "إزالة الكل",
+        "title": "إزالة جميع العناصر",
+        "description": "هل أنت متأكد أنك تريد حذف جميع العناصر من سلة التسوق؟ لا يمكن التراجع عن هذا الإجراء.",
+        "cancel": "إلغاء",
+        "removeAllButton": "إزالة الكل"
+    },
+    "FlightsAndHotelsList": {
+        "hotels": "الفنادق",
+        "flights": "الطيران"
+    },
+    "HotelsCard": {
+        "hotel": "فندق",
+        "hotelName": "اسم الفندق",
+        "enterSellPrice": "أدخل سعر البيع",
+        "sellPriceRequired": "سعر البيع مطلوب",
+        "night": "ليلة",
+        "nights": "ليله",
+        "adult": "بالغ",
+        "adults": "بالغين",
+        "child": "طفل",
+        "children": "أطفال",
+        "package": "باقة",
+        "bedType": "نوع السرير",
+        "meals": "الوجبات",
+        "guests": "الضيوف",
+        "more": "أخرى",
+        "revalidatePrice": "تحديث السعر",
+        "revalidationResult": "نتيجة تحديث السعر",
+        "priceUnchanged": "السعر لم يتغير",
+        "priceUnchangedDesc": "سعر الباقة لا يزال كما هو.",
+        "priceChanged": "تغير السعر",
+        "oldPrice": "السعر القديم",
+        "newPrice": "السعر الجديد",
+        "updatePrice": "تحديث السعر",
+        "updating": "جاري التحديث...",
+        "cancel": "إلغاء",
+        "close": "إغلاق",
+        "packageNotFound": "الباقة غير متاحة",
+        "packageNotFoundDesc": "الباقة المختارة لم تعد متاحة. هل تريد اختيار باقة أخرى؟",
+        "keepCurrent": "الإبقاء على الحالي",
+        "selectNewPackage": "اختيار باقة جديدة",
+        "availablePackages": "الباقات المتاحة",
+        "roomOptions": "خيارات الغرفة",
+        "backToPackages": "العودة للباقات",
+        "selectPackage": "اختيار الباقة",
+        "selecting": "جاري الاختيار...",
+        "onlyOnePackage": "خيار واحد فقط",
+        "packagesAvailable": "خيارات متاحة",
+        "startWith": "يبدأ من",
+        "refundable": "قابل للاسترداد",
+        "nonRefundable": "غير قابل للاسترداد",
+        "priceUpdated": "تم تحديث السعر بنجاح",
+        "priceUpdateError": "فشل في تحديث السعر",
+        "packageChanged": "تم تغيير الباقة بنجاح",
+        "packageChangeError": "فشل في تغيير الباقة",
+        "revalidationError": "فشل في تحديث السعر",
+        "buyPrice": "سعر الشراء",
+        "currentSellPrice": "سعر البيع الحالي",
+        "newSellPrice": "سعر البيع الجديد",
+        "enterNewSellPrice": "أدخل سعر البيع الجديد",
+        "profit": "الربح",
+        "sar": "ج.م",
+        "supplier": "المورد",
+        "sellPrice": "سعر البيع",
+        "enterSellPriceForPackage": "أدخل سعر البيع للباقة المختارة",
+        "confirmAndUpdate": "تحديث",
+        "until": "حتى"
+    },
+    "FlightCard": {
+        "departure": "الذهاب",
+        "return": "العودة",
+        "from": "من",
+        "to": "إلى",
+        "cabin": "المقصورة",
+        "business": "رجال الأعمال",
+        "economy": "اقتصادية",
+        "adult": "بالغ",
+        "adults": "بالغين",
+        "child": "طفل",
+        "children": "أطفال",
+        "infant": "رضيع",
+        "infants": "رضع",
+        "direct": "مباشر",
+        "enterSellPrice": "أدخل سعر البيع",
+        "sellPriceRequired": "سعر البيع مطلوب",
+        "airportStopover": "توقف في المطار",
+        "duration": "المدة",
+        "cabinBaggage": "أمتعة المقصورة",
+        "checkedBaggage": "الأمتعة المسجلة",
+        "unavailable": "غير متاح",
+        "selected": "مختاره",
+        "supplier": "المورد",
+        "totalPrice": "السعر الإجمالي",
+        "chooseFlight": "اختر الرحلة",
+        "revalidateFlight": "إعادة تحقق الرحلة"
+    },
+    "CartSheet": {
+        "openCart": "فتح السلة",
+        "cartItems": "عناصر السلة ({count})",
+        "hotel": "فندق",
+        "hotels": "فنادق",
+        "flight": "رحلة",
+        "flights": "رحلات",
+        "cartEmpty": "سلة التسوق الخاصة بك فارغة",
+        "checkout": "الدفع"
+    },
+    "HotelsSection": {
+        "hotels": "الفنادق",
+        "removeFromCart": "إزالة من السلة"
+    },
+    "FlightsSection": {
+        "flights": "الطيران"
+    },
+    "GuestsSection": {
+        "title": "معلومات الضيوف",
+        "addGuest": "إضافة ضيف",
+        "noGuests": "لم يتم إضافة ضيوف بعد. انقر على 'إضافة ضيف' لإضافة معلومات الضيف.",
+        "guest": "ضيف",
+        "leadGuest": "الضيف الرئيسي",
+        "name": "الاسم",
+        "guestType": "نوع الضيف",
+        "adult": "بالغ",
+        "child": "طفل",
+        "infant": "رضيع",
+        "birthDate": "تاريخ الميلاد",
+        "passportNumber": "رقم جواز السفر",
+        "passportCountry": "بلد جواز السفر",
+        "nationality": "الجنسية",
+        "issueDate": "تاريخ الإصدار",
+        "expiryDate": "تاريخ الانتهاء",
+        "uploadPassport": "رفع جواز السفر لملء البيانات تلقائياً",
+        "passportUploadSuccess": "تم تعبئة بيانات جواز السفر بنجاح",
+        "passportUploadError": "فشل قراءة جواز السفر. جرّب صورة أخرى.",
+        "passportUploadErrorType": "يرجى اختيار ملف صورة",
+        "passportUploadErrorParse": "تعذر قراءة بيانات جواز السفر من الصورة"
+    },
+    "LoginPage": {
+        "title": "تسجيل الدخول إلى حسابك",
+        "emailLabel": "عنوان البريد الإلكتروني",
+        "passwordLabel": "كلمة المرور",
+        "signIn": "تسجيل الدخول",
+        "signingIn": "جاري تسجيل الدخول...",
+        "validation": {
+            "emailRequired": "البريد الإلكتروني مطلوب",
+            "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صحيح",
+            "passwordRequired": "كلمة المرور مطلوبة",
+            "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل"
+        }
+    },
+    "Pagination": {
+        "previous": "السابق",
+        "next": "التالي",
+        "morePages": "المزيد من الصفحات",
+        "goToPreviousPage": "الذهاب إلى الصفحة السابقة",
+        "goToNextPage": "الذهاب إلى الصفحة التالية",
+        "rowsPerPage": "عدد الصفوف:",
+        "showing": "عرض {start} - {end} من {total} عنصر"
+    },
+    "QuotationTable": {
+        "bookingNumber": "رقم الحجز",
+        "title": "العنوان",
+        "summary": "ملخص الحالة",
+        "totalAmount": "المبلغ الاجمالي للبيع",
+        "total_buy": "المبلغ الاجمالي",
+        "clientName": "اسم العميل",
+        "rating": "التقييم",
+        "invoiceStatus": "حالة الفاتورة",
+        "quotationStatus": "الفاتورة",
+        "createdBy": "أضيف بواسطة",
+        "createdAt": "تاريخ الإضافة",
+        "source": "المصدر",
+        "noRating": "لا تقييم",
+        "noStatus": "-",
+        "sortBy": "ترتيب حسب",
+        "ascending": "تصاعدي",
+        "descending": "تنازلي",
+        "status": {
+            "paid": "مدفوع",
+            "unpaid": "غير مدفوع",
+            "pending": "قيد الانتظار",
+            "confirmed": "مؤكد",
+            "approved": "معتمد",
+            "cancelled": "ملغى",
+            "deleted": "محذوف",
+            "ordered": "تم الطلب",
+            "ordered+paid": "تم الطلب والدفع",
+            "partial": "دفع جزئي",
+            "refunded": "مسترد"
+        }
+    }
+}

@@ -1,0 +1,670 @@
+{
+    "HomePage": {
+        "title": "Hello world!"
+    },
+    "HotelsPage": {
+        "title": "Hotels",
+        "imageAlt": "Hotels hero image"
+    },
+    "Home": {
+        "Lastsearched": {
+            "title": "Last searched",
+            "imageAlt": "lastsearched",
+            "destination": "{city}",
+            "passengers": "{adults} adults, {children} children",
+            "date": "{date}"
+        },
+        "PopularDestinations": {
+            "title": "Most popular",
+            "subtitle": "Destinations",
+            "destination": "{name}",
+            "activities": "{tours} Tours, {activities} Activities"
+        },
+        "RecommendedHotel": {
+            "title": "Most Recommended",
+            "subtitle": "Hotel",
+            "imageAlt": "hotel",
+            "addToFavorites": "Add to favorites",
+            "hotelName": "{name}",
+            "hotelDescription": "{description}",
+            "night": "Night",
+            "location": "{location}"
+        },
+        "OurPackages": {
+            "title": "Our",
+            "subtitle": "Packages",
+            "description": "Enjoy the best offers and packages",
+            "imageAlt": "package",
+            "packageName": "Package Name",
+            "activities": "{tours} Tours, {activities} Activities"
+        },
+        "Hero": {
+            "title": "Let's Explore the World",
+            "hotel": "Hotel",
+            "flight": "Flight",
+            "imageAlt": "hero"
+        }
+    },
+    "Components": {
+        "HeaderShared": {
+            "viewMore": "View More"
+        },
+        "Parts": {
+            "Map": {
+                "show_on_map": "Show on Map",
+                "show_hotels_on_map": "Show {count} Hotels on Map",
+                "hotels_found": "{count} Hotels Found",
+                "hotels_found_with_location": "Found {count} accommodations in {location}",
+                "hotel_locations": "Hotel Locations"
+            }
+        },
+        "HotelSearchBox": {
+            "search": "Search",
+            "searching": "Searching...",
+            "validation": {
+                "countryRequired": "Country is required",
+                "countryEmpty": "Country cannot be empty",
+                "checkInRequired": "Check-in date is required",
+                "checkInPast": "Check-in date cannot be in the past",
+                "checkOutRequired": "Check-out date is required",
+                "checkOutAfterCheckIn": "Check-out date must be after check-in date",
+                "locationRequired": "Please select a location"
+            },
+            "LocationSearch": {
+                "destination": "Destination",
+                "loading": "Loading...",
+                "noResults": "No results found"
+            },
+            "CheckIn": {
+                "label": "Check In"
+            },
+            "CheckOut": {
+                "label": "Check Out"
+            },
+            "GuestSearch": {
+                "guestsAndRooms": "Guests and Rooms",
+                "roomNo": "Room No. {number}",
+                "removeRoom": "remove room",
+                "adults": "Adults:",
+                "children": "Children:",
+                "childAge": "Child {number} Age",
+                "year": "year",
+                "years": "years",
+                "old": "old",
+                "guest": "Guest",
+                "guests": "Guests",
+                "room": "Room",
+                "rooms": "Rooms",
+                "adultsLabel": "Adults",
+                "select": "Select",
+                "guestsInRooms": "{guests} {guestLabel} in {rooms} {roomLabel}",
+                "adultsInRooms": "{adults} {adultsLabel} in {rooms} {roomLabel}"
+            }
+        },
+        "FlightSearchBox": {
+            "search": "Search",
+            "validation": {
+                "fromAirportRequired": "From airport is required",
+                "toAirportRequired": "To airport is required",
+                "departureDateRequired": "Departure date is required",
+                "departureDatePast": "Departure date cannot be in the past",
+                "returnDateRequired": "Return date is required for round trip",
+                "returnDateAfter": "Return date must be after departure date",
+                "airportsMustBeDifferent": "From and To airports must be different"
+            },
+            "FromAirport": {
+                "label": "From",
+                "loading": "Loading...",
+                "noResults": "No results found"
+            },
+            "ToAirport": {
+                "label": "To",
+                "loading": "Loading...",
+                "noResults": "No results found"
+            },
+            "FlightDatePicker": {
+                "departure": "Departure",
+                "departureReturn": "Departure - Return",
+                "selectDates": "Select dates",
+                "selectReturn": "Select return",
+                "roundTrip": "Round trip",
+                "oneWay": "One way",
+                "done": "Done",
+                "return": "Return"
+            },
+            "FlightPassenger": {
+                "passengers": "Passengers",
+                "guests": "Guests",
+                "adults": "Adults",
+                "children": "Children",
+                "infants": "Infants",
+                "adultsDescription": "12+ years",
+                "childrenDescription": "2-11 years",
+                "infantsDescription": "Under 2 years",
+                "cabinClass": "Cabin Class",
+                "economy": "Economy",
+                "business": "Business",
+                "apply": "Apply"
+            }
+        },
+        "Navbar": {
+            "logout": "Logout",
+            "myBooking": "My Booking",
+            "home": "Home",
+            "hotels": "Hotels",
+            "flights": "Flights",
+            "toggleMenu": "Toggle menu"
+        },
+        "Footer": {
+            "home": "Home",
+            "hotels": "Hotels",
+            "flights": "Flights",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry, Lorem Ipsum is simply dummy text of the printing and typesetting industry,Lorem Ipsum is simply dummy text of the printing and typesetting industry, Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+            "location": "Saudi Arabia , Riyadh"
+        },
+        "LocaleSwitcher": {
+            "arabic": "Arabic",
+            "english": "English"
+        },
+        "PriceCell": {
+            "night": "Night",
+            "nights": "Nights"
+        }
+    },
+    "HotelsList": {
+        "searchPrompt": {
+            "title": "Start Your Hotel Search",
+            "description": "Please use the search box above to find hotels. Enter your destination, check-in and check-out dates, and number of guests to begin."
+        },
+        "NoHotelsFound": {
+            "title": "No Hotels Found",
+            "description": "We couldn't find any hotels matching your search criteria. Try adjusting your filters.",
+            "resetFilters": "Reset Filters"
+        },
+        "HotelCard": {
+            "hotelName": "Hotel Name",
+            "breakfastIncluded": "Breakfast Included",
+            "night": "Night",
+            "nights": "Nights",
+            "adult": "Adult",
+            "adults": "Adults",
+            "child": "Child",
+            "children": "Children"
+        },
+        "Sidebar": {
+            "searchHotel": "Search Hotel",
+            "starRating": "Star Rating",
+            "hotelChain": "Hotel Chain",
+            "propertyType": "Property Type",
+            "sortBy": "Sort By",
+            "budgetPerNight": "Your Budget for per night",
+            "facilities": "Facilities"
+        },
+        "MobileSidebar": {
+            "filters": "Filters",
+            "close": "Close",
+            "search": "Search for a specific hotel",
+            "sort": "Sort",
+            "sortBy": "Sort By",
+            "sortPriceLow": "Lowest Price",
+            "sortPriceHigh": "Highest Price",
+            "sortRatingLow": "Lowest Rating",
+            "sortRatingHigh": "Highest Rating"
+        },
+        "PriceSlider": {
+            "minPrice": "Min Price $",
+            "maxPrice": "Max Price $"
+        },
+        "SearchBox": {
+            "placeholder": "e.g. Best Western"
+        },
+        "Filters": {
+            "showMore": "Show More",
+            "showLess": "Show Less"
+        },
+        "error": {
+            "title": "Error loading hotels",
+            "titleFlight": "Error loading Flights",
+            "description": "There was a problem loading hotel results. Please try again later."
+        }
+    },
+    "SingleHotel": {
+        "error": {
+            "title": "Error",
+            "message": "An error occurred while loading hotel details",
+            "tryAgain": "Please try again later",
+            "goHome": "Go Home",
+            "searchHotels": "Search Hotels"
+        },
+        "overview": "Overview",
+        "map": "Map",
+        "showMore": "Show more",
+        "showLess": "Show less"
+    },
+    "AvailableRooms": {
+        "noRooms": "No rooms available at this time",
+        "title": "Available Rooms",
+        "bedType": "Bed Type:",
+        "meals": "Meals:",
+        "onlyOnePackage": "Only one package",
+        "packagesAvailable": "packages available",
+        "guests": "Guests",
+        "adult": "adult",
+        "adults": "adults",
+        "child": "child",
+        "children": "children",
+        "nights": "Nights",
+        "startWith": "start With",
+        "roomOptions": "Room Options",
+        "package": "Package",
+        "refundable": "Refundable",
+        "nonRefundable": "Non-refundable",
+        "selectPackage": "Continue to Booking",
+        "packageImages": "Package Images",
+        "packageImage": "Package",
+        "packageImageAlt": "Package image {index}",
+        "more": "More",
+        "validation": {
+            "datesRequired": "Please select check-in and check-out dates"
+        }
+    },
+    "Facilities": {
+        "title": "Facilities",
+        "noFacilities": "No facilities available",
+        "facility": "Facility"
+    },
+    "GalleryOne": {
+        "seeAllPhotos": "See All Photos",
+        "hotelImageAlt": "Hotel image {index}"
+    },
+    "SuccessDialog": {
+        "roomAdded": "Room added to cart successfully",
+        "flightAdded": "Flight added to cart successfully",
+        "roomMessage": "You can go to the cart to complete the process of creating this room",
+        "flightMessage": "You can go to the cart to complete the process of creating this flight",
+        "goToCart": "Go to Cart",
+        "goBack": "Complete Search"
+    },
+    "Flights": {
+        "title": "Flights",
+        "imageAlt": "Flights hero image"
+    },
+    "FlightsList": {
+        "searchPrompt": {
+            "title": "Start Your Flight Search",
+            "description": "Please use the search box above to find flights. Enter your departure and arrival airports, dates, and number of passengers to begin."
+        },
+        "noFlights": {
+            "title": "No Flights Found",
+            "description": "No flights found. Please try different search criteria."
+        },
+        "loadingMore": "Loading more flights...",
+        "error": {
+            "title": "Error Loading Flights",
+            "description": "There was an error loading flight results. Please try again."
+        },
+        "noResults": {
+            "title": "No Flights Found",
+            "description": "We couldn't find any flights matching your search criteria. Please try adjusting your filters or search again."
+        }
+    },
+    "FlightSidebar": {
+        "filterResults": "Filter results",
+        "flightsFound": "{count} {flightLabel} found",
+        "flight": "flight",
+        "flights": "flights",
+        "stops": "Stops",
+        "travelTime": "Travel time",
+        "providers": "Providers",
+        "sortBy": "Sort By",
+        "priceRange": "Price Range",
+        "airlines": "Airlines",
+        "direct": "Direct",
+        "flightNumber": "Flight Number",
+        "filterByFlightNumber": "Filter by flight number"
+    },
+    "FlightMobileSidebar": {
+        "filterFlights": "Filter Flights"
+    },
+    "RouteDisplay": {
+        "flights": "flights"
+    },
+    "SelectedFlightView": {
+        "backToList": "Back to Flight List",
+        "noReturnFlights": "No return flights match your filters. Please adjust your filters."
+    },
+    "FlightPriceSlider": {
+        "minPrice": "Min Price",
+        "maxPrice": "Max Price"
+    },
+    "TimeFilter": {
+        "goingTimeFrom": "Going time from {city}",
+        "arrivalTimeTo": "Arrival time to {city}",
+        "before6am": "Before 6 am",
+        "6am12pm": "6 am - 12 pm",
+        "12pm6pm": "12 pm - 6 pm",
+        "after6pm": "After 6 pm"
+    },
+    "FlightProperties": {
+        "loading": "loading..."
+    },
+    "FlightDetails": {
+        "offerSelection": "Offer Selection",
+        "selectedDepartureFlight": "1. Selected Departure flight",
+        "selectedReturnFlight": "2. Selected Return flight",
+        "backToDeparture": "Back to Departure",
+        "loading": "Loading...",
+        "loadingDetails": "Please wait while we load the flight details...",
+        "errorTitle": "Error Loading Flight Details",
+        "errorDescription": "An error occurred while loading the flight details. Please try again later.",
+        "totalPrice": "Total Price",
+        "buyPrice": "Buy Price",
+        "sellPrice": "Sell Price",
+        "enterSellPrice": "Enter sell price",
+        "addToCart": "Add To Cart",
+        "continue": "Continue",
+        "updateFlight": "Update Flight",
+        "updating": "Updating...",
+        "updateSuccess": "Flight updated successfully",
+        "updateError": "Failed to update flight",
+        "failedToAdd": "Failed to add flight to cart",
+        "chooseDepartureTravelPackage": "Choose the suitable departure travel package for you",
+        "chooseReturnTravelPackage": "Choose the suitable return travel package for you",
+        "expiredFlightsMessage": "This search is currently unavailable due to its expiration. Please update the search to see the updated results.",
+        "continueToBooking": "Continue to Booking"
+    },
+    "HotelBooking": {
+        "title": "Hotel Booking Details",
+        "noHotelData": "No Hotel Selected",
+        "noHotelDataDescription": "It seems you haven't selected a hotel yet. Please go back to the search page and choose a hotel.",
+        "backToSearch": "Back to Search",
+        "roomDetails": "Room Details",
+        "priceSummary": "Price Summary",
+        "pricePerNight": "Price per Night",
+        "totalPrice": "Total Price",
+        "refundable": "Refundable",
+        "nonRefundable": "Non-refundable"
+    },
+    "FlightBooking": {
+        "title": "Flight Booking Details",
+        "noFlightData": "No Flight Selected",
+        "noFlightDataDescription": "It seems you haven't selected a flight yet. Please go back to the search page and choose a flight.",
+        "backToSearch": "Back to Search"
+    },
+    "DefaultOfferDisplay": {
+        "departureFlight": "Departure Flight",
+        "returnFlight": "Return Flight",
+        "defaultOffer": "Default Offer",
+        "selected": "Selected",
+        "selectPackage": "Select Package",
+        "travelEssentials": "Travel Essentials",
+        "cabinBaggage": "Cabin Baggage",
+        "checkedBaggage": "Checked Baggage",
+        "notIncluded": "Not included"
+    },
+    "OfferCard": {
+        "selected": "Selected",
+        "selectPackage": "Select Package",
+        "travelEssentials": "Travel Essentials",
+        "cabinBaggage": "Cabin Baggage",
+        "checkedBaggage": "Checked Baggage",
+        "returnPackage": "Return Package",
+        "travelPackage": "Travel Package"
+    },
+    "CartPage": {
+        "bookingInformation": "Booking Information",
+        "title": "Title",
+        "client": "Client",
+        "quotation": "Link to Quotation",
+        "titleRequired": "Title is required",
+        "clientRequired": "Client is required",
+        "setSellPriceError": "Please set sell price for all items",
+        "submitBookingError": "Failed to submit booking"
+    },
+    "CartEmpty": {
+        "title": "Your cart is empty",
+        "description": "Add hotels or flights to your cart to continue",
+        "browseFlights": "Browse Flights",
+        "browseHotels": "Browse Hotels"
+    },
+    "SuccessfulBooking": {
+        "title": "Booking Submitted Successfully!",
+        "description": "Your quotation has been created and submitted. The cart has been cleared.",
+        "browseMoreHotels": "Go to Home",
+        "createNewBooking": "Create New Booking"
+    },
+    "ContractView": {
+        "userContractFor": "Client contract For",
+        "copyForWhatsApp": "Copy for WhatsApp",
+        "copied": "Copied!",
+        "copiedToClipboard": "Copied to clipboard",
+        "hotels": "Hotels",
+        "flights": "Flights",
+        "night": "Night",
+        "nights": "Nights",
+        "adult": "Adult",
+        "adults": "Adults",
+        "child": "Child",
+        "children": "Children",
+        "infant": "Infant",
+        "infants": "Infants",
+        "bedType": "Bed Type",
+        "meals": "Meals",
+        "departure": "Departure",
+        "return": "Return",
+        "totalPrice": "Total Price",
+        "SummaryCard": {
+            "bookingDetails": "Booking Details",
+            "contractStatus": "Contract Status",
+            "status_pending": "Pending",
+            "status_approved": "Approved",
+            "status_confirmed": "Confirmed",
+            "status_cancelled": "Cancelled",
+            "status_deleted": "Deleted",
+            "bookingNumber": "Booking Number",
+            "bookingDate": "Booking Date",
+            "phoneNumber": "Phone Number",
+            "employeeName": "Employee Name",
+            "totalPrice": "Total Price",
+            "totalBuyPrice": "Total Buy Price",
+            "notAvailable": "---"
+        }
+    },
+    "SummaryCard": {
+        "totalBuy": "Total Buy",
+        "totalSell": "Total Sell",
+        "sending": "Sending...",
+        "createContract": "Create Contract"
+    },
+    "RemoveAllDialog": {
+        "removeAll": "remove all",
+        "title": "Remove All Items",
+        "description": "Are you sure you want to delete all items from your cart? This action cannot be undone.",
+        "cancel": "Cancel",
+        "removeAllButton": "Remove All"
+    },
+    "FlightsAndHotelsList": {
+        "hotels": "Hotels",
+        "flights": "Flights"
+    },
+    "HotelsCard": {
+        "hotel": "Hotel",
+        "hotelName": "Hotel Name",
+        "enterSellPrice": "Enter sell price",
+        "sellPriceRequired": "Sell price is required",
+        "night": "Night",
+        "nights": "Nights",
+        "adult": "Adult",
+        "adults": "Adults",
+        "child": "Child",
+        "children": "Children",
+        "package": "Package",
+        "bedType": "Bed Type",
+        "meals": "Meals",
+        "guests": "Guests",
+        "more": "more",
+        "revalidatePrice": "Revalidate Price",
+        "revalidationResult": "Price Revalidation Result",
+        "priceUnchanged": "Price Unchanged",
+        "priceUnchangedDesc": "The package price is still the same as before.",
+        "priceChanged": "Price Changed",
+        "oldPrice": "Old Price",
+        "newPrice": "New Price",
+        "updatePrice": "Update Price",
+        "updating": "Updating...",
+        "cancel": "Cancel",
+        "close": "Close",
+        "packageNotFound": "Package Not Available",
+        "packageNotFoundDesc": "The selected package is no longer available. Would you like to select a different package?",
+        "keepCurrent": "Keep Current",
+        "selectNewPackage": "Select New Package",
+        "availablePackages": "Available Packages",
+        "roomOptions": "Room Options",
+        "backToPackages": "Back to Packages",
+        "selectPackage": "Select Package",
+        "selecting": "Selecting...",
+        "onlyOnePackage": "Only one option",
+        "packagesAvailable": "options available",
+        "startWith": "starts from",
+        "refundable": "Refundable",
+        "nonRefundable": "Non-refundable",
+        "priceUpdated": "Price updated successfully",
+        "priceUpdateError": "Failed to update price",
+        "packageChanged": "Package changed successfully",
+        "packageChangeError": "Failed to change package",
+        "revalidationError": "Failed to revalidate price",
+        "buyPrice": "Buy Price",
+        "currentSellPrice": "Current Sell Price",
+        "newSellPrice": "New Sell Price",
+        "enterNewSellPrice": "Enter new sell price",
+        "profit": "Profit",
+        "sar": "EGP",
+        "supplier": "Supplier",
+        "sellPrice": "Sell Price",
+        "enterSellPriceForPackage": "Enter sell price for the selected package",
+        "confirmAndUpdate": "Update",
+        "until": "until"
+    },
+    "FlightCard": {
+        "departure": "Departure",
+        "return": "Return",
+        "from": "From",
+        "to": "To",
+        "cabin": "Cabin",
+        "business": "Business",
+        "economy": "Economy",
+        "adult": "Adult",
+        "adults": "Adults",
+        "child": "Child",
+        "children": "Children",
+        "infant": "Infant",
+        "infants": "Infants",
+        "direct": "Direct",
+        "enterSellPrice": "Enter sell price",
+        "sellPriceRequired": "Sell price is required",
+        "airportStopover": "Airport stopover",
+        "duration": "Duration",
+        "cabinBaggage": "Cabin Baggage",
+        "checkedBaggage": "Checked Baggage",
+        "unavailable": "Unavailable",
+        "selected": "Selected",
+        "supplier": "Supplier",
+        "totalPrice": "Total Price",
+        "chooseFlight": "Choose Flight",
+        "revalidateFlight": "Revalidate Flight"
+    },
+    "CartSheet": {
+        "openCart": "Open cart",
+        "cartItems": "Cart Items ({count})",
+        "hotel": "Hotel",
+        "hotels": "Hotels",
+        "flight": "Flight",
+        "flights": "Flights",
+        "cartEmpty": "Your cart is empty",
+        "checkout": "Checkout"
+    },
+    "HotelsSection": {
+        "hotels": "Hotels",
+        "removeFromCart": "Remove from cart"
+    },
+    "FlightsSection": {
+        "flights": "Flights"
+    },
+    "GuestsSection": {
+        "title": "Guests Information",
+        "addGuest": "Add Guest",
+        "noGuests": "No guests added yet. Click 'Add Guest' to add guest information.",
+        "guest": "Guest",
+        "leadGuest": "Lead Guest",
+        "name": "Name",
+        "guestType": "Guest Type",
+        "adult": "Adult",
+        "child": "Child",
+        "infant": "Infant",
+        "birthDate": "Birth Date",
+        "passportNumber": "Passport Number",
+        "passportCountry": "Passport Country",
+        "nationality": "Nationality",
+        "issueDate": "Issue Date",
+        "expiryDate": "Expiry Date",
+        "uploadPassport": "Upload passport to fill data automatically",
+        "passportUploadSuccess": "Passport data filled successfully",
+        "passportUploadError": "Failed to read passport. Please try another image.",
+        "passportUploadErrorType": "Please select an image file",
+        "passportUploadErrorParse": "Could not read passport data from image"
+    },
+    "LoginPage": {
+        "title": "Sign in to your account",
+        "emailLabel": "Email address",
+        "passwordLabel": "Password",
+        "signIn": "Sign in",
+        "signingIn": "Signing in...",
+        "validation": {
+            "emailRequired": "Email is required",
+            "emailInvalid": "Please enter a valid email address",
+            "passwordRequired": "Password is required",
+            "passwordMinLength": "Password must be at least 6 characters"
+        }
+    },
+    "Pagination": {
+        "previous": "Previous",
+        "next": "Next",
+        "morePages": "More pages",
+        "goToPreviousPage": "Go to previous page",
+        "goToNextPage": "Go to next page",
+        "rowsPerPage": "Rows per page:",
+        "showing": "Showing {start} - {end} of {total} items"
+    },
+    "QuotationTable": {
+        "bookingNumber": "Booking Number",
+        "title": "Title",
+        "summary": "Summary",
+        "totalAmount": "Total Sell Price",
+        "total_buy": "Total Buy Price",
+        "clientName": "Client Name",
+        "rating": "Rating",
+        "invoiceStatus": "Invoice Status",
+        "quotationStatus": "Quotation Status",
+        "createdBy": "Created By",
+        "createdAt": "Created Date",
+        "source": "Source",
+        "noRating": "No Rating",
+        "noStatus": "-",
+        "sortBy": "Sort by",
+        "ascending": "Ascending",
+        "descending": "Descending",
+        "status": {
+            "paid": "Paid",
+            "unpaid": "Unpaid",
+            "pending": "Pending",
+            "confirmed": "Confirmed",
+            "approved": "Approved",
+            "cancelled": "Cancelled",
+            "deleted": "Deleted",
+            "ordered": "Ordered",
+            "ordered+paid": "Ordered & Paid",
+            "partial": "Partial",
+            "refunded": "Refunded"
+        }
+    }
+}
