@@ -19,7 +19,6 @@ import { Button } from "@/components/ui/button";
 import { FLIGHT_BOOKING_KEY } from "@/constants";
 import { FlightRoute } from "@/components/shared/FlightCardUtils/FlightRoute";
 import FlightBookingForm from "@/components/shared/booking/FlightBookingForm";
-import FlightBookingConfirmation from "@/components/shared/booking/FlightBookingConfirmation";
 import type { FlightBookingFormValues } from "@/components/shared/booking/FlightBookingForm";
 
 export interface FlightBookingData {
@@ -49,13 +48,6 @@ const FlightBookingPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Booking flow: "form" | "confirmation"
-  const [step, setStep] = useState<"form" | "confirmation">("form");
-  const [bookingId, setBookingId] = useState("");
-  const [formData, setFormData] = useState<FlightBookingFormValues | null>(
-    null
-  );
-
   // Read flight data from sessionStorage
   useEffect(() => {
     try {
@@ -80,12 +72,12 @@ const FlightBookingPage = () => {
       // Generate booking ID
       const generatedId = `FLT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
-      setBookingId(generatedId);
-      setFormData(data);
-      setStep("confirmation");
+      // Persist to sessionStorage so data survives locale switch
+      sessionStorage.setItem("FLIGHT_BOOKING_ID", generatedId);
+      sessionStorage.setItem("FLIGHT_BOOKING_FORM_DATA", JSON.stringify(data));
 
-      // Scroll to top
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Navigate to dedicated success route
+      router.push("/flights/booking/success");
     } catch (error) {
       console.error("Booking error:", error);
     } finally {
@@ -148,28 +140,6 @@ const FlightBookingPage = () => {
         returnFlight.legs[returnFlight.legs.length - 1].arrival_info.date
       )
     : null;
-
-  // Show Confirmation
-  if (step === "confirmation" && formData) {
-    return (
-      <FlightBookingConfirmation
-        bookingId={bookingId}
-        departureFrom={departureFromCode}
-        departureTo={departureToCode}
-        departureDate={departureDate}
-        returnDate={returnDate}
-        cabinClass={flightData.cabinClass}
-        adults={flightData.adults}
-        children={flightData.children}
-        infants={flightData.infants}
-        buyPrice={flightData.buyPrice}
-        formData={formData}
-        departureFlightData={departureFlight}
-        returnFlightData={returnFlight}
-        flightData={flightData}
-      />
-    );
-  }
 
   return (
     <div className="container my-24">

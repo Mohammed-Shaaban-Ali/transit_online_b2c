@@ -131,18 +131,16 @@ export default function FloatingLabelInput({
               className={`relative flex items-center px-3 bg-transparent transition-all duration-300 h-16! border border-gray-300 rounded-md w-full cursor-pointer text-start ${containerClassName}`}
             >
               <label
-                className={`absolute transition-all font-bold duration-200 pointer-events-none ${
-                  isActive
-                    ? "top-1 text-gray-500"
-                    : "top-1/2 -translate-y-1/2 text-gray-500"
-                } ${labelClassName}`}
+                className={`absolute transition-all font-bold duration-200 pointer-events-none ${isActive
+                  ? "top-1 text-gray-500"
+                  : "top-1/2 -translate-y-1/2 text-gray-500"
+                  } ${labelClassName}`}
               >
                 {label}
               </label>
               <span
-                className={`font-bold text-black ${
-                  isActive ? "mt-4" : ""
-                } ${inputClassName}`}
+                className={`font-bold text-black ${isActive ? "mt-4" : ""
+                  } ${inputClassName}`}
               >
                 {selectedDate ? formatDisplayDate(selectedDate) : ""}
               </span>
@@ -193,26 +191,23 @@ export default function FloatingLabelInput({
   return (
     <div className={`relative ${className}`}>
       <div
-        className={`relative flex items-center px-3 bg-transparent transition-all duration-300 ${
-          isTextarea ? "min-h-[80px] py-4" : "h-16!"
-        } border  border-gray-300 rounded-md ${containerClassName}`}
+        className={`relative flex items-center px-3 bg-transparent transition-all duration-300 ${isTextarea ? "min-h-[80px] py-4" : "h-16!"
+          } border  border-gray-300 rounded-md ${containerClassName}`}
       >
         <label
           htmlFor={id}
-          className={`absolute transition-all font-bold duration-200 pointer-events-none ${
-            isActive
-              ? "top-1 text-gray-500"
-              : "top-1/2 -translate-y-1/2 text-gray-500"
-          } ${labelClassName}`}
+          className={`absolute transition-all font-bold duration-200 pointer-events-none ${isActive
+            ? "top-1 text-gray-500"
+            : "top-1/2 -translate-y-1/2 text-gray-500"
+            } ${labelClassName}`}
         >
           {label}
         </label>
         <div className="flex items-center gap-1 relative w-full">
           {icon && !isTextarea && (
             <div
-              className={`absolute top-[19px] left-0 ${
-                isActive ? "text-gray-400" : "text-transparent"
-              }`}
+              className={`absolute top-[19px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
+                }`}
             >
               {icon}
             </div>
@@ -222,9 +217,8 @@ export default function FloatingLabelInput({
               id={id}
               rows={rows || 3}
               autoComplete={autoComplete}
-              className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 ${
-                isActive ? "mt-4 ps-6" : ""
-              } ${inputClassName}`}
+              className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 ${isActive ? "mt-4 ps-6" : ""
+                } ${inputClassName}`}
               {...registerProps}
               defaultValue={defaultValue}
               ref={(e) => {
@@ -249,9 +243,8 @@ export default function FloatingLabelInput({
               id={id}
               type={type}
               autoComplete={autoComplete}
-              className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 ${
-                isActive ? "mt-4 " : ""
-              }
+              className={`w-full text-start font-bold text-black bg-transparent border-none outline-none p-0 ${isActive ? "mt-4 " : ""
+                }
                 ${icon ? "ps-6" : ""}
                 ${inputClassName}`}
               {...registerProps}

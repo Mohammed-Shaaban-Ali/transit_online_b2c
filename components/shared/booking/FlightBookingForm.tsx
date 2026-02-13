@@ -10,6 +10,7 @@ import { FaUser, FaChild, FaPassport } from "react-icons/fa";
 import { MdEmail, MdPhone, MdPerson } from "react-icons/md";
 import { MdChildFriendly } from "react-icons/md";
 import { useLocale } from "next-intl";
+import NationalitySelect from "@/components/shared/NationalitySelect";
 
 // Types
 export interface FlightPassengerData {
@@ -43,10 +44,12 @@ function GenderSelector({
   value,
   onChange,
   t,
+  passengerIndex,
 }: {
   value: "male" | "female";
   onChange: (val: "male" | "female") => void;
   t: ReturnType<typeof useTranslations>;
+  passengerIndex: number;
 }) {
   const genders: { value: "male" | "female"; label: string }[] = [
     { value: "male", label: t("male") },
@@ -62,7 +65,7 @@ function GenderSelector({
         >
           <input
             type="radio"
-            name="gender-selector"
+            name={`gender-selector-${passengerIndex}`}
             checked={value === item.value}
             onChange={() => onChange(item.value)}
             className="w-5 h-5 accent-primary cursor-pointer"
@@ -154,13 +157,7 @@ export default function FlightBookingForm({
     ),
   });
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm<FlightBookingFormValues>({
+  const form = useForm<FlightBookingFormValues>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
       fullName: "",
@@ -169,6 +166,14 @@ export default function FlightBookingForm({
       passengers: defaultPassengers,
     },
   });
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = form;
 
   const watchFullName = watch("fullName");
   const watchEmail = watch("email");
@@ -244,7 +249,7 @@ export default function FlightBookingForm({
           <FloatingLabelInput
             id="phone"
             label={t("phone")}
-            type="tel"
+            type="text"
             register={register("phone")}
             watchValue={watchPhone}
             error={errors.phone?.message}
@@ -344,6 +349,7 @@ export default function FlightBookingForm({
                       setValue(`passengers.${pIdx}.gender`, val)
                     }
                     t={t}
+                    passengerIndex={pIdx}
                   />
                 </div>
 
@@ -374,11 +380,11 @@ export default function FlightBookingForm({
                     />
 
                     {/* Nationality */}
-                    <FloatingLabelInput
-                      id={`passengers.${pIdx}.nationality`}
+                    <NationalitySelect
+                      form={form as any}
+                      name={`passengers.${pIdx}.nationality`}
                       label={t("nationality")}
-                      register={register(`passengers.${pIdx}.nationality`)}
-                      watchValue={watch(`passengers.${pIdx}.nationality`)}
+                      required
                       error={
                         errors.passengers?.[pIdx]?.nationality?.message
                       }

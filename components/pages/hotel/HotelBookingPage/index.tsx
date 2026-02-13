@@ -20,7 +20,6 @@ import { useTranslations } from "next-intl";
 import { formatePrice } from "@/utils/formatePrice";
 import { HOTEL_BOOKING_KEY } from "@/constants";
 import HotelBookingForm from "@/components/shared/booking/HotelBookingForm";
-import BookingConfirmation from "@/components/shared/booking/BookingConfirmation";
 import type { BookingFormValues } from "@/components/shared/booking/HotelBookingForm";
 
 interface HotelBookingData {
@@ -45,11 +44,6 @@ const HotelBookingPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Booking flow: "form" | "confirmation"
-  const [step, setStep] = useState<"form" | "confirmation">("form");
-  const [bookingId, setBookingId] = useState("");
-  const [formData, setFormData] = useState<BookingFormValues | null>(null);
-
   useEffect(() => {
     try {
       const stored = sessionStorage.getItem(HOTEL_BOOKING_KEY);
@@ -72,12 +66,12 @@ const HotelBookingPage = () => {
       // Generate booking ID
       const generatedId = `HTL-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
-      setBookingId(generatedId);
-      setFormData(data);
-      setStep("confirmation");
+      // Persist to sessionStorage so data survives locale switch
+      sessionStorage.setItem("HOTEL_BOOKING_ID", generatedId);
+      sessionStorage.setItem("HOTEL_BOOKING_FORM_DATA", JSON.stringify(data));
 
-      // Scroll to top
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Navigate to dedicated success route
+      router.push(`/hotels/${hotelData?.hotelId}/${hotelData?.uuid}/booking/success`);
     } catch (error) {
       console.error("Booking error:", error);
     } finally {
@@ -121,29 +115,6 @@ const HotelBookingPage = () => {
           </Button>
         </div>
       </div>
-    );
-  }
-
-  // Show Confirmation
-  if (step === "confirmation" && formData) {
-    const totalPrice =
-      Number(hotelData.package?.price?.finalPrice || 0) * hotelData.nights;
-
-    return (
-      <BookingConfirmation
-        bookingId={bookingId}
-        hotelName={hotelData.hotelName}
-        hotelImage={hotelData.hotelImage}
-        starRating={hotelData.starRating}
-        checkIn={hotelData.checkIn}
-        checkOut={hotelData.checkOut}
-        nights={hotelData.nights}
-        adults={hotelData.adults}
-        childrenCount={hotelData.children}
-        totalPrice={totalPrice}
-        formData={formData}
-        rooms={hotelData.package?.rooms || []}
-      />
     );
   }
 
