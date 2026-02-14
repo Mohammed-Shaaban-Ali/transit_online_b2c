@@ -314,6 +314,9 @@
 }
 
 @media (min-width: 1024px) and (max-width: 1180px) {
+  /* html {
+    zoom: 0.8;
+  } */
   .container {
     max-width: 95%;
   }

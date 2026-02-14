@@ -102,7 +102,10 @@ const FlightCard = memo<FlightCardProps>(
                 />
               </div>
               <FlightLegsData legs={flightData?.legs || []} />
-              <div className="text-center md:border-e md:pe-4 border-gray-300 ">
+              <div className={`
+                text-center 
+                ${!inSheet ? "md:border-e md:pe-4 border-gray-300" : ""}
+                `}>
                 <FlightData
                   date={
                     flightData?.legs?.[
