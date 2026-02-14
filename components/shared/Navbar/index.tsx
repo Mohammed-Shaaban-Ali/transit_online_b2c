@@ -53,7 +53,7 @@ const Navbar = () => {
         className={`absolute top-2 left-0 right-0 w-full z-50 px-2 sm:px-4 py-4 sm:py-8
              bg-gray-200/25 backdrop-blur-sm rounded-full
             h-14 min-h-14 sm:min-h-16 sm:h-16 flex items-center justify-between gap-2
-            max-w-[95%] sm:container mx-auto 
+            max-w-[95%] sm:container mx-auto  responsive-container 
          `}
       >
         <Link

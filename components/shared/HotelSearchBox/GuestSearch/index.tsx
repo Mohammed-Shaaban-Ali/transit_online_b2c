@@ -86,7 +86,7 @@ const RoomCard = ({ room, index, form, onRemove }: RoomCardProps) => {
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-3">
         <div className="w-full flex justify-between items-center gap-2">
           <span className="font-medium text-[#6E7491] text-sm whitespace-nowrap">
             {t("adults")}
@@ -159,7 +159,7 @@ const RoomCard = ({ room, index, form, onRemove }: RoomCardProps) => {
       </div>
 
       {room.KidsAges.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-3">
           {room.KidsAges.map((age: number, idx: number) => (
             <div key={idx} className="mb-2">
               <label className="block text-gray-500 mb-1 text-xs">
@@ -244,7 +244,7 @@ const GuestSearch = ({ form }: GuestSearchProps) => {
   const isActive = open || hasValue;
 
   return (
-    <div className="col-span-1 relative md:border-x-2 border-gray-200 ">
+    <div className="col-span-1 relative lg:border-x-2 border-gray-200 ">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div className="relative flex items-center px-4 h-16 bg-transparent transition-all duration-300 cursor-pointer">

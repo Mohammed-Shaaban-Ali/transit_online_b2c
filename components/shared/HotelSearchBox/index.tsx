@@ -360,7 +360,7 @@ function HotelSearchBox({ defaultValues }: Props) {
   return (
     <div className="relative  ">
       <div
-        className={`container bg-primary-light p-2 py-5 sm:p-5 
+        className={` bg-primary-light p-2 py-5 sm:p-5 
           ${defaultValues
             ? "rounded-2xl "
             : "rounded-b-2xl ltr:rounded-tr-2xl rtl:rounded-tl-2xl "
@@ -370,7 +370,7 @@ function HotelSearchBox({ defaultValues }: Props) {
       >
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className={`grid grid-cols-1 md:grid-cols-4 gap-x-4 gap-y-4 w-full h-full  `}
+          className={`grid grid-cols-1 lg:grid-cols-4 gap-x-4 gap-y-4 w-full h-full  `}
           style={{ width: "100%" }}
         >
           <LocationSearch form={form} />
@@ -381,7 +381,7 @@ function HotelSearchBox({ defaultValues }: Props) {
               type="submit"
               size="lg"
               disabled={isLoading}
-              className=" px-4 sm:px-6 w-full sm:w-[200px] 
+              className=" px-4 sm:px-6 w-full max-w-[200px] 
               flex items-center justify-center gap-2 rounded-full font-bold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             // style={{ fontSize: "16px" }}
             >

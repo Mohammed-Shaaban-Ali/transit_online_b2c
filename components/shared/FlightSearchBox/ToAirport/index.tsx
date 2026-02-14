@@ -164,7 +164,7 @@ const ToAirport = forwardRef<ToAirportRef, SearchBarProps>(({ form }, ref) => {
   const isActive = isFocused || hasValue;
 
   return (
-    <div className="col-span-1 relative md:border-x-2 border-gray-200 ">
+    <div className="col-span-1 relative lg:border-x-2 border-gray-200 ">
       <div>
         <div className="relative flex items-center px-4 h-16 bg-transparent transition-all duration-300">
           <label
