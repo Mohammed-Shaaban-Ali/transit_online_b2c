@@ -1,7 +1,8 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { UseFormReturn } from "react-hook-form";
 
 // ─── Country type ───────────────────────────────────────────────
@@ -243,10 +244,34 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const portalDropdownRef = useRef<HTMLDivElement>(null);
 
   const formValue = watch(name);
 
   const [searchValue, setSearchValue] = useState("");
+  const [dropdownPos, setDropdownPos] = useState<{
+    top: number;
+    left: number;
+    width: number;
+    openUp: boolean;
+  } | null>(null);
+
+  // Calculate dropdown position relative to viewport (for portal)
+  const updateDropdownPosition = useCallback(() => {
+    if (!dropdownRef.current) return;
+    const rect = dropdownRef.current.getBoundingClientRect();
+    const dropdownMaxH = 240; // max-h-60 = 15rem = 240px
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+    const openUp = spaceBelow < dropdownMaxH && spaceAbove > spaceBelow;
+
+    setDropdownPos({
+      top: openUp ? rect.top + window.scrollY : rect.bottom + window.scrollY + 4,
+      left: rect.left + window.scrollX,
+      width: rect.width,
+      openUp,
+    });
+  }, []);
 
   // Hydration guard
   useEffect(() => {
@@ -287,16 +312,32 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
   useEffect(() => {
     if (isFocused) {
       setShowDropdown(true);
+      updateDropdownPosition();
     } else {
       const timer = setTimeout(() => setShowDropdown(false), 200);
       return () => clearTimeout(timer);
     }
-  }, [isFocused]);
+  }, [isFocused, updateDropdownPosition]);
+
+  // Reposition on scroll / resize while open
+  useEffect(() => {
+    if (!showDropdown) return;
+    const reposition = () => updateDropdownPosition();
+    window.addEventListener("scroll", reposition, true);
+    window.addEventListener("resize", reposition);
+    return () => {
+      window.removeEventListener("scroll", reposition, true);
+      window.removeEventListener("resize", reposition);
+    };
+  }, [showDropdown, updateDropdownPosition]);
 
   // Close on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      const inInput = dropdownRef.current?.contains(target);
+      const inPortal = portalDropdownRef.current?.contains(target);
+      if (!inInput && !inPortal) {
         setShowDropdown(false);
         setIsFocused(false);
       }
@@ -377,30 +418,51 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
         </div>
       </div>
 
-      {/* Dropdown */}
-      {showDropdown && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-hidden flex flex-col">
-          {filteredCountries.length === 0 ? (
-            <div className="px-4 py-3 flex items-center gap-2">
-              <span className="font-semibold text-gray-900">No results found</span>
-            </div>
-          ) : (
-            <div ref={scrollRef} className="flex-1 overflow-y-auto max-h-60">
-              {filteredCountries.map((country) => (
-                <div
-                  key={country.code}
-                  onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => handleSelect(country)}
-                  className={`px-4 py-3 hover:bg-gray-100 cursor-pointer transition-colors duration-150 flex items-center gap-2 ${selectedCountry?.name === country.name ? "bg-blue-50" : ""
-                    }`}
-                >
-                  <span className="font-semibold text-gray-900">{getDisplayName(country)}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
+      {/* Dropdown via portal – renders outside parent overflow */}
+      {showDropdown &&
+        isMounted &&
+        dropdownPos &&
+        createPortal(
+          <div
+            ref={portalDropdownRef}
+            className="bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-hidden flex flex-col"
+            style={{
+              position: "absolute",
+              zIndex: 9999,
+              left: dropdownPos.left,
+              width: dropdownPos.width,
+              ...(dropdownPos.openUp
+                ? { bottom: `calc(100vh - ${dropdownPos.top}px + 4px)`, top: "auto" }
+                : { top: dropdownPos.top }),
+            }}
+          >
+            {filteredCountries.length === 0 ? (
+              <div className="px-4 py-3 flex items-center gap-2">
+                <span className="font-semibold text-gray-900">No results found</span>
+              </div>
+            ) : (
+              <div ref={scrollRef} className="flex-1 overflow-y-auto max-h-60">
+                {filteredCountries.map((country) => (
+                  <div
+                    key={country.code}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleSelect(country);
+                    }}
+                    className={`px-4 py-3 hover:bg-gray-100 cursor-pointer transition-colors duration-150 flex items-center gap-2 ${selectedCountry?.name === country.name ? "bg-blue-50" : ""
+                      }`}
+                  >
+                    <span className="font-semibold text-gray-900">
+                      {getDisplayName(country)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>,
+          document.body
+        )}
 
       {/* Error */}
       {error && (
