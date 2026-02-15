@@ -81,6 +81,7 @@
             "CheckOut": {
                 "label": "Check Out"
             },
+            "done": "Done",
             "GuestSearch": {
                 "guestsAndRooms": "Guests and Rooms",
                 "roomNo": "Room No. {number}",

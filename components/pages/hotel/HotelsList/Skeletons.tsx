@@ -50,7 +50,7 @@ export const SidebarSkeleton = () => {
   return (
     <div className="space-y-6 animate-pulse">
       {/* Map Skeleton */}
-      <div className="w-full h-[120px] bg-gray-200 rounded-lg"></div>
+      {/* <div className="w-full h-[120px] bg-gray-200 rounded-lg"></div> */}
 
       {/* Filters Container Skeleton */}
       <div className="bg-primary-light rounded-2xl p-4 space-y-6">

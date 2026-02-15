@@ -28,9 +28,9 @@ const Sidebar = ({
   return (
     <div className="space-y-5">
       {/* Map Section */}
-      <div className="relative">
+      {/* <div className="relative">
         <Map hotels={displayedHotels} autoFocus={true} />
-      </div>
+      </div> */}
 
       {/* Filters Container */}
       <div className="bg-primary-light rounded-2xl p-4 space-y-6">

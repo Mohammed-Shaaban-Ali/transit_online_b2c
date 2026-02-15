@@ -81,6 +81,7 @@
             "CheckOut": {
                 "label": "تاريخ الذهاب"
             },
+            "done": "تم",
             "GuestSearch": {
                 "guestsAndRooms": "الضيوف والغرف",
                 "roomNo": "الغرفة رقم {number}",

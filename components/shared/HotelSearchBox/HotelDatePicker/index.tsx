@@ -7,6 +7,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { format } from "date-fns";
 import { DatePicker, parseDate } from "@ark-ui/react/date-picker";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useLocale, useTranslations } from "next-intl";
 import { ar, enUS } from "date-fns/locale";
 import { cn } from "@/lib/utils";
@@ -190,6 +191,31 @@ function HotelDatePicker({ form }: Props) {
             )}
           >
             <div className="flex flex-col">
+              {/* Header */}
+              <div className="flex justify-between flex-wrap items-center gap-3 sm:gap-0 px-4 py-3 border-b
+               border-gray-200 bg-gray-50">
+                <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FaCalendarAlt size={14} className="text-gray-400" />
+                  <span>
+                    {checkInValue && checkOutValue
+                      ? `${formatDateForDisplay(new Date(checkInValue))} - ${formatDateForDisplay(new Date(checkOutValue))}`
+                      : checkInValue
+                        ? `${formatDateForDisplay(new Date(checkInValue))} - ${t("CheckOut.label")}`
+                        : `${t("CheckIn.label")} - ${t("CheckOut.label")}`}
+                  </span>
+                </div>
+                <Button
+                  type="button"
+                  className="rounded-full ms-4"
+                  onClick={() => {
+                    setShowCalendar(false);
+                    setIsFocused(false);
+                  }}
+                >
+                  {t("done")}
+                </Button>
+              </div>
+
               {/* Calendar */}
               <div className="flex w-full justify-center p-3">
                 <DatePicker.Root
@@ -206,22 +232,23 @@ function HotelDatePicker({ form }: Props) {
                     const checkDate = date.toDate("UTC");
                     return checkDate < today;
                   }}
-                  dir={locale === "ar" ? "rtl" : "ltr"}
+                // dir={locale === "ar" ? "rtl" : "ltr"}
                 >
                   <DatePicker.Content className="bg-white inline-block">
                     <DatePicker.View
                       view="day"
                       className={cn(
                         "flex relative",
-                        numOfMonths > 1 && "divide-x divide-gray-200 rtl:divide-x-reverse"
+                        numOfMonths > 1 && "divide-x divide-gray-200 rtl:divide-x-reverse",
+                        "rtl:flex-row-reverse"
                       )}
                     >
-                      <nav className="absolute w-full top-0 flex justify-between px-3 z-10">
+                      <nav className="absolute w-full top-0 flex rtl:flex-row-reverse justify-between px-3 z-10">
                         <DatePicker.PrevTrigger className="p-2.5 hover:bg-gray-100 rounded-md transition-colors text-gray-700">
-                          <ChevronLeftIcon className="w-4 h-4" />
+                          <ChevronLeftIcon className="w-4 h-4 rtl:rotate-180" />
                         </DatePicker.PrevTrigger>
                         <DatePicker.NextTrigger className="p-2.5 hover:bg-gray-100 rounded-md transition-colors text-gray-700">
-                          <ChevronRightIcon className="w-4 h-4" />
+                          <ChevronRightIcon className="w-4 h-4 rtl:rotate-180" />
                         </DatePicker.NextTrigger>
                       </nav>
                       <DatePicker.Context>
@@ -242,7 +269,7 @@ function HotelDatePicker({ form }: Props) {
                                     </span>
                                   </DatePicker.ViewTrigger>
                                 </DatePicker.ViewControl>
-                                <DatePicker.Table>
+                                <DatePicker.Table dir={locale === "ar" ? "rtl" : "ltr"}>
                                   <DatePicker.TableHead>
                                     <DatePicker.TableRow>
                                       {api.weekDays.map((weekDay, id) => (
@@ -271,7 +298,7 @@ function HotelDatePicker({ form }: Props) {
                                                 // Today indicator
                                                 "data-today:after:content-[''] data-today:after:absolute data-today:after:bottom-0.5 data-today:after:w-1 data-today:after:h-1 data-today:after:rounded-full data-today:after:bg-primary",
                                                 // Outside range (other months)
-                                                "data-outside-range:text-gray-300 data-outside-range:pointer-events-none",
+                                                "data-outside-range:text-gray-300 data-outside-range:pointer-events-none data-outside-range:bg-transparent!",
                                                 // Disabled dates
                                                 "data-disabled:text-gray-300 data-disabled:pointer-events-none data-disabled:cursor-not-allowed",
                                                 "data-unavailable:text-gray-300 data-unavailable:pointer-events-none data-unavailable:cursor-not-allowed data-unavailable:line-through",
@@ -280,9 +307,13 @@ function HotelDatePicker({ form }: Props) {
                                                 // In range (between start and end)
                                                 "data-in-range:bg-primary/10",
                                                 // Range start
-                                                "data-range-start:bg-primary data-range-start:text-white data-range-start:rounded-e-none! data-range-start:rounded-s-lg data-range-start:hover:bg-primary/90",
+                                                locale === "ar"
+                                                  ? "data-range-start:bg-primary data-range-start:text-white data-range-start:rounded-l-none! data-range-start:rounded-r-lg data-range-start:hover:bg-primary/90"
+                                                  : "data-range-start:bg-primary data-range-start:text-white data-range-start:rounded-r-none! data-range-start:rounded-l-lg data-range-start:hover:bg-primary/90",
                                                 // Range end
-                                                "data-range-end:bg-primary data-range-end:text-white data-range-end:rounded-s-none! data-range-end:rounded-e-lg data-range-end:hover:bg-primary/90",
+                                                locale === "ar"
+                                                  ? "data-range-end:bg-primary data-range-end:text-white data-range-end:rounded-r-none! data-range-end:rounded-l-lg data-range-end:hover:bg-primary/90"
+                                                  : "data-range-end:bg-primary data-range-end:text-white data-range-end:rounded-l-none! data-range-end:rounded-r-lg data-range-end:hover:bg-primary/90",
                                                 // Selected (single mode)
                                                 "data-selected:bg-primary data-selected:text-white data-selected:rounded-lg data-selected:hover:bg-primary/90",
                                                 // Not in range - rounded
