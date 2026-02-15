@@ -203,10 +203,10 @@ export default function FloatingLabelInput({
         >
           {label}
         </label>
-        <div className="flex items-center gap-1 relative w-full">
+        <div className="flex items-center   gap-0 relative w-full">
           {icon && !isTextarea && (
             <div
-              className={`absolute top-[19px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
+              className={`absolute top-[15px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
                 }`}
             >
               {icon}
@@ -217,7 +217,8 @@ export default function FloatingLabelInput({
               id={id}
               rows={rows || 3}
               autoComplete={autoComplete}
-              className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 ${isActive ? "mt-4 ps-6" : ""
+              className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 
+                ${isActive ? "mt-4 ps-5" : ""
                 } ${inputClassName}`}
               {...registerProps}
               defaultValue={defaultValue}

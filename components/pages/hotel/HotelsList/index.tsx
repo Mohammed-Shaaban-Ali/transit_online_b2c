@@ -185,7 +185,7 @@ const HotelsList = () => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 ">
           {/* Sidebar - Hidden on mobile, visible on xl screens */}
           <div className={`
             

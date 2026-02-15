@@ -129,66 +129,70 @@
     @apply bg-background text-foreground;
   } */
 
+  html {
+    font-size: 90%;
+  }
+
   .container {
     @apply px-4 mx-auto;
   }
-  /* custom font sizes */
+  /* custom font sizes (scaled to 90%) */
   .text-10 {
-    @apply text-[8px] sm:text-[10px];
+    @apply text-[7px] sm:text-[9px];
   }
   .text-11 {
-    @apply text-[9px] sm:text-[11px];
+    @apply text-[8px] sm:text-[10px];
   }
   .text-12 {
-    @apply text-[10px] sm:text-[12px];
+    @apply text-[9px] sm:text-[11px];
   }
   .text-13 {
-    @apply text-[11px] sm:text-[13px];
+    @apply text-[10px] sm:text-[12px];
   }
   .text-14 {
-    @apply text-[11px] sm:text-[14px];
+    @apply text-[10px] sm:text-[13px];
   }
   .text-15 {
-    @apply text-[12px] sm:text-[15px];
+    @apply text-[11px] sm:text-[14px];
   }
   .text-16 {
-    @apply text-[13px] sm:text-[16px];
+    @apply text-[12px] sm:text-[14px];
   }
   .text-18 {
-    @apply text-[15px] sm:text-[18px];
+    @apply text-[14px] sm:text-[16px];
   }
   .text-20 {
-    @apply text-[17px] sm:text-[20px];
+    @apply text-[15px] sm:text-[18px];
   }
   .text-22 {
-    @apply text-[18px] sm:text-[22px];
+    @apply text-[16px] sm:text-[20px];
   }
   .text-24 {
-    @apply text-[21px] sm:text-[24px];
+    @apply text-[19px] sm:text-[22px];
   }
   .text-28 {
-    @apply text-[26px] sm:text-[28px];
+    @apply text-[23px] sm:text-[25px];
   }
   .text-32 {
-    @apply text-[28px] sm:text-[32px];
+    @apply text-[25px] sm:text-[29px];
   }
   .text-34 {
-    @apply text-[28px] sm:text-[34px];
+    @apply text-[25px] sm:text-[31px];
   }
   .text-36 {
-    @apply text-[32px] sm:text-[36px];
+    @apply text-[29px] sm:text-[32px];
   }
   .text-38 {
-    @apply text-[32px] sm:text-[38px];
+    @apply text-[29px] sm:text-[34px];
   }
   .text-40 {
-    @apply text-[32px] sm:text-[36px] md:text-[40px];
+    @apply text-[29px] sm:text-[32px] md:text-[36px];
   }
   .text-48 {
-    @apply text-[40px] sm:text-[44px] md:text-[48px];
+    @apply text-[36px] sm:text-[40px] md:text-[43px];
   }
   .text-60 {
-    @apply text-[56px] sm:text-[60px];
+    @apply text-[50px] sm:text-[54px];
   }
 
   /* Custom scrollbar styles */

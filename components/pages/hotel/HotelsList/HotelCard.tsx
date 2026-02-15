@@ -80,14 +80,14 @@ const HotelCard = ({
             </div>
             {/* Location */}
             <div className="flex items-center gap-1.5 text-gray-500">
-              <FaMapMarkerAlt size={16} className="text-gray-400 min-w-4" />
+              <FaMapMarkerAlt size={15} className="text-gray-400 min-w-4" />
               <div className="text-16 line-clamp-2">{hotel?.address}</div>
             </div>
 
             {/* Breakfast Included */}
             {hasBreakfast && (
               <div className="flex items-center gap-1.5 text-gray-500">
-                <FaCoffee size={16} className="text-gray-400" />
+                <FaCoffee size={15} className="text-gray-400" />
                 <span className="text-16">{t("breakfastIncluded")}</span>
               </div>
             )}
@@ -97,13 +97,13 @@ const HotelCard = ({
               <div className="flex items-center gap-1.5 text-gray-500 text-16">
                 {nights && (
                   <div className="flex items-center gap-1.5 me-2">
-                    <FaClock size={15} className="text-gray-400" />
+                    <FaClock size={14} className="text-gray-400" />
                     {nights} {nights === 1 ? t("night") : t("nights")}
                   </div>
                 )}
                 {(adults || children) && (
                   <>
-                    <FaUser size={15} className="text-gray-400" />
+                    <FaUser size={14} className="text-gray-400" />
                     <span className="text-16">
                       {adults} {adults === 1 ? t("adult") : t("adults")}
                       {children

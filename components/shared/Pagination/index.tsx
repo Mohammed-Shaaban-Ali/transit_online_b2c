@@ -82,7 +82,7 @@ const Pagination = ({
             size={"icon"}
             key={page}
             onClick={() => onPageChange(page as number)}
-            className={"w-9 h-9 md:w-11 md:h-11"}
+            className={"w-9 h-9 md:w-11 md:h-11 font-medium"}
           >
             {page}
           </Button>
@@ -94,7 +94,7 @@ const Pagination = ({
         disabled={currentPage === totalPages}
         variant={"outline"}
         size={"icon"}
-        className={"w-9 h-9 md:w-11 md:h-11"}
+        className={"w-9 h-9 md:w-11 md:h-11 "}
       >
         <FiChevronRight size={20} className="rtl:rotate-180" />
       </Button>

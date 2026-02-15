@@ -176,17 +176,18 @@ const ToAirport = forwardRef<ToAirportRef, SearchBarProps>(({ form }, ref) => {
           >
             {t("label")}
           </label>
-          <div className="flex items-center gap-1 relative w-full">
+          <div className="flex items-center   gap-0 relative w-full">
             <MdOutlineFlightLand
-              size={20}
-              className={`absolute top-[19px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
+              size={16}
+              className={`absolute top-[15px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
                 }`}
             />
             <input
               id="toAirport"
               autoComplete="off"
               type="search"
-              className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 ${isActive ? "mt-4 ps-6" : ""
+              className={`w-full font-bold text-black bg-transparent border-none outline-none p-0
+                 ${isActive ? "mt-4 ps-5" : ""
                 }`}
               value={displayValue}
               onFocus={() => setIsFocused(true)}

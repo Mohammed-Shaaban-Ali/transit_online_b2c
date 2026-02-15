@@ -433,7 +433,7 @@ const FlightProperties: React.FC<FlightPropertiesProps> = ({
               flightsCount={totalFlights}
             />
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {paginatedFlights.map(
                 (departureFlightData: FlightDirection, index: number) => {
                   const actualIndex =

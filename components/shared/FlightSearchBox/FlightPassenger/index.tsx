@@ -112,14 +112,15 @@ const FlightPassenger = ({ form }: GuestSearchProps) => {
             >
               {t("passengers")}
             </label>
-            <div className="flex items-center gap-1 relative">
+            <div className="flex items-center   gap-0 relative">
               <RiUserFill
-                size={20}
-                className={`absolute top-[19px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
+                size={16}
+                className={`absolute top-[15px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
                   }`}
               />
               <div
-                className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 ${isActive ? "mt-4 ps-6" : ""
+                className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 
+                  ${isActive ? "mt-4 ps-5" : ""
                   }`}
               >
                 {displayText}

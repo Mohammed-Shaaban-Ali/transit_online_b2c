@@ -48,16 +48,16 @@ export default function CustomInput({
         <label
           htmlFor={id}
           className={`absolute transition-all font-bold duration-200 pointer-events-none ${isActive
-              ? "top-[3px] text-gray-500"
-              : "top-1/2 -translate-y-1/2 text-gray-500"
+            ? "top-[3px] text-gray-500"
+            : "top-1/2 -translate-y-1/2 text-gray-500"
             } ${labelClassName}`}
         >
           {label}
         </label>
-        <div className="flex items-center gap-1 relative w-full">
+        <div className="flex items-center   gap-0 relative w-full">
           {icon && (
             <div
-              className={`absolute top-[22px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
+              className={`absolute top-[15px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
                 }`}
             >
               {icon}
@@ -67,7 +67,8 @@ export default function CustomInput({
             id={id}
             type={type}
             autoComplete={autoComplete}
-            className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 ${isActive ? "mt-4 ps-6" : ""
+            className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 
+              ${isActive ? "mt-4 ps-5" : ""
               } ${inputClassName}`}
             {...registerProps}
             ref={(e) => {

@@ -163,14 +163,15 @@ function HotelDatePicker({ form }: Props) {
           {t("CheckIn.label")} - {t("CheckOut.label")}
         </label>
 
-        <div className="flex items-center gap-1 relative w-full">
+        <div className="flex items-center   gap-0 relative w-full">
           <FaCalendarAlt
-            size={18}
-            className={`absolute top-[19px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
+            size={16}
+            className={`absolute top-[15px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
               }`}
           />
           <div
-            className={`w-full font-bold text-nowrap text-black bg-transparent border-none outline-none p-0 cursor-pointer ${isActive ? "mt-4 ps-6" : ""
+            className={`w-full font-bold text-nowrap text-black bg-transparent border-none outline-none p-0 cursor-pointer 
+              ${isActive ? "mt-4 ps-6" : ""
               }`}
             onClick={() => {
               setShowCalendar(true);
@@ -243,7 +244,7 @@ function HotelDatePicker({ form }: Props) {
                         "rtl:flex-row-reverse"
                       )}
                     >
-                      <nav className="absolute w-full top-0 flex rtl:flex-row-reverse justify-between px-3 z-10">
+                      <nav className="absolute  border-transparent w-full top-0 flex rtl:flex-row-reverse justify-between px-3 z-10">
                         <DatePicker.PrevTrigger className="p-2.5 hover:bg-gray-100 rounded-md transition-colors text-gray-700">
                           <ChevronLeftIcon className="w-4 h-4 rtl:rotate-180" />
                         </DatePicker.PrevTrigger>
