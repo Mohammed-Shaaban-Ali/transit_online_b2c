@@ -313,7 +313,7 @@
   } */
 }
 
-@media (min-width: 920px) and (max-width: 1280px) {
+@media (min-width: 920px) and (max-width: 1500px) {
   html {
     zoom: 0.8;
   }
