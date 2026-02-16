@@ -45,7 +45,7 @@ const ChainFilter = (props: Props) => {
 
       {chains?.length > initialVisibleCount && (
         <button
-          className="flex items-center gap-2 text-primary font-medium mt-2 hover:underline"
+          className="flex items-center text-center justify-center gap-2 text-primary font-medium mt-2 hover:underline"
           onClick={() => setShowAll(!showAll)}
         >
           <span>{showAll ? t("showLess") : t("showMore")}</span>

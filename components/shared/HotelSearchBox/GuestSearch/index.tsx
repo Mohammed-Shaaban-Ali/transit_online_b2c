@@ -244,7 +244,7 @@ const GuestSearch = ({ form }: GuestSearchProps) => {
   const isActive = open || hasValue;
 
   return (
-    <div className="col-span-1 relative   ">
+    <div className="col-span-1 relative ms-12  ">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div className="relative flex items-center px-4 h-16 bg-transparent transition-all duration-300 cursor-pointer">

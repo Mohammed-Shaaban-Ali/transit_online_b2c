@@ -152,7 +152,7 @@ const HotelsList = () => {
 
   const locationName = getLocationName();
   return (
-    <div className="container ">
+    <div className="container mb-6 ">
       {/* Search Box at the top */}
       <div className="my-6 ">
         <HotelSearchBox defaultValues={searchData} />
