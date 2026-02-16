@@ -47,7 +47,7 @@ export const HomeHero = () => {
   const [currentTab, setCurrentTab] = useState("Hotel");
 
   return (
-    <section className="relative min-h-screen ">
+    <section className="relative h-screen ">
       <Image
         src={heroImage}
         alt={t("imageAlt")}

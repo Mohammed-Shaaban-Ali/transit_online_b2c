@@ -301,12 +301,16 @@
 
 @media (min-width: 80rem) {
   .container {
-    max-width: 76rem;
+    max-width: min(90%, 1500px);
   }
 }
 
-@media (min-width: 82rem) {
+/* @media (min-width: 83rem) and (max-width: 89rem) {
   .container {
-    max-width: 80rem;
+    max-width: 82rem;
   }
+} */
+
+html {
+  zoom: 0.95;
 }
