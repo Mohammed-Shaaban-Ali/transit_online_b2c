@@ -239,7 +239,7 @@ const HotelsList = () => {
           {/* Main Content */}
           <div className={`col-span-1 xl:col-span-8
               
-              ${isError && searchData ? "col-span-1 xl:col-span-8" : "col-span-1 xl:col-span-8"}`}>
+              ${isError && searchData ? "col-span-1 xl:col-span-10" : "col-span-1 xl:col-span-8"}`}>
             {isAnyLoading ? (
               <HotelCardsSkeleton count={5} />
             ) : isError && searchData ? (

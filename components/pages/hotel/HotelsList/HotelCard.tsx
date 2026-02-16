@@ -55,11 +55,11 @@ const HotelCard = ({
       flex items-center flex-col sm:flex-row gap-2 mb-4 hover:bg-gray-50 transition-all duration-300"
     >
       {hotel?.defaultImage?.FullSize && (
-        <div className="relative shrink-0 w-full sm:w-[220px] sm:h-[220px] overflow-hidden sm:rounded-s-lg sm:rounded-e-none rounded-lg">
+        <div className="relative shrink-0 w-full sm:w-[200px] sm:h-[200px] overflow-hidden sm:rounded-s-lg sm:rounded-e-none rounded-lg">
           <Image
             width={700}
             height={700}
-            className="w-full h-full sm:h-[220px] sm:w-[220px] object-cover 
+            className="w-full h-full sm:h-[200px] sm:w-[200px] object-cover 
             group-hover:scale-105 transition-all duration-300
             "
             src={hotel?.defaultImage?.FullSize || "/img/hotels/placeholder.jpg"}
@@ -112,10 +112,10 @@ const HotelCard = ({
               </div>
             )}
             {/* Location */}
-            <div className="flex items-center gap-1.5 text-gray-500">
+            {/* <div className="flex items-center gap-1.5 text-gray-500">
               <FaMapMarkerAlt size={15} className="text-gray-400 min-w-4" />
               <div className="text-16 line-clamp-1">{hotel?.address}</div>
-            </div>
+            </div> */}
           </div>
 
           {/* Price Section */}
@@ -129,7 +129,7 @@ const HotelCard = ({
 
         {/* Description */}
         <div className="text-gray-500 text-16 line-clamp-2 mt-0.5">
-          {hotel?.description || hotel?.locationDetails}
+          {hotel?.description || hotel?.locationDetails || hotel?.address}
         </div>
       </div>
     </Link>
