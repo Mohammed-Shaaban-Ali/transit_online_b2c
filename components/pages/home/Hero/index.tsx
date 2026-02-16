@@ -56,7 +56,7 @@ export const HomeHero = () => {
       />
       <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/30"></div>
       <div
-        className="container w-full!  
+        className="container max-w-304! w-full!  
        z-10 absolute bottom-12 sm:bottom-20 left-1/2 -translate-x-1/2  "
       >
         <div className="flex flex-col items-center justify-between h-full gap-10 sm:gap-20 w-full min-h-[55vh]">

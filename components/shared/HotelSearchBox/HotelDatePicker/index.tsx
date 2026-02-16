@@ -151,7 +151,7 @@ function HotelDatePicker({ form }: Props) {
   const numOfMonths = isMobile ? 1 : 2;
 
   return (
-    <div className="col-span-1  relative lg:border-s-2 border-gray-200" ref={containerRef}>
+    <div className="col-span-1  relative " ref={containerRef}>
       <div className="relative flex w-full items-center px-4 h-16 bg-transparent transition-all duration-300">
         <label
           htmlFor="hotelDate"

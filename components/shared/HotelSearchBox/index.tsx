@@ -358,7 +358,7 @@ function HotelSearchBox({ defaultValues }: Props) {
   };
 
   return (
-    <div className="relative  ">
+    <div className="relative">
       <div
         className={` bg-primary-light p-2 py-5 sm:p-5 
           ${defaultValues

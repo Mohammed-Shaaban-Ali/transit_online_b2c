@@ -20,7 +20,7 @@ const PropertyTypeFilter = (props: Props) => {
   const { propertyTypes } = props;
   const { selectedPropertyTypes, togglePropertyType } = useHotelFilterRedux();
   const [showAll, setShowAll] = useState(false);
-  const initialVisibleCount = 8;
+  const initialVisibleCount = 10;
   const visiblePropertyTypes = showAll
     ? propertyTypes
     : propertyTypes?.slice(0, initialVisibleCount);

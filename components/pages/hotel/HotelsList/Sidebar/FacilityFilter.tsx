@@ -22,7 +22,7 @@ const FacilityFilter = (props: Props) => {
   const { selectedFacilities, toggleFacility } = useHotelFilterRedux();
   const [showAll, setShowAll] = useState(false);
 
-  const initialVisibleCount = 8;
+  const initialVisibleCount = 10;
   const visibleFacilities = showAll
     ? facilities
     : facilities?.slice(0, initialVisibleCount);

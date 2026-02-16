@@ -78,11 +78,7 @@ const HotelCard = ({
               <h4 className="text-22 font-bold">{hotel?.displayName}</h4>
               <h5 className="text-16 font-bold">{hotel?.displayNameAr}</h5>
             </div>
-            {/* Location */}
-            <div className="flex items-center gap-1.5 text-gray-500">
-              <FaMapMarkerAlt size={15} className="text-gray-400 min-w-4" />
-              <div className="text-16 line-clamp-1">{hotel?.address}</div>
-            </div>
+
 
             {/* Breakfast Included */}
             {hasBreakfast && (
@@ -115,6 +111,11 @@ const HotelCard = ({
                 )}
               </div>
             )}
+            {/* Location */}
+            <div className="flex items-center gap-1.5 text-gray-500">
+              <FaMapMarkerAlt size={15} className="text-gray-400 min-w-4" />
+              <div className="text-16 line-clamp-1">{hotel?.address}</div>
+            </div>
           </div>
 
           {/* Price Section */}

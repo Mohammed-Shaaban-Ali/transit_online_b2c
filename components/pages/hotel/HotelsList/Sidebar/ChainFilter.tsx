@@ -22,7 +22,7 @@ const ChainFilter = (props: Props) => {
   const { selectedChains, toggleChain } = useHotelFilterRedux();
   const [showAll, setShowAll] = useState(false);
 
-  const initialVisibleCount = 8;
+  const initialVisibleCount = 10;
   const visibleChains = showAll
     ? chains
     : chains?.slice(0, initialVisibleCount);

@@ -517,7 +517,7 @@ const FlightsList = () => {
   return (
     <div className="container mb-8">
       {/* Search Box at the top */}
-      <div className="my-8">
+      <div className="my-6 max-w-304 mx-auto    ">
         <FlightSearchBox
           defaultValues={flightSearchDefaultValues}
           isLoading={isIatiFetching || isSabreFetching}
