@@ -395,7 +395,7 @@ const FlightSearchBox = ({ defaultValues, isLoading = false }: Props) => {
               type="submit"
               size="lg"
               disabled={isLoading}
-              className="px-4 sm:px-6 w-full max-w-[200px]  
+              className="px-4 sm:px-6 w-full max-w-[180px]  
               flex items-center justify-center gap-2 rounded-full font-bold 
               transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             // style={{ fontSize: "16px" }}
