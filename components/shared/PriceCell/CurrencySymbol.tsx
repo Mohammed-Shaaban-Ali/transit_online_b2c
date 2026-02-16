@@ -17,9 +17,9 @@ function CurrencySymbol({ className = "", size = "md" }: Props) {
       : CURRENCY_CONFIG.currencySymbolEn;
 
   const sizeClasses = {
-    sm: "text-11 font-medium",
-    md: "text-14 font-semibold",
-    lg: "text-18 font-bold",
+    sm: "text-11 rtl:text-12 font-medium",
+    md: "text-14 rtl:text-16 font-semibold",
+    lg: "text-18  font-bold",
   };
 
   return (
