@@ -185,11 +185,11 @@ const HotelsList = () => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 ">
+        <div className="grid grid-cols-1 xl:grid-cols-10 gap-6 ">
           {/* Sidebar - Hidden on mobile, visible on xl screens */}
           <div className={`
             
-            ${isError && searchData ? "hidden" : "  xl:col-span-3 hidden xl:block"}
+            ${isError && searchData ? "hidden" : "  xl:col-span-2 hidden xl:block"}
             `}>
             {isAnyLoading ? (
               <SidebarSkeleton />
@@ -237,9 +237,9 @@ const HotelsList = () => {
           </div>
 
           {/* Main Content */}
-          <div className={`col-span-1 xl:col-span-9
+          <div className={`col-span-1 xl:col-span-8
               
-              ${isError && searchData ? "col-span-1 xl:col-span-12" : "col-span-1 xl:col-span-9"}`}>
+              ${isError && searchData ? "col-span-1 xl:col-span-8" : "col-span-1 xl:col-span-8"}`}>
             {isAnyLoading ? (
               <HotelCardsSkeleton count={5} />
             ) : isError && searchData ? (
