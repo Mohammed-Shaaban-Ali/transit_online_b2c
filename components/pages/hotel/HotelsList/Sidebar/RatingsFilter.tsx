@@ -13,17 +13,16 @@ const RatingsFilter = () => {
   };
 
   return (
-    <div className="grid grid-cols-5 gap-2">
+    <div className="grid grid-cols-5 gap-1">
       {ratings.map((rating) => {
         const isSelected = selectedRating.includes(rating);
         return (
           <label
             key={rating}
-            className={`flex items-center justify-center h-11 cursor-pointer border-2 rounded-md bg-white transition-colors ${
-              isSelected
-                ? "bg-yellow-500 text-white border-yellow-500"
-                : "border-gray-300 hover:bg-yellow-50"
-            }`}
+            className={`flex items-center justify-center h-10 cursor-pointer border-2 rounded-md bg-white transition-colors ${isSelected
+              ? "bg-yellow-500 text-white border-yellow-500"
+              : "border-gray-300 hover:bg-yellow-50"
+              }`}
           >
             <div className="flex items-center justify-center">
               <input
@@ -35,15 +34,13 @@ const RatingsFilter = () => {
               />
               <div className="flex items-center justify-center">
                 <AiFillStar
-                  className={`text-yellow-500 transition-opacity duration-200 ${
-                    isSelected ? "opacity-100 text-white!" : "opacity-80"
-                  }`}
+                  className={`text-yellow-500 transition-opacity duration-200 ${isSelected ? "opacity-100 text-white!" : "opacity-80"
+                    }`}
                   size={20}
                 />
                 <span
-                  className={`ml-1 font-medium ${
-                    isSelected ? "text-white" : ""
-                  }`}
+                  className={`ml-1 font-medium ${isSelected ? "text-white" : ""
+                    }`}
                 >
                   {rating}
                 </span>
