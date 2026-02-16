@@ -55,11 +55,11 @@ const HotelCard = ({
       flex items-center flex-col sm:flex-row gap-2 mb-4 hover:bg-gray-50 transition-all duration-300"
     >
       {hotel?.defaultImage?.FullSize && (
-        <div className="relative shrink-0 w-full sm:w-[200px] sm:h-[200px] overflow-hidden sm:rounded-s-lg sm:rounded-e-none rounded-lg">
+        <div className="relative shrink-0 w-full sm:w-[180px] sm:h-[180px] overflow-hidden sm:rounded-s-lg sm:rounded-e-none rounded-lg">
           <Image
             width={700}
             height={700}
-            className="w-full h-full sm:h-[200px] sm:w-[200px] object-cover 
+            className="w-full h-full sm:h-[180px] sm:w-[180px] object-cover 
             group-hover:scale-105 transition-all duration-300
             "
             src={hotel?.defaultImage?.FullSize || "/img/hotels/placeholder.jpg"}
