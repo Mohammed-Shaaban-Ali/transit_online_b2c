@@ -81,7 +81,7 @@ const HotelCard = ({
             {/* Location */}
             <div className="flex items-center gap-1.5 text-gray-500">
               <FaMapMarkerAlt size={15} className="text-gray-400 min-w-4" />
-              <div className="text-16 line-clamp-2">{hotel?.address}</div>
+              <div className="text-16 line-clamp-1">{hotel?.address}</div>
             </div>
 
             {/* Breakfast Included */}
@@ -127,7 +127,7 @@ const HotelCard = ({
         </div>
 
         {/* Description */}
-        <div className="text-gray-500 text-16 line-clamp-2 mt-3">
+        <div className="text-gray-500 text-16 line-clamp-2 mt-0.5">
           {hotel?.description || hotel?.locationDetails}
         </div>
       </div>

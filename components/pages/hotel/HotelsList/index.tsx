@@ -154,7 +154,7 @@ const HotelsList = () => {
   return (
     <div className="container ">
       {/* Search Box at the top */}
-      <div className="my-8">
+      <div className="my-6">
         <HotelSearchBox defaultValues={searchData} />
       </div>
 
