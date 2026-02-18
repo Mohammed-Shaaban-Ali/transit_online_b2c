@@ -126,7 +126,8 @@ const HotelBookingPage = () => {
       ? pkg.images
       : pkg.rooms?.[0]?.images || [];
 
-  const totalPrice = Number(pkg?.price?.finalPrice || 0) * item.nights;
+  const totalPrice = Number(pkg?.price?.finalPrice || 0);
+  const pricePerNight = item.nights > 0 ? totalPrice / item.nights : totalPrice;
 
   const infoBadges = [
     {
@@ -274,7 +275,7 @@ const HotelBookingPage = () => {
                 <span>{t("pricePerNight")}</span>
                 <div className="flex items-center gap-1 rtl:flex-row-reverse">
                   <CurrencySymbol size="sm" />
-                  {formatePrice(Number(pkg?.price?.finalPrice || 0))}
+                  {formatePrice(pricePerNight)}
                 </div>
               </div>
 

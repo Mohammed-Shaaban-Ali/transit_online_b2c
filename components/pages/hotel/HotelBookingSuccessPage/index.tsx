@@ -85,8 +85,7 @@ const HotelBookingSuccessPage = () => {
     );
   }
 
-  const totalPrice =
-    Number(hotelData.package?.price?.finalPrice || 0) * hotelData.nights;
+  const totalPrice = Number(hotelData.package?.price?.finalPrice || 0);
 
   return (
     <BookingConfirmation

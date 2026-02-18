@@ -239,14 +239,10 @@ const AvailableRooms = ({
 
                     {/* Price */}
                     <div className="flex flex-col items-end">
-                      <div style={{ fontSize: "11px" }}>
-                        ({Math.ceil(convertPrice(Number(pkg?.price?.finalPrice || 0)))} *{night} {t("nights")})
-                      </div>
-
                       <div className="text-16  flex items-center rtl:flex-row-reverse gap-1 font-medium  text-primary -mt-0.5">
                         <CurrencySymbol size="sm" />
                         {formatePrice(
-                          Number(pkg?.price?.finalPrice || 0) * night
+                          Number(pkg?.price?.finalPrice || 0)
                         )}
                         <div
                           style={{ fontSize: "9px" }}
@@ -313,14 +309,10 @@ const AvailableRooms = ({
 
                         {/* Price */}
                         <div className="flex flex-col items-end">
-                          <div style={{ fontSize: "11px" }}>
-                            ({Math.ceil(convertPrice(Number(pkg?.price?.finalPrice || 0)))} *{night} {t("nights")})
-                          </div>
-
                           <div className="text-16  flex items-center gap-1 font-medium  text-primary -mt-0.5">
                             <CurrencySymbol size="sm" />
                             {formatePrice(
-                              Number(pkg?.price?.finalPrice || 0) * night
+                              Number(pkg?.price?.finalPrice || 0)
                             )}
                           </div>
                         </div>
