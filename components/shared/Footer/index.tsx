@@ -40,7 +40,7 @@ function Footer() {
             {t("description")}
           </p>
         </div>
-        <div className="col-span-1 flex flex-col gap-7">
+        <div className="col-span-1 flex flex-col gap-5">
           <div className="flex items-center gap-1.5">
             <FaLocationDot className="size-5  text-white/70" />
             <p className="text-15 text-white/70 font-medium">{t("location")}</p>
@@ -59,7 +59,7 @@ function Footer() {
           </div>
         </div>
         <div className="col-span-1 items-end w-full ">
-          <div className=" flex sm:flex-col flex-row gap-7 w-fit  sm:ms-0">
+          <div className=" flex sm:flex-col flex-row gap-5 w-fit  sm:ms-0">
             {links?.map((i) => (
               <Link
                 href={i.href}
