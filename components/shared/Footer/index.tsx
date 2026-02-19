@@ -48,13 +48,13 @@ function Footer() {
           <div className="flex items-center gap-1.5">
             <FaSquarePhone className="size-5  text-white/70" />
             <p className="text-15 text-white/70 font-medium">
-              +966 25 789 1566487
+              +966920020060
             </p>
           </div>{" "}
           <div className="flex items-center gap-1.5">
             <MdEmail className="size-5  text-white/70" />
             <p className="text-15 text-white/70 font-medium">
-              support@travila.com{" "}
+              info@transitota.com
             </p>
           </div>
         </div>
