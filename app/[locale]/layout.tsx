@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Rubik } from "next/font/google";
+import { Rubik, Geom } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
