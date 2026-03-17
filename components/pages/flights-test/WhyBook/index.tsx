@@ -46,7 +46,7 @@ function WhyBook({}: Props) {
           <button
             type="button"
             onClick={() => setIsExpanded((prev) => !prev)}
-            className="text-[14px] text-blue-500 hover:underline cursor-pointer"
+            className="text-[14px] text-primary hover:underline cursor-pointer"
           >
             {isExpanded ? "Show Less" : "Show More"}
           </button>

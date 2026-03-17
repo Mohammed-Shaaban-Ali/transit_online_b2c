@@ -111,7 +111,7 @@ function Recommended({}: Props) {
                 className={`rounded-sm px-4 py-2 text-[14px] transition-colors duration-200 cursor-pointer ${
                   isActive
                     ? "bg-[#101f3d] text-white shadow-[0px_8px_16px_0px_rgba(15,41,77,0.08)]"
-                    : "bg-[#e1ecfc3f] text-black hover:text-blue-500"
+                    : "bg-[#e1ecfc3f] text-black hover:text-primary"
                 }`}
               >
                 {tab.label}
@@ -126,7 +126,7 @@ function Recommended({}: Props) {
               <button
                 key={link}
                 type="button"
-                className="w-fit text-start hover:text-blue-500  hover:underline cursor-pointer"
+                className="w-fit text-start hover:text-primary  hover:underline cursor-pointer"
               >
                 {link}
               </button>

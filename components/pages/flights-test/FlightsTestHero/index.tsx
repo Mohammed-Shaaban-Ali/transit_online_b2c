@@ -2,6 +2,7 @@ import React from "react";
 import heroImage from "@/public/images/flights/flight_home_bg_v6.webp";
 import Image from "next/image";
 import HeroQuickActions from "@/components/pages/flights-test/HeroQuickActions";
+import Form from "./Form";
 type Props = {};
 
 function FlightsTestHero({}: Props) {
@@ -17,7 +18,7 @@ function FlightsTestHero({}: Props) {
         </h1>
         <p className="mt-1 text-white/90 text-lg">Your next take-off awaits</p>
 
-        <div className="mt-3 h-[210px] w-full rounded-[8px] bg-white" />
+        <Form />
       </section>
     </div>
   );

@@ -100,7 +100,7 @@ function PartnerAirlines({}: Props) {
                   {flight.airline}
                 </p>
               </div>
-              <button className="flex items-center gap-0.5 text-[14px] text-blue-500 cursor-pointer hover:underline">
+              <button className="flex items-center gap-0.5 text-[14px] text-primary cursor-pointer hover:underline">
                 More
                 <IoChevronForward className="size-3.5" />
               </button>

@@ -31,8 +31,8 @@ function TrendingNow({}: Props) {
 
           <button
             type="button"
-            className="relative z-10 mb-4 min-w-[120px] rounded-sm bg-blue-500 px-8 py-3 text-[20px] 
-            font-bold text-white transition-colors duration-200 hover:bg-[#1f4bd1] md:mb-6 "
+            className="relative z-10 mb-4 min-w-[120px] rounded-sm bg-primary px-8 py-3 text-[20px] 
+            font-bold text-white transition-colors duration-200 hover:bg-primary/80 md:mb-6 "
           >
             Explore the world
           </button>

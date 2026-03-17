@@ -99,7 +99,7 @@ function HowToBook({}: Props) {
               >
                 <span
                   className="text-[16px] font-bold cursor-pointer 
-                leading-tight text-black  group-hover:text-blue-600
+                leading-tight text-black  group-hover:text-primary
                 group-hover:translate-x-2 transition-all duration-300 
                 "
                 >
@@ -108,13 +108,13 @@ function HowToBook({}: Props) {
                 {isOpen ? (
                   <IoChevronUp
                     className="size-4 shrink-0 text-black/60 
-                   group-hover:text-blue-600 group-hover:-translate-x-2 transition-all duration-300 
+                   group-hover:text-primary group-hover:-translate-x-2 transition-all duration-300 
 "
                   />
                 ) : (
                   <IoChevronDown
                     className="size-4 shrink-0 text-black/60 
-                   group-hover:text-blue-600 group-hover:translate-x-2 transition-all duration-300 
+                   group-hover:text-primary group-hover:translate-x-2 transition-all duration-300 
 "
                   />
                 )}
