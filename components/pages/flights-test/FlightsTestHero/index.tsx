@@ -11,7 +11,7 @@ function FlightsTestHero({}: Props) {
       <Image src={heroImage} alt="hero" fill />
       <HeroQuickActions />
 
-      <section className="relative z-10 container max-w-[1200px]! mx-auto flex h-full flex-col justify-end pb-24">
+      <section className="relative z-30 container max-w-[1200px]! mx-auto flex h-full flex-col justify-end pb-24">
         <h1 className="text-white text-[40px] font-bold leading-tight flex items-end gap-1">
           Discover the best flight deals
           <span className="bg-yellow-400 rounded-full w-2.5 h-2.5 block mb-2.5"></span>

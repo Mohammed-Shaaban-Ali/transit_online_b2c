@@ -19,7 +19,7 @@ function page({}: Props) {
       <FloatingSideActions />
       <FlightsTestHero />
 
-      <section className="relative z-10 -mt-16 rounded-t-[32px] bg-[#f9f9f9] py-12">
+      <section className="relative z-0 -mt-16 rounded-t-[32px] bg-[#f9f9f9] py-12">
         <TrustUs />
         <TrendingNow />
         <PartnerAirlines />

@@ -15,6 +15,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 type DatePickerFormValues = {
   fromAirport: string;
@@ -28,7 +29,12 @@ type DatePickerFormValues = {
   cabinClass: "ECONOMY" | "BUSINESS";
 };
 
-function StaticFlightSearchBox() {
+type Props = {
+  className?: string;
+  compactActions?: boolean;
+};
+
+function StaticFlightSearchBox({ className, compactActions = false }: Props) {
   const [tripType, setTripType] = useState<TripType>("roundTrip");
   const [nonstop, setNonstop] = useState(true);
   const [fromValue, setFromValue] = useState("");
@@ -81,7 +87,7 @@ function StaticFlightSearchBox() {
   };
 
   return (
-    <div className="mt-3 w-full rounded-[8px] bg-white p-5 ">
+    <div className={cn("mt-3 w-full rounded-[8px] bg-white p-5", className)}>
       <TripOptionsRow
         tripType={tripType}
         nonstop={nonstop}
@@ -89,8 +95,8 @@ function StaticFlightSearchBox() {
         onNonstopChange={setNonstop}
       />
 
-      <div className="grid grid-cols-12 gap-2.5">
-        <div className="relative col-span-3">
+      <div className={cn(compactActions ? "flex items-center gap-2.5" : "grid grid-cols-12 gap-2.5")}>
+        <div className={cn("relative", compactActions ? "flex-1" : "col-span-3")}>
           <CitySelectorPopover
             label="Leaving from"
             value={fromValue}
@@ -99,7 +105,7 @@ function StaticFlightSearchBox() {
           />
         </div>
 
-        <div className="relative col-span-3">
+        <div className={cn("relative", compactActions ? "flex-1" : "col-span-3")}>
           <button
             type="button"
             onClick={handleSwapLocations}
@@ -120,7 +126,7 @@ function StaticFlightSearchBox() {
           />
         </div>
 
-        <div className="col-span-3">
+        <div className={cn(compactActions ? "flex-1" : "col-span-3")}>
           <Popover open={datePopoverOpen} onOpenChange={setDatePopoverOpen}>
             <PopoverTrigger asChild>
               <button
@@ -147,7 +153,7 @@ function StaticFlightSearchBox() {
           </Popover>
         </div>
 
-        <div className="col-span-3">
+        <div className={cn(compactActions ? "flex-1" : "col-span-3")}>
           <PassengersPopover
             open={passengersPopoverOpen}
             onOpenChange={setPassengersPopoverOpen}
@@ -161,9 +167,15 @@ function StaticFlightSearchBox() {
             onCabinClassChange={setCabinClass}
           />
         </div>
+
+        {compactActions && (
+          <div className="shrink-0 flex items-center justify-end">
+            <ActionButtonsRow compact className="mt-0" />
+          </div>
+        )}
       </div>
 
-      <ActionButtonsRow />
+      {!compactActions && <ActionButtonsRow />}
     </div>
   );
 }
