@@ -22,7 +22,7 @@ export default function SelectedFlightSummary({
   return (
     <div className="flex items-center justify-between rounded bg-gray-200  p-2.5 mb-2">
       <div className="flex items-center gap-3 text-[14px] text-gray-900">
-        <span className="rounded bg-gray-800 text-white px-2.5 py-0.5 text-[13px] font-medium ">
+        <span className="rounded bg-primary text-white px-2.5 py-0.5 text-[13px] font-medium ">
           {direction}
         </span>
         <span className="flex items-center gap-2 font-semibold">
