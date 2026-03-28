@@ -1,116 +1,255 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { recentSearches, popularCities, asiaCities } from "../constants";
+import { UseFormReturn } from "react-hook-form";
+import useDebounce from "@/hooks/useDebounce";
+import { useGetAllAirportsQuery } from "@/redux/features/airports/airportsApi";
+import { airportTypes } from "@/types/airportTypes";
+import { RiMapPin2Fill } from "react-icons/ri";
+import { FlightSearchFormValues } from "../types";
+
+const RECENT_FROM_KEY = "flight-test-recent-from";
+const RECENT_TO_KEY = "flight-test-recent-to";
+const MAX_RECENT_CITIES = 6;
+
+function getStorageKey(fieldName: "fromAirport" | "toAirport") {
+  return fieldName === "fromAirport" ? RECENT_FROM_KEY : RECENT_TO_KEY;
+}
+
+function getRecentCities(
+  fieldName: "fromAirport" | "toAirport",
+): airportTypes[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(getStorageKey(fieldName));
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveRecentCity(
+  fieldName: "fromAirport" | "toAirport",
+  airport: airportTypes,
+) {
+  try {
+    const existing = getRecentCities(fieldName);
+    const filtered = existing.filter((c) => c.id !== airport.id);
+    const updated = [airport, ...filtered].slice(0, MAX_RECENT_CITIES);
+    localStorage.setItem(getStorageKey(fieldName), JSON.stringify(updated));
+  } catch {
+    /* noop */
+  }
+}
 
 type Props = {
   label: string;
-  value: string;
-  icon?: ReactNode;
-  onChange: (value: string) => void;
+  fieldName: "fromAirport" | "toAirport";
+  form: UseFormReturn<FlightSearchFormValues>;
+  displayValue: string;
+  onDisplayValueChange: (value: string) => void;
   panelWidthClassName?: string;
   triggerClassName?: string;
-  valueClassName?: string;
+  error?: string;
 };
 
 function CitySelectorPopover({
   label,
-  value,
-  icon,
-  onChange,
-  panelWidthClassName = "w-[320px]",
+  fieldName,
+  form,
+  displayValue,
+  onDisplayValueChange,
+  panelWidthClassName = "w-[480px]",
   triggerClassName = "",
-  valueClassName = "text-[16px] text-gray-500",
+  error,
 }: Props) {
   const [open, setOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [recentCities, setRecentCities] = useState<airportTypes[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const selectCity = (city: string) => {
-    onChange(city);
+  const formValue = form.watch(fieldName);
+
+  const debouncedSearch = useDebounce(searchText, 400);
+
+  const isSearching = debouncedSearch.length > 0;
+  const needsResolve = !!formValue && !displayValue;
+
+  const { data: searchData, isFetching: isSearchFetching } =
+    useGetAllAirportsQuery(
+      { search: debouncedSearch, page: "1" },
+      { skip: !isSearching },
+    );
+
+  const { data: resolveData } = useGetAllAirportsQuery(
+    { search: formValue, page: "1" },
+    { skip: !needsResolve },
+  );
+
+  useEffect(() => {
+    if (!needsResolve || !resolveData?.items) return;
+    const match = resolveData.items.find(
+      (a: airportTypes) => a.id === formValue,
+    );
+    if (match) {
+      onDisplayValueChange(`${match.name} (${match.id})`);
+    }
+  }, [needsResolve, resolveData, formValue, onDisplayValueChange]);
+
+  const { data: defaultData, isFetching: isDefaultFetching } =
+    useGetAllAirportsQuery(
+      { search: "", page: "1" },
+      { skip: !open || isSearching },
+    );
+
+  const airports = isSearching
+    ? searchData?.items || []
+    : defaultData?.items || [];
+  const isFetching = isSearching ? isSearchFetching : isDefaultFetching;
+
+  useEffect(() => {
+    if (open) {
+      setRecentCities(getRecentCities(fieldName));
+      setSearchText("");
+      setTimeout(() => inputRef.current?.focus(), 100);
+    }
+  }, [open, fieldName]);
+
+  const handleSelect = (airport: airportTypes) => {
+    form.setValue(fieldName, airport.id, { shouldValidate: true });
+    onDisplayValueChange(`${airport.name} (${airport.id})`);
+    saveRecentCity(fieldName, airport);
     setOpen(false);
+    setSearchText("");
   };
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <button
-          type="button"
-          className={`flex h-[58px] w-full items-center gap-2 rounded-sm border border-gray-300 px-3 text-start ${triggerClassName}`}
+    <div className="relative">
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            className={`flex h-[58px]   w-full items-center gap-2 rounded-sm border border-gray-300 px-3 text-start ${triggerClassName}`}
+          >
+            <span
+              title={displayValue || label}
+              className={
+                displayValue
+                  ? "text-[16px] text-black font-medium line-clamp-1"
+                  : "text-[16px] text-gray-500 line-clamp-1"
+              }
+            >
+              {displayValue || label}
+            </span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent
+          align="start"
+          side="bottom"
+          sideOffset={-58}
+          avoidCollisions={false}
+          className="border-none bg-transparent p-0 shadow-none"
         >
-          {icon}
-          <span className={valueClassName}>{value || label}</span>
-        </button>
-      </PopoverTrigger>
-      <PopoverContent
-        align="start"
-        side="bottom"
-        sideOffset={-58}
-        avoidCollisions={false}
-        className=" border-none bg-transparent p-0 shadow-none"
-      >
-        <div
-          className={`${panelWidthClassName} rounded-md border border-gray-200 bg-white shadow-xl`}
-        >
-          <div className="border-b border-gray-200 px-4 py-3">
-            <input
-              value={value}
-              onChange={(e) => onChange(e.target.value)}
-              placeholder={label}
-              className="h-[58px] w-full rounded-sm border border-gray-300 px-3 text-[15px] font-medium outline-none placeholder:text-gray-500"
-            />
-          </div>
-
-          <div className="max-h-[360px] overflow-y-auto p-4 text-black">
-            <h4 className="mb-3 text-[14px] font-semibold">Recent Searches</h4>
-            <div className="mb-5 space-y-2">
-              {recentSearches.map((city) => (
-                <button
-                  key={`recent-${city}`}
-                  type="button"
-                  onClick={() => selectCity(city)}
-                  className="text-start text-[14px] leading-[1.15] hover:bg-blue-100 rounded-sm p-2 py-3.5"
-                >
-                  {city}
-                </button>
-              ))}
+          <div
+            className={`${panelWidthClassName} rounded-md border border-gray-200 bg-white shadow-xl`}
+          >
+            <div className="border-b border-gray-200 px-4 py-3">
+              <input
+                ref={inputRef}
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                placeholder={label}
+                autoComplete="off"
+                className="h-[58px] w-full rounded-sm border border-gray-300 px-3 text-[15px] font-medium outline-none placeholder:text-gray-500"
+              />
             </div>
 
-            {[
-              {
-                title: "Popular cities",
-                cities: popularCities,
-              },
-              {
-                title: "Asia",
-                cities: asiaCities,
-              },
-            ].map((item) => (
-              <div key={item.title}>
-                <h4 className="mb-3 text-[14px] text-gray-500 first:border-t border-gray-200 pt-3">
-                  {item.title}
-                </h4>
-                <div className="mb-5 grid grid-cols-3 gap-y-2">
-                  {item.cities.map((city) => (
+            <div className="max-h-[360px] overflow-y-auto p-4 text-black">
+              {recentCities.length > 0 && !isSearching && (
+                <>
+                  <h4 className="mb-3 text-[14px] font-semibold">
+                    Recent Searches
+                  </h4>
+                  <div className="mb-5 space-y-1">
+                    {recentCities.map((airport) => (
+                      <button
+                        key={`recent-${airport.id}`}
+                        type="button"
+                        onClick={() => handleSelect(airport)}
+                        className="flex w-full items-center gap-2 rounded-sm p-2 py-3 text-start hover:bg-blue-50 transition-colors"
+                      >
+                        <RiMapPin2Fill
+                          size={16}
+                          className="text-gray-400 shrink-0"
+                        />
+                        <div className="flex flex-col">
+                          <span className="text-[14px] font-medium text-gray-900">
+                            {airport.name} ({airport.id})
+                          </span>
+                          {airport.city && (
+                            <span className="text-[12px] text-gray-500">
+                              {airport.city}
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="border-t border-gray-200 pt-3 mb-3">
+                    <h4 className="text-[14px] text-gray-500">All Airports</h4>
+                  </div>
+                </>
+              )}
+
+              {isFetching ? (
+                <div className="px-2 py-3 text-[14px] text-gray-500">
+                  Searching...
+                </div>
+              ) : airports.length === 0 ? (
+                <div className="px-2 py-3 text-[14px] text-gray-500">
+                  {isSearching ? "No results found" : "Loading airports..."}
+                </div>
+              ) : (
+                <div className="space-y-1">
+                  {airports.map((airport: airportTypes) => (
                     <button
-                      key={`popular-${city}`}
+                      key={airport.id}
                       type="button"
-                      onClick={() => selectCity(city)}
-                      className="text-start text-[14px] leading-[1.15] hover:bg-blue-100 rounded-sm p-2 py-3.5"
+                      onClick={() => handleSelect(airport)}
+                      className="flex w-full items-center gap-2 rounded-sm p-2 py-3 text-start hover:bg-blue-50 transition-colors"
                     >
-                      {city}
+                      <RiMapPin2Fill
+                        size={16}
+                        className="text-gray-400 shrink-0"
+                      />
+                      <div className="flex flex-col">
+                        <span className="text-[14px] font-semibold text-gray-900">
+                          {airport.name} ({airport.id})
+                        </span>
+                        {airport.city && (
+                          <span className="text-[12px] text-gray-500">
+                            {airport.city}
+                          </span>
+                        )}
+                      </div>
                     </button>
                   ))}
                 </div>
-              </div>
-            ))}
+              )}
+            </div>
           </div>
-        </div>
-      </PopoverContent>
-    </Popover>
+        </PopoverContent>
+      </Popover>
+
+      {error && (
+        <p className="mt-1 text-xs text-red-500 font-medium">{error}</p>
+      )}
+    </div>
   );
 }
 

@@ -1,20 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
+import { RootState } from "@/redux/app/store";
+import { setTimeRange } from "@/redux/features/flights/flightFilterSlice";
 import FilterSection from "../components/FilterSection";
+
+const MIN_HOUR = 0;
+const MAX_HOUR = 24;
+
+const formatHour = (value: number) => `${String(value).padStart(2, "0")}:00`;
 
 type RangeProps = {
   title: string;
   value: [number, number];
   onChange: (value: [number, number]) => void;
 };
-
-const MIN_HOUR = 0;
-const MAX_HOUR = 24;
-
-const formatHour = (value: number) => `${String(value).padStart(2, "0")}:00`;
 
 function TimeRangeSlider({ title, value, onChange }: RangeProps) {
   const [min, max] = value;
@@ -23,7 +26,7 @@ function TimeRangeSlider({ title, value, onChange }: RangeProps) {
       <p className="mb-3 text-[14px]">
         <span className="font-semibold">{title}</span>{" "}
         <span className="text-gray-600">
-          {formatHour(min)}–{formatHour(max)}
+          {formatHour(min)}-{formatHour(max)}
         </span>
       </p>
 
@@ -44,23 +47,67 @@ function TimeRangeSlider({ title, value, onChange }: RangeProps) {
   );
 }
 
-function TimesSection() {
-  const [departureRange, setDepartureRange] = useState<[number, number]>([
-    0, 24,
-  ]);
-  const [arrivalRange, setArrivalRange] = useState<[number, number]>([0, 24]);
+function TimesSection({ flightType = "departure" }: { flightType?: "departure" | "return" }) {
+  const dispatch = useDispatch();
+  const timeRange = useSelector((state: RootState) =>
+    flightType === "return"
+      ? state.flightFilter.returnFilters.timeRange
+      : state.flightFilter.departureFilters.timeRange
+  );
+
+  const depRange: [number, number] = timeRange
+    ? [parseInt(timeRange.departureMin), parseInt(timeRange.departureMax)]
+    : [0, 24];
+
+  const arrRange: [number, number] = timeRange
+    ? [parseInt(timeRange.arrivalMin), parseInt(timeRange.arrivalMax)]
+    : [0, 24];
+
+  const handleDepartureChange = useCallback(
+    (value: [number, number]) => {
+      dispatch(
+        setTimeRange({
+          timeRange: {
+            departureMin: formatHour(value[0]),
+            departureMax: formatHour(value[1]),
+            arrivalMin: timeRange?.arrivalMin || "00:00",
+            arrivalMax: timeRange?.arrivalMax || "24:00",
+          },
+          flightType,
+        })
+      );
+    },
+    [dispatch, timeRange, flightType]
+  );
+
+  const handleArrivalChange = useCallback(
+    (value: [number, number]) => {
+      dispatch(
+        setTimeRange({
+          timeRange: {
+            departureMin: timeRange?.departureMin || "00:00",
+            departureMax: timeRange?.departureMax || "24:00",
+            arrivalMin: formatHour(value[0]),
+            arrivalMax: formatHour(value[1]),
+          },
+          flightType,
+        })
+      );
+    },
+    [dispatch, timeRange, flightType]
+  );
 
   return (
     <FilterSection title="Times" className="mb-4">
       <TimeRangeSlider
         title="Departure time"
-        value={departureRange}
-        onChange={setDepartureRange}
+        value={depRange}
+        onChange={handleDepartureChange}
       />
       <TimeRangeSlider
         title="Arrival time"
-        value={arrivalRange}
-        onChange={setArrivalRange}
+        value={arrRange}
+        onChange={handleArrivalChange}
       />
 
       <style jsx global>{`
@@ -70,13 +117,11 @@ function TimesSection() {
           background: #d1d5db !important;
           border-radius: 9999px;
         }
-
         .time-range-slider .range-slider__range {
           height: 4px !important;
           background: #111827 !important;
           border-radius: 9999px;
         }
-
         .time-range-slider .range-slider__thumb {
           width: 18px !important;
           height: 18px !important;

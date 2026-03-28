@@ -1,46 +1,243 @@
 "use client";
 
-import { useState } from "react";
-import { X, ArrowLeftRight, Users, ChevronLeft } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { X, ArrowLeftRight, ChevronLeft } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import type { FlightData, FareOption } from "../data/flights";
-import FlightLeg from "./FlightLeg";
+import { useGetFlightFareMutation } from "@/redux/features/flights/flightsApi";
+import ItineraryFlightLeg from "../FlightCard/FlightLeg";
 import FareSlider from "./FareSlider";
+import type { FlightDirection } from "@/types/flightTypes";
+import type { FlightOffer } from "@/types/fareTypes";
+import {
+  flightDirectionToFlightData,
+  flightOfferToFareOption,
+  formatLegDate,
+} from "./fareDialogUtils";
+import ErrorSection from "@/components/pages/flights/FlightsList/FlightDetails/ErrorSection";
+import DefaultOfferDisplay from "@/components/pages/flights/FlightsList/FlightDetails/DefaultOfferDisplay";
+import { useRouter } from "@/i18n/navigation";
+import { FLIGHT_BOOKING_KEY } from "@/constants";
+import type { FareOption } from "../data/flights";
+import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
+import { formatePrice } from "@/utils/formatePrice";
+import { useTranslations } from "next-intl";
 
 type Props = {
   open: boolean;
   onClose: () => void;
-  departureFlightData: FlightData;
-  returnFlightData: FlightData;
-  onConfirm: (departureFare: FareOption, returnFare: FareOption) => void;
+  departureFlight: FlightDirection;
+  returnFlight?: FlightDirection | null;
+  adults: number;
+  children: number;
+  infants: number;
+  cabinClass: string;
 };
+
+type UiStep = "departure" | "return";
 
 export default function FareSelectionDialog({
   open,
   onClose,
-  departureFlightData,
-  returnFlightData,
-  onConfirm,
+  departureFlight,
+  returnFlight,
+  adults,
+  children,
+  infants,
+  cabinClass,
 }: Props) {
-  const [step, setStep] = useState<"departure" | "return">("departure");
+  const t = useTranslations("FlightDetails");
+  const router = useRouter();
+  const isRoundTrip = !!returnFlight;
 
-  const [selectedDepartureFareId, setSelectedDepartureFareId] =
-    useState<string>(departureFlightData.fareOptions[0]?.id ?? "");
-  const [selectedReturnFareId, setSelectedReturnFareId] = useState<string>(
-    returnFlightData.fareOptions[0]?.id ?? "",
+  const departureFareKey = departureFlight.fares?.[0]?.fare_key ?? "";
+  const returnFareKey = returnFlight?.fares?.[0]?.fare_key;
+
+  const provider = useMemo((): "iati" | "sabre" => {
+    const e = departureFlight.endpoint || returnFlight?.endpoint;
+    if (e === "sabre" || e === "iati") return e;
+    return "iati";
+  }, [departureFlight.endpoint, returnFlight?.endpoint]);
+
+  const [getFlightFare, { data, isLoading: isFetching, error, reset }] =
+    useGetFlightFareMutation();
+
+  const lastCallRef = useRef("");
+
+  const [uiStep, setUiStep] = useState<UiStep>("departure");
+  const [selectedDepartureFareId, setSelectedDepartureFareId] = useState("");
+  const [selectedReturnFareId, setSelectedReturnFareId] = useState("");
+
+  /** Mirrors FlightDetails default-offer flow */
+  const [showReturnOffers, setShowReturnOffers] = useState(false);
+  const [selectedDepartureOffer, setSelectedDepartureOffer] = useState<
+    string | null
+  >(null);
+  const [selectedOfferKey, setSelectedOfferKey] = useState<string | undefined>(
+    undefined,
   );
 
-  const selectedDepartureFare =
-    departureFlightData.fareOptions.find(
-      (f) => f.id === selectedDepartureFareId,
-    ) ?? departureFlightData.fareOptions[0];
+  const departureLeg = departureFlight.legs?.[0];
+  const retFirst = returnFlight?.legs?.[0];
 
-  const selectedReturnFare =
-    returnFlightData.fareOptions.find((f) => f.id === selectedReturnFareId) ??
-    returnFlightData.fareOptions[0];
+  const headerTitle = useMemo(() => {
+    const from =
+      departureLeg?.departure_info?.city_name ||
+      departureLeg?.departure_info?.airport_code ||
+      "";
+    const to =
+      departureLeg?.arrival_info?.city_name ||
+      departureLeg?.arrival_info?.airport_code ||
+      "";
+    return { from, to };
+  }, [departureLeg]);
 
-  const isReturnStep = step === "return";
-  const currentFlight = isReturnStep ? returnFlightData : departureFlightData;
+  const departureDisplay = useMemo(
+    () => flightDirectionToFlightData(departureFlight),
+    [departureFlight],
+  );
+  const returnDisplay = useMemo(
+    () => (returnFlight ? flightDirectionToFlightData(returnFlight) : null),
+    [returnFlight],
+  );
+
+  const depDateLabel = formatLegDate(departureLeg?.departure_info?.date);
+  const retDateLabel = retFirst
+    ? formatLegDate(retFirst.departure_info?.date)
+    : "";
+
+  useEffect(() => {
+    if (!open || !departureFareKey) return;
+    const key = `${departureFareKey}-${returnFareKey ?? ""}-${adults}-${children}-${infants}-${provider}`;
+    if (lastCallRef.current === key) return;
+    lastCallRef.current = key;
+    getFlightFare({
+      departureFareKey,
+      returnFareKey,
+      adults,
+      children,
+      infants,
+      provider,
+    });
+  }, [
+    open,
+    departureFareKey,
+    returnFareKey,
+    adults,
+    children,
+    infants,
+    provider,
+    getFlightFare,
+  ]);
+
+  useEffect(() => {
+    if (!open) {
+      lastCallRef.current = "";
+      reset();
+      setUiStep("departure");
+      setSelectedDepartureFareId("");
+      setSelectedReturnFareId("");
+      setShowReturnOffers(false);
+      setSelectedDepartureOffer(null);
+      setSelectedOfferKey(undefined);
+    }
+  }, [open, reset]);
+
+  const offers = data?.data?.offers ?? [];
+  const fareDetail = data?.data?.fare_detail;
+  const isDefaultFareOnly =
+    !!data?.data &&
+    (!data.data.offers || data.data.offers.length === 0) &&
+    !!fareDetail;
+
+  /**
+   * Departure offers: unique by offer_details[0].name (same as old OfferSelection).
+   * One card per departure package name.
+   */
+  const departureOffers = useMemo(() => {
+    const seen = new Set<string>();
+    return offers.filter((o: FlightOffer) => {
+      const name = o.offer_details?.[0]?.name;
+      if (!name || seen.has(name)) return false;
+      seen.add(name);
+      return true;
+    });
+  }, [offers]);
+
+  /**
+   * selectedDepartureFareId now stores offer_details[0].name directly
+   * (same as old selectedDepartureName / selectedDepartureOffer).
+   */
+
+  /**
+   * Return offers: all offers matching the selected departure package name
+   * (same as old OfferSelection returnOffers filter).
+   */
+  const returnOffers = useMemo(() => {
+    if (!selectedDepartureFareId) return [];
+    return offers.filter(
+      (o: FlightOffer) =>
+        o.offer_details?.[0]?.name === selectedDepartureFareId,
+    );
+  }, [offers, selectedDepartureFareId]);
+
+  useEffect(() => {
+    if (
+      data?.data &&
+      (!data.data.offers || data.data.offers.length === 0) &&
+      data.data.fare_detail
+    ) {
+      setSelectedDepartureOffer("default");
+      if (returnFareKey) {
+        setSelectedOfferKey("default");
+      }
+    }
+  }, [data?.data, returnFareKey]);
+
+  /** Drop invalid return selection when departure changes. */
+  useEffect(() => {
+    if (!isRoundTrip || returnOffers.length === 0) return;
+    if (!selectedReturnFareId) return;
+    const lastIdx = (offer: FlightOffer) =>
+      offer.offer_details?.[offer.offer_details.length - 1]?.name;
+    const stillValid = returnOffers.some(
+      (o) => lastIdx(o) === selectedReturnFareId,
+    );
+    if (!stillValid) {
+      setSelectedReturnFareId("");
+    }
+  }, [isRoundTrip, returnOffers, selectedReturnFareId]);
+
+  useEffect(() => {
+    if (open && departureFareKey) {
+      setShowReturnOffers(false);
+    }
+  }, [open, departureFareKey, returnFareKey]);
+
+  const fareOptionsDeparture: FareOption[] = useMemo(() => {
+    if (offers.length === 0) return [];
+    return departureOffers.map((o, i) =>
+      flightOfferToFareOption(o, i, "departure"),
+    );
+  }, [offers.length, departureOffers]);
+
+  const fareOptionsReturn: FareOption[] = useMemo(() => {
+    return returnOffers.map((o, i) => flightOfferToFareOption(o, i, "return"));
+  }, [returnOffers]);
+
+  const currentFareOptions =
+    isRoundTrip && uiStep === "return"
+      ? fareOptionsReturn
+      : fareOptionsDeparture;
+
+  const selectedDepartureFare = useMemo(() => {
+    return fareOptionsDeparture.find((f) => f.id === selectedDepartureFareId) ?? null;
+  }, [fareOptionsDeparture, selectedDepartureFareId]);
+
+  const selectedReturnFare = useMemo(() => {
+    return fareOptionsReturn.find((f) => f.id === selectedReturnFareId) ?? null;
+  }, [fareOptionsReturn, selectedReturnFareId]);
+
+  const isReturnStep = isRoundTrip && uiStep === "return" && offers.length > 0;
   const currentSelectedId = isReturnStep
     ? selectedReturnFareId
     : selectedDepartureFareId;
@@ -51,115 +248,416 @@ export default function FareSelectionDialog({
     ? setSelectedReturnFareId
     : setSelectedDepartureFareId;
 
-  const handleNext = () => {
-    if (!isReturnStep) {
-      setStep("return");
-    } else {
-      if (selectedDepartureFare && selectedReturnFare) {
-        onConfirm(selectedDepartureFare, selectedReturnFare);
+  const footerPriceLabel = isRoundTrip
+    ? isReturnStep
+      ? "Round-trip"
+      : "Departure package"
+    : "Total";
+
+  const tripLabelForSlider = isRoundTrip
+    ? isReturnStep
+      ? "Round-trip total"
+      : "Departure fare"
+    : "One-way total";
+
+  const hasPackageSelection = isReturnStep
+    ? !!selectedReturnFareId
+    : !!selectedDepartureFareId;
+
+  /** Footer price: on return step show total_price of the matched return offer. */
+  const footerPriceAmount = useMemo(() => {
+    if (isRoundTrip && isReturnStep) {
+      if (!selectedReturnFareId || returnOffers.length === 0) return 0;
+      const raw = returnOffers.find(
+        (o) =>
+          o.offer_details?.[o.offer_details.length - 1]?.name ===
+          selectedReturnFareId,
+      );
+      return raw?.total_price ?? 0;
+    }
+    if (!selectedDepartureFareId) return 0;
+    return currentSelectedFare?.price ?? 0;
+  }, [
+    isRoundTrip,
+    isReturnStep,
+    returnOffers,
+    selectedReturnFareId,
+    selectedDepartureFareId,
+    currentSelectedFare,
+  ]);
+
+  /** Same rules as FlightDetails.getDisplayPrice */
+  const getDisplayPrice = useCallback(() => {
+    if (
+      selectedDepartureOffer === "default" &&
+      (!data?.data?.offers || data?.data?.offers.length === 0) &&
+      data?.data?.fare_detail
+    ) {
+      return {
+        amount: data.data.fare_detail.price_info.total_fare || 0,
+        currency: data.data.fare_detail.currency_code || "",
+      };
+    }
+
+    if (selectedOfferKey && selectedDepartureOffer && data?.data?.offers) {
+      const selected = data.data.offers.find(
+        (offer) =>
+          offer.offer_details?.[0]?.name === selectedDepartureOffer &&
+          offer.offer_details?.[offer.offer_details.length - 1]?.name ===
+            selectedOfferKey,
+      );
+      if (selected) {
+        return {
+          amount: selected.total_price,
+          currency: selected.currency_code,
+        };
       }
     }
-  };
+
+    if (selectedDepartureOffer && data?.data?.offers) {
+      const departureOffer = data.data.offers.find(
+        (offer) => offer.offer_details?.[0]?.name === selectedDepartureOffer,
+      );
+      if (departureOffer) {
+        return {
+          amount: departureOffer.minimum_offer_price,
+          currency: departureOffer.currency_code,
+        };
+      }
+    }
+
+    return {
+      amount: data?.data?.fare_detail?.price_info?.total_fare || 0,
+      currency: data?.data?.fare_detail?.currency_code || "",
+    };
+  }, [selectedDepartureOffer, selectedOfferKey, data]);
 
   const handleBack = () => {
-    setStep("departure");
+    setUiStep("departure");
+  };
+
+  const handleContinueToBooking = useCallback(() => {
+    try {
+      const payload = data?.data;
+      if (!payload) return;
+
+      let offerKey = "";
+      let selectedOffer: FlightOffer | undefined;
+      let buyPrice = 0;
+
+      if (
+        selectedDepartureOffer === "default" &&
+        (!payload.offers || payload.offers.length === 0)
+      ) {
+        if (selectedOfferKey === "default" && returnFareKey) {
+          offerKey = "default|default";
+        } else {
+          offerKey = "default";
+        }
+      } else if (payload.offers && payload.offers.length > 0) {
+        if (isRoundTrip) {
+          /**
+           * selectedDepartureFareId = offer_details[0].name
+           * selectedReturnFareId    = offer_details[last].name
+           * Find the exact offer that matches both (same as old OfferSelection).
+           */
+          selectedOffer = payload.offers.find(
+            (o) =>
+              o.offer_details?.[0]?.name === selectedDepartureFareId &&
+              o.offer_details?.[o.offer_details.length - 1]?.name ===
+                selectedReturnFareId,
+          );
+          if (selectedOffer) {
+            offerKey = `${selectedDepartureFareId}|${selectedReturnFareId}`;
+          }
+        } else {
+          /**
+           * selectedDepartureFareId = offer_details[0].name
+           * Find the departure offer that matches the name.
+           */
+          selectedOffer = payload.offers.find(
+            (o) => o.offer_details?.[0]?.name === selectedDepartureFareId,
+          );
+          if (selectedDepartureFareId) {
+            offerKey = selectedDepartureFareId;
+          }
+        }
+      } else if (selectedDepartureOffer) {
+        offerKey = selectedDepartureOffer;
+      }
+
+      if (selectedOffer && payload.offers && payload.offers.length > 0) {
+        buyPrice = selectedOffer.total_price || 0;
+      } else if (payload.fare_detail) {
+        buyPrice = payload.fare_detail.price_info?.total_fare || 0;
+      }
+
+      const bookingData = {
+        departureFareKey,
+        returnFareKey: returnFareKey || undefined,
+        offerKey: offerKey || undefined,
+        adults,
+        children,
+        infants,
+        cabinClass: cabinClass as "ECONOMY" | "BUSINESS",
+        provider,
+        departureFlightData: departureFlight,
+        returnFlightData: returnFlight || undefined,
+        fareData: data,
+        selectedOffer: selectedOffer || undefined,
+        buyPrice,
+        buyCurrencyId: 1,
+        sellCurrencyId: 1,
+      };
+
+      sessionStorage.setItem(FLIGHT_BOOKING_KEY, JSON.stringify(bookingData));
+
+      onClose();
+      router.push("/flights/booking");
+    } catch (e) {
+      console.error(e);
+    }
+  }, [
+    data,
+    isRoundTrip,
+    returnFareKey,
+    selectedReturnFareId,
+    selectedDepartureFareId,
+    selectedDepartureOffer,
+    selectedOfferKey,
+    departureFareKey,
+    adults,
+    children,
+    infants,
+    cabinClass,
+    provider,
+    departureFlight,
+    returnFlight,
+    onClose,
+    router,
+  ]);
+
+  const handleNextOffers = () => {
+    if (!isRoundTrip || offers.length === 0) {
+      handleContinueToBooking();
+      return;
+    }
+    if (uiStep === "departure") {
+      setUiStep("return");
+      setSelectedReturnFareId("");
+      return;
+    }
+    handleContinueToBooking();
   };
 
   const handleClose = () => {
-    setStep("departure");
+    setUiStep("departure");
     onClose();
   };
 
+  const stepTitle =
+    offers.length === 0
+      ? "Review fare"
+      : isReturnStep
+        ? "Choose your return fare package"
+        : isRoundTrip
+          ? "Choose your departure fare package"
+          : "Choose your fare";
+
+  const subline =
+    isReturnStep && returnDisplay
+      ? `${returnDisplay.airline} · ${returnDisplay.flightNumber} · ${returnDisplay.departureTime} → ${returnDisplay.arrivalTime}`
+      : `${departureDisplay.airline} · ${departureDisplay.flightNumber} · ${departureDisplay.departureTime} → ${departureDisplay.arrivalTime}`;
+
+  const canContinueOffers =
+    !isFetching &&
+    !!data?.data &&
+    (offers.length === 0
+      ? false
+      : !isRoundTrip
+        ? !!selectedDepartureFareId
+        : uiStep === "departure"
+          ? !!selectedDepartureFareId
+          : !!selectedReturnFareId);
+
+  const continueToBookingDisabledDefault =
+    isFetching ||
+    (!!returnFareKey &&
+      showReturnOffers &&
+      selectedOfferKey === undefined &&
+      !(
+        selectedDepartureOffer === "default" &&
+        (!data?.data?.offers || data?.data?.offers.length === 0)
+      ));
+
+  if (!departureFareKey) {
+    return null;
+  }
+
+  const showOfferPackages = !isFetching && !error && offers.length > 0;
+  const showDefaultBlock = !isFetching && !error && isDefaultFareOnly;
+
   return (
     <Dialog open={open} onOpenChange={(v) => !v && handleClose()}>
-      <DialogContent className="sm:max-w-none w-[95vw] lg:w-[1024px] p-0 gap-0 overflow-y-auto max-h-[90vh]">
-        {/* Header */}
+      <DialogContent className="sm:max-w-none w-[95vw] lg:w-[1024px] p-0 gap-0 overflow-y-auto overflow-x-hidden max-h-[90vh] min-w-0">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             {isReturnStep && (
               <button
                 type="button"
                 onClick={handleBack}
-                className="rounded-full p-1 hover:bg-gray-100 transition-colors cursor-pointer"
+                className="rounded-full p-1 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
               >
                 <ChevronLeft size={20} className="text-gray-600" />
               </button>
             )}
-            <h2 className="text-[20px] font-bold text-gray-900">
-              New York{" "}
-              <ArrowLeftRight size={18} className="inline text-gray-600 mx-1" />{" "}
-              Miami
+            <h2 className="text-[20px] font-bold text-gray-900 truncate">
+              {headerTitle.from}{" "}
+              <ArrowLeftRight
+                size={18}
+                className="inline text-gray-600 mx-1 shrink-0"
+              />{" "}
+              {headerTitle.to}
             </h2>
           </div>
 
           <button
             type="button"
             onClick={handleClose}
-            className="rounded-full p-1.5 hover:bg-gray-100 transition-colors cursor-pointer"
+            className="rounded-full p-1.5 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
           >
             <X size={20} className="text-gray-600" />
           </button>
         </div>
 
-        {/* Flight legs summary */}
-        <div className="grid grid-cols-2 divide-x divide-gray-200 px-6 py-4 border-b border-gray-100 bg-gray-50">
-          <div className="pr-6">
-            <FlightLeg
-              flight={departureFlightData}
+        {/* Same itinerary detail as FlightCard hover (stops, layovers, segments) */}
+        <div
+          className={`px-6 py-4 border-b border-gray-100 bg-gray-50 ${
+            returnFlight
+              ? "grid grid-cols-1 md:grid-cols-2 gap-4 items-start"
+              : "space-y-4"
+          }`}
+        >
+          <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm min-w-0">
+            <ItineraryFlightLeg
+              legs={departureFlight.legs}
               label="Depart"
-              date="Fri, Apr 10"
+              date={depDateLabel}
             />
           </div>
-          <div className="pl-6">
-            <FlightLeg
-              flight={returnFlightData}
-              label="Return"
-              date="Mon, Apr 13"
+          {returnFlight && (
+            <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm min-w-0">
+              <ItineraryFlightLeg
+                legs={returnFlight.legs}
+                label="Return"
+                date={retDateLabel}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* <div className="px-6 pt-5 pb-1">
+          <p className="text-[14px] font-semibold text-gray-700">{stepTitle}</p>
+          {!isDefaultFareOnly && (
+            <p className="text-[12px] text-gray-400 mt-0.5">{subline}</p>
+          )}
+        </div> */}
+
+        <div className="px-6 pt-3 pb-6 min-h-[200px] min-w-0 overflow-x-hidden">
+          {isFetching && (
+            <div className="flex flex-col items-center justify-center py-16 gap-3">
+              <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+              <p className="text-sm text-gray-600">{t("loading")}</p>
+            </div>
+          )}
+          {!isFetching && error && <ErrorSection error={error} />}
+          {showOfferPackages && currentFareOptions.length > 0 && (
+            <FareSlider
+              fares={currentFareOptions}
+              selectedId={currentSelectedId}
+              onSelect={currentOnSelect}
+              tripLabel={tripLabelForSlider}
             />
+          )}
+          {showDefaultBlock && data && (
+            <DefaultOfferDisplay
+              showReturnOffers={showReturnOffers}
+              selectedDepartureOffer={selectedDepartureOffer || ""}
+              returnFareKey={returnFareKey || ""}
+              setReturnFareKey={(v) => setSelectedOfferKey(v)}
+              departureFlightData={departureFlight}
+              selectedOfferKey={selectedOfferKey || ""}
+              setSelectedOfferKey={setSelectedOfferKey}
+              data={data}
+              setShowReturnOffers={setShowReturnOffers}
+            />
+          )}
+        </div>
+
+        {/* Footer: FlightDetails parity — default fare uses getDisplayPrice + Continue vs Continue to booking */}
+        {data?.data && !isFetching && (isDefaultFareOnly ? !!selectedDepartureOffer : offers.length > 0 && hasPackageSelection) && (
+          <div className="flex flex-col gap-3 px-6 py-4 border-t border-gray-100 bg-white sticky bottom-0 z-10">
+            {isDefaultFareOnly && selectedDepartureOffer ? (
+              <div className="flex items-end justify-between gap-5 flex-wrap">
+                <div>
+                  <h4 className="text-[24px] font-medium text-gray-900">
+                    {t("totalPrice")}
+                  </h4>
+                  <div className="text-[32px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
+                    <CurrencySymbol size="lg" />
+                    {formatePrice(getDisplayPrice().amount || 0)}
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  {!showReturnOffers && returnFareKey && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowReturnOffers(true);
+                        setSelectedOfferKey(undefined);
+                      }}
+                      className="h-12 rounded-full px-8 text-[16px] font-semibold bg-primary text-white hover:bg-primary/90"
+                    >
+                      {t("continue")}
+                    </button>
+                  )}
+                  {(showReturnOffers || !returnFareKey) && (
+                    <button
+                      type="button"
+                      onClick={handleContinueToBooking}
+                      disabled={continueToBookingDisabledDefault}
+                      className="h-12 rounded-full px-8 text-[16px] font-semibold bg-primary text-white hover:bg-primary/90 disabled:opacity-50 disabled:pointer-events-none"
+                    >
+                      {t("continueToBooking")}
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-end gap-4 flex-wrap">
+                <div className="flex items-end gap-1.5 me-auto">
+                  <p className="text-[14px] text-gray-500 mb-1">
+                    {footerPriceLabel}
+                  </p>
+                  <div className="text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
+                    <CurrencySymbol size="lg" />
+                    {formatePrice(footerPriceAmount)}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleNextOffers}
+                  disabled={!canContinueOffers}
+                  className="h-14 rounded bg-primary px-8 text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+                >
+                  {isRoundTrip && offers.length > 0 && uiStep === "departure"
+                    ? "Next"
+                    : t("continueToBooking")}
+                </button>
+              </div>
+            )}
           </div>
-        </div>
-
-        {/* Current step label */}
-        <div className="px-6 pt-5 pb-1">
-          <p className="text-[14px] font-semibold text-gray-700">
-            {isReturnStep
-              ? "Choose your return fare"
-              : "Choose your departure fare"}
-          </p>
-          <p className="text-[12px] text-gray-400 mt-0.5">
-            {currentFlight.airline} · {currentFlight.flightNumber} ·{" "}
-            {currentFlight.departureTime} → {currentFlight.arrivalTime}
-          </p>
-        </div>
-
-        {/* Fare slider */}
-        <div className="px-6 pt-3 pb-6">
-          <FareSlider
-            fares={currentFlight.fareOptions}
-            selectedId={currentSelectedId}
-            onSelect={currentOnSelect}
-          />
-        </div>
-
-        {/* Footer */}
-        <div className="flex items-center justify-end gap-4 px-6 py-4 border-t border-gray-100 bg-white sticky bottom-0 z-10">
-          <div className="flex items-end gap-1.5">
-            <p className="text-[14px] text-gray-500 mb-1">
-              {isReturnStep ? "Round-trip" : "Departure"}
-            </p>
-            <p className="text-[24px] font-bold text-primary">
-              {currentSelectedFare?.currency}
-              {currentSelectedFare?.price}
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={handleNext}
-            className="h-14 rounded bg-primary px-8 text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
-          >
-            {isReturnStep ? "Continue" : "Next"}
-          </button>
-        </div>
+        )}
       </DialogContent>
     </Dialog>
   );

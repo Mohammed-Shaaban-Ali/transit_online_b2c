@@ -3,13 +3,16 @@
 import { useEffect, useState } from "react";
 import { ArrowRightLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { format } from "date-fns";
 import { useRouter } from "@/i18n/navigation";
+import { formatDateToString } from "@/utils/formatDateToString";
 import TripOptionsRow from "./components/TripOptionsRow";
 import CitySelectorPopover from "./components/CitySelectorPopover";
 import PassengersPopover from "./components/PassengersPopover";
 import ActionButtonsRow from "./components/ActionButtonsRow";
-import { CabinClass, TripType } from "./types";
+import { FlightSearchFormValues, TripType } from "./types";
 import FlightDatePicker from "@/components/shared/FlightSearchBox/FlightDatePicker";
 import {
   Popover,
@@ -18,25 +21,81 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 
-type DatePickerFormValues = {
-  fromAirport: string;
-  toAirport: string;
-  departureDate: string;
-  returnDate?: string;
-  tripType: "roundTrip" | "oneWay";
-  adults: number;
-  children: number;
-  infants: number;
-  cabinClass: "ECONOMY" | "BUSINESS";
-};
+const flightSearchSchema = z
+  .object({
+    fromAirport: z.string().min(1, { message: "Please select departure airport." }),
+    toAirport: z.string().min(1, { message: "Please select destination airport." }),
+    departureDate: z.string().min(1, { message: "Please select departure date." }),
+    returnDate: z.string().optional(),
+    tripType: z.enum(["roundTrip", "oneWay"]),
+    nonstop: z.boolean(),
+    adults: z.number().min(1, { message: "At least one adult is required." }),
+    children: z.number().min(0),
+    infants: z.number().min(0),
+    cabinClass: z.enum(["ECONOMY", "BUSINESS"]),
+  })
+  .refine(
+    (data) => {
+      if (data.departureDate) {
+        const today = new Date(new Date().setHours(0, 0, 0, 0));
+        const departure = new Date(data.departureDate);
+        departure.setHours(0, 0, 0, 0);
+        return departure >= today;
+      }
+      return true;
+    },
+    { message: "Departure date cannot be in the past.", path: ["departureDate"] }
+  )
+  .refine(
+    (data) => {
+      if (data.tripType === "roundTrip" && !data.returnDate) {
+        return false;
+      }
+      return true;
+    },
+    { message: "Please select return date.", path: ["returnDate"] }
+  )
+  .refine(
+    (data) => {
+      if (data.tripType === "roundTrip" && data.returnDate && data.departureDate) {
+        const dep = new Date(data.departureDate);
+        dep.setHours(0, 0, 0, 0);
+        const ret = new Date(data.returnDate);
+        ret.setHours(0, 0, 0, 0);
+        return ret >= dep;
+      }
+      return true;
+    },
+    { message: "Return date must be after departure date.", path: ["returnDate"] }
+  )
+  .refine(
+    (data) => {
+      if (data.fromAirport && data.toAirport) {
+        return data.fromAirport !== data.toAirport;
+      }
+      return true;
+    },
+    { message: "Departure and destination must be different.", path: ["toAirport"] }
+  )
+  .refine(
+    (data) => {
+      if (data.fromAirport && data.toAirport) {
+        return data.fromAirport !== data.toAirport;
+      }
+      return true;
+    },
+    { message: "Departure and destination must be different.", path: ["fromAirport"] }
+  );
 
 type Props = {
   className?: string;
   compactActions?: boolean;
   submitPath?: string;
   initialValues?: Partial<{
-    fromValue: string;
-    toValue: string;
+    fromAirport: string;
+    toAirport: string;
+    fromDisplayValue: string;
+    toDisplayValue: string;
     tripType: TripType;
     nonstop: boolean;
     departureDate: string;
@@ -44,7 +103,7 @@ type Props = {
     adults: number;
     children: number;
     infants: number;
-    cabinClass: CabinClass;
+    cabinClass: "ECONOMY" | "BUSINESS";
   }>;
 };
 
@@ -55,93 +114,89 @@ function StaticFlightSearchBox({
   initialValues,
 }: Props) {
   const router = useRouter();
+
   const [tripType, setTripType] = useState<TripType>(initialValues?.tripType || "roundTrip");
   const [nonstop, setNonstop] = useState(initialValues?.nonstop ?? true);
-  const [fromValue, setFromValue] = useState(initialValues?.fromValue || "");
-  const [toValue, setToValue] = useState(initialValues?.toValue || "");
+  const [fromDisplayValue, setFromDisplayValue] = useState(initialValues?.fromDisplayValue || "");
+  const [toDisplayValue, setToDisplayValue] = useState(initialValues?.toDisplayValue || "");
   const [passengersPopoverOpen, setPassengersPopoverOpen] = useState(false);
-  const [adults, setAdults] = useState(initialValues?.adults ?? 2);
-  const [children, setChildren] = useState(initialValues?.children ?? 2);
-  const [infants, setInfants] = useState(initialValues?.infants ?? 1);
-  const [cabinClass, setCabinClass] = useState<CabinClass>(initialValues?.cabinClass || "Economy");
   const [isSwapping, setIsSwapping] = useState(false);
   const [datePopoverOpen, setDatePopoverOpen] = useState(false);
-  const [formError, setFormError] = useState("");
 
-  const dateForm = useForm<DatePickerFormValues>({
-    mode: "onChange",
+  const form = useForm<FlightSearchFormValues>({
+    resolver: zodResolver(flightSearchSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
     defaultValues: {
-      fromAirport: "",
-      toAirport: "",
+      fromAirport: initialValues?.fromAirport || "",
+      toAirport: initialValues?.toAirport || "",
       departureDate: initialValues?.departureDate || "",
       returnDate: initialValues?.returnDate || "",
-      tripType: initialValues?.tripType === "roundTrip" ? "roundTrip" : "oneWay",
-      adults: 1,
-      children: 0,
-      infants: 0,
-      cabinClass: "ECONOMY",
+      tripType: (initialValues?.tripType === "roundTrip" ? "roundTrip" : "oneWay"),
+      nonstop: initialValues?.nonstop ?? true,
+      adults: initialValues?.adults ?? 1,
+      children: initialValues?.children ?? 0,
+      infants: initialValues?.infants ?? 0,
+      cabinClass: initialValues?.cabinClass || "ECONOMY",
     },
   });
 
+  const { formState: { errors } } = form;
+
   useEffect(() => {
-    // Multi-city uses same date UI behavior as one-way in this test version.
+    if (!initialValues) return;
+    form.reset({
+      fromAirport: initialValues.fromAirport || "",
+      toAirport: initialValues.toAirport || "",
+      departureDate: initialValues.departureDate || "",
+      returnDate: initialValues.returnDate || "",
+      tripType: initialValues.tripType === "roundTrip" ? "roundTrip" : "oneWay",
+      nonstop: initialValues.nonstop ?? true,
+      adults: initialValues.adults ?? 1,
+      children: initialValues.children ?? 0,
+      infants: initialValues.infants ?? 0,
+      cabinClass: initialValues.cabinClass || "ECONOMY",
+    });
+    setTripType(initialValues.tripType || "roundTrip");
+    setNonstop(initialValues.nonstop ?? true);
+  }, [
+    initialValues?.fromAirport,
+    initialValues?.toAirport,
+    initialValues?.departureDate,
+    initialValues?.returnDate,
+    initialValues?.tripType,
+    initialValues?.nonstop,
+    initialValues?.adults,
+    initialValues?.children,
+    initialValues?.infants,
+    initialValues?.cabinClass,
+  ]);
+
+  useEffect(() => {
     const mappedTripType = tripType === "roundTrip" ? "roundTrip" : "oneWay";
-    dateForm.setValue("tripType", mappedTripType, { shouldValidate: false });
-  }, [tripType, dateForm]);
+    form.setValue("tripType", mappedTripType, { shouldValidate: false });
+  }, [tripType, form]);
+
+  useEffect(() => {
+    form.setValue("nonstop", nonstop, { shouldValidate: false });
+  }, [nonstop, form]);
 
   const handleSwapLocations = () => {
     setIsSwapping((prev) => !prev);
-    setFromValue(toValue);
-    setToValue(fromValue);
+
+    const currentFrom = form.getValues("fromAirport");
+    const currentTo = form.getValues("toAirport");
+    const currentFromDisplay = fromDisplayValue;
+    const currentToDisplay = toDisplayValue;
+
+    form.setValue("fromAirport", currentTo, { shouldValidate: true });
+    form.setValue("toAirport", currentFrom, { shouldValidate: true });
+    setFromDisplayValue(currentToDisplay);
+    setToDisplayValue(currentFromDisplay);
   };
 
-  const validateForm = () => {
-    if (!fromValue.trim() || !toValue.trim()) {
-      setFormError("Please select both departure and destination.");
-      return false;
-    }
-    if (fromValue.trim().toLowerCase() === toValue.trim().toLowerCase()) {
-      setFormError("Departure and destination must be different.");
-      return false;
-    }
-    if (!departureDate) {
-      setFormError("Please select departure date.");
-      return false;
-    }
-    if (mappedTripType === "roundTrip" && !returnDate) {
-      setFormError("Please select return date.");
-      return false;
-    }
-    if (adults < 1) {
-      setFormError("At least one adult is required.");
-      return false;
-    }
-    setFormError("");
-    return true;
-  };
-
-  const handleSearch = () => {
-    if (!validateForm()) return;
-
-    const params = new URLSearchParams();
-    params.set("from", fromValue.trim());
-    params.set("to", toValue.trim());
-    params.set("tripType", tripType);
-    params.set("nonstop", String(nonstop));
-    params.set("departureDate", departureDate);
-    if (returnDate) {
-      params.set("returnDate", returnDate);
-    }
-    params.set("adults", String(adults));
-    params.set("children", String(children));
-    params.set("infants", String(infants));
-    params.set("cabinClass", cabinClass);
-
-    router.push(`${submitPath}?${params.toString()}`);
-  };
-
-  const departureDate = dateForm.watch("departureDate");
-  const returnDate = dateForm.watch("returnDate");
+  const departureDate = form.watch("departureDate");
+  const returnDate = form.watch("returnDate");
   const mappedTripType = tripType === "roundTrip" ? "roundTrip" : "oneWay";
 
   const getDateTriggerLabel = () => {
@@ -150,6 +205,41 @@ function StaticFlightSearchBox({
     if (mappedTripType === "oneWay" || !returnDate) return dep;
     const ret = format(new Date(returnDate), "MMM d");
     return `${dep}-${ret}`;
+  };
+
+  const fromAirportError = errors.fromAirport?.message;
+  const toAirportError = errors.toAirport?.message;
+  const departureDateError = errors.departureDate?.message;
+  const returnDateError = errors.returnDate?.message;
+
+  const handleSearch = () => {
+    form.handleSubmit((data) => {
+      const formattedData = {
+        ...data,
+        departureDate: formatDateToString(data.departureDate),
+        returnDate: data.returnDate ? formatDateToString(data.returnDate) : undefined,
+      };
+
+      const params = new URLSearchParams();
+      params.set("from", formattedData.fromAirport);
+      params.set("to", formattedData.toAirport);
+      params.set("tripType", tripType);
+      params.set("nonstop", String(nonstop));
+      params.set("departureDate", formattedData.departureDate);
+      if (formattedData.returnDate && formattedData.tripType === "roundTrip") {
+        params.set("returnDate", formattedData.returnDate);
+      }
+      params.set("adults", String(formattedData.adults));
+      if (formattedData.children > 0) {
+        params.set("children", String(formattedData.children));
+      }
+      if (formattedData.infants > 0) {
+        params.set("infants", String(formattedData.infants));
+      }
+      params.set("cabinClass", formattedData.cabinClass);
+
+      router.push(`${submitPath}?${params.toString()}`);
+    })();
   };
 
   return (
@@ -165,9 +255,12 @@ function StaticFlightSearchBox({
         <div className={cn("relative", compactActions ? "flex-1" : "col-span-3")}>
           <CitySelectorPopover
             label="Leaving from"
-            value={fromValue}
-            onChange={setFromValue}
+            fieldName="fromAirport"
+            form={form}
+            displayValue={fromDisplayValue}
+            onDisplayValueChange={setFromDisplayValue}
             panelWidthClassName="w-[480px]"
+            error={fromAirportError}
           />
         </div>
 
@@ -175,7 +268,7 @@ function StaticFlightSearchBox({
           <button
             type="button"
             onClick={handleSwapLocations}
-            className="absolute -start-5 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center 
+            className="absolute -start-5 top-[29px] z-20 flex h-10 w-10 -translate-y-1/2 items-center 
             justify-center rounded-full border border-gray-300 bg-white text-primary transition-colors hover:border-primary hover:text-primary/80 cursor-pointer"
           >
             <ArrowRightLeft
@@ -185,10 +278,13 @@ function StaticFlightSearchBox({
           </button>
           <CitySelectorPopover
             label="Going to"
-            value={toValue}
-            onChange={setToValue}
+            fieldName="toAirport"
+            form={form}
+            displayValue={toDisplayValue}
+            onDisplayValueChange={setToDisplayValue}
             panelWidthClassName="w-[480px]"
             triggerClassName="ps-9"
+            error={toAirportError}
           />
         </div>
 
@@ -211,26 +307,25 @@ function StaticFlightSearchBox({
               className="w-auto border-none bg-transparent p-0 shadow-none"
             >
               <FlightDatePicker
-                form={dateForm}
+                form={form as any}
                 openCalendarByDefault
                 calendarOnly
               />
             </PopoverContent>
           </Popover>
+          {departureDateError && (
+            <p className="mt-1 text-xs text-red-500 font-medium">{departureDateError}</p>
+          )}
+          {returnDateError && !departureDateError && (
+            <p className="mt-1 text-xs text-red-500 font-medium">{returnDateError}</p>
+          )}
         </div>
 
         <div className={cn(compactActions ? "flex-1" : "col-span-3")}>
           <PassengersPopover
+            form={form}
             open={passengersPopoverOpen}
             onOpenChange={setPassengersPopoverOpen}
-            adults={adults}
-            children={children}
-            infants={infants}
-            cabinClass={cabinClass}
-            onAdultsChange={setAdults}
-            onChildrenChange={setChildren}
-            onInfantsChange={setInfants}
-            onCabinClassChange={setCabinClass}
           />
         </div>
 
@@ -240,10 +335,6 @@ function StaticFlightSearchBox({
           </div>
         )}
       </div>
-
-      {formError && (
-        <p className="mt-2 text-sm font-medium text-red-500">{formError}</p>
-      )}
 
       {!compactActions && <ActionButtonsRow onSearch={handleSearch} />}
     </div>

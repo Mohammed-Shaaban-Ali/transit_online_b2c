@@ -1,37 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/app/store";
+import { toggleAirline } from "@/redux/features/flights/flightFilterSlice";
 import FilterCheckboxRow from "../FilterCheckboxRow";
 import FilterSection from "../components/FilterSection";
 
-function AirlinesSection() {
-  const [airlines, setAirlines] = useState({
-    american: false,
-    delta: false,
-    frontier: false,
-    spirit: false,
-  });
+type Props = {
+  airlines: { id?: string; text?: string; count?: string }[];
+  flightType?: "departure" | "return";
+};
+
+function AirlinesSection({ airlines, flightType = "departure" }: Props) {
+  const dispatch = useDispatch();
+  const selectedAirlines = useSelector((state: RootState) =>
+    flightType === "return"
+      ? state.flightFilter.returnFilters.selectedAirlines
+      : state.flightFilter.departureFilters.selectedAirlines
+  );
+
+  if (!airlines.length) return null;
 
   return (
-    <FilterSection title="Airlines" className="mb-4">
+    <FilterSection title="Airlines" collapsible defaultOpen className="mb-4">
       <div className="space-y-1">
-        {[
-          { id: "american", label: "American Airlines (23)", price: "US$150" },
-          { id: "delta", label: "Delta Air Lines (12)", price: "US$149" },
-          { id: "frontier", label: "Frontier Airlines (10)", price: "US$93" },
-          { id: "spirit", label: "Spirit Airlines (8)", price: "US$95" },
-        ].map((item) => (
+        {airlines.map((airline) => (
           <FilterCheckboxRow
-            key={item.id}
-            label={item.label}
-            price={item.price}
-            checked={airlines[item.id as keyof typeof airlines]}
+            key={airline.id}
+            label={`${airline.text || airline.id} (${airline.count || 0})`}
+            checked={selectedAirlines.includes(airline.id || "")}
             onCheckedChange={() =>
-              setAirlines((prev) => ({
-                ...prev,
-                [item.id as keyof typeof airlines]:
-                  !prev[item.id as keyof typeof airlines],
-              }))
+              dispatch(toggleAirline({ airline: airline.id || "", flightType }))
             }
           />
         ))}

@@ -4,57 +4,66 @@ import { useState } from "react";
 import FilterCheckboxRow from "../FilterCheckboxRow";
 import FilterSection from "../components/FilterSection";
 
-function AirportsSection() {
-  const [selected, setSelected] = useState({
-    ewr: false,
-    lga: false,
-    jfk: false,
-    mia: false,
-  });
+type AirportItem = {
+  code: string;
+  name: string;
+  count: number;
+};
+
+type Props = {
+  departureAirports: AirportItem[];
+  arrivalAirports: AirportItem[];
+};
+
+function AirportsSection({ departureAirports, arrivalAirports }: Props) {
+  const [selectedDep, setSelectedDep] = useState<string[]>([]);
+  const [selectedArr, setSelectedArr] = useState<string[]>([]);
+
+  const toggleDep = (code: string) =>
+    setSelectedDep((prev) =>
+      prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]
+    );
+
+  const toggleArr = (code: string) =>
+    setSelectedArr((prev) =>
+      prev.includes(code) ? prev.filter((c) => c !== code) : [...prev, code]
+    );
+
+  if (!departureAirports.length && !arrivalAirports.length) return null;
 
   return (
     <FilterSection title="Airports" collapsible defaultOpen className="mb-4">
-      <div className="mb-3">
-        <h5 className="mb-1 px-2 text-[16px] ">Departure Airport</h5>
-        <div className="space-y-1">
-          <FilterCheckboxRow
-            label="EWR Newark Liberty"
-            price="US$228"
-            checked={selected.ewr}
-            onCheckedChange={() =>
-              setSelected((prev) => ({ ...prev, ewr: !prev.ewr }))
-            }
-          />
-          <FilterCheckboxRow
-            label="LGA LaGuardia Airport"
-            price="US$222"
-            checked={selected.lga}
-            onCheckedChange={() =>
-              setSelected((prev) => ({ ...prev, lga: !prev.lga }))
-            }
-          />
-          <FilterCheckboxRow
-            label="JFK John F"
-            price="US$222"
-            checked={selected.jfk}
-            onCheckedChange={() =>
-              setSelected((prev) => ({ ...prev, jfk: !prev.jfk }))
-            }
-          />
+      {departureAirports.length > 0 && (
+        <div className="mb-3">
+          <h5 className="mb-1 px-2 text-[14px] font-medium">Departure Airport</h5>
+          <div className="space-y-1">
+            {departureAirports.map((a) => (
+              <FilterCheckboxRow
+                key={`dep-${a.code}`}
+                label={`${a.code} ${a.name} (${a.count})`}
+                checked={selectedDep.includes(a.code)}
+                onCheckedChange={() => toggleDep(a.code)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      <div>
-        <h5 className="mb-1 px-2 text-[16px] ">Arrival Airport</h5>
-        <FilterCheckboxRow
-          label="MIA Miami International "
-          price="US$222"
-          checked={selected.mia}
-          onCheckedChange={() =>
-            setSelected((prev) => ({ ...prev, mia: !prev.mia }))
-          }
-        />
-      </div>
+      {arrivalAirports.length > 0 && (
+        <div>
+          <h5 className="mb-1 px-2 text-[14px] font-medium">Arrival Airport</h5>
+          <div className="space-y-1">
+            {arrivalAirports.map((a) => (
+              <FilterCheckboxRow
+                key={`arr-${a.code}`}
+                label={`${a.code} ${a.name} (${a.count})`}
+                checked={selectedArr.includes(a.code)}
+                onCheckedChange={() => toggleArr(a.code)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </FilterSection>
   );
 }

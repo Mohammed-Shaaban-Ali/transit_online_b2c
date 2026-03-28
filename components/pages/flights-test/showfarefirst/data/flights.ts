@@ -23,6 +23,8 @@ export type FareOption = {
   note?: string;
   price: number;
   currency: string;
+  /** Appended after formatted price (e.g. "+" for return add-on, matches OfferCard / OfferSelection). */
+  priceSuffix?: string;
 };
 
 export type FlightData = {

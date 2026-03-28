@@ -1,4 +1,3 @@
-import Image, { type StaticImageData } from "next/image";
 import {
   HoverCard,
   HoverCardContent,
@@ -10,8 +9,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import type { Leg } from "@/types/flightTypes";
+import FlightLeg from "./FlightLeg";
 
 type Props = {
+  legs: Leg[];
   departureTime: string;
   departureCode: string;
   departureAirport: string;
@@ -20,12 +22,10 @@ type Props = {
   arrivalAirport: string;
   duration: string;
   stops: string;
-  airline: string;
-  flightNumber: string;
-  airlineLogo: StaticImageData | string;
 };
 
 export default function FlightTimeline({
+  legs,
   departureTime,
   departureCode,
   departureAirport,
@@ -34,10 +34,9 @@ export default function FlightTimeline({
   arrivalAirport,
   duration,
   stops,
-  airline,
-  flightNumber,
-  airlineLogo,
 }: Props) {
+  const stopsCount = legs.length - 1;
+
   return (
     <div className="flex flex-1 items-center gap-3 max-w-[320px]">
       <div className="text-start">
@@ -64,7 +63,19 @@ export default function FlightTimeline({
             </p>
             <div className="relative flex items-center">
               <span className="size-[6px] rounded-full border border-gray-400 bg-gray-400 shrink-0" />
-              <div className="h-px flex-1 bg-gray-300" />
+              <div className="h-px flex-1 bg-gray-300 relative">
+                {stopsCount > 0 &&
+                  Array.from({ length: stopsCount }).map((_, i) => (
+                    <span
+                      key={i}
+                      className="absolute top-1/2 -translate-y-1/2 size-2 mt-1 border border-gray-400 bg-white"
+                      style={{
+                        left: `${((i + 1) / (stopsCount + 1)) * 100}%`,
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    />
+                  ))}
+              </div>
               <span className="size-[6px] rounded-full border border-gray-400 bg-gray-400 shrink-0" />
             </div>
             <p className="text-center text-[12px] text-gray-500 mt-1">
@@ -76,46 +87,9 @@ export default function FlightTimeline({
         <HoverCardContent
           align="center"
           sideOffset={10}
-          className="w-[400px] p-0 rounded-lg"
+          className="w-[420px] p-4 rounded-lg"
         >
-          {/* Departure */}
-          <div className="flex gap-5 px-5 py-3 border-b border-gray-100">
-            <p className="text-[15px] font-bold text-gray-900 shrink-0">
-              {departureTime}
-            </p>
-            <p className="text-[14px] font-semibold text-gray-900">
-              {departureCode} {departureAirport}
-            </p>
-          </div>
-
-          {/* Airline info */}
-          <div className="flex items-center gap-3 px-5 py-3 border-b border-gray-100">
-            <Image
-              src={airlineLogo}
-              alt={airline}
-              width={28}
-              height={28}
-              className="shrink-0 rounded"
-            />
-            <div>
-              <p className="text-[13px] text-gray-500">
-                {airline} {flightNumber}
-              </p>
-              <p className="text-[13px] text-gray-500">
-                Flight time: {duration}
-              </p>
-            </div>
-          </div>
-
-          {/* Arrival */}
-          <div className="flex gap-5 px-5 py-3">
-            <p className="text-[15px] font-bold text-gray-900 shrink-0">
-              {arrivalTime}
-            </p>
-            <p className="text-[14px] font-semibold text-gray-900">
-              {arrivalCode} {arrivalAirport}
-            </p>
-          </div>
+          <FlightLeg legs={legs} />
         </HoverCardContent>
       </HoverCard>
 

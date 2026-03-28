@@ -304,6 +304,9 @@
     max-width: min(90%, 1550px);
   }
 }
+button {
+  cursor: pointer;
+}
 
 /* @media (min-width: 83rem) and (max-width: 89rem) {
   .container {

@@ -35,15 +35,6 @@ function TripOptionsRow({
         />
         One-way
       </label>
-      <label className="flex items-center gap-2">
-        <input
-          type="radio"
-          name="tripType"
-          checked={tripType === "multiCity"}
-          onChange={() => onTripTypeChange("multiCity")}
-        />
-        Multi-city
-      </label>
 
       <label className="ms-2 flex items-center gap-2">
         <input

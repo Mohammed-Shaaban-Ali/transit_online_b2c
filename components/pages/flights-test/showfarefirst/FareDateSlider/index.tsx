@@ -1,63 +1,93 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper as SwiperType } from "swiper";
+import { format, addDays, differenceInDays, parseISO } from "date-fns";
+import { useRouter } from "@/i18n/navigation";
 import "swiper/css";
 import "swiper/css/navigation";
 
-type FareDateItem = {
-  id: number;
-  range: string;
-  price?: string;
+type Props = {
+  departureDate: string;
+  returnDate?: string;
+  tripType: string;
+  searchParams: Record<string, string>;
 };
 
-const fareDateItems: FareDateItem[] = [
-  { id: 1, range: "Apr 9-Apr 12", price: "US$175" },
-  { id: 2, range: "Apr 10-Apr 13", price: "US$175" },
-  { id: 3, range: "Apr 11-Apr 14", price: "US$175" },
-  { id: 4, range: "Apr 12-Apr 15", price: "US$175" },
-  { id: 5, range: "Apr 13-Apr 16", price: "US$175" },
-  { id: 6, range: "Apr 14-Apr 17", price: "US$175" },
-  { id: 7, range: "Apr 15-Apr 18", price: "US$175" },
-  { id: 8, range: "Apr 16-Apr 19", price: "US$175" },
-  { id: 9, range: "Apr 17-Apr 20", price: "US$175" },
-  { id: 10, range: "Apr 18-Apr 21", price: "US$175" },
-  { id: 11, range: "Apr 19-Apr 22", price: "US$175" },
-  { id: 12, range: "Apr 20-Apr 23", price: "US$175" },
-  { id: 13, range: "Apr 21-Apr 24", price: "US$175" },
-  { id: 14, range: "Apr 22-Apr 25", price: "US$175" },
-  { id: 15, range: "Apr 23-Apr 26", price: "US$175" },
-  { id: 16, range: "Apr 24-Apr 27", price: "US$175" },
-];
-
-function FareDateSlider() {
+function FareDateSlider({ departureDate, returnDate, tripType, searchParams }: Props) {
+  const router = useRouter();
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  const [selectedId, setSelectedId] = useState(4);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  const handlePrev = () => {
-    if (!swiperInstance) return;
-    swiperInstance.slidePrev();
-  };
+  const isRoundTrip = tripType === "roundTrip";
+  const tripDuration = useMemo(() => {
+    if (!isRoundTrip || !returnDate || !departureDate) return 0;
+    return differenceInDays(parseISO(returnDate), parseISO(departureDate));
+  }, [departureDate, returnDate, isRoundTrip]);
 
-  const handleNext = () => {
-    if (!swiperInstance) return;
-    swiperInstance.slideNext();
+  const dateItems = useMemo(() => {
+    const depDate = parseISO(departureDate);
+    const items = [];
+    const daysRange = 7;
+
+    for (let offset = -daysRange; offset <= daysRange; offset++) {
+      const dep = addDays(depDate, offset);
+      const depStr = format(dep, "yyyy-MM-dd");
+
+      let label: string;
+      if (isRoundTrip && tripDuration > 0) {
+        const ret = addDays(dep, tripDuration);
+        label = `${format(dep, "MMM d")}-${format(ret, "MMM d")}`;
+      } else {
+        label = format(dep, "MMM d");
+      }
+
+      items.push({
+        id: offset + daysRange,
+        label,
+        depDate: depStr,
+        retDate: isRoundTrip && tripDuration > 0
+          ? format(addDays(dep, tripDuration), "yyyy-MM-dd")
+          : undefined,
+        isSelected: offset === 0,
+      });
+    }
+
+    return items;
+  }, [departureDate, isRoundTrip, tripDuration]);
+
+  const handleDateSelect = (item: (typeof dateItems)[0]) => {
+    const params = new URLSearchParams();
+    params.set("from", searchParams.from);
+    params.set("to", searchParams.to);
+    params.set("tripType", searchParams.tripType);
+    params.set("nonstop", searchParams.nonstop);
+    params.set("departureDate", item.depDate);
+    if (item.retDate) {
+      params.set("returnDate", item.retDate);
+    }
+    params.set("adults", searchParams.adults);
+    if (Number(searchParams.children) > 0) {
+      params.set("children", searchParams.children);
+    }
+    if (Number(searchParams.infants) > 0) {
+      params.set("infants", searchParams.infants);
+    }
+    params.set("cabinClass", searchParams.cabinClass);
+
+    router.push(`/flights-test/showfarefirst?${params.toString()}`);
   };
 
   return (
-    <div className="flex items-center  bg-white rounded-lg">
+    <div className="flex items-center bg-white rounded-lg">
       <button
         type="button"
-        className="mx-1 flex h-10 w-10 shrink-0 items-center
-         justify-center rounded-sm
-          cursor-pointer
-         text-gray-700 transition-colors hover:text-primary disabled:opacity-40"
-        onClick={handlePrev}
+        className="mx-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-sm cursor-pointer text-gray-700 transition-colors hover:text-primary disabled:opacity-40"
+        onClick={() => swiperInstance?.slidePrev()}
         disabled={!swiperInstance || isBeginning}
         aria-label="Previous dates"
       >
@@ -71,6 +101,7 @@ function FareDateSlider() {
         speed={350}
         slidesPerGroup={1}
         watchOverflow={false}
+        initialSlide={4}
         onSwiper={(swiper) => {
           setSwiperInstance(swiper);
           setIsBeginning(swiper.isBeginning);
@@ -88,19 +119,16 @@ function FareDateSlider() {
         }}
         className="flex-1"
       >
-        {fareDateItems.map((item, index) => {
-          const isSelected = selectedId === item.id;
-          const isLastItem = index === fareDateItems.length - 1;
+        {dateItems.map((item, index) => {
+          const isSelected = item.depDate === departureDate;
+          const isLastItem = index === dateItems.length - 1;
 
           return (
-            <SwiperSlide key={item.id} className="flex items-center ">
+            <SwiperSlide key={item.id} className="flex items-center">
               <button
                 type="button"
-                onClick={() => setSelectedId(item.id)}
-                className={`group relative cursor-pointer px-3 py-2  bg-white w-full flex items-center justify-center 
-                   text-center transition-all duration-300 hover:text-primary ${
-                     isSelected ? "" : ""
-                   }`}
+                onClick={() => handleDateSelect(item)}
+                className="group relative cursor-pointer px-3 py-2 bg-white w-full flex items-center justify-center text-center transition-all duration-300 hover:text-primary"
               >
                 <div className="flex flex-col items-center">
                   <p
@@ -110,7 +138,7 @@ function FareDateSlider() {
                         : "font-medium text-gray-700 group-hover:text-primary"
                     }`}
                   >
-                    {item.range}
+                    {item.label}
                   </p>
                   <p
                     className={`mt-0.5 text-[13px] ${
@@ -119,11 +147,11 @@ function FareDateSlider() {
                         : "text-gray-500 group-hover:text-primary"
                     }`}
                   >
-                    {isSelected && item.price ? item.price : "View"}
+                    {isSelected ? "Selected" : "View"}
                   </p>
                   <span
                     className={`absolute bottom-0 left-0 h-[2px] w-full transition-colors ${
-                      isSelected ? "bg-black" : "bg-transparent "
+                      isSelected ? "bg-black" : "bg-transparent"
                     }`}
                   />
                 </div>
@@ -140,7 +168,7 @@ function FareDateSlider() {
       <button
         type="button"
         className="mx-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-sm cursor-pointer text-gray-700 transition-colors hover:text-primary disabled:opacity-40"
-        onClick={handleNext}
+        onClick={() => swiperInstance?.slideNext()}
         disabled={!swiperInstance || isEnd}
         aria-label="Next dates"
       >
