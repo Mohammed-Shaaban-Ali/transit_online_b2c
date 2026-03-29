@@ -7,6 +7,8 @@ import "react-range-slider-input/dist/style.css";
 import { RootState } from "@/redux/app/store";
 import { setPriceRange } from "@/redux/features/flights/flightFilterSlice";
 import FilterSection from "../components/FilterSection";
+import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
+import { formatePrice } from "@/utils/formatePrice";
 
 type Props = {
   apiPriceRange: { min: number; max: number };
@@ -36,8 +38,11 @@ function PriceSection({ apiPriceRange, flightType = "departure" }: Props) {
   return (
     <FilterSection title="Price" className="mb-4">
       <div className="mb-3">
-        <p className="text-[14px] text-gray-600">
-          ${priceRange.min} - ${priceRange.max}
+        <p className="text-[14px] text-gray-600 flex flex-wrap items-center gap-1 tabular-nums">
+          <CurrencySymbol size="sm" />
+          <span>
+            {formatePrice(priceRange.min)} – {formatePrice(priceRange.max)}
+          </span>
         </p>
       </div>
 
@@ -50,9 +55,15 @@ function PriceSection({ apiPriceRange, flightType = "departure" }: Props) {
         onInput={(val) => handleChange(val as [number, number])}
       />
 
-      <div className="mt-1 flex items-center justify-between text-[13px] text-gray-600">
-        <span>${apiPriceRange.min}</span>
-        <span>${apiPriceRange.max}</span>
+      <div className="mt-1 flex items-center justify-between gap-2 text-[13px] text-gray-600 tabular-nums">
+        <span className="inline-flex items-center gap-0.5">
+          <CurrencySymbol size="sm" />
+          {formatePrice(apiPriceRange.min)}
+        </span>
+        <span className="inline-flex items-center gap-0.5">
+          <CurrencySymbol size="sm" />
+          {formatePrice(apiPriceRange.max)}
+        </span>
       </div>
 
       <style jsx global>{`

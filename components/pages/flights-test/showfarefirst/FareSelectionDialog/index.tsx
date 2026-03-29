@@ -230,7 +230,9 @@ export default function FareSelectionDialog({
       : fareOptionsDeparture;
 
   const selectedDepartureFare = useMemo(() => {
-    return fareOptionsDeparture.find((f) => f.id === selectedDepartureFareId) ?? null;
+    return (
+      fareOptionsDeparture.find((f) => f.id === selectedDepartureFareId) ?? null
+    );
   }, [fareOptionsDeparture, selectedDepartureFareId]);
 
   const selectedReturnFare = useMemo(() => {
@@ -413,7 +415,7 @@ export default function FareSelectionDialog({
       sessionStorage.setItem(FLIGHT_BOOKING_KEY, JSON.stringify(bookingData));
 
       onClose();
-      router.push("/flights/booking");
+      router.push("/flights-test/showfarefirst/booking");
     } catch (e) {
       console.error(e);
     }
@@ -595,69 +597,77 @@ export default function FareSelectionDialog({
         </div>
 
         {/* Footer: FlightDetails parity — default fare uses getDisplayPrice + Continue vs Continue to booking */}
-        {data?.data && !isFetching && (isDefaultFareOnly ? !!selectedDepartureOffer : offers.length > 0 && hasPackageSelection) && (
-          <div className="flex flex-col gap-3 px-6 py-4 border-t border-gray-100 bg-white sticky bottom-0 z-10">
-            {isDefaultFareOnly && selectedDepartureOffer ? (
-              <div className="flex items-end justify-between gap-5 flex-wrap">
-                <div>
-                  <h4 className="text-[24px] font-medium text-gray-900">
-                    {t("totalPrice")}
-                  </h4>
-                  <div className="text-[32px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
-                    <CurrencySymbol size="lg" />
-                    {formatePrice(getDisplayPrice().amount || 0)}
+        {data?.data &&
+          !isFetching &&
+          (isDefaultFareOnly
+            ? !!selectedDepartureOffer
+            : offers.length > 0 && hasPackageSelection) && (
+            <div className="flex flex-col gap-3 px-6 py-4 border-t border-gray-100 bg-white sticky bottom-0 z-10">
+              {isDefaultFareOnly && selectedDepartureOffer ? (
+                <div className="flex items-center justify-end gap-4 flex-wrap">
+                  <div className="flex items-end gap-1.5 me-auto">
+                    <p className="text-[14px] text-gray-500 mb-1">
+                      {t("totalPrice")}
+                    </p>
+                    <div className="text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
+                      <CurrencySymbol size="lg" />
+                      <span className="tabular-nums">
+                        {formatePrice(getDisplayPrice().amount || 0)}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {!showReturnOffers && returnFareKey && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowReturnOffers(true);
+                          setSelectedOfferKey(undefined);
+                        }}
+                        className="h-14 rounded bg-primary px-8 text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
+                      >
+                        {t("continue")}
+                      </button>
+                    )}
+                    {(showReturnOffers || !returnFareKey) && (
+                      <button
+                        type="button"
+                        onClick={handleContinueToBooking}
+                        disabled={continueToBookingDisabledDefault}
+                        className="h-14 rounded bg-primary px-8 text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+                      >
+                        {t("continueToBooking")}
+                      </button>
+                    )}
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  {!showReturnOffers && returnFareKey && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowReturnOffers(true);
-                        setSelectedOfferKey(undefined);
-                      }}
-                      className="h-12 rounded-full px-8 text-[16px] font-semibold bg-primary text-white hover:bg-primary/90"
-                    >
-                      {t("continue")}
-                    </button>
-                  )}
-                  {(showReturnOffers || !returnFareKey) && (
-                    <button
-                      type="button"
-                      onClick={handleContinueToBooking}
-                      disabled={continueToBookingDisabledDefault}
-                      className="h-12 rounded-full px-8 text-[16px] font-semibold bg-primary text-white hover:bg-primary/90 disabled:opacity-50 disabled:pointer-events-none"
-                    >
-                      {t("continueToBooking")}
-                    </button>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <div className="flex items-center justify-end gap-4 flex-wrap">
-                <div className="flex items-end gap-1.5 me-auto">
-                  <p className="text-[14px] text-gray-500 mb-1">
-                    {footerPriceLabel}
-                  </p>
-                  <div className="text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
-                    <CurrencySymbol size="lg" />
-                    {formatePrice(footerPriceAmount)}
+              ) : (
+                <div className="flex items-center justify-end gap-4 flex-wrap">
+                  <div className="flex items-end gap-1.5 me-auto">
+                    <p className="text-[14px] text-gray-500 mb-1">
+                      {footerPriceLabel}
+                    </p>
+                    <div className="text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
+                      <CurrencySymbol size="lg" />
+                      <span className="tabular-nums">
+                        {formatePrice(footerPriceAmount)}
+                      </span>
+                    </div>
                   </div>
+                  <button
+                    type="button"
+                    onClick={handleNextOffers}
+                    disabled={!canContinueOffers}
+                    className="h-14 rounded bg-primary px-8 text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+                  >
+                    {isRoundTrip && offers.length > 0 && uiStep === "departure"
+                      ? "Next"
+                      : t("continueToBooking")}
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={handleNextOffers}
-                  disabled={!canContinueOffers}
-                  className="h-14 rounded bg-primary px-8 text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
-                >
-                  {isRoundTrip && offers.length > 0 && uiStep === "departure"
-                    ? "Next"
-                    : t("continueToBooking")}
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+              )}
+            </div>
+          )}
       </DialogContent>
     </Dialog>
   );

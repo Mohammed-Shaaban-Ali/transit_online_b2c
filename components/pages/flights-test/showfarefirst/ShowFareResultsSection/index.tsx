@@ -556,10 +556,10 @@ function ShowFareResultsSection({
           ))}
         </div>
         <div>
-          <div className="h-[60px] animate-pulse rounded-t-md bg-gray-200" />
-          <div className="flex gap-2 bg-white px-4 py-3 animate-pulse">
+          <div className="h-[60px] animate-pulse rounded-t-md bg-gray-300" />
+          <div className="grid grid-cols-3 gap-2 bg-white px-4 py-3 animate-pulse">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-9 w-28 rounded-full bg-gray-200" />
+              <div key={i} className="h-11  rounded-md bg-gray-200" />
             ))}
           </div>
           <div className="mt-1.5 space-y-1.5">

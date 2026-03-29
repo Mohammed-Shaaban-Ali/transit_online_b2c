@@ -8,6 +8,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { formatePrice } from "@/utils/formatePrice";
+import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
 
 type Props = {
   nonstopCheapest: number;
@@ -26,21 +28,18 @@ function QuickFilter({
   const [selected, setSelected] = useState<QuickFilterId>("cheapest");
   const [sortOpen, setSortOpen] = useState(false);
 
-  const formatPrice = (price: number) =>
-    price > 0 && price < Infinity ? `$${price}` : "--";
-
-  const quickFilters: { id: QuickFilterId; label: string; price: string }[] = [
+  const quickFilters: { id: QuickFilterId; label: string; price: number }[] = [
     {
       id: "nonstop",
       label: "Nonstop first",
-      price: formatPrice(nonstopCheapest),
+      price: formatePrice(nonstopCheapest),
     },
     {
       id: "recommended",
       label: "Recommended",
-      price: formatPrice(recommendedCheapest),
+      price: formatePrice(recommendedCheapest),
     },
-    { id: "cheapest", label: "Cheapest", price: formatPrice(overallCheapest) },
+    { id: "cheapest", label: "Cheapest", price: formatePrice(overallCheapest) },
   ];
 
   const handleSelect = (id: QuickFilterId) => {
@@ -79,12 +78,14 @@ function QuickFilter({
                 {item.label}
               </p>
               <p
-                className={`mt-0.5 text-[13px] ${
+                className={`mt-0.5 text-[13px] flex items-center gap-1 ${
                   isSelected
                     ? "font-medium text-black"
                     : "text-gray-500 group-hover:text-primary"
                 }`}
               >
+                {" "}
+                <CurrencySymbol size="sm" />
                 {item.price}
               </p>
               <span
