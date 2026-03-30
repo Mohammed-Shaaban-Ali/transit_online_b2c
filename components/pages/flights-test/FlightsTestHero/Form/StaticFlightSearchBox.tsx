@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowRightLeft } from "lucide-react";
+import { ArrowRightLeft, ArrowUpDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,6 +11,7 @@ import { formatDateToString } from "@/utils/formatDateToString";
 import TripOptionsRow from "./components/TripOptionsRow";
 import CitySelectorPopover from "./components/CitySelectorPopover";
 import PassengersPopover from "./components/PassengersPopover";
+import MobilePassengersSheet from "./components/MobilePassengersSheet";
 import ActionButtonsRow from "./components/ActionButtonsRow";
 import { FlightSearchFormValues, TripType } from "./types";
 import FlightDatePicker from "@/components/shared/FlightSearchBox/FlightDatePicker";
@@ -20,12 +21,19 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { MdCalendarMonth } from "react-icons/md";
 
 const flightSearchSchema = z
   .object({
-    fromAirport: z.string().min(1, { message: "Please select departure airport." }),
-    toAirport: z.string().min(1, { message: "Please select destination airport." }),
-    departureDate: z.string().min(1, { message: "Please select departure date." }),
+    fromAirport: z
+      .string()
+      .min(1, { message: "Please select departure airport." }),
+    toAirport: z
+      .string()
+      .min(1, { message: "Please select destination airport." }),
+    departureDate: z
+      .string()
+      .min(1, { message: "Please select departure date." }),
     returnDate: z.string().optional(),
     tripType: z.enum(["roundTrip", "oneWay"]),
     nonstop: z.boolean(),
@@ -44,7 +52,10 @@ const flightSearchSchema = z
       }
       return true;
     },
-    { message: "Departure date cannot be in the past.", path: ["departureDate"] }
+    {
+      message: "Departure date cannot be in the past.",
+      path: ["departureDate"],
+    },
   )
   .refine(
     (data) => {
@@ -53,11 +64,15 @@ const flightSearchSchema = z
       }
       return true;
     },
-    { message: "Please select return date.", path: ["returnDate"] }
+    { message: "Please select return date.", path: ["returnDate"] },
   )
   .refine(
     (data) => {
-      if (data.tripType === "roundTrip" && data.returnDate && data.departureDate) {
+      if (
+        data.tripType === "roundTrip" &&
+        data.returnDate &&
+        data.departureDate
+      ) {
         const dep = new Date(data.departureDate);
         dep.setHours(0, 0, 0, 0);
         const ret = new Date(data.returnDate);
@@ -66,7 +81,10 @@ const flightSearchSchema = z
       }
       return true;
     },
-    { message: "Return date must be after departure date.", path: ["returnDate"] }
+    {
+      message: "Return date must be after departure date.",
+      path: ["returnDate"],
+    },
   )
   .refine(
     (data) => {
@@ -75,7 +93,10 @@ const flightSearchSchema = z
       }
       return true;
     },
-    { message: "Departure and destination must be different.", path: ["toAirport"] }
+    {
+      message: "Departure and destination must be different.",
+      path: ["toAirport"],
+    },
   )
   .refine(
     (data) => {
@@ -84,7 +105,10 @@ const flightSearchSchema = z
       }
       return true;
     },
-    { message: "Departure and destination must be different.", path: ["fromAirport"] }
+    {
+      message: "Departure and destination must be different.",
+      path: ["fromAirport"],
+    },
   );
 
 type Props = {
@@ -115,13 +139,23 @@ function StaticFlightSearchBox({
 }: Props) {
   const router = useRouter();
 
-  const [tripType, setTripType] = useState<TripType>(initialValues?.tripType || "roundTrip");
+  const [tripType, setTripType] = useState<TripType>(
+    initialValues?.tripType || "roundTrip",
+  );
   const [nonstop, setNonstop] = useState(initialValues?.nonstop ?? true);
-  const [fromDisplayValue, setFromDisplayValue] = useState(initialValues?.fromDisplayValue || "");
-  const [toDisplayValue, setToDisplayValue] = useState(initialValues?.toDisplayValue || "");
+  const [fromDisplayValue, setFromDisplayValue] = useState(
+    initialValues?.fromDisplayValue || "",
+  );
+  const [toDisplayValue, setToDisplayValue] = useState(
+    initialValues?.toDisplayValue || "",
+  );
   const [passengersPopoverOpen, setPassengersPopoverOpen] = useState(false);
+  const [mobileSheet, setMobileSheet] = useState<"passengers" | "cabin" | null>(
+    null,
+  );
   const [isSwapping, setIsSwapping] = useState(false);
   const [datePopoverOpen, setDatePopoverOpen] = useState(false);
+  const [datePopoverOpenMobile, setDatePopoverOpenMobile] = useState(false);
 
   const form = useForm<FlightSearchFormValues>({
     resolver: zodResolver(flightSearchSchema),
@@ -132,7 +166,8 @@ function StaticFlightSearchBox({
       toAirport: initialValues?.toAirport || "",
       departureDate: initialValues?.departureDate || "",
       returnDate: initialValues?.returnDate || "",
-      tripType: (initialValues?.tripType === "roundTrip" ? "roundTrip" : "oneWay"),
+      tripType:
+        initialValues?.tripType === "roundTrip" ? "roundTrip" : "oneWay",
       nonstop: initialValues?.nonstop ?? true,
       adults: initialValues?.adults ?? 1,
       children: initialValues?.children ?? 0,
@@ -141,7 +176,9 @@ function StaticFlightSearchBox({
     },
   });
 
-  const { formState: { errors } } = form;
+  const {
+    formState: { errors },
+  } = form;
 
   useEffect(() => {
     if (!initialValues) return;
@@ -204,7 +241,7 @@ function StaticFlightSearchBox({
     const dep = format(new Date(departureDate), "MMM d");
     if (mappedTripType === "oneWay" || !returnDate) return dep;
     const ret = format(new Date(returnDate), "MMM d");
-    return `${dep}-${ret}`;
+    return `${dep} - ${ret}`;
   };
 
   const fromAirportError = errors.fromAirport?.message;
@@ -217,7 +254,9 @@ function StaticFlightSearchBox({
       const formattedData = {
         ...data,
         departureDate: formatDateToString(data.departureDate),
-        returnDate: data.returnDate ? formatDateToString(data.returnDate) : undefined,
+        returnDate: data.returnDate
+          ? formatDateToString(data.returnDate)
+          : undefined,
       };
 
       const params = new URLSearchParams();
@@ -243,7 +282,12 @@ function StaticFlightSearchBox({
   };
 
   return (
-    <div className={cn("mt-3 w-full rounded-[8px] bg-white p-5", className)}>
+    <div
+      className={cn(
+        "mt-0 md:mt-3 w-full rounded-[8px] bg-white p-4 pt-2 md:p-5 ",
+        className,
+      )}
+    >
       <TripOptionsRow
         tripType={tripType}
         nonstop={nonstop}
@@ -251,8 +295,131 @@ function StaticFlightSearchBox({
         onNonstopChange={setNonstop}
       />
 
-      <div className={cn(compactActions ? "flex items-center gap-2.5" : "grid grid-cols-12 gap-2.5")}>
-        <div className={cn("relative", compactActions ? "flex-1" : "col-span-3")}>
+      {/* Mobile layout */}
+      <div className="flex flex-col md:hidden">
+        {/* From */}
+        <div className="relative border-b border-gray-200">
+          <CitySelectorPopover
+            label="Leaving from"
+            fieldName="fromAirport"
+            form={form}
+            displayValue={fromDisplayValue}
+            onDisplayValueChange={setFromDisplayValue}
+            panelWidthClassName="w-[calc(100vw-40px)]"
+            error={fromAirportError}
+            mobileStyle
+          />
+          <button
+            type="button"
+            onClick={handleSwapLocations}
+            className="absolute end-0 -bottom-[18px] z-20 flex
+             h-10 w-10 items-center justify-center rounded-md 
+             border border-gray-300 bg-white text-gray-600 
+             transition-colors hover:border-primary hover:text-primary 
+             cursor-pointer
+             
+             before:content-[''] before:absolute 
+             before:-start-[11px] before:top-0 before:h-10 
+             before:w-2.5 before:bg-white
+           
+             "
+          >
+            <ArrowUpDown
+              size={16}
+              className={`transition-transform duration-300 ${isSwapping ? "rotate-180" : "rotate-0"}`}
+            />
+          </button>
+        </div>
+
+        {/* To */}
+        <div className="relative border-b border-gray-200">
+          <CitySelectorPopover
+            label="Going to"
+            fieldName="toAirport"
+            form={form}
+            displayValue={toDisplayValue}
+            onDisplayValueChange={setToDisplayValue}
+            panelWidthClassName="w-[calc(100vw-40px)]"
+            error={toAirportError}
+            mobileStyle
+          />
+        </div>
+
+        {/* Date */}
+        <div className="border-b border-gray-200">
+          <Popover
+            open={datePopoverOpenMobile}
+            onOpenChange={setDatePopoverOpenMobile}
+          >
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className="flex h-[58px] w-full items-center gap-3  text-[16px] text-black"
+              >
+                <MdCalendarMonth size={20} />
+                <span
+                  className={departureDate ? "text-black" : "text-gray-500"}
+                >
+                  {getDateTriggerLabel()}
+                </span>
+              </button>
+            </PopoverTrigger>
+            <PopoverContent
+              align="start"
+              side="bottom"
+              sideOffset={6}
+              avoidCollisions
+              collisionPadding={16}
+              className="w-auto max-w-[calc(100vw-32px)] overflow-x-auto border-none bg-transparent p-0 shadow-none"
+            >
+              <FlightDatePicker
+                form={form as any}
+                openCalendarByDefault
+                calendarOnly
+              />
+            </PopoverContent>
+          </Popover>
+          {departureDateError && (
+            <p className="px-4 pb-2 text-xs text-red-500 font-medium">
+              {departureDateError}
+            </p>
+          )}
+          {returnDateError && !departureDateError && (
+            <p className="px-4 pb-2 text-xs text-red-500 font-medium">
+              {returnDateError}
+            </p>
+          )}
+        </div>
+
+        {/* Passengers + Cabin - bottom sheet */}
+        <MobilePassengersSheet
+          form={form}
+          openSheet={mobileSheet}
+          onOpenSheet={setMobileSheet}
+        />
+
+        {/* Search button */}
+        <button
+          type="button"
+          onClick={handleSearch}
+          className="mt-4 h-[52px] w-full rounded-lg bg-primary text-[18px] font-semibold text-white transition-colors hover:bg-primary/80"
+        >
+          Search
+        </button>
+      </div>
+
+      {/* Desktop layout */}
+      <div
+        className={cn(
+          "hidden",
+          compactActions
+            ? "md:flex md:items-center md:gap-2.5"
+            : "md:grid md:grid-cols-12 md:gap-2.5",
+        )}
+      >
+        <div
+          className={cn("relative", compactActions ? "flex-1" : "col-span-3")}
+        >
           <CitySelectorPopover
             label="Leaving from"
             fieldName="fromAirport"
@@ -264,12 +431,13 @@ function StaticFlightSearchBox({
           />
         </div>
 
-        <div className={cn("relative", compactActions ? "flex-1" : "col-span-3")}>
+        <div
+          className={cn("relative", compactActions ? "flex-1" : "col-span-3")}
+        >
           <button
             type="button"
             onClick={handleSwapLocations}
-            className="absolute -start-5 top-[29px] z-20 flex h-10 w-10 -translate-y-1/2 items-center 
-            justify-center rounded-full border border-gray-300 bg-white text-primary transition-colors hover:border-primary hover:text-primary/80 cursor-pointer"
+            className="absolute -start-5 top-[29px] z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-gray-300 bg-white text-primary transition-colors hover:border-primary hover:text-primary/80 cursor-pointer"
           >
             <ArrowRightLeft
               size={18}
@@ -293,9 +461,7 @@ function StaticFlightSearchBox({
             <PopoverTrigger asChild>
               <button
                 type="button"
-                className="flex h-[58px] w-full items-center 
-                rounded-sm border border-gray-300 px-3
-                 text-[16px]  text-black"
+                className="flex h-[58px] w-full items-center rounded-sm border border-gray-300 px-3 text-[16px] text-black"
               >
                 {getDateTriggerLabel()}
               </button>
@@ -314,10 +480,14 @@ function StaticFlightSearchBox({
             </PopoverContent>
           </Popover>
           {departureDateError && (
-            <p className="mt-1 text-xs text-red-500 font-medium">{departureDateError}</p>
+            <p className="mt-1 text-xs text-red-500 font-medium">
+              {departureDateError}
+            </p>
           )}
           {returnDateError && !departureDateError && (
-            <p className="mt-1 text-xs text-red-500 font-medium">{returnDateError}</p>
+            <p className="mt-1 text-xs text-red-500 font-medium">
+              {returnDateError}
+            </p>
           )}
         </div>
 
@@ -331,12 +501,18 @@ function StaticFlightSearchBox({
 
         {compactActions && (
           <div className="shrink-0 flex items-center justify-end">
-            <ActionButtonsRow compact className="mt-0" onSearch={handleSearch} />
+            <ActionButtonsRow
+              compact
+              className="mt-0"
+              onSearch={handleSearch}
+            />
           </div>
         )}
       </div>
 
-      {!compactActions && <ActionButtonsRow onSearch={handleSearch} />}
+      {!compactActions && (
+        <ActionButtonsRow onSearch={handleSearch} className="hidden md:flex" />
+      )}
     </div>
   );
 }

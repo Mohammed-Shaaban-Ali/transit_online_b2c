@@ -16,13 +16,23 @@ function Form() {
       thresholdRef.current = rect.top + window.scrollY;
     };
 
+    const isMobile = () => window.innerWidth < 768;
+
     const onScroll = () => {
+      if (isMobile()) {
+        setIsSticky(false);
+        return;
+      }
       if (thresholdRef.current === null) return;
       const shouldStick = window.scrollY >= thresholdRef.current;
       setIsSticky(shouldStick);
     };
 
     const onResize = () => {
+      if (isMobile()) {
+        setIsSticky(false);
+        return;
+      }
       calculateThreshold();
       if (formRef.current) {
         setReservedHeight(formRef.current.offsetHeight);
@@ -51,13 +61,13 @@ function Form() {
         ref={formRef}
         className={
           isSticky
-            ? "fixed inset-x-0 top-0 z-9999 border-b border-gray-200 bg-white backdrop-blur-sm"
+            ? "md:fixed md:inset-x-0 md:top-0 md:z-9999 md:border-b md:border-gray-200 md:bg-white md:backdrop-blur-sm"
             : ""
         }
       >
-        <div className={isSticky ? "container max-w-[1200px]! mx-auto" : ""}>
+        <div className={isSticky ? "md:container md:max-w-[1200px]! md:mx-auto" : ""}>
           <StaticFlightSearchBox
-            className={isSticky ? "mt-0 rounded-none p-5" : ""}
+            className={isSticky ? "md:mt-0 md:rounded-none md:p-5" : ""}
             compactActions={isSticky}
           />
         </div>

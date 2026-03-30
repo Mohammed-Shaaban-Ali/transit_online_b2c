@@ -10,6 +10,7 @@ import {
 import { UseFormReturn } from "react-hook-form";
 import CounterRow from "./CounterRow";
 import { CabinClass, FlightSearchFormValues } from "../types";
+import { MdPerson } from "react-icons/md";
 
 const MAX_ADULTS = 9;
 const MAX_CHILDREN = 9;
@@ -19,9 +20,15 @@ type Props = {
   form: UseFormReturn<FlightSearchFormValues>;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  mobileStyle?: boolean;
 };
 
-function PassengersPopover({ form, open, onOpenChange }: Props) {
+function PassengersPopover({
+  form,
+  open,
+  onOpenChange,
+  mobileStyle = false,
+}: Props) {
   const { watch, setValue } = form;
   const adults = watch("adults") || 1;
   const children = watch("children") || 0;
@@ -67,16 +74,29 @@ function PassengersPopover({ form, open, onOpenChange }: Props) {
   return (
     <Popover open={open} onOpenChange={onOpenChange}>
       <PopoverTrigger asChild>
-        <button
-          type="button"
-          className="flex h-[58px] w-full items-center justify-between rounded-sm border border-gray-300 px-3"
-        >
-          <span className="flex items-center gap-2 text-[16px] font-medium">
-            <UserIcon className="fill-gray-700" size={16} />
-            {triggerPassengersLabel}
-          </span>
-          <ChevronDown size={18} />
-        </button>
+        {mobileStyle ? (
+          <button
+            type="button"
+            className="flex h-[58px] w-full items-center gap-3 px-4"
+          >
+            <MdPerson size={20} />
+            <span className="flex-1 text-start text-[16px] font-medium text-black">
+              {triggerPassengersLabel}
+            </span>
+            <ChevronDown size={18} className="text-gray-400 shrink-0" />
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="flex h-[58px] w-full items-center justify-between rounded-sm border border-gray-300 px-3"
+          >
+            <span className="flex items-center gap-2 text-[16px] font-medium">
+              <UserIcon className="fill-gray-700" size={16} />
+              {triggerPassengersLabel}
+            </span>
+            <ChevronDown size={18} />
+          </button>
+        )}
       </PopoverTrigger>
       <PopoverContent
         align="end"
@@ -119,7 +139,9 @@ function PassengersPopover({ form, open, onOpenChange }: Props) {
         <div className="mt-5">
           <select
             value={cabinClass}
-            onChange={(e) => handleCabinClassChange(e.target.value as "ECONOMY" | "BUSINESS")}
+            onChange={(e) =>
+              handleCabinClassChange(e.target.value as "ECONOMY" | "BUSINESS")
+            }
             className="h-11 w-full rounded-sm border border-gray-300 px-2 text-[16px] outline-none transition-colors focus:border-primary appearance-none cursor-pointer"
           >
             <option value="ECONOMY">Economy</option>

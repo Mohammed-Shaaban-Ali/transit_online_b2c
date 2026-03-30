@@ -43,8 +43,8 @@ const trustCards = [
 
 function TrustUs({}: Props) {
   return (
-    <div className="container max-w-[1200px]! mx-auto py-7">
-      <div className="mb-6 flex items-center justify-between">
+    <div className="container max-w-[1200px]! mx-auto py-4 md:py-7">
+      <div className="mb-6 flex flex-col items-start gap-2 md:flex-row md:items-start md:justify-between">
         <h2 className="text-[28px] font-bold leading-tight ">
           Trust us to take you there
         </h2>

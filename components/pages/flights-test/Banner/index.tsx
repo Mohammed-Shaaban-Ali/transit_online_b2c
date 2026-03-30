@@ -55,7 +55,7 @@ function Banner({}: Props) {
                 {bannerFeatures.map((feature) => (
                   <li key={feature.id} className="flex items-start gap-5">
                     <feature.icon className="mt-1 size-6 shrink-0 text-white/85" />
-                    <p className="text-[20px] font-medium leading-tight text-white/95 ">
+                    <p className="text-[16px] md:text-[20px] font-medium leading-tight text-white/95 ">
                       {feature.text}
                     </p>
                   </li>

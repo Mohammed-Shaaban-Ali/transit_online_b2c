@@ -30,7 +30,7 @@ function FloatingSideActions({}: Props) {
   };
 
   return (
-    <div className="fixed right-6 bottom-[10%] z-50">
+    <div className="fixed right-6 bottom-[10%] z-50 hidden md:block">
       <div className="flex flex-col gap-1.5">
         {hasScrolled && (
           <button

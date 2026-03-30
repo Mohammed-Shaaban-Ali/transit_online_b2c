@@ -35,7 +35,11 @@ const heroActions = [
 
 function HeroQuickActions({}: Props) {
   return (
-    <div className="absolute right-10 bottom-28 z-20 hidden md:flex md:flex-col md:gap-2.5">
+    <div
+      className=" 
+
+    absolute right-10 bottom-28 z-20 hidden md:flex md:flex-col md:gap-2.5"
+    >
       {heroActions.map((action) => (
         <div key={action.id} className="group flex items-center justify-end">
           <button

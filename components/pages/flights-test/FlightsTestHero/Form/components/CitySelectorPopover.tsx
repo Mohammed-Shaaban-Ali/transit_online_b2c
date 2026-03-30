@@ -12,6 +12,8 @@ import { useGetAllAirportsQuery } from "@/redux/features/airports/airportsApi";
 import { airportTypes } from "@/types/airportTypes";
 import { RiMapPin2Fill } from "react-icons/ri";
 import { FlightSearchFormValues } from "../types";
+import { MdFlightTakeoff } from "react-icons/md";
+import { MdFlightLand } from "react-icons/md";
 
 const RECENT_FROM_KEY = "flight-test-recent-from";
 const RECENT_TO_KEY = "flight-test-recent-to";
@@ -56,6 +58,7 @@ type Props = {
   panelWidthClassName?: string;
   triggerClassName?: string;
   error?: string;
+  mobileStyle?: boolean;
 };
 
 function CitySelectorPopover({
@@ -67,6 +70,7 @@ function CitySelectorPopover({
   panelWidthClassName = "w-[480px]",
   triggerClassName = "",
   error,
+  mobileStyle = false,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -128,25 +132,51 @@ function CitySelectorPopover({
     setSearchText("");
   };
 
+  const planeIcon =
+    fieldName === "fromAirport" ? (
+      <MdFlightTakeoff size={20} className="" />
+    ) : (
+      <MdFlightLand size={20} />
+    );
+
   return (
     <div className="relative">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <button
-            type="button"
-            className={`flex h-[58px]   w-full items-center gap-2 rounded-sm border border-gray-300 px-3 text-start ${triggerClassName}`}
-          >
-            <span
-              title={displayValue || label}
-              className={
-                displayValue
-                  ? "text-[16px] text-black font-medium line-clamp-1"
-                  : "text-[16px] text-gray-500 line-clamp-1"
-              }
+          {mobileStyle ? (
+            <button
+              type="button"
+              className={`flex h-[58px] w-full items-center gap-2.5  text-start ${triggerClassName}`}
             >
-              {displayValue || label}
-            </span>
-          </button>
+              {planeIcon}
+              <span
+                title={displayValue || label}
+                className={
+                  displayValue
+                    ? "text-[16px] text-black font-medium line-clamp-1"
+                    : "text-[16px] text-gray-500 line-clamp-1"
+                }
+              >
+                {displayValue || label}
+              </span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              className={`flex h-[58px] w-full items-center gap-2 rounded-sm border border-gray-300 px-3 text-start ${triggerClassName}`}
+            >
+              <span
+                title={displayValue || label}
+                className={
+                  displayValue
+                    ? "text-[16px] text-black font-medium line-clamp-1"
+                    : "text-[16px] text-gray-500 line-clamp-1"
+                }
+              >
+                {displayValue || label}
+              </span>
+            </button>
+          )}
         </PopoverTrigger>
         <PopoverContent
           align="start"
