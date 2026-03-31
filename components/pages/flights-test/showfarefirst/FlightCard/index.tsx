@@ -107,78 +107,81 @@ function FlightCard({
     undefined;
   return (
     <article className="bg-white rounded-2xl sm:rounded-none overflow-hidden">
-      {/* ── Mobile layout ── */}
-      <div className="flex sm:hidden items-start gap-10 px-4 py-4">
+      {/* ── Mobile layout (compact type scale: times & price dominant, meta smallest) ── */}
+      <div className="flex sm:hidden items-start gap-10 px-3 py-3.5">
         {/* LEFT: times + airport codes + duration line + airlines */}
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           {/* Row 1: dep time — line — arr time+badge */}
-          <div className="flex items-start gap-2">
+          <div className="flex items-start gap-1.5">
             {/* Dep time + code */}
             <div className="shrink-0">
-              <p className="text-[26px] font-bold leading-none tabular-nums text-gray-900">
+              <p className="text-[21px] font-bold leading-none tabular-nums text-gray-900">
                 {depTime}
               </p>
-              <p className="mt-[3px] text-[14px] ">{depCode}</p>
+              <p className="mt-0.5 text-[12px] font-medium text-gray-800">
+                {depCode}
+              </p>
             </div>
 
             {/* Middle: duration + arrow line + stops */}
-            <div className="flex flex-1 flex-col items-center pt-2 min-w-0">
-              <p className="text-[11px] text-gray-400 leading-none">
+            <div className="flex min-w-0 flex-1 flex-col items-center pt-1">
+              <p className="text-[10px] leading-none text-gray-400">
                 {duration}
               </p>
-              <div className="relative flex w-full items-center my-1">
-                <span className="size-[5px] shrink-0 rounded-full bg-gray-400" />
-                <div className="relative flex-1 h-px bg-gray-300">
+              <div className="relative my-0.5 flex w-full items-center">
+                <span className="size-[4px] shrink-0 rounded-full bg-gray-400" />
+                <div className="relative h-px flex-1 bg-gray-300">
                   {stopsCount > 0 &&
                     Array.from({ length: stopsCount }).map((_, i) => (
                       <span
                         key={i}
-                        className="absolute top-1/2 size-[5px] -translate-y-1/2 -translate-x-1/2 border border-gray-400 bg-white"
+                        className="absolute top-1/2 size-[4px] -translate-x-1/2 -translate-y-1/2 border border-gray-400 bg-white"
                         style={{
                           left: `${((i + 1) / (stopsCount + 1)) * 100}%`,
                         }}
                       />
                     ))}
                 </div>
-                {/* Arrow head */}
                 <ChevronRight
-                  size={12}
+                  size={11}
                   className="-ml-1 shrink-0 text-gray-400"
                   strokeWidth={2.5}
                 />
               </div>
-              <p className="text-[11px] text-gray-400 leading-none">
+              <p className="text-[10px] leading-none text-gray-400">
                 {stopsText}
               </p>
             </div>
 
             {/* Arr time + day badge + code */}
             <div className="shrink-0 text-right">
-              <p className="text-[26px] font-bold leading-none tabular-nums text-gray-900">
+              <p className="text-[21px] font-bold leading-none tabular-nums text-gray-900">
                 {arrTime}
                 {dayDiff > 0 && (
-                  <sup className="ml-0.5 text-[13px] font-semibold text-orange-500 align-super">
+                  <sup className="ml-0.5 align-super text-[10px] font-semibold text-orange-500">
                     +{dayDiff}
                   </sup>
                 )}
               </p>
-              <p className="mt-[3px] text-[14px] text-right">{arrCode}</p>
+              <p className="mt-0.5 text-right text-[12px] font-medium text-gray-800">
+                {arrCode}
+              </p>
             </div>
           </div>
 
           {/* Row 2: airline names */}
-          <div className="mt-2.5 flex flex-wrap items-center gap-x-1 gap-y-0.5">
+          <div className="mt-2 flex flex-wrap items-center gap-x-1 gap-y-0.5">
             {airlineLogo && (
               <img
                 src={airlineLogo}
                 alt={allAirlines[0] ?? airlineName}
-                width={16}
-                height={16}
+                width={14}
+                height={14}
                 className="shrink-0 rounded"
               />
             )}
             {allAirlines.map((name, i) => (
-              <span key={name} className="text-[14px] text-gray-400">
+              <span key={name} className="text-[12px] text-gray-500">
                 {i > 0 && (
                   <span className="mx-1 text-gray-300 select-none">|</span>
                 )}
@@ -188,17 +191,17 @@ function FlightCard({
           </div>
         </div>
 
-        {/* RIGHT: price + availability */}
-        <div className="shrink-0 flex flex-col items-end justify-start gap-1 pl-2">
-          <div className="flex items-baseline gap-0.5 tabular-nums text-[22px] font-bold text-primary leading-none">
-            <CurrencySymbol size="lg" />
-            <span className="">
+        {/* RIGHT: price + availability — aligned with time row; currency slightly smaller than amount */}
+        <div className="flex shrink-0 flex-col items-end justify-start gap-0.5 ps-1">
+          <div className="flex items-baseline gap-0.5 tabular-nums leading-none text-primary">
+            <CurrencySymbol size="md" className="font-bold" />
+            <span className="text-[19px] font-bold">
               {displayPrice}
               {isReturn ? "+" : ""}
             </span>
           </div>
           {seatsLeft !== undefined && seatsLeft < 5 ? (
-            <p className="text-[12px] font-medium text-red-500">
+            <p className="text-[11px] font-medium text-red-500">
               &lt;{seatsLeft} left
             </p>
           ) : null}
@@ -211,9 +214,9 @@ function FlightCard({
                 onOpenFare?.(flightData);
               }
             }}
-            className="mt-2 flex items-center gap-0.5 h-8 rounded-lg bg-primary px-3.5 text-[12px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
+            className="mt-1.5 flex h-7 items-center gap-0.5 rounded-md bg-primary px-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
           >
-            Select <ChevronRight size={13} />
+            Select <ChevronRight size={12} />
           </button>
         </div>
       </div>
