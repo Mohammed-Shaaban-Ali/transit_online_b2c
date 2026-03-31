@@ -28,7 +28,7 @@ export function FareCard({
   return (
     <div
       onClick={onSelect}
-      className={`relative h-full flex flex-col border-2 rounded-lg p-4 cursor-pointer transition-all select-none ${className} ${
+      className={`relative flex h-full cursor-pointer select-none flex-col rounded-lg border-2 p-3 transition-all sm:p-4 ${className} ${
         isSelected
           ? "border-primary shadow-md"
           : "border-gray-200 hover:border-gray-300"
@@ -95,8 +95,8 @@ export function FareCard({
       </div>
 
       <div className="mt-4 pt-3 border-t border-gray-100 shrink-0">
-        <div className="flex items-center gap-1 text-[22px] sm:text-[28px] font-bold text-primary rtl:flex-row-reverse">
-          <CurrencySymbol size="lg" />
+        <div className="flex items-baseline gap-0.5 text-[20px] font-bold text-primary rtl:flex-row-reverse sm:text-[28px]">
+          <CurrencySymbol size="md" className="font-bold sm:text-[18px]!" />
           <span className="tabular-nums">
             {formatePrice(fare.price ?? 0)}
             {fare.priceSuffix ?? ""}

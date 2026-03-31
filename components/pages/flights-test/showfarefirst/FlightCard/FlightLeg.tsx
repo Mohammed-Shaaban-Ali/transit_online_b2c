@@ -89,28 +89,28 @@ function FlightLeg({
   const rows = buildRows(legs);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3 sm:gap-4">
       {label && date && (
-        <div className="flex items-center gap-3">
-          <span className="rounded bg-[#0f2a54] text-white px-2.5 py-0.5 text-[15px] font-semibold">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <span className="rounded bg-[#0f2a54] px-2 py-0.5 text-[12px] font-semibold text-white sm:px-2.5 sm:text-[15px]">
             {label}
           </span>
-          <p className="text-[14px] text-gray-500">
+          <p className="min-w-0 text-[12px] text-gray-500 sm:text-[14px]">
             {date}&nbsp;&nbsp;|&nbsp;&nbsp;Duration {totalDuration}
           </p>
         </div>
       )}
 
-      <div className="grid grid-cols-[50px_3px_1fr] gap-x-3">
+      <div className="grid grid-cols-[42px_3px_1fr] gap-x-2 sm:grid-cols-[50px_3px_1fr] sm:gap-x-3">
         {rows.map((row, i) => {
           if (row.type === "airport") {
             return (
               <React.Fragment key={i}>
-                <p className="text-[15px] font-bold text-gray-800 leading-snug self-center">
+                <p className="self-center text-[13px] font-bold leading-snug text-gray-800 tabular-nums sm:text-[15px]">
                   {row.time}
                 </p>
-                <div className="bg-gray-300 rounded-full" />
-                <p className="text-[14px] font-bold text-gray-800 leading-snug self-center">
+                <div className="rounded-full bg-gray-300" />
+                <p className="self-center text-[12px] font-bold leading-snug text-gray-800 sm:text-[14px]">
                   {row.airport}
                   {row.terminal ? ` ${row.terminal}` : ""}
                 </p>
@@ -121,25 +121,25 @@ function FlightLeg({
           if (row.type === "flight") {
             return (
               <React.Fragment key={i}>
-                <div className="flex justify-center py-2">
+                <div className="flex justify-center py-1.5 sm:py-2">
                   {row.logo ? (
                     <img
                       src={row.logo}
                       alt={row.airlineName}
                       width={22}
                       height={22}
-                      className="rounded object-contain"
+                      className="size-[20px] rounded object-contain sm:size-[22px]"
                     />
                   ) : (
-                    <div className="size-[22px] rounded bg-gray-200" />
+                    <div className="size-5 rounded bg-gray-200 sm:size-[22px]" />
                   )}
                 </div>
-                <div className="bg-gray-300 rounded-full" />
-                <div className="flex flex-col justify-center py-2">
-                  <p className="text-[13px] text-gray-500 leading-snug">
+                <div className="rounded-full bg-gray-300" />
+                <div className="flex flex-col justify-center py-1.5 sm:py-2">
+                  <p className="text-[12px] leading-snug text-gray-500 sm:text-[13px]">
                     {row.airlineName} {row.flightNum}
                   </p>
-                  <p className="text-[13px] text-gray-500 leading-snug">
+                  <p className="text-[12px] leading-snug text-gray-500 sm:text-[13px]">
                     Flight time: {row.duration}
                   </p>
                 </div>
@@ -169,8 +169,8 @@ function FlightLeg({
                     </svg>
                   </span>
                 </div>
-                <div className="flex items-center py-3.5">
-                  <span className="text-[12px] text-gray-500 border border-gray-200 rounded-sm px-3 py-1">
+                <div className="flex items-center py-2.5 sm:py-3.5">
+                  <span className="rounded-sm border border-gray-200 px-2 py-0.5 text-[11px] text-gray-500 sm:px-3 sm:py-1 sm:text-[12px]">
                     {formatLayover(row.layoverMinutes, row.cityName)}
                   </span>
                 </div>

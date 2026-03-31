@@ -91,12 +91,12 @@ export default function FareSlider({
   return (
     <div className="relative w-full min-w-0 max-w-full">
       {showNav && (
-        <div className="flex justify-end gap-2 mb-3">
+        <div className="mb-2 flex justify-end gap-1.5 sm:mb-3 sm:gap-2">
           <Button
             type="button"
             variant={isBeginning ? "outline-primary" : "default"}
             size="icon"
-            className="rounded-full shrink-0"
+            className="size-8 shrink-0 rounded-full sm:size-9"
             disabled={isBeginning}
             aria-label="Previous fares"
             onClick={(e) => {
@@ -104,13 +104,13 @@ export default function FareSlider({
               swiperRef.current?.slidePrev();
             }}
           >
-            <ChevronLeft size={18} className="rtl:rotate-180" />
+            <ChevronLeft size={16} className="rtl:rotate-180 sm:h-[18px] sm:w-[18px]" />
           </Button>
           <Button
             type="button"
             variant={isEnd ? "outline-primary" : "default"}
             size="icon"
-            className="rounded-full shrink-0"
+            className="size-8 shrink-0 rounded-full sm:size-9"
             disabled={isEnd}
             aria-label="Next fares"
             onClick={(e) => {
@@ -118,7 +118,7 @@ export default function FareSlider({
               swiperRef.current?.slideNext();
             }}
           >
-            <ChevronRight size={18} className="rtl:rotate-180" />
+            <ChevronRight size={16} className="rtl:rotate-180 sm:h-[18px] sm:w-[18px]" />
           </Button>
         </div>
       )}

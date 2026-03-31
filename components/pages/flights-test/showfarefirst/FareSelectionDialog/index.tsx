@@ -510,14 +510,14 @@ export default function FareSelectionDialog({
                 onClick={handleBack}
                 className="rounded-full p-1 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
               >
-                <ChevronLeft size={18} className="text-gray-600 sm:size-5" />
+                <ChevronLeft size={17} className="text-gray-600 sm:h-5 sm:w-5" />
               </button>
             )}
-            <h2 className="text-[16px] sm:text-[20px] font-bold text-gray-900 truncate">
+            <h2 className="text-[15px] sm:text-[20px] font-bold text-gray-900 truncate">
               {headerTitle.from}{" "}
               <ArrowLeftRight
-                size={15}
-                className="inline text-gray-600 mx-1 shrink-0 sm:size-[18px]"
+                size={14}
+                className="inline mx-1 shrink-0 text-gray-600 sm:h-[18px] sm:w-[18px]"
               />{" "}
               {headerTitle.to}
             </h2>
@@ -528,19 +528,19 @@ export default function FareSelectionDialog({
             onClick={handleClose}
             className="rounded-full p-1.5 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
           >
-            <X size={20} className="text-gray-600" />
+            <X size={18} className="text-gray-600 sm:h-5 sm:w-5" />
           </button>
         </div>
 
         {/* Same itinerary detail as FlightCard hover (stops, layovers, segments) */}
         <div
-          className={`px-6 py-4 border-b border-gray-100 bg-gray-50 ${
+          className={`border-b border-gray-100 bg-gray-50 px-3 py-3 sm:px-6 sm:py-4 ${
             returnFlight
-              ? "grid grid-cols-1 md:grid-cols-2 gap-4 items-start"
-              : "space-y-4"
+              ? "grid grid-cols-1 items-start gap-3 md:grid-cols-2 md:gap-4"
+              : "space-y-3 sm:space-y-4"
           }`}
         >
-          <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm min-w-0">
+          <div className="min-w-0 rounded-lg border border-gray-200 bg-white p-3 shadow-sm sm:p-4">
             <ItineraryFlightLeg
               legs={departureFlight.legs}
               label="Depart"
@@ -548,7 +548,7 @@ export default function FareSelectionDialog({
             />
           </div>
           {returnFlight && (
-            <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm min-w-0">
+            <div className="min-w-0 rounded-lg border border-gray-200 bg-white p-3 shadow-sm sm:p-4">
               <ItineraryFlightLeg
                 legs={returnFlight.legs}
                 label="Return"
@@ -565,11 +565,11 @@ export default function FareSelectionDialog({
           )}
         </div> */}
 
-        <div className="px-3 sm:px-6 pt-3 pb-6 min-h-[200px] min-w-0 overflow-x-hidden">
+        <div className="min-h-[200px] min-w-0 overflow-x-hidden px-3 pb-5 pt-3 sm:px-6 sm:pb-6">
           {isFetching && (
-            <div className="flex flex-col items-center justify-center py-16 gap-3">
-              <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-              <p className="text-sm text-gray-600">{t("loading")}</p>
+            <div className="flex flex-col items-center justify-center gap-2 py-12 sm:gap-3 sm:py-16">
+              <div className="h-9 w-9 animate-spin rounded-full border-2 border-primary border-t-transparent sm:h-10 sm:w-10" />
+              <p className="text-[13px] text-gray-600 sm:text-sm">{t("loading")}</p>
             </div>
           )}
           {!isFetching && error && <ErrorSection error={error} />}
@@ -602,15 +602,18 @@ export default function FareSelectionDialog({
           (isDefaultFareOnly
             ? !!selectedDepartureOffer
             : offers.length > 0 && hasPackageSelection) && (
-            <div className="flex flex-col gap-3 px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100 bg-white sticky bottom-0 z-10">
+            <div className="sticky bottom-0 z-10 flex flex-col gap-2 border-t border-gray-100 bg-white px-3 py-3 sm:gap-3 sm:px-6 sm:py-4">
               {isDefaultFareOnly && selectedDepartureOffer ? (
-                <div className="flex items-center justify-end gap-3 flex-wrap">
-                  <div className="flex items-end gap-1 sm:gap-1.5 me-auto">
-                    <p className="text-[12px] sm:text-[14px] text-gray-500 mb-1">
+                <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
+                  <div className="me-auto flex items-end gap-1 sm:gap-1.5">
+                    <p className="mb-0.5 text-[11px] text-gray-500 sm:mb-1 sm:text-[14px]">
                       {t("totalPrice")}
                     </p>
-                    <div className="text-[20px] sm:text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
-                      <CurrencySymbol size="lg" />
+                    <div className="flex items-baseline gap-0.5 text-[18px] font-bold text-primary rtl:flex-row-reverse sm:text-[24px]">
+                      <CurrencySymbol
+                        size="md"
+                        className="font-bold sm:text-[18px]!"
+                      />
                       <span className="tabular-nums">
                         {formatePrice(getDisplayPrice().amount || 0)}
                       </span>
@@ -624,7 +627,7 @@ export default function FareSelectionDialog({
                           setShowReturnOffers(true);
                           setSelectedOfferKey(undefined);
                         }}
-                        className="h-11 sm:h-14 rounded bg-primary px-5 sm:px-8 text-[15px] sm:text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
+                        className="h-10 cursor-pointer rounded bg-primary px-4 text-[14px] font-semibold text-white transition-colors hover:bg-primary/90 sm:h-14 sm:px-8 sm:text-[18px]"
                       >
                         {t("continue")}
                       </button>
@@ -634,7 +637,7 @@ export default function FareSelectionDialog({
                         type="button"
                         onClick={handleContinueToBooking}
                         disabled={continueToBookingDisabledDefault}
-                        className="h-11 sm:h-14 rounded bg-primary px-5 sm:px-8 text-[15px] sm:text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+                        className="h-10 cursor-pointer rounded bg-primary px-4 text-[14px] font-semibold text-white transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-50 sm:h-14 sm:px-8 sm:text-[18px]"
                       >
                         {t("continueToBooking")}
                       </button>
@@ -642,13 +645,16 @@ export default function FareSelectionDialog({
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center justify-end gap-3 flex-wrap">
-                  <div className="flex items-end gap-1 sm:gap-1.5 me-auto">
-                    <p className="text-[12px] sm:text-[14px] text-gray-500 mb-1">
+                <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
+                  <div className="me-auto flex items-end gap-1 sm:gap-1.5">
+                    <p className="mb-0.5 text-[11px] text-gray-500 sm:mb-1 sm:text-[14px]">
                       {footerPriceLabel}
                     </p>
-                    <div className="text-[20px] sm:text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
-                      <CurrencySymbol size="lg" />
+                    <div className="flex items-baseline gap-0.5 text-[18px] font-bold text-primary rtl:flex-row-reverse sm:text-[24px]">
+                      <CurrencySymbol
+                        size="md"
+                        className="font-bold sm:text-[18px]!"
+                      />
                       <span className="tabular-nums">
                         {formatePrice(footerPriceAmount)}
                       </span>
@@ -658,7 +664,7 @@ export default function FareSelectionDialog({
                     type="button"
                     onClick={handleNextOffers}
                     disabled={!canContinueOffers}
-                    className="h-11 sm:h-14 rounded bg-primary px-5 sm:px-8 text-[15px] sm:text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+                    className="h-10 rounded bg-primary px-4 text-[14px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:pointer-events-none disabled:opacity-50 sm:h-14 sm:px-8 sm:text-[18px]"
                   >
                     {isRoundTrip && offers.length > 0 && uiStep === "departure"
                       ? "Next"
