@@ -84,9 +84,9 @@ async function page({ searchParams }: Props) {
             aria-hidden
           />
         </div>
-        <div className="relative z-10 flex flex-col px-4 pb-6 pt-10 sm:pt-12">
+        <div className="relative z-10 flex flex-col px-3 pb-5 pt-9 sm:px-4 sm:pb-6 sm:pt-11">
           <div
-            className="overflow-hidden rounded-2xl bg-white"
+            className="overflow-hidden rounded-2xl bg-white text-[15px] antialiased [text-size-adjust:100%]"
             style={{ boxShadow: "0 4px 32px rgba(0,0,0,0.14)" }}
           >
             <StaticFlightSearchBox

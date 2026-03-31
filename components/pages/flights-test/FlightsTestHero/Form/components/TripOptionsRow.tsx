@@ -23,14 +23,14 @@ function TripOptionsRow({
   return (
     <>
       {/* Mobile: tabs style */}
-      <div className="mb-4 md:hidden">
+      <div className="mb-3 md:hidden">
         <div className="flex border-b border-gray-200">
           {TRIP_TYPES.map((t) => (
             <button
               key={t.value}
               type="button"
               onClick={() => onTripTypeChange(t.value)}
-              className={`flex-1 py-3 text-[14px] font-medium transition-colors ${
+              className={`flex-1 py-2.5 text-[13px] font-medium transition-colors ${
                 tripType === t.value
                   ? "border-b-2 border-primary text-primary"
                   : "text-gray-500"

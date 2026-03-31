@@ -284,7 +284,7 @@ function StaticFlightSearchBox({
   return (
     <div
       className={cn(
-        "mt-0 md:mt-3 w-full rounded-[8px] bg-white p-4 pt-2 md:p-5 ",
+        "mt-0 md:mt-3 w-full rounded-[8px] bg-white p-3 pt-2 md:p-5",
         className,
       )}
     >
@@ -354,9 +354,9 @@ function StaticFlightSearchBox({
             <PopoverTrigger asChild>
               <button
                 type="button"
-                className="flex h-[58px] w-full items-center gap-3  text-[16px] text-black"
+                className="flex h-[54px] w-full items-center gap-2.5 text-[15px] text-black"
               >
-                <MdCalendarMonth size={20} />
+                <MdCalendarMonth size={18} />
                 <span
                   className={departureDate ? "text-black" : "text-gray-500"}
                 >
@@ -402,7 +402,7 @@ function StaticFlightSearchBox({
         <button
           type="button"
           onClick={handleSearch}
-          className="mt-4 h-[52px] w-full rounded-lg bg-primary text-[18px] font-semibold text-white transition-colors hover:bg-primary/80"
+          className="mt-3 h-[48px] w-full rounded-lg bg-primary text-[16px] font-semibold text-white transition-colors hover:bg-primary/80"
         >
           Search
         </button>

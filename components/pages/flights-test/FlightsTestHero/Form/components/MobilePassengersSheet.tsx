@@ -48,25 +48,25 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
   return (
     <>
       {/* Combined passengers + cabin row */}
-      <div className="border-b border-gray-200 flex h-[58px] items-center gap-2">
+      <div className="flex h-[54px] items-center gap-1.5 border-b border-gray-200">
         {/* Passengers part */}
         <button
           type="button"
           onClick={() => onOpenSheet("passengers")}
-          className="flex items-center gap-2 shrink-0"
+          className="flex shrink-0 items-center gap-1.5"
         >
-          <MdPerson size={18} className="text-gray-600" />
-          <span className="text-[15px] font-medium text-black">{adults}</span>
+          <MdPerson size={17} className="text-gray-600" />
+          <span className="text-[14px] font-medium text-black">{adults}</span>
 
-          <MdChildCare size={18} className="text-gray-600" />
-          <span className="text-[15px] font-medium text-black">{children}</span>
+          <MdChildCare size={17} className="text-gray-600" />
+          <span className="text-[14px] font-medium text-black">{children}</span>
 
-          <MdOutlineChildFriendly size={18} className="text-gray-600" />
-          <span className="text-[15px] font-medium text-black">{infants}</span>
+          <MdOutlineChildFriendly size={17} className="text-gray-600" />
+          <span className="text-[14px] font-medium text-black">{infants}</span>
         </button>
 
         {/* Separator */}
-        <span className="mx-1 text-gray-300 text-[18px] font-light select-none">
+        <span className="mx-0.5 select-none text-[16px] font-light text-gray-300">
           |
         </span>
 
@@ -74,12 +74,12 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
         <button
           type="button"
           onClick={() => onOpenSheet("cabin")}
-          className="flex flex-1 items-center gap-1 min-w-0"
+          className="flex min-w-0 flex-1 items-center gap-1"
         >
-          <span className="flex-1 text-start text-[15px] font-medium text-black truncate">
+          <span className="flex-1 truncate text-start text-[14px] font-medium text-black">
             {cabinDisplayText}
           </span>
-          <ChevronDown size={18} className="text-gray-500 shrink-0" />
+          <ChevronDown size={17} className="shrink-0 text-gray-500" />
         </button>
       </div>
 
@@ -111,7 +111,7 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
             <div className="h-1 w-10 rounded-full bg-gray-300" />
           </div>
 
-          <div className="flex shrink-0 items-center justify-between border-b border-gray-100/80 px-5 py-4">
+          <div className="flex shrink-0 items-center justify-between border-b border-gray-100/80 px-4 py-3.5">
             <button
               type="button"
               onClick={() => onOpenSheet(null)}
@@ -119,16 +119,17 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
             >
               <X size={20} />
             </button>
-            <h2 className="text-[17px] font-semibold text-black">
+            <h2 className="text-[16px] font-semibold text-black">
               {openSheet === "passengers" ? "Passengers" : "Cabin Class"}
             </h2>
             <div className="w-8" />
           </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
+          <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
             {openSheet === "passengers" && (
               <>
                 <CounterRow
+                  compact
                   title="Adults"
                   subtitle="12+ years old at time of travel"
                   value={adults}
@@ -136,6 +137,7 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
                   onPlus={() => handleAdultsChange(adults + 1)}
                 />
                 <CounterRow
+                  compact
                   title="Children"
                   subtitle="2–11 years old at time of travel"
                   value={children}
@@ -143,6 +145,7 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
                   onPlus={() => handleChildrenChange(children + 1)}
                 />
                 <CounterRow
+                  compact
                   title="Infants (lap)"
                   subtitle="Under 2 years old at time of travel"
                   value={infants}
@@ -154,7 +157,7 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
                 <button
                   type="button"
                   onClick={() => onOpenSheet(null)}
-                  className="mt-4 h-[50px] w-full rounded-lg bg-primary text-[16px] font-semibold text-white hover:bg-primary/80"
+                  className="mt-3 h-[48px] w-full rounded-lg bg-primary text-[15px] font-semibold text-white hover:bg-primary/80"
                 >
                   Done
                 </button>
@@ -171,7 +174,7 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
                       setValue("cabinClass", option.value);
                       onOpenSheet(null);
                     }}
-                    className={`flex h-[52px] w-full items-center justify-between rounded-lg border px-4 text-[16px] font-medium transition-colors ${
+                    className={`flex h-[48px] w-full items-center justify-between rounded-lg border px-3 text-[15px] font-medium transition-colors ${
                       cabinClass === option.value
                         ? "border-primary bg-primary/5 text-primary"
                         : "border-gray-200 text-black hover:border-gray-300"

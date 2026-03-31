@@ -8,14 +8,31 @@ type Props = {
   value: number;
   onMinus: () => void;
   onPlus: () => void;
+  /** Tighter type scale (e.g. mobile bottom sheet) */
+  compact?: boolean;
 };
 
-function CounterRow({ title, subtitle, value, onMinus, onPlus }: Props) {
+function CounterRow({
+  title,
+  subtitle,
+  value,
+  onMinus,
+  onPlus,
+  compact = false,
+}: Props) {
   return (
     <div className="mb-4 flex items-center justify-between">
       <div>
-        <p className="text-[14px] mb-0.5 font-medium">{title}</p>
-        <p className="text-[12px] text-gray-500">{subtitle}</p>
+        <p
+          className={`mb-0.5 font-medium ${compact ? "text-[13px]" : "text-[14px]"}`}
+        >
+          {title}
+        </p>
+        <p
+          className={`text-gray-500 ${compact ? "text-[11px]" : "text-[12px]"}`}
+        >
+          {subtitle}
+        </p>
       </div>
       <div className="flex items-center gap-2">
         <button
@@ -27,7 +44,9 @@ function CounterRow({ title, subtitle, value, onMinus, onPlus }: Props) {
         >
           <MinusIcon size={16} />
         </button>
-        <span className="w-6 text-center text-[16px] leading-none">
+        <span
+          className={`w-6 text-center leading-none ${compact ? "text-[15px]" : "text-[16px]"}`}
+        >
           {value}
         </span>
         <button

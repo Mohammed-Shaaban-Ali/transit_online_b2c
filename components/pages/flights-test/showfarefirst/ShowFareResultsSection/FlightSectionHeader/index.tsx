@@ -47,16 +47,16 @@ export default function FlightSectionHeader({
         <div className="flex flex-col gap-2">
           <div className="min-w-0 flex items-center gap-2">
             <div
-              className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-primary text-[15px] font-bold leading-none text-white"
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-primary text-[14px] font-bold leading-none text-white"
               aria-hidden
             >
               {stepNumber}
             </div>
-            <h2 className="text-[18px] font-bold leading-snug text-gray-900">
+            <h2 className="text-[16px] font-bold leading-snug text-gray-900 sm:text-[17px]">
               {mobileStepTitle}
             </h2>
           </div>
-          <p className=" text-[14px] leading-relaxed text-gray-500">
+          <p className="text-[13px] leading-relaxed text-gray-500 sm:text-[14px]">
             {priceSubtitle}
           </p>
         </div>
@@ -68,7 +68,7 @@ export default function FlightSectionHeader({
                 <span className="shrink-0 rounded bg-primary px-2 py-0.5 text-[11px] font-semibold text-white">
                   Depart
                 </span>
-                <span className="shrink-0 text-[12px] font-medium text-gray-800 whitespace-nowrap sm:text-[13px]">
+                <span className="shrink-0 whitespace-nowrap text-[12px] font-medium text-gray-800 sm:text-[13px]">
                   {selectedDeparture.date} · {selectedDeparture.timeRange}
                 </span>
                 <span className="shrink-0 text-gray-300" aria-hidden>

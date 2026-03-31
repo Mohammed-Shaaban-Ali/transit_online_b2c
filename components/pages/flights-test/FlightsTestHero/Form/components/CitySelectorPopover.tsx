@@ -132,11 +132,12 @@ function CitySelectorPopover({
     setSearchText("");
   };
 
+  const iconSize = mobileStyle ? 18 : 20;
   const planeIcon =
     fieldName === "fromAirport" ? (
-      <MdFlightTakeoff size={20} className="" />
+      <MdFlightTakeoff size={iconSize} className="" />
     ) : (
-      <MdFlightLand size={20} />
+      <MdFlightLand size={iconSize} />
     );
 
   return (
@@ -146,15 +147,15 @@ function CitySelectorPopover({
           {mobileStyle ? (
             <button
               type="button"
-              className={`flex h-[58px] w-full items-center gap-2.5  text-start ${triggerClassName}`}
+              className={`flex h-[54px] w-full items-center gap-2 text-start ${triggerClassName}`}
             >
               {planeIcon}
               <span
                 title={displayValue || label}
                 className={
                   displayValue
-                    ? "text-[16px] text-black font-medium line-clamp-1"
-                    : "text-[16px] text-gray-500 line-clamp-1"
+                    ? "text-[15px] text-black font-medium line-clamp-1"
+                    : "text-[15px] text-gray-500 line-clamp-1"
                 }
               >
                 {displayValue || label}
@@ -181,7 +182,7 @@ function CitySelectorPopover({
         <PopoverContent
           align="start"
           side="bottom"
-          sideOffset={-58}
+          sideOffset={mobileStyle ? -54 : -58}
           avoidCollisions={false}
           className="border-none bg-transparent p-0 shadow-none"
         >

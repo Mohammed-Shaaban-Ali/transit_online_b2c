@@ -665,8 +665,7 @@ function ShowFareResultsSection({
         </div>
 
         <div
-          className="min-w-0 overflow-hidden rounded-md max-lg:px-3 max-lg:pt-2
-         lg:max-w-none lg:bg-transparent lg:px-0 lg:pt-0"
+          className="min-w-0 overflow-hidden rounded-md max-lg:px-2 max-lg:pt-1.5 lg:max-w-none lg:bg-transparent lg:px-0 lg:pt-0"
         >
           {/* Departure header - always visible */}
           {!showingReturns && (
@@ -692,17 +691,17 @@ function ShowFareResultsSection({
               />
 
               {isPartialLoading && (
-                <div className="mb-2 mt-1.5 flex items-center gap-2 rounded bg-blue-50 px-4 py-2">
+                <div className="mb-2 mt-1.5 flex items-center gap-2 rounded bg-blue-50 px-3 py-2 sm:px-4">
                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-                  <p className="text-sm text-primary">
+                  <p className="text-[13px] text-primary sm:text-sm">
                     Loading more results...
                   </p>
                 </div>
               )}
 
               {filteredDepartureFlights.length === 0 && isBothDone && (
-                <div className="mt-4 rounded bg-white px-6 py-12 text-center">
-                  <p className="text-lg text-gray-500">
+                <div className="mt-4 rounded bg-white px-4 py-10 text-center sm:px-6 sm:py-12">
+                  <p className="text-[15px] text-gray-500 sm:text-lg">
                     No flights found for your search.
                   </p>
                 </div>
@@ -763,8 +762,8 @@ function ShowFareResultsSection({
               />
 
               {filteredReturnFlights.length === 0 && (
-                <div className="mt-4 rounded bg-white px-6 py-12 text-center">
-                  <p className="text-lg text-gray-500">
+                <div className="mt-4 rounded bg-white px-4 py-10 text-center sm:px-6 sm:py-12">
+                  <p className="text-[15px] text-gray-500 sm:text-lg">
                     No return flights found for this departure.
                   </p>
                 </div>
@@ -829,7 +828,7 @@ function ShowFareResultsSection({
           <SheetTitle className="sr-only">Filters</SheetTitle>
 
           <div className="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 py-3">
-            <span className="text-[17px] font-semibold text-gray-900">
+            <span className="text-[16px] font-semibold text-gray-900">
               Filters
             </span>
             <button
@@ -854,7 +853,7 @@ function ShowFareResultsSection({
             <button
               type="button"
               onClick={() => setMobileFiltersOpen(false)}
-              className="h-12 w-full rounded-lg bg-primary text-[16px] font-semibold text-white transition-colors hover:bg-primary/90"
+              className="h-11 w-full rounded-lg bg-primary text-[15px] font-semibold text-white transition-colors hover:bg-primary/90 sm:h-12 sm:text-[16px]"
             >
               Show results
             </button>

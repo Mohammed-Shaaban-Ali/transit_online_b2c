@@ -149,9 +149,7 @@ function QuickFilter({
 
       {/* Mobile: white pill, no stroke — contrast + soft shadow only */}
       <div
-        className="mt-2 flex sm:hidden items-center justify-between gap-3 
-      rounded-lg bg-white px-4 py-3.5 mb-3
-      "
+        className="mb-3 mt-2 flex items-center justify-between gap-2 rounded-lg bg-white px-3 py-3 sm:hidden"
       >
         <Select
           value={selected}
@@ -166,11 +164,11 @@ function QuickFilter({
           >
             <div className="flex min-w-0 items-center gap-1">
               <ChevronsUpDown
-                className="h-4 w-4 shrink-0 text-black"
+                className="h-3.5 w-3.5 shrink-0 text-black"
                 strokeWidth={2}
                 aria-hidden
               />
-              <SelectValue className="truncate text-left text-[16px] font-semibold text-black">
+              <SelectValue className="truncate text-left text-[15px] font-semibold text-black">
                 {selectedFilter?.label}
               </SelectValue>
             </div>
@@ -194,9 +192,9 @@ function QuickFilter({
           <button
             type="button"
             onClick={onOpenFilters}
-            className="flex shrink-0 items-center gap-2 border-0 bg-transparent p-0 text-[15px] font-medium text-gray-900 outline-none transition-colors hover:text-gray-700"
+            className="flex shrink-0 items-center gap-1.5 border-0 bg-transparent p-0 text-[14px] font-medium text-gray-900 outline-none transition-colors hover:text-gray-700"
           >
-            <SlidersHorizontal className="h-4 w-4 shrink-0" aria-hidden />
+            <SlidersHorizontal className="h-3.5 w-3.5 shrink-0" aria-hidden />
             Filters
           </button>
         )}
