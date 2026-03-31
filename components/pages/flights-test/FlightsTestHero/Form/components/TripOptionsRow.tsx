@@ -30,10 +30,10 @@ function TripOptionsRow({
               key={t.value}
               type="button"
               onClick={() => onTripTypeChange(t.value)}
-              className={`flex-1 py-2.5 text-[13px] font-medium transition-colors ${
+              className={`flex-1 py-2.5 text-[14px] font-medium transition-colors ${
                 tripType === t.value
                   ? "border-b-2 border-primary text-primary"
-                  : "text-gray-500"
+                  : "text-black"
               }`}
             >
               {t.label}
