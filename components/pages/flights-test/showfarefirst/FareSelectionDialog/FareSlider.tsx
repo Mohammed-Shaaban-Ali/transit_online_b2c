@@ -12,9 +12,10 @@ import { FareCard } from "./FareCard";
 /** Space between slides — must match Swiper `spaceBetween` */
 const GAP_PX = 12;
 const MAX_SLIDE = 300;
-const MIN_SLIDE = 200;
-/** Aim for ~2 full cards visible so the strip fits the dialog width */
-const TARGET_VISIBLE = 2.15;
+/** On mobile show 1 full card + peek; on wider screens show ~2 */
+const MOBILE_BREAKPOINT = 480;
+const MOBILE_TARGET_VISIBLE = 1.1;
+const DESKTOP_TARGET_VISIBLE = 2.15;
 
 type Props = {
   fares: FareOption[];
@@ -27,10 +28,14 @@ type Props = {
 
 function computeSlideWidth(containerWidth: number) {
   if (containerWidth <= 0) return MAX_SLIDE;
-  const gapCount = Math.max(0, Math.ceil(TARGET_VISIBLE) - 1);
+  const targetVisible =
+    containerWidth < MOBILE_BREAKPOINT
+      ? MOBILE_TARGET_VISIBLE
+      : DESKTOP_TARGET_VISIBLE;
+  const gapCount = Math.max(0, Math.ceil(targetVisible) - 1);
   const totalGaps = gapCount * GAP_PX;
-  const raw = (containerWidth - totalGaps) / TARGET_VISIBLE;
-  return Math.min(MAX_SLIDE, Math.max(MIN_SLIDE, Math.floor(raw)));
+  const raw = (containerWidth - totalGaps) / targetVisible;
+  return Math.min(MAX_SLIDE, Math.floor(raw));
 }
 
 /** Horizontal Swiper: width follows dialog (no 100vw), overflow clipped, drag + arrows */

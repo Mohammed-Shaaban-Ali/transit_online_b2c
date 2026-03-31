@@ -23,6 +23,9 @@ import { FlightDirection } from "@/types/flightTypes";
 import ShowFareFilters from "./ShowFareFilters";
 import QuickFilter from "./QuickFilter";
 import FlightCard from "../FlightCard";
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 import FlightSectionHeader from "./FlightSectionHeader";
 import FareSelectionDialog from "../FareSelectionDialog";
 import headerImage from "@/public/images/flights/headerImage.jpg";
@@ -142,6 +145,7 @@ function ShowFareResultsSection({
   const [selectedDepartureData, setSelectedDepartureData] =
     useState<FlightDirection | null>(null);
 
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [fareDialogOpen, setFareDialogOpen] = useState(false);
   const [fareDepartureFlight, setFareDepartureFlight] =
     useState<FlightDirection | null>(null);
@@ -480,6 +484,55 @@ function ShowFareResultsSection({
     );
   }, [departureFlights]);
 
+  const getReturnComboPrice = useCallback(
+    (f: FlightDirection) => {
+      return (
+        (f?.fares?.[0]?.fare_info?.fare_detail?.price_info?.total_fare || 0) +
+        Number(
+          selectedDepartureData?.fares?.[0]?.fare_info?.fare_detail?.price_info
+            ?.total_fare || 0,
+        ) -
+        Number(selectedDepartureData?.minimum_package_price || 0)
+      );
+    },
+    [selectedDepartureData],
+  );
+
+  const returnNonstopFlights = useMemo(
+    () => matchingReturns.filter((f: any) => (f.legs?.length ?? 0) <= 1),
+    [matchingReturns],
+  );
+
+  const returnOverallCheapest = useMemo(() => {
+    if (!matchingReturns.length) return 0;
+    return Math.min(
+      ...matchingReturns.map((f: FlightDirection) => getReturnComboPrice(f)),
+    );
+  }, [matchingReturns, getReturnComboPrice]);
+
+  const returnNonstopCheapest = useMemo(() => {
+    if (!returnNonstopFlights.length) return 0;
+    return Math.min(
+      ...returnNonstopFlights.map((f: FlightDirection) =>
+        getReturnComboPrice(f),
+      ),
+    );
+  }, [returnNonstopFlights, getReturnComboPrice]);
+
+  const returnRecommendedCheapest = useMemo(() => {
+    if (!matchingReturns.length) return 0;
+    const getDuration = (f: FlightDirection) =>
+      (f.legs?.[0]?.time_info?.flight_time_hour || 0) * 60 +
+      (f.legs?.[0]?.time_info?.flight_time_minute || 0);
+    const minDuration = Math.min(...matchingReturns.map(getDuration));
+    const shortest = matchingReturns.filter(
+      (f: FlightDirection) => getDuration(f) === minDuration,
+    );
+    return Math.min(
+      ...shortest.map((f: FlightDirection) => getReturnComboPrice(f)),
+    );
+  }, [matchingReturns, getReturnComboPrice]);
+
   // Selected departure summary for header
   const selectedDepartureSummary = useMemo(() => {
     if (!selectedDepartureData) return null;
@@ -555,7 +608,7 @@ function ShowFareResultsSection({
             </div>
           ))}
         </div>
-        <div>
+        <div className="min-w-0">
           <div className="h-[60px] animate-pulse rounded-t-md bg-gray-300" />
           <div className="grid grid-cols-3 gap-2 bg-white px-4 py-3 animate-pulse">
             {[1, 2, 3].map((i) => (
@@ -601,144 +654,214 @@ function ShowFareResultsSection({
   }
 
   return (
-    <section className="mt-5 pb-5 grid grid-cols-1 gap-4 lg:grid-cols-[300px_1fr]">
-      <ShowFareFilters
-        filteringOptions={currentFilteringOptions}
-        apiPriceRange={currentApiPriceRange}
-        flightType={currentFilterType}
-      />
+    <>
+      <section className="mt-5 pb-5 grid grid-cols-1 gap-4 lg:grid-cols-[300px_1fr]">
+        <div className="hidden min-w-0 rounded-md  lg:block">
+          <ShowFareFilters
+            filteringOptions={currentFilteringOptions}
+            apiPriceRange={currentApiPriceRange}
+            flightType={currentFilterType}
+          />
+        </div>
 
-      <div className="overflow-hidden rounded-md">
-        {/* Departure header - always visible */}
-        {!showingReturns && (
-          <FlightSectionHeader
-            phase="departure"
-            stepNumber={1}
-            title={`Departures from ${fromAirport}`}
-            flightsCount={filteredDepartureFlights.length}
-            backgroundImage={headerImage}
+        <div
+          className="min-w-0 overflow-hidden rounded-md max-lg:px-3 max-lg:pt-2
+         lg:max-w-none lg:bg-transparent lg:px-0 lg:pt-0"
+        >
+          {/* Departure header - always visible */}
+          {!showingReturns && (
+            <FlightSectionHeader
+              phase="departure"
+              stepNumber={1}
+              title={`Departures from ${fromAirport}`}
+              flightsCount={filteredDepartureFlights.length}
+              backgroundImage={headerImage}
+              isRoundTrip={isRoundTrip}
+            />
+          )}
+
+          {!showingReturns && (
+            <>
+              <QuickFilter
+                key="departure-quick-filter"
+                flightType="departure"
+                nonstopCheapest={nonstopCheapest}
+                recommendedCheapest={recommendedCheapest}
+                overallCheapest={overallCheapest}
+                onOpenFilters={() => setMobileFiltersOpen(true)}
+              />
+
+              {isPartialLoading && (
+                <div className="mb-2 mt-1.5 flex items-center gap-2 rounded bg-blue-50 px-4 py-2">
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                  <p className="text-sm text-primary">
+                    Loading more results...
+                  </p>
+                </div>
+              )}
+
+              {filteredDepartureFlights.length === 0 && isBothDone && (
+                <div className="mt-4 rounded bg-white px-6 py-12 text-center">
+                  <p className="text-lg text-gray-500">
+                    No flights found for your search.
+                  </p>
+                </div>
+              )}
+
+              {visibleDepartureFlights.length > 0 && (
+                <div className="space-y-1.5 mt-1.5">
+                  {visibleDepartureFlights.map((flight: FlightDirection) => {
+                    const fareKey =
+                      flight.fares?.[0]?.fare_key ||
+                      flight.package_info?.package_key ||
+                      "";
+                    return (
+                      <FlightCard
+                        key={fareKey}
+                        flightData={flight}
+                        onSelectDeparture={
+                          isRoundTrip ? handleSelectDeparture : undefined
+                        }
+                        onOpenFare={
+                          !isRoundTrip
+                            ? (f) => handleOpenFare(f, null)
+                            : undefined
+                        }
+                      />
+                    );
+                  })}
+                </div>
+              )}
+
+              {depVisibleCount < filteredDepartureFlights.length && (
+                <div ref={depSentinelRef} className="h-10" />
+              )}
+            </>
+          )}
+
+          {/* Return flights section */}
+          {showingReturns && (
+            <>
+              <FlightSectionHeader
+                phase="return"
+                stepNumber={2}
+                title={`Returns from ${toAirport}`}
+                flightsCount={filteredReturnFlights.length}
+                backgroundImage={headerImage}
+                isRoundTrip={isRoundTrip}
+                selectedDeparture={selectedDepartureSummary}
+                onChangeFlight={handleChangeDeparture}
+              />
+
+              <QuickFilter
+                key="return-quick-filter"
+                flightType="return"
+                nonstopCheapest={returnNonstopCheapest}
+                recommendedCheapest={returnRecommendedCheapest}
+                overallCheapest={returnOverallCheapest}
+                onOpenFilters={() => setMobileFiltersOpen(true)}
+              />
+
+              {filteredReturnFlights.length === 0 && (
+                <div className="mt-4 rounded bg-white px-6 py-12 text-center">
+                  <p className="text-lg text-gray-500">
+                    No return flights found for this departure.
+                  </p>
+                </div>
+              )}
+
+              {visibleReturnFlights.length > 0 && (
+                <div className="space-y-1.5 mt-1.5">
+                  {visibleReturnFlights.map((flight: FlightDirection) => {
+                    const fareKey =
+                      flight.fares?.[0]?.fare_key ||
+                      flight.package_info?.package_key ||
+                      "";
+                    return (
+                      <FlightCard
+                        key={fareKey}
+                        flightData={flight}
+                        isReturn
+                        selectedDepartureData={selectedDepartureData}
+                        onOpenFare={
+                          selectedDepartureData
+                            ? (f) => handleOpenFare(selectedDepartureData, f)
+                            : undefined
+                        }
+                      />
+                    );
+                  })}
+                </div>
+              )}
+
+              {returnVisibleCount < filteredReturnFlights.length && (
+                <div ref={returnSentinelRef} className="h-10" />
+              )}
+            </>
+          )}
+        </div>
+
+        {fareDepartureFlight && (
+          <FareSelectionDialog
+            open={fareDialogOpen}
+            onClose={handleCloseFareDialog}
+            departureFlight={fareDepartureFlight}
+            returnFlight={fareReturnFlight}
+            adults={adults}
+            children={children}
+            infants={infants}
+            cabinClass={cabinClass}
           />
         )}
+      </section>
 
-        {!showingReturns && (
-          <>
-            <QuickFilter
-              nonstopCheapest={nonstopCheapest}
-              recommendedCheapest={recommendedCheapest}
-              overallCheapest={overallCheapest}
+      <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
+        <SheetContent
+          side="bottom"
+          className={cn(
+            "flex max-h-[min(92vh,calc(100%-1rem))] flex-col overflow-hidden rounded-t-2xl border-0 p-0",
+            "inset-x-3 bottom-3 w-auto sm:inset-x-4 sm:bottom-4",
+            "bg-linear-to-b from-white to-[#f5f6f8]",
+            "shadow-[0_-10px_40px_rgba(17,24,39,0.15)]",
+            "[&>button.absolute]:hidden",
+          )}
+        >
+          <SheetTitle className="sr-only">Filters</SheetTitle>
+
+          <div className="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 py-3">
+            <span className="text-[17px] font-semibold text-gray-900">
+              Filters
+            </span>
+            <button
+              type="button"
+              onClick={() => setMobileFiltersOpen(false)}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100"
+              aria-label="Close filters"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-2">
+            <ShowFareFilters
+              filteringOptions={currentFilteringOptions}
+              apiPriceRange={currentApiPriceRange}
+              flightType={currentFilterType}
             />
+          </div>
 
-            {isPartialLoading && (
-              <div className="mb-2 mt-1.5 flex items-center gap-2 rounded bg-blue-50 px-4 py-2">
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-                <p className="text-sm text-primary">Loading more results...</p>
-              </div>
-            )}
-
-            {filteredDepartureFlights.length === 0 && isBothDone && (
-              <div className="mt-4 rounded bg-white px-6 py-12 text-center">
-                <p className="text-lg text-gray-500">
-                  No flights found for your search.
-                </p>
-              </div>
-            )}
-
-            {visibleDepartureFlights.length > 0 && (
-              <div className="space-y-1.5 mt-1.5">
-                {visibleDepartureFlights.map((flight: FlightDirection) => {
-                  const fareKey =
-                    flight.fares?.[0]?.fare_key ||
-                    flight.package_info?.package_key ||
-                    "";
-                  return (
-                    <FlightCard
-                      key={fareKey}
-                      flightData={flight}
-                      onSelectDeparture={
-                        isRoundTrip ? handleSelectDeparture : undefined
-                      }
-                      onOpenFare={
-                        !isRoundTrip
-                          ? (f) => handleOpenFare(f, null)
-                          : undefined
-                      }
-                    />
-                  );
-                })}
-              </div>
-            )}
-
-            {depVisibleCount < filteredDepartureFlights.length && (
-              <div ref={depSentinelRef} className="h-10" />
-            )}
-          </>
-        )}
-
-        {/* Return flights section */}
-        {showingReturns && (
-          <>
-            <FlightSectionHeader
-              phase="return"
-              stepNumber={2}
-              title={`Returns from ${toAirport}`}
-              flightsCount={filteredReturnFlights.length}
-              backgroundImage={headerImage}
-              selectedDeparture={selectedDepartureSummary}
-              onChangeFlight={handleChangeDeparture}
-            />
-
-            {filteredReturnFlights.length === 0 && (
-              <div className="mt-4 rounded bg-white px-6 py-12 text-center">
-                <p className="text-lg text-gray-500">
-                  No return flights found for this departure.
-                </p>
-              </div>
-            )}
-
-            {visibleReturnFlights.length > 0 && (
-              <div className="space-y-1.5 mt-1.5">
-                {visibleReturnFlights.map((flight: FlightDirection) => {
-                  const fareKey =
-                    flight.fares?.[0]?.fare_key ||
-                    flight.package_info?.package_key ||
-                    "";
-                  return (
-                    <FlightCard
-                      key={fareKey}
-                      flightData={flight}
-                      isReturn
-                      selectedDepartureData={selectedDepartureData}
-                      onOpenFare={
-                        selectedDepartureData
-                          ? (f) => handleOpenFare(selectedDepartureData, f)
-                          : undefined
-                      }
-                    />
-                  );
-                })}
-              </div>
-            )}
-
-            {returnVisibleCount < filteredReturnFlights.length && (
-              <div ref={returnSentinelRef} className="h-10" />
-            )}
-          </>
-        )}
-      </div>
-
-      {fareDepartureFlight && (
-        <FareSelectionDialog
-          open={fareDialogOpen}
-          onClose={handleCloseFareDialog}
-          departureFlight={fareDepartureFlight}
-          returnFlight={fareReturnFlight}
-          adults={adults}
-          children={children}
-          infants={infants}
-          cabinClass={cabinClass}
-        />
-      )}
-    </section>
+          <div className="shrink-0 border-t border-gray-100 bg-white px-4 pb-safe pt-3">
+            <button
+              type="button"
+              onClick={() => setMobileFiltersOpen(false)}
+              className="h-12 w-full rounded-lg bg-primary text-[16px] font-semibold text-white transition-colors hover:bg-primary/90"
+            >
+              Show results
+            </button>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
 

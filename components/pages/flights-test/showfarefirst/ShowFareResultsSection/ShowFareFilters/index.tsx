@@ -13,16 +13,29 @@ type Props = {
   flightType?: "departure" | "return";
 };
 
-function ShowFareFilters({ filteringOptions, apiPriceRange, flightType = "departure" }: Props) {
+function ShowFareFilters({
+  filteringOptions,
+  apiPriceRange,
+  flightType = "departure",
+}: Props) {
   return (
     <aside className="p-1">
-      <StopsSection stops={filteringOptions?.stops || []} flightType={flightType} />
-      <AirlinesSection airlines={filteringOptions?.airline || []} flightType={flightType} />
+      <StopsSection
+        stops={filteringOptions?.stops || []}
+        flightType={flightType}
+      />
+      <AirlinesSection
+        airlines={filteringOptions?.airline || []}
+        flightType={flightType}
+      />
       <TimesSection flightType={flightType} />
       {flightType !== "return" && (
         <PriceSection apiPriceRange={apiPriceRange} flightType={flightType} />
       )}
-      <ProvidersSection providers={filteringOptions?.provider || []} flightType={flightType} />
+      <ProvidersSection
+        providers={filteringOptions?.provider || []}
+        flightType={flightType}
+      />
     </aside>
   );
 }

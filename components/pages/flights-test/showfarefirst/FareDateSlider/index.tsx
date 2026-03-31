@@ -17,7 +17,12 @@ type Props = {
   searchParams: Record<string, string>;
 };
 
-function FareDateSlider({ departureDate, returnDate, tripType, searchParams }: Props) {
+function FareDateSlider({
+  departureDate,
+  returnDate,
+  tripType,
+  searchParams,
+}: Props) {
   const router = useRouter();
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
@@ -50,9 +55,10 @@ function FareDateSlider({ departureDate, returnDate, tripType, searchParams }: P
         id: offset + daysRange,
         label,
         depDate: depStr,
-        retDate: isRoundTrip && tripDuration > 0
-          ? format(addDays(dep, tripDuration), "yyyy-MM-dd")
-          : undefined,
+        retDate:
+          isRoundTrip && tripDuration > 0
+            ? format(addDays(dep, tripDuration), "yyyy-MM-dd")
+            : undefined,
         isSelected: offset === 0,
       });
     }
@@ -83,7 +89,7 @@ function FareDateSlider({ departureDate, returnDate, tripType, searchParams }: P
   };
 
   return (
-    <div className="flex items-center bg-white rounded-lg">
+    <div className="hidden md:flex items-center bg-white rounded-lg">
       <button
         type="button"
         className="mx-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-sm cursor-pointer text-gray-700 transition-colors hover:text-primary disabled:opacity-40"

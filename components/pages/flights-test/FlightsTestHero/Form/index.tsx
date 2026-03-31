@@ -65,7 +65,11 @@ function Form() {
             : ""
         }
       >
-        <div className={isSticky ? "md:container md:max-w-[1200px]! md:mx-auto" : ""}>
+        <div
+          className={
+            isSticky ? "md:container md:max-w-[1200px]! md:mx-auto" : ""
+          }
+        >
           <StaticFlightSearchBox
             className={isSticky ? "md:mt-0 md:rounded-none md:p-5" : ""}
             compactActions={isSticky}

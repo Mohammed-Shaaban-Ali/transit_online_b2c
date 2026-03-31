@@ -502,22 +502,22 @@ export default function FareSelectionDialog({
   return (
     <Dialog open={open} onOpenChange={(v) => !v && handleClose()}>
       <DialogContent className="sm:max-w-none w-[95vw] lg:w-[1024px] p-0 gap-0 overflow-y-auto overflow-x-hidden max-h-[90vh] min-w-0">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
-          <div className="flex items-center gap-3 min-w-0">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             {isReturnStep && (
               <button
                 type="button"
                 onClick={handleBack}
                 className="rounded-full p-1 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
               >
-                <ChevronLeft size={20} className="text-gray-600" />
+                <ChevronLeft size={18} className="text-gray-600 sm:size-5" />
               </button>
             )}
-            <h2 className="text-[20px] font-bold text-gray-900 truncate">
+            <h2 className="text-[16px] sm:text-[20px] font-bold text-gray-900 truncate">
               {headerTitle.from}{" "}
               <ArrowLeftRight
-                size={18}
-                className="inline text-gray-600 mx-1 shrink-0"
+                size={15}
+                className="inline text-gray-600 mx-1 shrink-0 sm:size-[18px]"
               />{" "}
               {headerTitle.to}
             </h2>
@@ -565,7 +565,7 @@ export default function FareSelectionDialog({
           )}
         </div> */}
 
-        <div className="px-6 pt-3 pb-6 min-h-[200px] min-w-0 overflow-x-hidden">
+        <div className="px-3 sm:px-6 pt-3 pb-6 min-h-[200px] min-w-0 overflow-x-hidden">
           {isFetching && (
             <div className="flex flex-col items-center justify-center py-16 gap-3">
               <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
@@ -602,21 +602,21 @@ export default function FareSelectionDialog({
           (isDefaultFareOnly
             ? !!selectedDepartureOffer
             : offers.length > 0 && hasPackageSelection) && (
-            <div className="flex flex-col gap-3 px-6 py-4 border-t border-gray-100 bg-white sticky bottom-0 z-10">
+            <div className="flex flex-col gap-3 px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100 bg-white sticky bottom-0 z-10">
               {isDefaultFareOnly && selectedDepartureOffer ? (
-                <div className="flex items-center justify-end gap-4 flex-wrap">
-                  <div className="flex items-end gap-1.5 me-auto">
-                    <p className="text-[14px] text-gray-500 mb-1">
+                <div className="flex items-center justify-end gap-3 flex-wrap">
+                  <div className="flex items-end gap-1 sm:gap-1.5 me-auto">
+                    <p className="text-[12px] sm:text-[14px] text-gray-500 mb-1">
                       {t("totalPrice")}
                     </p>
-                    <div className="text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
+                    <div className="text-[20px] sm:text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
                       <CurrencySymbol size="lg" />
                       <span className="tabular-nums">
                         {formatePrice(getDisplayPrice().amount || 0)}
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     {!showReturnOffers && returnFareKey && (
                       <button
                         type="button"
@@ -624,7 +624,7 @@ export default function FareSelectionDialog({
                           setShowReturnOffers(true);
                           setSelectedOfferKey(undefined);
                         }}
-                        className="h-14 rounded bg-primary px-8 text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
+                        className="h-11 sm:h-14 rounded bg-primary px-5 sm:px-8 text-[15px] sm:text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
                       >
                         {t("continue")}
                       </button>
@@ -634,7 +634,7 @@ export default function FareSelectionDialog({
                         type="button"
                         onClick={handleContinueToBooking}
                         disabled={continueToBookingDisabledDefault}
-                        className="h-14 rounded bg-primary px-8 text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+                        className="h-11 sm:h-14 rounded bg-primary px-5 sm:px-8 text-[15px] sm:text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
                       >
                         {t("continueToBooking")}
                       </button>
@@ -642,12 +642,12 @@ export default function FareSelectionDialog({
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center justify-end gap-4 flex-wrap">
-                  <div className="flex items-end gap-1.5 me-auto">
-                    <p className="text-[14px] text-gray-500 mb-1">
+                <div className="flex items-center justify-end gap-3 flex-wrap">
+                  <div className="flex items-end gap-1 sm:gap-1.5 me-auto">
+                    <p className="text-[12px] sm:text-[14px] text-gray-500 mb-1">
                       {footerPriceLabel}
                     </p>
-                    <div className="text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
+                    <div className="text-[20px] sm:text-[24px] font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
                       <CurrencySymbol size="lg" />
                       <span className="tabular-nums">
                         {formatePrice(footerPriceAmount)}
@@ -658,7 +658,7 @@ export default function FareSelectionDialog({
                     type="button"
                     onClick={handleNextOffers}
                     disabled={!canContinueOffers}
-                    className="h-14 rounded bg-primary px-8 text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+                    className="h-11 sm:h-14 rounded bg-primary px-5 sm:px-8 text-[15px] sm:text-[18px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
                   >
                     {isRoundTrip && offers.length > 0 && uiStep === "departure"
                       ? "Next"

@@ -36,9 +36,11 @@ export function FareCard({
     >
       <div className="flex items-start justify-between mb-3">
         <div className="min-w-0">
-          <p className="text-[16px] font-bold truncate">{fare.cabinClass}</p>
+          <p className="text-[14px] sm:text-[16px] font-bold truncate">{fare.cabinClass}</p>
           {fare.fareType?.trim() ? (
-            <p className="text-[14px] text-gray-500 truncate">{fare.fareType}</p>
+            <p className="text-[12px] sm:text-[14px] text-gray-500 truncate">
+              {fare.fareType}
+            </p>
           ) : null}
         </div>
         <div
@@ -54,12 +56,12 @@ export function FareCard({
 
       <div className="space-y-4 flex-1 min-h-0 min-w-0">
         <div>
-          <p className="text-[14px] font-semibold text-gray-700 mb-1.5">
+          <p className="text-[12px] sm:text-[14px] font-semibold text-gray-700 mb-1.5">
             Baggage
           </p>
           <ul className="space-y-1.5">
             <li
-              className={`flex items-start gap-1.5 text-[14px] ${fare.baggage.carryOn ? "text-gray-700" : "text-gray-400"}`}
+              className={`flex items-start gap-1.5 text-[12px] sm:text-[14px] ${fare.baggage.carryOn ? "text-gray-700" : "text-gray-400"}`}
             >
               {fare.baggage.carryOn ? (
                 <Check size={13} className="text-green-500 shrink-0 mt-0.5" />
@@ -74,7 +76,7 @@ export function FareCard({
               </span>
             </li>
             <li
-              className={`flex items-start gap-1.5 text-[14px] ${fare.baggage.checked ? "text-gray-700" : "text-gray-400"}`}
+              className={`flex items-start gap-1.5 text-[12px] sm:text-[14px] ${fare.baggage.checked ? "text-gray-700" : "text-gray-400"}`}
             >
               {fare.baggage.checked ? (
                 <Check size={13} className="text-green-500 shrink-0 mt-0.5" />
@@ -93,7 +95,7 @@ export function FareCard({
       </div>
 
       <div className="mt-4 pt-3 border-t border-gray-100 shrink-0">
-        <div className="flex items-center gap-1 text-[28px] font-bold text-primary rtl:flex-row-reverse">
+        <div className="flex items-center gap-1 text-[22px] sm:text-[28px] font-bold text-primary rtl:flex-row-reverse">
           <CurrencySymbol size="lg" />
           <span className="tabular-nums">
             {formatePrice(fare.price ?? 0)}
@@ -101,7 +103,7 @@ export function FareCard({
           </span>
         </div>
         {tripLabel ? (
-          <p className="text-[11px] text-gray-500 mt-0.5">{tripLabel}</p>
+          <p className="text-[10px] sm:text-[11px] text-gray-500 mt-0.5">{tripLabel}</p>
         ) : null}
       </div>
 
