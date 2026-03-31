@@ -76,7 +76,7 @@ export default function FlightSectionHeader({
                 </span>
                 <span className="inline-flex shrink-0 items-center gap-0.5 text-[12px] text-gray-600 whitespace-nowrap">
                   <Clock className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                  {selectedDeparture.duration} · {selectedDeparture.stops}
+                  {selectedDeparture.duration}
                 </span>
               </div>
               {onChangeFlight && (
