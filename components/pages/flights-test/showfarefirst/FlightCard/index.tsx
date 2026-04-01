@@ -150,7 +150,7 @@ function FlightCard({
                 </div>
                 <ChevronRight
                   size={11}
-                  className="-ml-1 shrink-0 text-gray-400"
+                  className="-ml-1 shrink-0 text-gray-400 rtl:rotate-180"
                   strokeWidth={2.5}
                 />
               </div>
@@ -222,7 +222,7 @@ function FlightCard({
             }}
             className="mt-1.5 flex h-7 items-center gap-0.5 rounded-md bg-primary px-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
           >
-            {t("select")} <ChevronRight size={12} />
+            {t("select")} <ChevronRight size={12} className="rtl:rotate-180" />
           </button>
         </div>
       </div>
