@@ -7,15 +7,11 @@ import { FlightSearchFormValues } from "../types";
 import { MdChildCare, MdOutlineChildFriendly, MdPerson } from "react-icons/md";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const MAX_ADULTS = 9;
 const MAX_CHILDREN = 9;
 const MAX_INFANTS = 9;
-
-const CABIN_OPTIONS = [
-  { value: "ECONOMY", label: "Economy" },
-  { value: "BUSINESS", label: "Business" },
-] as const;
 
 type SheetType = "passengers" | "cabin" | null;
 
@@ -26,14 +22,20 @@ type Props = {
 };
 
 function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
+  const t = useTranslations("FlightsTestForm.Passengers");
   const { watch, setValue } = form;
   const adults = watch("adults") || 1;
   const children = watch("children") || 0;
   const infants = watch("infants") || 0;
   const cabinClass = watch("cabinClass") || "ECONOMY";
 
+  const CABIN_OPTIONS = [
+    { value: "ECONOMY" as const, label: t("economy") },
+    { value: "BUSINESS" as const, label: t("business") },
+  ];
+
   const cabinDisplayText =
-    CABIN_OPTIONS.find((o) => o.value === cabinClass)?.label ?? "Economy";
+    CABIN_OPTIONS.find((o) => o.value === cabinClass)?.label ?? t("economy");
 
   const handleAdultsChange = (value: number) => {
     const newAdults = Math.max(1, Math.min(MAX_ADULTS, value));
@@ -101,10 +103,10 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
         >
           <SheetTitle className="sr-only">
             {openSheet === "passengers"
-              ? "Passengers"
+              ? t("passengersTitle")
               : openSheet === "cabin"
-                ? "Cabin Class"
-                : "Flight search options"}
+                ? t("cabinClassTitle")
+                : t("flightSearchOptions")}
           </SheetTitle>
 
           <div className="flex justify-center pt-3 pb-1">
@@ -120,7 +122,7 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
               <X size={20} />
             </button>
             <h2 className="text-[16px] font-semibold text-black">
-              {openSheet === "passengers" ? "Passengers" : "Cabin Class"}
+              {openSheet === "passengers" ? t("passengersTitle") : t("cabinClassTitle")}
             </h2>
             <div className="w-8" />
           </div>
@@ -130,24 +132,24 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
               <>
                 <CounterRow
                   compact
-                  title="Adults"
-                  subtitle="12+ years old at time of travel"
+                  title={t("adults")}
+                  subtitle={t("adultsAgeMobile")}
                   value={adults}
                   onMinus={() => handleAdultsChange(adults - 1)}
                   onPlus={() => handleAdultsChange(adults + 1)}
                 />
                 <CounterRow
                   compact
-                  title="Children"
-                  subtitle="2–11 years old at time of travel"
+                  title={t("children")}
+                  subtitle={t("childrenAgeMobile")}
                   value={children}
                   onMinus={() => handleChildrenChange(children - 1)}
                   onPlus={() => handleChildrenChange(children + 1)}
                 />
                 <CounterRow
                   compact
-                  title="Infants (lap)"
-                  subtitle="Under 2 years old at time of travel"
+                  title={t("infantsLap")}
+                  subtitle={t("infantsAgeMobile")}
                   value={infants}
                   onMinus={() => handleInfantsChange(infants - 1)}
                   onPlus={() =>
@@ -159,7 +161,7 @@ function MobilePassengersSheet({ form, openSheet, onOpenSheet }: Props) {
                   onClick={() => onOpenSheet(null)}
                   className="mt-3 h-[48px] w-full rounded-lg bg-primary text-[15px] font-semibold text-white hover:bg-primary/80"
                 >
-                  Done
+                  {t("done")}
                 </button>
               </>
             )}

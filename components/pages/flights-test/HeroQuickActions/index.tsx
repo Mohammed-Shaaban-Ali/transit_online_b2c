@@ -1,39 +1,41 @@
 "use client";
 
 import {
-  IoAirplane,
   IoBarChart,
   IoCalendar,
   IoNotifications,
 } from "react-icons/io5";
 import { RiFlightTakeoffLine } from "react-icons/ri";
+import { useTranslations } from "next-intl";
 
 type Props = {};
 
-const heroActions = [
-  {
-    id: "bookings",
-    label: "My bookings",
-    icon: <IoCalendar className="size-7 text-[#173a73]" />,
-  },
-  {
-    id: "price-alerts",
-    label: "Price alerts",
-    icon: <IoNotifications className="size-7 text-[#173a73]" />,
-  },
-  {
-    id: "status",
-    label: "Flight status",
-    icon: <IoBarChart className="size-7 text-[#173a73]" />,
-  },
-  {
-    id: "private-jet",
-    label: "Private jet charters",
-    icon: <RiFlightTakeoffLine className="size-7 text-[#173a73]" />,
-  },
-];
-
 function HeroQuickActions({}: Props) {
+  const t = useTranslations("FlightsTestPage.HeroQuickActions");
+
+  const heroActions = [
+    {
+      id: "bookings",
+      label: t("myBookings"),
+      icon: <IoCalendar className="size-7 text-[#173a73]" />,
+    },
+    {
+      id: "price-alerts",
+      label: t("priceAlerts"),
+      icon: <IoNotifications className="size-7 text-[#173a73]" />,
+    },
+    {
+      id: "status",
+      label: t("flightStatus"),
+      icon: <IoBarChart className="size-7 text-[#173a73]" />,
+    },
+    {
+      id: "private-jet",
+      label: t("privateJet"),
+      icon: <RiFlightTakeoffLine className="size-7 text-[#173a73]" />,
+    },
+  ];
+
   return (
     <div
       className=" 

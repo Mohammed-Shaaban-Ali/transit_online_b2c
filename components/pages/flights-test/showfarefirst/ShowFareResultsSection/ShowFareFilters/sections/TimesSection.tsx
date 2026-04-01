@@ -6,6 +6,7 @@ import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import { RootState } from "@/redux/app/store";
 import { setTimeRange } from "@/redux/features/flights/flightFilterSlice";
+import { useTranslations } from "next-intl";
 import FilterSection from "../components/FilterSection";
 
 const MIN_HOUR = 0;
@@ -21,6 +22,7 @@ type RangeProps = {
 
 function TimeRangeSlider({ title, value, onChange }: RangeProps) {
   const [min, max] = value;
+
   return (
     <div className="mb-5">
       <p className="mb-3 text-[14px]">
@@ -30,18 +32,21 @@ function TimeRangeSlider({ title, value, onChange }: RangeProps) {
         </span>
       </p>
 
-      <RangeSlider
-        className="time-range-slider"
-        min={MIN_HOUR}
-        max={MAX_HOUR}
-        step={1}
-        value={value}
-        onInput={(nextValue) => onChange(nextValue as [number, number])}
-      />
+      {/* Force LTR so the slider always goes 00:00 → 24:00 left-to-right */}
+      <div dir="ltr">
+        <RangeSlider
+          className="time-range-slider"
+          min={MIN_HOUR}
+          max={MAX_HOUR}
+          step={1}
+          value={value}
+          onInput={(nextValue) => onChange(nextValue as [number, number])}
+        />
 
-      <div className="mt-1 flex items-center justify-between text-[13px] text-gray-600">
-        <span>{formatHour(min)}</span>
-        <span>{formatHour(max)}</span>
+        <div className="mt-1 flex items-center justify-between text-[13px] text-gray-600">
+          <span>{formatHour(min)}</span>
+          <span>{formatHour(max)}</span>
+        </div>
       </div>
     </div>
   );
@@ -49,6 +54,7 @@ function TimeRangeSlider({ title, value, onChange }: RangeProps) {
 
 function TimesSection({ flightType = "departure" }: { flightType?: "departure" | "return" }) {
   const dispatch = useDispatch();
+  const t = useTranslations("ShowFarePage.Filters");
   const timeRange = useSelector((state: RootState) =>
     flightType === "return"
       ? state.flightFilter.returnFilters.timeRange
@@ -98,14 +104,14 @@ function TimesSection({ flightType = "departure" }: { flightType?: "departure" |
   );
 
   return (
-    <FilterSection title="Times" className="mb-4">
+    <FilterSection title={t("times")} className="mb-4">
       <TimeRangeSlider
-        title="Departure time"
+        title={t("departureTime")}
         value={depRange}
         onChange={handleDepartureChange}
       />
       <TimeRangeSlider
-        title="Arrival time"
+        title={t("arrivalTime")}
         value={arrRange}
         onChange={handleArrivalChange}
       />

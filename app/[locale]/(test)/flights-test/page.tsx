@@ -10,12 +10,10 @@ import TrendingNow from "@/components/pages/flights-test/TrendingNow";
 import FloatingSideActions from "@/components/pages/flights-test/FloatingSideActions";
 
 type Props = {};
-const flightsTestFontFamily =
-  '"Trip Geom", BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif';
 
 function page({}: Props) {
   return (
-    <section className="relative" style={{ fontFamily: flightsTestFontFamily }}>
+    <section className="relative">
       <FloatingSideActions />
       <FlightsTestHero />
 

@@ -6,36 +6,27 @@ import androidImage from "@/public/images/flights/android.png";
 import flightCardImage from "@/public/images/flights/flight-card.png";
 import { FaRegClock, FaRoute } from "react-icons/fa6";
 import { GiCommercialAirplane } from "react-icons/gi";
+import { useTranslations } from "next-intl";
 type Props = {};
 
 function Banner({}: Props) {
+  const t = useTranslations("FlightsTestPage.Banner");
+
   const bannerFeatures = [
-    {
-      id: 1,
-      icon: FaRoute,
-      text: "Track over 110,000 global flights in real time",
-    },
-    {
-      id: 2,
-      icon: FaRegClock,
-      text: "Easily navigate airports with check-in counter, boarding gate, and baggage claim info",
-    },
-    {
-      id: 3,
-      icon: GiCommercialAirplane,
-      text: "Stay up-to-date with flight alerts and gate changes to keep your trip on track",
-    },
+    { id: 1, icon: FaRoute, text: t("feature1") },
+    { id: 2, icon: FaRegClock, text: t("feature2") },
+    { id: 3, icon: GiCommercialAirplane, text: t("feature3") },
   ];
 
   return (
     <section className="relative w-full my-6">
       <div className="relative min-h-[400px] overflow-hidden">
-        <Image src={bannerImage} alt="banner" fill className="object-cover" />
+        <Image src={bannerImage} alt={t("bannerAlt")} fill className="object-cover" />
 
         <div className="absolute left-[10%] top-[24px] z-10 hidden lg:block lg:w-[280px] xl:w-[330px]">
           <Image
             src={flightCardImage}
-            alt="Flight card"
+            alt={t("flightCardAlt")}
             className="h-auto w-full"
             priority
           />
@@ -48,7 +39,7 @@ function Banner({}: Props) {
           <div className="flex w-full max-w-[980px] items-start justify-between gap-6  lg:pl-[220px]">
             <div className="max-w-[780px] text-white">
               <h2 className="text-[28px] font-bold leading-tight ">
-                Get free flight status updates on the go
+                {t("title")}
               </h2>
 
               <ul className="mt-8 flex flex-col gap-6">
@@ -66,17 +57,17 @@ function Banner({}: Props) {
             <div className="hidden min-w-[150px] shrink-0 items-center lg:flex lg:flex-col lg:gap-6">
               <Image
                 src={qrcodeImage}
-                alt="QR code"
+                alt={t("qrCodeAlt")}
                 className="w-[120px] h-auto"
               />
               <Image
                 src={iosImage}
-                alt="Download on App Store"
+                alt={t("appStoreAlt")}
                 className="w-[120px] h-auto"
               />
               <Image
                 src={androidImage}
-                alt="Get it on Google Play"
+                alt={t("googlePlayAlt")}
                 className="w-[120px] h-auto"
               />
             </div>

@@ -1,27 +1,30 @@
 import Image from "next/image";
 import TrendingNowImage from "@/public/images/flights/TrendingNow.webp";
+import { useTranslations } from "next-intl";
 
 type Props = {};
 
 function TrendingNow({}: Props) {
+  const t = useTranslations("FlightsTestPage.TrendingNow");
+
   return (
     <section className="container max-w-[1200px]! mx-auto py-7">
       <h2 className="mb-6 text-[28px] font-bold leading-tight">
-        Get a glimpse of what's trending now
+        {t("title")}
       </h2>
 
       <div className="grid grid-cols-1 gap-6 overflow-hidden  md:grid-cols-[62%_38%]">
         <div className="relative min-h-[300px] md:min-h-[660px]  rounded-md overflow-hidden">
           <Image
             src={TrendingNowImage}
-            alt="Kids enjoying a flight"
+            alt={t("imageAlt")}
             fill
             className="object-cover"
           />
 
           <div className="absolute left-4 top-4 rounded-sm bg-[rgba(46,131,185,0.4)] px-3 py-2 md:left-5 md:top-32">
             <p className="text-[28px] font-bold leading-tight text-white ">
-              Wonderful things are happening
+              {t("wonderfulThings")}
             </p>
           </div>
         </div>
@@ -34,7 +37,7 @@ function TrendingNow({}: Props) {
             className="relative z-10 mb-4 min-w-[120px] rounded-sm bg-primary px-8 py-3 text-[20px] 
             font-bold text-white transition-colors duration-200 hover:bg-primary/80 md:mb-6 "
           >
-            Explore the world
+            {t("exploreWorld")}
           </button>
         </div>
       </div>

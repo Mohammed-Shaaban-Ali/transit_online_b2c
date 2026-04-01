@@ -1,5 +1,8 @@
+"use client";
+
 import Image, { StaticImageData } from "next/image";
 import { Clock } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Props = {
   phase: "departure" | "return";
@@ -33,12 +36,14 @@ export default function FlightSectionHeader({
   selectedDeparture,
   onChangeFlight,
 }: Props) {
+  const t = useTranslations("ShowFarePage.FlightSectionHeader");
+
   const mobileStepTitle =
-    phase === "departure" ? "Select departure flight" : "Select return flight";
+    phase === "departure" ? t("selectDeparture") : t("selectReturn");
 
   const priceSubtitle = isRoundTrip
-    ? "Average round-trip price per passenger, taxes and fees included"
-    : "Average price per passenger, taxes and fees included";
+    ? t("roundTripPrice")
+    : t("oneWayPrice");
 
   return (
     <div className="flex flex-col">
@@ -66,7 +71,7 @@ export default function FlightSectionHeader({
             <div className="flex items-center justify-between gap-2">
               <div className="flex min-w-0 flex-1 items-center gap-2 overflow-x-auto pb-0.5 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin]">
                 <span className="shrink-0 rounded bg-primary px-2 py-0.5 text-[11px] font-semibold text-white">
-                  Depart
+                  {t("depart")}
                 </span>
                 <span className="shrink-0 whitespace-nowrap text-[12px] font-medium text-gray-800 sm:text-[13px]">
                   {selectedDeparture.date} · {selectedDeparture.timeRange}
@@ -85,7 +90,7 @@ export default function FlightSectionHeader({
                   onClick={onChangeFlight}
                   className="shrink-0 text-[13px] font-semibold text-primary"
                 >
-                  Change
+                  {t("change")}
                 </button>
               )}
             </div>
@@ -113,7 +118,7 @@ export default function FlightSectionHeader({
               {title}
             </h3>
             <span className="ml-2 shrink-0 text-[14px] text-white/80">
-              {flightsCount} flights found
+              {t("flightsFound", { count: flightsCount })}
             </span>
           </div>
 
@@ -121,7 +126,7 @@ export default function FlightSectionHeader({
             <div className="mb-3 flex items-center justify-between rounded-sm bg-white p-2 text-black/70">
               <div className="flex flex-wrap items-center gap-3 text-[14px] lg:gap-4">
                 <span className="rounded bg-primary px-2.5 py-0.5 text-[13px] font-semibold text-white">
-                  Depart
+                  {t("depart")}
                 </span>
                 <span>{selectedDeparture.date}</span>
                 <span>{selectedDeparture.timeRange}</span>
@@ -139,7 +144,7 @@ export default function FlightSectionHeader({
                   onClick={onChangeFlight}
                   className="shrink-0 cursor-pointer text-[13px] font-semibold text-primary"
                 >
-                  Change Flight
+                  {t("changeFlight")}
                 </button>
               )}
             </div>

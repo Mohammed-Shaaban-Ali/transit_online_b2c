@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import "swiper/css";
 import type { FareOption } from "../data/flights";
 import { FareCard } from "./FareCard";
+import { useTranslations } from "next-intl";
 
 /** Space between slides — must match Swiper `spaceBetween` */
 const GAP_PX = 12;
@@ -45,6 +46,7 @@ export default function FareSlider({
   onSelect,
   tripLabel,
 }: Props) {
+  const t = useTranslations("ShowFarePage.FareDialog.sliderNav");
   const swiperRef = useRef<SwiperType | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [slideWidth, setSlideWidth] = useState(MAX_SLIDE);
@@ -98,7 +100,7 @@ export default function FareSlider({
             size="icon"
             className="size-8 shrink-0 rounded-full sm:size-9"
             disabled={isBeginning}
-            aria-label="Previous fares"
+            aria-label={t("previousFares")}
             onClick={(e) => {
               e.stopPropagation();
               swiperRef.current?.slidePrev();
@@ -112,7 +114,7 @@ export default function FareSlider({
             size="icon"
             className="size-8 shrink-0 rounded-full sm:size-9"
             disabled={isEnd}
-            aria-label="Next fares"
+            aria-label={t("nextFares")}
             onClick={(e) => {
               e.stopPropagation();
               swiperRef.current?.slideNext();

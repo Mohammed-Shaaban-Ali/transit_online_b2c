@@ -11,6 +11,7 @@ import { UseFormReturn } from "react-hook-form";
 import CounterRow from "./CounterRow";
 import { CabinClass, FlightSearchFormValues } from "../types";
 import { MdPerson } from "react-icons/md";
+import { useTranslations } from "next-intl";
 
 const MAX_ADULTS = 9;
 const MAX_CHILDREN = 9;
@@ -29,6 +30,7 @@ function PassengersPopover({
   onOpenChange,
   mobileStyle = false,
 }: Props) {
+  const t = useTranslations("FlightsTestForm.Passengers");
   const { watch, setValue } = form;
   const adults = watch("adults") || 1;
   const children = watch("children") || 0;
@@ -55,21 +57,21 @@ function PassengersPopover({
     setValue("cabinClass", value);
   };
 
-  const cabinDisplayText = cabinClass === "ECONOMY" ? "Economy" : "Business";
+  const cabinDisplayText = cabinClass === "ECONOMY" ? t("economy") : t("business");
 
   const detailedPassengersLabel = useMemo(() => {
     const parts: string[] = [];
-    if (adults > 0) parts.push(`${adults} adult${adults > 1 ? "s" : ""}`);
-    if (children > 0) parts.push(`${children} children`);
-    if (infants > 0) parts.push(`${infants} infant`);
+    if (adults > 0) parts.push(`${adults} ${t("adults")}`);
+    if (children > 0) parts.push(`${children} ${t("children")}`);
+    if (infants > 0) parts.push(`${infants} ${t("infantsLap")}`);
     return `${parts.join(" ")} · ${cabinDisplayText}`;
-  }, [adults, children, infants, cabinDisplayText]);
+  }, [adults, children, infants, cabinDisplayText, t]);
 
   const triggerPassengersLabel = useMemo(() => {
     const totalPassengers = adults + children + infants;
-    const passengerText = totalPassengers === 1 ? "Passenger" : "Passengers";
+    const passengerText = totalPassengers === 1 ? t("passenger") : t("passengers");
     return `${totalPassengers} ${passengerText} · ${cabinDisplayText}`;
-  }, [adults, children, infants, cabinDisplayText]);
+  }, [adults, children, infants, cabinDisplayText, t]);
 
   return (
     <Popover open={open} onOpenChange={onOpenChange}>
@@ -111,26 +113,26 @@ function PassengersPopover({
         </div>
 
         <p className="mb-5 text-[14px] text-gray-700">
-          Please select the exact number of passengers to view the best prices
+          {t("selectPassengersHint")}
         </p>
 
         <CounterRow
-          title="Adults"
-          subtitle="12+ years old"
+          title={t("adults")}
+          subtitle={t("adultsAge")}
           value={adults}
           onMinus={() => handleAdultsChange(adults - 1)}
           onPlus={() => handleAdultsChange(adults + 1)}
         />
         <CounterRow
-          title="Children"
-          subtitle="2-11 years old"
+          title={t("children")}
+          subtitle={t("childrenAge")}
           value={children}
           onMinus={() => handleChildrenChange(children - 1)}
           onPlus={() => handleChildrenChange(children + 1)}
         />
         <CounterRow
-          title="Infants on lap"
-          subtitle="Under 2 years old"
+          title={t("infantsLap")}
+          subtitle={t("infantsAge")}
           value={infants}
           onMinus={() => handleInfantsChange(infants - 1)}
           onPlus={() => handleInfantsChange(Math.min(adults, infants + 1))}
@@ -144,8 +146,8 @@ function PassengersPopover({
             }
             className="h-11 w-full rounded-sm border border-gray-300 px-2 text-[16px] outline-none transition-colors focus:border-primary appearance-none cursor-pointer"
           >
-            <option value="ECONOMY">Economy</option>
-            <option value="BUSINESS">Business</option>
+            <option value="ECONOMY">{t("economy")}</option>
+            <option value="BUSINESS">{t("business")}</option>
           </select>
         </div>
 
@@ -155,7 +157,7 @@ function PassengersPopover({
             onClick={() => onOpenChange(false)}
             className="h-11 min-w-[100px] cursor-pointer rounded-sm bg-primary text-[16px] text-white hover:bg-primary/80"
           >
-            Done
+            {t("done")}
           </button>
         </div>
       </PopoverContent>

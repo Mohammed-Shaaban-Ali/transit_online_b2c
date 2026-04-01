@@ -22,94 +22,69 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { MdCalendarMonth } from "react-icons/md";
+import { useTranslations } from "next-intl";
 
-const flightSearchSchema = z
-  .object({
-    fromAirport: z
-      .string()
-      .min(1, { message: "Please select departure airport." }),
-    toAirport: z
-      .string()
-      .min(1, { message: "Please select destination airport." }),
-    departureDate: z
-      .string()
-      .min(1, { message: "Please select departure date." }),
-    returnDate: z.string().optional(),
-    tripType: z.enum(["roundTrip", "oneWay"]),
-    nonstop: z.boolean(),
-    adults: z.number().min(1, { message: "At least one adult is required." }),
-    children: z.number().min(0),
-    infants: z.number().min(0),
-    cabinClass: z.enum(["ECONOMY", "BUSINESS"]),
-  })
-  .refine(
-    (data) => {
-      if (data.departureDate) {
-        const today = new Date(new Date().setHours(0, 0, 0, 0));
-        const departure = new Date(data.departureDate);
-        departure.setHours(0, 0, 0, 0);
-        return departure >= today;
-      }
-      return true;
-    },
-    {
-      message: "Departure date cannot be in the past.",
-      path: ["departureDate"],
-    },
-  )
-  .refine(
-    (data) => {
-      if (data.tripType === "roundTrip" && !data.returnDate) {
-        return false;
-      }
-      return true;
-    },
-    { message: "Please select return date.", path: ["returnDate"] },
-  )
-  .refine(
-    (data) => {
-      if (
-        data.tripType === "roundTrip" &&
-        data.returnDate &&
-        data.departureDate
-      ) {
-        const dep = new Date(data.departureDate);
-        dep.setHours(0, 0, 0, 0);
-        const ret = new Date(data.returnDate);
-        ret.setHours(0, 0, 0, 0);
-        return ret >= dep;
-      }
-      return true;
-    },
-    {
-      message: "Return date must be after departure date.",
-      path: ["returnDate"],
-    },
-  )
-  .refine(
-    (data) => {
-      if (data.fromAirport && data.toAirport) {
-        return data.fromAirport !== data.toAirport;
-      }
-      return true;
-    },
-    {
-      message: "Departure and destination must be different.",
-      path: ["toAirport"],
-    },
-  )
-  .refine(
-    (data) => {
-      if (data.fromAirport && data.toAirport) {
-        return data.fromAirport !== data.toAirport;
-      }
-      return true;
-    },
-    {
-      message: "Departure and destination must be different.",
-      path: ["fromAirport"],
-    },
-  );
+function buildFlightSearchSchema(v: ReturnType<typeof useTranslations<"FlightsTestForm.Validation">>) {
+  return z
+    .object({
+      fromAirport: z.string().min(1, { message: v("selectDepartureAirport") }),
+      toAirport: z.string().min(1, { message: v("selectDestinationAirport") }),
+      departureDate: z.string().min(1, { message: v("selectDepartureDate") }),
+      returnDate: z.string().optional(),
+      tripType: z.enum(["roundTrip", "oneWay"]),
+      nonstop: z.boolean(),
+      adults: z.number().min(1),
+      children: z.number().min(0),
+      infants: z.number().min(0),
+      cabinClass: z.enum(["ECONOMY", "BUSINESS"]),
+    })
+    .refine(
+      (data) => {
+        if (data.departureDate) {
+          const today = new Date(new Date().setHours(0, 0, 0, 0));
+          const departure = new Date(data.departureDate);
+          departure.setHours(0, 0, 0, 0);
+          return departure >= today;
+        }
+        return true;
+      },
+      { message: v("departureDatePast"), path: ["departureDate"] },
+    )
+    .refine(
+      (data) => {
+        if (data.tripType === "roundTrip" && !data.returnDate) return false;
+        return true;
+      },
+      { message: v("selectReturnDate"), path: ["returnDate"] },
+    )
+    .refine(
+      (data) => {
+        if (data.tripType === "roundTrip" && data.returnDate && data.departureDate) {
+          const dep = new Date(data.departureDate);
+          dep.setHours(0, 0, 0, 0);
+          const ret = new Date(data.returnDate);
+          ret.setHours(0, 0, 0, 0);
+          return ret >= dep;
+        }
+        return true;
+      },
+      { message: v("returnDateAfter"), path: ["returnDate"] },
+    )
+    .refine(
+      (data) => {
+        if (data.fromAirport && data.toAirport) return data.fromAirport !== data.toAirport;
+        return true;
+      },
+      { message: v("differentAirports"), path: ["toAirport"] },
+    )
+    .refine(
+      (data) => {
+        if (data.fromAirport && data.toAirport) return data.fromAirport !== data.toAirport;
+        return true;
+      },
+      { message: v("differentAirports"), path: ["fromAirport"] },
+    );
+}
 
 type Props = {
   className?: string;
@@ -138,6 +113,9 @@ function StaticFlightSearchBox({
   initialValues,
 }: Props) {
   const router = useRouter();
+  const t = useTranslations("FlightsTestForm");
+  const v = useTranslations("FlightsTestForm.Validation");
+  const flightSearchSchema = buildFlightSearchSchema(v);
 
   const [tripType, setTripType] = useState<TripType>(
     initialValues?.tripType || "roundTrip",
@@ -237,7 +215,7 @@ function StaticFlightSearchBox({
   const mappedTripType = tripType === "roundTrip" ? "roundTrip" : "oneWay";
 
   const getDateTriggerLabel = () => {
-    if (!departureDate) return "Select dates";
+    if (!departureDate) return t("selectDates");
     const dep = format(new Date(departureDate), "MMM d");
     if (mappedTripType === "oneWay" || !returnDate) return dep;
     const ret = format(new Date(returnDate), "MMM d");
@@ -300,7 +278,7 @@ function StaticFlightSearchBox({
         {/* From */}
         <div className="relative border-b border-gray-200">
           <CitySelectorPopover
-            label="Leaving from"
+            label={t("leavingFrom")}
             fieldName="fromAirport"
             form={form}
             displayValue={fromDisplayValue}
@@ -334,7 +312,7 @@ function StaticFlightSearchBox({
         {/* To */}
         <div className="relative border-b border-gray-200">
           <CitySelectorPopover
-            label="Going to"
+            label={t("goingTo")}
             fieldName="toAirport"
             form={form}
             displayValue={toDisplayValue}
@@ -403,7 +381,7 @@ function StaticFlightSearchBox({
           onClick={handleSearch}
           className="mt-3 h-[48px] w-full rounded-lg bg-primary text-[16px] font-semibold text-white transition-colors hover:bg-primary/80"
         >
-          Search
+          {t("search")}
         </button>
       </div>
 
@@ -420,7 +398,7 @@ function StaticFlightSearchBox({
           className={cn("relative", compactActions ? "flex-1" : "col-span-3")}
         >
           <CitySelectorPopover
-            label="Leaving from"
+            label={t("leavingFrom")}
             fieldName="fromAirport"
             form={form}
             displayValue={fromDisplayValue}
@@ -444,7 +422,7 @@ function StaticFlightSearchBox({
             />
           </button>
           <CitySelectorPopover
-            label="Going to"
+            label={t("goingTo")}
             fieldName="toAirport"
             form={form}
             displayValue={toDisplayValue}

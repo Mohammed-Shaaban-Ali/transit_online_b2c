@@ -1,5 +1,8 @@
+"use client";
+
 import { ChevronRight, Users } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import FlightAmenities from "./FlightAmenities";
 import FlightTimeline from "./FlightTimeline";
 import { FlightDirection } from "@/types/flightTypes";
@@ -23,11 +26,12 @@ function FlightCard({
   isReturn,
   selectedDepartureData,
 }: Props) {
+  const t = useTranslations("ShowFarePage.FlightCard");
   const firstLeg = flightData.legs?.[0];
   const lastLeg = flightData.legs?.[flightData.legs.length - 1];
   if (!firstLeg) return null;
 
-  const airlineName = firstLeg.airline_info?.carrier_name || "Airline";
+  const airlineName = firstLeg.airline_info?.carrier_name || t("airline");
   const flightNumber = `${firstLeg.airline_info?.carrier_code || ""}${firstLeg.flight_number || ""}`;
 
   const depTime = firstLeg.departure_info?.date
@@ -60,10 +64,10 @@ function FlightCard({
   const stopsCount = (flightData.legs?.length || 1) - 1;
   const stopsText =
     stopsCount === 0
-      ? "Nonstop"
+      ? t("nonstop")
       : stopsCount === 1
-        ? "1 Stop"
-        : `${stopsCount} Stops`;
+        ? t("stop")
+        : t("stops", { count: stopsCount });
 
   const priceSAR = isReturn
     ? (flightData?.fares?.[0]?.fare_info?.fare_detail?.price_info?.total_fare ||
@@ -75,7 +79,9 @@ function FlightCard({
       Number(selectedDepartureData?.minimum_package_price || 0)
     : flightData.minimum_package_price || 0;
   const displayPrice = formatePrice(priceSAR);
-  const cabinClass = firstLeg.airline_info?.carrier_name ? "Economy class" : "";
+  const cabinClass = firstLeg.airline_info?.carrier_name
+    ? t("economyClass")
+    : "";
 
   const airlineLogo = firstLeg.airline_info?.logo;
 
@@ -216,7 +222,7 @@ function FlightCard({
             }}
             className="mt-1.5 flex h-7 items-center gap-0.5 rounded-md bg-primary px-2.5 text-[11px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
           >
-            Select <ChevronRight size={12} />
+            {t("select")} <ChevronRight size={12} />
           </button>
         </div>
       </div>
@@ -268,7 +274,7 @@ function FlightCard({
             </div>
             <p className="text-[12px] text-primary flex items-center gap-1 fill-primary">
               <Users size={12} fill="currentColor" />
-              Exclusive fare
+              {t("exclusiveFare")}
             </p>
           </div>
           <button
@@ -282,7 +288,7 @@ function FlightCard({
             }}
             className="flex items-center gap-1 h-10 rounded bg-primary px-5 text-sm font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
           >
-            Select <ChevronRight size={16} />
+            {t("select")} <ChevronRight size={16} className="rtl:rotate-180" />
           </button>
         </div>
       </div>

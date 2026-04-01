@@ -2,32 +2,23 @@ import Image from "next/image";
 import discoverImage1 from "@/public/images/flights/Discover1.png";
 import discoverImage2 from "@/public/images/flights/Discover2.png";
 import discoverImage3 from "@/public/images/flights/Discover3.png";
+import { useTranslations } from "next-intl";
 
 type Props = {};
 
-const discoverBanners = [
-  {
-    id: 1,
-    image: discoverImage1,
-    alt: "South Korea travel deal",
-  },
-  {
-    id: 2,
-    image: discoverImage2,
-    alt: "Time to travel banner",
-  },
-  {
-    id: 3,
-    image: discoverImage3,
-    alt: "China Southern Airlines banner",
-  },
-];
-
 function Discover({}: Props) {
+  const t = useTranslations("FlightsTestPage.Discover");
+
+  const discoverBanners = [
+    { id: 1, image: discoverImage1, alt: t("banner1Alt") },
+    { id: 2, image: discoverImage2, alt: t("banner2Alt") },
+    { id: 3, image: discoverImage3, alt: t("banner3Alt") },
+  ];
+
   return (
     <section className="container max-w-[1200px]! mx-auto py-7">
       <h2 className="mb-6 text-[28px] font-bold leading-tight ">
-        Discover what's happening
+        {t("title")}
       </h2>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">

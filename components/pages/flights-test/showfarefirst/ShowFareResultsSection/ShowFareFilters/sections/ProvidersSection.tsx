@@ -3,6 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/app/store";
 import { toggleProvider } from "@/redux/features/flights/flightFilterSlice";
+import { useTranslations } from "next-intl";
 import FilterCheckboxRow from "../FilterCheckboxRow";
 import FilterSection from "../components/FilterSection";
 
@@ -13,6 +14,7 @@ type Props = {
 
 function ProvidersSection({ providers, flightType = "departure" }: Props) {
   const dispatch = useDispatch();
+  const t = useTranslations("ShowFarePage.Filters");
   const selectedProviders = useSelector((state: RootState) =>
     flightType === "return"
       ? state.flightFilter.returnFilters.selectedProviders
@@ -22,7 +24,7 @@ function ProvidersSection({ providers, flightType = "departure" }: Props) {
   if (!providers.length) return null;
 
   return (
-    <FilterSection title="Providers" collapsible defaultOpen className="mb-4">
+    <FilterSection title={t("providers")} collapsible defaultOpen className="mb-4">
       <div className="space-y-1">
         {providers.map((provider) => (
           <FilterCheckboxRow

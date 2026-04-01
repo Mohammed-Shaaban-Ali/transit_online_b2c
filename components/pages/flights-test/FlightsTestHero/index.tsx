@@ -3,9 +3,11 @@ import heroImage from "@/public/images/flights/flight_home_bg_v6.webp";
 import Image from "next/image";
 import HeroQuickActions from "@/components/pages/flights-test/HeroQuickActions";
 import Form from "./Form";
+import { useTranslations } from "next-intl";
 type Props = {};
 
 function FlightsTestHero({}: Props) {
+  const t = useTranslations("FlightsTestPage.Hero");
   return (
     <>
       {/* ── Desktop ── */}
@@ -20,11 +22,11 @@ function FlightsTestHero({}: Props) {
         <HeroQuickActions />
         <section className="relative z-30 container max-w-[1200px]! mx-auto flex h-full flex-col justify-end pb-24">
           <h1 className="text-white text-[40px] font-bold leading-tight flex items-end gap-1">
-            Discover the best flight deals
+            {t("title")}
             <span className="bg-yellow-400 rounded-full w-2.5 h-2.5 block mb-2.5"></span>
           </h1>
           <p className="mt-1 text-white/90 text-lg">
-            Your next take-off awaits
+            {t("subtitle")}
           </p>
           <Form />
         </section>
@@ -55,7 +57,7 @@ function FlightsTestHero({}: Props) {
             className="text-white text-[32px] font-bold leading-tight flex items-end gap-1 
           drop-shadow-md mb-4"
           >
-            Flights
+            {t("mobileTitle")}
             <span className="bg-yellow-400 rounded-full w-2.5 h-2.5 block mb-2"></span>
           </h1>
 

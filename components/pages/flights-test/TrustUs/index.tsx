@@ -1,56 +1,54 @@
 import React from "react";
-import { FaMedal } from "react-icons/fa6";
-import { MdSupportAgent, MdLocalOffer } from "react-icons/md";
-import { TbCurrencyDollar } from "react-icons/tb";
 import { IoChevronForward } from "react-icons/io5";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 type Props = {};
 
-const trustCards = [
-  {
-    id: 1,
-    title: "Travelers' favorite",
-    description: "Join over 300 million travelers worldwide who fly with us",
-    image:
-      "https://aw-s.tripcdn.com/modules/ibu/flight-online-web/font/popular.f23f85bcde.svg",
-  },
-  {
-    id: 2,
-    title: "Customer support available 24/7",
-    description:
-      "Get assistance from a Trip.com customer support agent in approximately 30 seconds. Anytime, anywhere.",
-    image:
-      "http://aw-s.tripcdn.com/modules/ibu/flight-online-web/font/support.7f30d8f0e8.svg",
-  },
-  {
-    id: 3,
-    title: "Transparent pricing",
-    description:
-      "No surprises. All taxes and fees included, what you see is what you pay.",
-    image:
-      "http://aw-s.tripcdn.com/modules/ibu/flight-online-web/font/price.272bcf92d8.svg",
-  },
-  {
-    id: 4,
-    title: "Earn double rewards",
-    description:
-      "Earn both airline miles and Trip Coins to use on your next trip",
-    image:
-      "https://aw-s.tripcdn.com/modules/ibu/flight-online-web/font/rewards.659f252ca5.svg",
-  },
+const trustCardImages = [
+  "https://aw-s.tripcdn.com/modules/ibu/flight-online-web/font/popular.f23f85bcde.svg",
+  "http://aw-s.tripcdn.com/modules/ibu/flight-online-web/font/support.7f30d8f0e8.svg",
+  "http://aw-s.tripcdn.com/modules/ibu/flight-online-web/font/price.272bcf92d8.svg",
+  "https://aw-s.tripcdn.com/modules/ibu/flight-online-web/font/rewards.659f252ca5.svg",
 ];
 
 function TrustUs({}: Props) {
+  const t = useTranslations("FlightsTestPage.TrustUs");
+
+  const trustCards = [
+    {
+      id: 1,
+      title: t("card1Title"),
+      description: t("card1Description"),
+      image: trustCardImages[0],
+    },
+    {
+      id: 2,
+      title: t("card2Title"),
+      description: t("card2Description"),
+      image: trustCardImages[1],
+    },
+    {
+      id: 3,
+      title: t("card3Title"),
+      description: t("card3Description"),
+      image: trustCardImages[2],
+    },
+    {
+      id: 4,
+      title: t("card4Title"),
+      description: t("card4Description"),
+      image: trustCardImages[3],
+    },
+  ];
+
   return (
     <div className="container max-w-[1200px]! mx-auto py-4 md:py-7">
       <div className="mb-6 flex flex-col items-start gap-2 md:flex-row md:items-start md:justify-between">
-        <h2 className="text-[28px] font-bold leading-tight ">
-          Trust us to take you there
-        </h2>
+        <h2 className="text-[28px] font-bold leading-tight ">{t("title")}</h2>
         <button className="flex items-center gap-1 text-lg cursor-pointer  text-black/60">
-          Register now
-          <IoChevronForward className="size-5s" />
+          {t("registerNow")}
+          <IoChevronForward className="rtl:rotate-180" />
         </button>
       </div>
 

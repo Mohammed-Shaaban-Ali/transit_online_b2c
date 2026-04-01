@@ -5,8 +5,7 @@ import { UseFormReturn } from "react-hook-form";
 import { format, addDays, addMonths, startOfMonth } from "date-fns";
 import { DatePicker, parseDate } from "@ark-ui/react/date-picker";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { useLocale } from "next-intl";
-import { ar, enUS } from "date-fns/locale";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { FlightSearchFormValues } from "../types";
 
@@ -17,6 +16,7 @@ type Props = {
 
 function FlexibleDatePicker({ form, onConfirm }: Props) {
   const locale = useLocale();
+  const t = useTranslations("FlightsTestForm.DatePicker");
   const [isMobile, setIsMobile] = useState(false);
   const [activeQuick, setActiveQuick] = useState<string | null>(null);
 
@@ -35,20 +35,22 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
   const numOfMonths = tripType === "oneWay" ? 1 : isMobile ? 1 : 2;
 
   const formatDisplay = (dateStr: string) =>
-    format(new Date(dateStr), "EEE, MMM d", {
-      locale: locale === "ar" ? ar : enUS,
-    });
+    new Intl.DateTimeFormat(locale, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    }).format(new Date(dateStr));
 
   const getFooterLabel = () => {
     if (!departureDate) return null;
     if (tripType === "oneWay") {
-      return `Depart: ${formatDisplay(departureDate)}`;
+      return `${t("depart")}: ${formatDisplay(departureDate)}`;
     }
     if (departureDate && returnDate) {
-      return `Depart: ${formatDisplay(departureDate)} ~ ${formatDisplay(returnDate)}`;
+      return `${t("depart")}: ${formatDisplay(departureDate)} ~ ${formatDisplay(returnDate)}`;
     }
     if (departureDate) {
-      return `Depart: ${formatDisplay(departureDate)} ~ Select return`;
+      return `${t("depart")}: ${formatDisplay(departureDate)} ~ ${t("selectReturn")}`;
     }
     return null;
   };
@@ -113,21 +115,10 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
       setValue("returnDate", format(end, "yyyy-MM-dd"));
       clearErrors(["departureDate", "returnDate"]);
     } else {
-      const monthIndex = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ].indexOf(type);
-      if (monthIndex !== -1) {
+      // Month quick-select key: "month-<0..11>" (stable across locales)
+      const match = /^month-(\d{1,2})$/.exec(type);
+      const monthIndex = match ? Number(match[1]) : -1;
+      if (monthIndex >= 0 && monthIndex <= 11) {
         const year =
           today.getFullYear() + (monthIndex < today.getMonth() ? 1 : 0);
         const start = new Date(year, monthIndex, 1);
@@ -142,7 +133,11 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
 
   const upcomingMonths = Array.from({ length: 2 }, (_, i) => {
     const d = addMonths(new Date(), i + 1);
-    return { label: format(d, "MMM"), key: format(d, "MMM") };
+    const monthIndex = d.getMonth(); // 0..11
+    return {
+      label: new Intl.DateTimeFormat(locale, { month: "short" }).format(d),
+      key: `month-${monthIndex}`,
+    };
   });
 
   const footerLabel = getFooterLabel();
@@ -152,14 +147,14 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
       {/* Header */}
       <div className="flex items-center justify-between gap-2 px-4 py-3 border-b border-gray-100 flex-wrap sm:px-5 sm:py-3.5 sm:gap-3">
         <span className="text-[15px] font-bold text-gray-900">
-          Select flexible departure dates
+          {t("headerTitle")}
         </span>
         <div className="flex items-center gap-2 flex-wrap">
           {tripType === "roundTrip" && (
             <>
               {[
-                { key: "next2weeks", label: "Next 2 weeks" },
-                { key: "nextMonth", label: "Next month" },
+                { key: "next2weeks", label: t("next2weeks") },
+                { key: "nextMonth", label: t("nextMonth") },
                 ...upcomingMonths,
               ].map((btn) => (
                 <button
@@ -247,7 +242,7 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                               {api.weekDays.map((weekDay, id) => (
                                 <DatePicker.TableHeader
                                   key={id}
-                                  className="text-[11px] font-bold text-primary h-8 text-center sm:text-[13px] sm:w-[52px] sm:h-9"
+                                  className="text-[11px] font-semibold  h-8 text-center sm:text-[13px] sm:w-[52px] sm:h-9"
                                 >
                                   {weekDay.short ?? weekDay.narrow}
                                 </DatePicker.TableHeader>
@@ -388,12 +383,12 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                 {footerLabel}
               </p>
               <p className="text-[11px] sm:text-[12px] text-gray-400 mt-0.5 text-end">
-                All dates are in local time
+                {t("allDaatesLocalTime")}
               </p>
             </>
           ) : (
             <p className="text-[12px] sm:text-[13px] text-gray-400">
-              Select a date to continue
+              {t("selectDateToContinue")}
             </p>
           )}
         </div>
@@ -405,7 +400,7 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
           text-[13px] sm:text-[14px] font-semibold text-white 
           transition-colors hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
         >
-          Confirm departure date
+          {t("confirmDeparture")}
         </button>
       </div>
     </div>

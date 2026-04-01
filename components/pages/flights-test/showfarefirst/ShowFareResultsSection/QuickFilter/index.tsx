@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslations } from "next-intl";
 import { setSortBy } from "@/redux/features/flights/flightFilterSlice";
 import {
   Popover,
@@ -38,21 +39,26 @@ function QuickFilter({
   flightType = "departure",
 }: Props) {
   const dispatch = useDispatch();
+  const t = useTranslations("ShowFarePage.QuickFilter");
   const [selected, setSelected] = useState<QuickFilterId>("cheapest");
   const [sortOpen, setSortOpen] = useState(false);
 
   const quickFilters: { id: QuickFilterId; label: string; price: number }[] = [
     {
       id: "nonstop",
-      label: "Nonstop first",
+      label: t("nonstopFirst"),
       price: formatePrice(nonstopCheapest),
     },
     {
       id: "recommended",
-      label: "Recommended",
+      label: t("recommended"),
       price: formatePrice(recommendedCheapest),
     },
-    { id: "cheapest", label: "Cheapest", price: formatePrice(overallCheapest) },
+    {
+      id: "cheapest",
+      label: t("cheapest"),
+      price: formatePrice(overallCheapest),
+    },
   ];
 
   const handleSelect = (id: QuickFilterId) => {
@@ -65,8 +71,8 @@ function QuickFilter({
   };
 
   const sortOptions = [
-    { id: "price", label: "Cheapest" },
-    { id: "duration", label: "Fastest" },
+    { id: "price", label: t("cheapest") },
+    { id: "duration", label: t("fastest") },
   ];
 
   const selectedFilter = quickFilters.find((f) => f.id === selected);
@@ -82,7 +88,8 @@ function QuickFilter({
               key={item.id}
               type="button"
               onClick={() => handleSelect(item.id)}
-              className="group relative cursor-pointer px-3 py-2 bg-white w-full flex items-center justify-center text-center transition-all duration-300 hover:text-primary"
+              className="group relative cursor-pointer px-3 py-2 bg-white w-full
+               flex items-center justify-center text-center transition-all duration-300 hover:text-primary"
             >
               <div className="flex flex-col items-center">
                 <p
@@ -117,11 +124,8 @@ function QuickFilter({
 
         <Popover open={sortOpen} onOpenChange={setSortOpen}>
           <PopoverTrigger asChild>
-            <button
-              type="button"
-              className="border-e-4 border-gray-200 w-full h-full py-2 cursor-pointer"
-            >
-              <p className="text-[14px]">Sort by</p>
+            <button type="button" className="w-full h-full py-2 cursor-pointer">
+              <p className="text-[14px]">{t("sortBy")}</p>
             </button>
           </PopoverTrigger>
           <PopoverContent
@@ -148,9 +152,7 @@ function QuickFilter({
       </div>
 
       {/* Mobile: white pill, no stroke — contrast + soft shadow only */}
-      <div
-        className="mb-3 mt-2 flex items-center justify-between gap-2 rounded-lg bg-white px-3 py-3 sm:hidden"
-      >
+      <div className="mb-3 mt-2 flex items-center justify-between gap-2 rounded-lg bg-white px-3 py-3 sm:hidden">
         <Select
           value={selected}
           onValueChange={(val) => handleSelect(val as QuickFilterId)}
@@ -195,7 +197,7 @@ function QuickFilter({
             className="flex shrink-0 items-center gap-1.5 border-0 bg-transparent p-0 text-[14px] font-medium text-gray-900 outline-none transition-colors hover:text-gray-700"
           >
             <SlidersHorizontal className="h-3.5 w-3.5 shrink-0" aria-hidden />
-            Filters
+            {t("filters")}
           </button>
         )}
       </div>

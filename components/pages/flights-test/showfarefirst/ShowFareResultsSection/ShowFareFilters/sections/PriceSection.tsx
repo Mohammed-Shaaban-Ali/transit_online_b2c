@@ -6,6 +6,7 @@ import RangeSlider from "react-range-slider-input";
 import "react-range-slider-input/dist/style.css";
 import { RootState } from "@/redux/app/store";
 import { setPriceRange } from "@/redux/features/flights/flightFilterSlice";
+import { useTranslations } from "next-intl";
 import FilterSection from "../components/FilterSection";
 import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
 import { formatePrice } from "@/utils/formatePrice";
@@ -17,6 +18,7 @@ type Props = {
 
 function PriceSection({ apiPriceRange, flightType = "departure" }: Props) {
   const dispatch = useDispatch();
+  const t = useTranslations("ShowFarePage.Filters");
   const priceRange = useSelector((state: RootState) =>
     flightType === "return"
       ? state.flightFilter.returnFilters.priceRange
@@ -36,7 +38,7 @@ function PriceSection({ apiPriceRange, flightType = "departure" }: Props) {
   );
 
   return (
-    <FilterSection title="Price" className="mb-4">
+    <FilterSection title={t("price")} className="mb-4">
       <div className="mb-3">
         <p className="text-[14px] text-gray-600 flex flex-wrap items-center gap-1 tabular-nums">
           <CurrencySymbol size="sm" />
@@ -46,24 +48,27 @@ function PriceSection({ apiPriceRange, flightType = "departure" }: Props) {
         </p>
       </div>
 
-      <RangeSlider
-        className="price-range-slider"
-        min={apiPriceRange.min}
-        max={apiPriceRange.max}
-        step={1}
-        value={[priceRange.min, priceRange.max]}
-        onInput={(val) => handleChange(val as [number, number])}
-      />
+      {/* Force LTR so the slider always goes min → max left-to-right */}
+      <div dir="ltr">
+        <RangeSlider
+          className="price-range-slider"
+          min={apiPriceRange.min}
+          max={apiPriceRange.max}
+          step={1}
+          value={[priceRange.min, priceRange.max]}
+          onInput={(val) => handleChange(val as [number, number])}
+        />
 
-      <div className="mt-1 flex items-center justify-between gap-2 text-[13px] text-gray-600 tabular-nums">
-        <span className="inline-flex items-center gap-0.5">
-          <CurrencySymbol size="sm" />
-          {formatePrice(apiPriceRange.min)}
-        </span>
-        <span className="inline-flex items-center gap-0.5">
-          <CurrencySymbol size="sm" />
-          {formatePrice(apiPriceRange.max)}
-        </span>
+        <div className="mt-1 flex items-center justify-between gap-2 text-[13px] text-gray-600 tabular-nums">
+          <span className="inline-flex items-center gap-0.5">
+            <CurrencySymbol size="sm" />
+            {formatePrice(apiPriceRange.min)}
+          </span>
+          <span className="inline-flex items-center gap-0.5">
+            <CurrencySymbol size="sm" />
+            {formatePrice(apiPriceRange.max)}
+          </span>
+        </div>
       </div>
 
       <style jsx global>{`

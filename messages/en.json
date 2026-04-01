@@ -727,6 +727,298 @@
         "rowsPerPage": "Rows per page:",
         "showing": "Showing {start} - {end} of {total} items"
     },
+    "ShowFarePage": {
+        "FareDateSlider": {
+            "previousDates": "Previous dates",
+            "nextDates": "Next dates",
+            "selected": "Selected",
+            "view": "View"
+        },
+        "FlightSectionHeader": {
+            "selectDeparture": "Select departure flight",
+            "selectReturn": "Select return flight",
+            "roundTripPrice": "Average round-trip price per passenger, taxes and fees included",
+            "oneWayPrice": "Average price per passenger, taxes and fees included",
+            "depart": "Depart",
+            "change": "Change",
+            "changeFlight": "Change Flight",
+            "flightsFound": "{count} flights found"
+        },
+        "QuickFilter": {
+            "nonstopFirst": "Nonstop first",
+            "recommended": "Recommended",
+            "cheapest": "Cheapest",
+            "sortBy": "Sort by",
+            "fastest": "Fastest",
+            "filters": "Filters"
+        },
+        "Results": {
+            "loadingMore": "Loading more results...",
+            "noFlights": "No flights found for your search.",
+            "noReturnFlights": "No return flights found for this departure.",
+            "showResults": "Show results",
+            "filtersTitle": "Filters",
+            "closeFilters": "Close filters",
+            "departuresFrom": "Departures from {airport}",
+            "returnsFrom": "Returns from {airport}"
+        },
+        "Filters": {
+            "stops": "Stops",
+            "direct": "Direct",
+            "stop": "Stop",
+            "airlines": "Airlines",
+            "times": "Times",
+            "departureTime": "Departure time",
+            "arrivalTime": "Arrival time",
+            "price": "Price",
+            "providers": "Providers"
+        },
+        "FlightCard": {
+            "nonstop": "Nonstop",
+            "stop": "1 Stop",
+            "stops": "{count} Stops",
+            "select": "Select",
+            "exclusiveFare": "Exclusive fare",
+            "airline": "Airline",
+            "economyClass": "Economy class"
+        },
+        "FareDialog": {
+            "depart": "Depart",
+            "return": "Return",
+            "duration": "Duration",
+            "flightTime": "Flight time",
+            "transferIn": "Transfer in {city} {time}",
+            "next": "Next",
+            "footer": {
+                "roundTrip": "Round-trip",
+                "departurePackage": "Departure package",
+                "total": "Total"
+            },
+            "sliderTripLabel": {
+                "roundTripTotal": "Round-trip total",
+                "departureFare": "Departure fare",
+                "oneWayTotal": "One-way total"
+            },
+            "stepTitle": {
+                "reviewFare": "Review fare",
+                "chooseReturnPackage": "Choose your return fare package",
+                "chooseDeparturePackage": "Choose your departure fare package",
+                "chooseFare": "Choose your fare"
+            },
+            "sliderNav": {
+                "previousFares": "Previous fares",
+                "nextFares": "Next fares"
+            },
+            "fareCard": {
+                "baggage": "Baggage",
+                "carryOn": "Carry-on baggage",
+                "checked": "Checked baggage",
+                "notIncluded": "Not included"
+            }
+        }
+    },
+    "FlightsTestForm": {
+        "leavingFrom": "Leaving from",
+        "goingTo": "Going to",
+        "selectDates": "Select dates",
+        "search": "Search",
+        "flightAndHotel": "Flight + Hotel",
+        "TripOptions": {
+            "oneWay": "One-way",
+            "roundTrip": "Round trip",
+            "roundTripDesktop": "Round-trip",
+            "nonstop": "Nonstop"
+        },
+        "CitySelector": {
+            "recentSearches": "Recent Searches",
+            "allAirports": "All Airports",
+            "searching": "Searching...",
+            "noResults": "No results found",
+            "loadingAirports": "Loading airports..."
+        },
+        "Passengers": {
+            "passenger": "Passenger",
+            "passengers": "Passengers",
+            "selectPassengersHint": "Please select the exact number of passengers to view the best prices",
+            "adults": "Adults",
+            "adultsAge": "12+ years old",
+            "children": "Children",
+            "childrenAge": "2-11 years old",
+            "infantsLap": "Infants on lap",
+            "infantsAge": "Under 2 years old",
+            "infantsAgeMobile": "Under 2 years old at time of travel",
+            "adultsAgeMobile": "12+ years old at time of travel",
+            "childrenAgeMobile": "2–11 years old at time of travel",
+            "economy": "Economy",
+            "business": "Business",
+            "done": "Done",
+            "passengersTitle": "Passengers",
+            "cabinClassTitle": "Cabin Class",
+            "flightSearchOptions": "Flight search options"
+        },
+        "DatePicker": {
+            "headerTitle": "Select flexible departure dates",
+            "next2weeks": "Next 2 weeks",
+            "nextMonth": "Next month",
+            "depart": "Depart",
+            "selectReturn": "Select return",
+            "allDatesLocalTime": "All dates are in local time",
+            "selectDateToContinue": "Select a date to continue",
+            "confirmDeparture": "Confirm departure date"
+        },
+        "Validation": {
+            "selectDepartureAirport": "Please select departure airport.",
+            "selectDestinationAirport": "Please select destination airport.",
+            "selectDepartureDate": "Please select departure date.",
+            "departureDatePast": "Departure date cannot be in the past.",
+            "selectReturnDate": "Please select return date.",
+            "returnDateAfter": "Return date must be after departure date.",
+            "differentAirports": "Departure and destination must be different."
+        }
+    },
+    "FlightsTestPage": {
+        "Hero": {
+            "title": "Discover the best flight deals",
+            "subtitle": "Your next take-off awaits",
+            "mobileTitle": "Flights"
+        },
+        "HeroQuickActions": {
+            "myBookings": "My bookings",
+            "priceAlerts": "Price alerts",
+            "flightStatus": "Flight status",
+            "privateJet": "Private jet charters"
+        },
+        "TrustUs": {
+            "title": "Trust us to take you there",
+            "registerNow": "Register now",
+            "card1Title": "Travelers' favorite",
+            "card1Description": "Join over 300 million travelers worldwide who fly with us",
+            "card2Title": "Customer support available 24/7",
+            "card2Description": "Get assistance from a Trip.com customer support agent in approximately 30 seconds. Anytime, anywhere.",
+            "card3Title": "Transparent pricing",
+            "card3Description": "No surprises. All taxes and fees included, what you see is what you pay.",
+            "card4Title": "Earn double rewards",
+            "card4Description": "Earn both airline miles and Trip Coins to use on your next trip"
+        },
+        "TrendingNow": {
+            "title": "Get a glimpse of what's trending now",
+            "wonderfulThings": "Wonderful things are happening",
+            "exploreWorld": "Explore the world",
+            "imageAlt": "Kids enjoying a flight"
+        },
+        "PartnerAirlines": {
+            "title": "Fly with our partner airlines",
+            "more": "More",
+            "from": "From",
+            "classType": "Economy"
+        },
+        "Banner": {
+            "title": "Get free flight status updates on the go",
+            "feature1": "Track over 110,000 global flights in real time",
+            "feature2": "Easily navigate airports with check-in counter, boarding gate, and baggage claim info",
+            "feature3": "Stay up-to-date with flight alerts and gate changes to keep your trip on track",
+            "qrCodeAlt": "QR code",
+            "appStoreAlt": "Download on App Store",
+            "googlePlayAlt": "Get it on Google Play",
+            "bannerAlt": "banner",
+            "flightCardAlt": "Flight card"
+        },
+        "Discover": {
+            "title": "Discover what's happening",
+            "banner1Alt": "South Korea travel deal",
+            "banner2Alt": "Time to travel banner",
+            "banner3Alt": "China Southern Airlines banner"
+        },
+        "WhyBook": {
+            "title": "Why Book Flights with Trip.com",
+            "flightsToSuitYouTitle": "Flights to Suit You",
+            "flightsToSuitYouText": "Ready to jet off? Booking a flight is the first step to an exciting getaway. However, with so many things to consider, finding cheap flights is not always the easiest of tasks. That's why, at Trip.com, we've made things simple. Letting you search and compare flights from thousands of different airlines to destinations all over the world, it's never",
+            "flightsToSuitYouTextExpanded": "Ready to jet off? Booking a flight is the first step to an exciting getaway. However, with so many things to consider, finding cheap flights is not always the easiest of tasks. That's why, at Trip.com, we've made things simple. Letting you search and compare flights from thousands of different airlines to destinations all over the world, it's never been easier to find flight tickets to suit you. From economy to first-class airline tickets, direct to connecting flights and return and one-way tickets, you can filter your search to suit your plans and budget. Whether it's for a long-haul family holiday, romantic weekend break, or a professional business trip, in just a few clicks you can be on your way to your chosen destination.",
+            "bookCheapTitle": "Book Cheap Flights Today",
+            "bookCheapText": "There are plenty of other ways you can save money on flights, too. You can look out for our flight flash sales, sign up to price alerts which let you know when flight prices have dropped, and download the Trip.com app to get money off. Joining the Trip.com loyalty program also gives you access to exclusive member-only offers. Not only that, but you can also earn Trip Coins which can be redeemed on your next booking.",
+            "showMore": "Show More",
+            "showLess": "Show Less"
+        },
+        "HowToBook": {
+            "title": "How to Book Cheap Flights?",
+            "item1Title": "Fly during the working week",
+            "item1Content": "Opting to take your flight during the working week can save you money. Flights departing over this period - especially Tuesdays and Wednesdays - are cheaper, mainly because these days are less popular to travel on.",
+            "item2Title": "Have a look at airline websites",
+            "item2Content": "Many airline websites have made it simpler to identify the inexpensive days to fly by displaying a \"calendar view\" booking system. This system allows you to scan prices ranging across the week that you are searching.",
+            "item3Title": "Consider flights with less-popular departure times",
+            "item3Content": "You may also get a bargain flight if you're willing to fly at an early hour. It may well be less expensive to fly at 6 am than at later times due to that time spot being less popular. The only problem you could face is getting to the airport at this time; make sure that public transport is running if you can't take a taxi or get a lift to the airport.",
+            "item4Title": "Find a better price on the Trip.com app",
+            "item4Content": "This may sound like I'm stating the obvious, but you'd be surprised at the number of people who settle for a price without first shopping around and doing some research. We suggest you have a look for bargains on the Trip.com app.",
+            "item5Title": "Book early instead of waiting until the last minute",
+            "item5Content": "Don't get fooled into thinking that last-minute deals are necessarily the best option for cheap flight tickets because they seldom are. The smart move is to book early, even as far as a year in advance if that is possible for the flight you require. Flight tickets have a tendency to be cheaper when they are first released - which is normally about a year before the flight - so have a look online as soon as the flights you want are available.",
+            "item6Title": "Use a credit card in a wiser way",
+            "item6Content": "There are a lot of advantages to paying for a flight with a credit card. One advantage is that you are protected when you make bigger purchases. Certain credit cards will offer you air miles for each sum of money spent, thus saving you a bit more on your flight tickets.",
+            "item7Title": "Choose flights with a connection",
+            "item7Content": "Connecting flights can often be much cheaper than direct flights. If your schedule allows, compare one-stop options and you may find major savings while still arriving comfortably at your destination.",
+            "item8Title": "Book package holidays which may offer cheap flight tickets",
+            "item8Content": "A package deal can sometimes reduce the total cost of your flight and accommodation. Keep an eye on package offers, especially during seasonal promotions and flash sales.",
+            "item9Title": "Be aware of hidden costs of cheap flights",
+            "item9Content": "Before booking, check baggage policies, seat selection charges, and airport transfer costs. A low fare can quickly increase with extras, so always compare the final total price."
+        },
+        "Recommended": {
+            "title": "Recommended by Trip.com",
+            "tab_destinations": "Flights to Popular Destinations",
+            "tab_routes": "Popular Flights Routes",
+            "tab_airlines": "Popular Airlines",
+            "tab_airports": "Popular Airports",
+            "tab_countries": "Cheap Flights to Popular Countries",
+            "link_flightsBangkok": "Flights to Bangkok",
+            "link_flightsManila": "Flights to Manila",
+            "link_flightsShanghai": "Flights to Shanghai",
+            "link_flightsTokyo": "Flights to Tokyo",
+            "link_flightsSeoul": "Flights to Seoul",
+            "link_flightsKL": "Flights to Kuala Lumpur",
+            "link_flightsPhnomPenh": "Flights to Phnom Penh",
+            "link_flightsHK": "Flights to Hong Kong",
+            "link_flightsGuangzhou": "Flights to Guangzhou",
+            "link_flightsSingapore": "Flights to Singapore",
+            "link_cairRiyadh": "Cairo to Riyadh",
+            "link_dubaiLondon": "Dubai to London",
+            "link_jeddahCairo": "Jeddah to Cairo",
+            "link_riyadhIstanbul": "Riyadh to Istanbul",
+            "link_abuDhabiBangkok": "Abu Dhabi to Bangkok",
+            "link_dohaManila": "Doha to Manila",
+            "link_kuwaitAmman": "Kuwait to Amman",
+            "link_riyadhDubai": "Riyadh to Dubai",
+            "link_dammamCairo": "Dammam to Cairo",
+            "link_muscatDelhi": "Muscat to Delhi",
+            "link_saudia": "Saudia",
+            "link_qatarAirways": "Qatar Airways",
+            "link_emirates": "Emirates",
+            "link_etihad": "Etihad Airways",
+            "link_turkish": "Turkish Airlines",
+            "link_flynas": "Flynas",
+            "link_flyadeal": "Flyadeal",
+            "link_airArabia": "Air Arabia",
+            "link_egyptair": "EgyptAir",
+            "link_lufthansa": "Lufthansa",
+            "link_kingKhalid": "King Khalid International",
+            "link_kingAbdulaziz": "King Abdulaziz International",
+            "link_dubaiIntl": "Dubai International",
+            "link_hamad": "Hamad International",
+            "link_abuDhabiIntl": "Abu Dhabi International",
+            "link_cairoIntl": "Cairo International",
+            "link_istanbul": "Istanbul Airport",
+            "link_heathrow": "Heathrow Airport",
+            "link_suvarnabhumi": "Suvarnabhumi Airport",
+            "link_changi": "Singapore Changi",
+            "link_flightsSaudi": "Flights to Saudi Arabia",
+            "link_flightsUAE": "Flights to UAE",
+            "link_flightsEgypt": "Flights to Egypt",
+            "link_flightsTurkey": "Flights to Turkey",
+            "link_flightsThailand": "Flights to Thailand",
+            "link_flightsPhilippines": "Flights to Philippines",
+            "link_flightsIndia": "Flights to India",
+            "link_flightsMalaysia": "Flights to Malaysia",
+            "link_flightsUK": "Flights to UK",
+            "link_flightsItaly": "Flights to Italy"
+        }
+    },
     "QuotationTable": {
         "bookingNumber": "Booking Number",
         "title": "Title",

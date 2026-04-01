@@ -26,6 +26,7 @@ import FlightCard from "../FlightCard";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import FlightSectionHeader from "./FlightSectionHeader";
 import FareSelectionDialog from "../FareSelectionDialog";
 import headerImage from "@/public/images/flights/headerImage.jpg";
@@ -136,6 +137,8 @@ function ShowFareResultsSection({
   nonstop,
 }: Props) {
   const dispatch = useDispatch();
+  const t = useTranslations("ShowFarePage.Results");
+  const tCard = useTranslations("ShowFarePage.FlightCard");
   const { departureFilters, returnFilters, currentFilterType } = useSelector(
     (state: RootState) => state.flightFilter,
   );
@@ -586,10 +589,10 @@ function ShowFareResultsSection({
       duration: `${dH}h ${dM}m`,
       stops:
         stopsCount === 0
-          ? "Nonstop"
+          ? tCard("nonstop")
           : stopsCount === 1
-            ? "1 Stop"
-            : `${stopsCount} Stops`,
+            ? tCard("stop")
+            : tCard("stops", { count: stopsCount }),
     };
   }, [selectedDepartureData, departureDate]);
 
@@ -672,7 +675,7 @@ function ShowFareResultsSection({
             <FlightSectionHeader
               phase="departure"
               stepNumber={1}
-              title={`Departures from ${fromAirport}`}
+              title={t("departuresFrom", { airport: fromAirport })}
               flightsCount={filteredDepartureFlights.length}
               backgroundImage={headerImage}
               isRoundTrip={isRoundTrip}
@@ -694,7 +697,7 @@ function ShowFareResultsSection({
                 <div className="mb-2 mt-1.5 flex items-center gap-2 rounded bg-blue-50 px-3 py-2 sm:px-4">
                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
                   <p className="text-[13px] text-primary sm:text-sm">
-                    Loading more results...
+                    {t("loadingMore")}
                   </p>
                 </div>
               )}
@@ -702,7 +705,7 @@ function ShowFareResultsSection({
               {filteredDepartureFlights.length === 0 && isBothDone && (
                 <div className="mt-4 rounded bg-white px-4 py-10 text-center sm:px-6 sm:py-12">
                   <p className="text-[15px] text-gray-500 sm:text-lg">
-                    No flights found for your search.
+                    {t("noFlights")}
                   </p>
                 </div>
               )}
@@ -744,7 +747,7 @@ function ShowFareResultsSection({
               <FlightSectionHeader
                 phase="return"
                 stepNumber={2}
-                title={`Returns from ${toAirport}`}
+                title={t("returnsFrom", { airport: toAirport })}
                 flightsCount={filteredReturnFlights.length}
                 backgroundImage={headerImage}
                 isRoundTrip={isRoundTrip}
@@ -764,7 +767,7 @@ function ShowFareResultsSection({
               {filteredReturnFlights.length === 0 && (
                 <div className="mt-4 rounded bg-white px-4 py-10 text-center sm:px-6 sm:py-12">
                   <p className="text-[15px] text-gray-500 sm:text-lg">
-                    No return flights found for this departure.
+                    {t("noReturnFlights")}
                   </p>
                 </div>
               )}
@@ -825,17 +828,17 @@ function ShowFareResultsSection({
             "[&>button.absolute]:hidden",
           )}
         >
-          <SheetTitle className="sr-only">Filters</SheetTitle>
+          <SheetTitle className="sr-only">{t("filtersTitle")}</SheetTitle>
 
           <div className="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 py-3">
             <span className="text-[16px] font-semibold text-gray-900">
-              Filters
+              {t("filtersTitle")}
             </span>
             <button
               type="button"
               onClick={() => setMobileFiltersOpen(false)}
               className="flex h-9 w-9 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100"
-              aria-label="Close filters"
+              aria-label={t("closeFilters")}
             >
               <X className="h-5 w-5" />
             </button>
@@ -855,7 +858,7 @@ function ShowFareResultsSection({
               onClick={() => setMobileFiltersOpen(false)}
               className="h-11 w-full rounded-lg bg-primary text-[15px] font-semibold text-white transition-colors hover:bg-primary/90 sm:h-12 sm:text-[16px]"
             >
-              Show results
+              {t("showResults")}
             </button>
           </div>
         </SheetContent>

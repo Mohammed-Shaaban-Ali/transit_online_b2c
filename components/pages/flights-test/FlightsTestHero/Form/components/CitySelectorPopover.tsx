@@ -14,6 +14,7 @@ import { RiMapPin2Fill } from "react-icons/ri";
 import { FlightSearchFormValues } from "../types";
 import { MdFlightTakeoff } from "react-icons/md";
 import { MdFlightLand } from "react-icons/md";
+import { useTranslations } from "next-intl";
 
 const RECENT_FROM_KEY = "flight-test-recent-from";
 const RECENT_TO_KEY = "flight-test-recent-to";
@@ -72,6 +73,7 @@ function CitySelectorPopover({
   error,
   mobileStyle = false,
 }: Props) {
+  const t = useTranslations("FlightsTestForm.CitySelector");
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [recentCities, setRecentCities] = useState<airportTypes[]>([]);
@@ -204,7 +206,7 @@ function CitySelectorPopover({
               {recentCities.length > 0 && !isSearching && (
                 <>
                   <h4 className="mb-3 text-[14px] font-semibold">
-                    Recent Searches
+                    {t("recentSearches")}
                   </h4>
                   <div className="mb-5 space-y-1">
                     {recentCities.map((airport) => (
@@ -232,18 +234,18 @@ function CitySelectorPopover({
                     ))}
                   </div>
                   <div className="border-t border-gray-200 pt-3 mb-3">
-                    <h4 className="text-[14px] text-gray-500">All Airports</h4>
+                    <h4 className="text-[14px] text-gray-500">{t("allAirports")}</h4>
                   </div>
                 </>
               )}
 
               {isFetching ? (
                 <div className="px-2 py-3 text-[14px] text-gray-500">
-                  Searching...
+                  {t("searching")}
                 </div>
               ) : airports.length === 0 ? (
                 <div className="px-2 py-3 text-[14px] text-gray-500">
-                  {isSearching ? "No results found" : "Loading airports..."}
+                  {isSearching ? t("noResults") : t("loadingAirports")}
                 </div>
               ) : (
                 <div className="space-y-1">

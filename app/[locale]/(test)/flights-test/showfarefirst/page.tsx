@@ -11,9 +11,6 @@ type Props = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
-const flightsTestFontFamily =
-  '"Trip Geom", BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif';
-
 const getParam = (
   params: Record<string, string | string[] | undefined>,
   key: string,
@@ -62,10 +59,7 @@ async function page({ searchParams }: Props) {
   };
 
   return (
-    <section
-      className="relative bg-[#ebedf1] md:bg-primary"
-      style={{ fontFamily: flightsTestFontFamily }}
-    >
+    <section className="relative bg-[#ebedf1] md:bg-primary">
       <FloatingSideActions />
 
       {/* Mobile: hero image + fade (like FlightsTestHero), form in flow so filters sit below */}

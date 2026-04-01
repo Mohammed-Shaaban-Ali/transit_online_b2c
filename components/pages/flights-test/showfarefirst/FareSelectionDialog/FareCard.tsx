@@ -4,6 +4,7 @@ import { Check, X } from "lucide-react";
 import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
 import { formatePrice } from "@/utils/formatePrice";
 import type { FareOption } from "../data/flights";
+import { useTranslations } from "next-intl";
 
 type Props = {
   fare: FareOption;
@@ -25,6 +26,7 @@ export function FareCard({
   tripLabel,
   className = "",
 }: Props) {
+  const t = useTranslations("ShowFarePage.FareDialog.fareCard");
   return (
     <div
       onClick={onSelect}
@@ -57,7 +59,7 @@ export function FareCard({
       <div className="space-y-4 flex-1 min-h-0 min-w-0">
         <div>
           <p className="text-[12px] sm:text-[14px] font-semibold text-gray-700 mb-1.5">
-            Baggage
+            {t("baggage")}
           </p>
           <ul className="space-y-1.5">
             <li
@@ -68,11 +70,11 @@ export function FareCard({
               ) : (
                 <X size={13} className="text-gray-400 shrink-0 mt-0.5" />
               )}
-              Carry-on baggage:{" "}
+              {t("carryOn")}:{" "}
               <span
                 className={`font-semibold ${!fare.baggage.carryOn ? "line-through" : ""}`}
               >
-                {fare.baggage.carryOn || "Not included"}
+                {fare.baggage.carryOn || t("notIncluded")}
               </span>
             </li>
             <li
@@ -83,11 +85,11 @@ export function FareCard({
               ) : (
                 <X size={13} className="text-gray-400 shrink-0 mt-0.5" />
               )}
-              Checked baggage:{" "}
+              {t("checked")}:{" "}
               <span
                 className={`font-semibold ${!fare.baggage.checked ? "line-through" : ""}`}
               >
-                {fare.baggage.checked || "Not included"}
+                {fare.baggage.checked || t("notIncluded")}
               </span>
             </li>
           </ul>

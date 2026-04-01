@@ -2,6 +2,7 @@
 
 import { SearchIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 type Props = {
   compact?: boolean;
@@ -10,12 +11,14 @@ type Props = {
 };
 
 function ActionButtonsRow({ compact = false, className, onSearch }: Props) {
+  const t = useTranslations("FlightsTestForm");
+
   if (compact) {
     return (
       <div className={cn("mt-4 flex items-center justify-end", className)}>
         <button
           type="button"
-          aria-label="Search"
+          aria-label={t("search")}
           onClick={onSearch}
           className="flex h-[58px] w-[58px] items-center justify-center rounded-sm bg-primary text-white transition-colors duration-200 hover:bg-primary/80"
         >
@@ -31,7 +34,7 @@ function ActionButtonsRow({ compact = false, className, onSearch }: Props) {
         type="button"
         className="min-w-[120px] rounded-sm border border-primary px-8 h-[58px] text-[20px] text-primary transition-colors duration-200 hover:bg-blue-100"
       >
-        Flight + Hotel
+        {t("flightAndHotel")}
       </button>
       <button
         type="button"
@@ -39,7 +42,7 @@ function ActionButtonsRow({ compact = false, className, onSearch }: Props) {
         className="min-w-[120px] rounded-sm bg-primary px-8 h-[58px] text-[20px] text-white transition-colors duration-200 hover:bg-primary/80 flex items-center gap-2"
       >
         <SearchIcon />
-        Search
+        {t("search")}
       </button>
     </div>
   );

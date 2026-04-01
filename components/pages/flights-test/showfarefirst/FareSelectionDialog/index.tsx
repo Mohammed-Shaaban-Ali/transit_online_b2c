@@ -45,7 +45,8 @@ export default function FareSelectionDialog({
   infants,
   cabinClass,
 }: Props) {
-  const t = useTranslations("FlightDetails");
+  const tDetails = useTranslations("FlightDetails");
+  const t = useTranslations("ShowFarePage.FareDialog");
   const router = useRouter();
   const isRoundTrip = !!returnFlight;
 
@@ -252,15 +253,15 @@ export default function FareSelectionDialog({
 
   const footerPriceLabel = isRoundTrip
     ? isReturnStep
-      ? "Round-trip"
-      : "Departure package"
-    : "Total";
+      ? t("footer.roundTrip")
+      : t("footer.departurePackage")
+    : t("footer.total");
 
   const tripLabelForSlider = isRoundTrip
     ? isReturnStep
-      ? "Round-trip total"
-      : "Departure fare"
-    : "One-way total";
+      ? t("sliderTripLabel.roundTripTotal")
+      : t("sliderTripLabel.departureFare")
+    : t("sliderTripLabel.oneWayTotal");
 
   const hasPackageSelection = isReturnStep
     ? !!selectedReturnFareId
@@ -459,12 +460,12 @@ export default function FareSelectionDialog({
 
   const stepTitle =
     offers.length === 0
-      ? "Review fare"
+      ? t("stepTitle.reviewFare")
       : isReturnStep
-        ? "Choose your return fare package"
+        ? t("stepTitle.chooseReturnPackage")
         : isRoundTrip
-          ? "Choose your departure fare package"
-          : "Choose your fare";
+          ? t("stepTitle.chooseDeparturePackage")
+          : t("stepTitle.chooseFare");
 
   const subline =
     isReturnStep && returnDisplay
@@ -569,7 +570,7 @@ export default function FareSelectionDialog({
           {isFetching && (
             <div className="flex flex-col items-center justify-center gap-2 py-12 sm:gap-3 sm:py-16">
               <div className="h-9 w-9 animate-spin rounded-full border-2 border-primary border-t-transparent sm:h-10 sm:w-10" />
-              <p className="text-[13px] text-gray-600 sm:text-sm">{t("loading")}</p>
+              <p className="text-[13px] text-gray-600 sm:text-sm">{tDetails("loading")}</p>
             </div>
           )}
           {!isFetching && error && <ErrorSection error={error} />}
@@ -607,7 +608,7 @@ export default function FareSelectionDialog({
                 <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
                   <div className="me-auto flex items-end gap-1 sm:gap-1.5">
                     <p className="mb-0.5 text-[11px] text-gray-500 sm:mb-1 sm:text-[14px]">
-                      {t("totalPrice")}
+                      {tDetails("totalPrice")}
                     </p>
                     <div className="flex items-baseline gap-0.5 text-[18px] font-bold text-primary rtl:flex-row-reverse sm:text-[24px]">
                       <CurrencySymbol
@@ -629,7 +630,7 @@ export default function FareSelectionDialog({
                         }}
                         className="h-10 cursor-pointer rounded bg-primary px-4 text-[14px] font-semibold text-white transition-colors hover:bg-primary/90 sm:h-14 sm:px-8 sm:text-[18px]"
                       >
-                        {t("continue")}
+                        {tDetails("continue")}
                       </button>
                     )}
                     {(showReturnOffers || !returnFareKey) && (
@@ -639,7 +640,7 @@ export default function FareSelectionDialog({
                         disabled={continueToBookingDisabledDefault}
                         className="h-10 cursor-pointer rounded bg-primary px-4 text-[14px] font-semibold text-white transition-colors hover:bg-primary/90 disabled:pointer-events-none disabled:opacity-50 sm:h-14 sm:px-8 sm:text-[18px]"
                       >
-                        {t("continueToBooking")}
+                        {tDetails("continueToBooking")}
                       </button>
                     )}
                   </div>
@@ -667,8 +668,8 @@ export default function FareSelectionDialog({
                     className="h-10 rounded bg-primary px-4 text-[14px] font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer disabled:pointer-events-none disabled:opacity-50 sm:h-14 sm:px-8 sm:text-[18px]"
                   >
                     {isRoundTrip && offers.length > 0 && uiStep === "departure"
-                      ? "Next"
-                      : t("continueToBooking")}
+                      ? t("next")
+                      : tDetails("continueToBooking")}
                   </button>
                 </div>
               )}

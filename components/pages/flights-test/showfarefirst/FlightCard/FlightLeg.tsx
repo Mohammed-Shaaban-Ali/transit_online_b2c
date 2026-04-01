@@ -1,44 +1,36 @@
 import React from "react";
 import type { Leg } from "@/types/flightTypes";
+import { useTranslations } from "next-intl";
+import { useFlightUtils } from "@/hooks/useFlightUtils";
 
-function formatTime(dateStr: string) {
-  return new Date(dateStr).toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
+function getLegDurationMinutes(leg: Leg) {
+  return leg.time_info?.leg_duration_time_minute ?? 0;
 }
 
-function formatLegDuration(leg: Leg) {
-  const h = leg.time_info?.flight_time_hour || 0;
-  const m = leg.time_info?.flight_time_minute || 0;
-  return `${h}h ${m}m`;
-}
-
-function formatLayover(minutes: number, cityName: string) {
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  const time = h > 0 ? `${h}h ${m.toString().padStart(2, "0")}m` : `${m}m`;
-  return `Transfer in ${cityName} ${time}`;
-}
-
-function formatTotalDuration(legs: Leg[]) {
-  const firstDep = new Date(legs[0].departure_info.date).getTime();
-  const lastArr = new Date(legs[legs.length - 1].arrival_info.date).getTime();
-  const totalMin = Math.round((lastArr - firstDep) / 60000);
-  const h = Math.floor(totalMin / 60);
-  const m = totalMin % 60;
-  return `${h}h ${m}m`;
+function getTotalTripMinutes(legs: Leg[]) {
+  return legs.reduce((sum, leg, idx) => {
+    const legMin = getLegDurationMinutes(leg);
+    const waitMin =
+      idx < legs.length - 1
+        ? (leg.time_info?.wait_time_in_minute_before_next_leg ?? 0)
+        : 0;
+    return sum + legMin + waitMin;
+  }, 0);
 }
 
 type RowItem =
-  | { type: "airport"; time: string; airport: string; terminal?: string }
+  | {
+      type: "airport";
+      dateTime: string;
+      airport: string;
+      terminal?: string;
+    }
   | {
       type: "flight";
       logo?: string;
       airlineName: string;
       flightNum: string;
-      duration: string;
+      durationMinutes: number;
     }
   | { type: "transfer"; layoverMinutes: number; cityName: string };
 
@@ -47,7 +39,7 @@ function buildRows(legs: Leg[]): RowItem[] {
   legs.forEach((leg, i) => {
     rows.push({
       type: "airport",
-      time: formatTime(leg.departure_info.date),
+      dateTime: leg.departure_info.date,
       airport: leg.departure_info.airport_name,
       terminal: leg.departure_info.terminal_no,
     });
@@ -56,11 +48,11 @@ function buildRows(legs: Leg[]): RowItem[] {
       logo: leg.airline_info?.logo,
       airlineName: leg.airline_info?.carrier_name || "Airline",
       flightNum: `${leg.airline_info?.carrier_code || ""}${leg.flight_number || ""}`,
-      duration: formatLegDuration(leg),
+      durationMinutes: getLegDurationMinutes(leg),
     });
     rows.push({
       type: "airport",
-      time: formatTime(leg.arrival_info.date),
+      dateTime: leg.arrival_info.date,
       airport: leg.arrival_info.airport_name,
       terminal: leg.arrival_info.terminal_no,
     });
@@ -85,7 +77,9 @@ function FlightLeg({
   label?: "Depart" | "Return";
   date?: string;
 }) {
-  const totalDuration = formatTotalDuration(legs);
+  const t = useTranslations("ShowFarePage.FareDialog");
+  const { formatTime, formatDuration } = useFlightUtils();
+  const totalDuration = formatDuration(getTotalTripMinutes(legs));
   const rows = buildRows(legs);
 
   return (
@@ -93,10 +87,10 @@ function FlightLeg({
       {label && date && (
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <span className="rounded bg-[#0f2a54] px-2 py-0.5 text-[12px] font-semibold text-white sm:px-2.5 sm:text-[15px]">
-            {label}
+            {label === "Depart" ? t("depart") : t("return")}
           </span>
           <p className="min-w-0 text-[12px] text-gray-500 sm:text-[14px]">
-            {date}&nbsp;&nbsp;|&nbsp;&nbsp;Duration {totalDuration}
+            {date}&nbsp;&nbsp;|&nbsp;&nbsp;{t("duration")} {totalDuration}
           </p>
         </div>
       )}
@@ -107,7 +101,7 @@ function FlightLeg({
             return (
               <React.Fragment key={i}>
                 <p className="self-center text-[13px] font-bold leading-snug text-gray-800 tabular-nums sm:text-[15px]">
-                  {row.time}
+                  {formatTime(row.dateTime)}
                 </p>
                 <div className="rounded-full bg-gray-300" />
                 <p className="self-center text-[12px] font-bold leading-snug text-gray-800 sm:text-[14px]">
@@ -140,7 +134,7 @@ function FlightLeg({
                     {row.airlineName} {row.flightNum}
                   </p>
                   <p className="text-[12px] leading-snug text-gray-500 sm:text-[13px]">
-                    Flight time: {row.duration}
+                    {t("flightTime")}: {formatDuration(row.durationMinutes)}
                   </p>
                 </div>
               </React.Fragment>
@@ -148,6 +142,10 @@ function FlightLeg({
           }
 
           if (row.type === "transfer") {
+            const layoverText = t("transferIn", {
+              city: row.cityName,
+              time: formatDuration(row.layoverMinutes),
+            });
             return (
               <React.Fragment key={i}>
                 <div />
@@ -171,7 +169,7 @@ function FlightLeg({
                 </div>
                 <div className="flex items-center py-2.5 sm:py-3.5">
                   <span className="rounded-sm border border-gray-200 px-2 py-0.5 text-[11px] text-gray-500 sm:px-3 sm:py-1 sm:text-[12px]">
-                    {formatLayover(row.layoverMinutes, row.cityName)}
+                    {layoverText}
                   </span>
                 </div>
               </React.Fragment>

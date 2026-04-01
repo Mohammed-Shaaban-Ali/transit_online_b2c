@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import partnerAirlinesImage from "@/public/images/flights/airport.webp";
 import { IoChevronForward } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 type Props = {};
 
 const partnerFlights = [
@@ -10,7 +11,6 @@ const partnerFlights = [
     airline: "American Airlines",
     route: "New York ⇌ Miami",
     date: "Wed, May 13 - Wed, May 20",
-    classType: "Economy",
     price: "US$277",
   },
   {
@@ -18,7 +18,6 @@ const partnerFlights = [
     airline: "American Airlines",
     route: "New York ⇌ London",
     date: "Thu, May 21 - Fri, May 29",
-    classType: "Economy",
     price: "US$1,006",
   },
   {
@@ -26,7 +25,6 @@ const partnerFlights = [
     airline: "Cathay Pacific",
     route: "Hong Kong ⇌ Bangkok",
     date: "Tue, Mar 24 - Tue, Mar 31",
-    classType: "Economy",
     price: "US$284",
   },
   {
@@ -34,7 +32,6 @@ const partnerFlights = [
     airline: "Cathay Pacific",
     route: "Taipei ⇌ Hong Kong",
     date: "Sun, Apr 19 - Mon, Apr 20",
-    classType: "Economy",
     price: "US$196",
   },
   {
@@ -42,7 +39,6 @@ const partnerFlights = [
     airline: "Cathay Pacific",
     route: "Taipei ⇌ Bangkok",
     date: "Thu, Jun 18 - Mon, Jun 22",
-    classType: "Economy",
     price: "US$220",
   },
   {
@@ -50,7 +46,6 @@ const partnerFlights = [
     airline: "Cathay Pacific",
     route: "Hong Kong ⇌ Seoul",
     date: "Fri, Apr 10 - Thu, Apr 16",
-    classType: "Economy",
     price: "US$344",
   },
   {
@@ -58,7 +53,6 @@ const partnerFlights = [
     airline: "Cathay Pacific",
     route: "New York ⇌ Shanghai",
     date: "Thu, Sep 17 - Thu, Oct 1",
-    classType: "Economy",
     price: "US$1,278",
   },
   {
@@ -66,16 +60,17 @@ const partnerFlights = [
     airline: "Cathay Pacific",
     route: "Hong Kong ⇌ Singapore",
     date: "Sat, May 9 - Sat, May 16",
-    classType: "Economy",
     price: "US$338",
   },
 ];
 
 function PartnerAirlines({}: Props) {
+  const t = useTranslations("FlightsTestPage.PartnerAirlines");
+
   return (
     <section className="container max-w-[1200px]! mx-auto py-7">
       <h2 className="mb-6 text-[28px] font-bold leading-tight text-[#151729]">
-        Fly with our partner airlines
+        {t("title")}
       </h2>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -101,8 +96,8 @@ function PartnerAirlines({}: Props) {
                 </p>
               </div>
               <button className="flex items-center gap-0.5 text-[14px] text-primary cursor-pointer hover:underline">
-                More
-                <IoChevronForward className="size-3.5" />
+                {t("more")}
+                <IoChevronForward className="size-3.5 rtl:rotate-180" />
               </button>
             </div>
 
@@ -110,12 +105,10 @@ function PartnerAirlines({}: Props) {
               {flight.route}
             </h3>
             <p className="mt-1.5 text-[14px] text-black/60">{flight.date}</p>
-            <p className="mt-1.5 text-[14px] text-black/60">
-              {flight.classType}
-            </p>
+            <p className="mt-1.5 text-[14px] text-black/60">{t("classType")}</p>
 
             <p className="mt-1.5 text-right text-[14px] text-black/60">
-              From{" "}
+              {t("from")}{" "}
               <span className="text-[18px] font-bold text-black">
                 {flight.price}
               </span>

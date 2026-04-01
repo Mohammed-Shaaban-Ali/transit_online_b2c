@@ -7,6 +7,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper as SwiperType } from "swiper";
 import { format, addDays, differenceInDays, parseISO } from "date-fns";
 import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { ar, enUS } from "date-fns/locale";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -24,9 +27,17 @@ function FareDateSlider({
   searchParams,
 }: Props) {
   const router = useRouter();
+  const t = useTranslations("ShowFarePage.FareDateSlider");
+  const locale = useLocale();
+  const dfLocale = locale === "ar" ? ar : enUS;
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  const formatMonthDay = (d: Date) =>
+    format(d, "MMM d", {
+      locale: dfLocale,
+    });
 
   const isRoundTrip = tripType === "roundTrip";
   const tripDuration = useMemo(() => {
@@ -46,9 +57,9 @@ function FareDateSlider({
       let label: string;
       if (isRoundTrip && tripDuration > 0) {
         const ret = addDays(dep, tripDuration);
-        label = `${format(dep, "MMM d")}-${format(ret, "MMM d")}`;
+        label = `${formatMonthDay(dep)}-${formatMonthDay(ret)}`;
       } else {
-        label = format(dep, "MMM d");
+        label = formatMonthDay(dep);
       }
 
       items.push({
@@ -64,7 +75,7 @@ function FareDateSlider({
     }
 
     return items;
-  }, [departureDate, isRoundTrip, tripDuration]);
+  }, [departureDate, isRoundTrip, tripDuration, dfLocale]);
 
   const handleDateSelect = (item: (typeof dateItems)[0]) => {
     const params = new URLSearchParams();
@@ -95,9 +106,9 @@ function FareDateSlider({
         className="mx-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-sm cursor-pointer text-gray-700 transition-colors hover:text-primary disabled:opacity-40"
         onClick={() => swiperInstance?.slidePrev()}
         disabled={!swiperInstance || isBeginning}
-        aria-label="Previous dates"
+        aria-label={t("previousDates")}
       >
-        <ChevronLeft size={22} />
+        <ChevronLeft size={22} className="rtl:rotate-180" />
       </button>
 
       <Swiper
@@ -153,7 +164,7 @@ function FareDateSlider({
                         : "text-gray-500 group-hover:text-primary"
                     }`}
                   >
-                    {isSelected ? "Selected" : "View"}
+                    {isSelected ? t("selected") : t("view")}
                   </p>
                   <span
                     className={`absolute bottom-0 left-0 h-[2px] w-full transition-colors ${
@@ -176,9 +187,9 @@ function FareDateSlider({
         className="mx-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-sm cursor-pointer text-gray-700 transition-colors hover:text-primary disabled:opacity-40"
         onClick={() => swiperInstance?.slideNext()}
         disabled={!swiperInstance || isEnd}
-        aria-label="Next dates"
+        aria-label={t("nextDates")}
       >
-        <ChevronRight size={22} />
+        <ChevronRight size={22} className="rtl:rotate-180" />
       </button>
     </div>
   );
