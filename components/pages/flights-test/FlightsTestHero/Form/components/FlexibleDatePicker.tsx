@@ -146,7 +146,7 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
     <div className="flex flex-col bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden w-[calc(100vw-32px)] sm:w-auto sm:min-w-[520px]">
       {/* Header */}
       <div className="flex items-center justify-between gap-2 px-4 py-3 border-b border-gray-100 flex-wrap sm:px-5 sm:py-3.5 sm:gap-3">
-        <span className="text-[15px] font-bold text-gray-900">
+        <span className="text-[20px] font-bold text-gray-900">
           {t("headerTitle")}
         </span>
         <div className="flex items-center gap-2 flex-wrap">
@@ -383,7 +383,7 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                 {footerLabel}
               </p>
               <p className="text-[11px] sm:text-[12px] text-gray-400 mt-0.5 text-end">
-                {t("allDaatesLocalTime")}
+                {t("allDatesLocalTime")}
               </p>
             </>
           ) : (
