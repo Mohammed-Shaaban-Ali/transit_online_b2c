@@ -84,7 +84,7 @@ async function page({ searchParams }: Props) {
             aria-hidden
           />
         </div>
-        <div className="relative z-10 flex flex-col px-3 pb-5 pt-9 sm:px-4 sm:pb-6 sm:pt-11">
+        <div className="relative z-10 flex flex-col px-3 pb-5 pt-28 sm:px-4 sm:pb-6 sm:pt-11">
           <div
             className="overflow-hidden rounded-2xl bg-white text-[15px] antialiased [text-size-adjust:100%]"
             style={{ boxShadow: "0 4px 32px rgba(0,0,0,0.14)" }}
@@ -100,7 +100,7 @@ async function page({ searchParams }: Props) {
 
       {/* Desktop: original primary strip + overlapping search card */}
       <div className="relative hidden h-[170px] w-full bg-primary md:block">
-        <div className="absolute left-1/2 top-full z-20 w-full max-w-[1200px] -translate-x-1/2 -translate-y-1/2 px-4 sm:px-5">
+        <div className="absolute left-1/2 top-full z-20 w-full max-w-[1200px] -translate-x-1/2 -translate-y-1/2 ">
           <StaticFlightSearchBox
             compactActions
             className="mt-0 rounded-[8px] shadow-[0_10px_24px_rgba(17,24,39,0.1)]"

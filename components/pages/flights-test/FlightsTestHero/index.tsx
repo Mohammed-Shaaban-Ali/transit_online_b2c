@@ -14,7 +14,7 @@ function FlightsTestHero({}: Props) {
           src={heroImage}
           alt="hero"
           fill
-          className="object-cover object-center"
+          className="object-cover object-top"
           priority
         />
         <HeroQuickActions />
@@ -31,9 +31,9 @@ function FlightsTestHero({}: Props) {
       </div>
 
       {/* ── Mobile ── */}
-      <div className="md:hidden relative md:pb-8">
+      <div className="md:hidden relative pt-20">
         {/* Background image — covers the top portion only */}
-        <div className="absolute inset-x-0 top-0 h-[160px]">
+        <div className="absolute inset-x-0 top-0 h-[225px]">
           <Image
             src={heroImage}
             alt="hero"
@@ -53,7 +53,7 @@ function FlightsTestHero({}: Props) {
           {/* Title */}
           <h1
             className="text-white text-[32px] font-bold leading-tight flex items-end gap-1 
-          drop-shadow-md mb-3"
+          drop-shadow-md mb-4"
           >
             Flights
             <span className="bg-yellow-400 rounded-full w-2.5 h-2.5 block mb-2"></span>

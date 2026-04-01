@@ -14,7 +14,7 @@ import PassengersPopover from "./components/PassengersPopover";
 import MobilePassengersSheet from "./components/MobilePassengersSheet";
 import ActionButtonsRow from "./components/ActionButtonsRow";
 import { FlightSearchFormValues, TripType } from "./types";
-import FlightDatePicker from "@/components/shared/FlightSearchBox/FlightDatePicker";
+import FlexibleDatePicker from "./components/FlexibleDatePicker";
 import {
   Popover,
   PopoverContent,
@@ -372,10 +372,9 @@ function StaticFlightSearchBox({
               collisionPadding={16}
               className="w-auto max-w-[calc(100vw-32px)] overflow-x-auto border-none bg-transparent p-0 shadow-none"
             >
-              <FlightDatePicker
+              <FlexibleDatePicker
                 form={form as any}
-                openCalendarByDefault
-                calendarOnly
+                onConfirm={() => setDatePopoverOpenMobile(false)}
               />
             </PopoverContent>
           </Popover>
@@ -472,10 +471,9 @@ function StaticFlightSearchBox({
               sideOffset={6}
               className="w-auto border-none bg-transparent p-0 shadow-none"
             >
-              <FlightDatePicker
+              <FlexibleDatePicker
                 form={form as any}
-                openCalendarByDefault
-                calendarOnly
+                onConfirm={() => setDatePopoverOpen(false)}
               />
             </PopoverContent>
           </Popover>

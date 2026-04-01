@@ -59,8 +59,8 @@ function LocaleSwitcher() {
     <div className="flex items-center gap-4 relative">
       <DropdownMenu>
         <DropdownMenuTrigger
-          className="w-9 h-9 sm:w-auto sm:min-w-fit sm:min-h-10 gap-2 rounded-full border
-         border-gray-300 text-black font-medium bg-white/60 
+          className="w-9 h-9 sm:w-auto sm:min-w-fit sm:min-h-10 gap-2 rounded-md border
+         border-gray-300 text-black font-medium bg-white 
          cursor-pointer hover:bg-white/80 transition-all duration-300
          flex items-center justify-center p-1 sm:px-3 sm:py-2 outline-none
          
