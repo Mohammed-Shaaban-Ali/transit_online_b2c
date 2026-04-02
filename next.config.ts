@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "test.gita.sa",
       },
+      {
+        protocol: "https",
+        hostname: "ak-d.tripcdn.com",
+      },
     ],
   },
 };

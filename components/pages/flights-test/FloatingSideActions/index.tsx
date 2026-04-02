@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import {
   IoArrowUpOutline,
@@ -7,9 +8,11 @@ import {
   IoPhonePortraitOutline,
 } from "react-icons/io5";
 
-type Props = {};
+type Props = {
+  rounded?: boolean;
+};
 
-function FloatingSideActions({}: Props) {
+function FloatingSideActions({ rounded }: Props) {
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
@@ -37,8 +40,10 @@ function FloatingSideActions({}: Props) {
             type="button"
             onClick={scrollToTop}
             aria-label="Scroll to top"
-            className="flex h-16 w-16 items-center justify-center rounded-md bg-primary text-white
-             transition-colors duration-200 hover:bg-primary/80 cursor-pointer"
+            className={cn(
+              "flex h-16 w-16 items-center justify-center rounded-md bg-primary text-white transition-colors duration-200 hover:bg-primary/80 cursor-pointer",
+              rounded && "rounded-full",
+            )}
           >
             <IoArrowUpOutline className="size-8" />
           </button>
@@ -47,8 +52,10 @@ function FloatingSideActions({}: Props) {
         <button
           type="button"
           aria-label="Support"
-          className="flex h-16 w-16 items-center justify-center rounded-md bg-primary text-white
-           transition-colors duration-200 hover:bg-primary/80 cursor-pointer"
+          className={cn(
+            "flex h-16 w-16 items-center justify-center rounded-md bg-primary text-white  transition-colors duration-200 hover:bg-primary/80 cursor-pointer",
+            rounded && "rounded-full",
+          )}
         >
           <IoHeadsetOutline className="size-8" />
         </button>
@@ -56,8 +63,10 @@ function FloatingSideActions({}: Props) {
         <button
           type="button"
           aria-label="App"
-          className="flex h-16 w-16 items-center justify-center rounded-md bg-primary text-white
-           transition-colors duration-200 hover:bg-primary/80 cursor-pointer"
+          className={cn(
+            "flex h-16 w-16 items-center justify-center rounded-md bg-primary text-white transition-colors duration-200 hover:bg-primary/80 cursor-pointer",
+            rounded && "rounded-full",
+          )}
         >
           <IoPhonePortraitOutline className="size-8" />
         </button>
