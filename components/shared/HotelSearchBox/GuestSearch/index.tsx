@@ -13,6 +13,8 @@ import usePerfectScrollbar from "@/hooks/usePerfectScrollbar";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa6";
 import { useTranslations } from "next-intl";
+import { HotelHeroField } from "../hero/HotelHeroField";
+import { cn } from "@/lib/utils";
 
 const MAX_GUESTS_PER_ROOM = 8;
 
@@ -186,10 +188,12 @@ const RoomCard = ({ room, index, form, onRemove }: RoomCardProps) => {
 
 interface GuestSearchProps {
   form: UseFormReturn<searchHotelsParams & { searchValue?: string }>;
+  variant?: "default" | "hero";
 }
 
-const GuestSearch = ({ form }: GuestSearchProps) => {
+const GuestSearch = ({ form, variant = "default" }: GuestSearchProps) => {
   const t = useTranslations("Components.HotelSearchBox.GuestSearch");
+  const th = useTranslations("Components.HotelSearchBox.hero");
   const [open, setOpen] = useState(false);
   const scrollRef = usePerfectScrollbar({
     suppressScrollX: true,
@@ -240,45 +244,95 @@ const GuestSearch = ({ form }: GuestSearchProps) => {
     });
   };
 
+  const getHeroDisplayText = () => {
+    const totalAdults = getTotalAdults();
+    const totalChildren = getTotalChildren();
+    const totalRooms = rooms.length;
+    return th("occupancySummary", {
+      rooms: totalRooms,
+      roomsWord: totalRooms === 1 ? t("room") : t("rooms"),
+      adults: totalAdults,
+      adultsLabel: t("adultsLabel"),
+      children: totalChildren,
+      childrenLabel: t("childrenNoun"),
+    });
+  };
+
   const hasValue = rooms && rooms.length > 0;
   const isActive = open || hasValue;
 
   return (
-    <div className="col-span-1 relative ms-12  ">
+    <div
+      className={cn(
+        "relative col-span-1",
+        variant === "default" && "ms-12",
+        variant === "hero" && "min-w-0 flex-1"
+      )}
+    >
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <div className="relative flex items-center px-4 h-16 bg-transparent transition-all duration-300 cursor-pointer">
-            <label
-              className={`absolute transition-all font-bold duration-200 pointer-events-none ${isActive
-                ? "-top-0.5 text-gray-500"
-                : "top-1/2 -translate-y-1/2 text-gray-500"
-                }`}
+          {variant === "hero" ? (
+            <button
+              type="button"
+              className="w-full min-w-0 cursor-pointer text-start"
             >
-              {t("guestsAndRooms")}
-            </label>
-            <div className="flex items-center   gap-0 relative">
-              <RiUserFill
-                size={16}
-                className={`absolute top-[15px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
-                  }`}
-              />
-              <div
-                className={`w-full font-bold text-black bg-transparent border-none outline-none p-0 
-                  ${isActive ? "mt-4 ps-6" : ""
-                  }`}
+              <HotelHeroField active={open}>
+                <div className="flex w-full min-w-0 items-center gap-2">
+                  <RiUserFill
+                    size={18}
+                    className="shrink-0 text-gray-500"
+                    aria-hidden
+                  />
+                  <span className="min-w-0 flex-1 truncate text-[15px] font-bold text-gray-900">
+                    {getHeroDisplayText()}
+                  </span>
+                </div>
+              </HotelHeroField>
+            </button>
+          ) : (
+            <div className="relative flex h-16 cursor-pointer items-center bg-transparent px-4 transition-all duration-300">
+              <label
+                className={`pointer-events-none absolute font-bold transition-all duration-200 ${
+                  isActive
+                    ? "-top-0.5 text-gray-500"
+                    : "top-1/2 -translate-y-1/2 text-gray-500"
+                }`}
               >
-                {getDisplayText()}
+                {t("guestsAndRooms")}
+              </label>
+              <div className="relative flex items-center gap-0">
+                <RiUserFill
+                  size={16}
+                  className={`absolute top-[15px] start-0 ${
+                    isActive ? "text-gray-400" : "text-transparent"
+                  }`}
+                />
+                <div
+                  className={`w-full bg-transparent p-0 font-bold text-black outline-none ${
+                    isActive ? "mt-4 ps-6" : ""
+                  }`}
+                >
+                  {getDisplayText()}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </PopoverTrigger>
         <PopoverContent
-          className="w-full sm:min-w-[500px] p-0 shadow-2xl"
+          className={cn(
+            "p-0 shadow-2xl",
+            variant === "hero"
+              ? "w-[min(100vw-24px,520px)] rounded-xl border border-gray-100"
+              : "w-full sm:min-w-[500px]"
+          )}
           align="start"
           sideOffset={8}
         >
           <div
-            className="bg-white p-4 rounded-lg custom-scrollbar"
+            className={cn(
+              "custom-scrollbar rounded-lg bg-white",
+              variant === "hero" ? "p-4" : "p-4"
+            )}
             style={{
               maxHeight: "500px",
               position: "relative",
@@ -287,7 +341,6 @@ const GuestSearch = ({ form }: GuestSearchProps) => {
             }}
             ref={scrollRef}
           >
-            {/* Room cards */}
             {rooms.map((room, index) => (
               <RoomCard
                 key={index}
@@ -298,26 +351,36 @@ const GuestSearch = ({ form }: GuestSearchProps) => {
               />
             ))}
 
-            {/* Add Room Button - Centered */}
-            <div className="flex justify-center items-center mx-auto my-2">
+            <div className="mx-auto my-2 flex items-center justify-center">
               <Button
                 variant="outline-primary"
                 size="icon"
-                className="rounded-full w-10 h-10"
+                className="h-10 w-10 rounded-full"
                 onClick={addRoom}
               >
                 <FaPlus />
               </Button>
             </div>
 
-            {/* Confirm/Select Button */}
-            <Button
-              type="button"
-              className="w-full h-11 mt-2 rounded-full "
-              onClick={() => setOpen(false)}
-            >
-              {t("select")}
-            </Button>
+            {variant === "hero" ? (
+              <div className="mt-3 flex justify-end border-t border-gray-100 pt-3">
+                <Button
+                  type="button"
+                  className="rounded-md px-6 font-semibold"
+                  onClick={() => setOpen(false)}
+                >
+                  {t("select")}
+                </Button>
+              </div>
+            ) : (
+              <Button
+                type="button"
+                className="mt-2 h-11 w-full rounded-full"
+                onClick={() => setOpen(false)}
+              >
+                {t("select")}
+              </Button>
+            )}
           </div>
         </PopoverContent>
       </Popover>

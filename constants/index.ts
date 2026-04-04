@@ -4,6 +4,7 @@ export const FLIGHT_BOOKING_KEY = "flight-booking-data";
 export const HOTEL_BOOKING_KEY = "hotel-booking-data";
 
 export const localStorageHotelSearchKey = `hotel-search-b2c`;
+export const localStorageHotelRecentSearchesKey = `hotel-search-recent-b2c`;
 export const localStorageFlightSearchKey = `flight-search-b2c`;
 export const localStorageHotelKey = `hotel-b2c`;
 export const localStorageCartKey = `cart-b2c`;

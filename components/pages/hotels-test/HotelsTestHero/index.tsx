@@ -1,6 +1,12 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import heroImage from "@/public/images/hotels/hotelhero.webp";
 import Image from "next/image";
+
+const HotelsTestHotelSearchForm = dynamic(
+  () =>
+    import("@/components/pages/hotels-test/HotelsTestHero/Form/HotelsTestHotelSearchForm"),
+);
 
 type Props = {};
 
@@ -16,13 +22,18 @@ function HotelsTestHero({}: Props) {
           className="object-cover object-top"
           priority
         />
-        <section className="relative z-30 container max-w-[1200px]! mx-auto flex h-full flex-col justify-end pb-[200px]">
-          <h1 className="text-white text-[40px] font-bold leading-tight flex items-end gap-1">
+        <section
+          className="relative z-30 container max-w-[1200px]! mx-auto flex h-full
+         flex-col justify-end pb-[200px]"
+        >
+          <h1 className="text-white text-[40px] font-bold leading-tight flex items-end gap-1 mb-2">
             Hotels & Homes
             <span className="bg-yellow-400 rounded-full w-2.5 h-2.5 block mb-2.5"></span>
           </h1>
 
-          <div className="w-full h-[100px] bg-white rounded-2xl"></div>
+          <div className="w-full max-w-full">
+            <HotelsTestHotelSearchForm />
+          </div>
         </section>
       </div>
 
@@ -57,9 +68,11 @@ function HotelsTestHero({}: Props) {
 
           {/* Form card */}
           <div
-            className="rounded-2xl bg-white overflow-hidden"
+            className="rounded-md bg-white overflow-hidden p-3"
             style={{ boxShadow: "0 4px 32px rgba(0,0,0,0.18)" }}
-          ></div>
+          >
+            <HotelsTestHotelSearchForm />
+          </div>
         </div>
       </div>
     </>

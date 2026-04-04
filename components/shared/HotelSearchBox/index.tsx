@@ -11,10 +11,16 @@ import HotelDatePicker from "./HotelDatePicker";
 import GuestSearch from "./GuestSearch";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { localStorageHotelSearchKey, } from "@/constants";
+import { localStorageHotelSearchKey } from "@/constants";
+import {
+  pushHotelRecentSearch,
+  type HotelRecentSearchItem,
+} from "@/utils/hotelRecentSearches";
+import { cn } from "@/lib/utils";
 
 type Props = {
   defaultValues?: searchHotelsParams;
+  variant?: "default" | "hero";
 };
 
 export interface searchHotelsParams {
@@ -32,7 +38,8 @@ export interface searchHotelsParams {
   }[];
 }
 
-const createSearchFormSchema = (t: (key: string) => string) =>
+/** Shared hotel search validation (same rules as the main HotelSearchBox). */
+export const createSearchFormSchema = (t: (key: string) => string) =>
   z
     .object({
       country: z
@@ -75,6 +82,10 @@ const createSearchFormSchema = (t: (key: string) => string) =>
           })
         )
         .optional(),
+      searchValue: z.string().optional(),
+      locationId: z.number().optional(),
+      locationCode: z.string().optional(),
+      storedLocale: z.string().optional(),
     })
     .refine(
       (data) => {
@@ -105,7 +116,7 @@ const createSearchFormSchema = (t: (key: string) => string) =>
       }
     );
 
-function HotelSearchBox({ defaultValues }: Props) {
+function HotelSearchBox({ defaultValues, variant = "default" }: Props) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations("Components.HotelSearchBox");
@@ -342,6 +353,7 @@ function HotelSearchBox({ defaultValues }: Props) {
       // Navigate to search page with query params
       if (typeof window !== "undefined") {
         localStorage.setItem(localStorageHotelSearchKey, JSON.stringify(searchDataWithValue));
+        pushHotelRecentSearch(searchDataWithValue as HotelRecentSearchItem);
       }
       router.push(`/hotels?${searchParams.toString()}`);
     } catch (error) {
@@ -356,6 +368,39 @@ function HotelSearchBox({ defaultValues }: Props) {
       }
     }
   };
+
+  if (variant === "hero") {
+    return (
+      <div className="relative w-full">
+        <div
+          className={cn(
+            "w-full overflow-hidden rounded-2xl border border-gray-200 bg-white",
+            "shadow-[0_8px_30px_rgba(15,23,42,0.08)]"
+          )}
+        >
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex w-full flex-col divide-y divide-gray-200 lg:flex-row lg:divide-x lg:divide-y-0 rtl:lg:divide-x-reverse"
+          >
+            <LocationSearch form={form} variant="hero" />
+            <HotelDatePicker form={form} variant="hero" />
+            <GuestSearch form={form} variant="hero" />
+            <div className="flex shrink-0 items-stretch p-2 sm:p-3 lg:w-auto lg:min-w-[140px]">
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isLoading}
+                className="flex h-12 w-full min-w-0 items-center justify-center gap-2 rounded-xl px-6 text-base font-bold shadow-sm lg:h-auto lg:min-h-[52px] lg:flex-1"
+              >
+                <FaSearch className="size-4 shrink-0" />
+                {isLoading ? t("searching") : t("search")}
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative">

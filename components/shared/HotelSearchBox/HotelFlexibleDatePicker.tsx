@@ -1,29 +1,30 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { UseFormReturn } from "react-hook-form";
-import { format, addDays, addMonths, startOfMonth } from "date-fns";
+import { format, addDays, addMonths, startOfMonth, differenceInCalendarDays } from "date-fns";
 import { DatePicker, parseDate } from "@ark-ui/react/date-picker";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { FlightSearchFormValues } from "../types";
+import type { searchHotelsParams } from "@/types/hotels";
+
+type FormShape = searchHotelsParams & { searchValue?: string };
 
 type Props = {
-  form: UseFormReturn<FlightSearchFormValues>;
+  form: UseFormReturn<FormShape>;
   onConfirm?: () => void;
 };
 
-function FlexibleDatePicker({ form, onConfirm }: Props) {
+function HotelFlexibleDatePicker({ form, onConfirm }: Props) {
   const locale = useLocale();
-  const t = useTranslations("FlightsTestForm.DatePicker");
+  const t = useTranslations("Components.HotelSearchBox.DatePicker");
   const [isMobile, setIsMobile] = useState(false);
   const [activeQuick, setActiveQuick] = useState<string | null>(null);
 
   const { watch, setValue, clearErrors, trigger } = form;
-  const tripType = watch("tripType");
-  const departureDate = watch("departureDate");
-  const returnDate = watch("returnDate");
+  const checkIn = watch("checkIn");
+  const checkOut = watch("checkOut");
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -32,7 +33,7 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const numOfMonths = tripType === "oneWay" ? 1 : isMobile ? 1 : 2;
+  const numOfMonths = isMobile ? 1 : 2;
 
   const formatDisplay = (dateStr: string) =>
     new Intl.DateTimeFormat(locale, {
@@ -41,63 +42,46 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
       day: "numeric",
     }).format(new Date(dateStr));
 
+  const nights = useMemo(() => {
+    if (!checkIn || !checkOut) return 0;
+    const a = new Date(checkIn);
+    const b = new Date(checkOut);
+    a.setHours(0, 0, 0, 0);
+    b.setHours(0, 0, 0, 0);
+    return Math.max(0, differenceInCalendarDays(b, a));
+  }, [checkIn, checkOut]);
+
   const getFooterLabel = () => {
-    if (!departureDate) return null;
-    if (tripType === "oneWay") {
-      return `${t("depart")}: ${formatDisplay(departureDate)}`;
+    if (!checkIn) return null;
+    if (checkIn && checkOut) {
+      return `${formatDisplay(checkIn)} ~ ${formatDisplay(checkOut)}`;
     }
-    if (departureDate && returnDate) {
-      return `${t("depart")}: ${formatDisplay(departureDate)} ~ ${formatDisplay(returnDate)}`;
-    }
-    if (departureDate) {
-      return `${t("depart")}: ${formatDisplay(departureDate)} ~ ${t("selectReturn")}`;
-    }
-    return null;
+    return `${formatDisplay(checkIn)} ~ ${t("selectCheckOut")}`;
   };
 
   const handleDateChange = (details: {
     value: { toString: () => string }[];
   }) => {
     setActiveQuick(null);
-    if (tripType === "roundTrip") {
-      if (details.value.length >= 1) {
-        setValue(
-          "departureDate",
-          format(new Date(details.value[0].toString()), "yyyy-MM-dd"),
-        );
-        clearErrors("departureDate");
-        trigger("departureDate");
-      }
-      if (details.value.length >= 2) {
-        setValue(
-          "returnDate",
-          format(new Date(details.value[1].toString()), "yyyy-MM-dd"),
-        );
-        clearErrors("returnDate");
-        trigger("returnDate");
-      } else {
-        setValue("returnDate", undefined);
-      }
+    if (details.value.length >= 1) {
+      setValue("checkIn", format(new Date(details.value[0].toString()), "yyyy-MM-dd"));
+      clearErrors("checkIn");
+      trigger("checkIn");
+    }
+    if (details.value.length >= 2) {
+      setValue("checkOut", format(new Date(details.value[1].toString()), "yyyy-MM-dd"));
+      clearErrors("checkOut");
+      trigger("checkOut");
     } else {
-      if (details.value.length >= 1) {
-        setValue(
-          "departureDate",
-          format(new Date(details.value[0].toString()), "yyyy-MM-dd"),
-        );
-        clearErrors("departureDate");
-        trigger("departureDate");
-      }
+      setValue("checkOut", "", { shouldValidate: false });
     }
   };
 
   const getPickerValue = () => {
-    if (tripType === "roundTrip") {
-      const values = [];
-      if (departureDate) values.push(parseDate(new Date(departureDate)));
-      if (returnDate) values.push(parseDate(new Date(returnDate)));
-      return values;
-    }
-    return departureDate ? [parseDate(new Date(departureDate))] : [];
+    const values = [];
+    if (checkIn) values.push(parseDate(new Date(checkIn)));
+    if (checkOut) values.push(parseDate(new Date(checkOut)));
+    return values;
   };
 
   const handleQuickSelect = (type: "next2weeks" | "nextMonth" | string) => {
@@ -105,17 +89,16 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
     const today = new Date(new Date().setHours(0, 0, 0, 0));
     if (type === "next2weeks") {
       const end = addDays(today, 13);
-      setValue("departureDate", format(today, "yyyy-MM-dd"));
-      setValue("returnDate", format(end, "yyyy-MM-dd"));
-      clearErrors(["departureDate", "returnDate"]);
+      setValue("checkIn", format(today, "yyyy-MM-dd"));
+      setValue("checkOut", format(end, "yyyy-MM-dd"));
+      clearErrors(["checkIn", "checkOut"]);
     } else if (type === "nextMonth") {
       const start = startOfMonth(addMonths(today, 1));
       const end = addDays(start, 29);
-      setValue("departureDate", format(start, "yyyy-MM-dd"));
-      setValue("returnDate", format(end, "yyyy-MM-dd"));
-      clearErrors(["departureDate", "returnDate"]);
+      setValue("checkIn", format(start, "yyyy-MM-dd"));
+      setValue("checkOut", format(end, "yyyy-MM-dd"));
+      clearErrors(["checkIn", "checkOut"]);
     } else {
-      // Month quick-select key: "month-<0..11>" (stable across locales)
       const match = /^month-(\d{1,2})$/.exec(type);
       const monthIndex = match ? Number(match[1]) : -1;
       if (monthIndex >= 0 && monthIndex <= 11) {
@@ -124,16 +107,16 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
         const start = new Date(year, monthIndex, 1);
         if (start < today) start.setDate(today.getDate());
         const end = addDays(start, 29);
-        setValue("departureDate", format(start, "yyyy-MM-dd"));
-        setValue("returnDate", format(end, "yyyy-MM-dd"));
-        clearErrors(["departureDate", "returnDate"]);
+        setValue("checkIn", format(start, "yyyy-MM-dd"));
+        setValue("checkOut", format(end, "yyyy-MM-dd"));
+        clearErrors(["checkIn", "checkOut"]);
       }
     }
   };
 
   const upcomingMonths = Array.from({ length: 2 }, (_, i) => {
     const d = addMonths(new Date(), i + 1);
-    const monthIndex = d.getMonth(); // 0..11
+    const monthIndex = d.getMonth();
     return {
       label: new Intl.DateTimeFormat(locale, { month: "short" }).format(d),
       key: `month-${monthIndex}`,
@@ -144,45 +127,37 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
 
   return (
     <div className="flex flex-col bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden w-[calc(100vw-32px)] sm:w-auto sm:min-w-[520px]">
-      {/* Header */}
       <div className="flex items-center justify-between gap-2 px-4 py-3 border-b border-gray-100 flex-wrap sm:px-5 sm:py-3.5 sm:gap-3">
-        <span className="text-[20px] font-bold text-gray-900">
-          {t("headerTitle")}
-        </span>
+        <span className="text-[20px] font-bold text-gray-900">{t("headerTitle")}</span>
         <div className="flex items-center gap-2 flex-wrap">
-          {tripType === "roundTrip" && (
-            <>
-              {[
-                { key: "next2weeks", label: t("next2weeks") },
-                { key: "nextMonth", label: t("nextMonth") },
-                ...upcomingMonths,
-              ].map((btn) => (
-                <button
-                  key={btn.key}
-                  type="button"
-                  onClick={() => handleQuickSelect(btn.key)}
-                  className={cn(
-                    "rounded-lg px-4 py-2 text-[13px] font-medium transition-colors whitespace-nowrap",
-                    activeQuick === btn.key
-                      ? "bg-primary text-white hover:bg-primary/90"
-                      : "bg-gray-100 text-gray-800 hover:bg-gray-200",
-                  )}
-                >
-                  {btn.label}
-                </button>
-              ))}
-            </>
-          )}
+          {[
+            { key: "next2weeks", label: t("next2weeks") },
+            { key: "nextMonth", label: t("nextMonth") },
+            ...upcomingMonths,
+          ].map((btn) => (
+            <button
+              key={btn.key}
+              type="button"
+              onClick={() => handleQuickSelect(btn.key as "next2weeks" | "nextMonth" | string)}
+              className={cn(
+                "rounded-lg px-4 py-2 text-[13px] font-medium transition-colors whitespace-nowrap",
+                activeQuick === btn.key
+                  ? "bg-primary text-white hover:bg-primary/90"
+                  : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+              )}
+            >
+              {btn.label}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Calendar */}
       <div className="flex justify-center px-2 pt-3 sm:px-4 sm:pt-4">
         <DatePicker.Root
-          key={`${tripType}-${numOfMonths}`}
+          key={`hotel-range-${numOfMonths}`}
           inline
-          value={getPickerValue()}
-          selectionMode={tripType === "roundTrip" ? "range" : "single"}
+          value={getPickerValue() as never}
+          selectionMode="range"
           timeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
           numOfMonths={numOfMonths}
           locale={locale}
@@ -199,9 +174,8 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
               view="day"
               className={cn(
                 "flex relative w-full sm:w-auto",
-                numOfMonths > 1 &&
-                  "divide-x divide-gray-200 rtl:divide-x-reverse",
-                "rtl:flex-row-reverse",
+                numOfMonths > 1 && "divide-x divide-gray-200 rtl:divide-x-reverse",
+                "rtl:flex-row-reverse"
               )}
             >
               <nav className="absolute border-transparent w-full top-0 flex rtl:flex-row-reverse justify-between px-2 z-10">
@@ -217,18 +191,13 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                   Array.from({ length: numOfMonths }).map((_, index) => {
                     const offset = api.getOffset({ months: index });
                     return (
-                      <div
-                        key={index}
-                        className="pb-3 w-full sm:w-auto sm:px-4"
-                      >
+                      <div key={index} className="pb-3 w-full sm:w-auto sm:px-4">
                         <DatePicker.ViewControl className="flex justify-center items-center mx-8 mb-3 h-10 sm:mx-10">
                           <DatePicker.ViewTrigger className="z-20 text-[15px] font-bold text-gray-900 hover:bg-gray-100 px-2 py-1 rounded-md transition-colors sm:text-[16px]">
                             <span>
                               {new Intl.DateTimeFormat(locale, {
                                 month: "long",
-                              }).format(
-                                offset.visibleRange.start.toDate("UTC"),
-                              )}{" "}
+                              }).format(offset.visibleRange.start.toDate("UTC"))}{" "}
                               {offset.visibleRange.start.year}
                             </span>
                           </DatePicker.ViewTrigger>
@@ -242,7 +211,7 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                               {api.weekDays.map((weekDay, id) => (
                                 <DatePicker.TableHeader
                                   key={id}
-                                  className="text-[11px] font-semibold  h-8 text-center sm:text-[13px] sm:w-[52px] sm:h-9"
+                                  className="text-[11px] font-semibold h-8 text-center sm:text-[13px] sm:w-[52px] sm:h-9"
                                 >
                                   {weekDay.short ?? weekDay.narrow}
                                 </DatePicker.TableHeader>
@@ -278,7 +247,7 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                                         "not-data-in-range:rounded-md",
                                         "data-selected:data-today:before:text-white",
                                         "data-range-start:data-today:before:text-white",
-                                        "data-range-end:data-today:before:text-white",
+                                        "data-range-end:data-today:before:text-white"
                                       )}
                                     >
                                       {day.day}
@@ -318,10 +287,7 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                           .map((months, id) => (
                             <DatePicker.TableRow key={id}>
                               {months.map((month, id) => (
-                                <DatePicker.TableCell
-                                  key={id}
-                                  value={month.value}
-                                >
+                                <DatePicker.TableCell key={id} value={month.value}>
                                   <DatePicker.TableCellTrigger className="w-16 h-10 text-sm text-gray-900 hover:bg-gray-100 rounded-lg transition-colors data-selected:bg-primary data-selected:text-white flex items-center justify-center font-medium">
                                     {month.label}
                                   </DatePicker.TableCellTrigger>
@@ -374,37 +340,38 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
         </DatePicker.Root>
       </div>
 
-      {/* Footer */}
-      <div className="flex flex-col  items-end gap-3 px-4 py-3 border-t border-gray-100  sm:px-5 sm:py-4">
-        <div className="min-w-0 flex-1 ">
+      <div className="flex flex-col items-end gap-3 px-4 py-3 border-t border-gray-100 sm:px-5 sm:py-4">
+        <div className="min-w-0 flex-1 w-full text-end">
           {footerLabel ? (
             <>
               <p className="text-[13px] sm:text-[15px] font-bold text-gray-900 truncate">
                 {footerLabel}
+                {checkIn && checkOut && nights > 0 && (
+                  <span className="text-primary">
+                    {" "}
+                    ({t("nightsCount", { count: nights })})
+                  </span>
+                )}
               </p>
-              <p className="text-[11px] sm:text-[12px] text-gray-400 mt-0.5 text-end">
+              <p className="text-[11px] sm:text-[12px] text-gray-400 mt-0.5">
                 {t("allDatesLocalTime")}
               </p>
             </>
           ) : (
-            <p className="text-[12px] sm:text-[13px] text-gray-400">
-              {t("selectDateToContinue")}
-            </p>
+            <p className="text-[12px] sm:text-[13px] text-gray-400">{t("selectDateToContinue")}</p>
           )}
         </div>
         <button
           type="button"
           onClick={onConfirm}
-          disabled={!departureDate}
-          className="rounded-md bg-primary px-4 py-2.5 sm:px-6 sm:py-3 
-          text-[13px] sm:text-[14px] font-semibold text-white 
-          transition-colors hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
+          disabled={!checkIn || !checkOut}
+          className="rounded-md bg-primary px-4 py-2.5 sm:px-6 sm:py-3 text-[13px] sm:text-[14px] font-semibold text-white transition-colors hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
         >
-          {t("confirmDeparture")}
+          {t("confirm")}
         </button>
       </div>
     </div>
   );
 }
 
-export default FlexibleDatePicker;
+export default HotelFlexibleDatePicker;

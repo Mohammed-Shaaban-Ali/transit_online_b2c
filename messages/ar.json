@@ -81,6 +81,23 @@
             "CheckOut": {
                 "label": "تاريخ الذهاب"
             },
+            "DatePicker": {
+                "headerTitle": "اختر تواريخ الإقامة",
+                "next2weeks": "الأسبوعان القادمان",
+                "nextMonth": "الشهر القادم",
+                "selectCheckOut": "اختر تاريخ المغادرة",
+                "selectDateToContinue": "اختر تاريخ الوصول والمغادرة للمتابعة",
+                "allDatesLocalTime": "جميع التواريخ بتوقيتك المحلي",
+                "confirm": "تم",
+                "nightsCount": "{count, plural, zero {# ليلة} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}"
+            },
+            "hero": {
+                "whereTo": "إلى أين؟",
+                "recentSearches": "عمليات البحث الأخيرة",
+                "popularDestinations": "وجهات شائعة",
+                "nightsBadge": "{count, plural, zero {# ليلة} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}",
+                "occupancySummary": "{rooms} {roomsWord}، {adults} {adultsLabel}، {children} {childrenLabel}"
+            },
             "done": "تم",
             "GuestSearch": {
                 "guestsAndRooms": "الضيوف والغرف",
@@ -97,6 +114,7 @@
                 "room": "غرفة",
                 "rooms": "غرف",
                 "adultsLabel": "بالغ",
+                "childrenNoun": "أطفال",
                 "select": "تحديد",
                 "guestsInRooms": "{guests} {guestLabel} في {rooms} {roomLabel}",
                 "adultsInRooms": "{adults} {adultsLabel} في {rooms} {roomLabel}"
@@ -818,6 +836,27 @@
         }
     },
     "HotelsTestPage": {
+        "HotelSearchForm": {
+            "nightsBadge": "{count} ليالي",
+            "whereTo": "إلى أين؟",
+            "selectDates": "اختر التواريخ",
+            "selectCheckOut": "اختر تاريخ المغادرة",
+            "recentSearches": "عمليات البحث الأخيرة",
+            "allCities": "جميع المدن",
+            "searching": "جاري البحث…",
+            "noResults": "لا توجد نتائج",
+            "loadingCities": "جاري تحميل المدن…",
+            "rooms": "الغرف",
+            "adults": "البالغون",
+            "adultsHint": "18+ سنة",
+            "children": "الأطفال",
+            "childrenHint": "0-17 سنة",
+            "done": "تم",
+            "search": "بحث",
+            "detailsTitle": "نتائج البحث",
+            "detailsMissingParams": "معاملات البحث غير مكتملة. ابدأ البحث من صفحة اختبار الفنادق.",
+            "detailsHint": "معايير بحثك موجودة في عنوان الصفحة (query). يمكنك لاحقاً ربط قائمة النتائج هنا."
+        },
         "WelcomeAboard": {
             "title": "أهلاً بك! استمتع بخصم {discount}% على الإقامات!",
             "perk1": "احصل على رمز ترويجي ووفّر حتى 10%",

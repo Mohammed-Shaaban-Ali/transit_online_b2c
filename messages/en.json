@@ -81,6 +81,23 @@
             "CheckOut": {
                 "label": "Check Out"
             },
+            "DatePicker": {
+                "headerTitle": "Select stay dates",
+                "next2weeks": "Next 2 weeks",
+                "nextMonth": "Next month",
+                "selectCheckOut": "Select check-out",
+                "selectDateToContinue": "Select check-in and check-out to continue",
+                "allDatesLocalTime": "All dates are in your local time zone",
+                "confirm": "Done",
+                "nightsCount": "{count, plural, one {# night} other {# nights}}"
+            },
+            "hero": {
+                "whereTo": "Where to?",
+                "recentSearches": "Recent searches",
+                "popularDestinations": "Popular destinations",
+                "nightsBadge": "{count, plural, one {# night} other {# nights}}",
+                "occupancySummary": "{rooms} {roomsWord}, {adults} {adultsLabel}, {children} {childrenLabel}"
+            },
             "done": "Done",
             "GuestSearch": {
                 "guestsAndRooms": "Guests and Rooms",
@@ -97,6 +114,7 @@
                 "room": "Room",
                 "rooms": "Rooms",
                 "adultsLabel": "Adults",
+                "childrenNoun": "children",
                 "select": "Select",
                 "guestsInRooms": "{guests} {guestLabel} in {rooms} {roomLabel}",
                 "adultsInRooms": "{adults} {adultsLabel} in {rooms} {roomLabel}"
@@ -818,6 +836,27 @@
         }
     },
     "HotelsTestPage": {
+        "HotelSearchForm": {
+            "nightsBadge": "{count} nights",
+            "whereTo": "Where to?",
+            "selectDates": "Select dates",
+            "selectCheckOut": "Select check-out",
+            "recentSearches": "Recent searches",
+            "allCities": "All cities",
+            "searching": "Searching…",
+            "noResults": "No results found",
+            "loadingCities": "Loading cities…",
+            "rooms": "Rooms",
+            "adults": "Adults",
+            "adultsHint": "18+ yrs",
+            "children": "Children",
+            "childrenHint": "0-17 yrs",
+            "done": "Done",
+            "search": "Search",
+            "detailsTitle": "Search results",
+            "detailsMissingParams": "Missing search parameters. Start a search from the hotels test page.",
+            "detailsHint": "Your criteria are in the URL query string. You can plug in a results list here next."
+        },
         "WelcomeAboard": {
             "title": "Welcome aboard! Enjoy a {discount}% discount on stays!",
             "perk1": "Snag a promo code and save up to 10%",

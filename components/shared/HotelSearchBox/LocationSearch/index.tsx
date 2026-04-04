@@ -1,11 +1,19 @@
 import useDebounce from "@/hooks/useDebounce";
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { searchHotelsParams } from "..";
 import { UseFormReturn } from "react-hook-form";
-import { RiMapPin2Fill } from "react-icons/ri";
+import { RiHistoryLine, RiMapPin2Fill } from "react-icons/ri";
 import { useGetAllCitiesQuery } from "@/redux/features/hotels/hotelsApi";
 import { useTranslations, useLocale } from "next-intl";
 import { localStorageHotelSearchKey } from "@/constants";
+import { HotelHeroField } from "../hero/HotelHeroField";
+import { POPULAR_HOTEL_DESTINATION_NAMES } from "../hero/popularDestinationNames";
+import {
+  getHotelRecentSearches,
+  type HotelRecentSearchItem,
+} from "@/utils/hotelRecentSearches";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 export interface cityTypes {
   id: number;
   code: string;
@@ -15,13 +23,16 @@ export interface cityTypes {
 }
 type Props = {
   form: UseFormReturn<searchHotelsParams & { searchValue?: string; locationId?: number; locationCode?: string; storedLocale?: string }>;
+  variant?: "default" | "hero";
 };
 
-function LocationSearch({ form }: Props) {
+function LocationSearch({ form, variant = "default" }: Props) {
   const t = useTranslations("Components.HotelSearchBox.LocationSearch");
+  const th = useTranslations("Components.HotelSearchBox.hero");
   const locale = useLocale();
   const [isFocused, setIsFocused] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [popularLookupName, setPopularLookupName] = useState<string | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -62,6 +73,11 @@ function LocationSearch({ form }: Props) {
     }
   );
   const cities = data?.data || [];
+
+  const { data: popularCityData } = useGetAllCitiesQuery(
+    { code: "", name: popularLookupName || "" },
+    { skip: !popularLookupName }
+  );
 
   // Query to fetch city by code when locale changes
   const { data: cityByCodeData } = useGetAllCitiesQuery(
@@ -112,35 +128,98 @@ function LocationSearch({ form }: Props) {
     return cities;
   }, [debouncedSearch, cities]);
 
-  // Show dropdown when there are results and input is focused
   useEffect(() => {
+    if (variant === "hero") {
+      if (!isFocused) {
+        const timer = setTimeout(() => setShowDropdown(false), 200);
+        return () => clearTimeout(timer);
+      }
+      const hasTyped = !!(searchValue && searchValue.trim().length > 0);
+      if (!hasTyped) {
+        setShowDropdown(true);
+        return;
+      }
+      setShowDropdown(true);
+      return;
+    }
     if (isFocused && filteredCities.length > 0) {
       setShowDropdown(true);
     } else if (!isFocused) {
-      // Delay hiding to allow click events
       const timer = setTimeout(() => setShowDropdown(false), 200);
       return () => clearTimeout(timer);
     }
-  }, [isFocused, filteredCities.length]);
+  }, [
+    isFocused,
+    filteredCities.length,
+    variant,
+    searchValue,
+    debouncedSearch,
+    isFetching,
+  ]);
 
-  const handleOptionClick = (item: cityTypes) => {
-    setValue("searchValue", item.name);
-    setValue("location", {
-      latitude: item.latitude,
-      longitude: item.longitude,
+  const handleOptionClick = useCallback(
+    (item: cityTypes) => {
+      setValue("searchValue", item.name);
+      setValue("location", {
+        latitude: item.latitude,
+        longitude: item.longitude,
+      });
+      setValue("locationId", item.id);
+      setValue("locationCode", item.code);
+      setValue("storedLocale", locale);
+      clearErrors("location");
+      trigger("location");
+      setShowDropdown(false);
+      setIsFocused(false);
+      inputRef.current?.blur();
+    },
+    [clearErrors, locale, setValue, trigger]
+  );
+
+  useEffect(() => {
+    if (!popularLookupName || !popularCityData?.data?.length) return;
+    const list = popularCityData.data;
+    const match =
+      list.find(
+        (c) => c.name.toLowerCase() === popularLookupName!.toLowerCase()
+      ) || list[0];
+    handleOptionClick(match);
+    setPopularLookupName(null);
+  }, [popularLookupName, popularCityData, handleOptionClick]);
+
+  const applyRecentSearch = useCallback(
+    (item: HotelRecentSearchItem) => {
+      if (item.searchValue) setValue("searchValue", item.searchValue);
+      setValue("location", item.location);
+      setValue("checkIn", item.checkIn);
+      setValue("checkOut", item.checkOut);
+      setValue("rooms", item.rooms);
+      setValue("country", item.country);
+      setValue("radiusInMeters", item.radiusInMeters ?? 10000);
+      if (item.locationId) setValue("locationId", item.locationId);
+      if (item.locationCode) setValue("locationCode", item.locationCode);
+      setValue("storedLocale", item.storedLocale || locale);
+      clearErrors(["location", "checkIn", "checkOut"]);
+      void trigger(["location", "checkIn", "checkOut"]);
+      setShowDropdown(false);
+      setIsFocused(false);
+      inputRef.current?.blur();
+    },
+    [clearErrors, locale, setValue, trigger]
+  );
+
+  const recentItems = useMemo(() => {
+    if (variant !== "hero" || typeof window === "undefined") return [];
+    const list = getHotelRecentSearches();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return list.filter((item) => {
+      if (!item.checkIn) return false;
+      const d = new Date(item.checkIn);
+      d.setHours(0, 0, 0, 0);
+      return d >= today;
     });
-    // Store the city id, code, and current locale for language change handling
-    setValue("locationId", item.id);
-    setValue("locationCode", item.code);
-    setValue("storedLocale", locale);
-    // Clear the location error immediately after selecting a valid location
-    clearErrors("location");
-    // Trigger validation to ensure the form state is updated
-    trigger("location");
-    setShowDropdown(false);
-    setIsFocused(false);
-    inputRef.current?.blur();
-  };
+  }, [variant, showDropdown]);
 
   // Set searchValue and location info from localStorage when location is provided but searchValue is not
   useEffect(() => {
@@ -211,37 +290,125 @@ function LocationSearch({ form }: Props) {
   }, [searchValue, setValue]);
 
   const hasValue = searchValue && searchValue.length > 0;
-  // Only use hasValue after mount to prevent hydration mismatch
   const isActive = isFocused || (isMounted && hasValue);
+
+  const typing = !!(searchValue && searchValue.trim().length > 0);
+  const showHeroExplore = variant === "hero" && isFocused && !typing;
+
+  const clearInput = () => {
+    setValue("searchValue", "", { shouldValidate: true });
+    setValue("location", { latitude: 0, longitude: 0 });
+    trigger("location");
+  };
+
+  if (variant === "hero") {
+    return (
+      <div className="relative col-span-1 min-w-0 flex-[1.15]">
+        <HotelHeroField active={isFocused}>
+          <RiMapPin2Fill className="shrink-0 text-gray-500" size={18} aria-hidden />
+          <div className="relative min-w-0 flex-1">
+            <input
+              id="searchValue-hero"
+              autoComplete="off"
+              type="search"
+              placeholder={th("whereTo")}
+              className="w-full min-w-0 border-none bg-transparent text-[15px] font-semibold text-gray-900 outline-none placeholder:text-gray-400"
+              {...registerProps}
+              ref={(e) => {
+                inputRef.current = e;
+                if (typeof registerRef === "function") {
+                  registerRef(e);
+                } else if (registerRef && "current" in registerRef) {
+                  (
+                    registerRef as React.MutableRefObject<HTMLInputElement | null>
+                  ).current = e;
+                }
+              }}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+            />
+          </div>
+          {isMounted && hasValue && (
+            <button
+              type="button"
+              aria-label="Clear"
+              className="shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={clearInput}
+            >
+              ×
+            </button>
+          )}
+        </HotelHeroField>
+
+        {showDropdown && (
+          <div
+            ref={dropdownRef}
+            className="absolute start-0 top-[calc(100%+6px)] z-50 max-h-[min(70vh,420px)] w-[min(100vw-32px,520px)] overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-xl"
+          >
+            {showHeroExplore ? (
+              <HeroExploreContent
+                recentItems={recentItems}
+                onRecentPick={applyRecentSearch}
+                onPopularPick={(name) => setPopularLookupName(name)}
+              />
+            ) : (
+              <SearchDropdown
+                dropdownRef={dropdownRef}
+                filteredCities={filteredCities}
+                handleOptionClick={handleOptionClick}
+                isFetching={
+                  isFetching ||
+                  (!!searchValue?.trim() &&
+                    (debouncedSearch ?? "").trim() !== searchValue.trim())
+                }
+                flat
+              />
+            )}
+          </div>
+        )}
+
+        {locationError && (
+          <p
+            title={locationError}
+            className="absolute -bottom-1 start-3 text-xs font-medium text-red-500 line-clamp-1 sm:start-4"
+          >
+            {locationError}
+          </p>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="col-span-1 relative">
       <div>
-        {/* label */}
         <div
-          className="relative flex items-center  px-4 h-16 bg-transparent
-           transition-all duration-300"
+          className="relative flex h-16 items-center bg-transparent px-4 transition-all duration-300"
         >
           <label
             htmlFor="searchValue"
-            className={`absolute start-4 transition-all font-bold duration-200 pointer-events-none ${isActive
-              ? "-top-0.5 text-gray-500"
-              : "top-1/2 -translate-y-1/2 text-gray-500"
-              }`}
+            className={`pointer-events-none absolute start-4 font-bold transition-all duration-200 ${
+              isActive
+                ? "-top-0.5 text-gray-500"
+                : "top-1/2 -translate-y-1/2 text-gray-500"
+            }`}
           >
             {t("destination")}
           </label>
-          <div className="flex items-center   gap-0 relative w-full">
+          <div className="relative flex w-full items-center gap-0">
             <RiMapPin2Fill
               size={16}
-              className={` 
-                  absolute top-[15px]  start-0
-                  ${isActive ? "text-gray-400" : "text-transparent"}`}
+              className={`absolute top-[15px] start-0 ${
+                isActive ? "text-gray-400" : "text-transparent"
+              }`}
             />
             <input
               autoComplete="off"
               type="search"
-              className={` w-full font-bold text-black bg-transparent border-none outline-none p-0 ${isActive ? "mt-4 ps-5" : ""
-                }`}
+              className={`w-full border-none bg-transparent p-0 font-bold text-black outline-none ${
+                isActive ? "mt-4 ps-5" : ""
+              }`}
               {...registerProps}
               ref={(e) => {
                 inputRef.current = e;
@@ -260,7 +427,6 @@ function LocationSearch({ form }: Props) {
         </div>
       </div>
 
-      {/* Dropdown with search results */}
       {showDropdown && (
         <SearchDropdown
           dropdownRef={dropdownRef}
@@ -270,9 +436,11 @@ function LocationSearch({ form }: Props) {
         />
       )}
 
-      {/* Error message */}
       {locationError && (
-        <p title={locationError} className="absolute -bottom-1.5 start-4 text-xs text-red-500 font-medium line-clamp-1">
+        <p
+          title={locationError}
+          className="absolute -bottom-1.5 start-4 line-clamp-1 text-xs font-medium text-red-500"
+        >
           {locationError}
         </p>
       )}
@@ -280,24 +448,108 @@ function LocationSearch({ form }: Props) {
   );
 }
 
-export default LocationSearch;
+function HeroExploreContent({
+  recentItems,
+  onRecentPick,
+  onPopularPick,
+}: {
+  recentItems: HotelRecentSearchItem[];
+  onRecentPick: (item: HotelRecentSearchItem) => void;
+  onPopularPick: (name: string) => void;
+}) {
+  const th = useTranslations("Components.HotelSearchBox.hero");
+  const tg = useTranslations("Components.HotelSearchBox.GuestSearch");
+
+  const formatStay = (checkIn: string, checkOut: string) => {
+    try {
+      const a = format(new Date(checkIn), "MMM d");
+      const b = format(new Date(checkOut), "MMM d");
+      return `${a} - ${b}`;
+    } catch {
+      return "";
+    }
+  };
+
+  const roomsSummary = (item: HotelRecentSearchItem) => {
+    const n = item.rooms?.length ?? 1;
+    const adults =
+      item.rooms?.reduce((s, r) => s + r.AdultsCount, 0) ?? 0;
+    return `${n} ${n === 1 ? tg("room") : tg("rooms")}, ${adults} ${tg("adultsLabel")}`;
+  };
+
+  return (
+    <div className="p-3 sm:p-4">
+      {recentItems.length > 0 && (
+        <>
+          <p className="mb-2 text-sm font-bold text-gray-900">
+            {th("recentSearches")}
+          </p>
+          <div className="space-y-1">
+            {recentItems.map((item, idx) => (
+              <button
+                key={`${item.searchValue}-${item.checkIn}-${idx}`}
+                type="button"
+                className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-start hover:bg-gray-50"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => onRecentPick(item)}
+              >
+                <RiHistoryLine className="shrink-0 text-gray-400" size={18} />
+                <div className="min-w-0 flex-1">
+                  <div className="truncate font-semibold text-gray-900">
+                    {item.searchValue}
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    {formatStay(item.checkIn, item.checkOut)} · {roomsSummary(item)}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+          <div className="my-3 border-t border-gray-100" />
+        </>
+      )}
+      <p className="mb-2 text-sm font-bold text-gray-900">
+        {th("popularDestinations")}
+      </p>
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5">
+        {POPULAR_HOTEL_DESTINATION_NAMES.map((name) => (
+          <button
+            key={name}
+            type="button"
+            className="rounded-lg px-2 py-2 text-center text-sm font-medium text-gray-800 hover:bg-sky-50 hover:text-primary"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => onPopularPick(name)}
+          >
+            {name}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const SearchDropdown = ({
   dropdownRef,
   filteredCities,
   handleOptionClick,
   isFetching,
+  flat,
 }: {
   dropdownRef: React.RefObject<HTMLDivElement | null>;
   filteredCities: cityTypes[];
   handleOptionClick: (city: cityTypes) => void;
   isFetching: boolean;
+  flat?: boolean;
 }) => {
   const t = useTranslations("Components.HotelSearchBox.LocationSearch");
   return (
     <div
-      ref={dropdownRef}
-      className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto"
+      ref={flat ? undefined : dropdownRef}
+      className={cn(
+        flat
+          ? "max-h-[min(50vh,320px)] overflow-y-auto"
+          : "absolute top-full left-0 right-0 z-50 mt-1 max-h-60 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg"
+      )}
     >
       {isFetching ? (
         <div className="px-4 py-3 flex items-center gap-2">
@@ -326,3 +578,5 @@ const SearchDropdown = ({
     </div>
   );
 };
+
+export default LocationSearch;

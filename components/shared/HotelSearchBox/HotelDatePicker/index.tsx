@@ -4,23 +4,33 @@ import React, { useState, useRef, useEffect, useMemo } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { searchHotelsParams } from "..";
 import { FaCalendarAlt } from "react-icons/fa";
-import { format } from "date-fns";
+import { differenceInCalendarDays, format } from "date-fns";
 import { DatePicker, parseDate } from "@ark-ui/react/date-picker";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocale, useTranslations } from "next-intl";
 import { ar, enUS } from "date-fns/locale";
 import { cn } from "@/lib/utils";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import HotelFlexibleDatePicker from "../HotelFlexibleDatePicker";
+import { HotelHeroField } from "../hero/HotelHeroField";
 
 type Props = {
   form: UseFormReturn<searchHotelsParams & { searchValue?: string }>;
+  variant?: "default" | "hero";
 };
 
-function HotelDatePicker({ form }: Props) {
+function HotelDatePicker({ form, variant = "default" }: Props) {
   const t = useTranslations("Components.HotelSearchBox");
+  const th = useTranslations("Components.HotelSearchBox.hero");
   const locale = useLocale();
   const [isFocused, setIsFocused] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [heroDateOpen, setHeroDateOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -149,6 +159,81 @@ function HotelDatePicker({ form }: Props) {
   }, [showCalendar]);
 
   const numOfMonths = isMobile ? 1 : 2;
+
+  const formatHeroRange = (dateStr: string) =>
+    new Intl.DateTimeFormat(locale, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    }).format(new Date(dateStr));
+
+  const heroNights =
+    checkInValue && checkOutValue
+      ? Math.max(
+          0,
+          differenceInCalendarDays(
+            new Date(checkOutValue),
+            new Date(checkInValue)
+          )
+        )
+      : 0;
+
+  const heroRangeLabel =
+    checkInValue && checkOutValue
+      ? `${formatHeroRange(checkInValue)} - ${formatHeroRange(checkOutValue)}`
+      : checkInValue
+        ? `${formatHeroRange(checkInValue)} - …`
+        : "";
+
+  if (variant === "hero") {
+    return (
+      <div className="relative min-w-0 flex-1 lg:max-w-[340px]">
+        <HotelHeroField active={heroDateOpen}>
+          <Popover open={heroDateOpen} onOpenChange={setHeroDateOpen}>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className="flex w-full min-w-0 items-center gap-2 text-start"
+              >
+                <FaCalendarAlt
+                  className="shrink-0 text-gray-500"
+                  size={18}
+                  aria-hidden
+                />
+                <span className="min-w-0 flex-1 truncate text-[15px] font-bold text-gray-900">
+                  {heroRangeLabel}
+                </span>
+                {heroNights > 0 && (
+                  <span className="shrink-0 rounded-full bg-sky-100 px-2.5 py-0.5 text-xs font-semibold text-primary">
+                    {th("nightsBadge", { count: heroNights })}
+                  </span>
+                )}
+              </button>
+            </PopoverTrigger>
+            <PopoverContent
+              align="start"
+              side="bottom"
+              sideOffset={8}
+              className="w-auto max-w-[calc(100vw-24px)] border-none bg-transparent p-0 shadow-none"
+            >
+              <HotelFlexibleDatePicker
+                form={form}
+                onConfirm={() => setHeroDateOpen(false)}
+              />
+            </PopoverContent>
+          </Popover>
+        </HotelHeroField>
+        {(checkInError || checkOutError) && (
+          <p
+            title={checkInError || checkOutError}
+            className="absolute -bottom-1 start-3 text-xs font-medium text-red-500 line-clamp-1 sm:start-4"
+          >
+            {checkInError || checkOutError}
+          </p>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="col-span-1  relative " ref={containerRef}>
