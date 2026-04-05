@@ -137,7 +137,7 @@ function WhereToPopover({ form, error, onApplyRecent }: Props) {
                 }}
                 className="flex size-6 shrink-0 items-center justify-center rounded-full 
                  text-[13px] font-light leading-none "
-                aria-label="Clear"
+                aria-label={t("clearDestination")}
               >
                 <RiCloseCircleFill className="text-gray-500" size={18} />
               </span>

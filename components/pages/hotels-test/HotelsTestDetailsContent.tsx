@@ -94,13 +94,18 @@ export default function HotelsTestDetailsContent() {
   return (
     <section className="mx-auto max-w-[1200px] w-full pt-20">
       {formDefaults ? (
-        <div className="mb-6">
+        <>
+          <h1 className="mb-4 text-xl font-semibold text-gray-900">
+            {t("detailsTitle")}
+          </h1>
+          <div className="mb-6">
           <HotelsTestHotelSearchForm
             initialValues={formDefaults}
             primaryBorder
             stayOnPage
           />
-        </div>
+          </div>
+        </>
       ) : (
         <p className="text-muted-foreground">{t("detailsMissingParams")}</p>
       )}

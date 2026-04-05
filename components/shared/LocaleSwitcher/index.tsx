@@ -15,6 +15,7 @@ import enFlag from "@/public/images/en_flag.webp";
 import arFlag from "@/public/images/ar_flag.webp";
 import { Locale, useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { baseApi, baseApi2 } from "@/redux/app/baseApi";
 import { GoGlobe } from "react-icons/go";
@@ -26,6 +27,7 @@ function LocaleSwitcher() {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const searchParams = useSearchParams();
   const [currentLang, setCurrentLang] = useState<Locale>(locale as Locale);
   const isRTL = locale === "ar";
 
@@ -49,8 +51,10 @@ function LocaleSwitcher() {
 
   const handleLanguageChange = (newLang: string) => {
     setCurrentLang(newLang as Locale);
-    // Navigate to the same path with the new locale
-    router.replace(pathname, { locale: newLang as Locale });
+    const query = searchParams.toString();
+    router.replace(`${pathname}${query ? `?${query}` : ""}`, {
+      locale: newLang as Locale,
+    });
   };
 
   const currentLanguage = Languages.find((lang) => lang.code === currentLang)!;

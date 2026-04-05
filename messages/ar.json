@@ -859,7 +859,29 @@
             "detailsMissingParams": "معاملات البحث غير مكتملة. ابدأ البحث من صفحة اختبار الفنادق.",
             "detailsHint": "معايير بحثك موجودة في عنوان الصفحة (query). يمكنك لاحقاً ربط قائمة النتائج هنا.",
             "detailsLoading": "جاري تحميل النتائج…",
-            "detailsError": "تعذر تحميل النتائج. حاول مرة أخرى."
+            "detailsError": "تعذر تحميل النتائج. حاول مرة أخرى.",
+            "clearDestination": "مسح الوجهة",
+            "decreaseQuantity": "تقليل",
+            "increaseQuantity": "زيادة",
+            "dateRangePartial": "{date} – …"
+        },
+        "ResultsSection": {
+            "filters": "عوامل التصفية",
+            "showResults": "عرض النتائج",
+            "noHotelsFromApi": "لم يُعثر على فنادق."
+        },
+        "HotelCard": {
+            "occupancyRooms": "{count, plural, zero {لا غرف} one {غرفة واحدة} two {غرفتان} few {# غرف} many {# غرفة} other {# غرف}}",
+            "occupancyAdults": "{count, plural, zero {لا بالغين} one {بالغ واحد} two {بالغان} few {# بالغين} many {# بالغاً} other {# بالغ}}",
+            "occupancyChildren": "{count, plural, zero {لا أطفال} one {طفل واحد} two {طفلان} few {# أطفال} many {# طفلاً} other {# طفل}}",
+            "noImage": "لا صورة",
+            "saveToWishlist": "حفظ في المفضلة",
+            "freeCancellation": "إلغاء مجاني",
+            "checkAvailability": "تحقق من التوفر"
+        },
+        "Hero": {
+            "title": "فنادق ومساكن",
+            "heroImageAlt": "صورة رئيسية للبحث عن الفنادق"
         },
         "WelcomeAboard": {
             "title": "أهلاً بك! استمتع بخصم {discount}% على الإقامات!",

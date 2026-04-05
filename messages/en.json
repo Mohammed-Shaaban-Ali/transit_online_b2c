@@ -859,7 +859,29 @@
             "detailsMissingParams": "Missing search parameters. Start a search from the hotels test page.",
             "detailsHint": "Your criteria are in the URL query string. You can plug in a results list here next.",
             "detailsLoading": "Loading results…",
-            "detailsError": "Could not load results. Try again."
+            "detailsError": "Could not load results. Try again.",
+            "clearDestination": "Clear destination",
+            "decreaseQuantity": "Decrease",
+            "increaseQuantity": "Increase",
+            "dateRangePartial": "{date} – …"
+        },
+        "ResultsSection": {
+            "filters": "Filters",
+            "showResults": "Show results",
+            "noHotelsFromApi": "No hotels found."
+        },
+        "HotelCard": {
+            "occupancyRooms": "{count, plural, one {# room} other {# rooms}}",
+            "occupancyAdults": "{count, plural, one {# adult} other {# adults}}",
+            "occupancyChildren": "{count, plural, one {# child} other {# children}}",
+            "noImage": "No image",
+            "saveToWishlist": "Save to wishlist",
+            "freeCancellation": "Free cancellation",
+            "checkAvailability": "Check availability"
+        },
+        "Hero": {
+            "title": "Hotels & Homes",
+            "heroImageAlt": "Hotels and homes search"
         },
         "WelcomeAboard": {
             "title": "Welcome aboard! Enjoy a {discount}% discount on stays!",

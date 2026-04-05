@@ -61,7 +61,7 @@ function StayDateRangePopover({ form }: Props) {
     checkIn && checkOut
       ? `${formatHero(checkIn)} - ${formatHero(checkOut)}`
       : checkIn
-        ? `${formatHero(checkIn)} - …`
+        ? t("dateRangePartial", { date: formatHero(checkIn) })
         : t("selectDates");
 
   return (

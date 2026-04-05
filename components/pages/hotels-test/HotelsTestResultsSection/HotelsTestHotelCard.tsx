@@ -13,7 +13,8 @@ import {
 import { hotelSeachTypes } from "@/types/hotels";
 import { convertPrice } from "@/config/currency";
 import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 
 type Props = {
   hotel: hotelSeachTypes;
@@ -69,33 +70,6 @@ const OCCUPANCY_ICONS: Record<
   children: Baby,
 };
 
-function getOccupancyLines(
-  rooms: number | undefined,
-  adults: number | undefined,
-  children: number | undefined,
-): { key: OccupancyRowKey; text: string }[] {
-  const lines: { key: OccupancyRowKey; text: string }[] = [];
-  if (rooms != null && rooms > 0) {
-    lines.push({
-      key: "rooms",
-      text: `${rooms} ${rooms === 1 ? "room" : "rooms"}`,
-    });
-  }
-  if (adults != null && adults >= 0) {
-    lines.push({
-      key: "adults",
-      text: `${adults} ${adults === 1 ? "adult" : "adults"}`,
-    });
-  }
-  if (children != null && children >= 0) {
-    lines.push({
-      key: "children",
-      text: `${children} ${children === 1 ? "child" : "children"}`,
-    });
-  }
-  return lines;
-}
-
 export default function HotelsTestHotelCard({
   hotel,
   nights = 1,
@@ -103,7 +77,31 @@ export default function HotelsTestHotelCard({
   adults,
   children,
 }: Props) {
+  const t = useTranslations("HotelsTestPage.HotelCard");
   const [wishlisted, setWishlisted] = useState(false);
+
+  const occupancyLines = useMemo(() => {
+    const lines: { key: OccupancyRowKey; text: string }[] = [];
+    if (rooms != null && rooms > 0) {
+      lines.push({
+        key: "rooms",
+        text: t("occupancyRooms", { count: rooms }),
+      });
+    }
+    if (adults != null && adults >= 0) {
+      lines.push({
+        key: "adults",
+        text: t("occupancyAdults", { count: adults }),
+      });
+    }
+    if (children != null && children >= 0) {
+      lines.push({
+        key: "children",
+        text: t("occupancyChildren", { count: children }),
+      });
+    }
+    return lines;
+  }, [rooms, adults, children, t]);
 
   const rawPrice = parseFloat(
     hotel.price?.toString().replace(/[^\d.]/g, "") || "0",
@@ -125,8 +123,6 @@ export default function HotelsTestHotelCard({
 
   const locationText = hotel.locationDetails || hotel.address;
 
-  const occupancyLines = getOccupancyLines(rooms, adults, children);
-
   return (
     <div
       className="group flex flex-col overflow-hidden rounded-lg border
@@ -147,14 +143,14 @@ export default function HotelsTestHotelCard({
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gray-200">
-            <span className="text-sm text-gray-400">No image</span>
+            <span className="text-sm text-gray-400">{t("noImage")}</span>
           </div>
         )}
         <button
           type="button"
           onClick={() => setWishlisted((p) => !p)}
           className="absolute top-2.5 end-2.5 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-900 shadow-sm transition-colors hover:bg-gray-50"
-          aria-label="Save to wishlist"
+          aria-label={t("saveToWishlist")}
         >
           <Heart
             className={`h-4 w-4 ${wishlisted ? "fill-rose-500 text-rose-500" : "fill-none stroke-[1.75]"}`}
@@ -217,7 +213,7 @@ export default function HotelsTestHotelCard({
             )}
             {hasFreeCancellation && (
               <p className="mt-1.5 text-[14px] font-medium text-green-600">
-                Free Cancellation
+                {t("freeCancellation")}
               </p>
             )}
           </div>
@@ -241,8 +237,11 @@ export default function HotelsTestHotelCard({
                bg-primary  px-5 py-2.5 text-[14px] font-bold text-white transition-colors hover:bg-primary/80 
                min-[500px]:min-w-[180px]"
             >
-              Check Availability
-              <ChevronRight className="h-4 w-4" strokeWidth={2.5} />
+              {t("checkAvailability")}
+              <ChevronRight
+                className="h-4 w-4 rtl:rotate-180"
+                strokeWidth={2.5}
+              />
             </button>
           </div>
         </div>

@@ -48,6 +48,8 @@ function StepperRow({
   onInc,
   decDisabled,
   incDisabled,
+  ariaDecrease,
+  ariaIncrease,
 }: {
   label: string;
   hint?: string;
@@ -56,6 +58,8 @@ function StepperRow({
   onInc: () => void;
   decDisabled: boolean;
   incDisabled: boolean;
+  ariaDecrease: string;
+  ariaIncrease: string;
 }) {
   return (
     <div className="flex items-center justify-between gap-4 p-2.5 last:pb-2">
@@ -76,7 +80,7 @@ function StepperRow({
               ? "cursor-not-allowed border-gray-300 bg-white text-gray-300"
               : "border-primary text-primary hover:bg-primary hover:text-white",
           )}
-          aria-label="Decrease"
+          aria-label={ariaDecrease}
         >
           <FaMinus className="size-2.5" />
         </button>
@@ -93,7 +97,7 @@ function StepperRow({
               ? "cursor-not-allowed border-gray-300 bg-white text-gray-300"
               : "border-primary text-primary hover:bg-primary hover:text-white",
           )}
-          aria-label="Increase"
+          aria-label={ariaIncrease}
         >
           <FaPlus className="size-2.5" />
         </button>
@@ -211,6 +215,8 @@ function OccupancySteppersPopover({ form }: Props) {
               incDisabled={roomCount >= MAX_ROOMS}
               onDec={() => setRoomsCount(roomCount - 1)}
               onInc={() => setRoomsCount(roomCount + 1)}
+              ariaDecrease={t("decreaseQuantity")}
+              ariaIncrease={t("increaseQuantity")}
             />
             <StepperRow
               label={t("adults")}
@@ -220,6 +226,8 @@ function OccupancySteppersPopover({ form }: Props) {
               incDisabled={totalAdults >= maxAdultsPossible}
               onDec={() => setAdultsTotal(totalAdults - 1)}
               onInc={() => setAdultsTotal(totalAdults + 1)}
+              ariaDecrease={t("decreaseQuantity")}
+              ariaIncrease={t("increaseQuantity")}
             />
             <StepperRow
               label={t("children")}
@@ -229,6 +237,8 @@ function OccupancySteppersPopover({ form }: Props) {
               incDisabled={totalChildren >= maxChildrenForFirst}
               onDec={() => setChildrenTotal(totalChildren - 1)}
               onInc={() => setChildrenTotal(totalChildren + 1)}
+              ariaDecrease={t("decreaseQuantity")}
+              ariaIncrease={t("increaseQuantity")}
             />
           </div>
           <div className="flex justify-end p-4">

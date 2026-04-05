@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import dynamic from "next/dynamic";
 import heroImage from "@/public/images/hotels/hotelhero.webp";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const HotelsTestHotelSearchForm = dynamic(
   () =>
@@ -11,13 +14,15 @@ const HotelsTestHotelSearchForm = dynamic(
 type Props = {};
 
 function HotelsTestHero({}: Props) {
+  const t = useTranslations("HotelsTestPage.Hero");
+
   return (
     <>
       {/* ── Desktop ── */}
       <div className="relative hidden h-[500px] w-full md:block">
         <Image
           src={heroImage}
-          alt="hero"
+          alt={t("heroImageAlt")}
           fill
           className="object-cover object-top"
           priority
@@ -27,7 +32,7 @@ function HotelsTestHero({}: Props) {
          flex-col justify-end pb-[200px]"
         >
           <h1 className="text-white text-[40px] font-bold leading-tight flex items-end gap-1 mb-2">
-            Hotels & Homes
+            {t("title")}
             <span className="bg-yellow-400 rounded-full w-2.5 h-2.5 block mb-2.5"></span>
           </h1>
 
@@ -43,7 +48,7 @@ function HotelsTestHero({}: Props) {
         <div className="absolute inset-x-0 top-0 h-[225px]">
           <Image
             src={heroImage}
-            alt="hero"
+            alt={t("heroImageAlt")}
             fill
             className="object-cover object-top"
             priority
@@ -62,7 +67,7 @@ function HotelsTestHero({}: Props) {
             className="text-white text-[32px] font-bold leading-tight flex items-end gap-1 
           drop-shadow-md mb-4"
           >
-            Hotels & Homes
+            {t("title")}
             <span className="bg-yellow-400 rounded-full w-2.5 h-2.5 block mb-2"></span>
           </h1>
 

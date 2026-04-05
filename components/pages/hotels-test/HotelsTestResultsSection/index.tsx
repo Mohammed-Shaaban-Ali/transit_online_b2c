@@ -47,6 +47,8 @@ export default function HotelsTestResultsSection({
   apiHotelCount = 0,
 }: Props) {
   const locale = useLocale();
+  const tForm = useTranslations("HotelsTestPage.HotelSearchForm");
+  const tResults = useTranslations("HotelsTestPage.ResultsSection");
   const tMobile = useTranslations("HotelsList.MobileSidebar");
   const {
     filteredHotels,
@@ -123,9 +125,7 @@ export default function HotelsTestResultsSection({
   if (isError) {
     return (
       <div className="mt-4 rounded-lg bg-white p-8 text-center">
-        <p className="text-[15px] text-red-500">
-          Could not load results. Please try again.
-        </p>
+        <p className="text-[15px] text-red-500">{tForm("detailsError")}</p>
       </div>
     );
   }
@@ -135,7 +135,9 @@ export default function HotelsTestResultsSection({
   if (!hasRawHotels) {
     return (
       <div className="mt-4 rounded-lg bg-white p-8 text-center">
-        <p className="text-[15px] text-gray-500">No hotels found.</p>
+        <p className="text-[15px] text-gray-500">
+          {tResults("noHotelsFromApi")}
+        </p>
       </div>
     );
   }
@@ -168,7 +170,7 @@ export default function HotelsTestResultsSection({
               className="flex items-center gap-1.5 text-[13px] font-medium text-gray-700"
             >
               <SlidersHorizontal className="h-3.5 w-3.5" />
-              Filters
+              {tResults("filters")}
             </button>
           </div>
 
@@ -237,10 +239,10 @@ export default function HotelsTestResultsSection({
           side="bottom"
           className="flex max-h-[min(92vh,calc(100%-1rem))] flex-col overflow-hidden rounded-t-2xl border-0 p-0 inset-x-3 bottom-3 w-auto sm:inset-x-4 sm:bottom-4 bg-[#f5f6f8] shadow-[0_-10px_40px_rgba(17,24,39,0.15)] [&>button.absolute]:hidden"
         >
-          <SheetTitle className="sr-only">Filters</SheetTitle>
+          <SheetTitle className="sr-only">{tResults("filters")}</SheetTitle>
           <div className="flex shrink-0 items-center justify-between border-b border-gray-100 bg-white px-4 py-3">
             <span className="text-[16px] font-semibold text-gray-900">
-              Filters
+              {tResults("filters")}
             </span>
             <button
               type="button"
@@ -259,7 +261,7 @@ export default function HotelsTestResultsSection({
               onClick={() => setMobileFiltersOpen(false)}
               className="h-11 w-full rounded-lg bg-primary text-[15px] font-semibold text-white transition-colors hover:bg-primary/90"
             >
-              Show results
+              {tResults("showResults")}
             </button>
           </div>
         </SheetContent>
