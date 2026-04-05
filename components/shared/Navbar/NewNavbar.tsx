@@ -35,20 +35,23 @@ const NewNavbar = () => {
     return pathname.startsWith("/") ? pathname : "/" + pathname;
   }
   const pathNameWithoutLocale = normalizePathname(pathname);
+  const isBlack =
+    pathNameWithoutLocale.includes("hotels-test") &&
+    pathNameWithoutLocale.includes("details");
 
-  const linkClassDesktop = (isActive: boolean) =>
+  const linkClassDesktop = (isActive: boolean, isBlack: boolean) =>
     `relative text-[18px] font-medium pb-1 transition-colors duration-300
-    text-white/80 hover:text-white
+    ${isBlack ? "text-black/80 hover:text-black" : "text-white/80 hover:text-white"}
     after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full
-     after:bg-white
+     ${isBlack ? "after:bg-black" : "after:bg-white"}
     after:transition-transform after:duration-300 after:scale-x-0 after:origin-right
     hover:after:scale-x-100 hover:after:origin-left
     ${isActive ? "text-white! after:scale-x-100 after:origin-left" : ""}`;
 
-  const linkClassMobile = (isActive: boolean) =>
+  const linkClassMobile = (isActive: boolean, isBlack: boolean) =>
     `relative text-[15px] sm:text-[16px] font-medium pb-0.5 whitespace-nowrap transition-colors duration-300
-    text-white/80 hover:text-white
-    after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-white
+    ${isBlack ? "text-black/80 hover:text-black" : "text-white/80 hover:text-white"}
+    after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full ${isBlack ? "after:bg-black" : "after:bg-white"}
     after:transition-transform after:duration-300 after:scale-x-0 after:origin-right
     hover:after:scale-x-100 hover:after:origin-left
     ${isActive ? "text-white! after:scale-x-100 after:origin-left" : ""}`;
@@ -72,7 +75,9 @@ const NewNavbar = () => {
               alt="logo"
               width={120}
               height={100}
-              className="h-full max-h-10 w-full object-contain brightness-0 invert sm:max-h-14"
+              className={`h-full max-h-10 w-full object-contain brightness-0 sm:max-h-14
+              ${isBlack ? "invert-0" : "invert"}
+              `}
             />
           </Link>
 
@@ -83,7 +88,7 @@ const NewNavbar = () => {
                 <Link
                   href={link.href}
                   key={link.label}
-                  className={linkClassDesktop(isActive)}
+                  className={linkClassDesktop(isActive, isBlack)}
                 >
                   {link.label}
                 </Link>
@@ -104,7 +109,7 @@ const NewNavbar = () => {
             <Link
               href={link.href}
               key={link.label}
-              className={linkClassMobile(isActive)}
+              className={linkClassMobile(isActive, isBlack)}
             >
               {link.label}
             </Link>

@@ -223,8 +223,10 @@
             "filters": "Filters",
             "close": "Close",
             "search": "Search for a specific hotel",
+            "propertiesFound": "{count} properties found",
             "sort": "Sort",
             "sortBy": "Sort By",
+            "sortRecommended": "Recommended",
             "sortPriceLow": "Lowest Price",
             "sortPriceHigh": "Highest Price",
             "sortRatingLow": "Lowest Rating",
@@ -855,7 +857,9 @@
             "search": "Search",
             "detailsTitle": "Search results",
             "detailsMissingParams": "Missing search parameters. Start a search from the hotels test page.",
-            "detailsHint": "Your criteria are in the URL query string. You can plug in a results list here next."
+            "detailsHint": "Your criteria are in the URL query string. You can plug in a results list here next.",
+            "detailsLoading": "Loading results…",
+            "detailsError": "Could not load results. Try again."
         },
         "WelcomeAboard": {
             "title": "Welcome aboard! Enjoy a {discount}% discount on stays!",

@@ -223,8 +223,10 @@
             "filters": "الفلاتر",
             "close": "إغلاق",
             "search": "ابحث عن فندق معين",
+            "propertiesFound": "{count} عقار",
             "sort": "ترتيب",
             "sortBy": "ترتيب حسب",
+            "sortRecommended": "موصى به",
             "sortPriceLow": "الأقل سعراً",
             "sortPriceHigh": "الأعلى سعراً",
             "sortRatingLow": "الأقل تقييماً",
@@ -855,7 +857,9 @@
             "search": "بحث",
             "detailsTitle": "نتائج البحث",
             "detailsMissingParams": "معاملات البحث غير مكتملة. ابدأ البحث من صفحة اختبار الفنادق.",
-            "detailsHint": "معايير بحثك موجودة في عنوان الصفحة (query). يمكنك لاحقاً ربط قائمة النتائج هنا."
+            "detailsHint": "معايير بحثك موجودة في عنوان الصفحة (query). يمكنك لاحقاً ربط قائمة النتائج هنا.",
+            "detailsLoading": "جاري تحميل النتائج…",
+            "detailsError": "تعذر تحميل النتائج. حاول مرة أخرى."
         },
         "WelcomeAboard": {
             "title": "أهلاً بك! استمتع بخصم {discount}% على الإقامات!",

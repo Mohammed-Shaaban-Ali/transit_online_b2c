@@ -38,7 +38,7 @@ function HotelsTestHero({}: Props) {
       </div>
 
       {/* ── Mobile ── */}
-      <div className="md:hidden relative pt-20">
+      <div className="md:hidden relative">
         {/* Background image — covers the top portion only */}
         <div className="absolute inset-x-0 top-0 h-[225px]">
           <Image
@@ -56,7 +56,7 @@ function HotelsTestHero({}: Props) {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-4 pt-10">
+        <div className="relative z-10 flex flex-col px-4 pt-6">
           {/* Title */}
           <h1
             className="text-white text-[32px] font-bold leading-tight flex items-end gap-1 
