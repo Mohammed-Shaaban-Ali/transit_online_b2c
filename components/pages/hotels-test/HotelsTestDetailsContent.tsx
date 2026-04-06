@@ -92,7 +92,7 @@ export default function HotelsTestDetailsContent() {
   const showLoading = Boolean(apiParams && isLoading);
 
   return (
-    <section className="mx-auto max-w-[1200px] container w-full pt-32 sm:pt-20 ">
+    <section className="mx-auto max-w-[1200px]! container w-full pt-32 sm:pt-20 ">
       {formDefaults ? (
         <>
           <div className="mb-6">
