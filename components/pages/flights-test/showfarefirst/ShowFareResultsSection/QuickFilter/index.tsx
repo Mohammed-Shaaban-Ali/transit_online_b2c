@@ -164,7 +164,7 @@ function QuickFilter({
               "data-[size=default]:h-auto [&>svg]:hidden"
             }
           >
-            <div className="flex min-w-0 items-center ms-auto gap-1">
+            <div className="flex min-w-0 items-center rtl:ms-auto gap-1">
               <ChevronsUpDown
                 className="h-3.5 w-3.5 shrink-0 text-black"
                 strokeWidth={2}

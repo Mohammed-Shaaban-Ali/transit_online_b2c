@@ -25,9 +25,7 @@ function FlightsTestHero({}: Props) {
             {t("title")}
             <span className="bg-yellow-400 rounded-full w-2.5 h-2.5 block mb-2.5"></span>
           </h1>
-          <p className="mt-1 text-white/90 text-lg">
-            {t("subtitle")}
-          </p>
+          <p className="mt-1 text-white/90 text-lg">{t("subtitle")}</p>
           <Form />
         </section>
       </div>
@@ -51,7 +49,7 @@ function FlightsTestHero({}: Props) {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-4 pt-6">
+        <div className="relative z-10 flex flex-col px-4 pt-28">
           {/* Title */}
           <h1
             className="text-white text-[32px] font-bold leading-tight flex items-end gap-1 
