@@ -102,7 +102,7 @@ const NewNavbar = () => {
         </div>
       </div>
 
-      <nav className="flex w-full overflow-x-scroll items-center justify-start gap-x-4 gap-y-1 md:hidden">
+      <nav className="flex w-full  items-center justify-start gap-x-4 gap-y-1 md:hidden">
         {links.map((link) => {
           const isActive = pathNameWithoutLocale === link.href;
           return (

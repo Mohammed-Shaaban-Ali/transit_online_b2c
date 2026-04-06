@@ -877,7 +877,15 @@
             "noImage": "No image",
             "saveToWishlist": "Save to wishlist",
             "freeCancellation": "Free cancellation",
-            "checkAvailability": "Check availability"
+            "cancellationShort": "Free cancellation",
+            "checkAvailability": "Check availability",
+            "ratingOutstanding": "Outstanding",
+            "ratingExcellent": "Excellent",
+            "ratingVeryGood": "Very good",
+            "ratingGood": "Good",
+            "totalInclTaxes": "Total (incl. taxes & fees):",
+            "breakfastIncluded": "Breakfast included",
+            "stayTotalLine": "{total} total · {nights, plural, one {# night} other {# nights}}"
         },
         "Hero": {
             "title": "Hotels & Homes",

@@ -92,18 +92,15 @@ export default function HotelsTestDetailsContent() {
   const showLoading = Boolean(apiParams && isLoading);
 
   return (
-    <section className="mx-auto max-w-[1200px] w-full pt-20">
+    <section className="mx-auto max-w-[1200px] container w-full pt-32 sm:pt-20 ">
       {formDefaults ? (
         <>
-          <h1 className="mb-4 text-xl font-semibold text-gray-900">
-            {t("detailsTitle")}
-          </h1>
           <div className="mb-6">
-          <HotelsTestHotelSearchForm
-            initialValues={formDefaults}
-            primaryBorder
-            stayOnPage
-          />
+            <HotelsTestHotelSearchForm
+              initialValues={formDefaults}
+              primaryBorder
+              stayOnPage
+            />
           </div>
         </>
       ) : (

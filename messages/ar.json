@@ -877,7 +877,15 @@
             "noImage": "لا صورة",
             "saveToWishlist": "حفظ في المفضلة",
             "freeCancellation": "إلغاء مجاني",
-            "checkAvailability": "تحقق من التوفر"
+            "cancellationShort": "إلغاء مجاني",
+            "checkAvailability": "تحقق من التوفر",
+            "ratingOutstanding": "ممتاز",
+            "ratingExcellent": "رائع جداً",
+            "ratingVeryGood": "جيد جداً",
+            "ratingGood": "جيد",
+            "totalInclTaxes": "الإجمالي (شامل الضرائب والرسوم):",
+            "breakfastIncluded": "يشمل الإفطار",
+            "stayTotalLine": "{total} إجمالي · {nights, plural, zero {لا ليالي} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}"
         },
         "Hero": {
             "title": "فنادق ومساكن",

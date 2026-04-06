@@ -170,7 +170,7 @@ function WhereToPopover({ form, error, onApplyRecent }: Props) {
                     {t("recentSearches")}
                   </h4>
                   <div className="mb-5 space-y-1">
-                    {recentItems.map((item, idx) => (
+                    {recentItems.slice(0, 5).map((item, idx) => (
                       <button
                         key={`${item.searchValue}-${item.checkIn}-${idx}`}
                         type="button"
