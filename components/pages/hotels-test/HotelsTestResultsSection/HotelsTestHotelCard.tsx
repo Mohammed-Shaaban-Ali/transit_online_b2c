@@ -140,14 +140,14 @@ export default function HotelsTestHotelCard({
     <Link
       href={`/hotels/${hotel.id}/${uuid}`}
       onClick={persistHotelAndNavigate}
-      className="group flex flex-row items-stretch overflow-hidden rounded-xl border
+      className="group flex flex-row items-stretch overflow-hidden rounded-lg border
         border-gray-200 bg-white font-sans transition-shadow duration-200
           hover:border-gray-300  max-sm:min-h-[168px]"
     >
       {/* Image — ~35% on phone, ~30% on sm+ */}
       <div
         className="relative w-[35%] min-w-[112px] max-w-[42%] shrink-0 overflow-hidden
-          max-sm:max-w-none max-sm:rounded-s-xl sm:w-[30%] sm:min-w-[200px] sm:max-w-[320px]
+          max-sm:max-w-none max-sm:rounded-s-xl sm:w-[30%] sm:min-w-[200px] sm:max-w-[220px]
           max-sm:h-auto max-sm:min-h-[168px] sm:h-[240px] sm:max-h-none sm:rounded-none"
       >
         {hotel.defaultImage?.FullSize ? (
@@ -155,7 +155,7 @@ export default function HotelsTestHotelCard({
             src={hotel.defaultImage.FullSize}
             alt={hotelName}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.02] "
             sizes="(max-width: 639px) 40vw, 320px"
           />
         ) : (

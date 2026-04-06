@@ -14,6 +14,7 @@ import {
   RiCloseCircleFill,
   RiMapPin2Fill,
   RiMapPin2Line,
+  RiTimeLine,
 } from "react-icons/ri";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -22,6 +23,16 @@ import {
 } from "@/utils/hotelRecentSearches";
 import { cn } from "@/lib/utils";
 import type { HotelsTestFormValues } from "./HotelsTestHotelSearchForm";
+
+function formatShortDate(dateStr: string, locale: string) {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  return d.toLocaleDateString(locale === "ar" ? "ar-EG" : "en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
 
 type Props = {
   form: UseFormReturn<HotelsTestFormValues>;
@@ -105,26 +116,37 @@ function WhereToPopover({ form, error, onApplyRecent }: Props) {
     <div className="relative flex  min-w-0 flex-1 flex-col self-stretch">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <button
-            type="button"
+          <div
             className={cn(
               "flex h-full  w-full min-w-0 flex-1 items-center gap-3 px-3.5 py-2 text-start  sm:px-2",
-              "rounded-md border-0 bg-transparent transition-colors duration-150",
-              "hover:bg-primary/10 data-[state=open]:bg-primary/10",
-              "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/25",
+              "rounded-md border-0 bg-transparent transition-colors duration-150 cursor-pointer",
+              open ? "bg-primary/10" : "hover:bg-primary/10",
             )}
+            onClick={() => !open && setOpen(true)}
           >
             <RiMapPin2Line className="size-[18px] shrink-0  sm:size-5" />
-            <span
-              title={displayValue || t("whereTo")}
-              className={cn(
-                "min-w-0 flex-1 truncate text-[15px] font-bold leading-snug sm:text-[16px]",
-                displayValue ? "text-slate-900" : "text-gray-500",
-              )}
-            >
-              {displayValue || t("whereTo")}
-            </span>
-            {hasDestination && (
+            {open ? (
+              <input
+                ref={inputRef}
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                placeholder={t("whereTo")}
+                autoComplete="off"
+                onClick={(e) => e.stopPropagation()}
+                className="min-w-0 flex-1 bg-transparent text-[15px] font-bold leading-snug outline-none placeholder:text-gray-500 text-slate-900"
+              />
+            ) : (
+              <span
+                title={displayValue || t("whereTo")}
+                className={cn(
+                  "min-w-0 flex-1 truncate text-[15px] font-bold leading-snug sm:text-[16px]",
+                  displayValue ? "text-slate-900" : "text-gray-500",
+                )}
+              >
+                {displayValue || t("whereTo")}
+              </span>
+            )}
+            {hasDestination && !open && (
               <span
                 role="button"
                 tabIndex={0}
@@ -142,65 +164,73 @@ function WhereToPopover({ form, error, onApplyRecent }: Props) {
                 <RiCloseCircleFill className="text-gray-500" size={18} />
               </span>
             )}
-          </button>
+          </div>
         </PopoverTrigger>
         <PopoverContent
           align="start"
           side="bottom"
-          sideOffset={-63}
+          sideOffset={0}
           avoidCollisions={false}
           className="border-none bg-transparent p-0 shadow-none"
         >
-          <div className="w-[min(100vw-32px,480px)] rounded-md border border-gray-200 bg-white shadow-xl">
-            <div className="border-b border-gray-200 px-4 py-3">
-              <input
-                ref={inputRef}
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                placeholder={t("whereTo")}
-                autoComplete="off"
-                className="h-[58px] w-full rounded-sm border border-gray-300 px-3 text-[15px] font-medium outline-none placeholder:text-gray-500"
-              />
-            </div>
-
+          <div className="w-[min(100vw-32px,600px)] rounded-md border border-gray-200 bg-white shadow-xl">
             <div className="max-h-[360px] overflow-y-auto p-4 text-black">
               {recentItems.length > 0 && !isSearching && (
                 <>
-                  <h4 className="mb-3 text-[14px] font-semibold">
+                  <h4 className="mb-2 p-1 text-[16px] font-semibold text-gray-700">
                     {t("recentSearches")}
                   </h4>
-                  <div className="mb-5 space-y-1">
-                    {recentItems.slice(0, 5).map((item, idx) => (
-                      <button
-                        key={`${item.searchValue}-${item.checkIn}-${idx}`}
-                        type="button"
-                        onClick={() => {
-                          onApplyRecent?.(item);
-                          setOpen(false);
-                          setSearchText("");
-                        }}
-                        className="flex w-full items-start gap-2 rounded-sm p-2 py-3 text-start transition-colors hover:bg-blue-50"
-                      >
-                        <RiMapPin2Fill
-                          size={16}
-                          className="mt-0.5 shrink-0 text-gray-400"
-                        />
-                        <div className="flex min-w-0 flex-col">
-                          <span className="text-[14px] font-medium text-gray-900">
+                  <div className="mb-4 space-y-0.5">
+                    {recentItems.slice(0, 5).map((item, idx) => {
+                      const totalAdults = (item.rooms || []).reduce(
+                        (sum, r) => sum + (r.AdultsCount || 0),
+                        0,
+                      );
+                      const totalKids = (item.rooms || []).reduce(
+                        (sum, r) => sum + (r.KidsAges?.length || 0),
+                        0,
+                      );
+                      const roomCount = item.rooms?.length || 1;
+                      const occupancyParts = [
+                        `${roomCount} ${roomCount === 1 ? t("room") : t("rooms")}`,
+                        `${totalAdults} ${totalAdults === 1 ? t("adult") : t("adults")}`,
+                        ...(totalKids > 0
+                          ? [
+                              `${totalKids} ${totalKids === 1 ? t("child") : t("children")}`,
+                            ]
+                          : []),
+                      ];
+                      return (
+                        <button
+                          key={`${item.searchValue}-${item.checkIn}-${idx}`}
+                          type="button"
+                          onClick={() => {
+                            onApplyRecent?.(item);
+                            setOpen(false);
+                            setSearchText("");
+                          }}
+                          className="flex w-full items-center gap-3 rounded-sm px-2 py-2.5 text-start transition-colors hover:bg-blue-50"
+                        >
+                          <RiTimeLine
+                            size={16}
+                            className="shrink-0 text-gray-400"
+                          />
+                          <span className="min-w-[60px] shrink-0 truncate text-[15px] text-black/70">
                             {item.searchValue}
                           </span>
-                          <span className="text-[12px] text-gray-500">
-                            {item.checkIn} → {item.checkOut}
+                          <span className="min-w-0 truncate text-[15px] text-black/70 ">
+                            {formatShortDate(item.checkIn, locale)} -{" "}
+                            {formatShortDate(item.checkOut, locale)}
                           </span>
-                        </div>
-                      </button>
-                    ))}
+                          <span className="text-gray-300">|</span>
+                          <span className="shrink-0 text-[15px] text-black/70 ">
+                            {occupancyParts.join(", ")}
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
-                  <div className="mb-3 border-t border-gray-200 pt-3">
-                    <h4 className="text-[14px] text-gray-500">
-                      {t("allCities")}
-                    </h4>
-                  </div>
+                  <div className="mb-3 border-t border-gray-200 pt-3"></div>
                 </>
               )}
 

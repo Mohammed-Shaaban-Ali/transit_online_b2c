@@ -77,9 +77,7 @@ export default function HotelsTestResultsSection({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && visibleCount < total) {
-          setVisibleCount((prev) =>
-            Math.min(prev + ITEMS_PER_PAGE, total),
-          );
+          setVisibleCount((prev) => Math.min(prev + ITEMS_PER_PAGE, total));
         }
       },
       { rootMargin: "200px" },
@@ -213,7 +211,7 @@ export default function HotelsTestResultsSection({
           {showFilteredEmpty ? (
             <NoHotelsFound />
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-4">
               {displayedHotels.map((hotel: hotelSeachTypes) => (
                 <HotelsTestHotelCard
                   key={hotel.id}
