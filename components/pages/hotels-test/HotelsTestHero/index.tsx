@@ -61,7 +61,7 @@ function HotelsTestHero({}: Props) {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col px-4 pt-6">
+        <div className="relative z-10 flex flex-col px-4 pt-32">
           {/* Title */}
           <h1
             className="text-white text-[32px] font-bold leading-tight flex items-end gap-1 
@@ -72,10 +72,7 @@ function HotelsTestHero({}: Props) {
           </h1>
 
           {/* Form card */}
-          <div
-            className="rounded-md bg-white overflow-hidden p-3"
-            style={{ boxShadow: "0 4px 32px rgba(0,0,0,0.18)" }}
-          >
+          <div className="rounded-md bg-white overflow-hidden ">
             <HotelsTestHotelSearchForm />
           </div>
         </div>

@@ -217,7 +217,7 @@ function HotelsTestHotelSearchForm({
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit, onInvalid)}
-      className={`w-full ${!primaryBorder ? "rounded-md p-3 bg-white" : ""}`}
+      className={`w-full ${!primaryBorder ? "rounded-md sm:p-3 bg-white" : ""}`}
       noValidate
     >
       <div
