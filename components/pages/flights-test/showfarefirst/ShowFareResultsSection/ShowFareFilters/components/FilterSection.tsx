@@ -38,8 +38,8 @@ function FilterSection({
           />
         </button>
       ) : (
-        <div className="mb-3 flex items-center justify-between">
-          <h4 className="text-[16px] font-semibold">{title}</h4>
+        <div className="mb-1.5 flex items-center justify-between">
+          <h4 className="text-[16px] font-medium">{title}</h4>
         </div>
       )}
 

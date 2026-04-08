@@ -210,6 +210,34 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+  .custom-scrollbar-hover {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  .custom-scrollbar-hover:hover {
+    scrollbar-color: #cfd8e6 transparent;
+  }
+  .custom-scrollbar-hover::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar-hover::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+  .custom-scrollbar-hover:hover::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar-hover::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+  }
+  .custom-scrollbar-hover:hover::-webkit-scrollbar-thumb {
+    background: #cfd8e6;
+  }
+  .custom-scrollbar-hover:hover::-webkit-scrollbar-thumb:hover {
+    background: #bcc9db;
+  }
 
   /* Map marker styles */
   .map-marker-container {

@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
-import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchHotelsMutation } from "@/redux/features/hotels/hotelsApi";
 import {
@@ -91,37 +91,98 @@ export default function HotelsTestDetailsContent() {
 
   const showLoading = Boolean(apiParams && isLoading);
 
+  const [formBarHeight, setFormBarHeight] = useState(0);
+  const formBarRef = useRef<HTMLDivElement>(null);
+  const spacerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (spacerRef.current) {
+        spacerRef.current.style.height = isScrolled ? "0px" : "80px";
+      }
+      if (wrapperRef.current) {
+        if (isScrolled) {
+          wrapperRef.current.style.background = "white";
+          wrapperRef.current.style.padding = "8px 0";
+          wrapperRef.current.style.boxShadow = "0 6px 18px rgba(15,23,42,0.12)";
+        } else {
+          wrapperRef.current.style.background = "transparent";
+          wrapperRef.current.style.padding = "0 0 8px";
+          wrapperRef.current.style.boxShadow = "none";
+        }
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const measure = () => {
+      if (formBarRef.current) {
+        setFormBarHeight(formBarRef.current.getBoundingClientRect().height);
+      }
+    };
+
+    measure();
+
+    const observer = new ResizeObserver(measure);
+    if (formBarRef.current) observer.observe(formBarRef.current);
+
+    const t1 = setTimeout(measure, 100);
+    const t2 = setTimeout(measure, 500);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [formDefaults]);
+
   return (
-    <section className="mx-auto max-w-[1200px]! container w-full pt-32 sm:pt-20 ">
+    <>
       {formDefaults ? (
-        <>
-          <div className="mb-6">
-            <HotelsTestHotelSearchForm
-              initialValues={formDefaults}
-              primaryBorder
-              stayOnPage
-            />
+        <div ref={formBarRef} className="sticky top-0 z-30 w-full">
+          <div ref={spacerRef} style={{ height: "80px" }} />
+          <div
+            ref={wrapperRef}
+            className="w-full"
+            style={{ background: "transparent", padding: "0 0 8px" }}
+          >
+            <div className="mx-auto max-w-[1200px]! container w-full">
+              <HotelsTestHotelSearchForm
+                initialValues={formDefaults}
+                primaryBorder
+                stayOnPage
+              />
+            </div>
           </div>
-        </>
+        </div>
       ) : (
-        <p className="text-muted-foreground">{t("detailsMissingParams")}</p>
+        <div className="mx-auto max-w-[1200px] container w-full pt-32 sm:pt-20">
+          <p className="text-muted-foreground">{t("detailsMissingParams")}</p>
+        </div>
       )}
 
-      {!apiParams && !formDefaults && null}
+      <section className="mx-auto max-w-[1200px]! container w-full ">
+        {!apiParams && !formDefaults && null}
 
-      {apiParams && (
-        <HotelsTestResultsSection
-          uuid={uuid}
-          isLoading={showLoading}
-          isError={Boolean(isError && apiParams)}
-          filters={filters}
-          nights={nights}
-          rooms={roomsCount}
-          adults={adults}
-          children={children}
-          apiHotelCount={data?.data?.length ?? 0}
-        />
-      )}
-    </section>
+        {apiParams && (
+          <HotelsTestResultsSection
+            uuid={uuid}
+            isLoading={showLoading}
+            isError={Boolean(isError && apiParams)}
+            filters={filters}
+            nights={nights}
+            rooms={roomsCount}
+            adults={adults}
+            children={children}
+            apiHotelCount={data?.data?.length ?? 0}
+            stickyTop={formBarHeight + 16}
+          />
+        )}
+      </section>
+    </>
   );
 }

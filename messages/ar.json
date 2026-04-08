@@ -886,9 +886,16 @@
             "ratingExcellent": "رائع جداً",
             "ratingVeryGood": "جيد جداً",
             "ratingGood": "جيد",
+            "reviews": "{count} تقييم",
             "totalInclTaxes": "الإجمالي (شامل الضرائب والرسوم):",
             "breakfastIncluded": "يشمل الإفطار",
-            "stayTotalLine": "{total} إجمالي · {nights, plural, zero {لا ليالي} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}"
+            "stayTotalLine": "{total} إجمالي · {nights, plural, zero {لا ليالي} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}",
+            "totalPriceLabel": "السعر الإجمالي:",
+            "roomNightsInclTaxes": "{roomCount, plural, one {غرفة واحدة} other {# غرف}} × {nightCount, plural, one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}} شامل الضرائب والرسوم",
+            "specialDiscountBadge": "خصم خاص",
+            "percentOffBadge": "خصم 25٪",
+            "paymentsEasyReach": "تقبل معظم بطاقات الدفع - سهل الوصول",
+            "lastBookedStatic": "آخر حجز منذ 7 دقائق"
         },
         "Hero": {
             "title": "فنادق ومساكن",

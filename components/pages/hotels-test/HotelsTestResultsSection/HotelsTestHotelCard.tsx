@@ -1,7 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { MapPin, Heart, Star, Bed, User, Baby } from "lucide-react";
+import {
+  MapPin,
+  Heart,
+  Star,
+  Bed,
+  User,
+  Baby,
+  ChevronRight,
+} from "lucide-react";
 import { hotelSeachTypes } from "@/types/hotels";
 import { convertPrice } from "@/config/currency";
 import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
@@ -9,7 +17,8 @@ import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { localStorageHotelKey } from "@/constants";
-
+import hotelCardStyles from "@/public/images/hotels/hotelCard.png";
+import { Button } from "@/components/ui/button";
 type Props = {
   hotel: hotelSeachTypes;
   uuid: string;
@@ -61,6 +70,10 @@ const OCCUPANCY_ICONS: Record<
   children: Baby,
 };
 
+/** API `hotel.price` is the stay total (all nights). Strikethrough uses a fixed 25% promo vs per-night. */
+const MOCK_PROMO_PERCENT = 25;
+const MOCK_REVIEW_COUNT = 300;
+
 export default function HotelsTestHotelCard({
   hotel,
   uuid,
@@ -99,10 +112,14 @@ export default function HotelsTestHotelCard({
   const rawPrice = parseFloat(
     hotel.price?.toString().replace(/[^\d.]/g, "") || "0",
   );
-  const perNightPrice = convertPrice(rawPrice);
-  const totalPrice = perNightPrice * nights;
-  /** Rough total incl. fees for subline (API does not split taxes on card). */
-  const totalInclFeesEstimate = Math.round(totalPrice * 1.08);
+  /** Total for the whole stay (all nights) from API — always the discounted price. */
+  const stayTotal = convertPrice(rawPrice);
+  const safeNights = Math.max(nights, 1);
+  const pricePerNight = stayTotal / safeNights;
+  /** Strikethrough = current price ÷ (1 - 25%) → original before 25% off. */
+  const wasTotal = Math.ceil(stayTotal / (1 - MOCK_PROMO_PERCENT / 100));
+  const wasPerNight = Math.ceil(pricePerNight / (1 - MOCK_PROMO_PERCENT / 100));
+  const roomCount = rooms != null && rooms > 0 ? rooms : 1;
 
   const starRating = hotel.starRating ? Number(hotel.starRating) : 0;
   const reviewScore = starRating > 0 ? Math.min(10, starRating * 2) : 8.5;
@@ -121,7 +138,7 @@ export default function HotelsTestHotelCard({
     f?.name?.toLowerCase().includes("room"),
   )?.name;
 
-  const locationText = hotel.locationDetails || hotel.address;
+  const locationText = hotel.address || hotel.locationDetails;
 
   const persistHotelAndNavigate = () => {
     if (typeof window !== "undefined") {
@@ -148,7 +165,7 @@ export default function HotelsTestHotelCard({
       <div
         className="relative w-[35%] min-w-[112px] max-w-[42%] shrink-0 overflow-hidden
           max-sm:max-w-none max-sm:rounded-s-xl sm:w-[30%] sm:min-w-[200px] sm:max-w-[220px]
-          max-sm:h-auto max-sm:min-h-[168px] sm:h-[240px] sm:max-h-none sm:rounded-none"
+          max-sm:h-auto max-sm:min-h-[168px] sm:min-h-[230px] sm:max-h-none sm:rounded-none"
       >
         {hotel.defaultImage?.FullSize ? (
           <Image
@@ -166,12 +183,12 @@ export default function HotelsTestHotelCard({
         <button
           type="button"
           onClick={handleWishlistClick}
-          className="absolute top-2 end-2 z-10 flex h-8 w-8 items-center justify-center
+          className="absolute top-4 end-4 z-10 flex size-9 items-center justify-center
             rounded-full bg-white text-gray-900 shadow-sm transition-colors hover:bg-gray-50"
           aria-label={t("saveToWishlist")}
         >
           <Heart
-            className={`h-4 w-4 ${wishlisted ? "fill-rose-500 text-rose-500" : "fill-none stroke-[1.75]"}`}
+            className={`size-5 ${wishlisted ? "fill-rose-500 text-rose-500" : "fill-none stroke-[1.75]"}`}
           />
         </button>
       </div>
@@ -228,43 +245,74 @@ export default function HotelsTestHotelCard({
             </div>
           )}
 
-          <div className="mt-auto flex flex-col items-end gap-0.5 pt-2">
-            <div className="flex items-baseline gap-0.5">
-              <span className="text-[12px] font-semibold text-primary">
+          <div className="mt-auto flex w-full flex-col items-end gap-1 pt-2">
+            <div
+              className="flex flex-row items-baseline justify-end gap-2"
+              dir="ltr"
+            >
+              <span className="inline-flex items-baseline gap-0.5 text-[12px] text-gray-500 line-through">
+                <CurrencySymbol size="sm" className="text-[12px]" />
+                {wasTotal.toLocaleString()}
+              </span>
+              <span className="inline-flex items-baseline gap-0.5 text-[22px] font-bold leading-none tracking-tight text-[#1a1a1a]">
                 <CurrencySymbol
                   size="sm"
-                  className="text-[12px] font-semibold text-primary"
+                  className="text-[14px] font-bold text-[#1a1a1a]"
                 />
-              </span>
-              <span className="text-[22px] font-bold leading-none tracking-tight text-primary">
-                {Math.round(totalPrice).toLocaleString()}
+                {Math.round(stayTotal).toLocaleString()}
               </span>
             </div>
+            <p className="text-end text-[11px] text-gray-600">
+              <span>{t("totalPriceLabel")} </span>
+              <span className="font-semibold text-gray-800">
+                <CurrencySymbol size="sm" className="text-[11px]" />
+                {Math.round(stayTotal).toLocaleString()}
+              </span>
+            </p>
           </div>
         </div>
 
         {/* —— sm+: original richer layout —— */}
-        <div className="hidden min-h-0 flex-1 flex-col p-4 sm:flex">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+        <div className="hidden min-h-0 flex-1 flex-col p-4 px-5 sm:flex">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-[18px] font-bold leading-snug text-gray-900 line-clamp-2">
+                <h3 className="text-[20px] font-bold leading-snug line-clamp-2 hover:underline">
                   {hotelName}
                 </h3>
-                {starRating > 0 && <StarRating rating={starRating} />}
+
+                {starRating > 0 && <StarRating rating={starRating} compact />}
               </div>
               {locationText && (
-                <p className="mt-2 flex items-center gap-1 text-[14px] text-gray-600">
+                <p className="mt-2 flex items-center gap-1.5 text-[15px] ">
                   <MapPin className="shrink-0 size-4" />
                   <span className="line-clamp-2">{locationText}</span>
                 </p>
               )}
+              <p className="mt-2 flex items-center gap-1.5 text-[15px] ">
+                <Image
+                  src={hotelCardStyles}
+                  alt="hotel card"
+                  width={14}
+                  height={14}
+                />
+                <span className="line-clamp-2">{t("paymentsEasyReach")}</span>
+              </p>
             </div>
 
-            <div className="flex shrink-0 items-start gap-2 sm:flex-col sm:items-end sm:text-end">
+            <div className="flex shrink-0 items-start gap-2 sm:items-center">
+              <div className="flex flex-col items-end leading-tight">
+                <span className="text-[15px] font-semibold ">
+                  {t(ratingLabelKey(reviewScore))}
+                </span>
+
+                <span className="mt-0.5 text-[12px] font-medium text-gray-500">
+                  {t("reviews", { count: MOCK_REVIEW_COUNT })}
+                </span>
+              </div>
               <div
-                className="flex h-9 min-w-11 items-center justify-center rounded-full rounded-tr-none
-                  bg-primary px-2 text-[16px] font-bold text-white"
+                className="flex h-8  min-w-[34px] items-center justify-center rounded-xl rounded-tr-none
+                  bg-primary px-2 text-[16px] font-bold text-white shrink-0"
               >
                 {reviewScore.toFixed(1)}
               </div>
@@ -272,17 +320,15 @@ export default function HotelsTestHotelCard({
           </div>
 
           <div
-            className="mt-5 flex flex-1 flex-col gap-4 min-[500px]:flex-row min-[500px]:items-end
+            className="mt-2.5 flex flex-1 flex-col gap-4 min-[500px]:flex-row min-[500px]:items-end
               min-[500px]:justify-between min-[500px]:gap-6"
           >
-            <div className="min-w-0 flex-1 border-s border-gray-300 ps-3">
+            <div className="min-w-0 flex-1 border-s-2 border-gray-200 ps-3 ms-2">
               {roomTypeLabel && (
-                <p className="text-[16px] font-medium text-gray-900">
-                  {roomTypeLabel}
-                </p>
+                <p className="text-[15px]  ">{roomTypeLabel}</p>
               )}
               {occupancyLines.length > 0 && (
-                <div className="mt-0.5 flex min-w-0 flex-col gap-1 text-[14px] text-gray-900">
+                <div className="mt-0.5 flex min-w-0 flex-col gap-1 text-[15px]">
                   {occupancyLines.map((row) => {
                     const Icon = OCCUPANCY_ICONS[row.key];
                     return (
@@ -297,6 +343,10 @@ export default function HotelsTestHotelCard({
                   })}
                 </div>
               )}
+
+              <div className="flex items-center gap-1.5 text-[15px] text-gray-600">
+                {t("lastBookedStatic")}
+              </div>
               {hasFreeCancellation && (
                 <p className="mt-1.5 text-[14px] font-medium text-green-600">
                   {t("freeCancellation")}
@@ -304,26 +354,57 @@ export default function HotelsTestHotelCard({
               )}
             </div>
 
-            <div className="flex shrink-0 flex-col items-end gap-1 self-stretch min-[500px]:self-end">
-              <div className="flex items-baseline gap-1">
-                <span className="text-[15px] font-semibold text-gray-900">
-                  <CurrencySymbol
-                    size="sm"
-                    className="text-[15px] font-semibold"
-                  />
+            <div className="flex w-full min-w-0 shrink-0 flex-col items-stretch gap-2 self-stretch min-[500px]:w-auto min-[500px]:min-w-[220px] min-[500px]:max-w-[280px] min-[500px]:items-end min-[500px]:self-end">
+              <div
+                className="flex flex-row items-baseline justify-end gap-2"
+                dir="ltr"
+              >
+                <span className="inline-flex items-baseline gap-0.5 text-[15px] text-gray-500 line-through">
+                  <CurrencySymbol size="sm" />
+                  {wasTotal.toLocaleString()}
                 </span>
-                <span className="text-[26px] font-bold leading-none tracking-tight text-gray-900">
-                  {Math.round(perNightPrice).toLocaleString()}
+                <span className="inline-flex items-baseline gap-1 text-[26px] font-bold leading-none tracking-tight text-[#1a1a1a]">
+                  <CurrencySymbol
+                    size="md"
+                    className="text-[24px] font-bold text-[#1a1a1a]"
+                  />
+                  {Math.round(stayTotal).toLocaleString()}
                 </span>
               </div>
-              {nights > 1 && (
-                <p className="text-[13px] text-gray-500">
-                  {t("stayTotalLine", {
-                    total: Math.round(totalPrice).toLocaleString(),
-                    nights,
+              <div className="flex flex-col gap-0.5">
+                <p className="text-end text-[13px] ">
+                  <span>{t("totalPriceLabel")} </span>
+                  <span className="font-semibold ">
+                    <CurrencySymbol size="sm" className="text-[13px]" />
+                    {Math.round(stayTotal).toLocaleString()}
+                  </span>
+                </p>
+                <p className="text-end text-[11px] leading-snug ">
+                  {t("roomNightsInclTaxes", {
+                    roomCount,
+                    nightCount: safeNights,
                   })}
                 </p>
-              )}
+              </div>
+              <div className="flex flex-wrap justify-end gap-1.5">
+                <span className="rounded bg-[#fff1f2] px-2 py-0.5 text-[11px] font-medium text-[#e11d48]">
+                  {t("specialDiscountBadge")}
+                </span>
+                <span className="rounded bg-[#fff1f2] px-2 py-0.5 text-[11px] font-medium text-[#e11d48]">
+                  {t("percentOffBadge")}
+                </span>
+              </div>
+              <Button
+                className="mt-1 inline-flex w-full items-center justify-center gap-2 rounded 
+              h-10!
+              px-4 py-2.5 text-[14px] font-semibold text-white min-[500px]:max-w-[260px]"
+              >
+                {t("checkAvailability")}
+                <ChevronRight
+                  className="size-4 shrink-0 rtl:rotate-180"
+                  aria-hidden
+                />
+              </Button>
             </div>
           </div>
         </div>

@@ -881,14 +881,21 @@
             "saveToWishlist": "Save to wishlist",
             "freeCancellation": "Free cancellation",
             "cancellationShort": "Free cancellation",
-            "checkAvailability": "Check availability",
+            "checkAvailability": "Check Availability",
             "ratingOutstanding": "Outstanding",
             "ratingExcellent": "Excellent",
             "ratingVeryGood": "Very good",
             "ratingGood": "Good",
+            "reviews": "{count} reviews",
             "totalInclTaxes": "Total (incl. taxes & fees):",
             "breakfastIncluded": "Breakfast included",
-            "stayTotalLine": "{total} total · {nights, plural, one {# night} other {# nights}}"
+            "stayTotalLine": "{total} total · {nights, plural, one {# night} other {# nights}}",
+            "totalPriceLabel": "Total price:",
+            "roomNightsInclTaxes": "{roomCount, plural, one {# room} other {# rooms}} × {nightCount, plural, one {# night} other {# nights}} incl. taxes & fees",
+            "specialDiscountBadge": "Special Discount",
+            "percentOffBadge": "25% off",
+            "paymentsEasyReach": "Most card payments accepted - Easy to reach",
+            "lastBookedStatic": "Last booked 7 mins ago"
         },
         "Hero": {
             "title": "Hotels & Homes",

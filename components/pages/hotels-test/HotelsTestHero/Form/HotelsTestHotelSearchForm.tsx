@@ -234,15 +234,18 @@ function HotelsTestHotelSearchForm({
         <SegmentDivider />
         <OccupancySteppersPopover form={form} />
         <SegmentDivider />
-        <div className="flex w-full shrink-0 items-stretch self-stretch  lg:w-auto lg:min-w-[132px] md:ms-2 lg:max-w-[220px]">
+        <div
+          className="flex w-full shrink-0 items-stretch self-stretch  
+        lg:w-auto lg:min-w-[132px] md:ms-2 lg:max-w-[200px]"
+        >
           <Button
             type="submit"
             disabled={form.formState.isSubmitting}
             className={cn(
-              "h-full  w-full flex-1 flex items-center justify-center gap-2 rounded-md px-5",
-              "border-0 bg-primary text-[15px] font-bold text-white shadow-none",
+              "h-full  w-full flex-1 flex items-center justify-center gap-2 rounded-md ",
+              "border-0 bg-primary text-[16px] font-bold text-white shadow-none",
               "hover:bg-primary/80 disabled:opacity-50",
-              "min-h-[48px] sm:text-base lg:min-h-[52px]",
+              "min-h-[48px]  lg:min-h-[50px]",
             )}
           >
             <FaSearch className="size-4 shrink-0 text-white" />

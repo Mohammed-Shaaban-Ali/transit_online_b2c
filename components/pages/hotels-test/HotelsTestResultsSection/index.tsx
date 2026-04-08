@@ -19,6 +19,7 @@ import { SlidersHorizontal } from "lucide-react";
 import NoHotelsFound from "@/components/pages/hotel/HotelsList/NoHotelsFound";
 import HotelsTestFilters from "./HotelsTestFilters";
 import { SortOption } from "@/redux/features/hotels/hotelFilterSlice";
+import FirstBooking from "./FirstBooking";
 
 type Props = {
   uuid: string;
@@ -31,6 +32,8 @@ type Props = {
   children?: number;
   /** From API response; used so we do not hide filters before Redux syncs */
   apiHotelCount?: number;
+  /** Height of the sticky form bar so the sidebar sticks right below it */
+  stickyTop?: number;
 };
 
 const ITEMS_PER_PAGE = 10;
@@ -45,6 +48,7 @@ export default function HotelsTestResultsSection({
   adults,
   children,
   apiHotelCount = 0,
+  stickyTop = 0,
 }: Props) {
   const locale = useLocale();
   const tForm = useTranslations("HotelsTestPage.HotelSearchForm");
@@ -149,10 +153,18 @@ export default function HotelsTestResultsSection({
 
   return (
     <>
-      <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[260px_1fr]">
+      <div className="mt-4 grid grid-cols-1 gap-8 lg:grid-cols-[270px_1fr]">
         {/* Desktop sidebar */}
         <div className="hidden lg:block">
-          <HotelsTestFilters filters={filters} />
+          <div
+            className="lg:sticky lg:overflow-y-scroll custom-scrollbar-hover"
+            style={{
+              top: stickyTop,
+              maxHeight: `calc(100vh - ${stickyTop}px)`,
+            }}
+          >
+            <HotelsTestFilters filters={filters} />
+          </div>
         </div>
 
         {/* Main content */}
@@ -172,11 +184,11 @@ export default function HotelsTestResultsSection({
             </button>
           </div>
 
-          {/* Results count + sort (desktop) */}
-          <div className="mb-3 hidden items-center justify-between gap-3  pb-3 lg:flex">
-            <p className="text-[18px] font-semibold text-gray-900">
-              {countLabel}
-            </p>
+          {/*First booking*/}
+          <FirstBooking />
+
+          <div className="mb-3 hidden items-center justify-between gap-3  pb-2 lg:flex">
+            <p className="text-[20px] font-bold  ">{countLabel}</p>
             <Select
               value={sortSelectValue}
               onValueChange={(v) =>
@@ -185,8 +197,8 @@ export default function HotelsTestResultsSection({
             >
               <SelectTrigger
                 size="sm"
-                className="h-10!  shrink-0 rounded-md
-                 border-gray-400 bg-white px-3 text-[15px] font-normal text-gray-900 shadow-none
+                className="h-10!  shrink-0 rounded-sm
+                 border-gray-300 bg-white px-5 text-[15px] font-normal text-gray-900 shadow-none
                  gap-2!
                  "
               >
