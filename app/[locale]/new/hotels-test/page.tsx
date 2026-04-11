@@ -8,6 +8,7 @@ import WelcomeAboard from "@/components/pages/hotels-test/WelcomeAboard/page";
 import WhatNew from "@/components/pages/hotels-test/WhatNew";
 import PropertiesAtAGlance from "@/components/pages/hotels-test/PropertiesAtAGlance";
 import HotelsInfo from "@/components/pages/hotels-test/HotelsInfo";
+import NewNavbar from "@/components/shared/Navbar/NewNavbar";
 
 type Props = {};
 
@@ -15,22 +16,26 @@ async function page({}: Props) {
   const t = await getTranslations("HotelsTestPage.TopHotels");
 
   return (
-    <section className="relative">
-      <FloatingSideActions rounded />
-      <HotelsTestHero />
+    <>
+      <NewNavbar />
 
-      <section className="relative z-0 min-w-0 overflow-x-clip md:-mt-16 md:rounded-t-[32px] bg-white py-6 md:py-12">
-        <WelcomeAboard />
-        <WhatNew />
-        <PriceMatch />
-        <TopHotels title={t("title1")} />
-        <TopHotels title={t("title2")} />
-        <TopHotels title={t("title3")} />
-        <PropertiesAtAGlance />
-        <HotelsInfo />
-        <Recommendations />
+      <section className="relative">
+        <FloatingSideActions rounded />
+        <HotelsTestHero />
+
+        <section className="relative z-0 min-w-0 overflow-x-clip md:-mt-16 md:rounded-t-[32px] bg-white py-6 md:py-12">
+          <WelcomeAboard />
+          <WhatNew />
+          <PriceMatch />
+          <TopHotels title={t("title1")} />
+          <TopHotels title={t("title2")} />
+          <TopHotels title={t("title3")} />
+          <PropertiesAtAGlance />
+          <HotelsInfo />
+          <Recommendations />
+        </section>
       </section>
-    </section>
+    </>
   );
 }
 

@@ -12,7 +12,6 @@ export default async function Layout({
       className=" min-h-screen flex flex-col justify-between"
       style={{ fontFamily: flightsTestFontFamily }}
     >
-      <NewNavbar />
       {children}
     </main>
   );

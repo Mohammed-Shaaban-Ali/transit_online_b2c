@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import HotelsTestDetailsContent from "@/components/pages/hotels-test/HotelsTestDetailsContent";
+import NewNavbar from "@/components/shared/Navbar/NewNavbar";
 
 function DetailsFallback() {
   return (
@@ -12,8 +13,11 @@ function DetailsFallback() {
 
 export default function HotelsTestDetailsPage() {
   return (
-    <Suspense fallback={<DetailsFallback />}>
-      <HotelsTestDetailsContent />
-    </Suspense>
+    <>
+      <NewNavbar />
+      <Suspense fallback={<DetailsFallback />}>
+        <HotelsTestDetailsContent />
+      </Suspense>
+    </>
   );
 }
