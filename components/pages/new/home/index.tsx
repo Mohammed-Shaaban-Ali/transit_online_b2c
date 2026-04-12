@@ -7,6 +7,9 @@ import Round from "./Round";
 import Recommended from "./Recommended";
 import { useSidebarMini } from "../layout/sidebar-mini-context";
 import Trip from "./Trip";
+import Exclusive from "./Exclusive";
+import Moments from "./Moments";
+import TravelApp from "./TravelApp";
 
 type Props = {};
 
@@ -19,12 +22,17 @@ function Home({}: Props) {
       role="main"
     >
       <Hero />
-      <section className="container max-w-[1200px]! mx-auto my-12">
+      <section className="container max-w-[1200px]! mx-auto my-12 mb-6">
+        <Exclusive />
         <Discover />
         <Trip />
+        <Moments />
         <Hotels />
         <Round />
-        <Recommended />
+      </section>
+      <TravelApp />
+      <section className="container max-w-[1200px]! mx-auto mb-6">
+        <Recommended />{" "}
       </section>
     </div>
   );
