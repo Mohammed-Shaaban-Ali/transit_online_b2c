@@ -154,12 +154,9 @@ function Sidebar({ className }: Props) {
   if (!isMini) {
     return (
       <aside
-        className={cn(
-          "flex h-screen min-h-0 w-[220px] flex-col border-e border-gray-100 bg-white",
-          className,
-        )}
+        className={cn("flex h-screen min-h-0 w-[220px] flex-col ", className)}
       >
-        <div className="fixed start-0 top-0 z-40">
+        <div className="fixed start-0 top-0 z-40 flex h-screen w-[220px] flex-col border-e border-gray-100 bg-white">
           <SidebarHeaderToggle align="start" />
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
             <SidebarNavContent showTitleAsTooltip={false} />
@@ -172,7 +169,7 @@ function Sidebar({ className }: Props) {
   return (
     <aside
       className={cn(
-        "group/sidebar fixed start-0 top-0 z-40 flex h-screen min-h-0 w-16 flex-col border-e border-gray-100 bg-white",
+        "group/sidebar fixed start-0 top-0 z-40 flex h-screen min-h-0 w-16 flex-col border-e  border-gray-100 bg-white",
         className,
       )}
     >

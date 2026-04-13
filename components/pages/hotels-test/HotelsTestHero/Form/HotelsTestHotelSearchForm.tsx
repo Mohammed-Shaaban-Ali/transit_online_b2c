@@ -67,12 +67,14 @@ type HotelsTestHotelSearchFormProps = {
    * instead of router.push (which would create a new history entry back to the hero page).
    */
   stayOnPage?: boolean;
+  className?: string;
 };
 
 function HotelsTestHotelSearchForm({
   initialValues,
   primaryBorder = false,
   stayOnPage = false,
+  className,
 }: HotelsTestHotelSearchFormProps) {
   const router = useRouter();
   const tv = useTranslations("Components.HotelSearchBox");
@@ -217,7 +219,11 @@ function HotelsTestHotelSearchForm({
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit, onInvalid)}
-      className={`w-full ${!primaryBorder ? "rounded-md sm:p-3 bg-white" : ""}`}
+      className={cn(
+        "w-full",
+        className,
+        !primaryBorder ? "rounded-md sm:p-3 bg-white" : "",
+      )}
       noValidate
     >
       <div

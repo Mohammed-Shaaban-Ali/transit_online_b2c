@@ -22,7 +22,7 @@ function Home({}: Props) {
       role="main"
     >
       <Hero />
-      <section className="container max-w-[1200px]! mx-auto my-12 mb-6">
+      <section className="container max-w-[1200px]! mx-auto mt-16 mb-6 ">
         <Exclusive />
         <Discover />
         <Trip />
