@@ -27,12 +27,12 @@ const sidebarItems: SidebarItem[][] = [
     [
         {
             label: "Hotels & Homes",
-            href: "/new/hotels",
+            href: "/new/hotels-test",
             icon: BedDouble,
         },
         {
             label: "Flights",
-            href: "/new/flights",
+            href: "/new/flights-test",
             icon: Plane,
         },
         {
