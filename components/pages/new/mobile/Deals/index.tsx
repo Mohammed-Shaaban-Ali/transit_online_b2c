@@ -30,7 +30,7 @@ const discoverBanners = [
 export default function Deals() {
   return (
     <section className="mt-9">
-      <h2 className="mb-2.5 text-[22px] font-bold leading-tight text-[#111827]">
+      <h2 className="mb-2.5 text-[16px] font-bold leading-tight text-[#111827]">
         Limited-time deals
       </h2>
 

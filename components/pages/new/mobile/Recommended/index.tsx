@@ -94,7 +94,7 @@ export default function Recommended() {
 
   return (
     <section className="mt-8">
-      <h2 className="mb-3 text-[22px] font-bold leading-tight text-[#111827]">
+      <h2 className="mb-3 text-[16px] font-bold leading-tight text-[#111827]">
         Trip.com recommendations
       </h2>
 
