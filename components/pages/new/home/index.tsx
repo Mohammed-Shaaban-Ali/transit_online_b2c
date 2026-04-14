@@ -18,7 +18,7 @@ function Home({}: Props) {
 
   return (
     <div
-      className={`relative z-0 min-h-0 flex-1 overflow-y-auto pt-[68px] ms-8 me-5 mt-8 ${isMini ? "ms-28" : "ms-8"}`}
+      className={`relative z-0 min-h-0 flex-1 overflow-y-auto mt-[64px] px-3 pb-4 md:pt-[68px] md:me-5 md:mt-8 md:px-0 ${isMini ? "md:ms-28" : "md:ms-8"}`}
       role="main"
     >
       <Hero />
