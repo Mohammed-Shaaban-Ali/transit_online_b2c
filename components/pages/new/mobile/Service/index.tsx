@@ -52,11 +52,11 @@ function ServiceCard({ item }: { item: MobileServiceItem }) {
   const content = (
     <div className="flex flex-col items-center text-center">
       <span
-        className={`inline-flex size-14 items-center justify-center rounded-full p-2 ${bubbleClass}`}
+        className={`inline-flex size-[60px] items-center justify-center rounded-full p-2 ${bubbleClass}`}
       >
         <Icon className="size-8" strokeWidth={1.9} />
       </span>
-      <span className="mt-3 text-[12px] font-medium leading-tight text-[#1A1D29]">
+      <span className="mt-3 text-[13px] font-semibold leading-tight text-[#1A1D29]">
         {item.label}
       </span>
     </div>
@@ -76,13 +76,13 @@ function ServiceCard({ item }: { item: MobileServiceItem }) {
 export default function Service() {
   return (
     <>
-      <div className="grid grid-cols-4 gap-x-3 gap-y-6">
+      <div className="grid grid-cols-4 gap-x-3 gap-y-5">
         {firstRow.map((item) => (
           <ServiceCard key={item.label} item={item} />
         ))}
       </div>
 
-      <div className="mt-7 grid grid-cols-4 gap-x-3 gap-y-6">
+      <div className="mt-5 grid grid-cols-4 gap-x-3 gap-y-5">
         {secondRow.map((item) => (
           <ServiceCard key={item.label} item={item} />
         ))}
