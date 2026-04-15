@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Menu, Search } from "lucide-react";
 import logo from "@/public/transit_logos/transit_logo_q.png";
+import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 import getSidebarItems from "@/components/pages/new/layout/sidebar/items";
 import {
   Sheet,
@@ -48,6 +49,8 @@ function page({}: Props) {
                 className="w-full bg-transparent px-2 text-sm text-gray-800 outline-none placeholder:text-gray-500"
               />
             </div>
+
+            <LocaleSwitcher />
 
             <Sheet>
               <SheetTrigger asChild>

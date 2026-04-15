@@ -20,7 +20,11 @@ import { useDispatch } from "react-redux";
 import { baseApi, baseApi2 } from "@/redux/app/baseApi";
 import { GoGlobe } from "react-icons/go";
 
-function LocaleSwitcher() {
+type LocaleSwitcherProps = {
+  variant?: "default" | "navbar";
+};
+
+function LocaleSwitcher({ variant = "default" }: LocaleSwitcherProps) {
   const t = useTranslations("Components.LocaleSwitcher");
   const locale = useLocale();
   const pathname = usePathname();
@@ -58,20 +62,28 @@ function LocaleSwitcher() {
   };
 
   const currentLanguage = Languages.find((lang) => lang.code === currentLang)!;
+  const isNavbarVariant = variant === "navbar";
 
   return (
     <div className="flex items-center gap-4 relative">
       <DropdownMenu>
         <DropdownMenuTrigger
-          className="w-9 h-9 sm:w-auto sm:min-w-fit sm:min-h-10 gap-2 rounded-md border
-         border-gray-300 text-black font-medium bg-white 
-         cursor-pointer hover:bg-white/80 transition-all duration-300
-         flex items-center justify-center p-1 sm:px-3 sm:py-2 outline-none
-         
-       "
+          className={
+            isNavbarVariant
+              ? "relative inline-flex items-center gap-1.5 whitespace-nowrap rounded px-3 py-2 text-[14px] text-gray-900 transition-colors hover:bg-gray-100 outline-none"
+              : "w-9 h-9 sm:w-auto sm:min-w-fit sm:min-h-10 gap-2 rounded-md border border-gray-300 text-black font-medium bg-white cursor-pointer hover:bg-white/80 transition-all duration-300 flex items-center justify-center p-1 sm:px-3 sm:py-2 outline-none"
+          }
         >
-          <GoGlobe className="size-[20px] text-primary md:hidden shrink-0" />
-          <div className="hidden md:flex items-center gap-2">
+          {!isNavbarVariant && (
+            <GoGlobe className="size-[20px] shrink-0 text-primary md:hidden" />
+          )}
+          <div
+            className={
+              isNavbarVariant
+                ? "flex items-center gap-2"
+                : "hidden md:flex items-center gap-2"
+            }
+          >
             <Image
               alt={currentLanguage.name}
               src={currentLanguage.flag}

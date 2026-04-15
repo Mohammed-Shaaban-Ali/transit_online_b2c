@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { Globe, Menu, Search, Smartphone } from "lucide-react";
+import { Menu, Search, Smartphone } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import logo from "@/public/transit_logos/transit_logo_q.png";
 import { useSidebarMini } from "@/components/pages/new/layout/sidebar-mini-context";
 import { useTranslations } from "next-intl";
+import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 
 /** Top blue bar + light gray rounded background on hover (Trip-style nav items). */
 const navItemHover =
@@ -78,10 +79,7 @@ function Navbar({}: Props) {
         <Link href="/" className={navItemHover}>
           {t("listProperty")}
         </Link>
-        <button type="button" className={navItemHover}>
-          <Globe className="size-4 shrink-0 text-primary" />
-          USD
-        </button>
+        <LocaleSwitcher variant="navbar" />
         <Link href="/" className={navItemHover}>
           {t("customerSupport")}
         </Link>
