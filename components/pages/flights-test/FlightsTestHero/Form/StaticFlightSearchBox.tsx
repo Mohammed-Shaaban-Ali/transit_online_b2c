@@ -24,7 +24,9 @@ import { cn } from "@/lib/utils";
 import { MdCalendarMonth } from "react-icons/md";
 import { useTranslations } from "next-intl";
 
-function buildFlightSearchSchema(v: ReturnType<typeof useTranslations<"FlightsTestForm.Validation">>) {
+function buildFlightSearchSchema(
+  v: ReturnType<typeof useTranslations<"FlightsTestForm.Validation">>,
+) {
   return z
     .object({
       fromAirport: z.string().min(1, { message: v("selectDepartureAirport") }),
@@ -59,7 +61,11 @@ function buildFlightSearchSchema(v: ReturnType<typeof useTranslations<"FlightsTe
     )
     .refine(
       (data) => {
-        if (data.tripType === "roundTrip" && data.returnDate && data.departureDate) {
+        if (
+          data.tripType === "roundTrip" &&
+          data.returnDate &&
+          data.departureDate
+        ) {
           const dep = new Date(data.departureDate);
           dep.setHours(0, 0, 0, 0);
           const ret = new Date(data.returnDate);
@@ -72,14 +78,16 @@ function buildFlightSearchSchema(v: ReturnType<typeof useTranslations<"FlightsTe
     )
     .refine(
       (data) => {
-        if (data.fromAirport && data.toAirport) return data.fromAirport !== data.toAirport;
+        if (data.fromAirport && data.toAirport)
+          return data.fromAirport !== data.toAirport;
         return true;
       },
       { message: v("differentAirports"), path: ["toAirport"] },
     )
     .refine(
       (data) => {
-        if (data.fromAirport && data.toAirport) return data.fromAirport !== data.toAirport;
+        if (data.fromAirport && data.toAirport)
+          return data.fromAirport !== data.toAirport;
         return true;
       },
       { message: v("differentAirports"), path: ["fromAirport"] },
@@ -109,7 +117,7 @@ type Props = {
 function StaticFlightSearchBox({
   className,
   compactActions = false,
-  submitPath = "/flights-test/showfarefirst",
+  submitPath = "/new/flights/showfarefirst",
   initialValues,
 }: Props) {
   const router = useRouter();

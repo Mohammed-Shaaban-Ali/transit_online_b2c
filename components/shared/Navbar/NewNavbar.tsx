@@ -13,15 +13,15 @@ const NewNavbar = () => {
   const links = [
     {
       label: t("home"),
-      href: "/",
+      href: "/new",
     },
     {
       label: t("hotels"),
-      href: "/hotels-test",
+      href: "/new/hotels",
     },
     {
       label: t("flights"),
-      href: "/flights-test",
+      href: "/new/flights",
     },
   ];
 
@@ -36,7 +36,7 @@ const NewNavbar = () => {
   }
   const pathNameWithoutLocale = normalizePathname(pathname);
   const isBlack =
-    pathNameWithoutLocale.includes("hotels-test") &&
+    pathNameWithoutLocale.includes("hotels") &&
     pathNameWithoutLocale.includes("details");
 
   const linkClassDesktop = (isActive: boolean, isBlack: boolean) =>

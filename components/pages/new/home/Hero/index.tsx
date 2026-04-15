@@ -20,16 +20,27 @@ type Props = {};
 function Hero({}: Props) {
   const t = useTranslations("NewPage.home.hero");
   const tabs = [
-    { key: "hotelsHomes", title: t("tabs.hotelsHomes"), icon: BedDouble },
-    { key: "flights", title: t("tabs.flights"), icon: Plane },
-    { key: "trains", title: t("tabs.trains"), icon: Train },
-    { key: "cars", title: t("tabs.cars"), icon: Car },
+    {
+      key: "hotelsHomes",
+      title: t("tabs.hotelsHomes"),
+      icon: BedDouble,
+      disabled: false,
+    },
+    { key: "flights", title: t("tabs.flights"), icon: Plane, disabled: false },
+    { key: "trains", title: t("tabs.trains"), icon: Train, disabled: true },
+    { key: "cars", title: t("tabs.cars"), icon: Car, disabled: true },
     {
       key: "attractionsTours",
       title: t("tabs.attractionsTours"),
       icon: Landmark,
+      disabled: true,
     },
-    { key: "flightHotel", title: t("tabs.flightHotel"), icon: Building2 },
+    {
+      key: "flightHotel",
+      title: t("tabs.flightHotel"),
+      icon: Building2,
+      disabled: true,
+    },
   ];
   const titles = [
     {
@@ -96,7 +107,10 @@ function Hero({}: Props) {
                         tab.key === activeTab
                           ? "bg-white text-black!"
                           : "hover:bg-white/20"
-                      }`}
+                      }
+                      ${tab.disabled ? "opacity-50 cursor-not-allowed!" : ""}
+                      `}
+                    disabled={tab.disabled}
                   >
                     <Icon className="size-4" />
                     {tab.title}

@@ -22,10 +22,11 @@ function isActivePath(pathname: string, href: string) {
   return pathname.startsWith(`${href}/`);
 }
 
-const linkRowClass = (active: boolean) =>
+const linkRowClass = (active: boolean, disabled: boolean) =>
   cn(
     "flex items-center gap-5 ps-3.5 px-2 py-2.5 text-[15px] text-gray-900 transition-colors hover:bg-gray-100",
     active && "bg-gray-50 text-primary",
+    disabled && "opacity-50 cursor-not-allowed",
   );
 
 function ItemLabel({ item }: { item: SidebarItem }) {
@@ -95,18 +96,32 @@ function SidebarNavContent({
 
               return (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    title={showTitleAsTooltip ? item.label : undefined}
-                    className={linkRowClass(active)}
-                  >
-                    <Icon
-                      className="size-[22px] shrink-0 text-gray-600"
-                      strokeWidth={1.75}
-                      aria-hidden
-                    />
-                    <ItemLabel item={item} />
-                  </Link>
+                  {item.disabled ? (
+                    <button
+                      type="button"
+                      className={`${linkRowClass(active, item.disabled ?? true)} w-full`}
+                    >
+                      <Icon
+                        className="size-[22px] shrink-0 text-gray-600"
+                        strokeWidth={1.75}
+                        aria-hidden
+                      />
+                      <ItemLabel item={item} />
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      title={showTitleAsTooltip ? item.label : undefined}
+                      className={linkRowClass(active, item.disabled ?? true)}
+                    >
+                      <Icon
+                        className="size-[22px] shrink-0 text-gray-600"
+                        strokeWidth={1.75}
+                        aria-hidden
+                      />
+                      <ItemLabel item={item} />
+                    </Link>
+                  )}
                 </li>
               );
             })}

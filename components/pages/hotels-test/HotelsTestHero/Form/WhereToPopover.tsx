@@ -34,6 +34,18 @@ function formatShortDate(dateStr: string, locale: string) {
   });
 }
 
+function isFutureCheckInDate(dateStr: string) {
+  if (!dateStr) return false;
+  const checkInDate = new Date(dateStr);
+  if (isNaN(checkInDate.getTime())) return false;
+
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+
+  checkInDate.setHours(0, 0, 0, 0);
+  return checkInDate > todayStart;
+}
+
 type Props = {
   form: UseFormReturn<HotelsTestFormValues>;
   error?: string;
@@ -73,7 +85,11 @@ function WhereToPopover({ form, error, onApplyRecent }: Props) {
   useEffect(() => {
     if (open) {
       setSearchText("");
-      setRecentItems(getHotelRecentSearches().slice(0, 6));
+      setRecentItems(
+        getHotelRecentSearches().filter((item) =>
+          isFutureCheckInDate(item.checkIn),
+        ).slice(0, 6),
+      );
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [open]);

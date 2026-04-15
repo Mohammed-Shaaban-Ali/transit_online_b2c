@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Rubik, Geom } from "next/font/google";
+import { Rubik } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -16,8 +16,6 @@ const rubik = Rubik({
   display: "swap",
   variable: "--font-rubik",
 });
-
-
 
 // export const metadata: Metadata = {
 //   title: "Eficta Online B2C",

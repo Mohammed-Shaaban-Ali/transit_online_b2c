@@ -53,10 +53,18 @@ function ServiceCard({ item }: { item: MobileServiceItem }) {
 export default function Service() {
   const t = useTranslations("NewPage.mobile.service");
   const firstRow: MobileServiceItem[] = [
-    { label: t("hotelsHomes"), icon: BedDouble, href: "/new/hotels-test", active: true },
-    { label: t("flights"), icon: Plane, href: "/new/flights-test", active: true },
-    { label: t("flightHotel"), icon: Hotel, href: "/new/flight-hotel", active: true },
-    { label: t("trains"), icon: TrainFront, href: "/new/trains", active: true },
+    {
+      label: t("hotelsHomes"),
+      icon: BedDouble,
+      href: "/new/hotels",
+      active: true,
+    },
+    { label: t("flights"), icon: Plane, href: "/new/flights", active: true },
+    {
+      label: t("flightHotel"),
+      icon: Hotel,
+    },
+    { label: t("trains"), icon: TrainFront },
   ];
   const secondRow: MobileServiceItem[] = [
     { label: t("carRentals"), icon: CarFront },
