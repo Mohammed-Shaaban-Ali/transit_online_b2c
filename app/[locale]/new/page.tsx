@@ -7,17 +7,22 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Menu, Search } from "lucide-react";
 import logo from "@/public/transit_logos/transit_logo_q.png";
-import sidebarItems from "@/components/pages/new/layout/sidebar/items";
+import getSidebarItems from "@/components/pages/new/layout/sidebar/items";
 import {
   Sheet,
   SheetContent,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useTranslations } from "next-intl";
 
 type Props = {};
 
 function page({}: Props) {
+  const t = useTranslations("NewPage.page");
+  const sidebarT = useTranslations("NewPage.sidebar.items");
+  const sidebarItems = getSidebarItems(sidebarT);
+
   return (
     <SidebarMiniProvider>
       <section className="relative flex  min-h-0 w-full overflow-hidden">
@@ -26,7 +31,7 @@ function page({}: Props) {
             <Link href="/" className="shrink-0">
               <Image
                 src={logo}
-                alt="Transit"
+                alt={t("logoAlt")}
                 width={72}
                 height={24}
                 className="h-6 w-auto object-contain"
@@ -38,8 +43,8 @@ function page({}: Props) {
               <Search className="h-4 w-4 shrink-0 text-gray-500" />
               <input
                 type="search"
-                placeholder="Where to?"
-                aria-label="Search"
+                placeholder={t("searchPlaceholder")}
+                aria-label={t("searchAria")}
                 className="w-full bg-transparent px-2 text-sm text-gray-800 outline-none placeholder:text-gray-500"
               />
             </div>
@@ -48,7 +53,7 @@ function page({}: Props) {
               <SheetTrigger asChild>
                 <button
                   type="button"
-                  aria-label="Open menu"
+                  aria-label={t("openMenu")}
                   className="inline-flex h-9 w-9 items-center justify-center rounded-md text-gray-800 hover:bg-gray-100"
                 >
                   <Menu className="h-5 w-5" />
@@ -56,7 +61,7 @@ function page({}: Props) {
               </SheetTrigger>
               <SheetContent side="right" className="w-[88%] p-0 sm:max-w-sm">
                 <div className="border-b border-gray-100 px-4 py-3">
-                  <SheetTitle className="text-base">Menu</SheetTitle>
+                  <SheetTitle className="text-base">{t("menuTitle")}</SheetTitle>
                 </div>
                 <nav className="max-h-[calc(100vh-56px)] overflow-y-auto py-2">
                   {sidebarItems.map((group, groupIndex) => (

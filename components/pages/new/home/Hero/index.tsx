@@ -13,41 +13,45 @@ import {
 } from "lucide-react";
 import Form from "@/components/pages/flights-test/FlightsTestHero/Form";
 import HotelsTestHotelSearchForm from "@/components/pages/hotels-test/HotelsTestHero/Form/HotelsTestHotelSearchForm";
+import { useTranslations } from "next-intl";
 
 type Props = {};
 
-const titles = [
-  {
-    title: "Secure payment",
-    link: "https://ak-d.tripcdn.com/images/0AS6b1200090fx7s7F635.png",
-  },
-  {
-    title: "Support in approx. 30s",
-    link: "https://ak-d.tripcdn.com/images/0AS5f120008whj34f2145.png",
-  },
-];
-
-const tabs = [
-  { title: "Hotels & Homes", icon: BedDouble },
-  { title: "Flights", icon: Plane },
-  { title: "Trains", icon: Train },
-  { title: "Cars", icon: Car },
-  { title: "Attractions & Tours", icon: Landmark },
-  { title: "Flight + Hotel", icon: Building2 },
-];
-
 function Hero({}: Props) {
-  const [activeTab, setActiveTab] = useState("Flights");
+  const t = useTranslations("NewPage.home.hero");
+  const tabs = [
+    { key: "hotelsHomes", title: t("tabs.hotelsHomes"), icon: BedDouble },
+    { key: "flights", title: t("tabs.flights"), icon: Plane },
+    { key: "trains", title: t("tabs.trains"), icon: Train },
+    { key: "cars", title: t("tabs.cars"), icon: Car },
+    {
+      key: "attractionsTours",
+      title: t("tabs.attractionsTours"),
+      icon: Landmark,
+    },
+    { key: "flightHotel", title: t("tabs.flightHotel"), icon: Building2 },
+  ];
+  const titles = [
+    {
+      title: t("badges.securePayment"),
+      link: "https://ak-d.tripcdn.com/images/0AS6b1200090fx7s7F635.png",
+    },
+    {
+      title: t("badges.support"),
+      link: "https://ak-d.tripcdn.com/images/0AS5f120008whj34f2145.png",
+    },
+  ];
+  const [activeTab, setActiveTab] = useState("flights");
 
   return (
     <section
       className={`relative w-full
     
-    ${activeTab === "Hotels & Homes" ? "h-[310px]" : "h-[380px]"}`}
+    ${activeTab === "hotelsHomes" ? "h-[310px]" : "h-[380px]"}`}
     >
       <Image
         src={heroSection}
-        alt="heroSection"
+        alt={t("heroAlt")}
         width={1000}
         height={1000}
         className="h-full w-full overflow-hidden rounded-2xl object-cover object-right"
@@ -56,7 +60,7 @@ function Hero({}: Props) {
       <div className="absolute left-1/2 top-1/2 w-full max-w-[1200px] -translate-x-1/2 -translate-y-1/2 px-4">
         <div>
           <h1 className="text-center text-4xl font-bold text-white md:text-5xl mt-12">
-            Your Trip Starts Here
+            {t("title")}
           </h1>
           <div className="mt-3 flex items-center justify-center gap-2">
             {titles.map((title, index) => (
@@ -84,12 +88,12 @@ function Hero({}: Props) {
                 const Icon = tab.icon;
                 return (
                   <button
-                    key={tab.title}
+                    key={tab.key}
                     type="button"
-                    onClick={() => setActiveTab(tab.title)}
+                    onClick={() => setActiveTab(tab.key)}
                     className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-semibold text-white transition
                       ${
-                        tab.title === activeTab
+                        tab.key === activeTab
                           ? "bg-white text-black!"
                           : "hover:bg-white/20"
                       }`}
@@ -106,7 +110,7 @@ function Hero({}: Props) {
   
             "
             >
-              {activeTab === "Hotels & Homes" ? (
+              {activeTab === "hotelsHomes" ? (
                 <HotelsTestHotelSearchForm className="mt-10" />
               ) : (
                 <Form />

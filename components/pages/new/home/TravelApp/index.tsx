@@ -7,15 +7,18 @@ import iosImage from "@/public/images/flights/ios.png";
 import androidImage from "@/public/images/flights/android.png";
 
 import heroSection from "@/public/images/new_hone/heroSection.webp";
+import { useTranslations } from "next-intl";
 
 type Props = {};
 
 function TravelApp({}: Props) {
+  const t = useTranslations("NewPage.home.travelApp");
+
   return (
     <section className="relative w-full h-[400px] overflow-hidden">
       <Image
         src={heroSection}
-        alt="heroSection"
+        alt={t("heroAlt")}
         fill
         className="object-cover "
       />
@@ -25,9 +28,18 @@ function TravelApp({}: Props) {
       backdrop-blur-xs
       "
       ></div>
-      <div className="h-96 w-52 bg-primary rounded-r-full absolute -left-32 top-1/2 -translate-y-1/2 overflow-hidden"></div>
-      <div className="h-96 w-[400px] bg-red-50 rounded-l-full absolute right-0 top-1/2 -translate-y-1/2 overflow-hidden">
-        <Image src={SeeImage} alt="SeeImage" fill className="object-cover" />
+      <div
+        className="h-96 w-52 bg-primary ltr:rounded-r-full rtl:rounded-l-full 
+      absolute
+      ltr:-left-32 rtl:-right-32 top-1/2 -translate-y-1/2 overflow-hidden"
+      ></div>
+      <div className="h-96 w-[400px] bg-red-50 ltr:rounded-l-full rtl:rounded-r-full absolute end-0 top-1/2 -translate-y-1/2 overflow-hidden">
+        <Image
+          src={SeeImage}
+          alt={t("seeImageAlt")}
+          fill
+          className="object-cover"
+        />
       </div>
 
       {/* contant */}
@@ -36,7 +48,7 @@ function TravelApp({}: Props) {
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
           <div className="flex w-full max-w-xl flex-col gap-5 lg:max-w-none lg:flex-1">
             <h2 className="text-center text-3xl font-bold leading-tight md:text-4xl lg:text-start">
-              Your all-in-one travel app
+              {t("title")}
             </h2>
 
             <div
@@ -45,10 +57,10 @@ function TravelApp({}: Props) {
             px-4 py-2.5 text-[16px]  backdrop-blur-sm lg:justify-start text-white font-bold "
             >
               <span className="inline-flex items-center gap-1.5 font-medium">
-                App-only deals
+                {t("appOnlyDeals")}
               </span>
               <span className="inline-flex items-center gap-1.5 font-medium">
-                Easy trip planning
+                {t("easyPlanning")}
               </span>
             </div>
 
@@ -63,7 +75,7 @@ function TravelApp({}: Props) {
                 >
                   <Image
                     src={qrcodeImage}
-                    alt="QR code to download the app"
+                    alt={t("qrAlt")}
                     fill
                     className="object-contain p-0.5"
                     sizes="140px"
@@ -78,7 +90,7 @@ function TravelApp({}: Props) {
                       1.8M+
                     </p>
                     <p className="mt-1.5 text-[11px] text-white/95 sm:text-sm">
-                      Daily users
+                      {t("dailyUsers")}
                     </p>
                   </div>
                   <div className="px-4 text-start ">
@@ -86,7 +98,7 @@ function TravelApp({}: Props) {
                       150K+
                     </p>
                     <p className="mt-1.5 text-[11px] text-white/95 sm:text-sm">
-                      Daily downloads
+                      {t("dailyDownloads")}
                     </p>
                   </div>
                   <div className="px-8 text-start last:pe-0 ">
@@ -94,7 +106,7 @@ function TravelApp({}: Props) {
                       4.7
                     </p>
                     <p className="mt-1.5 text-[11px] text-white/95 sm:text-sm">
-                      Rating
+                      {t("rating")}
                     </p>
                   </div>
                 </div>
@@ -106,7 +118,7 @@ function TravelApp({}: Props) {
                   <a
                     href="#"
                     className="block min-w-0 transition-opacity hover:opacity-90"
-                    aria-label="Download on the App Store"
+                    aria-label={t("appStoreAria")}
                   >
                     <Image
                       src={iosImage}
@@ -119,7 +131,7 @@ function TravelApp({}: Props) {
                   <a
                     href="#"
                     className="block min-w-0 transition-opacity hover:opacity-90"
-                    aria-label="Get it on Google Play"
+                    aria-label={t("googlePlayAria")}
                   >
                     <Image
                       src={androidImage}
@@ -132,7 +144,7 @@ function TravelApp({}: Props) {
                 </div>
 
                 <p className="text-start text-xs leading-snug text-white/90 sm:text-sm">
-                  Scan the QR code to download the app
+                  {t("scanQr")}
                 </p>
               </div>
             </div>

@@ -1298,6 +1298,153 @@
             "link_flightsItaly": "Flights to Italy"
         }
     },
+    "NewPage": {
+        "page": {
+            "logoAlt": "Transit",
+            "searchPlaceholder": "Where to?",
+            "searchAria": "Search",
+            "openMenu": "Open menu",
+            "menuTitle": "Menu"
+        },
+        "sidebar": {
+            "mainNav": "Main navigation",
+            "items": {
+                "hotelsHomes": "Hotels & Homes",
+                "flights": "Flights",
+                "trains": "Trains",
+                "cars": "Cars",
+                "attractionsTours": "Attractions & Tours",
+                "flightHotel": "Flight + Hotel",
+                "privateTours": "Private Tours",
+                "groupTours": "Group Tours",
+                "tripPlanner": "Trip.Planner",
+                "travelInspiration": "Travel Inspiration",
+                "map": "Map",
+                "deals": "Deals",
+                "rewards": "Trip.com Rewards",
+                "app": "App"
+            }
+        },
+        "navbar": {
+            "expandSidebar": "Expand sidebar",
+            "collapseSidebar": "Collapse sidebar",
+            "logoAlt": "Transit",
+            "search": "Search",
+            "searchPlaceholder": "Destinations, attractions, hotels, and ...",
+            "accountAndTools": "Account and tools",
+            "app": "App",
+            "listProperty": "List your property",
+            "customerSupport": "Customer support",
+            "findBookings": "Find bookings",
+            "signInRegister": "Sign in / Register"
+        },
+        "home": {
+            "hero": {
+                "title": "Your Trip Starts Here",
+                "heroAlt": "Hero section",
+                "badges": {
+                    "securePayment": "Secure payment",
+                    "support": "Support in approx. 30s"
+                },
+                "tabs": {
+                    "hotelsHomes": "Hotels & Homes",
+                    "flights": "Flights",
+                    "trains": "Trains",
+                    "cars": "Cars",
+                    "attractionsTours": "Attractions & Tours",
+                    "flightHotel": "Flight + Hotel"
+                }
+            },
+            "exclusive": {
+                "title": "New user exclusive",
+                "previousSlide": "Previous slide",
+                "nextSlide": "Next slide",
+                "moreAbout": "More about {category}",
+                "claimAll": "Claim all",
+                "hotelsHomes": "Hotels & Homes",
+                "euTrains": "EU trains",
+                "attractions": "Attractions",
+                "airportTransfers": "Airport transfers",
+                "discount1": "10% off",
+                "discount2": "5% off",
+                "discount3": "8% off",
+                "discount4": "12% off",
+                "discount5": "15% off",
+                "discount6": "18% off",
+                "discount7": "20% off",
+                "discount8": "22% off"
+            },
+            "discover": {
+                "previousSlide": "Previous slide",
+                "nextSlide": "Next slide"
+            },
+            "hotels": {
+                "title": "Unwind in our selected hotels in Shanghai",
+                "previousSlide": "Previous slide",
+                "nextSlide": "Next slide",
+                "city": "Shanghai",
+                "reviews": "{count} reviews",
+                "from": "From"
+            },
+            "round": {
+                "title": "Get around in Shanghai",
+                "previousSlide": "Previous slide",
+                "nextSlide": "Next slide",
+                "from": "From"
+            },
+            "moments": {
+                "title": "Unforgettable trip moments in Shanghai",
+                "previousSlide": "Previous slide",
+                "nextSlide": "Next slide",
+                "like": "Like",
+                "verified": "Verified"
+            },
+            "trip": {
+                "title": "Get around in Shanghai",
+                "previousSlide": "Previous slide",
+                "nextSlide": "Next slide",
+                "badge": "Medium haul"
+            },
+            "travelApp": {
+                "heroAlt": "Travel app banner",
+                "seeImageAlt": "Travel app preview",
+                "title": "Your all-in-one travel app",
+                "appOnlyDeals": "App-only deals",
+                "easyPlanning": "Easy trip planning",
+                "qrAlt": "QR code to download the app",
+                "dailyUsers": "Daily users",
+                "dailyDownloads": "Daily downloads",
+                "rating": "Rating",
+                "appStoreAria": "Download on the App Store",
+                "googlePlayAria": "Get it on Google Play",
+                "scanQr": "Scan the QR code to download the app"
+            }
+        },
+        "mobile": {
+            "service": {
+                "hotelsHomes": "Hotels & Homes",
+                "flights": "Flights",
+                "flightHotel": "Flight + Hotel",
+                "trains": "Trains",
+                "carRentals": "Car Rentals",
+                "airportTransfers": "Airport Transfers",
+                "attractionsTours": "Attractions & Tours",
+                "travelGuides": "Travel guides"
+            },
+            "deals": {
+                "title": "Limited-time deals",
+                "securePayment": "Secure payment",
+                "support": "Support in approx. 30s"
+            },
+            "trip": {
+                "title": "Get inspired for your next trip",
+                "card1": "Springtime in the Middle East | Bring the desert to life",
+                "card2": "KL Twin Tower Glow",
+                "card3": "Cairo! Facing the Pyramids! This hotel is amazing",
+                "card4": "Egypt | Alexandria is not stressful at all"
+            }
+        }
+    },
     "QuotationTable": {
         "bookingNumber": "Booking Number",
         "title": "Title",

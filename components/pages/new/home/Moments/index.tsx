@@ -7,6 +7,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { Navigation } from "swiper/modules";
 import { BadgeCheck, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import hotelImage1 from "@/public/images/hotels/hotel1.webp";
 import hotelImage2 from "@/public/images/hotels/hotel2.webp";
@@ -88,6 +89,7 @@ const moments: Moment[] = [
 
 function Moments({}: Props) {
   const locale = useLocale();
+  const t = useTranslations("NewPage.home.moments");
   const isRtl = locale === "ar";
 
   const [showPrev, setShowPrev] = useState(false);
@@ -106,15 +108,17 @@ function Moments({}: Props) {
   return (
     <section className="container mx-auto w-full min-w-0 max-w-[1200px]! overflow-x-clip py-6 ">
       <h2 className="mb-4 text-[22px] font-bold leading-tight ">
-        Unforgettable trip moments in Shanghai
+        {t("title")}
       </h2>
 
       <div className="relative min-w-0 max-w-full mx-2.5">
         <button
           id="moments-carousel-prev"
           type="button"
-          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"} sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2`}
-          aria-label="Previous Slide"
+          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"}
+             sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2
+             md:rtl:start-0 md:rtl:translate-x-1/2`}
+          aria-label={t("previousSlide")}
         >
           <ChevronLeft
             className="h-5 w-5 rtl:rotate-180"
@@ -125,8 +129,10 @@ function Moments({}: Props) {
         <button
           id="moments-carousel-next"
           type="button"
-          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"} end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2`}
-          aria-label="Next Slide"
+          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"}
+             end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2
+             md:rtl:end-0 md:rtl:-translate-x-1/2`}
+          aria-label={t("nextSlide")}
         >
           <ChevronRight
             className="h-5 w-5 rtl:rotate-180"
@@ -186,7 +192,7 @@ function Moments({}: Props) {
                 <button
                   type="button"
                   className="absolute end-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-black backdrop-blur-[2px] transition-colors hover:bg-white/70"
-                  aria-label="Like"
+                  aria-label={t("like")}
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Heart
@@ -216,7 +222,7 @@ function Moments({}: Props) {
                     {moment.verified ? (
                       <BadgeCheck
                         className="h-4 w-4 shrink-0 text-sky-400"
-                        aria-label="Verified"
+                        aria-label={t("verified")}
                         strokeWidth={2.25}
                       />
                     ) : null}

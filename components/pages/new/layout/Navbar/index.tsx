@@ -5,6 +5,7 @@ import { Globe, Menu, Search, Smartphone } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import logo from "@/public/transit_logos/transit_logo_q.png";
 import { useSidebarMini } from "@/components/pages/new/layout/sidebar-mini-context";
+import { useTranslations } from "next-intl";
 
 /** Top blue bar + light gray rounded background on hover (Trip-style nav items). */
 const navItemHover =
@@ -15,6 +16,7 @@ type Props = {};
 
 function Navbar({}: Props) {
   const { isMini, toggleMini } = useSidebarMini();
+  const t = useTranslations("NewPage.navbar");
 
   return (
     <header
@@ -24,7 +26,7 @@ function Navbar({}: Props) {
       <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3 lg:gap-4">
         <button
           type="button"
-          aria-label={isMini ? "Expand sidebar" : "Collapse sidebar"}
+          aria-label={isMini ? t("expandSidebar") : t("collapseSidebar")}
           aria-pressed={isMini}
           onClick={toggleMini}
           className="relative inline-flex items-center justify-center rounded-md p-1.5 text-gray-900 transition-all hover:bg-gray-100"
@@ -35,7 +37,7 @@ function Navbar({}: Props) {
         <Link href="/" className="relative z-0 flex shrink-0 items-center py-1">
           <Image
             src={logo}
-            alt="Transit"
+            alt={t("logoAlt")}
             width={120}
             height={40}
             className="h-8 w-auto max-w-[120px] object-contain sm:h-9"
@@ -45,18 +47,18 @@ function Navbar({}: Props) {
 
         <div
           className="mx-1 hidden min-w-0 flex-1 items-center rounded-md border border-gray-200 bg-white
-         py-1 pl-3 pr-1 md:flex md:max-w-[320px] h-10"
+         py-1 ps-3 pe-1 md:flex md:max-w-[320px] h-10"
         >
           <input
             type="search"
-            placeholder="Destinations, attractions, hotels, and ..."
+            placeholder={t("searchPlaceholder")}
             className="min-w-0 flex-1 border-0 bg-transparent text-sm text-neutral-800 outline-none
              placeholder:text-gray-400"
-            aria-label="Search"
+            aria-label={t("search")}
           />
           <button
             type="button"
-            aria-label="Search"
+            aria-label={t("search")}
             className="flex size-8 shrink-0 items-center justify-center rounded bg-primary
              text-white transition-colors hover:bg-primary/90"
           >
@@ -66,25 +68,25 @@ function Navbar({}: Props) {
       </div>
 
       <nav
-        aria-label="Account and tools"
+        aria-label={t("accountAndTools")}
         className="hidden shrink-0 items-center gap-0.5 lg:flex xl:gap-1"
       >
         <Link href="/" className={navItemHover}>
           <Smartphone className="size-4 shrink-0" />
-          App
+          {t("app")}
         </Link>
         <Link href="/" className={navItemHover}>
-          List your property
+          {t("listProperty")}
         </Link>
         <button type="button" className={navItemHover}>
           <Globe className="size-4 shrink-0 text-primary" />
           USD
         </button>
         <Link href="/" className={navItemHover}>
-          Customer support
+          {t("customerSupport")}
         </Link>
         <Link href="/" className={navItemHover}>
-          Find bookings
+          {t("findBookings")}
         </Link>
         <Link
           href="/"
@@ -92,7 +94,7 @@ function Navbar({}: Props) {
           
                   bg-primary px-2 py-2 text-[14px] font-medium text-white transition-colors hover:bg-primary/90"
         >
-          Sign in / Register
+          {t("signInRegister")}
         </Link>
       </nav>
     </header>

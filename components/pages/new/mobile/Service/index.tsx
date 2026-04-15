@@ -12,6 +12,7 @@ import {
   PlaneTakeoff,
   TrainFront,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type MobileServiceItem = {
   label: string;
@@ -19,30 +20,6 @@ type MobileServiceItem = {
   href?: string;
   active?: boolean;
 };
-
-const firstRow: MobileServiceItem[] = [
-  {
-    label: "Hotels & Homes",
-    icon: BedDouble,
-    href: "/new/hotels-test",
-    active: true,
-  },
-  { label: "Flights", icon: Plane, href: "/new/flights-test", active: true },
-  {
-    label: "Flight + Hotel",
-    icon: Hotel,
-    href: "/new/flight-hotel",
-    active: true,
-  },
-  { label: "Trains", icon: TrainFront, href: "/new/trains", active: true },
-];
-
-const secondRow: MobileServiceItem[] = [
-  { label: "Car Rentals", icon: CarFront },
-  { label: "Airport Transfers", icon: PlaneTakeoff },
-  { label: "Attractions & Tours", icon: FerrisWheel },
-  { label: "Travel guides", icon: Map },
-];
 
 function ServiceCard({ item }: { item: MobileServiceItem }) {
   const Icon = item.icon;
@@ -74,6 +51,20 @@ function ServiceCard({ item }: { item: MobileServiceItem }) {
 }
 
 export default function Service() {
+  const t = useTranslations("NewPage.mobile.service");
+  const firstRow: MobileServiceItem[] = [
+    { label: t("hotelsHomes"), icon: BedDouble, href: "/new/hotels-test", active: true },
+    { label: t("flights"), icon: Plane, href: "/new/flights-test", active: true },
+    { label: t("flightHotel"), icon: Hotel, href: "/new/flight-hotel", active: true },
+    { label: t("trains"), icon: TrainFront, href: "/new/trains", active: true },
+  ];
+  const secondRow: MobileServiceItem[] = [
+    { label: t("carRentals"), icon: CarFront },
+    { label: t("airportTransfers"), icon: PlaneTakeoff },
+    { label: t("attractionsTours"), icon: FerrisWheel },
+    { label: t("travelGuides"), icon: Map },
+  ];
+
   return (
     <>
       <div className="grid grid-cols-4 gap-x-3 gap-y-5">

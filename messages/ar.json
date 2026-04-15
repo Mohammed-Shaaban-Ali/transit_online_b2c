@@ -1298,6 +1298,153 @@
             "link_flightsItaly": "رحلات إلى إيطاليا"
         }
     },
+    "NewPage": {
+        "page": {
+            "logoAlt": "ترانزيت",
+            "searchPlaceholder": "إلى أين؟",
+            "searchAria": "بحث",
+            "openMenu": "فتح القائمة",
+            "menuTitle": "القائمة"
+        },
+        "sidebar": {
+            "mainNav": "التنقل الرئيسي",
+            "items": {
+                "hotelsHomes": "الفنادق والمساكن",
+                "flights": "الطيران",
+                "trains": "القطارات",
+                "cars": "السيارات",
+                "attractionsTours": "الأنشطة والجولات",
+                "flightHotel": "طيران + فندق",
+                "privateTours": "جولات خاصة",
+                "groupTours": "جولات جماعية",
+                "tripPlanner": "مخطط الرحلات",
+                "travelInspiration": "إلهام السفر",
+                "map": "الخريطة",
+                "deals": "العروض",
+                "rewards": "مكافآت Trip.com",
+                "app": "التطبيق"
+            }
+        },
+        "navbar": {
+            "expandSidebar": "توسيع الشريط الجانبي",
+            "collapseSidebar": "تصغير الشريط الجانبي",
+            "logoAlt": "ترانزيت",
+            "search": "بحث",
+            "searchPlaceholder": "وجهات، أنشطة، فنادق، و...",
+            "accountAndTools": "الحساب والأدوات",
+            "app": "التطبيق",
+            "listProperty": "أضف عقارك",
+            "customerSupport": "دعم العملاء",
+            "findBookings": "البحث عن الحجوزات",
+            "signInRegister": "تسجيل الدخول / إنشاء حساب"
+        },
+        "home": {
+            "hero": {
+                "title": "رحلتك تبدأ من هنا",
+                "heroAlt": "القسم الرئيسي",
+                "badges": {
+                    "securePayment": "دفع آمن",
+                    "support": "دعم خلال حوالي 30 ثانية"
+                },
+                "tabs": {
+                    "hotelsHomes": "الفنادق والمساكن",
+                    "flights": "الطيران",
+                    "trains": "القطارات",
+                    "cars": "السيارات",
+                    "attractionsTours": "الأنشطة والجولات",
+                    "flightHotel": "طيران + فندق"
+                }
+            },
+            "exclusive": {
+                "title": "حصري للمستخدمين الجدد",
+                "previousSlide": "الشريحة السابقة",
+                "nextSlide": "الشريحة التالية",
+                "moreAbout": "معلومات أكثر عن {category}",
+                "claimAll": "احصل على الكل",
+                "hotelsHomes": "الفنادق والمساكن",
+                "euTrains": "قطارات أوروبا",
+                "attractions": "الأنشطة",
+                "airportTransfers": "التنقّل من/إلى المطار",
+                "discount1": "خصم 10%",
+                "discount2": "خصم 5%",
+                "discount3": "خصم 8%",
+                "discount4": "خصم 12%",
+                "discount5": "خصم 15%",
+                "discount6": "خصم 18%",
+                "discount7": "خصم 20%",
+                "discount8": "خصم 22%"
+            },
+            "discover": {
+                "previousSlide": "الشريحة السابقة",
+                "nextSlide": "الشريحة التالية"
+            },
+            "hotels": {
+                "title": "استرخِ في فنادقنا المختارة في شنغهاي",
+                "previousSlide": "الشريحة السابقة",
+                "nextSlide": "الشريحة التالية",
+                "city": "شنغهاي",
+                "reviews": "{count} تقييم",
+                "from": "ابتداءً من"
+            },
+            "round": {
+                "title": "تنقّل بسهولة داخل شنغهاي",
+                "previousSlide": "الشريحة السابقة",
+                "nextSlide": "الشريحة التالية",
+                "from": "ابتداءً من"
+            },
+            "moments": {
+                "title": "لحظات رحلة لا تُنسى في شنغهاي",
+                "previousSlide": "الشريحة السابقة",
+                "nextSlide": "الشريحة التالية",
+                "like": "إعجاب",
+                "verified": "موثّق"
+            },
+            "trip": {
+                "title": "تنقّل بسهولة داخل شنغهاي",
+                "previousSlide": "الشريحة السابقة",
+                "nextSlide": "الشريحة التالية",
+                "badge": "رحلة متوسطة المدى"
+            },
+            "travelApp": {
+                "heroAlt": "بانر تطبيق السفر",
+                "seeImageAlt": "معاينة تطبيق السفر",
+                "title": "تطبيقك المتكامل للسفر",
+                "appOnlyDeals": "عروض خاصة بالتطبيق",
+                "easyPlanning": "تخطيط رحلة بسهولة",
+                "qrAlt": "رمز QR لتنزيل التطبيق",
+                "dailyUsers": "مستخدمون يوميًا",
+                "dailyDownloads": "تنزيلات يوميًا",
+                "rating": "التقييم",
+                "appStoreAria": "حمّل من App Store",
+                "googlePlayAria": "احصل عليه من Google Play",
+                "scanQr": "امسح رمز QR لتنزيل التطبيق"
+            }
+        },
+        "mobile": {
+            "service": {
+                "hotelsHomes": "الفنادق والمساكن",
+                "flights": "الطيران",
+                "flightHotel": "طيران + فندق",
+                "trains": "القطارات",
+                "carRentals": "تأجير سيارات",
+                "airportTransfers": "التنقّل من/إلى المطار",
+                "attractionsTours": "الأنشطة والجولات",
+                "travelGuides": "أدلة السفر"
+            },
+            "deals": {
+                "title": "عروض لفترة محدودة",
+                "securePayment": "دفع آمن",
+                "support": "دعم خلال حوالي 30 ثانية"
+            },
+            "trip": {
+                "title": "استلهم رحلتك القادمة",
+                "card1": "ربيع الشرق الأوسط | عندما تزدهر الصحراء بالحياة",
+                "card2": "تألق برجي كوالالمبور التوأم",
+                "card3": "القاهرة! أمام الأهرامات! هذا الفندق مذهل",
+                "card4": "مصر | الإسكندرية ليست مرهقة على الإطلاق"
+            }
+        }
+    },
     "QuotationTable": {
         "bookingNumber": "رقم الحجز",
         "title": "العنوان",

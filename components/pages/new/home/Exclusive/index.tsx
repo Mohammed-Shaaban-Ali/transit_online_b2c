@@ -15,6 +15,7 @@ import {
   TrainFront,
 } from "lucide-react";
 import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -31,20 +32,50 @@ type Coupon = {
   Icon: LucideIcon;
 };
 
-const coupons: Coupon[] = [
-  { id: 1, discount: "10% off", category: "Hotels & Homes", Icon: Bed },
-  { id: 2, discount: "5% off", category: "EU trains", Icon: TrainFront },
-  { id: 3, discount: "8% off", category: "Attractions", Icon: FerrisWheel },
-  { id: 4, discount: "12% off", category: "Airport transfers", Icon: Plane },
-  { id: 5, discount: "15% off", category: "Hotels & Homes", Icon: Bed },
-  { id: 6, discount: "18% off", category: "EU trains", Icon: TrainFront },
-  { id: 7, discount: "20% off", category: "Attractions", Icon: FerrisWheel },
-  { id: 8, discount: "22% off", category: "Airport transfers", Icon: Plane },
-];
-
 function Exclusive({}: Props) {
   const locale = useLocale();
+  const t = useTranslations("NewPage.home.exclusive");
   const isRtl = locale === "ar";
+  const coupons: Coupon[] = [
+    { id: 1, discount: t("discount1"), category: t("hotelsHomes"), Icon: Bed },
+    {
+      id: 2,
+      discount: t("discount2"),
+      category: t("euTrains"),
+      Icon: TrainFront,
+    },
+    {
+      id: 3,
+      discount: t("discount3"),
+      category: t("attractions"),
+      Icon: FerrisWheel,
+    },
+    {
+      id: 4,
+      discount: t("discount4"),
+      category: t("airportTransfers"),
+      Icon: Plane,
+    },
+    { id: 5, discount: t("discount5"), category: t("hotelsHomes"), Icon: Bed },
+    {
+      id: 6,
+      discount: t("discount6"),
+      category: t("euTrains"),
+      Icon: TrainFront,
+    },
+    {
+      id: 7,
+      discount: t("discount7"),
+      category: t("attractions"),
+      Icon: FerrisWheel,
+    },
+    {
+      id: 8,
+      discount: t("discount8"),
+      category: t("airportTransfers"),
+      Icon: Plane,
+    },
+  ];
 
   const [showPrev, setShowPrev] = useState(false);
   const [showNext, setShowNext] = useState(false);
@@ -61,9 +92,7 @@ function Exclusive({}: Props) {
 
   return (
     <section className="container mx-auto w-full min-w-0 max-w-[1200px]! overflow-x-clip py-6 pb-1">
-      <h2 className="mb-4 text-[24px] font-bold leading-tight">
-        New user exclusive
-      </h2>
+      <h2 className="mb-4 text-[24px] font-bold leading-tight">{t("title")}</h2>
 
       <div
         className={`relative min-w-0 max-w-full mx-2.5 rounded-xl px-1 py-2 sm:px-2 `}
@@ -71,8 +100,11 @@ function Exclusive({}: Props) {
         <button
           id="exclusive-prev"
           type="button"
-          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"} sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2`}
-          aria-label="Previous Slide"
+          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"}
+             sm:start-2 translate-x-0
+             md:start-0 md:-translate-x-1/2
+             md:rtl:start-2 md:rtl:translate-x-1/2`}
+          aria-label={t("previousSlide")}
         >
           <ChevronLeft
             className="h-5 w-5 rtl:rotate-180"
@@ -83,8 +115,11 @@ function Exclusive({}: Props) {
         <button
           id="exclusive-next"
           type="button"
-          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"} end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2`}
-          aria-label="Next Slide"
+          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"} 
+            end-0 sm:end-2 translate-x-0
+            md:end-0 md:translate-x-1/2
+            md:rtl:end-2 md:rtl:-translate-x-1/2`}
+          aria-label={t("nextSlide")}
         >
           <ChevronRight
             className="h-5 w-5 rtl:rotate-180"
@@ -141,7 +176,7 @@ function Exclusive({}: Props) {
                     <button
                       type="button"
                       className="inline-flex shrink-0 rounded-full text-neutral-400 transition-colors hover:text-neutral-600"
-                      aria-label={`More about ${category}`}
+                      aria-label={t("moreAbout", { category })}
                     >
                       <Info className="h-4 w-4" strokeWidth={2} aria-hidden />
                     </button>
@@ -151,7 +186,7 @@ function Exclusive({}: Props) {
                     className="w-fit rounded-sm bg-primary px-3.5 py-2 text-sm mt-auto
                      font-semibold text-white transition-colors hover:bg-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
-                    Claim all
+                    {t("claimAll")}
                   </button>
                 </div>
 

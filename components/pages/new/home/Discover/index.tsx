@@ -7,6 +7,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import discoverImage1 from "@/public/images/flights/Discover1.png";
 import discoverImage2 from "@/public/images/flights/Discover2.png";
@@ -22,6 +23,7 @@ const navButtonClass =
 
 function Discover({}: Props) {
   const locale = useLocale();
+  const t = useTranslations("NewPage.home.discover");
   const isRtl = locale === "ar";
 
   const [showPrev, setShowPrev] = useState(false);
@@ -76,8 +78,11 @@ function Discover({}: Props) {
         <button
           id="hotels-what-new-prev"
           type="button"
-          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"} sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2`}
-          aria-label="Previous slide"
+          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"} 
+            
+            sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2
+            md:rtl:start-0 md:rtl:translate-x-1/2`}
+          aria-label={t("previousSlide")}
         >
           <ChevronLeft
             className="h-5 w-5 rtl:rotate-180"
@@ -88,8 +93,10 @@ function Discover({}: Props) {
         <button
           id="hotels-what-new-next"
           type="button"
-          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"} end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2`}
-          aria-label="Next slide"
+          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"} 
+            end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2
+            md:rtl:end-0 md:rtl:-translate-x-1/2`}
+          aria-label={t("nextSlide")}
         >
           <ChevronRight
             className="h-5 w-5 rtl:rotate-180"

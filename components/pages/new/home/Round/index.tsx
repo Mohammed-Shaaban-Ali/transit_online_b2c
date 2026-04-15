@@ -13,6 +13,7 @@ import {
   MoveRight,
 } from "lucide-react";
 import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import Image1 from "@/public/images/new_hone/round1.webp";
 import Image2 from "@/public/images/new_hone/round2.webp";
@@ -28,6 +29,7 @@ const navButtonClass =
 
 function Round({}: Props) {
   const locale = useLocale();
+  const t = useTranslations("NewPage.home.round");
   const isRtl = locale === "ar";
 
   const [showPrev, setShowPrev] = useState(false);
@@ -112,15 +114,17 @@ function Round({}: Props) {
   return (
     <section className="container mx-auto w-full min-w-0 max-w-[1200px]! overflow-x-clip py-6 ">
       <h2 className="mb-4 text-[22px] font-bold leading-tight ">
-        Get around in Shanghai
+        {t("title")}
       </h2>
 
       <div className="relative min-w-0 max-w-full mx-2.5">
         <button
           id="hotels-top-prev"
           type="button"
-          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"} sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2`}
-          aria-label="Previous Slide"
+          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"}
+             sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2
+             md:rtl:start-0 md:rtl:translate-x-1/2`}
+          aria-label={t("previousSlide")}
         >
           <ChevronLeft
             className="h-5 w-5 rtl:rotate-180"
@@ -131,8 +135,10 @@ function Round({}: Props) {
         <button
           id="hotels-top-next"
           type="button"
-          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"} end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2`}
-          aria-label="Next Slide"
+          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"}
+             end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2
+             md:rtl:end-0 md:rtl:-translate-x-1/2`}
+          aria-label={t("nextSlide")}
         >
           <ChevronRight
             className="h-5 w-5 rtl:rotate-180"
@@ -189,7 +195,9 @@ function Round({}: Props) {
                 <div className="flex flex-col p-3.5 pt-4 gap-1">
                   <h3 className="text-[16px] font-medium leading-tight text-black/90 flex items-center gap-2">
                     <BusFront className="size-[18px]" />
-                    {hotel.from} <MoveRight className="size-5" /> {hotel.to}
+                    {
+                      hotel.from
+                    } <MoveRight className="size-5 rtl:rotate-180" /> {hotel.to}
                   </h3>
 
                   {/* Rating badge */}
@@ -198,7 +206,7 @@ function Round({}: Props) {
                   {/* Price */}
                   <div className="flex items-baseline  gap-1">
                     <span className="text-[14px] font-medium text-black">
-                      From
+                      {t("from")}
                     </span>
                     <span className="text-[16px] font-semibold text-black">
                       US${hotel.price}

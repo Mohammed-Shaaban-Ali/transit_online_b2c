@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import type { useTranslations } from "next-intl";
 import {
     BadgePercent,
     BedDouble,
@@ -17,92 +18,94 @@ import {
 } from "lucide-react";
 
 export type SidebarItem = {
-    label: string;
-    href: string;
-    icon: LucideIcon;
-    isNew?: boolean;
+  label: string;
+  href: string;
+  icon: LucideIcon;
+  isNew?: boolean;
 };
 
-const sidebarItems: SidebarItem[][] = [
+type SidebarT = ReturnType<typeof useTranslations>;
+
+const getSidebarItems = (t: SidebarT): SidebarItem[][] => [
     [
         {
-            label: "Hotels & Homes",
+            label: t("hotelsHomes"),
             href: "/new/hotels-test",
             icon: BedDouble,
         },
         {
-            label: "Flights",
+            label: t("flights"),
             href: "/new/flights-test",
             icon: Plane,
         },
         {
-            label: "Trains",
+            label: t("trains"),
             href: "/new/trains",
             icon: TrainFront,
         },
         {
-            label: "Cars",
+            label: t("cars"),
             href: "/new/cars",
             icon: CarFront,
         },
         {
-            label: "Attractions & Tours",
+            label: t("attractionsTours"),
             href: "/new/attractions",
             icon: FerrisWheel,
         },
         {
-            label: "Flight + Hotel",
+            label: t("flightHotel"),
             href: "/new/flight-hotel",
             icon: Hotel,
         },
     ],
     [
         {
-            label: "Private Tours",
+            label: t("privateTours"),
             href: "/new/private-tours",
             icon: Luggage,
         },
         {
-            label: "Group Tours",
+            label: t("groupTours"),
             href: "/new/group-tours",
             icon: Flag,
         },
     ],
     [
         {
-            label: "Trip.Planner",
+            label: t("tripPlanner"),
             href: "/new/planner",
             icon: Route,
             isNew: true,
         },
         {
-            label: "Travel Inspiration",
+            label: t("travelInspiration"),
             href: "/new/inspiration",
             icon: Lightbulb,
         },
         {
-            label: "Map",
+            label: t("map"),
             href: "/new/map",
             icon: MapPinned,
         },
         {
-            label: "Deals",
+            label: t("deals"),
             href: "/new/deals",
             icon: BadgePercent,
         },
     ],
     [
         {
-            label: "Trip.com Rewards",
+            label: t("rewards"),
             href: "/new/rewards",
             icon: CircleDollarSign,
         },
         {
-            label: "App",
+            label: t("app"),
             href: "/new/app",
             icon: Smartphone,
         },
     ],
 ];
+export default getSidebarItems;
 
-export default sidebarItems;

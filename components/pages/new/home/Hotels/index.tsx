@@ -7,6 +7,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import hotelImage1 from "@/public/images/hotels/hotel1.webp";
 import hotelImage2 from "@/public/images/hotels/hotel2.webp";
@@ -22,6 +23,7 @@ const navButtonClass =
 
 function Hotels({}: Props) {
   const locale = useLocale();
+  const t = useTranslations("NewPage.home.hotels");
   const isRtl = locale === "ar";
 
   const [showPrev, setShowPrev] = useState(false);
@@ -97,15 +99,17 @@ function Hotels({}: Props) {
   return (
     <section className="container mx-auto w-full min-w-0 max-w-[1200px]! overflow-x-clip py-6 ">
       <h2 className="mb-4 text-[22px] font-bold leading-tight ">
-        Unwind in our selected hotels in Shanghai
+        {t("title")}
       </h2>
 
       <div className="relative min-w-0 max-w-full mx-2.5">
         <button
           id="hotels-top-prev"
           type="button"
-          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"} sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2`}
-          aria-label="Previous Slide"
+          className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"} 
+            sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2
+            md:rtl:start-0 md:rtl:translate-x-1/2`}
+          aria-label={t("previousSlide")}
         >
           <ChevronLeft
             className="h-5 w-5 rtl:rotate-180"
@@ -116,8 +120,10 @@ function Hotels({}: Props) {
         <button
           id="hotels-top-next"
           type="button"
-          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"} end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2`}
-          aria-label="Next Slide"
+          className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"} 
+            end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2
+            md:rtl:end-0 md:rtl:-translate-x-1/2`}
+          aria-label={t("nextSlide")}
         >
           <ChevronRight
             className="h-5 w-5 rtl:rotate-180"
@@ -174,7 +180,7 @@ function Hotels({}: Props) {
                 <div className="flex flex-col p-3.5 pt-4 gap-1">
                   {/* Hotel name */}
                   <span className="text-[12px] font-normal text-black/50">
-                    Shanghai
+                    {t("city")}
                   </span>
                   <h3 className="text-[16px] font-medium leading-tight text-black/90 line-clamp-1">
                     {hotel.name}
@@ -190,14 +196,14 @@ function Hotels({}: Props) {
                       <span className="font-normal opacity-80">/10</span>
                     </span>
                     <span className="bg-white px-2 py-0.5 text-xs font-medium text-black/70">
-                      {hotel.reviews.toLocaleString()} reviews
+                      {t("reviews", { count: hotel.reviews.toLocaleString() })}
                     </span>
                   </div>
 
                   {/* Price */}
                   <div className="mt-6 flex items-baseline  gap-1">
                     <span className="text-[14px] font-medium text-black">
-                      From
+                      {t("from")}
                     </span>
                     <span className="text-[16px] font-semibold text-black">
                       US${hotel.price}

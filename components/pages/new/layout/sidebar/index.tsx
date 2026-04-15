@@ -5,9 +5,10 @@ import React, { useRef, useCallback } from "react";
 import { Menu } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 import { useSidebarMini } from "../sidebar-mini-context";
-import sidebarItems from "./items";
+import getSidebarItems from "./items";
 import type { SidebarItem } from "./items";
 
 const SIDEBAR_FULL_W = 220;
@@ -47,6 +48,9 @@ function SidebarNavContent({
   onScroll?: (scrollTop: number) => void;
 }) {
   const pathname = usePathname();
+  const t = useTranslations("NewPage.sidebar");
+  const sidebarItemsT = useTranslations("NewPage.sidebar.items");
+  const sidebarItems = getSidebarItems(sidebarItemsT);
 
   const handleScroll = useCallback(
     (e: React.UIEvent<HTMLElement>) => {
@@ -72,7 +76,7 @@ function SidebarNavContent({
     <nav
       ref={refCallback}
       className="custom-scrollbar-hover flex min-h-0 flex-1 flex-col overflow-y-auto ps-2.5 py-3"
-      aria-label="Main"
+      aria-label={t("mainNav")}
       onScroll={onScroll ? handleScroll : undefined}
     >
       {sidebarItems.map((group, groupIndex) => (
@@ -115,6 +119,7 @@ function SidebarNavContent({
 
 function SidebarHeaderToggle({ align }: { align: "start" | "center" }) {
   const { isMini, toggleMini } = useSidebarMini();
+  const t = useTranslations("NewPage.navbar");
 
   return (
     <div
@@ -124,7 +129,7 @@ function SidebarHeaderToggle({ align }: { align: "start" | "center" }) {
     >
       <button
         type="button"
-        aria-label={isMini ? "Expand sidebar" : "Collapse sidebar"}
+        aria-label={isMini ? t("expandSidebar") : t("collapseSidebar")}
         aria-pressed={isMini}
         onClick={toggleMini}
         className="relative inline-flex items-center justify-center rounded-md p-1.5 text-gray-900 transition-all hover:bg-gray-100"

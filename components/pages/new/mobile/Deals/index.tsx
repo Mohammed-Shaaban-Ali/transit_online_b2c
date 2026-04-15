@@ -9,17 +9,7 @@ import discoverImage2 from "@/public/images/flights/Discover2.png";
 import discoverImage3 from "@/public/images/flights/Discover3.png";
 import "swiper/css";
 import "swiper/css/pagination";
-
-const titles = [
-  {
-    title: "Secure payment",
-    link: "https://ak-d.tripcdn.com/images/0AS6b1200090fx7s7F635.png",
-  },
-  {
-    title: "Support in approx. 30s",
-    link: "https://ak-d.tripcdn.com/images/0AS5f120008whj34f2145.png",
-  },
-];
+import { useTranslations } from "next-intl";
 
 const discoverBanners = [
   { id: 1, image: discoverImage1, alt: "Discover deal 1" },
@@ -28,10 +18,22 @@ const discoverBanners = [
 ];
 
 export default function Deals() {
+  const t = useTranslations("NewPage.mobile.deals");
+  const titles = [
+    {
+      title: t("securePayment"),
+      link: "https://ak-d.tripcdn.com/images/0AS6b1200090fx7s7F635.png",
+    },
+    {
+      title: t("support"),
+      link: "https://ak-d.tripcdn.com/images/0AS5f120008whj34f2145.png",
+    },
+  ];
+
   return (
     <section className="mt-9">
       <h2 className="mb-2.5 text-[16px] font-bold leading-tight text-[#111827]">
-        Limited-time deals
+        {t("title")}
       </h2>
 
       <Swiper

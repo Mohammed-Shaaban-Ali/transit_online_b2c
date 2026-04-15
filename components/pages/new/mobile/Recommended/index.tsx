@@ -2,92 +2,38 @@
 
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useTranslations } from "next-intl";
 import "swiper/css";
 
-const recommendedTabs = [
-  {
-    id: "destinations",
-    label: "Flights to Popular Destinations",
-    links: [
-      "Flights to Bangkok",
-      "Flights to Manila",
-      "Flights to Shanghai",
-      "Flights to Tokyo",
-      "Flights to Seoul",
-      "Flights to Kuala Lumpur",
-      "Flights to Phnom Penh",
-      "Flights to Hong Kong",
-      "Flights to Guangzhou",
-      "Flights to Singapore",
-    ],
-  },
-  {
-    id: "routes",
-    label: "Popular Flights Routes",
-    links: [
-      "Cairo to Riyadh",
-      "Dubai to London",
-      "Jeddah to Cairo",
-      "Riyadh to Istanbul",
-      "Abu Dhabi to Bangkok",
-      "Doha to Manila",
-      "Kuwait to Amman",
-      "Riyadh to Dubai",
-      "Dammam to Cairo",
-      "Muscat to Delhi",
-    ],
-  },
-  {
-    id: "airlines",
-    label: "Popular Airlines",
-    links: [
-      "Saudia",
-      "Qatar Airways",
-      "Emirates",
-      "Etihad Airways",
-      "Turkish Airlines",
-      "Flynas",
-      "Flyadeal",
-      "Air Arabia",
-      "EgyptAir",
-      "Lufthansa",
-    ],
-  },
-  {
-    id: "airports",
-    label: "Popular Airports",
-    links: [
-      "King Khalid International",
-      "King Abdulaziz International",
-      "Dubai International",
-      "Hamad International",
-      "Abu Dhabi International",
-      "Cairo International",
-      "Istanbul Airport",
-      "Heathrow Airport",
-      "Suvarnabhumi Airport",
-      "Singapore Changi",
-    ],
-  },
-  {
-    id: "countries",
-    label: "Cheap Flights to Popular Countries",
-    links: [
-      "Flights to Saudi Arabia",
-      "Flights to UAE",
-      "Flights to Egypt",
-      "Flights to Turkey",
-      "Flights to Thailand",
-      "Flights to Philippines",
-      "Flights to India",
-      "Flights to Malaysia",
-      "Flights to UK",
-      "Flights to Italy",
-    ],
-  },
-];
-
 export default function Recommended() {
+  const t = useTranslations("FlightsTestPage.Recommended");
+  const recommendedTabs = [
+    {
+      id: "destinations",
+      label: t("tab_destinations"),
+      links: [t("link_flightsBangkok"), t("link_flightsManila"), t("link_flightsShanghai"), t("link_flightsTokyo"), t("link_flightsSeoul"), t("link_flightsKL"), t("link_flightsPhnomPenh"), t("link_flightsHK"), t("link_flightsGuangzhou"), t("link_flightsSingapore")],
+    },
+    {
+      id: "routes",
+      label: t("tab_routes"),
+      links: [t("link_cairRiyadh"), t("link_dubaiLondon"), t("link_jeddahCairo"), t("link_riyadhIstanbul"), t("link_abuDhabiBangkok"), t("link_dohaManila"), t("link_kuwaitAmman"), t("link_riyadhDubai"), t("link_dammamCairo"), t("link_muscatDelhi")],
+    },
+    {
+      id: "airlines",
+      label: t("tab_airlines"),
+      links: [t("link_saudia"), t("link_qatarAirways"), t("link_emirates"), t("link_etihad"), t("link_turkish"), t("link_flynas"), t("link_flyadeal"), t("link_airArabia"), t("link_egyptair"), t("link_lufthansa")],
+    },
+    {
+      id: "airports",
+      label: t("tab_airports"),
+      links: [t("link_kingKhalid"), t("link_kingAbdulaziz"), t("link_dubaiIntl"), t("link_hamad"), t("link_abuDhabiIntl"), t("link_cairoIntl"), t("link_istanbul"), t("link_heathrow"), t("link_suvarnabhumi"), t("link_changi")],
+    },
+    {
+      id: "countries",
+      label: t("tab_countries"),
+      links: [t("link_flightsSaudi"), t("link_flightsUAE"), t("link_flightsEgypt"), t("link_flightsTurkey"), t("link_flightsThailand"), t("link_flightsPhilippines"), t("link_flightsIndia"), t("link_flightsMalaysia"), t("link_flightsUK"), t("link_flightsItaly")],
+    },
+  ];
   const [activeTab, setActiveTab] = useState(recommendedTabs[0].id);
   const activeData =
     recommendedTabs.find((tab) => tab.id === activeTab) ?? recommendedTabs[0];
@@ -95,7 +41,7 @@ export default function Recommended() {
   return (
     <section className="mt-8">
       <h2 className="mb-3 text-[16px] font-bold leading-tight text-[#111827]">
-        Trip.com recommendations
+        {t("title")}
       </h2>
 
       <Swiper
