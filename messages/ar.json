@@ -453,7 +453,11 @@
         "priceSummary": "ملخص السعر",
         "route": "المسار",
         "passengers": "الركاب",
-        "totalPrice": "السعر الإجمالي"
+        "totalPrice": "السعر الإجمالي",
+        "bookingNav": {
+            "pointsAria": "نقاط المكافآت: {count}",
+            "accountAria": "قائمة الحساب"
+        }
     },
     "FlightBookingForm": {
         "contactInfo": "بيانات التواصل",

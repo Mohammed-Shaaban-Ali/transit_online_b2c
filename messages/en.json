@@ -453,7 +453,11 @@
         "priceSummary": "Price Summary",
         "route": "Route",
         "passengers": "Passengers",
-        "totalPrice": "Total Price"
+        "totalPrice": "Total Price",
+        "bookingNav": {
+            "pointsAria": "Reward points: {count}",
+            "accountAria": "Account menu"
+        }
     },
     "FlightBookingForm": {
         "contactInfo": "Contact Information",
