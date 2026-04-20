@@ -416,7 +416,7 @@ export default function FareSelectionDialog({
       sessionStorage.setItem(FLIGHT_BOOKING_KEY, JSON.stringify(bookingData));
 
       onClose();
-      router.push("/flights-test/showfarefirst/booking");
+      router.push("/new/flights/showfarefirst/booking");
     } catch (e) {
       console.error(e);
     }
@@ -511,7 +511,10 @@ export default function FareSelectionDialog({
                 onClick={handleBack}
                 className="rounded-full p-1 hover:bg-gray-100 transition-colors cursor-pointer shrink-0"
               >
-                <ChevronLeft size={17} className="text-gray-600 sm:h-5 sm:w-5" />
+                <ChevronLeft
+                  size={17}
+                  className="text-gray-600 sm:h-5 sm:w-5"
+                />
               </button>
             )}
             <h2 className="text-[15px] sm:text-[20px] font-bold text-gray-900 truncate">
@@ -570,7 +573,9 @@ export default function FareSelectionDialog({
           {isFetching && (
             <div className="flex flex-col items-center justify-center gap-2 py-12 sm:gap-3 sm:py-16">
               <div className="h-9 w-9 animate-spin rounded-full border-2 border-primary border-t-transparent sm:h-10 sm:w-10" />
-              <p className="text-[13px] text-gray-600 sm:text-sm">{tDetails("loading")}</p>
+              <p className="text-[13px] text-gray-600 sm:text-sm">
+                {tDetails("loading")}
+              </p>
             </div>
           )}
           {!isFetching && error && <ErrorSection error={error} />}

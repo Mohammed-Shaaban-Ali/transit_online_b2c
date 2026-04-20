@@ -3,18 +3,15 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { FlightDirection } from "@/types/flightTypes";
-import { FaPlane, FaUser, FaUsers } from "react-icons/fa";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { MdChildFriendly } from "react-icons/md";
-import { FaExchangeAlt } from "react-icons/fa";
-import PriceCell from "@/components/shared/PriceCell";
-import { useFlightUtils } from "@/hooks/useFlightUtils";
+import { FaPlane } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { FLIGHT_BOOKING_KEY } from "@/constants";
 import FlightItineraryRow from "@/components/pages/flights-test/showfarefirst/FlightCard/FlightItineraryRow";
-import FlightBookingForm from "@/components/shared/booking/FlightBookingForm";
-import type { FlightBookingFormValues } from "@/components/shared/booking/FlightBookingForm";
+import PriceDetailsCard from "./PriceDetailsCard";
+import FlightBookingForm, {
+  FlightBookingFormValues,
+} from "./FlightBookingForm";
 
 export interface FlightBookingData {
   departureFareKey: string;
@@ -36,9 +33,7 @@ export interface FlightBookingData {
 
 const FlightBookingPage = () => {
   const t = useTranslations("FlightBooking");
-  const tFlightCard = useTranslations("FlightCard");
   const router = useRouter();
-  const { formatDate } = useFlightUtils();
   const [flightData, setFlightData] = useState<FlightBookingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -110,25 +105,13 @@ const FlightBookingPage = () => {
   const departureFlight = flightData.departureFlightData;
   const returnFlight = flightData.returnFlightData;
 
-  const departureFromCode =
-    departureFlight?.legs?.[0]?.departure_info?.airport_code || "";
-  const departureToCode =
-    departureFlight?.legs?.[departureFlight.legs.length - 1]?.arrival_info
-      ?.airport_code || "";
-  const returnDate = returnFlight?.legs?.[returnFlight.legs.length - 1]
-    ?.arrival_info?.date
-    ? formatDate(
-        returnFlight.legs[returnFlight.legs.length - 1].arrival_info.date,
-      )
-    : null;
-
   const flights: FlightDirection[] = [
     departureFlight,
     ...(returnFlight ? [returnFlight] : []),
   ];
 
   return (
-    <div className="container my-24">
+    <div className="mx-auto w-full max-w-[1200px]! px-2 sm:px-5 md:px-0 ">
       <h1 className="text-28 font-bold mb-6">{t("title")}</h1>
 
       {/* ===== Form + Price Summary Grid ===== */}
@@ -151,80 +134,12 @@ const FlightBookingPage = () => {
 
         {/* Right: Price Summary (Sticky) */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden sticky top-12">
-            <div className="px-4 md:px-5 py-3 bg-gray-100 border-b border-gray-200">
-              <h3 className="text-16 font-bold">{t("priceSummary")}</h3>
-            </div>
-
-            <div className="p-4 flex flex-col gap-4">
-              {/* Passengers */}
-              <div className="flex flex-wrap gap-3">
-                {[
-                  {
-                    icon: <FaUser size={12} className="text-gray-400" />,
-                    label: `${flightData.adults} ${flightData.adults === 1 ? tFlightCard("adult") : tFlightCard("adults")}`,
-                    value: flightData.adults,
-                  },
-                  {
-                    icon: <FaUsers size={12} className="text-gray-400" />,
-                    label: `${flightData.children} ${flightData.children === 1 ? tFlightCard("child") : tFlightCard("children")}`,
-                    value: flightData.children,
-                  },
-                  {
-                    icon: (
-                      <MdChildFriendly size={12} className="text-gray-400" />
-                    ),
-                    label: `${flightData.infants} ${flightData.infants === 1 ? tFlightCard("infant") : tFlightCard("infants")}`,
-                    value: flightData.infants,
-                  },
-                ]
-                  .filter((item) => item.value > 0)
-                  .map((item) => (
-                    <div key={item.label} className="flex items-center gap-1.5">
-                      {item.icon}
-                      <span className="text-13 text-gray-600">
-                        {item.label}
-                      </span>
-                    </div>
-                  ))}
-              </div>
-
-              {/* Route */}
-              <div className="flex items-center justify-between text-14 font-medium text-gray-500">
-                <span>{t("route")}</span>
-                <div className="flex items-center gap-1.5 font-bold text-gray-700">
-                  <span>{departureFromCode}</span>
-                  {returnDate ? (
-                    <FaExchangeAlt size={11} className="text-gray-400" />
-                  ) : (
-                    <FaArrowRightLong
-                      size={11}
-                      className="text-gray-400 rtl:rotate-180"
-                    />
-                  )}
-                  <span>{departureToCode}</span>
-                </div>
-              </div>
-
-              {/* Cabin */}
-              <div className="flex items-center justify-between text-14 font-medium text-gray-500">
-                <span>{tFlightCard("cabin")}</span>
-                <span>
-                  {flightData.cabinClass === "BUSINESS"
-                    ? tFlightCard("business")
-                    : tFlightCard("economy")}
-                </span>
-              </div>
-
-              <div className="border-t border-dashed border-gray-300" />
-
-              {/* Total Price */}
-              <div className="flex items-center justify-between">
-                <span className="text-16 font-bold">{t("totalPrice")}</span>
-                <PriceCell price={flightData.buyPrice} />
-              </div>
-            </div>
-          </div>
+          <PriceDetailsCard
+            adults={flightData.adults}
+            children={flightData.children}
+            infants={flightData.infants}
+            buyPrice={flightData.buyPrice}
+          />
         </div>
       </div>
     </div>

@@ -60,13 +60,12 @@ type Props = {
 
 export default function FlightItineraryRow({ flights }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
-  console.log(flights, "flights");
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+    <div className="bg-white border border-gray-300 rounded-lg overflow-hidden">
       {/* ── Each flight: summary row + its detail panel ── */}
       <div className="flex">
         {/* Left: stacked flight rows with their detail panels */}
-        <div className="flex-1 divide-y divide-gray-100">
+        <div className="flex-1  ">
           {flights.map((flight, idx) => {
             const firstLeg = flight.legs[0];
             const lastLeg = flight.legs[flight.legs.length - 1];
@@ -142,7 +141,9 @@ export default function FlightItineraryRow({ flights }: Props) {
           type="button"
           onClick={() => setIsExpanded((v) => !v)}
           aria-label={isExpanded ? "Collapse details" : "Expand details"}
-          className="shrink-0 self-stretch flex items-center justify-center px-4 border-l border-gray-100 text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
+          className="shrink-0 self-stretch flex items-center justify-center px-4 
+           border-gray-100 text-gray-400
+             transition-colors cursor-pointer"
         >
           <svg
             width="22"

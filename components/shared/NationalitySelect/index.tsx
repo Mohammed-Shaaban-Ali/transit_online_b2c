@@ -1,7 +1,13 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { createPortal } from "react-dom";
 import { UseFormReturn } from "react-hook-form";
 
@@ -16,8 +22,18 @@ export interface CountryItem {
 // ─── Static countries list – Arab countries first (Saudi Arabia on top) ──
 const COUNTRIES: CountryItem[] = [
   // ── Arab Countries ──────────────────────────────────────────
-  { code: "SA", name: "Saudi Arabia", nameAr: "المملكة العربية السعودية", flag: "🇸🇦" },
-  { code: "AE", name: "United Arab Emirates", nameAr: "الإمارات العربية المتحدة", flag: "🇦🇪" },
+  {
+    code: "SA",
+    name: "Saudi Arabia",
+    nameAr: "المملكة العربية السعودية",
+    flag: "🇸🇦",
+  },
+  {
+    code: "AE",
+    name: "United Arab Emirates",
+    nameAr: "الإمارات العربية المتحدة",
+    flag: "🇦🇪",
+  },
   { code: "KW", name: "Kuwait", nameAr: "الكويت", flag: "🇰🇼" },
   { code: "QA", name: "Qatar", nameAr: "قطر", flag: "🇶🇦" },
   { code: "BH", name: "Bahrain", nameAr: "البحرين", flag: "🇧🇭" },
@@ -44,7 +60,12 @@ const COUNTRIES: CountryItem[] = [
   { code: "AL", name: "Albania", nameAr: "ألبانيا", flag: "🇦🇱" },
   { code: "AD", name: "Andorra", nameAr: "أندورا", flag: "🇦🇩" },
   { code: "AO", name: "Angola", nameAr: "أنغولا", flag: "🇦🇴" },
-  { code: "AG", name: "Antigua and Barbuda", nameAr: "أنتيغوا وبربودا", flag: "🇦🇬" },
+  {
+    code: "AG",
+    name: "Antigua and Barbuda",
+    nameAr: "أنتيغوا وبربودا",
+    flag: "🇦🇬",
+  },
   { code: "AR", name: "Argentina", nameAr: "الأرجنتين", flag: "🇦🇷" },
   { code: "AM", name: "Armenia", nameAr: "أرمينيا", flag: "🇦🇲" },
   { code: "AU", name: "Australia", nameAr: "أستراليا", flag: "🇦🇺" },
@@ -59,7 +80,12 @@ const COUNTRIES: CountryItem[] = [
   { code: "BJ", name: "Benin", nameAr: "بنين", flag: "🇧🇯" },
   { code: "BT", name: "Bhutan", nameAr: "بوتان", flag: "🇧🇹" },
   { code: "BO", name: "Bolivia", nameAr: "بوليفيا", flag: "🇧🇴" },
-  { code: "BA", name: "Bosnia and Herzegovina", nameAr: "البوسنة والهرسك", flag: "🇧🇦" },
+  {
+    code: "BA",
+    name: "Bosnia and Herzegovina",
+    nameAr: "البوسنة والهرسك",
+    flag: "🇧🇦",
+  },
   { code: "BW", name: "Botswana", nameAr: "بوتسوانا", flag: "🇧🇼" },
   { code: "BR", name: "Brazil", nameAr: "البرازيل", flag: "🇧🇷" },
   { code: "BN", name: "Brunei", nameAr: "بروناي", flag: "🇧🇳" },
@@ -70,13 +96,23 @@ const COUNTRIES: CountryItem[] = [
   { code: "KH", name: "Cambodia", nameAr: "كمبوديا", flag: "🇰🇭" },
   { code: "CM", name: "Cameroon", nameAr: "الكاميرون", flag: "🇨🇲" },
   { code: "CA", name: "Canada", nameAr: "كندا", flag: "🇨🇦" },
-  { code: "CF", name: "Central African Republic", nameAr: "جمهورية أفريقيا الوسطى", flag: "🇨🇫" },
+  {
+    code: "CF",
+    name: "Central African Republic",
+    nameAr: "جمهورية أفريقيا الوسطى",
+    flag: "🇨🇫",
+  },
   { code: "TD", name: "Chad", nameAr: "تشاد", flag: "🇹🇩" },
   { code: "CL", name: "Chile", nameAr: "تشيلي", flag: "🇨🇱" },
   { code: "CN", name: "China", nameAr: "الصين", flag: "🇨🇳" },
   { code: "CO", name: "Colombia", nameAr: "كولومبيا", flag: "🇨🇴" },
   { code: "CG", name: "Congo", nameAr: "الكونغو", flag: "🇨🇬" },
-  { code: "CD", name: "Congo (DRC)", nameAr: "الكونغو الديمقراطية", flag: "🇨🇩" },
+  {
+    code: "CD",
+    name: "Congo (DRC)",
+    nameAr: "الكونغو الديمقراطية",
+    flag: "🇨🇩",
+  },
   { code: "CR", name: "Costa Rica", nameAr: "كوستاريكا", flag: "🇨🇷" },
   { code: "CI", name: "Côte d'Ivoire", nameAr: "ساحل العاج", flag: "🇨🇮" },
   { code: "HR", name: "Croatia", nameAr: "كرواتيا", flag: "🇭🇷" },
@@ -85,10 +121,20 @@ const COUNTRIES: CountryItem[] = [
   { code: "CZ", name: "Czech Republic", nameAr: "التشيك", flag: "🇨🇿" },
   { code: "DK", name: "Denmark", nameAr: "الدنمارك", flag: "🇩🇰" },
   { code: "DM", name: "Dominica", nameAr: "دومينيكا", flag: "🇩🇲" },
-  { code: "DO", name: "Dominican Republic", nameAr: "جمهورية الدومينيكان", flag: "🇩🇴" },
+  {
+    code: "DO",
+    name: "Dominican Republic",
+    nameAr: "جمهورية الدومينيكان",
+    flag: "🇩🇴",
+  },
   { code: "EC", name: "Ecuador", nameAr: "الإكوادور", flag: "🇪🇨" },
   { code: "SV", name: "El Salvador", nameAr: "السلفادور", flag: "🇸🇻" },
-  { code: "GQ", name: "Equatorial Guinea", nameAr: "غينيا الاستوائية", flag: "🇬🇶" },
+  {
+    code: "GQ",
+    name: "Equatorial Guinea",
+    nameAr: "غينيا الاستوائية",
+    flag: "🇬🇶",
+  },
   { code: "ER", name: "Eritrea", nameAr: "إريتريا", flag: "🇪🇷" },
   { code: "EE", name: "Estonia", nameAr: "إستونيا", flag: "🇪🇪" },
   { code: "SZ", name: "Eswatini", nameAr: "إسواتيني", flag: "🇸🇿" },
@@ -157,12 +203,22 @@ const COUNTRIES: CountryItem[] = [
   { code: "NI", name: "Nicaragua", nameAr: "نيكاراغوا", flag: "🇳🇮" },
   { code: "NE", name: "Niger", nameAr: "النيجر", flag: "🇳🇪" },
   { code: "NG", name: "Nigeria", nameAr: "نيجيريا", flag: "🇳🇬" },
-  { code: "MK", name: "North Macedonia", nameAr: "مقدونيا الشمالية", flag: "🇲🇰" },
+  {
+    code: "MK",
+    name: "North Macedonia",
+    nameAr: "مقدونيا الشمالية",
+    flag: "🇲🇰",
+  },
   { code: "NO", name: "Norway", nameAr: "النرويج", flag: "🇳🇴" },
   { code: "PK", name: "Pakistan", nameAr: "باكستان", flag: "🇵🇰" },
   { code: "PW", name: "Palau", nameAr: "بالاو", flag: "🇵🇼" },
   { code: "PA", name: "Panama", nameAr: "بنما", flag: "🇵🇦" },
-  { code: "PG", name: "Papua New Guinea", nameAr: "بابوا غينيا الجديدة", flag: "🇵🇬" },
+  {
+    code: "PG",
+    name: "Papua New Guinea",
+    nameAr: "بابوا غينيا الجديدة",
+    flag: "🇵🇬",
+  },
   { code: "PY", name: "Paraguay", nameAr: "باراغواي", flag: "🇵🇾" },
   { code: "PE", name: "Peru", nameAr: "بيرو", flag: "🇵🇪" },
   { code: "PH", name: "Philippines", nameAr: "الفلبين", flag: "🇵🇭" },
@@ -171,12 +227,27 @@ const COUNTRIES: CountryItem[] = [
   { code: "RO", name: "Romania", nameAr: "رومانيا", flag: "🇷🇴" },
   { code: "RU", name: "Russia", nameAr: "روسيا", flag: "🇷🇺" },
   { code: "RW", name: "Rwanda", nameAr: "رواندا", flag: "🇷🇼" },
-  { code: "KN", name: "Saint Kitts and Nevis", nameAr: "سانت كيتس ونيفيس", flag: "🇰🇳" },
+  {
+    code: "KN",
+    name: "Saint Kitts and Nevis",
+    nameAr: "سانت كيتس ونيفيس",
+    flag: "🇰🇳",
+  },
   { code: "LC", name: "Saint Lucia", nameAr: "سانت لوسيا", flag: "🇱🇨" },
-  { code: "VC", name: "Saint Vincent and the Grenadines", nameAr: "سانت فنسنت والغرينادين", flag: "🇻🇨" },
+  {
+    code: "VC",
+    name: "Saint Vincent and the Grenadines",
+    nameAr: "سانت فنسنت والغرينادين",
+    flag: "🇻🇨",
+  },
   { code: "WS", name: "Samoa", nameAr: "ساموا", flag: "🇼🇸" },
   { code: "SM", name: "San Marino", nameAr: "سان مارينو", flag: "🇸🇲" },
-  { code: "ST", name: "São Tomé and Príncipe", nameAr: "ساو تومي وبرينسيبي", flag: "🇸🇹" },
+  {
+    code: "ST",
+    name: "São Tomé and Príncipe",
+    nameAr: "ساو تومي وبرينسيبي",
+    flag: "🇸🇹",
+  },
   { code: "SN", name: "Senegal", nameAr: "السنغال", flag: "🇸🇳" },
   { code: "RS", name: "Serbia", nameAr: "صربيا", flag: "🇷🇸" },
   { code: "SC", name: "Seychelles", nameAr: "سيشل", flag: "🇸🇨" },
@@ -198,7 +269,12 @@ const COUNTRIES: CountryItem[] = [
   { code: "TL", name: "Timor-Leste", nameAr: "تيمور الشرقية", flag: "🇹🇱" },
   { code: "TG", name: "Togo", nameAr: "توغو", flag: "🇹🇬" },
   { code: "TO", name: "Tonga", nameAr: "تونغا", flag: "🇹🇴" },
-  { code: "TT", name: "Trinidad and Tobago", nameAr: "ترينيداد وتوباغو", flag: "🇹🇹" },
+  {
+    code: "TT",
+    name: "Trinidad and Tobago",
+    nameAr: "ترينيداد وتوباغو",
+    flag: "🇹🇹",
+  },
   { code: "TR", name: "Turkey", nameAr: "تركيا", flag: "🇹🇷" },
   { code: "TM", name: "Turkmenistan", nameAr: "تركمانستان", flag: "🇹🇲" },
   { code: "TV", name: "Tuvalu", nameAr: "توفالو", flag: "🇹🇻" },
@@ -240,7 +316,9 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState<CountryItem | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<CountryItem | null>(
+    null,
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -266,7 +344,9 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
     const openUp = spaceBelow < dropdownMaxH && spaceAbove > spaceBelow;
 
     setDropdownPos({
-      top: openUp ? rect.top + window.scrollY : rect.bottom + window.scrollY + 4,
+      top: openUp
+        ? rect.top + window.scrollY
+        : rect.bottom + window.scrollY + 4,
       left: rect.left + window.scrollX,
       width: rect.width,
       openUp,
@@ -282,9 +362,12 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
   useEffect(() => {
     if (formValue) {
       const country = COUNTRIES.find(
-        (c) => c.name === formValue || c.nameAr === formValue
+        (c) => c.name === formValue || c.nameAr === formValue,
       );
-      if (country && (!selectedCountry || selectedCountry.name !== country.name)) {
+      if (
+        country &&
+        (!selectedCountry || selectedCountry.name !== country.name)
+      ) {
         setSelectedCountry(country);
         setSearchValue(getDisplayName(country));
       }
@@ -302,9 +385,7 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
     }
     const q = searchValue.toLowerCase().trim();
     return COUNTRIES.filter(
-      (c) =>
-        c.name.toLowerCase().includes(q) ||
-        c.nameAr.includes(q)
+      (c) => c.name.toLowerCase().includes(q) || c.nameAr.includes(q),
     );
   }, [searchValue]);
 
@@ -385,21 +466,24 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
           required,
           validate: required
             ? (value) => {
-              if (!value || value.trim().length === 0) return "This field is required";
-              return true;
-            }
+                if (!value || value.trim().length === 0)
+                  return "This field is required";
+                return true;
+              }
             : undefined,
         })}
       />
 
       <div>
-        <div
-          className="relative flex items-center px-3 h-16 bg-transparent border border-gray-300 rounded-md transition-all duration-300"
-        >
+        <div className="relative flex items-center px-3 h-16 bg-transparent border border-gray-300 rounded-md transition-all duration-300">
           <label
             htmlFor={name}
-            className={`absolute start-3 transition-all font-bold duration-200 pointer-events-none ${isActive ? "top-1 text-gray-500" : "top-1/2 -translate-y-1/2 text-gray-500"
-              }`}
+            className={`absolute start-3 transition-all font-bold duration-200 pointer-events-none
+               ${
+                 isActive
+                   ? "-top-2.5 text-[12px] text-black/50 font-medium   bg-white rounded-md px-2 "
+                   : "top-1/2 -translate-y-1/2 text-gray-500"
+               }`}
           >
             {label}
           </label>
@@ -410,8 +494,9 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
               value={searchValue}
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              className={`w-full! font-bold text-black border-none outline-none p-0 ${isActive ? "mt-4" : ""
-                }`}
+              className={`w-full! font-bold text-black border-none outline-none p-0 ${
+                isActive ? "mt-4" : ""
+              }`}
               ref={inputRef}
             />
           </div>
@@ -432,13 +517,18 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
               left: dropdownPos.left,
               width: dropdownPos.width,
               ...(dropdownPos.openUp
-                ? { bottom: `calc(100vh - ${dropdownPos.top}px + 4px)`, top: "auto" }
+                ? {
+                    bottom: `calc(100vh - ${dropdownPos.top}px + 4px)`,
+                    top: "auto",
+                  }
                 : { top: dropdownPos.top }),
             }}
           >
             {filteredCountries.length === 0 ? (
               <div className="px-4 py-3 flex items-center gap-2">
-                <span className="font-semibold text-gray-900">No results found</span>
+                <span className="font-semibold text-gray-900">
+                  No results found
+                </span>
               </div>
             ) : (
               <div ref={scrollRef} className="flex-1 overflow-y-auto max-h-60">
@@ -450,8 +540,9 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
                       e.stopPropagation();
                       handleSelect(country);
                     }}
-                    className={`px-4 py-3 hover:bg-gray-100 cursor-pointer transition-colors duration-150 flex items-center gap-2 ${selectedCountry?.name === country.name ? "bg-blue-50" : ""
-                      }`}
+                    className={`px-4 py-3 hover:bg-gray-100 cursor-pointer transition-colors duration-150 flex items-center gap-2 ${
+                      selectedCountry?.name === country.name ? "bg-blue-50" : ""
+                    }`}
                   >
                     <span className="font-semibold text-gray-900">
                       {getDisplayName(country)}
@@ -461,7 +552,7 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
               </div>
             )}
           </div>,
-          document.body
+          document.body,
         )}
 
       {/* Error */}

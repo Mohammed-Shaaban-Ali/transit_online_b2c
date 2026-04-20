@@ -36,8 +36,9 @@ const NewNavbar = () => {
   }
   const pathNameWithoutLocale = normalizePathname(pathname);
   const isBlack =
-    pathNameWithoutLocale.includes("hotels") &&
-    pathNameWithoutLocale.includes("details");
+    (pathNameWithoutLocale.includes("hotels") &&
+      pathNameWithoutLocale.includes("details")) ||
+    pathNameWithoutLocale.includes("booking");
 
   const linkClassDesktop = (isActive: boolean, isBlack: boolean) =>
     `relative text-[18px] font-medium pb-1 transition-colors duration-300
