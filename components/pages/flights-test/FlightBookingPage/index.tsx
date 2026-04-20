@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { FLIGHT_BOOKING_KEY } from "@/constants";
 import FlightItineraryRow from "@/components/pages/flights-test/showfarefirst/FlightCard/FlightItineraryRow";
 import PriceDetailsCard from "./PriceDetailsCard";
+import BaggageAllowance from "./FlightBookingForm/BaggageAllowance";
 import FlightBookingForm, {
   FlightBookingFormValues,
 } from "./FlightBookingForm";
@@ -111,38 +112,44 @@ const FlightBookingPage = () => {
   ];
 
   return (
-    <div className="mx-auto w-full max-w-[1200px]! px-2 sm:px-5 md:px-0 ">
-      <h1 className="text-28 font-bold mb-6">{t("title")}</h1>
+    <section
+      className="relative z-0 min-h-screen 
+      rounded-t-[32px] bg-[#f3f3f3] py-12"
+    >
+      <div className="mx-auto w-full max-w-[1200px]! px-2 sm:px-5 md:px-0 ">
+        <h1 className="text-28 font-bold mb-6">{t("title")}</h1>
 
-      {/* ===== Form + Price Summary Grid ===== */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left: Booking Form */}
-        <div className="lg:col-span-2">
-          {/* ===== Collapsible Flight Itinerary ===== */}
-          <div className="mb-6">
-            <FlightItineraryRow flights={flights} />
+        {/* ===== Form + Price Summary Grid ===== */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left: Booking Form */}
+          <div className="lg:col-span-2">
+            {/* ===== Collapsible Flight Itinerary ===== */}
+            <div className="mb-6">
+              <FlightItineraryRow flights={flights} />
+            </div>
+
+            <FlightBookingForm
+              adults={flightData.adults}
+              children={flightData.children}
+              infants={flightData.infants}
+              isSubmitting={isSubmitting}
+              onSubmit={handleBookingSubmit}
+              flights={flights}
+            />
           </div>
 
-          <FlightBookingForm
-            adults={flightData.adults}
-            children={flightData.children}
-            infants={flightData.infants}
-            isSubmitting={isSubmitting}
-            onSubmit={handleBookingSubmit}
-          />
-        </div>
-
-        {/* Right: Price Summary (Sticky) */}
-        <div className="lg:col-span-1">
-          <PriceDetailsCard
-            adults={flightData.adults}
-            children={flightData.children}
-            infants={flightData.infants}
-            buyPrice={flightData.buyPrice}
-          />
+          {/* Right: Price Summary (Sticky) */}
+          <div className="lg:col-span-1">
+            <PriceDetailsCard
+              adults={flightData.adults}
+              children={flightData.children}
+              infants={flightData.infants}
+              buyPrice={flightData.buyPrice}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
