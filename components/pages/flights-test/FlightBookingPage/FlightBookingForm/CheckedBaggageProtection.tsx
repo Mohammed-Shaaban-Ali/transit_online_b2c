@@ -51,16 +51,6 @@ export default function CheckedBaggageProtection() {
             </button>
           </div>
         </div>
-
-        <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {protectionBenefits.map((benefit) => (
-            <ProtectionBenefitItem
-              key={benefit.label}
-              label={benefit.label}
-              imageSrc={benefit.imageSrc}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );

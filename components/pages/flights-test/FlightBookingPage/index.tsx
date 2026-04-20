@@ -9,10 +9,10 @@ import { Button } from "@/components/ui/button";
 import { FLIGHT_BOOKING_KEY } from "@/constants";
 import FlightItineraryRow from "@/components/pages/flights-test/showfarefirst/FlightCard/FlightItineraryRow";
 import PriceDetailsCard from "./PriceDetailsCard";
-import BaggageAllowance from "./FlightBookingForm/BaggageAllowance";
 import FlightBookingForm, {
   FlightBookingFormValues,
 } from "./FlightBookingForm";
+import BookingSteps from "./BookingSteps";
 
 export interface FlightBookingData {
   departureFareKey: string;
@@ -35,6 +35,7 @@ export interface FlightBookingData {
 const FlightBookingPage = () => {
   const t = useTranslations("FlightBooking");
   const router = useRouter();
+
   const [flightData, setFlightData] = useState<FlightBookingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -114,13 +115,15 @@ const FlightBookingPage = () => {
   return (
     <section
       className="relative z-0 min-h-screen 
-      rounded-t-[32px] bg-[#f3f3f3] py-12"
+      rounded-t-[32px] bg-[#f3f3f3] py-12 "
     >
-      <div className="mx-auto w-full max-w-[1200px]! px-2 sm:px-5 md:px-0 ">
-        <h1 className="text-28 font-bold mb-6">{t("title")}</h1>
+      <div className="mx-auto w-full max-w-[1200px]! px-2 sm:px-5 md:px-0  ">
+        <div className="bg-white w-full h-[330px]  rounded-t-[32px]  absolute top-0 left-0 z-0"></div>
+        <BookingSteps />
+        <h1 className="text-28 font-bold mb-6 relative z-10">{t("title")}</h1>
 
         {/* ===== Form + Price Summary Grid ===== */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
           {/* Left: Booking Form */}
           <div className="lg:col-span-2">
             {/* ===== Collapsible Flight Itinerary ===== */}
@@ -138,8 +141,8 @@ const FlightBookingPage = () => {
             />
           </div>
 
-          {/* Right: Price Summary (Sticky) */}
-          <div className="lg:col-span-1">
+          {/* Right: Price summary (lg: sticky) */}
+          <div className="lg:col-span-1 lg:self-start lg:sticky lg:top-6 lg:z-20">
             <PriceDetailsCard
               adults={flightData.adults}
               children={flightData.children}

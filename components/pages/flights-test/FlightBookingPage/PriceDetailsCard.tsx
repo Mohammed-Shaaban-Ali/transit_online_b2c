@@ -42,9 +42,7 @@ const PriceDetailsCard = ({
 
   return (
     <div
-      className="
-    sticky top-8
-     rounded-lg bg-white p-5 shadow-[0_4px_16px_0_rgba(69,88,115,0.2)]"
+      className="rounded-lg bg-white p-5 shadow-[0_4px_16px_0_rgba(69,88,115,0.2)]"
     >
       <h4 className="text-[20px] font-bold leading-none ">Price details</h4>
 
