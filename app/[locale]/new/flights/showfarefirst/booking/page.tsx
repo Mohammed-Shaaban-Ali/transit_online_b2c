@@ -3,10 +3,13 @@ import NewNavbar from "@/components/shared/Navbar/NewNavbar";
 
 export default async function page() {
   return (
-    <section className="relative flex min-h-screen flex-col md:bg-primary">
-      <div className="h-[76px]">
+    <section className="relative flex min-h-screen flex-col text-sm md:bg-primary md:text-base">
+      <div
+        className="md:h-[76px] md:bg-transparent 
+      h-[108px] bg-primary "
+      >
         <NewNavbar />
-      </div>{" "}
+      </div>
       <FlightBookingPage />
     </section>
   );

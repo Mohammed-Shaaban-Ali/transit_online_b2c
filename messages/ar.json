@@ -497,6 +497,127 @@
             "passportExpiryRequired": "تاريخ إنتهاء الوثيقة مطلوب"
         }
     },
+    "FlightBookingPageNested": {
+        "bookingSteps": {
+            "step1": "أدخل بياناتك",
+            "step2": "اختر مقعدك",
+            "step3": "خصص رحلتك",
+            "step4": "أكمل الدفع"
+        },
+        "priceDetails": {
+            "title": "تفاصيل السعر",
+            "tickets": "التذاكر ({count} بالغ)",
+            "adultPassenger": "البالغون (المسافر 1)",
+            "fare": "سعر التذكرة",
+            "taxesFees": "الضرائب والرسوم",
+            "baggage": "الأمتعة",
+            "personalItem": "حقيبة شخصية",
+            "carryOnBaggage": "أمتعة المقصورة",
+            "checkedBaggage": "أمتعة مشحونة",
+            "free": "مجانًا",
+            "total": "الإجمالي",
+            "tripCoins": "Trip Coins + {count}"
+        },
+        "flightBookingForm": {
+            "termsPrefix": "لقد قرأت ووافقت على شروط وأحكام حجز Trip.com التالية:",
+            "flightBookingPolicies": "سياسات حجز الطيران",
+            "privacyStatement": "بيان الخصوصية",
+            "total": "الإجمالي",
+            "next": "التالي",
+            "awardWinning": "حائز على جوائز",
+            "supportIn30s": "دعم خلال حوالي 30 ثانية",
+            "rewardsForBooking": "مكافآت على الحجز"
+        },
+        "contactInformation": {
+            "title": "بيانات التواصل",
+            "contactName": "اسم جهة الاتصال *",
+            "email": "البريد الإلكتروني *",
+            "mobilePhone": "هاتف الجوال *"
+        },
+        "passengerInformation": {
+            "title": "من المسافر؟",
+            "signIn": "سجل الدخول",
+            "signInSuffix": "لحجز أسهل",
+            "passenger": "المسافر",
+            "givenNames": "الاسم الأول *",
+            "lastName": "اسم العائلة *",
+            "genderOnId": "الجنس في الهوية *",
+            "male": "ذكر",
+            "female": "أنثى",
+            "dateOfBirth": "تاريخ الميلاد *",
+            "nationality": "الجنسية (البلد/المنطقة) *",
+            "idType": "نوع الهوية *",
+            "select": "اختر",
+            "passport": "جواز سفر",
+            "nationalId": "هوية وطنية",
+            "residencePermit": "تصريح إقامة",
+            "idNumber": "رقم الهوية *",
+            "idHint": ". أدخل اسم المسافر كما هو تمامًا في وثيقة الهوية",
+            "frequentFlyerProgram": "برنامج المسافر الدائم (اختياري)",
+            "saveAndAddPassenger": "حفظ وإضافة مسافر"
+        },
+        "baggageAllowance": {
+            "title": "سماح الأمتعة",
+            "subtitle": "خذ كل ما تحتاجه لرحلتك.",
+            "baggagePolicies": "سياسات الأمتعة",
+            "departure": "المغادرة",
+            "arrival": "الوصول",
+            "personalItem": "حقيبة شخصية",
+            "personalItemSize": "(25 × 33 × 20 سم)",
+            "carryOnBaggage": "أمتعة المقصورة",
+            "carryOnBaggageSize": "(55 × 38 × 20 سم)",
+            "checkedBaggage": "أمتعة مشحونة",
+            "checkedBaggageSize": "الحد الأقصى لمقاس الحقيبة (الطول + العرض + الارتفاع) لكل حقيبة 159 سم",
+            "passenger1": "المسافر 1",
+            "carryOnAllowance": "قطعة واحدة، إجمالي 7 كجم تشمل أمتعة المقصورة",
+            "personalItemAllowance": "قطعة واحدة، إجمالي 7 كجم تشمل الحقيبة الشخصية",
+            "checkedPieces": "3 قطع"
+        },
+        "checkedBaggageProtection": {
+            "title": "حماية الأمتعة المشحونة",
+            "descriptionPrefix": "ستكون أمتعتك المشحونة محمية طوال رحلتك. إذا فُقدت أمتعتك، يرجى الإبلاغ خلال 24 ساعة من وصول الرحلة. سنتتبع أمتعتك المفقودة لمدة 96 ساعة. إذا تعذر العثور عليها، ستحصل على تعويض",
+            "compensationAmount": "1,000.00 دولار أمريكي.",
+            "viewMore": "عرض المزيد",
+            "priceAmount": "5.00 دولار أمريكي",
+            "priceSuffix": "/للشخص",
+            "selectAriaLabel": "اختيار حماية الأمتعة المشحونة"
+        },
+        "cancellationsChanges": {
+            "title": "الإلغاءات والتعديلات",
+            "cancellationsTitle": "الإلغاءات",
+            "cancellationsDescription": "سياسة الإلغاء: من 117 دولار أمريكي",
+            "changesTitle": "التعديلات",
+            "changesDescription": "سياسة التعديل: من 106 دولار أمريكي",
+            "details": "التفاصيل",
+            "included": "مشمول"
+        },
+        "stayDiscounts": {
+            "title": "خصومات الإقامة",
+            "item1Title": "كود مستخدم جديد (الحجز الأول)",
+            "item1Offer": "خصم 10% (حتى 10.00 دولار أمريكي)",
+            "item2Title": "كود مستخدم جديد (الحجز الثاني...)",
+            "item2Offer": "خصم 5% (حتى 6.00 دولار أمريكي)",
+            "item3Title": "عرض حصري للمسافرين",
+            "item3Offer": "حتى 25% خصم"
+        },
+        "freePromoCodes": {
+            "title": "أكوادك الترويجية المجانية",
+            "item1": "كود خصم تأجير السيارات - 5%",
+            "item2": "خصم 5% على الأنشطة والجولات",
+            "item3": "خصم 12% على النقل من وإلى المطار",
+            "item4": "خصم 10% على النقل من وإلى المطار",
+            "claimFreePromoCode": "احصل على كود ترويجي مجاني",
+            "viewDetails": "عرض التفاصيل",
+            "claimed": "تم الاستلام"
+        },
+        "promoCodes": {
+            "title": "الأكواد الترويجية",
+            "toggleAriaLabel": "تبديل نموذج الكود الترويجي",
+            "selectEnter": "اختر/أدخل",
+            "placeholder": "يرجى إدخال الكود الترويجي",
+            "verify": "تحقق"
+        }
+    },
     "FlightBookingConfirmation": {
         "title": "تم حجز الرحلة بنجاح!",
         "description": "تم تأكيد حجز رحلتك بنجاح. يمكنك الاحتفاظ برقم الحجز للمراجعة.",

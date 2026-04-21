@@ -54,6 +54,7 @@ export default function FlightBookingForm({
   onSubmit,
 }: FlightBookingFormProps) {
   const t = useTranslations("FlightBookingForm");
+  const tNested = useTranslations("FlightBookingPageNested.flightBookingForm");
   const locale = useLocale();
   const isRTL = locale === "ar";
 
@@ -149,7 +150,7 @@ export default function FlightBookingForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-11 pt-10"
+      className="flex flex-col gap-7 md:gap-11 pt-6 md:pt-10"
     >
       <PassengerInformationSection
         defaultPassengers={defaultPassengers}
@@ -168,25 +169,24 @@ export default function FlightBookingForm({
       <PromoCodesSection />
 
       <section className="space-y-4">
-        <p className="text-[16px] ">
-          I have read and agreed to the following Trip.com booking terms and
-          conditions:{" "}
+        <p className="text-[14px] md:text-[16px]">
+          {tNested("termsPrefix")}{" "}
           <button type="button" className="text-primary">
-            Flight Booking Policies
+            {tNested("flightBookingPolicies")}
           </button>
           ,{" "}
           <button type="button" className="text-primary">
-            Privacy Statement
+            {tNested("privacyStatement")}
           </button>
           .
         </p>
 
-        <div className="rounded-xl bg-white p-5">
+        <div className="rounded-xl bg-white p-4 md:p-5">
           <div className="mb-4 flex items-center justify-between">
-            <span className="text-[24px] font-semibold leading-none">
-              Total
+            <span className="text-[20px] md:text-[24px] font-semibold leading-none">
+              {tNested("total")}
             </span>
-            <span className="text-[24px] font-bold leading-none text-primary">
+            <span className="text-[20px] md:text-[24px] font-bold leading-none text-primary">
               US$258.00
             </span>
           </div>
@@ -194,36 +194,36 @@ export default function FlightBookingForm({
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="h-14 w-full rounded-lg text-[16px] font-bold text-white"
+            className="h-12 md:h-14 w-full rounded-lg text-[14px] md:text-[16px] font-bold text-white"
           >
-            {isSubmitting ? t("submitting") : "Next"}
+            {isSubmitting ? t("submitting") : tNested("next")}
           </Button>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[14px] text-slate-600">
+        <div className="flex flex-wrap items-center justify-center gap-x-5 md:gap-x-8 gap-y-2.5 md:gap-y-3 text-[12px] md:text-[14px] text-slate-600">
           <div className="flex items-center gap-2">
             <img
               src="https://ak-d.tripcdn.com/images/05S4r12000ceoxeo136F7.png"
-              alt="Award-winning"
+              alt={tNested("awardWinning")}
               className="h-5 w-5 object-contain"
             />
-            <span>Award-winning</span>
+            <span>{tNested("awardWinning")}</span>
           </div>
           <div className="flex items-center gap-2">
             <img
               src="https://ak-d.tripcdn.com/images/0AS5f120008whj34f2145.png"
-              alt="Support in approx. 30s"
+              alt={tNested("supportIn30s")}
               className="h-5 w-5 object-contain"
             />
-            <span>Support in approx. 30s</span>
+            <span>{tNested("supportIn30s")}</span>
           </div>
           <div className="flex items-center gap-2">
             <img
               src="https://ak-d.tripcdn.com/images/0AS5x120008whk01q784B.png"
-              alt="Rewards for booking"
+              alt={tNested("rewardsForBooking")}
               className="h-5 w-5 object-contain"
             />
-            <span>Rewards for booking</span>
+            <span>{tNested("rewardsForBooking")}</span>
           </div>
         </div>
       </section>

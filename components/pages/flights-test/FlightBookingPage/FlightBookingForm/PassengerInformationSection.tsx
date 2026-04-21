@@ -5,6 +5,7 @@ import type { UseFormReturn } from "react-hook-form";
 import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
 import { Button } from "@/components/ui/button";
 import NationalitySelect from "@/components/shared/NationalitySelect";
+import { useTranslations } from "next-intl";
 import type {
   FlightBookingFormValues,
   FlightPassengerData,
@@ -25,6 +26,7 @@ export default function PassengerInformationSection({
   idTypeByPassenger,
   setIdTypeByPassenger,
 }: PassengerInformationSectionProps) {
+  const t = useTranslations("FlightBookingPageNested.passengerInformation");
   const {
     register,
     watch,
@@ -34,13 +36,14 @@ export default function PassengerInformationSection({
 
   return (
     <div>
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-5 flex items-center justify-between flex-wrap gap-2">
         <h3 className="text-28 leading-none font-bold ">
-          Who&apos;s traveling?
+          {t("title")}
         </h3>
         <p className="text-[16px] text-gray-600">
           <span className="text-primary">✓</span>{" "}
-          <span className="text-blue-500">Sign in</span> for effortless booking
+          <span className="text-blue-500">{t("signIn")}</span>{" "}
+          {t("signInSuffix")}
         </p>
       </div>
 
@@ -54,13 +57,13 @@ export default function PassengerInformationSection({
               className="flex flex-col gap-4 rounded-lg border border-gray-100 bg-white p-4 md:p-5"
             >
               <h4 className="text-[18px] font-bold text-slate-900">
-                Passenger
+                {t("passenger")}
               </h4>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FloatingLabelInput
                   id={`passengers.${pIdx}.firstName`}
-                  label="Given names *"
+                  label={t("givenNames")}
                   register={register(`passengers.${pIdx}.firstName`)}
                   watchValue={watch(`passengers.${pIdx}.firstName`)}
                   error={errors.passengers?.[pIdx]?.firstName?.message}
@@ -71,7 +74,7 @@ export default function PassengerInformationSection({
 
                 <FloatingLabelInput
                   id={`passengers.${pIdx}.lastName`}
-                  label="Last name (surname) *"
+                  label={t("lastName")}
                   register={register(`passengers.${pIdx}.lastName`)}
                   watchValue={watch(`passengers.${pIdx}.lastName`)}
                   error={errors.passengers?.[pIdx]?.lastName?.message}
@@ -85,7 +88,7 @@ export default function PassengerInformationSection({
                 <div className="relative">
                   <div className="relative flex h-[68px] items-center rounded-lg border border-[#d7dce3] bg-white px-3 transition-all duration-300">
                     <label className="pointer-events-none absolute -top-2.5 rounded-md bg-white px-2 text-[12px] font-medium text-black/50">
-                      Gender on ID *
+                      {t("genderOnId")}
                     </label>
                     <select
                       value={genderValue}
@@ -97,15 +100,15 @@ export default function PassengerInformationSection({
                       }
                       className="mt-4 w-full border-none bg-transparent text-start font-medium text-slate-900 outline-none"
                     >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="male">{t("male")}</option>
+                      <option value="female">{t("female")}</option>
                     </select>
                   </div>
                 </div>
 
                 <FloatingLabelInput
                   id={`passengers.${pIdx}.dateOfBirth`}
-                  label="Date of birth *"
+                  label={t("dateOfBirth")}
                   type="date"
                   register={register(`passengers.${pIdx}.dateOfBirth`)}
                   watchValue={watch(`passengers.${pIdx}.dateOfBirth`)}
@@ -132,7 +135,7 @@ export default function PassengerInformationSection({
                 <NationalitySelect
                   form={form}
                   name={`passengers.${pIdx}.nationality`}
-                  label="Nationality (country/region) *"
+                  label={t("nationality")}
                   required
                   error={errors.passengers?.[pIdx]?.nationality?.message}
                 />
@@ -142,7 +145,7 @@ export default function PassengerInformationSection({
                 <div className="relative">
                   <div className="relative flex h-[68px] items-center rounded-lg border border-[#d7dce3] bg-white px-3 transition-all duration-300">
                     <label className="pointer-events-none absolute top-1 font-medium text-slate-500">
-                      ID type *
+                      {t("idType")}
                     </label>
                     <select
                       value={idTypeByPassenger[pIdx] || ""}
@@ -156,18 +159,20 @@ export default function PassengerInformationSection({
                       className="mt-4 w-full border-none bg-transparent text-start font-medium text-slate-900 outline-none"
                     >
                       <option value="" disabled>
-                        Select
+                        {t("select")}
                       </option>
-                      <option value="passport">Passport</option>
-                      <option value="nationalId">National ID</option>
-                      <option value="residencePermit">Residence permit</option>
+                      <option value="passport">{t("passport")}</option>
+                      <option value="nationalId">{t("nationalId")}</option>
+                      <option value="residencePermit">
+                        {t("residencePermit")}
+                      </option>
                     </select>
                   </div>
                 </div>
 
                 <FloatingLabelInput
                   id={`passengers.${pIdx}.passportNumber`}
-                  label="ID number *"
+                  label={t("idNumber")}
                   register={register(`passengers.${pIdx}.passportNumber`)}
                   watchValue={watch(`passengers.${pIdx}.passportNumber`)}
                   error={errors.passengers?.[pIdx]?.passportNumber?.message}
@@ -178,15 +183,15 @@ export default function PassengerInformationSection({
               </div>
 
               <div className="rounded-lg bg-gray-100 px-4 py-3 text-[12px] text-gray-600">
-                . Enter passenger&apos;s name exactly as it appears on their ID
+                {t("idHint")}
               </div>
 
               <div className="flex justify-end text-[14px] text-gray-600">
-                Frequent flyer program (optional)
+                {t("frequentFlyerProgram")}
               </div>
 
               <Button size="lg" type="button">
-                Save &amp; add passenger
+                {t("saveAndAddPassenger")}
               </Button>
             </div>
           );

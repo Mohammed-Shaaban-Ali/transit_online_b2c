@@ -497,6 +497,127 @@
             "passportExpiryRequired": "Document expiry date is required"
         }
     },
+    "FlightBookingPageNested": {
+        "bookingSteps": {
+            "step1": "Fill in your info",
+            "step2": "Choose your seat",
+            "step3": "Personalize your trip",
+            "step4": "Finalize your payment"
+        },
+        "priceDetails": {
+            "title": "Price details",
+            "tickets": "Tickets ({count} adult)",
+            "adultPassenger": "Adults (Passenger 1)",
+            "fare": "Fare",
+            "taxesFees": "Taxes & fees",
+            "baggage": "Baggage",
+            "personalItem": "Personal item",
+            "carryOnBaggage": "Carry-on baggage",
+            "checkedBaggage": "Checked baggage",
+            "free": "Free",
+            "total": "Total",
+            "tripCoins": "Trip Coins + {count}"
+        },
+        "flightBookingForm": {
+            "termsPrefix": "I have read and agreed to the following Trip.com booking terms and conditions:",
+            "flightBookingPolicies": "Flight Booking Policies",
+            "privacyStatement": "Privacy Statement",
+            "total": "Total",
+            "next": "Next",
+            "awardWinning": "Award-winning",
+            "supportIn30s": "Support in approx. 30s",
+            "rewardsForBooking": "Rewards for booking"
+        },
+        "contactInformation": {
+            "title": "Contact details",
+            "contactName": "Contact name *",
+            "email": "Email *",
+            "mobilePhone": "Mobile phone *"
+        },
+        "passengerInformation": {
+            "title": "Who's traveling?",
+            "signIn": "Sign in",
+            "signInSuffix": "for effortless booking",
+            "passenger": "Passenger",
+            "givenNames": "Given names *",
+            "lastName": "Last name (surname) *",
+            "genderOnId": "Gender on ID *",
+            "male": "Male",
+            "female": "Female",
+            "dateOfBirth": "Date of birth *",
+            "nationality": "Nationality (country/region) *",
+            "idType": "ID type *",
+            "select": "Select",
+            "passport": "Passport",
+            "nationalId": "National ID",
+            "residencePermit": "Residence permit",
+            "idNumber": "ID number *",
+            "idHint": ". Enter passenger's name exactly as it appears on their ID",
+            "frequentFlyerProgram": "Frequent flyer program (optional)",
+            "saveAndAddPassenger": "Save & add passenger"
+        },
+        "baggageAllowance": {
+            "title": "Baggage allowance",
+            "subtitle": "Bring everything you need for your trip.",
+            "baggagePolicies": "Baggage policies",
+            "departure": "Departure",
+            "arrival": "Arrival",
+            "personalItem": "Personal item",
+            "personalItemSize": "(25 x 33 x 20 cm)",
+            "carryOnBaggage": "Carry-on baggage",
+            "carryOnBaggageSize": "(55 x 38 x 20 cm)",
+            "checkedBaggage": "Checked baggage",
+            "checkedBaggageSize": "Overall size limit (length + width + height) per bag 159 cm",
+            "passenger1": "Passenger 1",
+            "carryOnAllowance": "1 piece, total 7 kg including carry-on baggage",
+            "personalItemAllowance": "1 piece, total 7 kg including personal item",
+            "checkedPieces": "3 pieces"
+        },
+        "checkedBaggageProtection": {
+            "title": "Checked baggage protection",
+            "descriptionPrefix": "Your checked baggage will be protected throughout your flight. If your baggage is lost, please report it within 24 hours of your flight's arrival. We'll track your lost baggage for 96 hours. If we are unable to find it, you'll be compensated",
+            "compensationAmount": "US$1,000.00.",
+            "viewMore": "View more",
+            "priceAmount": "US$5.00",
+            "priceSuffix": "/person",
+            "selectAriaLabel": "Select checked baggage protection"
+        },
+        "cancellationsChanges": {
+            "title": "Cancellations & changes",
+            "cancellationsTitle": "Cancellations",
+            "cancellationsDescription": "Cancellation policy: From US$117",
+            "changesTitle": "Changes",
+            "changesDescription": "Change policy: From US$106",
+            "details": "Details",
+            "included": "Included"
+        },
+        "stayDiscounts": {
+            "title": "Stay discounts",
+            "item1Title": "New user promo code (1st booking)",
+            "item1Offer": "10% off (up to US$10.00)",
+            "item2Title": "New user promo code (2nd booking...)",
+            "item2Offer": "5% off (up to US$6.00)",
+            "item3Title": "Flyer Exclusive offer",
+            "item3Offer": "Up to 25% Off"
+        },
+        "freePromoCodes": {
+            "title": "Your free promo codes",
+            "item1": "Car Rental Promo Code - 5% Off",
+            "item2": "5% off Attractions & Tours",
+            "item3": "12% Off Airport Transfers",
+            "item4": "10% Off Airport Transfers",
+            "claimFreePromoCode": "Claim a free promo code",
+            "viewDetails": "View details",
+            "claimed": "Claimed"
+        },
+        "promoCodes": {
+            "title": "Promo codes",
+            "toggleAriaLabel": "Toggle promo code form",
+            "selectEnter": "Select/Enter",
+            "placeholder": "Please enter promo code",
+            "verify": "Verify"
+        }
+    },
     "FlightBookingConfirmation": {
         "title": "Flight Booked Successfully!",
         "description": "Your flight booking has been confirmed. Please save your booking ID for reference.",

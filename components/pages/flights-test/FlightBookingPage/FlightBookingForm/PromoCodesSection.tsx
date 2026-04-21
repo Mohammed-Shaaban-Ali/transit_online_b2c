@@ -4,14 +4,16 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function PromoCodesSection() {
+  const t = useTranslations("FlightBookingPageNested.promoCodes");
   const [isOpen, setIsOpen] = useState(false);
   const [promoCode, setPromoCode] = useState("");
 
   return (
     <section className="mt-2">
-      <h3 className="mb-3 text-28 font-bold ">Promo codes</h3>
+      <h3 className="mb-3 text-28 font-bold ">{t("title")}</h3>
 
       <div className="rounded-xl bg-white px-2 py-2 transition-all duration-200 ease-linear ">
         <button
@@ -21,14 +23,14 @@ export default function PromoCodesSection() {
             isOpen ? "h-10 border-transparent px-1" : "h-14"
           }`}
           aria-expanded={isOpen}
-          aria-label="Toggle promo code form"
+          aria-label={t("toggleAriaLabel")}
         >
           <span
             className={`transition-opacity duration-150 ease-linear ${
               isOpen ? "opacity-0" : "opacity-100"
             }`}
           >
-            Select/Enter
+            {t("selectEnter")}
           </span>
           <ChevronDown
             size={20}
@@ -51,14 +53,14 @@ export default function PromoCodesSection() {
                 <Input
                   value={promoCode}
                   onChange={(event) => setPromoCode(event.target.value)}
-                  placeholder="Please enter promo code"
+                  placeholder={t("placeholder")}
                   className="h-14 border-[#2F67FF] bg-white px-4 text-[14px] text-slate-800 focus-visible:ring-0"
                 />
                 <Button
                   type="button"
                   className="h-14 min-w-[124px] rounded-md bg-[#6E7891] px-6 text-[16px] font-medium text-white hover:bg-[#5F6980]"
                 >
-                  Verify
+                  {t("verify")}
                 </Button>
               </div>
             </div>

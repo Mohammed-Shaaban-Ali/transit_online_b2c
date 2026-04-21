@@ -1,24 +1,26 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 
 type Props = {
   activeStep?: number;
 };
 
 function BookingSteps({ activeStep = 0 }: Props) {
+  const t = useTranslations("FlightBookingPageNested.bookingSteps");
   const bookingSteps = [
-    "Fill in your info",
-    "Choose your seat",
-    "Personalize your trip",
-    "Finalize your payment",
+    t("step1"),
+    t("step2"),
+    t("step3"),
+    t("step4"),
   ];
 
   const lastIndex = bookingSteps.length - 1;
   const lineProgressPct = Math.min(100, ((activeStep + 0.5) / lastIndex) * 100);
 
   return (
-    <div className="relative z-10 mb-10">
+    <div className="relative z-10 mb-6 md:mb-10">
       <div
-        className="pointer-events-none absolute left-4 right-4 top-4 h-1"
+        className="pointer-events-none absolute left-3 right-3 md:left-4 md:right-4 top-3 md:top-4 h-1"
         aria-hidden
       >
         <div className="relative h-full w-full bg-gray-200">
@@ -29,7 +31,7 @@ function BookingSteps({ activeStep = 0 }: Props) {
         </div>
       </div>
 
-      <div className="relative grid grid-cols-4 gap-2">
+      <div className="relative grid grid-cols-4 gap-1 md:gap-2">
         {bookingSteps.map((step, index) => {
           const isActive = index === activeStep;
           const isFirst = index === 0;
@@ -44,7 +46,7 @@ function BookingSteps({ activeStep = 0 }: Props) {
           return (
             <div key={step} className={`flex min-w-0 flex-col ${columnAlign}`}>
               <span
-                className={`relative z-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-12 font-semibold ${
+                className={`relative z-1 flex h-7 w-7 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-full text-[11px] md:text-12 font-semibold ${
                   isActive
                     ? "bg-primary text-white"
                     : "border border-gray-200 bg-gray-200"
@@ -53,7 +55,7 @@ function BookingSteps({ activeStep = 0 }: Props) {
                 {index + 1}
               </span>
               <span
-                className={`mt-2 max-w-full text-[14px] leading-snug ${
+                className={`mt-1.5 md:mt-2 max-w-full text-[11px] md:text-[14px] leading-snug ${
                   isActive ? " text-primary" : "text-gray-600"
                 }`}
               >

@@ -2,27 +2,29 @@
 
 import Image from "next/image";
 import { CheckCircle, CircleDot } from "lucide-react";
-
-const promoCodes = [
-  { title: "Car Rental Promo Code - 5% Off", iconColor: "bg-cyan-500" },
-  { title: "5% off Attractions & Tours", iconColor: "bg-rose-500" },
-  { title: "12% Off Airport Transfers", iconColor: "bg-cyan-500" },
-  { title: "10% Off Airport Transfers", iconColor: "bg-cyan-500" },
-];
+import { useTranslations } from "next-intl";
 
 export default function FreePromoCodesSection() {
+  const t = useTranslations("FlightBookingPageNested.freePromoCodes");
+  const promoCodes = [
+    { title: t("item1"), iconColor: "bg-cyan-500" },
+    { title: t("item2"), iconColor: "bg-rose-500" },
+    { title: t("item3"), iconColor: "bg-cyan-500" },
+    { title: t("item4"), iconColor: "bg-cyan-500" },
+  ];
+
   return (
     <section className="mt-2 rounded-2xl border border-gray-100 bg-white p-4">
       <div className="mb-6 flex items-center gap-3">
         <Image
           src="/images/PromoCodes.webp"
-          alt="Promo codes"
+          alt={t("title")}
           width={32}
           height={32}
           className="h-8 w-8 object-contain"
         />
         <h3 className="text-28 font-bold leading-none ">
-          Your free promo codes
+          {t("title")}
         </h3>
       </div>
 
@@ -38,8 +40,8 @@ export default function FreePromoCodesSection() {
             flex items-center justify-between gap-4 border-b border-dashed border-primary
             px-5 py-4 md:border-b-0 md:border-r"
             >
-              <div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white border-b border-primary rounded-full"></div>
-              <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white border-t border-primary rounded-full"></div>
+              <div className="absolute hidden md:block -top-1.5 -right-1.5 w-3 h-3 bg-white border-b border-primary rounded-full"></div>
+              <div className="absolute hidden md:block -bottom-1.5 -right-1.5 w-3 h-3 bg-white border-t border-primary rounded-full"></div>
               <div className="flex items-center gap-4">
                 <div
                   className={`flex h-12 w-12 items-center justify-center rounded-full ${item.iconColor}`}
@@ -49,7 +51,7 @@ export default function FreePromoCodesSection() {
                 <div>
                   <p className="text-[14px] font-semibold ">{item.title}</p>
                   <p className="text-[14px] font-medium text-gray-500">
-                    Claim a free promo code
+                    {t("claimFreePromoCode")}
                   </p>
                 </div>
               </div>
@@ -58,7 +60,7 @@ export default function FreePromoCodesSection() {
                 type="button"
                 className="text-[14px] font-medium text-primary"
               >
-                View details
+                {t("viewDetails")}
               </button>
             </div>
 
@@ -69,7 +71,7 @@ export default function FreePromoCodesSection() {
                 px-5 text-[16px] font-medium text-white"
               >
                 <CheckCircle size={16} />
-                Claimed
+                {t("claimed")}
               </button>
             </div>
           </div>

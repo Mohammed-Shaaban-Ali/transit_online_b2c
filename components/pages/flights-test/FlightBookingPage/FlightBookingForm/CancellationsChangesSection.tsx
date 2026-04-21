@@ -1,25 +1,27 @@
 "use client";
 
 import Image from "next/image";
-
-const items = [
-  {
-    title: "Cancellations",
-    description: "Cancellation policy: From US$117",
-    imageSrc: "/images/Cancellations.webp",
-  },
-  {
-    title: "Changes",
-    description: "Change policy: From US$106",
-    imageSrc: "/images/Changes.webp",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function CancellationsChangesSection() {
+  const t = useTranslations("FlightBookingPageNested.cancellationsChanges");
+  const items = [
+    {
+      title: t("cancellationsTitle"),
+      description: t("cancellationsDescription"),
+      imageSrc: "/images/Cancellations.webp",
+    },
+    {
+      title: t("changesTitle"),
+      description: t("changesDescription"),
+      imageSrc: "/images/Changes.webp",
+    },
+  ];
+
   return (
     <section className="mt-2">
       <h3 className="mb-3 text-28 font-bold leading-none ">
-        Cancellations & changes
+        {t("title")}
       </h3>
 
       <div className="space-y-3">
@@ -43,13 +45,15 @@ export default function CancellationsChangesSection() {
                 <p className="text-[14px] text-slate-900">
                   {item.description}{" "}
                   <button type="button" className="font-medium text-primary">
-                    Details
+                    {t("details")}
                   </button>
                 </p>
               </div>
             </div>
 
-            <p className="text-[14px] font-medium text-slate-500">Included</p>
+            <p className="text-[14px] font-medium text-slate-500">
+              {t("included")}
+            </p>
           </div>
         ))}
       </div>

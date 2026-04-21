@@ -2,27 +2,29 @@
 
 import Image from "next/image";
 import { Info } from "lucide-react";
-
-const discountItems = [
-  {
-    title: "New user promo code (1st booking)",
-    offer: "10% off (up to US$10.00)",
-  },
-  {
-    title: "New user promo code (2nd booking...)",
-    offer: "5% off (up to US$6.00)",
-  },
-  {
-    title: "Flyer Exclusive offer",
-    offer: "Up to 25% Off",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function StayDiscountsSection() {
+  const t = useTranslations("FlightBookingPageNested.stayDiscounts");
+  const discountItems = [
+    {
+      title: t("item1Title"),
+      offer: t("item1Offer"),
+    },
+    {
+      title: t("item2Title"),
+      offer: t("item2Offer"),
+    },
+    {
+      title: t("item3Title"),
+      offer: t("item3Offer"),
+    },
+  ];
+
   return (
     <section className="mt-2">
       <div className="mb-3 flex items-center gap-2">
-        <h3 className="text-28 font-bold leading-none ">Stay discounts</h3>
+        <h3 className="text-28 font-bold leading-none ">{t("title")}</h3>
         <Info size={18} className="text-gray-600" />
       </div>
 

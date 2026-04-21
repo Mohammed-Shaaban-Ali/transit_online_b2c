@@ -115,19 +115,21 @@ const FlightBookingPage = () => {
   return (
     <section
       className="relative z-0 min-h-screen 
-      rounded-t-[32px] bg-[#f3f3f3] py-12 "
+      rounded-t-2xl md:rounded-t-[32px] bg-[#f3f3f3] py-6 md:py-12 "
     >
-      <div className="mx-auto w-full max-w-[1200px]! px-2 sm:px-5 md:px-0  ">
-        <div className="bg-white w-full h-[330px]  rounded-t-[32px]  absolute top-0 left-0 z-0"></div>
+      <div className="mx-auto w-full max-w-[1200px]! px-3 sm:px-5 md:px-0">
+        <div className="hidden md:block bg-white w-full h-[220px] md:h-[330px] rounded-t-2xl md:rounded-t-[32px] absolute top-0 left-0 z-0"></div>
         <BookingSteps />
-        <h1 className="text-28 font-bold mb-6 relative z-10">{t("title")}</h1>
+        <h1 className="text-xl md:text-28 font-bold mb-4 md:mb-6 relative z-10">
+          {t("title")}
+        </h1>
 
         {/* ===== Form + Price Summary Grid ===== */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 relative z-10">
           {/* Left: Booking Form */}
           <div className="lg:col-span-2">
             {/* ===== Collapsible Flight Itinerary ===== */}
-            <div className="mb-6">
+            <div className="mb-4 md:mb-6">
               <FlightItineraryRow flights={flights} />
             </div>
 

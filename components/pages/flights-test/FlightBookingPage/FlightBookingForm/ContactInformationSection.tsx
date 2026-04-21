@@ -3,6 +3,7 @@
 import type { UseFormReturn } from "react-hook-form";
 import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
 import type { FlightBookingFormValues } from "@/components/pages/flights-test/FlightBookingPage/FlightBookingForm";
+import { useTranslations } from "next-intl";
 
 interface ContactInformationSectionProps {
   form: UseFormReturn<FlightBookingFormValues>;
@@ -11,6 +12,7 @@ interface ContactInformationSectionProps {
 export default function ContactInformationSection({
   form,
 }: ContactInformationSectionProps) {
+  const t = useTranslations("FlightBookingPageNested.contactInformation");
   const {
     register,
     watch,
@@ -21,14 +23,14 @@ export default function ContactInformationSection({
     <div className="mt-6">
       <div className="mb-5 flex items-center gap-2">
         <h3 className="text-28 leading-none font-bold text-slate-900">
-          Contact details
+          {t("title")}
         </h3>
       </div>
 
       <div className="grid grid-cols-1 gap-4 rounded-lg border border-gray-100 bg-white p-5 md:grid-cols-3">
         <FloatingLabelInput
           id="fullName"
-          label="Contact name *"
+          label={t("contactName")}
           register={register("fullName")}
           watchValue={watch("fullName")}
           error={errors.fullName?.message}
@@ -39,7 +41,7 @@ export default function ContactInformationSection({
 
         <FloatingLabelInput
           id="email"
-          label="Email *"
+          label={t("email")}
           type="email"
           register={register("email")}
           watchValue={watch("email")}
@@ -55,7 +57,7 @@ export default function ContactInformationSection({
               htmlFor="phone"
               className="pointer-events-none absolute -top-2.5 rounded-md bg-white px-2 text-[12px] font-medium text-black/50"
             >
-              Mobile phone *
+              {t("mobilePhone")}
             </label>
 
             <div className="flex h-full items-center gap-3 pt-2">
