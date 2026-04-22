@@ -8,7 +8,7 @@
 
 export const CURRENCY_CONFIG = {
   /** Exchange rate: 1 SAR = X EGP */
-  exchangeRate: 12.5,
+  exchangeRate: 1,
 
   /** Currency code for display (e.g., "EGP") */
   currencyCode: "EGP",

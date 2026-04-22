@@ -546,6 +546,8 @@
             "female": "أنثى",
             "dateOfBirth": "تاريخ الميلاد *",
             "nationality": "الجنسية (البلد/المنطقة) *",
+            "passportNumber": "رقم جواز السفر *",
+            "passportExpiry": "تاريخ انتهاء جواز السفر *",
             "idType": "نوع الهوية *",
             "select": "اختر",
             "passport": "جواز سفر",

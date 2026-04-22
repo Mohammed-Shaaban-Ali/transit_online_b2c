@@ -1,6 +1,6 @@
-import { baseApi, SuccessResponse } from "@/redux/app/baseApi";
+import { baseApi, baseApi2, SuccessResponse } from "@/redux/app/baseApi";
 import { FlightFareResponse } from "@/types/fareTypes";
-import { FlightBookingTypes, FlightSearchResponse } from "@/types/flightTypes";
+import { FlightSearchResponse } from "@/types/flightTypes";
 
 export interface FlightSearchParams {
   fromAirport: string;
@@ -20,6 +20,73 @@ interface FlightFareRequest {
   children: number;
   infants: number;
   provider?: "iati" | "sabre";
+}
+
+export interface LoyaltyPriceBreakdownItem {
+  value: number;
+  label: string;
+  type: "PAYMENT" | "COUPON" | string;
+}
+
+export interface LoyaltyCalculatePriceResponse {
+  success: boolean;
+  message: string | null;
+  data: {
+    total: {
+      value: number;
+      label: string;
+    };
+    payments: LoyaltyPriceBreakdownItem[];
+    coupon_code: string | null;
+    coupon_error_message: string | null;
+    available_points: number;
+    points: number;
+    remaining_points: number;
+    enough_points: boolean;
+    usePoints: boolean;
+    currency: string;
+    payment_gateways: string[];
+  };
+}
+
+interface LoyaltyCalculatePriceRequest {
+  originalPrice: number;
+  module: "flights";
+  points: boolean;
+  provider: string;
+  carrierAirlineCode: string;
+  operatorAirlineCode: string;
+  returnProvider?: string;
+  returnCarrierAirlineCode?: string;
+  returnOperatorAirlineCode?: string;
+}
+
+interface FlightBookRequest {
+  paymentGateway: string;
+  couponCode?: string;
+  departureFareKey: string;
+  returnFareKey?: string;
+  offer?: string;
+  contact_info: {
+    name: string;
+    email: string;
+    phone: string;
+    country_code: string;
+  };
+  paxList: Array<{
+    name: string;
+    lastName: string;
+    birthDate: string;
+    type: string;
+    gender: string;
+    identityInfo: {
+      passport: {
+        citizenshipCountry: string;
+        endDate: string;
+        no: string;
+      };
+    };
+  }>;
 }
 
 const flightsApi = baseApi.injectEndpoints({
@@ -60,6 +127,7 @@ const flightsApi = baseApi.injectEndpoints({
         };
       },
     }),
+
     bookFlight: builder.mutation<
       {
         success: boolean;
@@ -67,7 +135,7 @@ const flightsApi = baseApi.injectEndpoints({
         bookingId: number;
         redirectUrl: string;
       },
-      FlightBookingTypes
+      FlightBookRequest
     >({
       query: (data) => ({
         url: `/api/iati/book`,
@@ -76,7 +144,7 @@ const flightsApi = baseApi.injectEndpoints({
       }),
     }),
     getFlightBooking: builder.query<
-      SuccessResponse<FlightBookingTypes>,
+      SuccessResponse<any>,
       string
     >({
       query: (bookingId) => ({
@@ -90,6 +158,33 @@ const flightsApi = baseApi.injectEndpoints({
 
   }),
 });
+
+
+
+const flightsApi2 = baseApi2.injectEndpoints({
+  endpoints: (builder) => ({
+
+    calculateFlightPrice: builder.query<
+      LoyaltyCalculatePriceResponse,
+      LoyaltyCalculatePriceRequest
+    >({
+      query: (params) => ({
+        url: "/api/loyalty/calculate-price",
+        method: "GET",
+        params,
+      }),
+      keepUnusedDataFor: 0,
+    }),
+
+
+  }),
+});
+
+export const {
+
+  useLazyCalculateFlightPriceQuery,
+
+} = flightsApi2;
 
 export const {
   useSearchFlightsIatiQuery,

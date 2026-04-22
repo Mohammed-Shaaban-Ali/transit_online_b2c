@@ -546,6 +546,8 @@
             "female": "Female",
             "dateOfBirth": "Date of birth *",
             "nationality": "Nationality (country/region) *",
+            "passportNumber": "Passport number *",
+            "passportExpiry": "Passport expiry date *",
             "idType": "ID type *",
             "select": "Select",
             "passport": "Passport",

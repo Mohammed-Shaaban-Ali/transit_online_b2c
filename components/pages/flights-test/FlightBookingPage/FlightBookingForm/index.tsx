@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
 import { useLocale } from "next-intl";
 import PassengerInformationSection from "@/components/pages/flights-test/FlightBookingPage/FlightBookingForm/PassengerInformationSection";
 import ContactInformationSection from "@/components/pages/flights-test/FlightBookingPage/FlightBookingForm/ContactInformationSection";
@@ -40,7 +39,6 @@ interface FlightBookingFormProps {
   adults: number;
   children: number;
   infants: number;
-  isSubmitting?: boolean;
   onSubmit: (data: FlightBookingFormValues) => void;
   flights: FlightDirection[];
 }
@@ -49,7 +47,6 @@ export default function FlightBookingForm({
   adults,
   children: childrenCount,
   infants,
-  isSubmitting = false,
   flights,
   onSubmit,
 }: FlightBookingFormProps) {
@@ -57,6 +54,19 @@ export default function FlightBookingForm({
   const tNested = useTranslations("FlightBookingPageNested.flightBookingForm");
   const locale = useLocale();
   const isRTL = locale === "ar";
+  const calculateAge = (birthDate: string) => {
+    const birth = new Date(birthDate);
+    const today = new Date();
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birth.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
 
   const defaultPassengers = useMemo(() => {
     const passengers: FlightPassengerData[] = [];
@@ -103,24 +113,43 @@ export default function FlightBookingForm({
     return passengers;
   }, [adults, childrenCount, infants]);
 
-  const [idTypeByPassenger, setIdTypeByPassenger] = useState<string[]>([]);
-
-  useEffect(() => {
-    setIdTypeByPassenger(defaultPassengers.map(() => ""));
-  }, [defaultPassengers.length]);
-
   // Zod schema
   const bookingSchema = z.object({
-    fullName: z.string().min(1, t("validation.fullNameRequired")),
+    fullName: z
+      .string()
+      .min(1, t("validation.fullNameRequired"))
+      .refine(
+        (value) => value.trim().split(/\s+/).filter(Boolean).length >= 2,
+        t("validation.fullNameRequired"),
+      ),
     email: z
       .string()
       .min(1, t("validation.emailRequired"))
       .email(t("validation.emailInvalid")),
-    phone: z.string().min(5, t("validation.phoneRequired")),
+    phone: z
+      .string()
+      .min(5, t("validation.phoneRequired"))
+      .regex(/^\d+$/, "contact info phone must contain digits only")
+      .refine(
+        (value) => value.length <= 10,
+        "contact info phone Must be less than or equal 10 digits",
+      ),
     passengers: z.array(
       z.object({
-        firstName: z.string().min(1, t("validation.firstNameRequired")),
-        lastName: z.string().min(1, t("validation.lastNameRequired")),
+        firstName: z
+          .string()
+          .min(1, t("validation.firstNameRequired"))
+          .regex(
+            /^[A-Za-z\s]+$/,
+            "name must only contain a-z, A-Z or space",
+          ),
+        lastName: z
+          .string()
+          .min(1, t("validation.lastNameRequired"))
+          .regex(
+            /^[A-Za-z\s]+$/,
+            "lastName must only contain a-z, A-Z or space",
+          ),
         dateOfBirth: z.string().min(1, t("validation.dateOfBirthRequired")),
         gender: z.enum(["male", "female"]),
         passportNumber: z
@@ -133,6 +162,55 @@ export default function FlightBookingForm({
         type: z.enum(["adult", "child", "infant"]),
       }),
     ),
+  }).superRefine((values, ctx) => {
+    const passportByValue: Record<string, number[]> = {};
+
+    values.passengers.forEach((passenger, index) => {
+      const trimmedPassport = passenger.passportNumber.trim();
+      if (trimmedPassport) {
+        passportByValue[trimmedPassport] = passportByValue[trimmedPassport]
+          ? [...passportByValue[trimmedPassport], index]
+          : [index];
+      }
+
+      if (!passenger.dateOfBirth) return;
+      const age = calculateAge(passenger.dateOfBirth);
+
+      if (passenger.type === "adult" && age < 12) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["passengers", index, "dateOfBirth"],
+          message: "Adult must be 12+ years old",
+        });
+      }
+
+      if (passenger.type === "child" && (age < 2 || age > 11)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["passengers", index, "dateOfBirth"],
+          message: "Child must be 2-11 years old",
+        });
+      }
+
+      if (passenger.type === "infant" && age >= 2) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["passengers", index, "dateOfBirth"],
+          message: "Infant must be under 2 years old",
+        });
+      }
+    });
+
+    Object.values(passportByValue).forEach((indices) => {
+      if (indices.length <= 1) return;
+      indices.forEach((index) => {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["passengers", index, "passportNumber"],
+          message: "passport.no Must be unique for each passenger",
+        });
+      });
+    });
   });
 
   const form = useForm<FlightBookingFormValues>({
@@ -149,6 +227,7 @@ export default function FlightBookingForm({
 
   return (
     <form
+      id="flight-booking-form"
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-7 md:gap-11 pt-6 md:pt-10"
     >
@@ -156,8 +235,6 @@ export default function FlightBookingForm({
         defaultPassengers={defaultPassengers}
         form={form}
         isRTL={isRTL}
-        idTypeByPassenger={idTypeByPassenger}
-        setIdTypeByPassenger={setIdTypeByPassenger}
       />
 
       <ContactInformationSection form={form} />
@@ -180,25 +257,6 @@ export default function FlightBookingForm({
           </button>
           .
         </p>
-
-        <div className="rounded-xl bg-white p-4 md:p-5">
-          <div className="mb-4 flex items-center justify-between">
-            <span className="text-[20px] md:text-[24px] font-semibold leading-none">
-              {tNested("total")}
-            </span>
-            <span className="text-[20px] md:text-[24px] font-bold leading-none text-primary">
-              US$258.00
-            </span>
-          </div>
-
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="h-12 md:h-14 w-full rounded-lg text-[14px] md:text-[16px] font-bold text-white"
-          >
-            {isSubmitting ? t("submitting") : tNested("next")}
-          </Button>
-        </div>
 
         <div className="flex flex-wrap items-center justify-center gap-x-5 md:gap-x-8 gap-y-2.5 md:gap-y-3 text-[12px] md:text-[14px] text-slate-600">
           <div className="flex items-center gap-2">

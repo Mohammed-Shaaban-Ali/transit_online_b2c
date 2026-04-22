@@ -13,6 +13,11 @@ import FlightBookingForm, {
   FlightBookingFormValues,
 } from "./FlightBookingForm";
 import BookingSteps from "./BookingSteps";
+import {
+  useBookFlightMutation,
+  useLazyCalculateFlightPriceQuery,
+} from "@/redux/features/flights/flightsApi";
+import { toast } from "sonner";
 
 export interface FlightBookingData {
   departureFareKey: string;
@@ -34,11 +39,18 @@ export interface FlightBookingData {
 
 const FlightBookingPage = () => {
   const t = useTranslations("FlightBooking");
+  const tForm = useTranslations("FlightBookingForm");
+  const tFormNested = useTranslations(
+    "FlightBookingPageNested.flightBookingForm",
+  );
   const router = useRouter();
 
   const [flightData, setFlightData] = useState<FlightBookingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [calculatePrice, calculatePriceState] =
+    useLazyCalculateFlightPriceQuery();
+  const [bookFlight] = useBookFlightMutation();
 
   useEffect(() => {
     try {
@@ -54,16 +66,148 @@ const FlightBookingPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const runPriceValidation = async () => {
+      if (!flightData) return;
+
+      const departureLeg = flightData.departureFlightData?.legs?.[0];
+      const returnLeg = flightData.returnFlightData?.legs?.[0];
+      const provider =
+        flightData.departureFlightData?.provider_key || flightData.provider;
+      const returnProvider = flightData.returnFlightData?.provider_key;
+
+      const carrierAirlineCode =
+        departureLeg?.airline_info?.carrier_code ||
+        departureLeg?.airline_info?.validating_carrier_code;
+      const operatorAirlineCode =
+        departureLeg?.airline_info?.operator_code ||
+        departureLeg?.airline_info?.operating_airline_code;
+
+      if (!provider || !carrierAirlineCode || !operatorAirlineCode) {
+        return;
+      }
+
+      try {
+        await calculatePrice({
+          originalPrice: Number(flightData.buyPrice || 0),
+          module: "flights",
+          points: false,
+          provider,
+          carrierAirlineCode,
+          operatorAirlineCode,
+          ...(returnLeg && returnProvider
+            ? {
+                returnProvider,
+                returnCarrierAirlineCode:
+                  returnLeg?.airline_info?.carrier_code ||
+                  returnLeg?.airline_info?.validating_carrier_code,
+                returnOperatorAirlineCode:
+                  returnLeg?.airline_info?.operator_code ||
+                  returnLeg?.airline_info?.operating_airline_code,
+              }
+            : {}),
+        }).unwrap();
+      } catch (error) {
+        console.error("Price calculation error:", error);
+      }
+    };
+
+    runPriceValidation();
+  }, [flightData, calculatePrice]);
+
+  const getOfferValueForBooking = (bookingData: FlightBookingData) => {
+    if (bookingData.offerKey) return bookingData.offerKey;
+
+    const details = bookingData.selectedOffer?.offer_details;
+    if (!Array.isArray(details) || details.length === 0) return undefined;
+
+    const firstName = details[0]?.name;
+    const lastName = details[details.length - 1]?.name;
+    if (!firstName) return undefined;
+
+    if (bookingData.returnFareKey && lastName) {
+      return `${firstName}|${lastName}`;
+    }
+
+    return firstName;
+  };
+
   const handleBookingSubmit = async (data: FlightBookingFormValues) => {
+    if (!flightData) return;
+
+    const nameParts = data.fullName.trim().split(/\s+/).filter(Boolean);
+    if (nameParts.length < 2) {
+      toast.error("Contact name must include at least two words.");
+      return;
+    }
+
+    const calculatedData = calculatePriceState.data?.data;
+    const paymentGateway = calculatedData?.payment_gateways?.[0];
+
+    if (!calculatedData || !paymentGateway) {
+      toast.error("Unable to validate latest price. Please try again.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      const generatedId = `FLT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
-      sessionStorage.setItem("FLIGHT_BOOKING_ID", generatedId);
+      const bookingPayload = {
+        paymentGateway,
+        ...(calculatedData.coupon_code
+          ? { couponCode: calculatedData.coupon_code }
+          : {}),
+        departureFareKey: flightData.departureFareKey,
+        ...(flightData.returnFareKey
+          ? { returnFareKey: flightData.returnFareKey }
+          : {}),
+        ...(getOfferValueForBooking(flightData)
+          ? { offer: getOfferValueForBooking(flightData) }
+          : {}),
+        contact_info: {
+          name: data.fullName.trim(),
+          email: data.email.trim(),
+          phone: data.phone.trim(),
+          country_code: "20",
+        },
+        paxList: data.passengers.map((passenger) => ({
+          name: passenger.firstName.trim(),
+          lastName: passenger.lastName.trim(),
+          birthDate: passenger.dateOfBirth,
+          type: passenger.type.toUpperCase(),
+          gender: passenger.gender.toUpperCase(),
+          identityInfo: {
+            passport: {
+              citizenshipCountry: passenger.nationality,
+              endDate: passenger.passportExpiry,
+              no: passenger.passportNumber.trim(),
+            },
+            notTurkishCitizen: passenger.nationality !== "TR",
+            notPakistanCitizen: passenger.nationality !== "PK",
+          },
+        })),
+      };
+
+      const response = await bookFlight(bookingPayload).unwrap();
+
+      sessionStorage.setItem(
+        "FLIGHT_BOOKING_ID",
+        String(response.bookingId || ""),
+      );
       sessionStorage.setItem("FLIGHT_BOOKING_FORM_DATA", JSON.stringify(data));
+      sessionStorage.setItem(
+        "FLIGHT_BOOKING_PRICE_DATA",
+        JSON.stringify(calculatedData),
+      );
+
+      if (response.redirectUrl) {
+        window.location.href = response.redirectUrl;
+        return;
+      }
+
       router.push("/flights/booking/success");
     } catch (error) {
       console.error("Booking error:", error);
+      toast.error("Failed to complete booking. Please check data and retry.");
     } finally {
       setIsSubmitting(false);
     }
@@ -137,7 +281,6 @@ const FlightBookingPage = () => {
               adults={flightData.adults}
               children={flightData.children}
               infants={flightData.infants}
-              isSubmitting={isSubmitting}
               onSubmit={handleBookingSubmit}
               flights={flights}
             />
@@ -149,7 +292,24 @@ const FlightBookingPage = () => {
               adults={flightData.adults}
               children={flightData.children}
               infants={flightData.infants}
-              buyPrice={flightData.buyPrice}
+              buyPrice={
+                calculatePriceState.data?.data?.total?.value ||
+                flightData.buyPrice
+              }
+              currency={calculatePriceState.data?.data?.currency}
+              paymentDetails={calculatePriceState.data?.data?.payments}
+              paymentGateways={calculatePriceState.data?.data?.payment_gateways}
+              isCalculating={calculatePriceState.isFetching}
+              calculationError={
+                calculatePriceState.isError
+                  ? "Price check failed, default fare is shown."
+                  : null
+              }
+              formId="flight-booking-form"
+              submitLabel={
+                isSubmitting ? tForm("submitting") : tFormNested("next")
+              }
+              isSubmitting={isSubmitting}
             />
           </div>
         </div>

@@ -667,9 +667,7 @@ function ShowFareResultsSection({
           />
         </div>
 
-        <div
-          className="min-w-0 overflow-hidden rounded-md max-lg:px-2 max-lg:pt-1.5 lg:max-w-none lg:bg-transparent lg:px-0 lg:pt-0"
-        >
+        <div className="min-w-0 overflow-hidden rounded-md max-lg:px-2 max-lg:pt-1.5 lg:max-w-none lg:bg-transparent lg:px-0 lg:pt-0">
           {/* Departure header - always visible */}
           {!showingReturns && (
             <FlightSectionHeader

@@ -1,9 +1,7 @@
 "use client";
 
-import type { Dispatch, SetStateAction } from "react";
 import type { UseFormReturn } from "react-hook-form";
 import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
-import { Button } from "@/components/ui/button";
 import NationalitySelect from "@/components/shared/NationalitySelect";
 import { useTranslations } from "next-intl";
 import type {
@@ -15,16 +13,12 @@ interface PassengerInformationSectionProps {
   defaultPassengers: FlightPassengerData[];
   form: UseFormReturn<FlightBookingFormValues>;
   isRTL: boolean;
-  idTypeByPassenger: string[];
-  setIdTypeByPassenger: Dispatch<SetStateAction<string[]>>;
 }
 
 export default function PassengerInformationSection({
   defaultPassengers,
   form,
   isRTL,
-  idTypeByPassenger,
-  setIdTypeByPassenger,
 }: PassengerInformationSectionProps) {
   const t = useTranslations("FlightBookingPageNested.passengerInformation");
   const {
@@ -37,9 +31,7 @@ export default function PassengerInformationSection({
   return (
     <div>
       <div className="mb-5 flex items-center justify-between flex-wrap gap-2">
-        <h3 className="text-28 leading-none font-bold ">
-          {t("title")}
-        </h3>
+        <h3 className="text-28 leading-none font-bold ">{t("title")}</h3>
         <p className="text-[16px] text-gray-600">
           <span className="text-primary">✓</span>{" "}
           <span className="text-blue-500">{t("signIn")}</span>{" "}
@@ -50,15 +42,21 @@ export default function PassengerInformationSection({
       <div className="flex flex-col gap-6">
         {defaultPassengers.map((_, pIdx) => {
           const genderValue = watch(`passengers.${pIdx}.gender`) || "male";
+          const passengerType = watch(`passengers.${pIdx}.type`) || "adult";
 
           return (
             <div
               key={pIdx}
-              className="flex flex-col gap-4 rounded-lg border border-gray-100 bg-white p-4 md:p-5"
+              className="flex flex-col gap-8 rounded-lg border border-gray-100 bg-white p-4 md:p-5"
             >
-              <h4 className="text-[18px] font-bold text-slate-900">
-                {t("passenger")}
-              </h4>
+              <div className="flex items-center justify-between gap-2">
+                <h4 className="text-[18px] font-bold text-slate-900">
+                  {`Passenger ${pIdx + 1}`}
+                </h4>
+                <span className="rounded-md bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">
+                  {String(passengerType).toUpperCase()}
+                </span>
+              </div>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FloatingLabelInput
@@ -86,7 +84,7 @@ export default function PassengerInformationSection({
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div className="relative">
-                  <div className="relative flex h-[68px] items-center rounded-lg border border-[#d7dce3] bg-white px-3 transition-all duration-300">
+                  <div className="relative flex h-16! items-center rounded-lg border border-[#d7dce3] bg-white px-3 transition-all duration-300">
                     <label className="pointer-events-none absolute -top-2.5 rounded-md bg-white px-2 text-[12px] font-medium text-black/50">
                       {t("genderOnId")}
                     </label>
@@ -142,57 +140,42 @@ export default function PassengerInformationSection({
               </div>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="relative">
-                  <div className="relative flex h-[68px] items-center rounded-lg border border-[#d7dce3] bg-white px-3 transition-all duration-300">
-                    <label className="pointer-events-none absolute top-1 font-medium text-slate-500">
-                      {t("idType")}
-                    </label>
-                    <select
-                      value={idTypeByPassenger[pIdx] || ""}
-                      onChange={(e) => {
-                        setIdTypeByPassenger((prev) =>
-                          prev.map((item, idx) =>
-                            idx === pIdx ? e.target.value : item,
-                          ),
-                        );
-                      }}
-                      className="mt-4 w-full border-none bg-transparent text-start font-medium text-slate-900 outline-none"
-                    >
-                      <option value="" disabled>
-                        {t("select")}
-                      </option>
-                      <option value="passport">{t("passport")}</option>
-                      <option value="nationalId">{t("nationalId")}</option>
-                      <option value="residencePermit">
-                        {t("residencePermit")}
-                      </option>
-                    </select>
-                  </div>
-                </div>
-
                 <FloatingLabelInput
                   id={`passengers.${pIdx}.passportNumber`}
-                  label={t("idNumber")}
+                  label={t("passportNumber")}
                   register={register(`passengers.${pIdx}.passportNumber`)}
                   watchValue={watch(`passengers.${pIdx}.passportNumber`)}
                   error={errors.passengers?.[pIdx]?.passportNumber?.message}
                   inputClassName="font-medium text-slate-900"
                   containerClassName="h-[68px] bg-white border-[#d7dce3] rounded-lg"
                   labelClassName="font-medium text-slate-500"
+                />{" "}
+                <FloatingLabelInput
+                  id={`passengers.${pIdx}.passportExpiry`}
+                  label={t("passportExpiry")}
+                  type="date"
+                  register={register(`passengers.${pIdx}.passportExpiry`)}
+                  watchValue={watch(`passengers.${pIdx}.passportExpiry`)}
+                  selectedDate={
+                    watch(`passengers.${pIdx}.passportExpiry`)
+                      ? new Date(watch(`passengers.${pIdx}.passportExpiry`))
+                      : null
+                  }
+                  onDateChange={(date) => {
+                    if (date) {
+                      const formatted = date.toISOString().split("T")[0];
+                      setValue(`passengers.${pIdx}.passportExpiry`, formatted);
+                    } else {
+                      setValue(`passengers.${pIdx}.passportExpiry`, "");
+                    }
+                  }}
+                  isRTL={isRTL}
+                  error={errors.passengers?.[pIdx]?.passportExpiry?.message}
+                  minDate={new Date()}
+                  containerClassName="h-[68px] bg-white border-[#d7dce3] rounded-lg"
+                  labelClassName="font-medium text-slate-500"
                 />
               </div>
-
-              <div className="rounded-lg bg-gray-100 px-4 py-3 text-[12px] text-gray-600">
-                {t("idHint")}
-              </div>
-
-              <div className="flex justify-end text-[14px] text-gray-600">
-                {t("frequentFlyerProgram")}
-              </div>
-
-              <Button size="lg" type="button">
-                {t("saveAndAddPassenger")}
-              </Button>
             </div>
           );
         })}

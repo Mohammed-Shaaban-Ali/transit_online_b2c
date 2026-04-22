@@ -362,7 +362,10 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
   useEffect(() => {
     if (formValue) {
       const country = COUNTRIES.find(
-        (c) => c.name === formValue || c.nameAr === formValue,
+        (c) =>
+          c.code === formValue ||
+          c.name === formValue ||
+          c.nameAr === formValue,
       );
       if (
         country &&
@@ -430,7 +433,8 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
   const handleSelect = (country: CountryItem) => {
     setSelectedCountry(country);
     const displayName = getDisplayName(country);
-    setValue(name, displayName, { shouldValidate: true });
+    // Store ISO country code in form value (e.g. "SA")
+    setValue(name, country.code, { shouldValidate: true });
     setSearchValue(displayName);
     setShowDropdown(false);
     setIsFocused(false);
@@ -482,7 +486,7 @@ const NationalitySelect: React.FC<NationalitySelectProps> = ({
                ${
                  isActive
                    ? "-top-2.5 text-[12px] text-black/50 font-medium   bg-white rounded-md px-2 "
-                   : "top-1/2 -translate-y-1/2 text-gray-500"
+                   : "top-1/2 -translate-y-1/2  text-slate-500 text-sm"
                }`}
           >
             {label}
