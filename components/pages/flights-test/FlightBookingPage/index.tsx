@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { FlightDirection } from "@/types/flightTypes";
 import { FaPlane } from "react-icons/fa";
+import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { FLIGHT_BOOKING_KEY } from "@/constants";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import FlightItineraryRow from "@/components/pages/flights-test/showfarefirst/FlightCard/FlightItineraryRow";
 import PriceDetailsCard from "./PriceDetailsCard";
 import FlightBookingForm, {
@@ -16,6 +18,7 @@ import BookingSteps from "./BookingSteps";
 import {
   useBookFlightMutation,
   useLazyCalculateFlightPriceQuery,
+  useLazyGetFlightBookingQuery,
 } from "@/redux/features/flights/flightsApi";
 import { toast } from "sonner";
 
@@ -48,9 +51,58 @@ const FlightBookingPage = () => {
   const [flightData, setFlightData] = useState<FlightBookingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
+  const [paymentRedirectUrl, setPaymentRedirectUrl] = useState<string | null>(
+    null,
+  );
+  const [isVerifyingPayment, setIsVerifyingPayment] = useState(false);
+  const [activeBookingId, setActiveBookingId] = useState<string | null>(null);
+  const isVerifyingPaymentRef = useRef(false);
   const [calculatePrice, calculatePriceState] =
     useLazyCalculateFlightPriceQuery();
   const [bookFlight] = useBookFlightMutation();
+  const [getFlightBooking] = useLazyGetFlightBookingQuery();
+
+  const sleep = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+
+  const verifyBookingAfterPayment = async (bookingId: string) => {
+    if (isVerifyingPaymentRef.current) return;
+    isVerifyingPaymentRef.current = true;
+    setIsVerifyingPayment(true);
+    console.log("Payment finished event received, verifying booking status...");
+
+    try {
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          const result = await getFlightBooking(bookingId, false).unwrap();
+
+          if (result?.data) {
+            console.log(
+              `Booking verification succeeded on attempt ${attempt}.`,
+            );
+            router.push("/flights/booking/success");
+            return;
+          }
+        } catch (error) {
+          console.error(
+            `Booking verification attempt ${attempt} failed:`,
+            error,
+          );
+        }
+
+        if (attempt < 3) {
+          await sleep(3000);
+        }
+      }
+
+      console.error("Booking verification failed after 3 attempts.");
+      router.push("/flights/booking/failed");
+    } finally {
+      isVerifyingPaymentRef.current = false;
+      setIsVerifyingPayment(false);
+    }
+  };
 
   useEffect(() => {
     try {
@@ -114,6 +166,36 @@ const FlightBookingPage = () => {
 
     runPriceValidation();
   }, [flightData, calculatePrice]);
+
+  useEffect(() => {
+    const onPaymentMessage = (event: MessageEvent) => {
+      if (!isPaymentDialogOpen) return;
+
+      const data = event.data;
+      console.log(data, "data");
+      if (!data || typeof data !== "object") return;
+      const url = String((data as { url?: string }).url || "").toLowerCase();
+      const bookingId =
+        activeBookingId || sessionStorage.getItem("FLIGHT_BOOKING_ID");
+
+      if (!bookingId) {
+        console.error("Payment finished but booking id is missing.");
+        setIsPaymentDialogOpen(false);
+        setIsVerifyingPayment(false);
+        router.push("/flights/booking/failed");
+        return;
+      }
+
+      if (url.includes("gita.sa")) {
+        console.log("url###");
+        setPaymentRedirectUrl(null);
+        void verifyBookingAfterPayment(bookingId);
+      }
+    };
+
+    window.addEventListener("message", onPaymentMessage);
+    return () => window.removeEventListener("message", onPaymentMessage);
+  }, [activeBookingId, isPaymentDialogOpen, router]);
 
   const getOfferValueForBooking = (bookingData: FlightBookingData) => {
     if (bookingData.offerKey) return bookingData.offerKey;
@@ -188,6 +270,7 @@ const FlightBookingPage = () => {
       };
 
       const response = await bookFlight(bookingPayload).unwrap();
+      setActiveBookingId(String(response.bookingId || ""));
 
       sessionStorage.setItem(
         "FLIGHT_BOOKING_ID",
@@ -200,14 +283,15 @@ const FlightBookingPage = () => {
       );
 
       if (response.redirectUrl) {
-        window.location.href = response.redirectUrl;
+        setPaymentRedirectUrl(response.redirectUrl);
+        setIsVerifyingPayment(false);
+        setIsPaymentDialogOpen(true);
         return;
       }
 
-      router.push("/flights/booking/success");
+      // router.push("/flights/booking/success");
     } catch (error) {
       console.error("Booking error:", error);
-      toast.error("Failed to complete booking. Please check data and retry.");
     } finally {
       setIsSubmitting(false);
     }
@@ -314,6 +398,38 @@ const FlightBookingPage = () => {
           </div>
         </div>
       </div>
+      <Dialog
+        open={isPaymentDialogOpen}
+        onOpenChange={(open) => {
+          if (open) setIsPaymentDialogOpen(true);
+        }}
+      >
+        <DialogContent
+          className="min-w-screen min-h-screen rounded-none border-none p-0 overflow-hidden"
+          showCloseButton={false}
+          onEscapeKeyDown={(event) => event.preventDefault()}
+          onPointerDownOutside={(event) => event.preventDefault()}
+          onInteractOutside={(event) => event.preventDefault()}
+        >
+          {isVerifyingPayment ? (
+            <div className="flex h-full w-full items-center justify-center bg-white">
+              <div className="flex flex-col items-center gap-3 text-center">
+                <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                <p className="text-base font-medium text-gray-700">
+                  Verifying your payment, please wait...
+                </p>
+              </div>
+            </div>
+          ) : paymentRedirectUrl ? (
+            <iframe
+              src={paymentRedirectUrl}
+              title="Flight payment"
+              className="w-full h-full border-0"
+              allow="payment *"
+            />
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

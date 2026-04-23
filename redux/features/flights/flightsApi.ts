@@ -194,4 +194,5 @@ export const {
   useGetFlightFareMutation,
   useBookFlightMutation,
   useGetFlightBookingQuery,
+  useLazyGetFlightBookingQuery,
 } = flightsApi;
