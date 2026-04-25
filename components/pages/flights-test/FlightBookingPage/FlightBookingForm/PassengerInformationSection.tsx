@@ -31,7 +31,7 @@ export default function PassengerInformationSection({
   return (
     <div>
       <div className="mb-5 flex items-center justify-between flex-wrap gap-2">
-        <h3 className="text-28 leading-none font-bold ">{t("title")}</h3>
+        <h3 className="text-24 leading-none font-bold ">{t("title")}</h3>
         <p className="text-[16px] text-gray-600">
           <span className="text-primary">✓</span>{" "}
           <span className="text-blue-500">{t("signIn")}</span>{" "}

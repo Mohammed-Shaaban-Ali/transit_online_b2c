@@ -164,7 +164,7 @@ export default function FlightBookingConfirmation({
               >
                 <FaCheckCircle className="text-green-500 text-4xl" />
               </div>
-              <h1 className="text-24 md:text-28 font-bold mb-2">
+              <h1 className="text-24 md:text-24 font-bold mb-2">
                 {t("title")}
               </h1>
               <p className="text-gray-500 mb-4">{t("description")}</p>
@@ -176,9 +176,7 @@ export default function FlightBookingConfirmation({
                   animation: "scaleIn 0.4s ease-out 0.6s forwards",
                 }}
               >
-                <span className="text-14 text-gray-500">
-                  {t("bookingId")}:
-                </span>
+                <span className="text-14 text-gray-500">{t("bookingId")}:</span>
                 <span className="text-18 font-bold text-primary font-mono tracking-wider">
                   {bookingId}
                 </span>
@@ -195,8 +193,6 @@ export default function FlightBookingConfirmation({
               </div>
 
               <div className="p-4 md:p-5 flex flex-col gap-4">
-
-
                 {/* Info Badges */}
                 <div className="flex flex-wrap items-center gap-2">
                   {departureDate && (
@@ -279,10 +275,8 @@ export default function FlightBookingConfirmation({
                     </div>
                   )}
                   <div className="flex items-center justify-end gap-3 flex-wrap">
-
                     <PriceCell price={buyPrice} />
                   </div>
-
                 </div>
               </div>
             </div>
@@ -379,10 +373,7 @@ export default function FlightBookingConfirmation({
                         <div className="flex flex-wrap gap-x-4 gap-y-2 mt-1 ps-12">
                           {passenger.passportNumber && (
                             <div className="flex items-center gap-1.5 text-13 text-gray-500">
-                              <FaPassport
-                                size={11}
-                                className="text-gray-400"
-                              />
+                              <FaPassport size={11} className="text-gray-400" />
                               <span className="text-gray-400">
                                 {tForm("passportNumber")}:
                               </span>
@@ -418,13 +409,11 @@ export default function FlightBookingConfirmation({
                         </div>
                       </div>
                     );
-                  }
+                  },
                 )}
               </div>
             </div>
           </AnimatedCard>
-
-
         </div>
       </div>
     </>

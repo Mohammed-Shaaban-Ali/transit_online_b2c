@@ -47,9 +47,7 @@ export default function BaggageAllowance({ flights }: BaggageAllowanceProps) {
 
   return (
     <section className="">
-      <h3 className="mb-2 text-28 font-bold leading-none ">
-        {t("title")}
-      </h3>
+      <h3 className="mb-2 text-24 font-bold leading-none ">{t("title")}</h3>
       <p className="mb-5 text-[14px] text-gray-500">
         <span className="text-primary">✓</span> {t("subtitle")}{" "}
         <button type="button" className="font-medium text-primary">

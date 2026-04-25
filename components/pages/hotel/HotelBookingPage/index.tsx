@@ -71,7 +71,9 @@ const HotelBookingPage = () => {
       sessionStorage.setItem("HOTEL_BOOKING_FORM_DATA", JSON.stringify(data));
 
       // Navigate to dedicated success route
-      router.push(`/hotels/${hotelData?.hotelId}/${hotelData?.uuid}/booking/success`);
+      router.push(
+        `/hotels/${hotelData?.hotelId}/${hotelData?.uuid}/booking/success`,
+      );
     } catch (error) {
       console.error("Booking error:", error);
     } finally {
@@ -150,7 +152,7 @@ const HotelBookingPage = () => {
   return (
     <div className="container my-24">
       {/* Header */}
-      <h1 className="text-28 font-bold mb-6">{t("title")}</h1>
+      <h1 className="text-24 font-bold mb-6">{t("title")}</h1>
 
       {/* ===== Hotel Details - Full Width Top Section ===== */}
       <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden mb-6">
@@ -242,8 +244,6 @@ const HotelBookingPage = () => {
                 ))}
               </div>
             )}
-
-
           </div>
         </div>
       </div>

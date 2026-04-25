@@ -26,7 +26,7 @@ const OfferCard: React.FC<OfferCardProps> = ({
 }) => {
   const t = useTranslations("OfferCard");
   const getBaggageInfo = () => {
-    const cabinBag = "1 Bage (7 Kg)"
+    const cabinBag = "1 Bage (7 Kg)";
     // isReturnPhase
     // ? offer.cabin_baggages_text?.[offer.cabin_baggages_text.length - 1]
     // : offer.cabin_baggages_text?.[0];
@@ -86,15 +86,14 @@ const OfferCard: React.FC<OfferCardProps> = ({
         <h3 className="font-bold text-22">{packageName}</h3>
         {/* Price */}
         <div
-          className={`flex items-center gap-1 text-28 font-bold text-primary 
+          className={`flex items-center gap-1 text-24 font-bold text-primary 
             ${!isReturnPhase ? "rtl:flex-row-reverse" : ""}
             `}
         >
           <CurrencySymbol size="lg" />
 
-
           {displayPrice !== undefined
-            ? (displayPrice)
+            ? displayPrice
             : formatePrice(offer.minimum_offer_price)}
         </div>
       </div>
@@ -103,10 +102,11 @@ const OfferCard: React.FC<OfferCardProps> = ({
       <Button
         className={` 
             h-11 rounded-full mt-3
-            ${isSelected
-            ? "bg-primary text-white hover:bg-primary/90 "
-            : "bg-primary/15 text-primary hover:bg-primary/30"
-          }`}
+            ${
+              isSelected
+                ? "bg-primary text-white hover:bg-primary/90 "
+                : "bg-primary/15 text-primary hover:bg-primary/30"
+            }`}
         onClick={(e) => {
           e.stopPropagation();
           onSelect();

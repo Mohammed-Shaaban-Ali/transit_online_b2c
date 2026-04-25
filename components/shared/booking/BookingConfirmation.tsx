@@ -143,7 +143,7 @@ export default function BookingConfirmation({
               >
                 <FaCheckCircle className="text-green-500 text-4xl" />
               </div>
-              <h1 className="text-24 md:text-28 font-bold mb-2">
+              <h1 className="text-24 md:text-24 font-bold mb-2">
                 {t("title")}
               </h1>
               <p className="text-gray-500 mb-4">{t("description")}</p>
@@ -155,9 +155,7 @@ export default function BookingConfirmation({
                   animation: "scaleIn 0.4s ease-out 0.6s forwards",
                 }}
               >
-                <span className="text-14 text-gray-500">
-                  {t("bookingId")}:
-                </span>
+                <span className="text-14 text-gray-500">{t("bookingId")}:</span>
                 <span className="text-18 font-bold text-primary font-mono tracking-wider">
                   {bookingId}
                 </span>
@@ -245,10 +243,7 @@ export default function BookingConfirmation({
                           {room.roomBasis && (
                             <>
                               <span className="text-gray-300">|</span>
-                              <FaUtensils
-                                size={10}
-                                className="text-gray-400"
-                              />
+                              <FaUtensils size={10} className="text-gray-400" />
                               <span className="text-12 text-gray-500">
                                 {room.roomBasis}
                               </span>
@@ -287,7 +282,9 @@ export default function BookingConfirmation({
                     <FaEnvelope size={14} className="text-primary" />
                   </div>
                   <div>
-                    <div className="text-11 text-gray-400">{tForm("email")}</div>
+                    <div className="text-11 text-gray-400">
+                      {tForm("email")}
+                    </div>
                     <div className="text-14 font-medium">{formData.email}</div>
                   </div>
                 </div>
@@ -296,7 +293,9 @@ export default function BookingConfirmation({
                     <FaPhone size={14} className="text-primary" />
                   </div>
                   <div>
-                    <div className="text-11 text-gray-400">{tForm("phone")}</div>
+                    <div className="text-11 text-gray-400">
+                      {tForm("phone")}
+                    </div>
                     <div className="text-14 font-medium" dir="ltr">
                       +966 {formData.phone}
                     </div>
@@ -321,10 +320,11 @@ export default function BookingConfirmation({
                       className="flex items-center gap-3 bg-gray-50 rounded-lg p-3 border border-gray-100"
                     >
                       <div
-                        className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${guest.type === "adult"
+                        className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${
+                          guest.type === "adult"
                             ? "bg-primary/10"
                             : "bg-orange-100"
-                          }`}
+                        }`}
                       >
                         {guest.type === "adult" ? (
                           <FaUser size={12} className="text-primary" />
@@ -349,8 +349,6 @@ export default function BookingConfirmation({
               </div>
             </div>
           </AnimatedCard>
-
-
         </div>
       </div>
     </>

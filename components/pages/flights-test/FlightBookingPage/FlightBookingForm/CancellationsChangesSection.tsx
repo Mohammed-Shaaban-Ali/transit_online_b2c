@@ -20,9 +20,7 @@ export default function CancellationsChangesSection() {
 
   return (
     <section className="mt-2">
-      <h3 className="mb-3 text-28 font-bold leading-none ">
-        {t("title")}
-      </h3>
+      <h3 className="mb-3 text-24 font-bold leading-none ">{t("title")}</h3>
 
       <div className="space-y-3">
         {items.map((item) => (

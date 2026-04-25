@@ -22,7 +22,7 @@ export default function ContactInformationSection({
   return (
     <div className="mt-6">
       <div className="mb-5 flex items-center gap-2">
-        <h3 className="text-28 leading-none font-bold text-slate-900">
+        <h3 className="text-24 leading-none font-bold text-slate-900">
           {t("title")}
         </h3>
       </div>

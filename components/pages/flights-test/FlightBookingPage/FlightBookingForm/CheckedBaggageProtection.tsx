@@ -8,9 +8,7 @@ export default function CheckedBaggageProtection() {
 
   return (
     <section className="mt-2">
-      <h3 className="mb-3 text-28 font-bold leading-none ">
-        {t("title")}
-      </h3>
+      <h3 className="mb-3 text-24 font-bold leading-none ">{t("title")}</h3>
 
       <div className="rounded-2xl border border-gray-100 bg-white p-5">
         <h4 className="mb-3 text-[16px] font-semibold leading-none text-slate-900">
@@ -40,10 +38,7 @@ export default function CheckedBaggageProtection() {
               </span>
               {t("priceSuffix")}
             </p>
-            <button
-              type="button"
-              aria-label={t("selectAriaLabel")}
-            >
+            <button type="button" aria-label={t("selectAriaLabel")}>
               <Circle size={20} className="text-primary" />
             </button>
           </div>

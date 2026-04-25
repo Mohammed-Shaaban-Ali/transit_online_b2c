@@ -23,9 +23,7 @@ export default function FreePromoCodesSection() {
           height={32}
           className="h-8 w-8 object-contain"
         />
-        <h3 className="text-28 font-bold leading-none ">
-          {t("title")}
-        </h3>
+        <h3 className="text-24 font-bold leading-none ">{t("title")}</h3>
       </div>
 
       <div className="space-y-4">

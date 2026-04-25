@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useGetFlightFareMutation } from "@/redux/features/flights/flightsApi";
-import {
-  FaArrowLeft,
-} from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import { useRouter } from "@/i18n/navigation";
 import OfferSelection from "./OfferSelection";
 import {
@@ -53,7 +51,7 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState<any>(null);
   const [selectedOfferKey, setSelectedOfferKey] = useState<string | undefined>(
-    undefined
+    undefined,
   );
   const [selectedDepartureOffer, setSelectedDepartureOffer] = useState<
     string | null
@@ -83,8 +81,9 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
   useEffect(() => {
     if (isOpen && departureFareKey) {
       // Create a unique key from all parameters
-      const callKey = `${departureFareKey}-${returnFareKey || ""
-        }-${adults}-${childrens}-${infants}-${provider}`;
+      const callKey = `${departureFareKey}-${
+        returnFareKey || ""
+      }-${adults}-${childrens}-${infants}-${provider}`;
 
       // Only make the call if parameters have changed
       if (lastCallParamsRef.current !== callKey) {
@@ -171,7 +170,7 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
         (offer) =>
           offer.offer_details?.[0]?.name === selectedDepartureOffer &&
           offer.offer_details?.[offer.offer_details.length - 1]?.name ===
-          selectedOfferKey
+            selectedOfferKey,
       );
       if (selectedOffer) {
         return {
@@ -184,7 +183,7 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
     // If only departure is selected, show departure price only
     if (selectedDepartureOffer && data?.data?.offers) {
       const departureOffer = data.data.offers.find(
-        (offer) => offer.offer_details?.[0]?.name === selectedDepartureOffer
+        (offer) => offer.offer_details?.[0]?.name === selectedDepartureOffer,
       );
       if (departureOffer) {
         return {
@@ -216,12 +215,10 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
           offerKey = "default";
         }
       } else if (selectedOffer && selectedOffer.offer_details) {
-        const departureName =
-          selectedOffer.offer_details[0]?.name || "";
+        const departureName = selectedOffer.offer_details[0]?.name || "";
         const returnName =
-          selectedOffer.offer_details[
-            selectedOffer.offer_details.length - 1
-          ]?.name || "";
+          selectedOffer.offer_details[selectedOffer.offer_details.length - 1]
+            ?.name || "";
         if (returnName) {
           offerKey = `${departureName}|${returnName}`;
         } else {
@@ -233,15 +230,10 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
 
       // Determine buy price
       let buyPrice = 0;
-      if (
-        selectedOffer &&
-        data?.data?.offers &&
-        data.data.offers.length > 0
-      ) {
+      if (selectedOffer && data?.data?.offers && data.data.offers.length > 0) {
         buyPrice = selectedOffer.total_price || 0;
       } else if (data?.data?.fare_detail) {
-        buyPrice =
-          data.data.fare_detail.price_info?.total_fare || 0;
+        buyPrice = data.data.fare_detail.price_info?.total_fare || 0;
       }
 
       // Store flight data in sessionStorage for the booking page
@@ -280,7 +272,7 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
         className="max-w-2xl w-[95vw] sm:min-w-[700px] p-0 flex flex-col overflow-y-auto h-full"
       >
         <SheetHeader className=" flex items-center justify-between px-4 py-3  flex-row text-left shrink-0">
-          <SheetTitle className="text-28! font-bold  m-0">
+          <SheetTitle className="text-24! font-bold  m-0">
             {t("offerSelection")}
           </SheetTitle>
         </SheetHeader>
@@ -368,11 +360,11 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
                           data.data.offers.find(
                             (offer) =>
                               offer.offer_details?.[0]?.name ===
-                              selectedDepartureOffer &&
+                                selectedDepartureOffer &&
                               offer.offer_details?.[
                                 offer.offer_details.length - 1
-                              ]?.name === offerKey
-                          )
+                              ]?.name === offerKey,
+                          ),
                         );
                       }}
                       onBackToDeparture={() => {
@@ -416,9 +408,7 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
               <div className="flex items-end justify-between gap-5">
                 {/* total price */}
                 <div className="">
-                  <h4 className="text-24 font-medium ">
-                    {t("totalPrice")}
-                  </h4>
+                  <h4 className="text-24 font-medium ">{t("totalPrice")}</h4>
                   <div className="text-32 font-bold text-primary flex items-center gap-1 rtl:flex-row-reverse">
                     <CurrencySymbol size="lg" />
                     {formatePrice(getDisplayPrice().amount || 0)}
@@ -452,7 +442,8 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
                         selectedOfferKey === undefined &&
                         !(
                           selectedDepartureOffer === "default" &&
-                          (!data?.data?.offers || data?.data?.offers.length === 0)
+                          (!data?.data?.offers ||
+                            data?.data?.offers.length === 0)
                         ))
                     }
                   >

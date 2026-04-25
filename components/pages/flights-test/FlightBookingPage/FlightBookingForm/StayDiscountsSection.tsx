@@ -24,7 +24,7 @@ export default function StayDiscountsSection() {
   return (
     <section className="mt-2">
       <div className="mb-3 flex items-center gap-2">
-        <h3 className="text-28 font-bold leading-none ">{t("title")}</h3>
+        <h3 className="text-24 font-bold leading-none ">{t("title")}</h3>
         <Info size={18} className="text-gray-600" />
       </div>
 

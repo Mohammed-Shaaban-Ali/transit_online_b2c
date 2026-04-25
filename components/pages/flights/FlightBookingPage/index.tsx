@@ -3,12 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { FlightDirection } from "@/types/flightTypes";
-import {
-  FaCalendarAlt,
-  FaPlane,
-  FaUser,
-  FaUsers,
-} from "react-icons/fa";
+import { FaCalendarAlt, FaPlane, FaUser, FaUsers } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { MdChildFriendly } from "react-icons/md";
 import { FaExchangeAlt } from "react-icons/fa";
@@ -137,13 +132,13 @@ const FlightBookingPage = () => {
   const returnDate = returnFlight?.legs?.[returnFlight.legs.length - 1]
     ?.arrival_info?.date
     ? formatDate(
-        returnFlight.legs[returnFlight.legs.length - 1].arrival_info.date
+        returnFlight.legs[returnFlight.legs.length - 1].arrival_info.date,
       )
     : null;
 
   return (
     <div className="container my-24">
-      <h1 className="text-28 font-bold mb-6">{t("title")}</h1>
+      <h1 className="text-24 font-bold mb-6">{t("title")}</h1>
 
       {/* ===== Flight Details - Full Width Top Section ===== */}
       <div
@@ -240,9 +235,7 @@ const FlightBookingPage = () => {
                   value: flightData.children,
                 },
                 {
-                  icon: (
-                    <MdChildFriendly size={12} className="text-gray-500" />
-                  ),
+                  icon: <MdChildFriendly size={12} className="text-gray-500" />,
                   label: `${flightData.infants} ${flightData.infants === 1 ? tFlightCard("infant") : tFlightCard("infants")}`,
                   value: flightData.infants,
                 },

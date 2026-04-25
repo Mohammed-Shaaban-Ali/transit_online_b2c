@@ -17,7 +17,7 @@ function PriceCell({ price, nights }: Props) {
     <div className="flex  items-baseline gap-0.5 w-max">
       <div className="flex items-center gap-1 rtl:flex-row-reverse">
         <CurrencySymbol size="md" />
-        <h6 className="text-28 font-bold text-primary">
+        <h6 className="text-24 font-bold text-primary">
           {formatePrice(price)}
         </h6>
       </div>

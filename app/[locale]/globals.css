@@ -138,61 +138,59 @@
   }
   /* custom font sizes (scaled to 90%) */
   .text-10 {
-    @apply text-[7px] sm:text-[9px];
+    @apply text-[7px] sm:text-[9px] lg:text-[10px];
   }
   .text-11 {
-    @apply text-[8px] sm:text-[10px];
+    @apply text-[8px] sm:text-[10px] lg:text-[11px];
   }
   .text-12 {
-    @apply text-[9px] sm:text-[11px];
+    @apply text-[9px] sm:text-[11px] lg:text-[12px];
   }
   .text-13 {
-    @apply text-[10px] sm:text-[12px];
+    @apply text-[10px] sm:text-[12px] lg:text-[13px];
   }
   .text-14 {
-    @apply text-[10px] sm:text-[13px];
+    @apply text-[10px] sm:text-[13px] lg:text-[14px];
   }
   .text-15 {
-    @apply text-[11px] sm:text-[14px];
+    @apply text-[11px] sm:text-[14px] lg:text-[15px];
   }
   .text-16 {
-    @apply text-[12px] sm:text-[14px];
+    @apply text-[12px] sm:text-[14px] lg:text-[16px];
   }
   .text-18 {
-    @apply text-[14px] sm:text-[16px];
+    @apply text-[14px] sm:text-[16px] lg:text-[18px];
   }
   .text-20 {
-    @apply text-[15px] sm:text-[18px];
+    @apply text-[15px] sm:text-[18px] lg:text-[20px];
   }
   .text-22 {
-    @apply text-[16px] sm:text-[20px];
+    @apply text-[16px] sm:text-[20px] lg:text-[22px];
   }
+
   .text-24 {
-    @apply text-[19px] sm:text-[22px];
-  }
-  .text-28 {
-    @apply text-[23px] sm:text-[25px];
+    @apply text-[23px] sm:text-[25px] lg:text-[28px];
   }
   .text-32 {
-    @apply text-[25px] sm:text-[29px];
+    @apply text-[25px] sm:text-[29px] lg:text-[32px];
   }
   .text-34 {
-    @apply text-[25px] sm:text-[31px];
+    @apply text-[25px] sm:text-[31px] lg:text-[34px];
   }
   .text-36 {
-    @apply text-[29px] sm:text-[32px];
+    @apply text-[29px] sm:text-[32px] lg:text-[36px];
   }
   .text-38 {
-    @apply text-[29px] sm:text-[34px];
+    @apply text-[29px] sm:text-[34px] lg:text-[38px];
   }
   .text-40 {
-    @apply text-[29px] sm:text-[32px] md:text-[36px];
+    @apply text-[29px] sm:text-[32px] lg:text-[40px];
   }
   .text-48 {
-    @apply text-[36px] sm:text-[40px] md:text-[43px];
+    @apply text-[36px] sm:text-[40px] lg:text-[48px];
   }
   .text-60 {
-    @apply text-[50px] sm:text-[54px];
+    @apply text-[50px] sm:text-[54px] lg:text-[60px];
   }
 
   /* Custom scrollbar styles */

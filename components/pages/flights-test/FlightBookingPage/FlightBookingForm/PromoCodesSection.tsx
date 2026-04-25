@@ -13,7 +13,7 @@ export default function PromoCodesSection() {
 
   return (
     <section className="mt-2">
-      <h3 className="mb-3 text-28 font-bold ">{t("title")}</h3>
+      <h3 className="mb-3 text-24 font-bold ">{t("title")}</h3>
 
       <div className="rounded-xl bg-white px-2 py-2 transition-all duration-200 ease-linear ">
         <button

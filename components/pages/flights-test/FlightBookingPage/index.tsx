@@ -81,7 +81,7 @@ const FlightBookingPage = () => {
             console.log(
               `Booking verification succeeded on attempt ${attempt}.`,
             );
-            router.push("/flights/booking/success");
+            router.push("/new/flights/showfarefirst/booking/success");
             return;
           }
         } catch (error) {
@@ -97,7 +97,7 @@ const FlightBookingPage = () => {
       }
 
       console.error("Booking verification failed after 3 attempts.");
-      router.push("/flights/booking/failed");
+      router.push("/new/flights/showfarefirst/booking/failed");
     } finally {
       isVerifyingPaymentRef.current = false;
       setIsVerifyingPayment(false);
@@ -182,7 +182,7 @@ const FlightBookingPage = () => {
         console.error("Payment finished but booking id is missing.");
         setIsPaymentDialogOpen(false);
         setIsVerifyingPayment(false);
-        router.push("/flights/booking/failed");
+        router.push("/new/flights/showfarefirst/booking/failed");
         return;
       }
 
@@ -348,7 +348,7 @@ const FlightBookingPage = () => {
       <div className="mx-auto w-full max-w-[1200px]! px-3 sm:px-5 md:px-0">
         <div className="hidden md:block bg-white w-full h-[220px] md:h-[330px] rounded-t-2xl md:rounded-t-[32px] absolute top-0 left-0 z-0"></div>
         <BookingSteps />
-        <h1 className="text-xl md:text-28 font-bold mb-4 md:mb-6 relative z-10">
+        <h1 className="text-xl md:text-24 font-bold mb-4 md:mb-6 relative z-10">
           {t("title")}
         </h1>
 
