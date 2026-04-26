@@ -630,6 +630,77 @@
         "backToHome": "Back to Home",
         "searchMore": "Search More Flights"
     },
+    "FlightBookingSuccessPage": {
+        "totalAmount": "Total Amount",
+        "bookingTotal": "Booking total",
+        "paymentMethodNote": "Please note that the payment method cannot be changed once the transaction has been completed",
+        "adults": "Adults",
+        "ticketFare": "Ticket fare",
+        "taxesAndFees": "Taxes & fees",
+        "promoCode": "Promo code"
+    },
+    "BookingDetails": {
+        "Payment": {
+            "successfulPayment": "Successful Payment",
+            "failedPayment": "Failed Payment",
+            "paymentCompleted": "Payment completed successfully",
+            "paymentNotCompleted": "Payment was not completed",
+            "successDescription": "Your booking is now confirmed and your e-ticket has been issued.",
+            "failureDescription": "Your booking could not be completed. Please try again."
+        },
+        "FlightDetails": {
+            "title": "Flight Details",
+            "cancellationAndChangePolicies": "Cancellation and change policies",
+            "baggageAllowance": "Baggage Allowance",
+            "bookingInfo": "Booking info",
+            "allTimesLocal": "All times are in local time",
+            "stopLayover": "Stop / Layover",
+            "notAvailable": "N/A"
+        },
+        "AddOns": {
+            "title": "Your Add-ons",
+            "promoCode": "Promo code"
+        },
+        "PassengerInformation": {
+            "title": "Passenger Information",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "idType": "ID type",
+            "passport": "Passport",
+            "idNumber": "ID number",
+            "nationality": "Nationality (country/region)",
+            "gender": "Gender",
+            "dateOfBirth": "Date of birth",
+            "male": "Male",
+            "female": "Female",
+            "adult": "Adult",
+            "child": "Child",
+            "infant": "Infant",
+            "notAvailable": "N/A",
+            "fallbackDob": "Feb 7, 2003"
+        },
+        "ContactInformation": {
+            "title": "Contact Information",
+            "email": "Email",
+            "phone": "Phone"
+        },
+        "CustomerSupport": {
+            "title": "Customer support",
+            "supportIn30s": "Support in approx. 30s",
+            "questionPendingPayment": "How do I complete a pending payment?",
+            "questionPaymentCompleted": "Was my payment completed successfully?",
+            "questionCreditCardIssue": "Why couldn't I pay with my credit card?",
+            "questionOtherHelp": "Get help with something else"
+        },
+        "FeaturedProperties": {
+            "title": "Featured properties in Dubai",
+            "showMore": "Show More",
+            "previousSlide": "Previous slide",
+            "nextSlide": "Next slide",
+            "reviews": "reviews",
+            "view": "View"
+        }
+    },
     "DefaultOfferDisplay": {
         "departureFlight": "Departure Flight",
         "returnFlight": "Return Flight",

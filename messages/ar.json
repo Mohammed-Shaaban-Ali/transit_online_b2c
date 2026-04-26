@@ -630,6 +630,77 @@
         "backToHome": "العودة للرئيسية",
         "searchMore": "البحث عن رحلات أخرى"
     },
+    "FlightBookingSuccessPage": {
+        "totalAmount": "المبلغ الإجمالي",
+        "bookingTotal": "إجمالي الحجز",
+        "paymentMethodNote": "يرجى ملاحظة أنه لا يمكن تغيير طريقة الدفع بعد اكتمال العملية",
+        "adults": "البالغون",
+        "ticketFare": "سعر التذكرة",
+        "taxesAndFees": "الضرائب والرسوم",
+        "promoCode": "كود الخصم"
+    },
+    "BookingDetails": {
+        "Payment": {
+            "successfulPayment": "الدفع ناجح",
+            "failedPayment": "الدفع فشل",
+            "paymentCompleted": "تم إكمال الدفع بنجاح",
+            "paymentNotCompleted": "لم يتم إكمال الدفع",
+            "successDescription": "تم تأكيد حجزك الآن وتم إصدار التذكرة الإلكترونية.",
+            "failureDescription": "تعذر إكمال حجزك. يرجى المحاولة مرة أخرى."
+        },
+        "FlightDetails": {
+            "title": "تفاصيل الرحلة",
+            "cancellationAndChangePolicies": "سياسات الإلغاء والتغيير",
+            "baggageAllowance": "سماح الأمتعة",
+            "bookingInfo": "معلومات الحجز",
+            "allTimesLocal": "جميع الأوقات بالتوقيت المحلي",
+            "stopLayover": "توقف / انتظار",
+            "notAvailable": "غير متاح"
+        },
+        "AddOns": {
+            "title": "الإضافات",
+            "promoCode": "كود الخصم"
+        },
+        "PassengerInformation": {
+            "title": "معلومات المسافرين",
+            "firstName": "الاسم الأول",
+            "lastName": "اسم العائلة",
+            "idType": "نوع الهوية",
+            "passport": "جواز السفر",
+            "idNumber": "رقم الهوية",
+            "nationality": "الجنسية (الدولة/المنطقة)",
+            "gender": "الجنس",
+            "dateOfBirth": "تاريخ الميلاد",
+            "male": "ذكر",
+            "female": "أنثى",
+            "adult": "بالغ",
+            "child": "طفل",
+            "infant": "رضيع",
+            "notAvailable": "غير متاح",
+            "fallbackDob": "٧ فبراير ٢٠٠٣"
+        },
+        "ContactInformation": {
+            "title": "معلومات التواصل",
+            "email": "البريد الإلكتروني",
+            "phone": "الهاتف"
+        },
+        "CustomerSupport": {
+            "title": "دعم العملاء",
+            "supportIn30s": "دعم خلال حوالي 30 ثانية",
+            "questionPendingPayment": "كيف أكمل دفعة معلقة؟",
+            "questionPaymentCompleted": "هل اكتملت عملية الدفع بنجاح؟",
+            "questionCreditCardIssue": "لماذا لم أستطع الدفع ببطاقة الائتمان؟",
+            "questionOtherHelp": "الحصول على مساعدة في أمر آخر"
+        },
+        "FeaturedProperties": {
+            "title": "عقارات مميزة في دبي",
+            "showMore": "عرض المزيد",
+            "previousSlide": "الشريحة السابقة",
+            "nextSlide": "الشريحة التالية",
+            "reviews": "تقييم",
+            "view": "عرض"
+        }
+    },
     "DefaultOfferDisplay": {
         "departureFlight": "رحلة الذهاب",
         "returnFlight": "رحلة العودة",

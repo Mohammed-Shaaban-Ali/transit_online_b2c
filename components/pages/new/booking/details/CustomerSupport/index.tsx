@@ -1,38 +1,42 @@
 import Image from "next/image";
 import React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import supportIllustration from "@/public/images/Customer support.png";
 
 type Props = {};
 
 function CustomerSupport({}: Props) {
+  const t = useTranslations("BookingDetails.CustomerSupport");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
   const supportQuestions = [
-    "How do I complete a pending payment?",
-    "Was my payment completed successfully?",
-    "Why couldn't I pay with my credit card?",
-    "Get help with something else",
+    t("questionPendingPayment"),
+    t("questionPaymentCompleted"),
+    t("questionCreditCardIssue"),
+    t("questionOtherHelp"),
   ];
 
   return (
     <section className="rounded bg-white px-6 py-8">
       <div className="flex items-center justify-between gap-4">
         <div className="space-y-2">
-          <h3 className="text-24 font-bold leading-none ">Customer support</h3>
+          <h3 className="text-24 font-bold leading-none ">{t("title")}</h3>
 
           <div className="flex items-center gap-2 text-15 text-gray-500 font-normal leading-tight ">
             <span className="inline-flex h-5 w-5 ">
               <img
                 src="https://ak-d.tripcdn.com/images/0AS5f120008whj34f2145.png"
-                alt="Support in approx. 30s"
+                alt={t("supportIn30s")}
                 className="h-5 w-5 object-contain"
               />{" "}
             </span>
-            <p>Support in approx. 30s</p>
+            <p>{t("supportIn30s")}</p>
           </div>
         </div>
 
         <Image
           src={supportIllustration}
-          alt="Customer support"
+          alt={t("title")}
           width={88}
           height={72}
           className="h-[72px] w-[88px] object-contain"
@@ -52,7 +56,7 @@ function CustomerSupport({}: Props) {
 
             <span className="text-gray-900 transition-colors duration-200 group-hover:text-primary">
               <svg
-                className="h-4 w-4 group-hover:hidden"
+                className={`h-4 w-4 group-hover:hidden ${isRtl ? "rotate-180" : ""}`}
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

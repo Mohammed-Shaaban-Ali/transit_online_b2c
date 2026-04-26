@@ -1,5 +1,6 @@
 import React from "react";
 import { AlertTriangle, CheckCircle2, Download, FileText } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Props = {
   status?: "success" | "failed";
@@ -14,13 +15,14 @@ function Payment({
   currency = "US$",
   failureReason,
 }: Props) {
+  const t = useTranslations("BookingDetails.Payment");
   const isSuccess = status === "success";
   const formattedAmount = `${currency}${Number(totalAmount || 0).toFixed(2)}`;
 
   return (
     <section className="space-y-6 bg-white px-6 py-8 rounded">
       <h3 className="text-24 font-bold leading-none ">
-        {isSuccess ? "Successful Payment" : "Failed Payment"}
+        {isSuccess ? t("successfulPayment") : t("failedPayment")}
       </h3>
 
       <div
@@ -36,14 +38,14 @@ function Payment({
             <div className="space-y-2">
               <p className="text-18 font-bold leading-none text-[#0e1a2f]">
                 {isSuccess
-                  ? "Payment completed successfully"
-                  : "Payment was not completed"}
+                  ? t("paymentCompleted")
+                  : t("paymentNotCompleted")}
               </p>
               <p className="text-14 font-normal leading-tight text-gray-500">
                 {isSuccess
-                  ? "Your booking is now confirmed and your e-ticket has been issued."
+                  ? t("successDescription")
                   : failureReason ||
-                    "Your booking could not be completed. Please try again."}
+                    t("failureDescription")}
               </p>
             </div>
           </div>

@@ -158,19 +158,18 @@ const hotels = [
 
 function FeaturedProperties({}: Props) {
   const locale = useLocale();
+  const t = useTranslations("BookingDetails.FeaturedProperties");
   const isRtl = locale === "ar";
 
   return (
     <section className=" space-y-6 bg-white px-6 py-8 rounded">
       <div className="flex items-center justify-between gap-4">
-        <h2 className=" text-22 font-bold leading-none ">
-          Featured properties in Dubai
-        </h2>
+        <h2 className=" text-22 font-bold leading-none ">{t("title")}</h2>
         <Link
           href="/new/hotels"
           className="text-16 font-medium leading-none text-primary flex items-center gap-1 hover:underline"
         >
-          Show More <ChevronRight className="h-4 w-4" />
+          {t("showMore")} <ChevronRight className="h-4 w-4 rtl:rotate-180" />
         </Link>
       </div>
 
@@ -178,8 +177,14 @@ function FeaturedProperties({}: Props) {
         <button
           id="hotels-top-prev"
           type="button"
-          className={`${navButtonClass} hidden sm:flex sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2`}
-          aria-label="Previous slide"
+          className={`${navButtonClass}
+            
+            hidden sm:flex
+            
+            sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2
+            md:rtl:start-0 md:rtl:translate-x-1/2
+            `}
+          aria-label={t("previousSlide")}
         >
           <ChevronLeft
             className="h-5 w-5 rtl:rotate-180"
@@ -190,8 +195,15 @@ function FeaturedProperties({}: Props) {
         <button
           id="hotels-top-next"
           type="button"
-          className={`${navButtonClass} hidden sm:flex end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2`}
-          aria-label="Next slide"
+          className={`${navButtonClass}
+             hidden sm:flex
+             
+    
+              
+              end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2
+            md:rtl:end-0 md:rtl:-translate-x-1/2
+              `}
+          aria-label={t("nextSlide")}
         >
           <ChevronRight
             className="h-5 w-5 rtl:rotate-180"
@@ -247,7 +259,7 @@ function FeaturedProperties({}: Props) {
                       <span className="font-normal opacity-80">/10</span>
                     </span>
                     <span className="bg-white px-2.5 py-1 text-xs font-medium text-black/70">
-                      {hotel.reviews.toLocaleString()} reviews
+                      {hotel.reviews.toLocaleString()} {t("reviews")}
                     </span>
                   </div>
                 </div>
@@ -304,6 +316,7 @@ function FeaturedProperties({}: Props) {
                     className="mt-4 h-10 w-full rounded bg-primary text-16 font-semibold text-white transition-colors duration-200 hover:bg-primary/90"
                   >
                     View
+                    {t("view")}
                   </button>
                 </div>
               </article>

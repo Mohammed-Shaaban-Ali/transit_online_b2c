@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import AddOIns from "@/components/pages/new/booking/details/AddOIns";
 import ContactInformation from "@/components/pages/new/booking/details/ContactInformation";
 import FlightDetails from "@/components/pages/new/booking/details/FlightDetails";
@@ -17,6 +18,8 @@ const BOOKING_FORM_KEY = "FLIGHT_BOOKING_FORM_DATA";
 const BOOKING_PRICE_KEY = "FLIGHT_BOOKING_PRICE_DATA";
 
 export default function Page() {
+  const t = useTranslations("FlightBookingSuccessPage");
+  const locale = useLocale();
   const [flightData, setFlightData] = useState<FlightBookingData | null>(null);
   const [formData, setFormData] = useState<FlightBookingFormValues | null>(null);
   const [priceData, setPriceData] = useState<any>(null);
@@ -48,6 +51,18 @@ export default function Page() {
     if (!flightData) return 1;
     return Number(flightData.adults || 0) + Number(flightData.children || 0) + Number(flightData.infants || 0);
   }, [flightData]);
+
+  const bookingTimestamp = useMemo(
+    () =>
+      new Date().toLocaleString(locale === "ar" ? "ar-EG" : "en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
+    [locale],
+  );
 
   return (
     <section className="relative flex min-h-screen flex-col text-sm md:bg-primary md:text-base">
@@ -92,7 +107,7 @@ export default function Page() {
               <section className="rounded bg-white p-6">
                 <div className="flex items-center justify-between border-b border-dashed border-gray-300 pb-5">
                   <h3 className="text-22 font-bold leading-none ">
-                    Total Amount
+                    {t("totalAmount")}
                   </h3>
                   <p className="text-22 font-bold leading-none text-primary">
                     {currencySymbol}
@@ -103,7 +118,7 @@ export default function Page() {
                 <div className="space-y-2 pt-5">
                   <div className="flex items-center justify-between">
                     <h4 className="text-20 font-bold leading-none ">
-                      Booking total
+                      {t("bookingTotal")}
                     </h4>
                     <p className="text-20 font-bold leading-none ">
                       {currencySymbol}
@@ -112,23 +127,16 @@ export default function Page() {
                   </div>
 
                   <p className="text-14 font-normal leading-tight text-gray-500">
-                    {new Date().toLocaleString("en-US", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
+                    {bookingTimestamp}
                   </p>
 
                   <p className="text-12 font-normal leading-snug text-red-500">
-                    Please note that the payment method cannot be changed once
-                    the transaction has been completed
+                    {t("paymentMethodNote")}
                   </p>
 
                   <div className="space-y-3 bg-gray-100 p-4 mt-2 rounded text-gray-500 text-14">
                     <div className="flex items-center justify-between ">
-                      <span className="font-normal ">Adults</span>
+                      <span className="font-normal ">{t("adults")}</span>
                       <span className="font-medium ">
                         {currencySymbol}
                         {totalAmount.toFixed(2)} × {passengerCount}
@@ -136,7 +144,7 @@ export default function Page() {
                     </div>
 
                     <div className="flex items-center justify-between ">
-                      <span className="font-normal ">Ticket fare</span>
+                      <span className="font-normal ">{t("ticketFare")}</span>
                       <span className="font-medium ">
                         {currencySymbol}
                         {Math.max(totalAmount - Number(priceData?.total?.tax || 0), 0).toFixed(2)} × 1
@@ -144,7 +152,7 @@ export default function Page() {
                     </div>
 
                     <div className="flex items-center justify-between ">
-                      <span className="font-normal  ">Taxes & fees</span>
+                      <span className="font-normal  ">{t("taxesAndFees")}</span>
                       <span className="font-medium ">
                         {currencySymbol}
                         {Number(priceData?.total?.tax || 0).toFixed(2)} × 1
@@ -152,7 +160,7 @@ export default function Page() {
                     </div>
 
                     <div className="flex items-center justify-between ">
-                      <span className="font-normal ">Promo code</span>
+                      <span className="font-normal ">{t("promoCode")}</span>
                       <span className="font-medium ">
                         {currencySymbol}
                         {Number(priceData?.discount?.value || 0).toFixed(2)} × 1
