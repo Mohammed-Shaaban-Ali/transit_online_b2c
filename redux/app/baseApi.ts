@@ -7,6 +7,7 @@ import {
 import { toast } from "sonner";
 import { Locale } from "next-intl";
 import { refreshApiToken } from "@/utils/refreshApiToken";
+import { RootState } from "./store";
 
 const API_URL = process.env.NEXT_PUBLIC_APP_EFICTA || "";
 const API_URL2 = process.env.NEXT_PUBLIC_APP_AIRPORTS || "";
@@ -31,10 +32,14 @@ export interface SuccessResponse<DataType = any> {
 const createBaseQuery = (baseUrl: string) =>
   fetchBaseQuery({
     baseUrl,
-    prepareHeaders: (headers) => {
+    prepareHeaders: (headers, { getState }) => {
       const apiToken = getCookie(API_TOKEN_COOKIE) as string;
       const language = (getCookie(NEXT_LOCALE) as Locale) || "en";
+      const token = (getState() as RootState).auth.token;
 
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
       // Set x-api-token header
       if (apiToken) {
         headers.set("x-api-token", apiToken);

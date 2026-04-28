@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { baseApi, baseApi2 } from "./baseApi";
 import hotelFilterSlice from "../features/hotels/hotelFilterSlice";
 import flightFilterSlice from "../features/flights/flightFilterSlice";
+import authSlice from "../features/auth/authSlice";
 
 export const store = configureStore({
   reducer: {
@@ -9,6 +10,7 @@ export const store = configureStore({
     [baseApi2.reducerPath]: baseApi2.reducer,
     hotelFilter: hotelFilterSlice.reducer,
     flightFilter: flightFilterSlice.reducer,
+    auth: authSlice.reducer,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware().concat(baseApi.middleware, baseApi2.middleware);

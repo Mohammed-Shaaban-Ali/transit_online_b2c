@@ -5,10 +5,18 @@ import { useRouter } from "@/i18n/navigation";
 import { FlightDirection } from "@/types/flightTypes";
 import { FaPlane } from "react-icons/fa";
 import { Loader2 } from "lucide-react";
+import { getCookie } from "cookies-next";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { FLIGHT_BOOKING_KEY } from "@/constants";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import FlightItineraryRow from "@/components/pages/flights-test/showfarefirst/FlightCard/FlightItineraryRow";
 import PriceDetailsCard from "./PriceDetailsCard";
 import FlightBookingForm, {
@@ -56,6 +64,8 @@ const FlightBookingPage = () => {
     null,
   );
   const [isVerifyingPayment, setIsVerifyingPayment] = useState(false);
+  const [isLoginRequiredDialogOpen, setIsLoginRequiredDialogOpen] =
+    useState(false);
   const [activeBookingId, setActiveBookingId] = useState<string | null>(null);
   const isVerifyingPaymentRef = useRef(false);
   const [calculatePrice, calculatePriceState] =
@@ -216,6 +226,11 @@ const FlightBookingPage = () => {
 
   const handleBookingSubmit = async (data: FlightBookingFormValues) => {
     if (!flightData) return;
+    const authToken = getCookie("auth-token");
+    if (!authToken) {
+      setIsLoginRequiredDialogOpen(true);
+      return;
+    }
 
     const nameParts = data.fullName.trim().split(/\s+/).filter(Boolean);
     if (nameParts.length < 2) {
@@ -398,6 +413,41 @@ const FlightBookingPage = () => {
           </div>
         </div>
       </div>
+      <Dialog
+        open={isLoginRequiredDialogOpen}
+        onOpenChange={setIsLoginRequiredDialogOpen}
+      >
+        <DialogContent className="max-w-md rounded-2xl p-6">
+          <DialogHeader className="space-y-2 text-center">
+            <DialogTitle className="text-2xl font-bold text-slate-900">
+              Login Required
+            </DialogTitle>
+            <DialogDescription className="text-sm text-slate-600">
+              You need to login first before proceeding to payment.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="mt-4 flex-col gap-3 sm:flex-col sm:justify-stretch">
+            <Button
+              type="button"
+              className="h-11 w-full"
+              onClick={() => {
+                const returnTo = `${window.location.pathname}${window.location.search}`;
+                router.push(`/new/login?returnTo=${encodeURIComponent(returnTo)}`);
+              }}
+            >
+              Go to Login
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              className="h-11 w-full"
+              onClick={() => setIsLoginRequiredDialogOpen(false)}
+            >
+              Cancel
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <Dialog
         open={isPaymentDialogOpen}
         onOpenChange={(open) => {

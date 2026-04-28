@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -34,6 +34,8 @@ export interface FlightBookingFormValues {
   phone: string;
   passengers: FlightPassengerData[];
 }
+
+const FLIGHT_BOOKING_FORM_DRAFT_KEY = "FLIGHT_BOOKING_FORM_DRAFT";
 
 interface FlightBookingFormProps {
   adults: number;
@@ -224,6 +226,60 @@ export default function FlightBookingForm({
   });
 
   const { handleSubmit } = form;
+
+  useEffect(() => {
+    try {
+      const rawDraft = sessionStorage.getItem(FLIGHT_BOOKING_FORM_DRAFT_KEY);
+      if (!rawDraft) return;
+
+      const parsedDraft = JSON.parse(rawDraft) as Partial<FlightBookingFormValues>;
+      const draftPassengers = Array.isArray(parsedDraft.passengers)
+        ? parsedDraft.passengers
+        : [];
+
+      const mergedPassengers = defaultPassengers.map((defaultPassenger, index) => {
+        const draftPassenger = draftPassengers[index];
+        if (!draftPassenger || typeof draftPassenger !== "object") {
+          return defaultPassenger;
+        }
+
+        return {
+          ...defaultPassenger,
+          ...draftPassenger,
+          type: defaultPassenger.type,
+        };
+      });
+
+      form.reset({
+        fullName: parsedDraft.fullName || "",
+        email: parsedDraft.email || "",
+        phone: parsedDraft.phone || "",
+        passengers: mergedPassengers,
+      });
+    } catch (error) {
+      console.error("Failed to restore flight booking form draft:", error);
+    }
+  }, [defaultPassengers, form]);
+
+  useEffect(() => {
+    const subscription = form.watch((values) => {
+      try {
+        sessionStorage.setItem(
+          FLIGHT_BOOKING_FORM_DRAFT_KEY,
+          JSON.stringify({
+            fullName: values.fullName || "",
+            email: values.email || "",
+            phone: values.phone || "",
+            passengers: values.passengers || [],
+          }),
+        );
+      } catch (error) {
+        console.error("Failed to persist flight booking form draft:", error);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [form]);
 
   return (
     <form
