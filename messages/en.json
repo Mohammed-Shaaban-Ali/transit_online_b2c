@@ -1534,7 +1534,44 @@
             "listProperty": "List your property",
             "customerSupport": "Customer support",
             "findBookings": "Find bookings",
-            "signInRegister": "Sign in / Register"
+            "signInRegister": "Sign in / Register",
+            "profile": "Profile",
+            "myBooking": "My booking",
+            "logout": "Logout"
+        },
+        "login": {
+            "welcome": "Welcome",
+            "subtitle": {
+                "identifier": "Login with your email or phone number",
+                "otp": "Enter the 4-digit OTP sent to your email or phone"
+            },
+            "fields": {
+                "identifier": {
+                    "label": "Email or Phone Number"
+                },
+                "otp": {
+                    "label": "OTP Code"
+                }
+            },
+            "validation": {
+                "identifierRequired": "Email or phone number is required",
+                "identifierInvalid": "Please enter a valid email or phone number",
+                "otpRequired": "OTP is required",
+                "otpInvalid": "OTP must be exactly 4 digits"
+            },
+            "errors": {
+                "failedToSendOtp": "Failed to send OTP",
+                "invalidOtp": "Invalid OTP, please try again"
+            },
+            "actions": {
+                "changeIdentifier": "Change email/phone number",
+                "sendingOtp": "SENDING OTP...",
+                "sendOtp": "SEND OTP",
+                "verifying": "VERIFYING...",
+                "verifyOtp": "VERIFY OTP"
+            },
+            "or": "OR",
+            "socialLoginAlt": "login"
         },
         "home": {
             "hero": {

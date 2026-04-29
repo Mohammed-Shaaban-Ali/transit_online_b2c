@@ -171,6 +171,9 @@
   .text-24 {
     @apply text-[23px] sm:text-[25px] lg:text-[28px];
   }
+  .text-28 {
+    @apply text-[20px] sm:text-[24px] lg:text-[28px];
+  }
   .text-32 {
     @apply text-[25px] sm:text-[29px] lg:text-[32px];
   }

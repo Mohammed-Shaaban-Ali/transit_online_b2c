@@ -6,7 +6,7 @@ import LocaleSwitcher from "../LocaleSwitcher";
 import logo from "@/public/transit_logos/transit_logo_q.png";
 import { Link } from "@/i18n/navigation";
 
-const NewNavbar = () => {
+const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
   const t = useTranslations("Components.Navbar");
   const pathname = usePathname();
 
@@ -36,8 +36,10 @@ const NewNavbar = () => {
   }
   const pathNameWithoutLocale = normalizePathname(pathname);
   const isBlack =
-    pathNameWithoutLocale.includes("hotels") &&
-    pathNameWithoutLocale.includes("details");
+    isBgWhite ||
+    pathNameWithoutLocale.includes("hotels") ||
+    pathNameWithoutLocale.includes("details") ||
+    pathNameWithoutLocale.includes("my-booking");
 
   const linkClassDesktop = (isActive: boolean, isBlack: boolean) =>
     `relative text-[18px] font-medium pb-1 transition-colors duration-300
@@ -62,6 +64,7 @@ const NewNavbar = () => {
         flex flex-col gap-1 sm:gap-4 md:flex-row md:items-center md:justify-between md:gap-2 md:py-8
         min-h-0 md:min-h-16 md:h-16
         max-w-[95%] sm:max-w-[1450px] mx-auto
+        ${isBgWhite ? "bg-white border-b border-gray-200 rounded-none" : ""}
       `}
     >
       <div className="flex w-full items-center justify-between gap-3 md:flex-1 md:min-w-0">

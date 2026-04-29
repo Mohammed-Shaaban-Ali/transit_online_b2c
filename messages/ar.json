@@ -1534,7 +1534,44 @@
             "listProperty": "أضف عقارك",
             "customerSupport": "دعم العملاء",
             "findBookings": "البحث عن الحجوزات",
-            "signInRegister": "تسجيل الدخول / إنشاء حساب"
+            "signInRegister": "تسجيل الدخول / إنشاء حساب",
+            "profile": "الملف الشخصي",
+            "myBooking": "حجوزاتي",
+            "logout": "تسجيل الخروج"
+        },
+        "login": {
+            "welcome": "مرحبًا",
+            "subtitle": {
+                "identifier": "سجّل الدخول باستخدام البريد الإلكتروني أو رقم الهاتف",
+                "otp": "أدخل رمز OTP المكوّن من 4 أرقام المرسل إلى بريدك أو هاتفك"
+            },
+            "fields": {
+                "identifier": {
+                    "label": "البريد الإلكتروني أو رقم الهاتف"
+                },
+                "otp": {
+                    "label": "رمز OTP"
+                }
+            },
+            "validation": {
+                "identifierRequired": "البريد الإلكتروني أو رقم الهاتف مطلوب",
+                "identifierInvalid": "يرجى إدخال بريد إلكتروني أو رقم هاتف صالح",
+                "otpRequired": "رمز OTP مطلوب",
+                "otpInvalid": "يجب أن يتكوّن رمز OTP من 4 أرقام بالضبط"
+            },
+            "errors": {
+                "failedToSendOtp": "فشل إرسال رمز OTP",
+                "invalidOtp": "رمز OTP غير صحيح، حاول مرة أخرى"
+            },
+            "actions": {
+                "changeIdentifier": "تغيير البريد الإلكتروني/رقم الهاتف",
+                "sendingOtp": "جارٍ إرسال رمز OTP...",
+                "sendOtp": "إرسال رمز OTP",
+                "verifying": "جارٍ التحقق...",
+                "verifyOtp": "تأكيد رمز OTP"
+            },
+            "or": "أو",
+            "socialLoginAlt": "تسجيل الدخول"
         },
         "home": {
             "hero": {

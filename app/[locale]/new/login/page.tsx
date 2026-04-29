@@ -6,6 +6,7 @@ import { getCookie } from "cookies-next";
 import { useForm } from "react-hook-form";
 import { Mail } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
 import loginImage1 from "@/public/images/login/login.png";
 import loginImage2 from "@/public/images/login/login2.png";
@@ -25,6 +26,7 @@ interface LoginFormValues {
 }
 
 export default function LoginPage() {
+  const t = useTranslations("NewPage.login");
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
@@ -77,7 +79,7 @@ export default function LoginPage() {
       setStep("otp");
       setValue("otp", "");
     } catch (error: any) {
-      setServerError(error?.data?.message || "Failed to send OTP");
+      setServerError(error?.data?.message || t("errors.failedToSendOtp"));
     }
   };
 
@@ -93,7 +95,7 @@ export default function LoginPage() {
       }).unwrap();
       router.replace(redirectAfterLogin);
     } catch (error: any) {
-      setServerError(error?.data?.message || "Invalid OTP, please try again");
+      setServerError(error?.data?.message || t("errors.invalidOtp"));
     }
   };
 
@@ -126,12 +128,12 @@ export default function LoginPage() {
 
           <div className="relative z-10 w-full max-w-[460px] pb-16 pt-8">
             <h1 className="text-center text-5xl font-extrabold text-primary">
-              Welcome
+              {t("welcome")}
             </h1>
             <p className="mt-1 text-center text-base font-medium text-gray-400">
               {step === "identifier"
-                ? "Login with your email or phone number"
-                : "Enter the 4-digit OTP sent to your email or phone"}
+                ? t("subtitle.identifier")
+                : t("subtitle.otp")}
             </p>
 
             <form
@@ -143,10 +145,10 @@ export default function LoginPage() {
               {step === "identifier" ? (
                 <FloatingLabelInput
                   id="identifier"
-                  label="Email or Phone Number"
+                  label={t("fields.identifier.label")}
                   autoComplete="username"
                   register={register("identifier", {
-                    required: "Email or phone number is required",
+                    required: t("validation.identifierRequired"),
                     validate: (value) => {
                       const normalizedValue = value.trim();
                       const emailRegex = /^\S+@\S+\.\S+$/;
@@ -155,7 +157,7 @@ export default function LoginPage() {
                       return (
                         emailRegex.test(normalizedValue) ||
                         phoneRegex.test(normalizedValue) ||
-                        "Please enter a valid email or phone number"
+                        t("validation.identifierInvalid")
                       );
                     },
                   })}
@@ -169,13 +171,13 @@ export default function LoginPage() {
               ) : (
                 <FloatingLabelInput
                   id="otp"
-                  label="OTP Code"
+                  label={t("fields.otp.label")}
                   autoComplete="one-time-code"
                   register={register("otp", {
-                    required: "OTP is required",
+                    required: t("validation.otpRequired"),
                     pattern: {
                       value: /^\d{4}$/,
-                      message: "OTP must be exactly 4 digits",
+                      message: t("validation.otpInvalid"),
                     },
                   })}
                   watchValue={watch("otp")}
@@ -198,7 +200,7 @@ export default function LoginPage() {
                   onClick={() => setStep("identifier")}
                   className="-mt-4 text-center text-sm font-medium text-primary hover:underline"
                 >
-                  Change email/phone number
+                  {t("actions.changeIdentifier")}
                 </button>
               ) : null}
 
@@ -209,17 +211,19 @@ export default function LoginPage() {
               >
                 {step === "identifier"
                   ? isLoading
-                    ? "SENDING OTP..."
-                    : "SEND OTP"
+                    ? t("actions.sendingOtp")
+                    : t("actions.sendOtp")
                   : isVerifyingOtp
-                    ? "VERIFYING..."
-                    : "VERIFY OTP"}
+                    ? t("actions.verifying")
+                    : t("actions.verifyOtp")}
               </Button>
             </form>
 
             <div className="mt-8 flex items-center gap-4">
               <span className="h-px flex-1 bg-gray-200" />
-              <span className="text-base font-medium text-gray-500">OR</span>
+              <span className="text-base font-medium text-gray-500">
+                {t("or")}
+              </span>
               <span className="h-px flex-1 bg-gray-200" />
             </div>
 
@@ -232,7 +236,7 @@ export default function LoginPage() {
                 >
                   <Image
                     src={image}
-                    alt="login"
+                    alt={t("socialLoginAlt")}
                     width={500}
                     height={500}
                     className="object-cover max-w-8"
