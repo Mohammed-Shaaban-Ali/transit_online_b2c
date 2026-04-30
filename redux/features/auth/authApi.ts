@@ -1,4 +1,4 @@
-import { baseApi2, SuccessResponse } from "@/redux/app/baseApi";
+import { baseApi, baseApi2, SuccessResponse } from "@/redux/app/baseApi";
 import { setAuthData, type AuthUser } from "@/redux/features/auth/authSlice";
 
 interface VerifyOtpResponse {
@@ -13,25 +13,27 @@ interface VerifyOtpResponse {
 
 const authApi = baseApi2.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation<SuccessResponse<any>, {
-      login: string;
-      type: "EMAIL" | "PHONE"
-    }>({
+    login: builder.mutation<
+      SuccessResponse<any>,
+      {
+        login: string;
+        type: "EMAIL" | "PHONE";
+      }
+    >({
       query: (body) => ({
         url: "/api/auth/login",
         method: "POST",
         body,
       }),
-
     }),
 
     sendOtp: builder.mutation<
       VerifyOtpResponse,
       {
-      field: string;
-      otp: string;
-      type: "EMAIL" | "PHONE"
-    }
+        field: string;
+        otp: string;
+        type: "EMAIL" | "PHONE";
+      }
     >({
       query: (body) => ({
         url: "/api/auth/verify-otp",
@@ -55,4 +57,17 @@ const authApi = baseApi2.injectEndpoints({
   }),
 });
 
+const authApi2 = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getMyBooking: builder.query<SuccessResponse<any>, void>({
+      query: () => ({
+        url: "/api/iati/bookings",
+        method: "GET",
+      }),
+    }),
+  }),
+});
+
 export const { useLoginMutation, useSendOtpMutation } = authApi;
+
+export const { useGetMyBookingQuery } = authApi2;

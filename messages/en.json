@@ -1711,5 +1711,52 @@
             "partial": "Partial",
             "refunded": "Refunded"
         }
+    },
+    "MyBooking": {
+        "title": "My Bookings",
+        "travelWorryFree": "Travel Worry-free Guarantee",
+        "cantFindBooking": "Can't find your booking?",
+        "tabs": {
+            "all": "All",
+            "awaitingPayment": "Awaiting Payment",
+            "upcoming": "Upcoming",
+            "awaitingReview": "Awaiting Review"
+        },
+        "member": "Member",
+        "loading": "Loading bookings...",
+        "noBookings": "You don't have any bookings or we can't access your bookings at this time.",
+        "searchBookings": "Search bookings",
+        "bookingNumber": "Booking No.",
+        "bookingDate": "Booking Date",
+        "passengers": "Passenger(s)",
+        "status": {
+            "ticketed": "Ticketed",
+            "pending": "Pending",
+            "cancelled": "Cancelled"
+        },
+        "sidebar": {
+            "myBookings": "My bookings",
+            "tabs": {
+                "all": "All",
+                "flights": "Flights",
+                "hotels": "Hotels",
+                "trains": "Trains",
+                "carRentals": "Car Rentals",
+                "airportTransfers": "Airport Transfers",
+                "attractionsTours": "Attractions & Tours",
+                "flightHotel": "Flight + Hotel",
+                "privateTours": "Private Tours",
+                "tourPackages": "Tour Packages"
+            },
+            "savedItems": {
+                "saved": "Saved",
+                "account": "Account",
+                "myPosts": "My Posts",
+                "priceAlerts": "Price Alerts",
+                "myCards": "My Cards",
+                "giftCards": "Gift Cards",
+                "promoCodes": "Promo Codes"
+            }
+        }
     }
 }

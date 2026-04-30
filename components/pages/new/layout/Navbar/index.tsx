@@ -159,7 +159,7 @@ function Navbar({}: Props) {
                 className="absolute end-0 mt-2 w-48 rounded-md border border-gray-200 bg-white p-1 shadow-lg"
               >
                 <Link
-                  href="/"
+                  href="/new/my-booking"
                   role="menuitem"
                   onClick={() => setIsProfileMenuOpen(false)}
                   className="flex w-full items-center gap-2 rounded px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"

@@ -1,34 +1,37 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-
-const bookingTabs = [
-  { label: "All", value: "all" },
-  { label: "Flights", value: "flights" },
-  { label: "Hotels", value: "hotels" },
-  { label: "Trains", value: "trains" },
-  { label: "Car Rentals", value: "car-rentals" },
-  { label: "Airport Transfers", value: "airport-transfers" },
-  { label: "Attractions & Tours", value: "attractions-tours" },
-  { label: "Flight + Hotel", value: "flight-hotel" },
-  { label: "Private Tours", value: "private-tours" },
-  { label: "Tour Packages", value: "tour-packages" },
-];
-
-const savedItems = [
-  "My posts",
-  "Price alerts",
-  "My cards",
-  "Gift cards",
-  "Promo codes",
-];
+import { useTranslations } from "next-intl";
 
 function MyBookingSidebar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("tab")?.toLowerCase() || "all";
+  const t = useTranslations("MyBooking.sidebar");
+
+  const bookingTabs = [
+    { label: t("tabs.all"), value: "all" },
+    { label: t("tabs.flights"), value: "flights" },
+    { label: t("tabs.hotels"), value: "hotels" },
+    { label: t("tabs.trains"), value: "trains" },
+    { label: t("tabs.carRentals"), value: "car-rentals" },
+    { label: t("tabs.airportTransfers"), value: "airport-transfers" },
+    { label: t("tabs.attractionsTours"), value: "attractions-tours" },
+    { label: t("tabs.flightHotel"), value: "flight-hotel" },
+    { label: t("tabs.privateTours"), value: "private-tours" },
+    { label: t("tabs.tourPackages"), value: "tour-packages" },
+  ];
+
+  const savedItems = [
+    { label: t("savedItems.saved"), key: "saved" },
+    { label: t("savedItems.account"), key: "account" },
+    { label: t("savedItems.myPosts"), key: "myPosts" },
+    { label: t("savedItems.priceAlerts"), key: "priceAlerts" },
+    { label: t("savedItems.myCards"), key: "myCards" },
+    { label: t("savedItems.giftCards"), key: "giftCards" },
+    { label: t("savedItems.promoCodes"), key: "promoCodes" },
+  ];
 
   const getTabClassName = (value: string) => {
     const isActive = activeTab === value;
@@ -47,11 +50,11 @@ function MyBookingSidebar() {
           type="button"
           className="inline-flex items-center gap-1.5 text-16  font-semibold leading-tight "
         >
-          My bookings
+          {t("myBookings")}
         </button>
       </div>
 
-      <nav aria-label="My bookings tabs" className="pb-2 space-y-1">
+      <nav aria-label={t("myBookings")} className="pb-2 space-y-1">
         {bookingTabs.map((item) => (
           <Link
             key={item.value}
@@ -64,17 +67,9 @@ function MyBookingSidebar() {
       </nav>
 
       <div className="p-6 pb-4 space-y-1 flex flex-col gap-4">
-        {[
-          { label: "Saved" },
-          { label: "Account" },
-          { label: "My Posts" },
-          { label: "Price Alerts" },
-          { label: "My Cards" },
-          { label: "Gift Cards" },
-          { label: "Promo Codes" },
-        ].map((item) => (
+        {savedItems.map((item) => (
           <button
-            key={item.label}
+            key={item.key}
             type="button"
             className="inline-flex items-center gap-1.5 text-16  font-semibold leading-tight "
           >

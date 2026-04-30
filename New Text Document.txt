@@ -1,0 +1,1756 @@
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1447,
+            "booking_number": "FS-1777215623229",
+            "booking_reference": "TEST57F15",
+            "status": "ticketed",
+            "finished": false,
+            "offer_details": {
+                "offers": [
+                    {
+                        "fares": [
+                            {
+                                "pax_type": "ADULT",
+                                "price_info": {
+                                    "tax": 446.33,
+                                    "base_fare": 292.56,
+                                    "supplement": 144.46,
+                                    "total_fare": 11338,
+                                    "service_fee": 0,
+                                    "agency_commission": 0
+                                },
+                                "currency_code": "SAR",
+                                "number_of_pax": 1,
+                                "baggage_allowances": [
+                                    {
+                                        "type": "KILO",
+                                        "amount": 0,
+                                        "carrier": "XY",
+                                        "class_code": "E",
+                                        "flight_number": "XY96",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "K",
+                                        "departure_airport": "MED"
+                                    },
+                                    {
+                                        "type": "KILO",
+                                        "amount": 0,
+                                        "carrier": "XY",
+                                        "class_code": "Q",
+                                        "flight_number": "XY15",
+                                        "arrival_airport": "JED",
+                                        "alternative_type": "K",
+                                        "departure_airport": "RUH"
+                                    }
+                                ],
+                                "cabin_baggage_allowances": [
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "E",
+                                        "flight_number": "XY96",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "P",
+                                        "departure_airport": "MED"
+                                    },
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "Q",
+                                        "flight_number": "XY15",
+                                        "arrival_airport": "JED",
+                                        "alternative_type": "P",
+                                        "departure_airport": "RUH"
+                                    }
+                                ]
+                            }
+                        ],
+                        "can_book": true,
+                        "fare_type": "ECONOMY",
+                        "meal_text": null,
+                        "offer_key": "eyJwcmljZUlkIjoiY2M1MGUzMjgtNjI4My00Y2VjLWFkMDctMzNlODE4MTJmNDg3Iiwib2ZmZXJOYW1lIjoieHkubGlnaCIsIm9mZmVyVHlwZSI6IkRFUEFSVFVSRV9GTElHSFRfT0ZGRVIiLCJzZWdtZW50TnVtYmVyIjoxfQ==",
+                        "offer_type": "DEPARTURE_FLIGHT_OFFER",
+                        "can_rezerve": false,
+                        "total_price": 11934.74,
+                        "exchangeable": null,
+                        "baggages_text": [
+                            "Unavailable",
+                            "Unavailable"
+                        ],
+                        "currency_code": "EGP",
+                        "default_offer": true,
+                        "offer_details": [
+                            {
+                                "name": "xy.ligh",
+                                "descriptions": [
+                                    "xy.ligh"
+                                ]
+                            }
+                        ],
+                        "non_refundable": false,
+                        "booking_classes": [
+                            {
+                                "carrier": "XY",
+                                "class_code": "E",
+                                "flight_number": "XY96",
+                                "arrival_airport": "RUH",
+                                "departure_airport": "MED"
+                            },
+                            {
+                                "carrier": "XY",
+                                "class_code": "Q",
+                                "flight_number": "XY15",
+                                "arrival_airport": "JED",
+                                "departure_airport": "RUH"
+                            }
+                        ],
+                        "refundability_text": "Refundable with fees",
+                        "cabin_baggages_text": [
+                            "1 Bag (7 Kg)",
+                            "1 Bag (7 Kg)"
+                        ],
+                        "minimum_offer_price": 11338,
+                        "exchangeability_text": null
+                    },
+                    {
+                        "fares": [
+                            {
+                                "pax_type": "ADULT",
+                                "price_info": {
+                                    "tax": 446.33,
+                                    "base_fare": 302.7,
+                                    "supplement": 144.46,
+                                    "total_fare": 11468,
+                                    "service_fee": 0,
+                                    "agency_commission": 0
+                                },
+                                "currency_code": "SAR",
+                                "number_of_pax": 1,
+                                "baggage_allowances": [
+                                    {
+                                        "type": "KILO",
+                                        "amount": 0,
+                                        "carrier": "XY",
+                                        "class_code": "E",
+                                        "flight_number": "XY96",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "K",
+                                        "departure_airport": "MED"
+                                    },
+                                    {
+                                        "type": "KILO",
+                                        "amount": 0,
+                                        "carrier": "XY",
+                                        "class_code": "Q",
+                                        "flight_number": "XY15",
+                                        "arrival_airport": "JED",
+                                        "alternative_type": "K",
+                                        "departure_airport": "RUH"
+                                    }
+                                ],
+                                "cabin_baggage_allowances": [
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "E",
+                                        "flight_number": "XY96",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "P",
+                                        "departure_airport": "MED"
+                                    },
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "Q",
+                                        "flight_number": "XY15",
+                                        "arrival_airport": "JED",
+                                        "alternative_type": "P",
+                                        "departure_airport": "RUH"
+                                    }
+                                ]
+                            }
+                        ],
+                        "can_book": true,
+                        "fare_type": "ECONOMY",
+                        "meal_text": null,
+                        "offer_key": "eyJwcmljZUlkIjoiZTdiMWNiOTktNDhkNy00MTE5LTlkYjItMWIxZjhiZTdmYTI5Iiwib2ZmZXJOYW1lIjoieHkubGZseCIsIm9mZmVyVHlwZSI6IkRFUEFSVFVSRV9GTElHSFRfT0ZGRVIiLCJzZWdtZW50TnVtYmVyIjoxfQ==",
+                        "offer_type": "DEPARTURE_FLIGHT_OFFER",
+                        "can_rezerve": false,
+                        "total_price": 11468,
+                        "exchangeable": null,
+                        "baggages_text": [
+                            "Unavailable",
+                            "Unavailable"
+                        ],
+                        "currency_code": "EGP",
+                        "default_offer": false,
+                        "offer_details": [
+                            {
+                                "name": "xy.lflx",
+                                "descriptions": [
+                                    "xy.lflx"
+                                ]
+                            }
+                        ],
+                        "non_refundable": false,
+                        "booking_classes": [
+                            {
+                                "carrier": "XY",
+                                "class_code": "E",
+                                "flight_number": "XY96",
+                                "arrival_airport": "RUH",
+                                "departure_airport": "MED"
+                            },
+                            {
+                                "carrier": "XY",
+                                "class_code": "Q",
+                                "flight_number": "XY15",
+                                "arrival_airport": "JED",
+                                "departure_airport": "RUH"
+                            }
+                        ],
+                        "refundability_text": "Refundable with fees",
+                        "cabin_baggages_text": [
+                            "1 Bag (7 Kg)",
+                            "1 Bag (7 Kg)"
+                        ],
+                        "minimum_offer_price": 11468,
+                        "exchangeability_text": null
+                    },
+                    {
+                        "fares": [
+                            {
+                                "pax_type": "ADULT",
+                                "price_info": {
+                                    "tax": 446.33,
+                                    "base_fare": 378.33,
+                                    "supplement": 144.46,
+                                    "total_fare": 12439,
+                                    "service_fee": 0,
+                                    "agency_commission": 0
+                                },
+                                "currency_code": "SAR",
+                                "number_of_pax": 1,
+                                "baggage_allowances": [
+                                    {
+                                        "type": "KILO",
+                                        "amount": 20,
+                                        "carrier": "XY",
+                                        "class_code": "E",
+                                        "flight_number": "XY96",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "K",
+                                        "departure_airport": "MED"
+                                    },
+                                    {
+                                        "type": "KILO",
+                                        "amount": 20,
+                                        "carrier": "XY",
+                                        "class_code": "Q",
+                                        "flight_number": "XY15",
+                                        "arrival_airport": "JED",
+                                        "alternative_type": "K",
+                                        "departure_airport": "RUH"
+                                    }
+                                ],
+                                "cabin_baggage_allowances": [
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "E",
+                                        "flight_number": "XY96",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "P",
+                                        "departure_airport": "MED"
+                                    },
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "Q",
+                                        "flight_number": "XY15",
+                                        "arrival_airport": "JED",
+                                        "alternative_type": "P",
+                                        "departure_airport": "RUH"
+                                    }
+                                ]
+                            }
+                        ],
+                        "can_book": true,
+                        "services": [
+                            {
+                                "offer_legs": [
+                                    {
+                                        "to": "RUH",
+                                        "from": "MED",
+                                        "arrival_time": "2026-05-01 19:25:00",
+                                        "flight_class": "E",
+                                        "flight_number": "XY96",
+                                        "departure_time": "2026-05-01 18:00:00",
+                                        "operator_airline_code": "XY",
+                                        "marketing_airline_code": "XY"
+                                    },
+                                    {
+                                        "to": "JED",
+                                        "from": "RUH",
+                                        "arrival_time": "2026-05-01 22:40:00",
+                                        "flight_class": "Q",
+                                        "flight_number": "XY15",
+                                        "departure_time": "2026-05-01 20:50:00",
+                                        "operator_airline_code": "XY",
+                                        "marketing_airline_code": "XY"
+                                    }
+                                ],
+                                "service_id": "checked.baggage.20K",
+                                "description": "checked.baggage.20K",
+                                "service_type": "Unknown",
+                                "supplier_code": "XY",
+                                "chargeable_type": "INCLUDED_IN_PRICE"
+                            }
+                        ],
+                        "fare_type": "ECONOMY",
+                        "meal_text": null,
+                        "offer_key": "eyJwcmljZUlkIjoiYjU0NTM0MWUtY2Y5Yy00ZWYyLWJhY2QtY2ZiMzVkNmMyYWE5Iiwib2ZmZXJOYW1lIjoieHkudmFsdSIsIm9mZmVyVHlwZSI6IkRFUEFSVFVSRV9GTElHSFRfT0ZGRVIiLCJzZWdtZW50TnVtYmVyIjoxfQ==",
+                        "offer_type": "DEPARTURE_FLIGHT_OFFER",
+                        "can_rezerve": false,
+                        "total_price": 12439,
+                        "exchangeable": null,
+                        "baggages_text": [
+                            "20 Kg",
+                            "20 Kg"
+                        ],
+                        "currency_code": "EGP",
+                        "default_offer": false,
+                        "offer_details": [
+                            {
+                                "name": "xy.valu",
+                                "descriptions": [
+                                    "xy.valu"
+                                ]
+                            }
+                        ],
+                        "non_refundable": false,
+                        "booking_classes": [
+                            {
+                                "carrier": "XY",
+                                "class_code": "E",
+                                "flight_number": "XY96",
+                                "arrival_airport": "RUH",
+                                "departure_airport": "MED"
+                            },
+                            {
+                                "carrier": "XY",
+                                "class_code": "Q",
+                                "flight_number": "XY15",
+                                "arrival_airport": "JED",
+                                "departure_airport": "RUH"
+                            }
+                        ],
+                        "refundability_text": "Refundable with fees",
+                        "cabin_baggages_text": [
+                            "1 Bag (7 Kg)",
+                            "1 Bag (7 Kg)"
+                        ],
+                        "minimum_offer_price": 12439,
+                        "exchangeability_text": null
+                    },
+                    {
+                        "fares": [
+                            {
+                                "pax_type": "ADULT",
+                                "price_info": {
+                                    "tax": 446.33,
+                                    "base_fare": 527.07,
+                                    "supplement": 144.46,
+                                    "total_fare": 14348,
+                                    "service_fee": 0,
+                                    "agency_commission": 0
+                                },
+                                "currency_code": "SAR",
+                                "number_of_pax": 1,
+                                "baggage_allowances": [
+                                    {
+                                        "type": "KILO",
+                                        "amount": 30,
+                                        "carrier": "XY",
+                                        "class_code": "E",
+                                        "flight_number": "XY96",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "K",
+                                        "departure_airport": "MED"
+                                    },
+                                    {
+                                        "type": "KILO",
+                                        "amount": 30,
+                                        "carrier": "XY",
+                                        "class_code": "Q",
+                                        "flight_number": "XY15",
+                                        "arrival_airport": "JED",
+                                        "alternative_type": "K",
+                                        "departure_airport": "RUH"
+                                    }
+                                ],
+                                "cabin_baggage_allowances": [
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "E",
+                                        "flight_number": "XY96",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "P",
+                                        "departure_airport": "MED"
+                                    },
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "Q",
+                                        "flight_number": "XY15",
+                                        "arrival_airport": "JED",
+                                        "alternative_type": "P",
+                                        "departure_airport": "RUH"
+                                    }
+                                ]
+                            }
+                        ],
+                        "can_book": true,
+                        "services": [
+                            {
+                                "offer_legs": [
+                                    {
+                                        "to": "RUH",
+                                        "from": "MED",
+                                        "arrival_time": "2026-05-01 19:25:00",
+                                        "flight_class": "E",
+                                        "flight_number": "XY96",
+                                        "departure_time": "2026-05-01 18:00:00",
+                                        "operator_airline_code": "XY",
+                                        "marketing_airline_code": "XY"
+                                    },
+                                    {
+                                        "to": "JED",
+                                        "from": "RUH",
+                                        "arrival_time": "2026-05-01 22:40:00",
+                                        "flight_class": "Q",
+                                        "flight_number": "XY15",
+                                        "departure_time": "2026-05-01 20:50:00",
+                                        "operator_airline_code": "XY",
+                                        "marketing_airline_code": "XY"
+                                    }
+                                ],
+                                "service_id": "checked.baggage.30K",
+                                "description": "checked.baggage.30K",
+                                "service_type": "Unknown",
+                                "supplier_code": "XY",
+                                "chargeable_type": "INCLUDED_IN_PRICE"
+                            }
+                        ],
+                        "fare_type": "ECONOMY",
+                        "meal_text": null,
+                        "offer_key": "eyJwcmljZUlkIjoiMmRiN2E5ODUtMGM5YS00NDNkLWE4NzUtMDJhOWFiY2FhMzQyIiwib2ZmZXJOYW1lIjoieHkucHVzZCIsIm9mZmVyVHlwZSI6IkRFUEFSVFVSRV9GTElHSFRfT0ZGRVIiLCJzZWdtZW50TnVtYmVyIjoxfQ==",
+                        "offer_type": "DEPARTURE_FLIGHT_OFFER",
+                        "can_rezerve": false,
+                        "total_price": 14348,
+                        "exchangeable": null,
+                        "baggages_text": [
+                            "30 Kg",
+                            "30 Kg"
+                        ],
+                        "currency_code": "EGP",
+                        "default_offer": false,
+                        "offer_details": [
+                            {
+                                "name": "xy.pusd",
+                                "descriptions": [
+                                    "xy.pusd"
+                                ]
+                            }
+                        ],
+                        "non_refundable": false,
+                        "booking_classes": [
+                            {
+                                "carrier": "XY",
+                                "class_code": "E",
+                                "flight_number": "XY96",
+                                "arrival_airport": "RUH",
+                                "departure_airport": "MED"
+                            },
+                            {
+                                "carrier": "XY",
+                                "class_code": "Q",
+                                "flight_number": "XY15",
+                                "arrival_airport": "JED",
+                                "departure_airport": "RUH"
+                            }
+                        ],
+                        "refundability_text": "Refundable with fees",
+                        "cabin_baggages_text": [
+                            "1 Bag (7 Kg)",
+                            "1 Bag (7 Kg)"
+                        ],
+                        "minimum_offer_price": 14348,
+                        "exchangeability_text": null
+                    }
+                ],
+                "office": {
+                    "office_id": 2369,
+                    "office_name": "Arab Jet"
+                },
+                "fare_detail": {
+                    "meal_text": null,
+                    "pax_fares": [
+                        {
+                            "pax_type": "ADULT",
+                            "price_info": {
+                                "tax": 446.33,
+                                "base_fare": 292.56,
+                                "supplement": 144.46,
+                                "total_fare": 883.35,
+                                "service_fee": 0,
+                                "agency_commission": 0
+                            },
+                            "currency_code": "SAR",
+                            "number_of_pax": 1,
+                            "baggage_allowances": [
+                                {
+                                    "type": "KILO",
+                                    "amount": 0,
+                                    "carrier": "XY",
+                                    "class_code": "E",
+                                    "flight_number": "XY96",
+                                    "arrival_airport": "RUH",
+                                    "alternative_type": "K",
+                                    "departure_airport": "MED"
+                                },
+                                {
+                                    "type": "KILO",
+                                    "amount": 0,
+                                    "carrier": "XY",
+                                    "class_code": "Q",
+                                    "flight_number": "XY15",
+                                    "arrival_airport": "JED",
+                                    "alternative_type": "K",
+                                    "departure_airport": "RUH"
+                                }
+                            ],
+                            "cabin_baggage_allowances": [
+                                {
+                                    "type": "PIECE",
+                                    "amount": 1,
+                                    "carrier": "XY",
+                                    "class_code": "E",
+                                    "flight_number": "XY96",
+                                    "arrival_airport": "RUH",
+                                    "alternative_type": "P",
+                                    "departure_airport": "MED"
+                                },
+                                {
+                                    "type": "PIECE",
+                                    "amount": 1,
+                                    "carrier": "XY",
+                                    "class_code": "Q",
+                                    "flight_number": "XY15",
+                                    "arrival_airport": "JED",
+                                    "alternative_type": "P",
+                                    "departure_airport": "RUH"
+                                }
+                            ]
+                        }
+                    ],
+                    "price_info": {
+                        "tax": 446.33,
+                        "base_fare": 292.56,
+                        "supplement": 144.46,
+                        "total_fare": 11338,
+                        "service_fee": 0,
+                        "agency_commission": 0
+                    },
+                    "exchangeable": null,
+                    "baggages_text": [
+                        "Unavailable",
+                        "Unavailable"
+                    ],
+                    "currency_code": "EGP",
+                    "non_refundable": null,
+                    "refundability_text": null,
+                    "cabin_baggages_text": [
+                        "1 Bag (7 Kg)",
+                        "1 Bag (7 Kg)"
+                    ],
+                    "exchangeability_text": null
+                },
+                "multiprovider": false,
+                "fare_detail_key": "eyJmYXJlS2V5IjoiUzo1MTlmMmVkZi01YzVlLTRiYjktODQ3OS1mZTI4NjZhOTBhNjc6M2EzZjMyOTgtN2QyMS00NDg5LTgyZWEtZDFiOTkzNDYzMTg4Om1vZndhbWdxIiwiZGVwYXJ0dXJlSXRpbmVyYXJ5SWQiOiJtOjNzaW86YTUwdTptb2Z3OTVreDpJVDowMjEwNjFNVE84SzRXMEQwOjNzMTUiLCJtdWx0aXByb3ZpZGVyIjpmYWxzZX0=",
+                "departure_flight": {
+                    "legs": [
+                        {
+                            "time_info": {
+                                "day_cross": false,
+                                "flight_time_hour": 3,
+                                "flight_time_minute": 15,
+                                "layover_time_in_minutes": 85,
+                                "leg_duration_time_minute": 85,
+                                "wait_time_in_minute_before_next_leg": 85
+                            },
+                            "airline_info": {
+                                "logo": "https://test.gita.sa/storage/airlines/logos/XY.jpg",
+                                "carrier_code": "XY",
+                                "carrier_name": "Flynas",
+                                "operator_code": "XY",
+                                "operator_name": "Flynas",
+                                "operating_airline_code": "XY"
+                            },
+                            "arrival_info": {
+                                "date": "2026-05-01 19:25:00",
+                                "city_name": "Riyadh",
+                                "terminal_no": "3",
+                                "airport_code": "RUH",
+                                "airport_name": "King Khaled International Airport"
+                            },
+                            "flight_number": "XY96",
+                            "cabin_baggages": [
+                                {
+                                    "type": "PIECE",
+                                    "amount": 1,
+                                    "class_code": "E",
+                                    "passenger_type": "ADULT",
+                                    "alternative_type": "P"
+                                }
+                            ],
+                            "departure_info": {
+                                "date": "2026-05-01 18:00:00",
+                                "city_name": "Madinah",
+                                "airport_code": "MED",
+                                "airport_name": "Mohammad Bin Abdulaziz Airport"
+                            }
+                        },
+                        {
+                            "time_info": {
+                                "day_cross": false,
+                                "flight_time_hour": 3,
+                                "flight_time_minute": 15,
+                                "layover_time_in_minutes": 85,
+                                "leg_duration_time_minute": 110,
+                                "wait_time_in_minute_before_next_leg": 0
+                            },
+                            "airline_info": {
+                                "logo": "https://test.gita.sa/storage/airlines/logos/XY.jpg",
+                                "carrier_code": "XY",
+                                "carrier_name": "Flynas",
+                                "operator_code": "XY",
+                                "operator_name": "Flynas",
+                                "operating_airline_code": "XY"
+                            },
+                            "arrival_info": {
+                                "date": "2026-05-01 22:40:00",
+                                "city_name": "Jeddah",
+                                "terminal_no": "1",
+                                "airport_code": "JED",
+                                "airport_name": "King Abdulaziz International Airport"
+                            },
+                            "flight_number": "XY15",
+                            "cabin_baggages": [
+                                {
+                                    "type": "PIECE",
+                                    "amount": 1,
+                                    "class_code": "Q",
+                                    "passenger_type": "ADULT",
+                                    "alternative_type": "P"
+                                }
+                            ],
+                            "departure_info": {
+                                "date": "2026-05-01 20:50:00",
+                                "city_name": "Riyadh",
+                                "terminal_no": "3",
+                                "airport_code": "RUH",
+                                "airport_name": "King Khaled International Airport"
+                            }
+                        }
+                    ],
+                    "fares": [
+                        {
+                            "fare_key": "eyJzZWFyY2hJZCI6IlM6NTE5ZjJlZGYtNWM1ZS00YmI5LTg0NzktZmUyODY2YTkwYTY3IiwiaXRpbmVyYXJ5SWQiOiJtOjNzaW86YTUwdTptb2Z3OTVreDpJVDowMjEwNjFNVE84SzRXMEQwOjNzMTUiLCJmYXJlVHlwZSI6IkJVU0lORVNTIiwic2VnbWVudHMiOlsiRSIsIlEiXX0=",
+                            "fare_info": {
+                                "free_seats": 9,
+                                "cabin_types": [
+                                    "ECONOMY",
+                                    "ECONOMY"
+                                ],
+                                "class_codes": [
+                                    "E",
+                                    "Q"
+                                ],
+                                "fare_detail": {
+                                    "pax_fares": [
+                                        {
+                                            "pax_type": "ADULT",
+                                            "price_info": {
+                                                "tax": 0,
+                                                "base_fare": 292.56,
+                                                "supplement": 590.79,
+                                                "total_fare": 883.35,
+                                                "service_fee": 0,
+                                                "agency_commission": 0
+                                            },
+                                            "currency_code": "SAR",
+                                            "number_of_pax": 1,
+                                            "cabin_baggage_allowances": [
+                                                {
+                                                    "type": "PIECE",
+                                                    "amount": 1,
+                                                    "carrier": "XY",
+                                                    "class_code": "E",
+                                                    "flight_number": "XY96",
+                                                    "arrival_airport": "RUH",
+                                                    "alternative_type": "P",
+                                                    "departure_airport": "MED"
+                                                },
+                                                {
+                                                    "type": "PIECE",
+                                                    "amount": 1,
+                                                    "carrier": "XY",
+                                                    "class_code": "Q",
+                                                    "flight_number": "XY15",
+                                                    "arrival_airport": "JED",
+                                                    "alternative_type": "P",
+                                                    "departure_airport": "RUH"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "price_info": {
+                                        "tax": 0,
+                                        "base_fare": 292.56,
+                                        "supplement": 590.79,
+                                        "total_fare": 11338,
+                                        "service_fee": 0,
+                                        "agency_commission": 0
+                                    },
+                                    "currency_code": "EGP"
+                                }
+                            }
+                        }
+                    ],
+                    "office": {
+                        "office_id": 2369,
+                        "office_name": "Arab Jet"
+                    },
+                    "points": 1680,
+                    "charter": false,
+                    "endpoint": "iati",
+                    "priority": 1,
+                    "book_type": "DIRECT",
+                    "package_info": {
+                        "packaged": false
+                    },
+                    "provider_key": "Charter",
+                    "baggages_text": "Unavailable",
+                    "cabin_baggages_text": "1 Bag (7 Kg)",
+                    "minimum_package_price": null,
+                    "minimum_package_points": null
+                },
+                "flight_informations": [
+                    {
+                        "provider_key": "FLYNAS AJ",
+                        "pnr_requirements": [
+                            "TC"
+                        ],
+                        "permitted_actions": [
+                            "REFUND"
+                        ]
+                    }
+                ],
+                "departure_selected_flights": [
+                    {
+                        "flight": {
+                            "to": "RUH",
+                            "from": "MED",
+                            "cabin_type": "ECONOMY",
+                            "class_code": "E",
+                            "arrival_time": "2026-05-01 19:25:00",
+                            "flight_number": "XY96",
+                            "departure_time": "2026-05-01 18:00:00",
+                            "operator_airline_code": "XY",
+                            "marketing_airline_code": "XY"
+                        }
+                    },
+                    {
+                        "flight": {
+                            "to": "JED",
+                            "from": "RUH",
+                            "cabin_type": "ECONOMY",
+                            "class_code": "Q",
+                            "arrival_time": "2026-05-01 22:40:00",
+                            "flight_number": "XY15",
+                            "departure_time": "2026-05-01 20:50:00",
+                            "operator_airline_code": "XY",
+                            "marketing_airline_code": "XY"
+                        }
+                    }
+                ]
+            },
+            "chosen_offer": {
+                "offer_name": "xy.ligh",
+                "baggages_text": [
+                    "Unavailable",
+                    "Unavailable"
+                ],
+                "cabin_baggages_text": [
+                    "1 Bag (7 Kg)",
+                    "1 Bag (7 Kg)"
+                ]
+            },
+            "fromLocation": "MED",
+            "toLocation": "JED",
+            "passengers": [
+                {
+                    "name": "Mohammed",
+                    "type": "ADULT",
+                    "gender": "MALE",
+                    "lastName": "Shaaban",
+                    "birthDate": "2008-04-02",
+                    "identityInfo": {
+                        "passport": {
+                            "no": "1221",
+                            "endDate": "2026-05-06",
+                            "citizenshipCountry": "EG"
+                        },
+                        "notTurkishCitizen": true,
+                        "notPakistanCitizen": true
+                    },
+                    "eticket": "4935980375770"
+                }
+            ],
+            "adult": 1,
+            "child": 0,
+            "infant": 0,
+            "departure": "2026-04-30T21:00:00.000Z",
+            "return_date": null,
+            "type": "OneWay",
+            "currency": "EGP",
+            "original_price": "11934.74",
+            "price": "11935.00",
+            "coupon_code": null,
+            "cabin_class": "ECONOMY",
+            "contact_info": {
+                "name": "Mohammed Shaab",
+                "email": "ms75007461@gmail.com",
+                "phone": "1096706570",
+                "country_code": "20"
+            },
+            "booking_data": {
+                "books": [
+                    {
+                        "pnr": "TEST57F15",
+                        "order_id": 30931050,
+                        "pax_list": [
+                            {
+                                "name": "MOHAMMED",
+                                "type": "ADULT",
+                                "gender": "MALE",
+                                "eticket": "4935980375770",
+                                "lastname": "SHAABAN",
+                                "birthdate": "2008-04-02",
+                                "identity_info": {
+                                    "passport": {
+                                        "no": "1221",
+                                        "end_date": "2026-05-06 03:00:00",
+                                        "citizenship_country": "EG"
+                                    },
+                                    "not_turkish_citizen": false,
+                                    "not_pakistan_citizen": false
+                                }
+                            }
+                        ],
+                        "book_status": "BOOKED"
+                    }
+                ]
+            },
+            "voucher": "https://test.gita.sa/api/flights-services/v1/public/voucher/FS-1777215623229"
+        },
+        {
+            "id": 1444,
+            "booking_number": "FS-1777117995514",
+            "booking_reference": "TESTDA9A5",
+            "status": "ticketed",
+            "finished": false,
+            "offer_details": {
+                "offers": [
+                    {
+                        "fares": [
+                            {
+                                "pax_type": "ADULT",
+                                "price_info": {
+                                    "tax": 446.33,
+                                    "base_fare": 359.73,
+                                    "supplement": 189.5,
+                                    "total_fare": 12778,
+                                    "service_fee": 0,
+                                    "agency_commission": 0
+                                },
+                                "currency_code": "SAR",
+                                "number_of_pax": 1,
+                                "baggage_allowances": [
+                                    {
+                                        "type": "KILO",
+                                        "amount": 0,
+                                        "carrier": "XY",
+                                        "class_code": "V",
+                                        "flight_number": "XY4",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "K",
+                                        "departure_airport": "JED"
+                                    },
+                                    {
+                                        "type": "KILO",
+                                        "amount": 0,
+                                        "carrier": "XY",
+                                        "class_code": "N",
+                                        "flight_number": "XY99",
+                                        "arrival_airport": "MED",
+                                        "alternative_type": "K",
+                                        "departure_airport": "RUH"
+                                    }
+                                ],
+                                "cabin_baggage_allowances": [
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "V",
+                                        "flight_number": "XY4",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "P",
+                                        "departure_airport": "JED"
+                                    },
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "N",
+                                        "flight_number": "XY99",
+                                        "arrival_airport": "MED",
+                                        "alternative_type": "P",
+                                        "departure_airport": "RUH"
+                                    }
+                                ]
+                            }
+                        ],
+                        "can_book": true,
+                        "fare_type": "ECONOMY",
+                        "meal_text": null,
+                        "offer_key": "eyJwcmljZUlkIjoiNzBhZTVhMWEtNzEzNi00MjYzLTgwNjctN2FjNGRiYzhmMGRiIiwib2ZmZXJOYW1lIjoieHkubGlnaCIsIm9mZmVyVHlwZSI6IkRFUEFSVFVSRV9GTElHSFRfT0ZGRVIiLCJzZWdtZW50TnVtYmVyIjoxfQ==",
+                        "offer_type": "DEPARTURE_FLIGHT_OFFER",
+                        "can_rezerve": false,
+                        "total_price": 13450.53,
+                        "exchangeable": null,
+                        "baggages_text": [
+                            "Unavailable",
+                            "Unavailable"
+                        ],
+                        "currency_code": "EGP",
+                        "default_offer": true,
+                        "offer_details": [
+                            {
+                                "name": "xy.ligh",
+                                "descriptions": [
+                                    "xy.ligh"
+                                ]
+                            }
+                        ],
+                        "non_refundable": false,
+                        "booking_classes": [
+                            {
+                                "carrier": "XY",
+                                "class_code": "V",
+                                "flight_number": "XY4",
+                                "arrival_airport": "RUH",
+                                "departure_airport": "JED"
+                            },
+                            {
+                                "carrier": "XY",
+                                "class_code": "N",
+                                "flight_number": "XY99",
+                                "arrival_airport": "MED",
+                                "departure_airport": "RUH"
+                            }
+                        ],
+                        "refundability_text": "Refundable with fees",
+                        "cabin_baggages_text": [
+                            "1 Bag (7 Kg)",
+                            "1 Bag (7 Kg)"
+                        ],
+                        "minimum_offer_price": 12778,
+                        "exchangeability_text": null
+                    },
+                    {
+                        "fares": [
+                            {
+                                "pax_type": "ADULT",
+                                "price_info": {
+                                    "tax": 446.33,
+                                    "base_fare": 369.88,
+                                    "supplement": 189.5,
+                                    "total_fare": 12908,
+                                    "service_fee": 0,
+                                    "agency_commission": 0
+                                },
+                                "currency_code": "SAR",
+                                "number_of_pax": 1,
+                                "baggage_allowances": [
+                                    {
+                                        "type": "KILO",
+                                        "amount": 0,
+                                        "carrier": "XY",
+                                        "class_code": "V",
+                                        "flight_number": "XY4",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "K",
+                                        "departure_airport": "JED"
+                                    },
+                                    {
+                                        "type": "KILO",
+                                        "amount": 0,
+                                        "carrier": "XY",
+                                        "class_code": "N",
+                                        "flight_number": "XY99",
+                                        "arrival_airport": "MED",
+                                        "alternative_type": "K",
+                                        "departure_airport": "RUH"
+                                    }
+                                ],
+                                "cabin_baggage_allowances": [
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "V",
+                                        "flight_number": "XY4",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "P",
+                                        "departure_airport": "JED"
+                                    },
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "N",
+                                        "flight_number": "XY99",
+                                        "arrival_airport": "MED",
+                                        "alternative_type": "P",
+                                        "departure_airport": "RUH"
+                                    }
+                                ]
+                            }
+                        ],
+                        "can_book": true,
+                        "fare_type": "ECONOMY",
+                        "meal_text": null,
+                        "offer_key": "eyJwcmljZUlkIjoiZDk5NWNjYjktYmJlOS00MzFiLWEwYjItOTA1MjlhYmJhZjI3Iiwib2ZmZXJOYW1lIjoieHkubGZseCIsIm9mZmVyVHlwZSI6IkRFUEFSVFVSRV9GTElHSFRfT0ZGRVIiLCJzZWdtZW50TnVtYmVyIjoxfQ==",
+                        "offer_type": "DEPARTURE_FLIGHT_OFFER",
+                        "can_rezerve": false,
+                        "total_price": 12908,
+                        "exchangeable": null,
+                        "baggages_text": [
+                            "Unavailable",
+                            "Unavailable"
+                        ],
+                        "currency_code": "EGP",
+                        "default_offer": false,
+                        "offer_details": [
+                            {
+                                "name": "xy.lflx",
+                                "descriptions": [
+                                    "xy.lflx"
+                                ]
+                            }
+                        ],
+                        "non_refundable": false,
+                        "booking_classes": [
+                            {
+                                "carrier": "XY",
+                                "class_code": "V",
+                                "flight_number": "XY4",
+                                "arrival_airport": "RUH",
+                                "departure_airport": "JED"
+                            },
+                            {
+                                "carrier": "XY",
+                                "class_code": "N",
+                                "flight_number": "XY99",
+                                "arrival_airport": "MED",
+                                "departure_airport": "RUH"
+                            }
+                        ],
+                        "refundability_text": "Refundable with fees",
+                        "cabin_baggages_text": [
+                            "1 Bag (7 Kg)",
+                            "1 Bag (7 Kg)"
+                        ],
+                        "minimum_offer_price": 12908,
+                        "exchangeability_text": null
+                    },
+                    {
+                        "fares": [
+                            {
+                                "pax_type": "ADULT",
+                                "price_info": {
+                                    "tax": 446.33,
+                                    "base_fare": 460.72,
+                                    "supplement": 189.5,
+                                    "total_fare": 14074,
+                                    "service_fee": 0,
+                                    "agency_commission": 0
+                                },
+                                "currency_code": "SAR",
+                                "number_of_pax": 1,
+                                "baggage_allowances": [
+                                    {
+                                        "type": "KILO",
+                                        "amount": 20,
+                                        "carrier": "XY",
+                                        "class_code": "V",
+                                        "flight_number": "XY4",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "K",
+                                        "departure_airport": "JED"
+                                    },
+                                    {
+                                        "type": "KILO",
+                                        "amount": 20,
+                                        "carrier": "XY",
+                                        "class_code": "N",
+                                        "flight_number": "XY99",
+                                        "arrival_airport": "MED",
+                                        "alternative_type": "K",
+                                        "departure_airport": "RUH"
+                                    }
+                                ],
+                                "cabin_baggage_allowances": [
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "V",
+                                        "flight_number": "XY4",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "P",
+                                        "departure_airport": "JED"
+                                    },
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "N",
+                                        "flight_number": "XY99",
+                                        "arrival_airport": "MED",
+                                        "alternative_type": "P",
+                                        "departure_airport": "RUH"
+                                    }
+                                ]
+                            }
+                        ],
+                        "can_book": true,
+                        "services": [
+                            {
+                                "offer_legs": [
+                                    {
+                                        "to": "RUH",
+                                        "from": "JED",
+                                        "arrival_time": "2026-05-01 09:50:00",
+                                        "flight_class": "V",
+                                        "flight_number": "XY4",
+                                        "departure_time": "2026-05-01 08:05:00",
+                                        "operator_airline_code": "XY",
+                                        "marketing_airline_code": "XY"
+                                    },
+                                    {
+                                        "to": "MED",
+                                        "from": "RUH",
+                                        "arrival_time": "2026-05-01 13:00:00",
+                                        "flight_class": "N",
+                                        "flight_number": "XY99",
+                                        "departure_time": "2026-05-01 11:30:00",
+                                        "operator_airline_code": "XY",
+                                        "marketing_airline_code": "XY"
+                                    }
+                                ],
+                                "service_id": "checked.baggage.20K",
+                                "description": "checked.baggage.20K",
+                                "service_type": "Unknown",
+                                "supplier_code": "XY",
+                                "chargeable_type": "INCLUDED_IN_PRICE"
+                            }
+                        ],
+                        "fare_type": "ECONOMY",
+                        "meal_text": null,
+                        "offer_key": "eyJwcmljZUlkIjoiMmZlYTFlNjctY2QxYy00MTY1LTkyNjgtZGUzMDU0ZDA2YWQyIiwib2ZmZXJOYW1lIjoieHkudmFsdSIsIm9mZmVyVHlwZSI6IkRFUEFSVFVSRV9GTElHSFRfT0ZGRVIiLCJzZWdtZW50TnVtYmVyIjoxfQ==",
+                        "offer_type": "DEPARTURE_FLIGHT_OFFER",
+                        "can_rezerve": false,
+                        "total_price": 14074,
+                        "exchangeable": null,
+                        "baggages_text": [
+                            "20 Kg",
+                            "20 Kg"
+                        ],
+                        "currency_code": "EGP",
+                        "default_offer": false,
+                        "offer_details": [
+                            {
+                                "name": "xy.valu",
+                                "descriptions": [
+                                    "xy.valu"
+                                ]
+                            }
+                        ],
+                        "non_refundable": false,
+                        "booking_classes": [
+                            {
+                                "carrier": "XY",
+                                "class_code": "V",
+                                "flight_number": "XY4",
+                                "arrival_airport": "RUH",
+                                "departure_airport": "JED"
+                            },
+                            {
+                                "carrier": "XY",
+                                "class_code": "N",
+                                "flight_number": "XY99",
+                                "arrival_airport": "MED",
+                                "departure_airport": "RUH"
+                            }
+                        ],
+                        "refundability_text": "Refundable with fees",
+                        "cabin_baggages_text": [
+                            "1 Bag (7 Kg)",
+                            "1 Bag (7 Kg)"
+                        ],
+                        "minimum_offer_price": 14074,
+                        "exchangeability_text": null
+                    },
+                    {
+                        "fares": [
+                            {
+                                "pax_type": "ADULT",
+                                "price_info": {
+                                    "tax": 446.33,
+                                    "base_fare": 634.82,
+                                    "supplement": 189.5,
+                                    "total_fare": 16309,
+                                    "service_fee": 0,
+                                    "agency_commission": 0
+                                },
+                                "currency_code": "SAR",
+                                "number_of_pax": 1,
+                                "baggage_allowances": [
+                                    {
+                                        "type": "KILO",
+                                        "amount": 30,
+                                        "carrier": "XY",
+                                        "class_code": "V",
+                                        "flight_number": "XY4",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "K",
+                                        "departure_airport": "JED"
+                                    },
+                                    {
+                                        "type": "KILO",
+                                        "amount": 30,
+                                        "carrier": "XY",
+                                        "class_code": "N",
+                                        "flight_number": "XY99",
+                                        "arrival_airport": "MED",
+                                        "alternative_type": "K",
+                                        "departure_airport": "RUH"
+                                    }
+                                ],
+                                "cabin_baggage_allowances": [
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "V",
+                                        "flight_number": "XY4",
+                                        "arrival_airport": "RUH",
+                                        "alternative_type": "P",
+                                        "departure_airport": "JED"
+                                    },
+                                    {
+                                        "type": "PIECE",
+                                        "amount": 1,
+                                        "carrier": "XY",
+                                        "class_code": "N",
+                                        "flight_number": "XY99",
+                                        "arrival_airport": "MED",
+                                        "alternative_type": "P",
+                                        "departure_airport": "RUH"
+                                    }
+                                ]
+                            }
+                        ],
+                        "can_book": true,
+                        "services": [
+                            {
+                                "offer_legs": [
+                                    {
+                                        "to": "RUH",
+                                        "from": "JED",
+                                        "arrival_time": "2026-05-01 09:50:00",
+                                        "flight_class": "V",
+                                        "flight_number": "XY4",
+                                        "departure_time": "2026-05-01 08:05:00",
+                                        "operator_airline_code": "XY",
+                                        "marketing_airline_code": "XY"
+                                    },
+                                    {
+                                        "to": "MED",
+                                        "from": "RUH",
+                                        "arrival_time": "2026-05-01 13:00:00",
+                                        "flight_class": "N",
+                                        "flight_number": "XY99",
+                                        "departure_time": "2026-05-01 11:30:00",
+                                        "operator_airline_code": "XY",
+                                        "marketing_airline_code": "XY"
+                                    }
+                                ],
+                                "service_id": "checked.baggage.30K",
+                                "description": "checked.baggage.30K",
+                                "service_type": "Unknown",
+                                "supplier_code": "XY",
+                                "chargeable_type": "INCLUDED_IN_PRICE"
+                            }
+                        ],
+                        "fare_type": "ECONOMY",
+                        "meal_text": null,
+                        "offer_key": "eyJwcmljZUlkIjoiNzZmNzAwYjEtNGUzOS00YzBkLWJjZGEtMmU5ZGU4MTRkNDc5Iiwib2ZmZXJOYW1lIjoieHkucHVzZCIsIm9mZmVyVHlwZSI6IkRFUEFSVFVSRV9GTElHSFRfT0ZGRVIiLCJzZWdtZW50TnVtYmVyIjoxfQ==",
+                        "offer_type": "DEPARTURE_FLIGHT_OFFER",
+                        "can_rezerve": false,
+                        "total_price": 16309,
+                        "exchangeable": null,
+                        "baggages_text": [
+                            "30 Kg",
+                            "30 Kg"
+                        ],
+                        "currency_code": "EGP",
+                        "default_offer": false,
+                        "offer_details": [
+                            {
+                                "name": "xy.pusd",
+                                "descriptions": [
+                                    "xy.pusd"
+                                ]
+                            }
+                        ],
+                        "non_refundable": false,
+                        "booking_classes": [
+                            {
+                                "carrier": "XY",
+                                "class_code": "V",
+                                "flight_number": "XY4",
+                                "arrival_airport": "RUH",
+                                "departure_airport": "JED"
+                            },
+                            {
+                                "carrier": "XY",
+                                "class_code": "N",
+                                "flight_number": "XY99",
+                                "arrival_airport": "MED",
+                                "departure_airport": "RUH"
+                            }
+                        ],
+                        "refundability_text": "Refundable with fees",
+                        "cabin_baggages_text": [
+                            "1 Bag (7 Kg)",
+                            "1 Bag (7 Kg)"
+                        ],
+                        "minimum_offer_price": 16309,
+                        "exchangeability_text": null
+                    }
+                ],
+                "office": {
+                    "office_id": 2369,
+                    "office_name": "Arab Jet"
+                },
+                "fare_detail": {
+                    "meal_text": null,
+                    "pax_fares": [
+                        {
+                            "pax_type": "ADULT",
+                            "price_info": {
+                                "tax": 446.33,
+                                "base_fare": 359.73,
+                                "supplement": 189.5,
+                                "total_fare": 995.57,
+                                "service_fee": 0,
+                                "agency_commission": 0
+                            },
+                            "currency_code": "SAR",
+                            "number_of_pax": 1,
+                            "baggage_allowances": [
+                                {
+                                    "type": "KILO",
+                                    "amount": 0,
+                                    "carrier": "XY",
+                                    "class_code": "V",
+                                    "flight_number": "XY4",
+                                    "arrival_airport": "RUH",
+                                    "alternative_type": "K",
+                                    "departure_airport": "JED"
+                                },
+                                {
+                                    "type": "KILO",
+                                    "amount": 0,
+                                    "carrier": "XY",
+                                    "class_code": "N",
+                                    "flight_number": "XY99",
+                                    "arrival_airport": "MED",
+                                    "alternative_type": "K",
+                                    "departure_airport": "RUH"
+                                }
+                            ],
+                            "cabin_baggage_allowances": [
+                                {
+                                    "type": "PIECE",
+                                    "amount": 1,
+                                    "carrier": "XY",
+                                    "class_code": "V",
+                                    "flight_number": "XY4",
+                                    "arrival_airport": "RUH",
+                                    "alternative_type": "P",
+                                    "departure_airport": "JED"
+                                },
+                                {
+                                    "type": "PIECE",
+                                    "amount": 1,
+                                    "carrier": "XY",
+                                    "class_code": "N",
+                                    "flight_number": "XY99",
+                                    "arrival_airport": "MED",
+                                    "alternative_type": "P",
+                                    "departure_airport": "RUH"
+                                }
+                            ]
+                        }
+                    ],
+                    "price_info": {
+                        "tax": 446.33,
+                        "base_fare": 359.73,
+                        "supplement": 189.5,
+                        "total_fare": 12778,
+                        "service_fee": 0,
+                        "agency_commission": 0
+                    },
+                    "exchangeable": null,
+                    "baggages_text": [
+                        "Unavailable",
+                        "Unavailable"
+                    ],
+                    "currency_code": "EGP",
+                    "non_refundable": null,
+                    "refundability_text": null,
+                    "cabin_baggages_text": [
+                        "1 Bag (7 Kg)",
+                        "1 Bag (7 Kg)"
+                    ],
+                    "exchangeability_text": null
+                },
+                "multiprovider": false,
+                "fare_detail_key": "eyJmYXJlS2V5IjoiUzo1YzQ4NWY1Ny1iMDEwLTQ3NDUtODI5Ny05MDJhMTNlNzkwYmQ6MGI5MGEzMzktZjRhZi00OTI4LWFiOTMtNzcyMmU4ZDhjYTk2Om1vZWE2NHBhIiwiZGVwYXJ0dXJlSXRpbmVyYXJ5SWQiOiJtOjNzaW86YTUwdTptb2VhNHZydzpJVDowMjEwNjE4UnlqT3R3Q0c0OjNiNGUiLCJtdWx0aXByb3ZpZGVyIjpmYWxzZX0=",
+                "departure_flight": {
+                    "legs": [
+                        {
+                            "time_info": {
+                                "day_cross": false,
+                                "flight_time_hour": 3,
+                                "flight_time_minute": 15,
+                                "layover_time_in_minutes": 100,
+                                "leg_duration_time_minute": 105,
+                                "wait_time_in_minute_before_next_leg": 100
+                            },
+                            "airline_info": {
+                                "logo": "https://test.gita.sa/storage/airlines/logos/XY.jpg",
+                                "carrier_code": "XY",
+                                "carrier_name": "Flynas",
+                                "operator_code": "XY",
+                                "operator_name": "Flynas",
+                                "operating_airline_code": "XY"
+                            },
+                            "arrival_info": {
+                                "date": "2026-05-01 09:50:00",
+                                "city_name": "Riyadh",
+                                "terminal_no": "3",
+                                "airport_code": "RUH",
+                                "airport_name": "King Khaled International Airport"
+                            },
+                            "flight_number": "XY4",
+                            "cabin_baggages": [
+                                {
+                                    "type": "PIECE",
+                                    "amount": 1,
+                                    "class_code": "V",
+                                    "passenger_type": "ADULT",
+                                    "alternative_type": "P"
+                                }
+                            ],
+                            "departure_info": {
+                                "date": "2026-05-01 08:05:00",
+                                "city_name": "Jeddah",
+                                "terminal_no": "1",
+                                "airport_code": "JED",
+                                "airport_name": "King Abdulaziz International Airport"
+                            }
+                        },
+                        {
+                            "time_info": {
+                                "day_cross": false,
+                                "flight_time_hour": 3,
+                                "flight_time_minute": 15,
+                                "layover_time_in_minutes": 100,
+                                "leg_duration_time_minute": 90,
+                                "wait_time_in_minute_before_next_leg": 0
+                            },
+                            "airline_info": {
+                                "logo": "https://test.gita.sa/storage/airlines/logos/XY.jpg",
+                                "carrier_code": "XY",
+                                "carrier_name": "Flynas",
+                                "operator_code": "XY",
+                                "operator_name": "Flynas",
+                                "operating_airline_code": "XY"
+                            },
+                            "arrival_info": {
+                                "date": "2026-05-01 13:00:00",
+                                "city_name": "Madinah",
+                                "airport_code": "MED",
+                                "airport_name": "Mohammad Bin Abdulaziz Airport"
+                            },
+                            "flight_number": "XY99",
+                            "cabin_baggages": [
+                                {
+                                    "type": "PIECE",
+                                    "amount": 1,
+                                    "class_code": "N",
+                                    "passenger_type": "ADULT",
+                                    "alternative_type": "P"
+                                }
+                            ],
+                            "departure_info": {
+                                "date": "2026-05-01 11:30:00",
+                                "city_name": "Riyadh",
+                                "terminal_no": "3",
+                                "airport_code": "RUH",
+                                "airport_name": "King Khaled International Airport"
+                            }
+                        }
+                    ],
+                    "fares": [
+                        {
+                            "fare_key": "eyJzZWFyY2hJZCI6IlM6NWM0ODVmNTctYjAxMC00NzQ1LTgyOTctOTAyYTEzZTc5MGJkIiwiaXRpbmVyYXJ5SWQiOiJtOjNzaW86YTUwdTptb2VhNHZydzpJVDowMjEwNjE4UnlqT3R3Q0c0OjNiNGUiLCJmYXJlVHlwZSI6IkJVU0lORVNTIiwic2VnbWVudHMiOlsiViIsIk4iXX0=",
+                            "fare_info": {
+                                "free_seats": 9,
+                                "cabin_types": [
+                                    "ECONOMY",
+                                    "ECONOMY"
+                                ],
+                                "class_codes": [
+                                    "V",
+                                    "N"
+                                ],
+                                "fare_detail": {
+                                    "pax_fares": [
+                                        {
+                                            "pax_type": "ADULT",
+                                            "price_info": {
+                                                "tax": 0,
+                                                "base_fare": 359.73,
+                                                "supplement": 635.83,
+                                                "total_fare": 995.57,
+                                                "service_fee": 0,
+                                                "agency_commission": 0
+                                            },
+                                            "currency_code": "SAR",
+                                            "number_of_pax": 1,
+                                            "cabin_baggage_allowances": [
+                                                {
+                                                    "type": "PIECE",
+                                                    "amount": 1,
+                                                    "carrier": "XY",
+                                                    "class_code": "V",
+                                                    "flight_number": "XY4",
+                                                    "arrival_airport": "RUH",
+                                                    "alternative_type": "P",
+                                                    "departure_airport": "JED"
+                                                },
+                                                {
+                                                    "type": "PIECE",
+                                                    "amount": 1,
+                                                    "carrier": "XY",
+                                                    "class_code": "N",
+                                                    "flight_number": "XY99",
+                                                    "arrival_airport": "MED",
+                                                    "alternative_type": "P",
+                                                    "departure_airport": "RUH"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "price_info": {
+                                        "tax": 0,
+                                        "base_fare": 359.73,
+                                        "supplement": 635.83,
+                                        "total_fare": 12778,
+                                        "service_fee": 0,
+                                        "agency_commission": 0
+                                    },
+                                    "currency_code": "EGP"
+                                }
+                            }
+                        }
+                    ],
+                    "office": {
+                        "office_id": 2369,
+                        "office_name": "Arab Jet"
+                    },
+                    "points": 1892,
+                    "charter": false,
+                    "endpoint": "iati",
+                    "priority": 1,
+                    "book_type": "DIRECT",
+                    "package_info": {
+                        "packaged": false
+                    },
+                    "provider_key": "Charter",
+                    "baggages_text": "Unavailable",
+                    "cabin_baggages_text": "1 Bag (7 Kg)",
+                    "minimum_package_price": null,
+                    "minimum_package_points": null
+                },
+                "flight_informations": [
+                    {
+                        "provider_key": "FLYNAS AJ",
+                        "pnr_requirements": [
+                            "TC"
+                        ],
+                        "permitted_actions": [
+                            "REFUND"
+                        ]
+                    }
+                ],
+                "departure_selected_flights": [
+                    {
+                        "flight": {
+                            "to": "RUH",
+                            "from": "JED",
+                            "cabin_type": "ECONOMY",
+                            "class_code": "V",
+                            "arrival_time": "2026-05-01 09:50:00",
+                            "flight_number": "XY4",
+                            "departure_time": "2026-05-01 08:05:00",
+                            "operator_airline_code": "XY",
+                            "marketing_airline_code": "XY"
+                        }
+                    },
+                    {
+                        "flight": {
+                            "to": "MED",
+                            "from": "RUH",
+                            "cabin_type": "ECONOMY",
+                            "class_code": "N",
+                            "arrival_time": "2026-05-01 13:00:00",
+                            "flight_number": "XY99",
+                            "departure_time": "2026-05-01 11:30:00",
+                            "operator_airline_code": "XY",
+                            "marketing_airline_code": "XY"
+                        }
+                    }
+                ]
+            },
+            "chosen_offer": {
+                "offer_name": "xy.ligh",
+                "baggages_text": [
+                    "Unavailable",
+                    "Unavailable"
+                ],
+                "cabin_baggages_text": [
+                    "1 Bag (7 Kg)",
+                    "1 Bag (7 Kg)"
+                ]
+            },
+            "fromLocation": "JED",
+            "toLocation": "MED",
+            "passengers": [
+                {
+                    "name": "Mohammed",
+                    "type": "ADULT",
+                    "gender": "MALE",
+                    "lastName": "Shaaban",
+                    "birthDate": "2001-04-05",
+                    "identityInfo": {
+                        "passport": {
+                            "no": "1221",
+                            "endDate": "2026-05-14",
+                            "citizenshipCountry": "EG"
+                        },
+                        "notTurkishCitizen": true,
+                        "notPakistanCitizen": true
+                    },
+                    "eticket": "0701257903462"
+                }
+            ],
+            "adult": 1,
+            "child": 0,
+            "infant": 0,
+            "departure": "2026-04-30T21:00:00.000Z",
+            "return_date": null,
+            "type": "OneWay",
+            "currency": "EGP",
+            "original_price": "13450.53",
+            "price": "13451.00",
+            "coupon_code": null,
+            "cabin_class": "ECONOMY",
+            "contact_info": {
+                "name": "Mohammed Shaaban",
+                "email": "ms7500746@gmail.com",
+                "phone": "1096706570",
+                "country_code": "20"
+            },
+            "booking_data": {
+                "books": [
+                    {
+                        "pnr": "TESTDA9A5",
+                        "order_id": 30929748,
+                        "pax_list": [
+                            {
+                                "name": "MOHAMMED",
+                                "type": "ADULT",
+                                "gender": "MALE",
+                                "eticket": "0701257903462",
+                                "lastname": "SHAABAN",
+                                "birthdate": "2001-04-05",
+                                "identity_info": {
+                                    "passport": {
+                                        "no": "1221",
+                                        "end_date": "2026-05-14 03:00:00",
+                                        "citizenship_country": "EG"
+                                    },
+                                    "not_turkish_citizen": false,
+                                    "not_pakistan_citizen": false
+                                }
+                            }
+                        ],
+                        "book_status": "BOOKED"
+                    }
+                ]
+            },
+            "voucher": "https://test.gita.sa/api/flights-services/v1/public/voucher/FS-1777117995514"
+        },
+ 
+    ]
+}

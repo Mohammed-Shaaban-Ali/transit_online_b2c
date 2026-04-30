@@ -39,7 +39,7 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
     isBgWhite ||
     pathNameWithoutLocale.includes("hotels") ||
     pathNameWithoutLocale.includes("details") ||
-    pathNameWithoutLocale.includes("my-booking");
+    pathNameWithoutLocale.endsWith("my-booking");
 
   const linkClassDesktop = (isActive: boolean, isBlack: boolean) =>
     `relative text-[18px] font-medium pb-1 transition-colors duration-300

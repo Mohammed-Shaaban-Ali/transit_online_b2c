@@ -1711,5 +1711,52 @@
             "partial": "دفع جزئي",
             "refunded": "مسترد"
         }
+    },
+    "MyBooking": {
+        "title": "حجوزاتي",
+        "travelWorryFree": "ضمان السفر بلا قلق",
+        "cantFindBooking": "لا يمكنك العثور على حجزك؟",
+        "tabs": {
+            "all": "الكل",
+            "awaitingPayment": "بانتظار الدفع",
+            "upcoming": "قادمة",
+            "awaitingReview": "بانتظار المراجعة"
+        },
+        "member": "عضو",
+        "loading": "جارٍ تحميل الحجوزات...",
+        "noBookings": "ليس لديك أي حجوزات أو لا يمكننا الوصول إلى حجوزاتك في هذا الوقت.",
+        "searchBookings": "بحث عن الحجوزات",
+        "bookingNumber": "رقم الحجز",
+        "bookingDate": "تاريخ الحجز",
+        "passengers": "راكب(ركاب)",
+        "status": {
+            "ticketed": "تم إصدار التذكرة",
+            "pending": "قيد الانتظار",
+            "cancelled": "ملغى"
+        },
+        "sidebar": {
+            "myBookings": "حجوزاتي",
+            "tabs": {
+                "all": "الكل",
+                "flights": "الطيران",
+                "hotels": "الفنادق",
+                "trains": "القطارات",
+                "carRentals": "تأجير سيارات",
+                "airportTransfers": "التنقل من/إلى المطار",
+                "attractionsTours": "الأنشطة والجولات",
+                "flightHotel": "طيران + فندق",
+                "privateTours": "جولات خاصة",
+                "tourPackages": "باقات الجولات"
+            },
+            "savedItems": {
+                "saved": "المحفوظ",
+                "account": "الحساب",
+                "myPosts": "منشوراتي",
+                "priceAlerts": "تنبيهات الأسعار",
+                "myCards": "بطاقاتي",
+                "giftCards": "بطاقات الهدايا",
+                "promoCodes": "أكواد الخصم"
+            }
+        }
     }
 }
