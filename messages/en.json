@@ -1064,6 +1064,7 @@
             "clearDestination": "Clear destination",
             "decreaseQuantity": "Decrease",
             "increaseQuantity": "Increase",
+            "addRoom": "Add room",
             "dateRangePartial": "{date} – …"
         },
         "ResultsSection": {

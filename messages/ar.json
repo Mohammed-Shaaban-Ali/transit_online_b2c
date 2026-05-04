@@ -1064,6 +1064,7 @@
             "clearDestination": "مسح الوجهة",
             "decreaseQuantity": "تقليل",
             "increaseQuantity": "زيادة",
+            "addRoom": "إضافة غرفة",
             "dateRangePartial": "{date} – …"
         },
         "ResultsSection": {
