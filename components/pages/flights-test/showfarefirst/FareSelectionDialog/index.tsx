@@ -416,7 +416,7 @@ export default function FareSelectionDialog({
       sessionStorage.setItem(FLIGHT_BOOKING_KEY, JSON.stringify(bookingData));
 
       onClose();
-      router.push("/new/flights/showfarefirst/booking");
+      router.push("/flights/showfarefirst/booking");
     } catch (e) {
       console.error(e);
     }

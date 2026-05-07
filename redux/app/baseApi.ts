@@ -183,6 +183,8 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
         "/api/sabre/fare",
         "/api/iati/fare",
         "/api/hotels/b2c/packages",
+        "/api/auth/login",
+        "/api/auth/send-otp",
       ];
       if (notToastUrls.includes(url)) {
         return result;

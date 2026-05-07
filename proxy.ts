@@ -8,14 +8,14 @@ export default function proxy(request: NextRequest) {
   const authToken = request.cookies.get('auth-token')?.value;
   const pathname = request.nextUrl.pathname;
   const localeGroup = routing.locales.join('|');
-  const loginRegex = new RegExp(`^/(${localeGroup})/new/login/?$`);
+  const loginRegex = new RegExp(`^/(${localeGroup})/login/?$`);
   const loginMatch = pathname.match(loginRegex);
   const returnTo = request.nextUrl.searchParams.get('returnTo');
 
   if (authToken && loginMatch) {
     const locale = loginMatch[1];
     const safeReturnTo =
-      returnTo && returnTo.startsWith('/') ? returnTo : `/${locale}/new`;
+      returnTo && returnTo.startsWith('/') ? returnTo : `/${locale}`;
     const redirectUrl = new URL(safeReturnTo, request.url);
     return NextResponse.redirect(redirectUrl);
   }

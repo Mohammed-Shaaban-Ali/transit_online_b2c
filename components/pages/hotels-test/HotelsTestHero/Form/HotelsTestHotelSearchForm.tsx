@@ -202,9 +202,9 @@ function HotelsTestHotelSearchForm({
       }
 
       if (stayOnPage) {
-        router.replace(`/new/hotels/details?${params.toString()}`);
+        router.replace(`/hotels/details?${params.toString()}`);
       } else {
-        router.push(`/new/hotels/details?${params.toString()}`);
+        router.push(`/hotels/details?${params.toString()}`);
       }
     } catch (e) {
       console.error(e);

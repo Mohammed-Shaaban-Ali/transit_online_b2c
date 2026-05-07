@@ -494,7 +494,8 @@
             "dateOfBirthRequired": "Date of birth is required",
             "passportNumberRequired": "Passport number is required",
             "nationalityRequired": "Nationality is required",
-            "passportExpiryRequired": "Document expiry date is required"
+            "passportExpiryRequired": "Document expiry date is required",
+            "phoneInvalid": "Please enter a valid phone number"
         }
     },
     "FlightBookingPageNested": {
@@ -1543,20 +1544,20 @@
         "login": {
             "welcome": "Welcome",
             "subtitle": {
-                "identifier": "Login with your email or phone number",
-                "otp": "Enter the 4-digit OTP sent to your email or phone"
+                "identifier": "Login with your phone number",
+                "otp": "Enter the 4-digit OTP sent to your phone"
             },
             "fields": {
                 "identifier": {
-                    "label": "Email or Phone Number"
+                    "label": "Phone Number"
                 },
                 "otp": {
                     "label": "OTP Code"
                 }
             },
             "validation": {
-                "identifierRequired": "Email or phone number is required",
-                "identifierInvalid": "Please enter a valid email or phone number",
+                "identifierRequired": "Phone number is required",
+                "identifierInvalid": "Please enter a valid phone number",
                 "otpRequired": "OTP is required",
                 "otpInvalid": "OTP must be exactly 4 digits"
             },
@@ -1565,7 +1566,7 @@
                 "invalidOtp": "Invalid OTP, please try again"
             },
             "actions": {
-                "changeIdentifier": "Change email/phone number",
+                "changeIdentifier": "Change phone number",
                 "sendingOtp": "SENDING OTP...",
                 "sendOtp": "SEND OTP",
                 "verifying": "VERIFYING...",

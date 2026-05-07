@@ -56,10 +56,10 @@ export default function Service() {
     {
       label: t("hotelsHomes"),
       icon: BedDouble,
-      href: "/new/hotels",
+      href: "/hotels",
       active: true,
     },
-    { label: t("flights"), icon: Plane, href: "/new/flights", active: true },
+    { label: t("flights"), icon: Plane, href: "/flights", active: true },
     {
       label: t("flightHotel"),
       icon: Hotel,

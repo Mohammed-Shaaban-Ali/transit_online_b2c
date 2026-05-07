@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import LocaleSwitcher from "../LocaleSwitcher";
 import logo from "@/public/transit_logos/transit_logo_q.png";
 import { Link } from "@/i18n/navigation";
+import UserMenu from "./UserMenu";
 
 const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
   const t = useTranslations("Components.Navbar");
@@ -13,15 +14,15 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
   const links = [
     {
       label: t("home"),
-      href: "/new",
+      href: "/",
     },
     {
       label: t("hotels"),
-      href: "/new/hotels",
+      href: "/hotels",
     },
     {
       label: t("flights"),
-      href: "/new/flights",
+      href: "/flights",
     },
   ];
 
@@ -37,8 +38,8 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
   const pathNameWithoutLocale = normalizePathname(pathname);
   const isBlack =
     isBgWhite ||
-    pathNameWithoutLocale.includes("hotels") ||
-    pathNameWithoutLocale.includes("details") ||
+    (pathNameWithoutLocale.includes("hotels") &&
+      pathNameWithoutLocale.includes("details")) ||
     pathNameWithoutLocale.endsWith("my-booking");
 
   const linkClassDesktop = (isActive: boolean, isBlack: boolean) =>
@@ -102,6 +103,19 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
 
         <div className="flex shrink-0 items-center gap-2.5">
           <LocaleSwitcher />
+          <div className="hidden md:block">
+            <UserMenu
+              wrapperClassName="relative"
+              triggerClassName="inline-flex items-center gap-2 rounded bg-white/15 px-2 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/25"
+              avatarClassName="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-semibold text-primary"
+              nameClassName="max-w-[110px] truncate"
+              signInClassName={`inline-flex items-center rounded px-3 py-2 text-[14px] font-medium transition-colors ${
+                isBlack
+                  ? "bg-primary text-white hover:bg-primary/90"
+                  : "bg-white/15 text-white hover:bg-white/25"
+              }`}
+            />
+          </div>
         </div>
       </div>
 

@@ -4,6 +4,8 @@ import type { UseFormReturn } from "react-hook-form";
 import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
 import type { FlightBookingFormValues } from "@/components/pages/flights-test/FlightBookingPage/FlightBookingForm";
 import { useTranslations } from "next-intl";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 interface ContactInformationSectionProps {
   form: UseFormReturn<FlightBookingFormValues>;
@@ -16,6 +18,7 @@ export default function ContactInformationSection({
   const {
     register,
     watch,
+    setValue,
     formState: { errors },
   } = form;
 
@@ -51,37 +54,43 @@ export default function ContactInformationSection({
           labelClassName="font-medium text-slate-500"
         />
 
-        <div className="relative">
-          <div className="relative h-[58px] rounded-md border border-gray-300 bg-white px-3">
-            <label
-              htmlFor="phone"
-              className="pointer-events-none absolute -top-2.5 rounded-md bg-white px-2 text-[12px] font-medium text-black/50"
-            >
-              {t("mobilePhone")}
-            </label>
-
-            <div className="flex h-full items-center gap-3 pt-2">
-              <button
-                type="button"
-                className="h-9 shrink-0 border-none bg-transparent px-1 font-medium text-slate-900 outline-none"
-              >
-                +20
-              </button>
-
-              <div className="h-7 w-px bg-[#d7dce3]" />
-
-              <input
-                id="phone"
-                type="text"
-                className="w-full border-none bg-transparent p-0 text-start font-medium text-slate-900 outline-none"
-                {...register("phone")}
-              />
-            </div>
-          </div>
+        <div className="relative ">
+          <label
+            htmlFor="phone"
+            className="pointer-events-none absolute -top-2 start-5 z-10 rounded-md bg-white px-2 text-[12px] font-medium text-black/50"
+          >
+            {t("mobilePhone")}
+          </label>
+          <PhoneInput
+            country="eg"
+            value={watch("phone").replace("+", "")}
+            onChange={(value, country: { dialCode?: string }) => {
+              const dialCode = (country?.dialCode || "20").replace(/\D/g, "");
+              const normalizedPhone = value.replace(/^\+/, "");
+              setValue("phone", `+${normalizedPhone}`, {
+                shouldValidate: true,
+              });
+              setValue("phoneCountryCode", dialCode, {
+                shouldValidate: true,
+              });
+            }}
+            inputProps={{
+              id: "phone",
+              autoComplete: "tel",
+              name: "phone",
+            }}
+            enableSearch
+            containerClass="!w-full ![direction:ltr]"
+            inputClass="!w-full !h-[58px] !pl-14 !pr-3 !rounded-md !border !border-gray-300 !text-slate-900 !font-medium !text-left"
+            buttonClass="!border-gray-300 !bg-white !rounded-s-md "
+            dropdownClass="!text-slate-900"
+          />
+          <input type="hidden" {...register("phone")} />
+          <input type="hidden" {...register("phoneCountryCode")} />
           {errors.phone?.message && (
             <p
               title={errors.phone.message}
-              className="absolute -bottom-4 start-4 line-clamp-1 text-xs font-medium text-red-500"
+              className="line-clamp-1 text-xs font-medium text-red-500"
             >
               {errors.phone.message}
             </p>

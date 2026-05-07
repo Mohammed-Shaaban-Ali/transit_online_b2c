@@ -32,6 +32,7 @@ export interface FlightBookingFormValues {
   fullName: string;
   email: string;
   phone: string;
+  phoneCountryCode: string;
   passengers: FlightPassengerData[];
 }
 
@@ -130,12 +131,9 @@ export default function FlightBookingForm({
       .email(t("validation.emailInvalid")),
     phone: z
       .string()
-      .min(5, t("validation.phoneRequired"))
-      .regex(/^\d+$/, "contact info phone must contain digits only")
-      .refine(
-        (value) => value.length <= 10,
-        "contact info phone Must be less than or equal 10 digits",
-      ),
+      .min(1, t("validation.phoneRequired"))
+      .regex(/^\+?\d{8,15}$/, t("validation.phoneInvalid")),
+    phoneCountryCode: z.string().min(1, t("validation.phoneRequired")),
     passengers: z.array(
       z.object({
         firstName: z
@@ -221,6 +219,7 @@ export default function FlightBookingForm({
       fullName: "",
       email: "",
       phone: "",
+      phoneCountryCode: "20",
       passengers: defaultPassengers,
     },
   });
@@ -254,6 +253,7 @@ export default function FlightBookingForm({
         fullName: parsedDraft.fullName || "",
         email: parsedDraft.email || "",
         phone: parsedDraft.phone || "",
+        phoneCountryCode: parsedDraft.phoneCountryCode || "20",
         passengers: mergedPassengers,
       });
     } catch (error) {
@@ -270,6 +270,7 @@ export default function FlightBookingForm({
             fullName: values.fullName || "",
             email: values.email || "",
             phone: values.phone || "",
+            phoneCountryCode: values.phoneCountryCode || "20",
             passengers: values.passengers || [],
           }),
         );

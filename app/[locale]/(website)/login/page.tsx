@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { getCookie } from "cookies-next";
 import { useForm } from "react-hook-form";
-import { Mail } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import loginImage1 from "@/public/images/login/login.png";
 import loginImage2 from "@/public/images/login/login2.png";
 import loginImage3 from "@/public/images/login/login3.png";
@@ -21,17 +22,18 @@ import {
 import { Button } from "@/components/ui/button";
 
 interface LoginFormValues {
-  identifier: string;
+  phone: string;
   otp: string;
 }
 
 export default function LoginPage() {
   const t = useTranslations("NewPage.login");
+  const locale = useLocale();
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
   const redirectAfterLogin =
-    returnTo && returnTo.startsWith("/") ? returnTo : "/new";
+    returnTo && returnTo.startsWith("/") ? returnTo : `/${locale}`;
 
   useEffect(() => {
     if (getCookie("auth-token")) {
@@ -41,6 +43,8 @@ export default function LoginPage() {
 
   const [step, setStep] = useState<"identifier" | "otp">("identifier");
   const [serverError, setServerError] = useState("");
+  const [otpDigits, setOtpDigits] = useState(["", "", "", ""]);
+  const otpRefs = useRef<Array<HTMLInputElement | null>>([]);
   const [loginMeta, setLoginMeta] = useState<{
     field: string;
     type: "EMAIL" | "PHONE";
@@ -56,30 +60,49 @@ export default function LoginPage() {
   } = useForm<LoginFormValues>({
     mode: "onTouched",
     defaultValues: {
-      identifier: "",
+      phone: "",
       otp: "",
     },
   });
 
   const onIdentifierSubmit = async (values: LoginFormValues) => {
     setServerError("");
-    const normalizedIdentifier = values.identifier.trim();
-    const loginType: "EMAIL" | "PHONE" = normalizedIdentifier.includes("@")
-      ? "EMAIL"
-      : "PHONE";
+    const normalizedPhone = values.phone.trim();
 
     const sendData = {
-      login: normalizedIdentifier,
-      type: loginType,
+      login: `+${normalizedPhone.replace(/^\+/, "")}`,
+      type: "PHONE" as const,
     };
 
     try {
       await login(sendData).unwrap();
-      setLoginMeta({ field: normalizedIdentifier, type: loginType });
+      setLoginMeta({ field: sendData.login, type: "PHONE" });
       setStep("otp");
       setValue("otp", "");
+      setOtpDigits(["", "", "", ""]);
     } catch (error: any) {
       setServerError(error?.data?.message || t("errors.failedToSendOtp"));
+    }
+  };
+
+  const handleOtpChange = (index: number, rawValue: string) => {
+    const value = rawValue.replace(/\D/g, "").slice(0, 1);
+    const updatedDigits = [...otpDigits];
+    updatedDigits[index] = value;
+    setOtpDigits(updatedDigits);
+    setValue("otp", updatedDigits.join(""), { shouldValidate: true });
+
+    if (value && index < otpRefs.current.length - 1) {
+      otpRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleOtpKeyDown = (
+    index: number,
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === "Backspace" && !otpDigits[index] && index > 0) {
+      otpRefs.current[index - 1]?.focus();
     }
   };
 
@@ -89,7 +112,7 @@ export default function LoginPage() {
 
     try {
       await sendOtp({
-        field: loginMeta.field,
+        field: loginMeta.field.replace("+", ""),
         otp: values.otp.trim(),
         type: loginMeta.type,
       }).unwrap();
@@ -143,49 +166,86 @@ export default function LoginPage() {
               className="mt-10 flex flex-col gap-8"
             >
               {step === "identifier" ? (
-                <FloatingLabelInput
-                  id="identifier"
-                  label={t("fields.identifier.label")}
-                  autoComplete="username"
-                  register={register("identifier", {
-                    required: t("validation.identifierRequired"),
-                    validate: (value) => {
-                      const normalizedValue = value.trim();
-                      const emailRegex = /^\S+@\S+\.\S+$/;
-                      const phoneRegex = /^\+?[0-9]{8,15}$/;
-
-                      return (
-                        emailRegex.test(normalizedValue) ||
-                        phoneRegex.test(normalizedValue) ||
-                        t("validation.identifierInvalid")
-                      );
-                    },
-                  })}
-                  watchValue={watch("identifier")}
-                  error={errors.identifier?.message}
-                  icon={<Mail size={18} />}
-                  inputClassName="font-medium text-slate-900"
-                  containerClassName="h-[68px] bg-white border-[#1aa4ea] rounded-lg"
-                  labelClassName="font-medium text-[#1aa4ea]"
-                />
+                <div className="space-y-2">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-[#1aa4ea]"
+                  >
+                    {t("fields.identifier.label")}
+                  </label>
+                  <PhoneInput
+                    country="sa"
+                    value={watch("phone")}
+                    onChange={(value) =>
+                      setValue("phone", value, { shouldValidate: true })
+                    }
+                    inputProps={{
+                      id: "phone",
+                      autoComplete: "tel",
+                      name: "phone",
+                    }}
+                    enableSearch
+                    containerClass="!w-full ![direction:ltr]"
+                    inputClass="!w-full !h-[52px] !pl-14 !pr-3 !rounded-lg !border-primary !text-slate-900 !font-medium !text-left"
+                    buttonClass="!border-primary !bg-white "
+                    dropdownClass="!text-slate-900"
+                  />
+                  <input
+                    type="hidden"
+                    {...register("phone", {
+                      required: t("validation.identifierRequired"),
+                      validate: (value) =>
+                        /^\d{8,15}$/.test(value.trim()) ||
+                        t("validation.identifierInvalid"),
+                    })}
+                  />
+                  {errors.phone?.message ? (
+                    <p className="text-sm font-medium text-red-500">
+                      {errors.phone.message}
+                    </p>
+                  ) : null}
+                </div>
               ) : (
-                <FloatingLabelInput
-                  id="otp"
-                  label={t("fields.otp.label")}
-                  autoComplete="one-time-code"
-                  register={register("otp", {
-                    required: t("validation.otpRequired"),
-                    pattern: {
-                      value: /^\d{4}$/,
-                      message: t("validation.otpInvalid"),
-                    },
-                  })}
-                  watchValue={watch("otp")}
-                  error={errors.otp?.message}
-                  inputClassName="font-medium text-slate-900 tracking-[0.4em]"
-                  containerClassName="h-[68px] bg-white border-[#1aa4ea] rounded-lg"
-                  labelClassName="font-medium text-[#1aa4ea]"
-                />
+                <div className="space-y-2 w-fit mx-auto">
+                  <p className="text-sm font-medium text-primary">
+                    {t("fields.otp.label")}
+                  </p>
+                  <div className="flex items-center justify-center gap-3">
+                    {otpDigits.map((digit, index) => (
+                      <input
+                        key={index}
+                        ref={(el) => {
+                          otpRefs.current[index] = el;
+                        }}
+                        type="text"
+                        inputMode="numeric"
+                        autoComplete="one-time-code"
+                        maxLength={1}
+                        value={digit}
+                        onChange={(event) =>
+                          handleOtpChange(index, event.target.value)
+                        }
+                        onKeyDown={(event) => handleOtpKeyDown(index, event)}
+                        className="h-14 w-14 rounded-lg border border-[#1aa4ea] bg-white text-center text-xl font-semibold text-slate-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                      />
+                    ))}
+                  </div>
+                  <input
+                    type="hidden"
+                    {...register("otp", {
+                      required: t("validation.otpRequired"),
+                      pattern: {
+                        value: /^\d{4}$/,
+                        message: t("validation.otpInvalid"),
+                      },
+                    })}
+                  />
+                  {errors.otp?.message ? (
+                    <p className="text-sm font-medium text-red-500">
+                      {errors.otp.message}
+                    </p>
+                  ) : null}
+                </div>
               )}
 
               {serverError ? (

@@ -1,28 +1,39 @@
-import Image from "next/image";
-import flightsImage from "@/public/images/flights.jpg";
-import FlightsList from "@/components/pages/flights/FlightsList";
-import { getTranslations } from "next-intl/server";
+import FlightsTestHero from "@/components/pages/flights-test/FlightsTestHero";
+import PartnerAirlines from "@/components/pages/flights-test/PartnerAirlines";
+import TrustUs from "@/components/pages/flights-test/TrustUs";
+import Discover from "@/components/pages/flights-test/Discover";
+import WhyBook from "@/components/pages/flights-test/WhyBook";
+import HowToBook from "@/components/pages/flights-test/HowToBook";
+import Recommended from "@/components/pages/flights-test/Recommended";
+import Banner from "@/components/pages/flights-test/Banner";
+import TrendingNow from "@/components/pages/flights-test/TrendingNow";
+import FloatingSideActions from "@/components/pages/flights-test/FloatingSideActions";
+import NewNavbar from "@/components/shared/Navbar/NewNavbar";
 
-export default async function page() {
-  const t = await getTranslations("Flights");
+type Props = {};
+
+function page({}: Props) {
   return (
-    <section>
-      <section className="bg-white h-[280px] sm:h-[320px] relative">
-        <Image
-          src={flightsImage}
-          alt={t("imageAlt")}
-          fill
-          className="object-cover object-[center_30%]"
-        />
-        {/* title */}
-        <div className="absolute top-0 left-0 w-full h-full bg-black/15"></div>
-        <div className="absolute bottom-14 left-1/2 -translate-x-1/2 text-center ">
-          <h1 className="text-white text-[48px]! font-extrabold">
-            {t("title")}
-          </h1>
-        </div>
+    <>
+      <NewNavbar />
+
+      <section className="relative">
+        <FloatingSideActions />
+        <FlightsTestHero />
+
+        <section className="relative z-0 md:-mt-16 md:rounded-t-[32px] bg-[#f9f9f9] py-12">
+          <TrustUs />
+          <TrendingNow />
+          <PartnerAirlines />
+          <Banner />
+          <Discover />
+          <WhyBook />
+          <HowToBook />
+          <Recommended />
+        </section>
       </section>
-      <FlightsList />
-    </section>
+    </>
   );
 }
+
+export default page;

@@ -29,6 +29,10 @@ import {
   useLazyGetFlightBookingQuery,
 } from "@/redux/features/flights/flightsApi";
 import { toast } from "sonner";
+import {
+  useLoginMutation,
+  useSendOtpMutation,
+} from "@/redux/features/auth/authApi";
 
 export interface FlightBookingData {
   departureFareKey: string;
@@ -66,12 +70,20 @@ const FlightBookingPage = () => {
   const [isVerifyingPayment, setIsVerifyingPayment] = useState(false);
   const [isLoginRequiredDialogOpen, setIsLoginRequiredDialogOpen] =
     useState(false);
+  const [pendingBookingData, setPendingBookingData] =
+    useState<FlightBookingFormValues | null>(null);
+  const [loginPhoneMeta, setLoginPhoneMeta] = useState<string | null>(null);
+  const [loginOtpDigits, setLoginOtpDigits] = useState(["", "", "", ""]);
+  const [loginError, setLoginError] = useState("");
+  const loginOtpRefs = useRef<Array<HTMLInputElement | null>>([]);
   const [activeBookingId, setActiveBookingId] = useState<string | null>(null);
   const isVerifyingPaymentRef = useRef(false);
   const [calculatePrice, calculatePriceState] =
     useLazyCalculateFlightPriceQuery();
   const [bookFlight] = useBookFlightMutation();
   const [getFlightBooking] = useLazyGetFlightBookingQuery();
+  const [login, { isLoading: isSendingLoginOtp }] = useLoginMutation();
+  const [sendOtp, { isLoading: isVerifyingLoginOtp }] = useSendOtpMutation();
 
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -91,7 +103,7 @@ const FlightBookingPage = () => {
             console.log(
               `Booking verification succeeded on attempt ${attempt}.`,
             );
-            router.push("/new/flights/showfarefirst/booking/success");
+            router.push("/flights/showfarefirst/booking/success");
             return;
           }
         } catch (error) {
@@ -107,7 +119,7 @@ const FlightBookingPage = () => {
       }
 
       console.error("Booking verification failed after 3 attempts.");
-      router.push("/new/flights/showfarefirst/booking/failed");
+      router.push("/flights/showfarefirst/booking/failed");
     } finally {
       isVerifyingPaymentRef.current = false;
       setIsVerifyingPayment(false);
@@ -192,7 +204,7 @@ const FlightBookingPage = () => {
         console.error("Payment finished but booking id is missing.");
         setIsPaymentDialogOpen(false);
         setIsVerifyingPayment(false);
-        router.push("/new/flights/showfarefirst/booking/failed");
+        router.push("/flights/showfarefirst/booking/failed");
         return;
       }
 
@@ -224,14 +236,8 @@ const FlightBookingPage = () => {
     return firstName;
   };
 
-  const handleBookingSubmit = async (data: FlightBookingFormValues) => {
+  const submitBookingWithAuth = async (data: FlightBookingFormValues) => {
     if (!flightData) return;
-    const authToken = getCookie("auth-token");
-    if (!authToken) {
-      setIsLoginRequiredDialogOpen(true);
-      return;
-    }
-
     const nameParts = data.fullName.trim().split(/\s+/).filter(Boolean);
     if (nameParts.length < 2) {
       toast.error("Contact name must include at least two words.");
@@ -249,6 +255,25 @@ const FlightBookingPage = () => {
     setIsSubmitting(true);
     try {
       const bookingPayload = {
+        // Keep country code and local number separated for backend contract.
+        ...(() => {
+          const phoneDigits = data.phone.trim().replace(/\D/g, "");
+          const countryCodeDigits = data.phoneCountryCode.replace(/\D/g, "");
+          const localPhone = countryCodeDigits
+            ? phoneDigits.startsWith(countryCodeDigits)
+              ? phoneDigits.slice(countryCodeDigits.length)
+              : phoneDigits
+            : phoneDigits;
+
+          return {
+            contact_info: {
+              name: data.fullName.trim(),
+              email: data.email.trim(),
+              phone: localPhone,
+              country_code: countryCodeDigits || "20",
+            },
+          };
+        })(),
         paymentGateway,
         ...(calculatedData.coupon_code
           ? { couponCode: calculatedData.coupon_code }
@@ -260,12 +285,6 @@ const FlightBookingPage = () => {
         ...(getOfferValueForBooking(flightData)
           ? { offer: getOfferValueForBooking(flightData) }
           : {}),
-        contact_info: {
-          name: data.fullName.trim(),
-          email: data.email.trim(),
-          phone: data.phone.trim(),
-          country_code: "20",
-        },
         paxList: data.passengers.map((passenger) => ({
           name: passenger.firstName.trim(),
           lastName: passenger.lastName.trim(),
@@ -309,6 +328,89 @@ const FlightBookingPage = () => {
       console.error("Booking error:", error);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleBookingSubmit = async (data: FlightBookingFormValues) => {
+    const authToken = getCookie("auth-token");
+    if (!authToken) {
+      setIsSubmitting(true);
+      const normalizedPhone = data.phone.trim().replace(/[^\d+]/g, "");
+      if (!/^\+?\d{8,15}$/.test(normalizedPhone)) {
+        toast.error("Please enter a valid phone number.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const phoneWithCode = normalizedPhone.startsWith("+")
+        ? normalizedPhone
+        : `+${normalizedPhone}`;
+
+      setPendingBookingData(data);
+      setLoginError("");
+      setLoginOtpDigits(["", "", "", ""]);
+      setLoginPhoneMeta(phoneWithCode);
+
+      try {
+        await login({ login: phoneWithCode, type: "PHONE" }).unwrap();
+        setIsLoginRequiredDialogOpen(true);
+      } catch (error: any) {
+        toast.error(error?.data?.message || "Failed to send OTP.");
+      } finally {
+        setIsSubmitting(false);
+      }
+      return;
+    }
+
+    await submitBookingWithAuth(data);
+  };
+
+  const handleLoginOtpChange = (index: number, rawValue: string) => {
+    const value = rawValue.replace(/\D/g, "").slice(0, 1);
+    const updatedDigits = [...loginOtpDigits];
+    updatedDigits[index] = value;
+    setLoginOtpDigits(updatedDigits);
+
+    if (value && index < loginOtpRefs.current.length - 1) {
+      loginOtpRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleLoginOtpKeyDown = (
+    index: number,
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === "Backspace" && !loginOtpDigits[index] && index > 0) {
+      loginOtpRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleVerifyBookingLoginOtp = async () => {
+    if (!loginPhoneMeta) return;
+    setLoginError("");
+
+    const otp = loginOtpDigits.join("");
+    if (!/^\d{4}$/.test(otp)) {
+      setLoginError("Please enter the 4-digit OTP.");
+      return;
+    }
+
+    try {
+      await sendOtp({
+        field: loginPhoneMeta.replace("+", ""),
+        otp,
+        type: "PHONE",
+      }).unwrap();
+
+      setIsLoginRequiredDialogOpen(false);
+
+      if (pendingBookingData) {
+        const bookingData = pendingBookingData;
+        setPendingBookingData(null);
+        await submitBookingWithAuth(bookingData);
+      }
+    } catch (error: any) {
+      setLoginError(error?.data?.message || "Invalid OTP, please try again.");
     }
   };
 
@@ -415,31 +517,61 @@ const FlightBookingPage = () => {
       </div>
       <Dialog
         open={isLoginRequiredDialogOpen}
-        onOpenChange={setIsLoginRequiredDialogOpen}
+        onOpenChange={(open) => {
+          setIsLoginRequiredDialogOpen(open);
+          if (!open) {
+            setLoginError("");
+            setLoginOtpDigits(["", "", "", ""]);
+          }
+        }}
       >
         <DialogContent className="max-w-md rounded-2xl p-6">
           <DialogHeader className="space-y-2 text-center">
             <DialogTitle className="text-2xl font-bold text-slate-900">
-              Login Required
+              Enter OTP
             </DialogTitle>
             <DialogDescription className="text-sm text-slate-600">
-              You need to login first before proceeding to payment.
+              Enter the 4-digit OTP sent to your phone to continue booking.
             </DialogDescription>
           </DialogHeader>
+
+          <div className="space-y-3">
+            <div className="flex items-center justify-center gap-3">
+              {loginOtpDigits.map((digit, index) => (
+                <input
+                  key={index}
+                  ref={(el) => {
+                    loginOtpRefs.current[index] = el;
+                  }}
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={digit}
+                  onChange={(event) =>
+                    handleLoginOtpChange(index, event.target.value)
+                  }
+                  onKeyDown={(event) => handleLoginOtpKeyDown(index, event)}
+                  className="h-12 w-12 rounded-lg border border-[#d7dce3] bg-white text-center text-lg font-semibold text-slate-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                />
+              ))}
+            </div>
+            {loginError ? (
+              <p className="text-sm font-medium text-red-500">{loginError}</p>
+            ) : null}
+          </div>
+
           <DialogFooter className="mt-4 flex-col gap-3 sm:flex-col sm:justify-stretch">
             <Button
               type="button"
               className="h-11 w-full"
-              onClick={() => {
-                const returnTo = `${window.location.pathname}${window.location.search}`;
-                router.push(`/new/login?returnTo=${encodeURIComponent(returnTo)}`);
-              }}
+              disabled={isSendingLoginOtp || isVerifyingLoginOtp}
+              onClick={() => void handleVerifyBookingLoginOtp()}
             >
-              Go to Login
+              {isVerifyingLoginOtp ? "Verifying..." : "Verify OTP"}
             </Button>
             <Button
               type="button"
-              variant="outline"
+              variant="ghost"
               className="h-11 w-full"
               onClick={() => setIsLoginRequiredDialogOpen(false)}
             >

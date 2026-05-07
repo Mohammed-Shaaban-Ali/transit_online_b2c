@@ -494,7 +494,8 @@
             "dateOfBirthRequired": "تاريخ الميلاد مطلوب",
             "passportNumberRequired": "رقم وثيقة السفر مطلوب",
             "nationalityRequired": "الجنسية مطلوبة",
-            "passportExpiryRequired": "تاريخ إنتهاء الوثيقة مطلوب"
+            "passportExpiryRequired": "تاريخ إنتهاء الوثيقة مطلوب",
+            "phoneInvalid": "يرجى إدخال رقم هاتف صحيح"
         }
     },
     "FlightBookingPageNested": {
@@ -1543,20 +1544,20 @@
         "login": {
             "welcome": "مرحبًا",
             "subtitle": {
-                "identifier": "سجّل الدخول باستخدام البريد الإلكتروني أو رقم الهاتف",
-                "otp": "أدخل رمز OTP المكوّن من 4 أرقام المرسل إلى بريدك أو هاتفك"
+                "identifier": "سجّل الدخول باستخدام رقم الهاتف",
+                "otp": "أدخل رمز OTP المكوّن من 4 أرقام المرسل إلى رقم هاتفك"
             },
             "fields": {
                 "identifier": {
-                    "label": "البريد الإلكتروني أو رقم الهاتف"
+                    "label": "رقم الهاتف"
                 },
                 "otp": {
                     "label": "رمز OTP"
                 }
             },
             "validation": {
-                "identifierRequired": "البريد الإلكتروني أو رقم الهاتف مطلوب",
-                "identifierInvalid": "يرجى إدخال بريد إلكتروني أو رقم هاتف صالح",
+                "identifierRequired": "رقم الهاتف مطلوب",
+                "identifierInvalid": "يرجى إدخال رقم هاتف صالح",
                 "otpRequired": "رمز OTP مطلوب",
                 "otpInvalid": "يجب أن يتكوّن رمز OTP من 4 أرقام بالضبط"
             },
@@ -1565,7 +1566,7 @@
                 "invalidOtp": "رمز OTP غير صحيح، حاول مرة أخرى"
             },
             "actions": {
-                "changeIdentifier": "تغيير البريد الإلكتروني/رقم الهاتف",
+                "changeIdentifier": "تغيير رقم الهاتف",
                 "sendingOtp": "جارٍ إرسال رمز OTP...",
                 "sendOtp": "إرسال رمز OTP",
                 "verifying": "جارٍ التحقق...",

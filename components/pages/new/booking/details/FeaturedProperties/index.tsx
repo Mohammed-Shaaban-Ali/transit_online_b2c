@@ -166,7 +166,7 @@ function FeaturedProperties({}: Props) {
       <div className="flex items-center justify-between gap-4">
         <h2 className=" text-22 font-bold leading-none ">{t("title")}</h2>
         <Link
-          href="/new/hotels"
+          href="/hotels"
           className="text-16 font-medium leading-none text-primary flex items-center gap-1 hover:underline"
         >
           {t("showMore")} <ChevronRight className="h-4 w-4 rtl:rotate-180" />

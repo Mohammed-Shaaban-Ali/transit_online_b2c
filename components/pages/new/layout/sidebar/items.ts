@@ -31,38 +31,38 @@ const getSidebarItems = (t: SidebarT): SidebarItem[][] => [
     [
         {
             label: t("hotelsHomes"),
-            href: "/new/hotels",
+            href: "/hotels",
             icon: BedDouble,
             disabled: false,
 
         },
         {
             label: t("flights"),
-            href: "/new/flights",
+            href: "/flights",
             icon: Plane,
             disabled: false,
         },
         {
             label: t("trains"),
-            href: "/new/trains",
+            href: "/trains",
             icon: TrainFront, disabled: true,
 
         },
         {
             label: t("cars"),
-            href: "/new/cars",
+            href: "/cars",
             icon: CarFront,
             disabled: true,
         },
         {
             label: t("attractionsTours"),
-            href: "/new/attractions",
+            href: "/attractions",
             icon: FerrisWheel,
             disabled: true,
         },
         {
             label: t("flightHotel"),
-            href: "/new/flight-hotel",
+            href: "/flight-hotel",
             icon: Hotel,
             disabled: true,
         },
@@ -70,13 +70,13 @@ const getSidebarItems = (t: SidebarT): SidebarItem[][] => [
     [
         {
             label: t("privateTours"),
-            href: "/new/private-tours",
+            href: "/private-tours",
             icon: Luggage,
             disabled: true,
         },
         {
             label: t("groupTours"),
-            href: "/new/group-tours",
+            href: "/group-tours",
             icon: Flag,
             disabled: true,
         },
@@ -84,26 +84,26 @@ const getSidebarItems = (t: SidebarT): SidebarItem[][] => [
     [
         {
             label: t("tripPlanner"),
-            href: "/new/planner",
+            href: "/planner",
             icon: Route,
             isNew: true,
             disabled: true,
         },
         {
             label: t("travelInspiration"),
-            href: "/new/inspiration",
+            href: "/inspiration",
             icon: Lightbulb,
             disabled: true,
         },
         {
             label: t("map"),
-            href: "/new/map",
+            href: "/map",
             icon: MapPinned,
             disabled: true,
         },
         {
             label: t("deals"),
-            href: "/new/deals",
+            href: "/deals",
             icon: BadgePercent,
             disabled: true,
         },
@@ -111,13 +111,13 @@ const getSidebarItems = (t: SidebarT): SidebarItem[][] => [
     [
         {
             label: t("rewards"),
-            href: "/new/rewards",
+            href: "/rewards",
             icon: CircleDollarSign,
             disabled: true,
         },
         {
             label: t("app"),
-            href: "/new/app",
+            href: "/app",
             icon: Smartphone,
             disabled: true,
         },

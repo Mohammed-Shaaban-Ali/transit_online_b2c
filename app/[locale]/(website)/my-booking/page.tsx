@@ -183,7 +183,7 @@ function page({}: Props) {
                     <div
                       key={booking.id}
                       onClick={() =>
-                        router.push(`/new/my-booking/${booking.booking_number}`)
+                        router.push(`/my-booking/${booking.booking_number}`)
                       }
                       className="rounded-md bg-white p-5 md:p-7 cursor-pointer hover:shadow-md transition-shadow"
                     >

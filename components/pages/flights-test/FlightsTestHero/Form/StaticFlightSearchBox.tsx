@@ -117,7 +117,7 @@ type Props = {
 function StaticFlightSearchBox({
   className,
   compactActions = false,
-  submitPath = "/new/flights/showfarefirst",
+  submitPath = "/flights/showfarefirst",
   initialValues,
 }: Props) {
   const router = useRouter();
@@ -353,9 +353,11 @@ function StaticFlightSearchBox({
             <PopoverContent
               align="start"
               side="bottom"
-              sideOffset={6}
-              avoidCollisions
-              collisionPadding={16}
+              sideOffset={8}
+              avoidCollisions={false}
+              collisionPadding={0}
+              sticky="always"
+              hideWhenDetached={false}
               className="w-auto max-w-[calc(100vw-32px)] overflow-x-auto border-none bg-transparent p-0 shadow-none"
             >
               <FlexibleDatePicker
