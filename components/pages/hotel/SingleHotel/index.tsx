@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import AvailableRooms from "./AvailableRooms";
 import Facilities from "./Facilities";
 import GalleryOne from "./GalleryOne";
+import HotelRoomsTabs from "./HotelRoomsTabs";
 import SingleHotelSkeleton from "./Skeleton";
 import { getSearchParamsData } from "@/utils/getSearchParams";
 import { Button } from "@/components/ui/button";
@@ -53,7 +54,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
     const parsedHotel = JSON.parse(LocalStorage);
     // Find the package with the lowest price
     const sortedPackages = [...(data?.packages || [])].sort(
-      (a, b) => (a.price?.finalPrice || 0) - (b.price?.finalPrice || 0)
+      (a, b) => (a.price?.finalPrice || 0) - (b.price?.finalPrice || 0),
     );
     const cheapestPackage = sortedPackages[0];
 
@@ -91,7 +92,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
     if (searchData?.checkIn && searchData?.checkOut) {
       const calculatedNights = calculateNights(
         searchData.checkIn,
-        searchData.checkOut
+        searchData.checkOut,
       );
       setNights(calculatedNights);
     }
@@ -99,14 +100,14 @@ function SingleHotel({ hotelID, uuid }: Props) {
       setAdults(
         searchData?.rooms?.reduce(
           (sum: number, room: any) => sum + room.AdultsCount,
-          0
-        )
+          0,
+        ),
       );
       setChildren(
         searchData?.rooms?.reduce(
           (sum: number, room: any) => sum + (room.KidsAges?.length || 0),
-          0
-        )
+          0,
+        ),
       );
     }
   }, []);
@@ -122,7 +123,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
     }
 
     return (
-      <div className="container mx-auto px-4">
+      <div className="container max-w-[1200px]! mx-auto px-4">
         <div className="min-h-screen flex flex-col justify-center items-center">
           <div className="text-center">
             <h1 className="text-6xl font-bold text-red-600 mb-4">
@@ -151,8 +152,9 @@ function SingleHotel({ hotelID, uuid }: Props) {
   }
 
   return (
-    <section className="py-12 container ">
+    <section className="my-12 container max-w-[1200px]! mx-auto px-4 ">
       <GalleryOne hotel={hotelData} nights={nights} />
+      <HotelRoomsTabs />
 
       {data?.hotelContent?.descriptions &&
         data?.hotelContent?.descriptions.length > 0 && (
@@ -160,8 +162,9 @@ function SingleHotel({ hotelID, uuid }: Props) {
             <h3 className="text-22 font-bold mb-3">{t("overview")}</h3>
             <div className="space-y-2">
               <div
-                className={`text-16 leading-relaxed text-gray-600 ${!isOverviewExpanded ? "line-clamp-3" : ""
-                  }`}
+                className={`text-16 leading-relaxed text-gray-600 ${
+                  !isOverviewExpanded ? "line-clamp-3" : ""
+                }`}
               >
                 {data?.hotelContent?.descriptions?.map(
                   (des: {
@@ -170,7 +173,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
                     language: string;
                   }) => (
                     <p key={des.line}>{des.description}</p>
-                  )
+                  ),
                 )}
               </div>
               {data?.hotelContent?.descriptions &&

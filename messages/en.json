@@ -262,6 +262,29 @@
         "showMore": "Show more",
         "showLess": "Show less"
     },
+    "HotelRoomsTabs": {
+        "ariaTabs": "Hotel detail sections",
+        "ariaFilters": "Room filters",
+        "tabs": {
+            "rooms": "Rooms",
+            "reviews": "Guest Reviews",
+            "amenities": "Services & Amenities",
+            "policies": "Policies"
+        },
+        "filters": {
+            "freeCancellation": "Free cancellation",
+            "instantConfirmation": "Instant confirmation",
+            "roomsWithWindows": "Rooms with windows",
+            "prepayOnline": "Prepay Online",
+            "hotelPackage": "Hotel Package",
+            "payAtHotel": "Pay at Hotel"
+        },
+        "placeholders": {
+            "reviews": "Guest reviews content will appear here.",
+            "amenities": "Services and amenities details will appear here.",
+            "policies": "Hotel policies will appear here."
+        }
+    },
     "AvailableRooms": {
         "noRooms": "No rooms available at this time",
         "title": "Available Rooms",
@@ -295,8 +318,23 @@
         "facility": "Facility"
     },
     "GalleryOne": {
-        "seeAllPhotos": "See All Photos",
-        "hotelImageAlt": "Hotel image {index}"
+        "seeAllPhotos": "See All {count} Photos",
+        "hotelImageAlt": "Hotel image {index}",
+        "showOnMap": "Show on map",
+        "wePriceMatch": "We Price Match",
+        "selectRooms": "Select Rooms",
+        "travelEssentials": "Travel Essentials",
+        "amenities": "Amenities",
+        "allAmenities": "All amenities",
+        "more": "more",
+        "outstanding": "Outstanding",
+        "excellent": "Excellent",
+        "veryGood": "Very Good",
+        "good": "Good",
+        "reviewQuote": "The room was absolutely perfect, spotless and very clean, making for a super comfortable stay.",
+        "allReviews": "All {count} reviews",
+        "surroundings": "Surroundings",
+        "viewOnMap": "View on map"
     },
     "SuccessDialog": {
         "roomAdded": "Room added to cart successfully",

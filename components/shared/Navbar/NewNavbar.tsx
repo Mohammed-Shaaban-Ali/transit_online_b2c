@@ -106,12 +106,14 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
           <div className="hidden md:block">
             <UserMenu
               wrapperClassName="relative"
-              triggerClassName="inline-flex items-center gap-2 rounded bg-white/15 px-2 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/25"
-              avatarClassName="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-semibold text-primary"
-              nameClassName="max-w-[110px] truncate"
+              triggerClassName={`inline-flex items-center gap-2 rounded-md bg-white/15 px-2 py-1.5 text-sm font-medium text-white transition-colors hover:bg-white/25
+                ${isBlack ? "border text-black!" : "bg-white/15 text-white hover:bg-white/25"}
+                `}
+              avatarClassName={`inline-flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-semibold text-primary"
+              nameClassName="max-w-[110px] truncate ${isBlack ? "bg-gray-200!" : ""}`}
               signInClassName={`inline-flex items-center rounded px-3 py-2 text-[14px] font-medium transition-colors ${
                 isBlack
-                  ? "bg-primary text-white hover:bg-primary/90"
+                  ? "bg-primary! text-white! hover:bg-primary/90"
                   : "bg-white/15 text-white hover:bg-white/25"
               }`}
             />

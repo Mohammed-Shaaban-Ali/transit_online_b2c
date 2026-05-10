@@ -1,5 +1,6 @@
 import React from "react";
 import SingleHotel from "@/components/pages/hotel/SingleHotel";
+import NewNavbar from "@/components/shared/Navbar/NewNavbar";
 
 type Props = Promise<{
   hotel_Id: string;
@@ -11,5 +12,11 @@ export default async function Page({ params }: { params: Props }) {
   const uuid = resolvedParams?.uuid;
   const hotel_Id = resolvedParams?.hotel_Id;
 
-  return <SingleHotel hotelID={hotel_Id} uuid={uuid} />;
+  return (
+    <div className="bg-[#f9f9f9]">
+      <NewNavbar />
+
+      <SingleHotel hotelID={hotel_Id} uuid={uuid} />
+    </div>
+  );
 }

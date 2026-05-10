@@ -155,7 +155,7 @@ export default function HotelsTestHotelCard({
   const hotelName = locale === "ar" ? hotel.displayNameAr : hotel.displayName;
   return (
     <Link
-      href={`/hotels/${hotel.id}/${uuid}`}
+      href={`/hotels/details/${hotel.id}/${uuid}`}
       onClick={persistHotelAndNavigate}
       className="group flex flex-row items-stretch overflow-hidden rounded-lg border
         border-gray-200 bg-white font-sans transition-shadow duration-200

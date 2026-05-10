@@ -262,6 +262,29 @@
         "showMore": "عرض المزيد",
         "showLess": "عرض أقل"
     },
+    "HotelRoomsTabs": {
+        "ariaTabs": "أقسام تفاصيل الفندق",
+        "ariaFilters": "تصفية الغرف",
+        "tabs": {
+            "rooms": "الغرف",
+            "reviews": "تقييمات الضيوف",
+            "amenities": "الخدمات والمرافق",
+            "policies": "السياسات"
+        },
+        "filters": {
+            "freeCancellation": "إلغاء مجاني",
+            "instantConfirmation": "تأكيد فوري",
+            "roomsWithWindows": "غرف بنافذة",
+            "prepayOnline": "دفع مسبق عبر الإنترنت",
+            "hotelPackage": "باقة الفندق",
+            "payAtHotel": "الدفع في الفندق"
+        },
+        "placeholders": {
+            "reviews": "محتوى تقييمات الضيوف سيظهر هنا.",
+            "amenities": "تفاصيل الخدمات والمرافق ستظهر هنا.",
+            "policies": "سياسات الفندق ستظهر هنا."
+        }
+    },
     "AvailableRooms": {
         "noRooms": "لا توجد غرف متاحة في الوقت الحالي",
         "title": "الغرف المتاحة",
@@ -295,8 +318,23 @@
         "facility": "مرفق"
     },
     "GalleryOne": {
-        "seeAllPhotos": "عرض جميع الصور",
-        "hotelImageAlt": "صورة الفندق {index}"
+        "seeAllPhotos": "عرض جميع الصور ({count})",
+        "hotelImageAlt": "صورة الفندق {index}",
+        "showOnMap": "عرض على الخريطة",
+        "wePriceMatch": "نضمن أفضل سعر",
+        "selectRooms": "اختر الغرف",
+        "travelEssentials": "المميزات الأساسية",
+        "amenities": "المرافق",
+        "allAmenities": "جميع المرافق",
+        "more": "المزيد",
+        "outstanding": "رائع",
+        "excellent": "ممتاز",
+        "veryGood": "جيد جداً",
+        "good": "جيد",
+        "reviewQuote": "الغرفة كانت مثالية تماماً، نظيفة للغاية مما جعل الإقامة مريحة جداً.",
+        "allReviews": "جميع التقييمات ({count})",
+        "surroundings": "المحيط",
+        "viewOnMap": "عرض على الخريطة"
     },
     "SuccessDialog": {
         "roomAdded": "تم إضافة الغرفة إلى السلة بنجاح",
