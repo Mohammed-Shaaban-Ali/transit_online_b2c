@@ -14,6 +14,7 @@ import GalleryOne from "./GalleryOne";
 import HotelRoomsTabs from "./HotelRoomsTabs";
 import GuestReviewsSection from "./GuestReviewsSection";
 import HotelLocationSection from "./HotelLocationSection";
+import HotelServicesAmenitiesSection from "./HotelServicesAmenitiesSection";
 import SingleHotelSkeleton from "./Skeleton";
 import { getSearchParamsData } from "@/utils/getSearchParams";
 import { Button } from "@/components/ui/button";
@@ -204,6 +205,8 @@ function SingleHotel({ hotelID, uuid }: Props) {
         latitude={hotelData?.location?.latitude}
         longitude={hotelData?.location?.longitude}
       />
+
+      <HotelServicesAmenitiesSection />
 
       {hotelData?.location?.latitude && hotelData?.location?.longitude && (
         <section className="pt-8">
