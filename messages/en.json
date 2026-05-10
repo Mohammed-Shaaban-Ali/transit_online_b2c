@@ -513,6 +513,22 @@
         "packageImage": "Package",
         "packageImageAlt": "Package image {index}",
         "more": "More",
+        "yourChoices": "Your Choices",
+        "sleeps": "Sleeps",
+        "todayPrice": "Today's Price",
+        "freeCancellation": "Free Cancellation",
+        "instantConfirmation": "Instant confirmation",
+        "prepayOnline": "Prepay online",
+        "specialDiscount": "Special Discount",
+        "off": "off",
+        "totalPrice": "Total price",
+        "inclTaxes": "incl. taxes & fees",
+        "reserve": "Reserve",
+        "showMoreRates": "Show {count} more room rate",
+        "showLess": "Show Less",
+        "from": "from",
+        "roomDetails": "Room Details",
+        "lateCheckout": "Late Check-out",
         "validation": {
             "datesRequired": "Please select check-in and check-out dates"
         }

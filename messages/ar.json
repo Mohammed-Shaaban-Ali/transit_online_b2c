@@ -513,6 +513,22 @@
         "packageImage": "باقة",
         "packageImageAlt": "صورة الباقة {index}",
         "more": "اخرى",
+        "yourChoices": "خياراتك",
+        "sleeps": "ينام",
+        "todayPrice": "سعر اليوم",
+        "freeCancellation": "إلغاء مجاني",
+        "instantConfirmation": "تأكيد فوري",
+        "prepayOnline": "الدفع المسبق أونلاين",
+        "specialDiscount": "خصم خاص",
+        "off": "خصم",
+        "totalPrice": "السعر الإجمالي",
+        "inclTaxes": "شامل الضرائب والرسوم",
+        "reserve": "احجز",
+        "showMoreRates": "عرض {count} أسعار إضافية",
+        "showLess": "عرض أقل",
+        "from": "من",
+        "roomDetails": "تفاصيل الغرفة",
+        "lateCheckout": "تسجيل مغادرة متأخر",
         "validation": {
             "datesRequired": "يرجى اختيار تواريخ الوصول والذهاب"
         }
