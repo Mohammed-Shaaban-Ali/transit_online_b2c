@@ -431,6 +431,60 @@
             "carbonMonoxide": "Carbon monoxide alarm"
         }
     },
+    "HotelPropertyPolicies": {
+        "title": "Property Policies",
+        "checkInOut": {
+            "label": "Check-in and Check-out Times",
+            "checkInLabel": "Check-in:",
+            "checkInValue": "After 14:30",
+            "checkOutLabel": "Check-out:",
+            "checkOutValue": "Before 12:00",
+            "frontDesk": "Front desk hours: 24/7"
+        },
+        "guestsAccepted": {
+            "label": "Guests Accepted",
+            "body": "Guests from all countries/regions are welcome at this property"
+        },
+        "childPolicies": {
+            "label": "Child policies",
+            "line1": "Children of all ages are welcome at this property.",
+            "line2": "Children between 0 and 17 years old can stay for free if no extra bed is needed."
+        },
+        "cribs": {
+            "label": "Cribs and Extra Beds",
+            "body": "For all room types, cribs and extra beds cannot be added."
+        },
+        "breakfast": {
+            "label": "Breakfast",
+            "body": "Breakfast not provided"
+        },
+        "deposit": {
+            "label": "Deposit Policy",
+            "depositWord": "Deposit",
+            "body": "No deposit required by the property"
+        },
+        "pets": {
+            "label": "Pets",
+            "body": "Pets are not allowed"
+        },
+        "serviceAnimals": {
+            "label": "Service animals",
+            "body": "Service animals are not allowed"
+        },
+        "ageRequirements": {
+            "label": "Age Requirements",
+            "body": "The main guest checking in must be at least 18 years old"
+        },
+        "payingAtHotel": {
+            "label": "Paying at the hotel"
+        },
+        "payments": {
+            "wechat": "WeChat Pay",
+            "unionPay": "UnionPay",
+            "alipay": "Alipay",
+            "cash": "Cash"
+        }
+    },
     "AvailableRooms": {
         "noRooms": "No rooms available at this time",
         "title": "Available Rooms",

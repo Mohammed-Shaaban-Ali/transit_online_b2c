@@ -110,7 +110,7 @@ export default function HotelServicesAmenitiesSection() {
   const t = useTranslations("HotelServicesAmenities");
 
   return (
-    <section className="mt-8 rounded-lg border border-gray-100 bg-white  shadow-sm  p-5">
+    <section className="mt-5 rounded-lg border border-gray-100 bg-white  shadow-sm  p-5">
       <h2 className="text-22 font-bold text-gray-900 ">{t("pageTitle")}</h2>
 
       <div className="mt-4 ">
