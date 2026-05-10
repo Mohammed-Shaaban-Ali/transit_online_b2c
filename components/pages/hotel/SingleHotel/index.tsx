@@ -12,6 +12,8 @@ import AvailableRooms from "./AvailableRooms";
 import Facilities from "./Facilities";
 import GalleryOne from "./GalleryOne";
 import HotelRoomsTabs from "./HotelRoomsTabs";
+import GuestReviewsSection from "./GuestReviewsSection";
+import HotelLocationSection from "./HotelLocationSection";
 import SingleHotelSkeleton from "./Skeleton";
 import { getSearchParamsData } from "@/utils/getSearchParams";
 import { Button } from "@/components/ui/button";
@@ -155,6 +157,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
     <section className="my-12 container max-w-[1200px]! mx-auto px-4 ">
       <GalleryOne hotel={hotelData} nights={nights} />
       <HotelRoomsTabs />
+      <GuestReviewsSection />
 
       {data?.hotelContent?.descriptions &&
         data?.hotelContent?.descriptions.length > 0 && (
@@ -196,6 +199,11 @@ function SingleHotel({ hotelID, uuid }: Props) {
       />
 
       <Facilities amenities={hotelData?.facilities as any} />
+
+      <HotelLocationSection
+        latitude={hotelData?.location?.latitude}
+        longitude={hotelData?.location?.longitude}
+      />
 
       {hotelData?.location?.latitude && hotelData?.location?.longitude && (
         <section className="pt-8">

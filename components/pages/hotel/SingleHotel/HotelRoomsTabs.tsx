@@ -22,9 +22,7 @@ export default function HotelRoomsTabs() {
   const [activeTab, setActiveTab] = useState<TabId>("rooms");
   const [selectedFilters, setSelectedFilters] = useState<Set<string>>(
     () =>
-      new Set(
-        STATIC_FILTERS.filter((f) => f.defaultSelected).map((f) => f.id),
-      ),
+      new Set(STATIC_FILTERS.filter((f) => f.defaultSelected).map((f) => f.id)),
   );
 
   const toggleFilter = (id: string) => {
@@ -37,9 +35,9 @@ export default function HotelRoomsTabs() {
   };
 
   return (
-    <div className="mt-6 rounded-lg border border-gray-100 bg-white p-4 shadow-sm md:p-5">
+    <div className="mt-5 rounded-lg border border-gray-100 bg-white  shadow-sm ">
       <div
-        className="flex flex-wrap gap-6 border-b border-gray-200 pb-3"
+        className="flex flex-wrap gap-6 border-b p-5 pb-0 "
         role="tablist"
         aria-label={t("ariaTabs")}
       >
@@ -50,11 +48,10 @@ export default function HotelRoomsTabs() {
             role="tab"
             aria-selected={activeTab === id}
             className={cn(
-              "relative pb-3 text-sm font-medium text-gray-500 transition-colors hover:text-gray-800",
+              "relative pb-3 text-lg font-bold text-gray-500 transition-colors hover:text-gray-800",
               activeTab === id &&
-                "font-semibold text-gray-900 after:absolute after:start-0 after:bottom-0 after:h-0.5 after:w-full after:rounded-full after:bg-gray-900",
+                "font-bold text-gray-900 after:absolute after:start-0 after:bottom-0 after:h-1 after:w-full after:rounded-full after:bg-gray-900",
             )}
-            onClick={() => setActiveTab(id)}
           >
             {t(`tabs.${id}`)}
           </button>
@@ -62,7 +59,11 @@ export default function HotelRoomsTabs() {
       </div>
 
       {activeTab === "rooms" && (
-        <div className="flex flex-wrap gap-2 pt-4" role="group" aria-label={t("ariaFilters")}>
+        <div
+          className="flex flex-wrap gap-2 p-5"
+          role="group"
+          aria-label={t("ariaFilters")}
+        >
           {STATIC_FILTERS.map((filter) => {
             const isOn = selectedFilters.has(filter.id);
             return (
@@ -71,14 +72,12 @@ export default function HotelRoomsTabs() {
                 type="button"
                 onClick={() => toggleFilter(filter.id)}
                 className={cn(
-                  "inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm transition-colors",
+                  "inline-flex items-center gap-1.5 rounded px-3 py-1.5 text-[14x] font-medium transition-colors",
                   "bg-gray-100 text-gray-800 hover:bg-gray-200",
-                  isOn && "bg-gray-200 ring-1 ring-gray-300",
+                  isOn &&
+                    "bg-gray-800 text-white ring-1 ring-gray-300   hover:bg-gray-800 hover:text-white",
                 )}
               >
-                {isOn && (
-                  <Check className="size-3.5 shrink-0 text-gray-900" strokeWidth={2.5} />
-                )}
                 <span>
                   {t(`filters.${filter.id}`)}({filter.count})
                 </span>
@@ -89,7 +88,9 @@ export default function HotelRoomsTabs() {
       )}
 
       {activeTab !== "rooms" && (
-        <p className="pt-4 text-sm text-gray-500">{t(`placeholders.${activeTab}`)}</p>
+        <p className="pt-4 text-sm text-gray-500">
+          {t(`placeholders.${activeTab}`)}
+        </p>
       )}
     </div>
   );

@@ -285,6 +285,87 @@
             "policies": "Hotel policies will appear here."
         }
     },
+    "GuestReviews": {
+        "title": "Guest Reviews",
+        "ratingLabel": "Excellent",
+        "reviewCount": "{count} reviews",
+        "streak": "{count} guests in a row gave their stay a positive rating.",
+        "categories": {
+            "cleanliness": "Cleanliness",
+            "amenities": "Amenities",
+            "location": "Location",
+            "service": "Service"
+        },
+        "compareNote": "Average for similar properties in Shanghai",
+        "aiSummaryTitle": "Review summary",
+        "aiPowered": "Powered by AI",
+        "feedbackHelpful": "Mark as helpful",
+        "feedbackNotHelpful": "Mark as not helpful",
+        "whatGuestsSay": "What guests say",
+        "originalText": "Original Text",
+        "translationByGoogle": " Translation provided by Google",
+        "showAllReviews": "Show All Reviews",
+        "summaries": {
+            "location": {
+                "title": "Location Convenience:",
+                "body": "Guests highlight proximity to subway stations, Lujiazui, The Bund, and central sightseeing.",
+                "basedOn": "(based on 1 review)"
+            },
+            "facilities": {
+                "title": "New and Smart Facilities:",
+                "body": "Many reviews mention recent renovations, in-room smart assistants, and modern equipment.",
+                "basedOn": "(based on 231 reviews)"
+            },
+            "service": {
+                "title": "Good Service:",
+                "body": "Front desk staff are described as friendly and responsive; some guests mention robot food delivery.",
+                "basedOn": ""
+            },
+            "hygiene": {
+                "title": "Clean Hygiene:",
+                "body": "Rooms are frequently described as clean with prompt housekeeping.",
+                "basedOn": "(based on 564 reviews)"
+            },
+            "environment": {
+                "title": "Comfortable Environment:",
+                "body": "Guests appreciate minimalist decor, natural light where available, and good ventilation.",
+                "basedOn": "(based on 541 reviews)"
+            },
+            "suggestion": {
+                "title": "Guest Suggestion:",
+                "body": "A smaller number of reviews cite bedding comfort, street or renovation noise, and air quality as areas to improve.",
+                "basedOn": "(based on 10 reviews)"
+            }
+        },
+        "reviews": {
+            "chalermpan": {
+                "initials": "CZ",
+                "name": "Chalermpan Zu",
+                "date": "April 28, 2026",
+                "body": "We were surprised by the entrance which was under construction, we couldn't even find the hotel sign although we were standing in front of it. After reaching the hotel lobby on the fifth floor, the cigarette smell was dense though inside our room was minimal. After going out for the whole evening, the cigarette smell was intense in our room. The good things were the room size and the bed, including cleanliness and staff's attentive service."
+            },
+            "liona": {
+                "initials": "L",
+                "name": "liona777",
+                "date": "April 25, 2026",
+                "body": "Environment: There's ongoing renovation downstairs from 8 AM to 6 PM, and the noise is very loud and can be heard in every room. The rooms have no windows, and the newly renovated smell is quite strong. With no windows, the smell can't dissipate, making my throat feel scratchy after just one night. It's about a ten-minute walk to Century Avenue Metro Station, but quite close to the Bund by taxi."
+            },
+            "guest": {
+                "initials": "G",
+                "name": "Guest User",
+                "date": "April 19, 2026",
+                "body": "The room was very clean and odor-free. I compared reviews for several Home Inn branches, and this one was the only one without hygiene issues. After staying, it was indeed as good as the reviews claimed; even the bathroom was spotless. Because there was noise from renovations on other floors, the front desk staff immediately moved me to another room and kept checking to see if the situation had improved. You can really feel their dedication to solving customer problems. It's this servic..."
+            }
+        }
+    },
+    "HotelLocation": {
+        "title": "Location",
+        "transport": "Transport",
+        "shopping": "Shopping",
+        "landmarks": "Landmarks",
+        "dining": "Dining",
+        "showOnMap": "Show on map"
+    },
     "AvailableRooms": {
         "noRooms": "No rooms available at this time",
         "title": "Available Rooms",
