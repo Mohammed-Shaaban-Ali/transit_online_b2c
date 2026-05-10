@@ -16,11 +16,14 @@ import GuestReviewsSection from "./GuestReviewsSection";
 import HotelLocationSection from "./HotelLocationSection";
 import HotelServicesAmenitiesSection from "./HotelServicesAmenitiesSection";
 import HotelPropertyPoliciesSection from "./HotelPropertyPoliciesSection";
+import HotelFinePrintSection from "./HotelFinePrintSection";
 import SingleHotelSkeleton from "./Skeleton";
 import { getSearchParamsData } from "@/utils/getSearchParams";
 import { Button } from "@/components/ui/button";
 import ExpiredDialog from "@/components/shared/ExpiredDialog";
 import { localStorageHotelKey } from "@/constants";
+import NearbyProperties from "./NearbyProperties";
+import HotelMapDialog from "./HotelMapDialog";
 
 type Props = {
   hotelID: string;
@@ -35,6 +38,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
   const [adults, setAdults] = useState<number | undefined>(undefined);
   const [children, setChildren] = useState<number | undefined>(undefined);
   const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
+  const [mapDialogOpen, setMapDialogOpen] = useState(false);
 
   const { data, isFetching, error } = useGetHotelDetailsQuery({
     hotelID,
@@ -155,13 +159,31 @@ function SingleHotel({ hotelID, uuid }: Props) {
     );
   }
 
+  const mapLat = hotelData?.location?.latitude;
+  const mapLng = hotelData?.location?.longitude;
+  const canOpenMapDialog =
+    mapLat != null &&
+    mapLng != null &&
+    !Number.isNaN(Number(mapLat)) &&
+    !Number.isNaN(Number(mapLng));
+
   return (
     <section className="my-12 container max-w-[1200px]! mx-auto px-4 ">
-      <GalleryOne hotel={hotelData} nights={nights} />
+      <GalleryOne
+        hotel={hotelData}
+        nights={nights}
+        onOpenMap={canOpenMapDialog ? () => setMapDialogOpen(true) : undefined}
+      />
       <HotelRoomsTabs />
+      <AvailableRooms
+        hotel={hotelData as any}
+        night={Number(nights || 0)}
+        adults={Number(adults || 0)}
+        children={Number(children || 0)}
+      />
       <GuestReviewsSection />
 
-      {data?.hotelContent?.descriptions &&
+      {/* {data?.hotelContent?.descriptions &&
         data?.hotelContent?.descriptions.length > 0 && (
           <section className="pt-8">
             <h3 className="text-22 font-bold mb-3">{t("overview")}</h3>
@@ -192,38 +214,32 @@ function SingleHotel({ hotelID, uuid }: Props) {
                 )}
             </div>
           </section>
-        )}
-      <AvailableRooms
-        hotel={hotelData as any}
-        night={Number(nights || 0)}
-        adults={Number(adults || 0)}
-        children={Number(children || 0)}
-      />
+        )} */}
 
       <Facilities amenities={hotelData?.facilities as any} />
 
       <HotelLocationSection
         latitude={hotelData?.location?.latitude}
         longitude={hotelData?.location?.longitude}
+        onShowMap={canOpenMapDialog ? () => setMapDialogOpen(true) : undefined}
       />
 
       <HotelServicesAmenitiesSection />
 
       <HotelPropertyPoliciesSection />
 
-      {hotelData?.location?.latitude && hotelData?.location?.longitude && (
-        <section className="pt-8">
-          <h3 className="text-22 font-bold mb-3">{t("map")}</h3>
-          <iframe
-            src={`https://maps.google.com/maps?q=${hotelData?.location?.latitude},${hotelData?.location?.longitude}&hl=en&z=14&output=embed`}
-            width="100%"
-            height="400"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </section>
+      <HotelFinePrintSection />
+
+      <NearbyProperties />
+
+      {canOpenMapDialog && (
+        <HotelMapDialog
+          open={mapDialogOpen}
+          onOpenChange={setMapDialogOpen}
+          latitude={Number(mapLat)}
+          longitude={Number(mapLng)}
+          title={t("map")}
+        />
       )}
     </section>
   );

@@ -107,9 +107,14 @@ function LocationBlock({
 type Props = {
   latitude?: number;
   longitude?: number;
+  onShowMap?: () => void;
 };
 
-export default function HotelLocationSection({ latitude, longitude }: Props) {
+export default function HotelLocationSection({
+  latitude,
+  longitude,
+  onShowMap,
+}: Props) {
   const t = useTranslations("HotelLocation");
 
   const mapHref =
@@ -149,7 +154,21 @@ export default function HotelLocationSection({ latitude, longitude }: Props) {
       </div>
 
       <div className="mt-8 flex justify-center border-t border-gray-100 pt-6">
-        {mapHref ? (
+        {mapHref && onShowMap ? (
+          <button
+            type="button"
+            onClick={onShowMap}
+            className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
+          >
+            {t("showOnMap")}
+            <span
+              className="flex size-7 items-center justify-center rounded-full border border-primary text-primary"
+              aria-hidden
+            >
+              <ChevronRight className="size-4" strokeWidth={2.5} />
+            </span>
+          </button>
+        ) : mapHref ? (
           <a
             href={mapHref}
             target="_blank"

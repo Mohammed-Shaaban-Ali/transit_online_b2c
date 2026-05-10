@@ -485,6 +485,11 @@
             "cash": "Cash"
         }
     },
+    "HotelFinePrint": {
+        "title": "Fine Print",
+        "cityNotes": "City notes",
+        "cityNotesBody": "To implement the relevant provisions of the \"Shanghai Municipal Regulations on Domestic Waste Management\" and promote the reduction of domestic waste at the source, the Shanghai Municipal Administration of Culture and Tourism has formulated the \"Implementation Opinions on the Prohibition of Providing Disposable Daily Necessities in Hotel Rooms in Shanghai.\" Starting July 1, 2019, hotel rooms in Shanghai will no longer proactively provide disposable daily necessities such as toothbrushes, combs, bath sponges, razors, nail files, and shoe polish. Please consult your hotel if needed."
+    },
     "AvailableRooms": {
         "noRooms": "No rooms available at this time",
         "title": "Available Rooms",

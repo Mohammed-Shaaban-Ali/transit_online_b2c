@@ -46,7 +46,14 @@ function getRatingLabel(score: number) {
   return "good";
 }
 
-export default function GalleryOne({ hotel, nights }: any) {
+type GalleryOneProps = {
+  hotel: any;
+  nights?: number;
+  /** Opens embedded map dialog when coordinates exist */
+  onOpenMap?: () => void;
+};
+
+export default function GalleryOne({ hotel, nights, onOpenMap }: GalleryOneProps) {
   const t = useTranslations("GalleryOne");
   const locale = useLocale();
   const [isOpen, setOpen] = useState(false);
@@ -88,9 +95,19 @@ export default function GalleryOne({ hotel, nights }: any) {
               <div className="flex items-center gap-1 text-gray-500 text-lg font-normal flex-wrap">
                 <FiMapPin className="w-4 h-4 shrink-0" />
                 <span>{hotel?.address}</span>
-                <button className="text-primary hover:underline font-medium ml-1 whitespace-nowrap">
-                  {t("showOnMap")}
-                </button>
+                {onOpenMap ? (
+                  <button
+                    type="button"
+                    onClick={onOpenMap}
+                    className="text-primary ms-1 whitespace-nowrap font-medium hover:underline"
+                  >
+                    {t("showOnMap")}
+                  </button>
+                ) : (
+                  <span className="ms-1 whitespace-nowrap text-gray-400">
+                    {t("showOnMap")}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -383,18 +400,30 @@ export default function GalleryOne({ hotel, nights }: any) {
                     </div>
                   ))}
                 </div>
-                <a
-                  href={
-                    hotel?.location?.latitude && hotel?.location?.longitude
-                      ? `https://maps.google.com/maps?q=${hotel.location.latitude},${hotel.location.longitude}`
-                      : "#"
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary text-base font-medium hover:underline mt-3 block"
-                >
-                  {t("viewOnMap")}
-                </a>
+                {onOpenMap &&
+                hotel?.location?.latitude &&
+                hotel?.location?.longitude ? (
+                  <button
+                    type="button"
+                    onClick={onOpenMap}
+                    className="mt-3 block text-left text-base font-medium text-primary hover:underline"
+                  >
+                    {t("viewOnMap")}
+                  </button>
+                ) : hotel?.location?.latitude && hotel?.location?.longitude ? (
+                  <a
+                    href={`https://maps.google.com/maps?q=${hotel.location.latitude},${hotel.location.longitude}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 block text-base font-medium text-primary hover:underline"
+                  >
+                    {t("viewOnMap")}
+                  </a>
+                ) : (
+                  <span className="mt-3 block text-base text-gray-400">
+                    {t("viewOnMap")}
+                  </span>
+                )}
               </div>
             </div>
           </div>
