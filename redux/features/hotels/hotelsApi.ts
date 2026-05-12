@@ -179,7 +179,15 @@ const hotelsApi = baseApi.injectEndpoints({
 
     getHotelBooking: builder.query<SuccessResponse<any>, string>({
       query: (bookingId) => ({
-        url: `/api/iati/bookings/${bookingId}`,
+        url: `/api/hotels/b2c/bookings/${bookingId}`,
+        method: "GET",
+      }),
+      keepUnusedDataFor: 0,
+    }),
+
+    getHotelBookings: builder.query<SuccessResponse<any[]>, void>({
+      query: () => ({
+        url: `/api/hotels/b2c/bookings`,
         method: "GET",
       }),
       keepUnusedDataFor: 0,
@@ -197,6 +205,7 @@ export const {
   useBookHotelMutation,
   useGetHotelBookingQuery,
   useLazyGetHotelBookingQuery,
+  useGetHotelBookingsQuery,
 } = hotelsApi;
 
 const hotelsApi2 = baseApi2.injectEndpoints({
