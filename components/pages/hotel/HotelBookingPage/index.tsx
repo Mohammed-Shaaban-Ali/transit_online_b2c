@@ -1,26 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/navigation";
-import Image from "next/image";
-import {
-  FaCalendar,
-  FaClock,
-  FaHotel,
-  FaUser,
-  FaUtensils,
-} from "react-icons/fa";
-import { IoMdBed } from "react-icons/io";
-import { MdMeetingRoom } from "react-icons/md";
-import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
-import StarRating from "@/components/shared/StarRating";
-import PackageImages from "@/components/shared/PackageImages";
-import { Button } from "@/components/ui/button";
+import { FaHotel } from "react-icons/fa";
+import { Loader2 } from "lucide-react";
+import { getCookie } from "cookies-next";
 import { useTranslations } from "next-intl";
-import { formatePrice } from "@/utils/formatePrice";
-import { HOTEL_BOOKING_KEY } from "@/constants";
+import { Button } from "@/components/ui/button";
+import { HOTEL_BOOKING_KEY, HOTEL_BOOKING_ID_KEY, HOTEL_BOOKING_FORM_DATA_KEY } from "@/constants";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import HotelBookingForm from "@/components/shared/booking/HotelBookingForm";
 import type { BookingFormValues } from "@/components/shared/booking/HotelBookingForm";
+import HotelDetailsCard from "./HotelDetailsCard";
+import DatesCard from "./DatesCard";
+import PriceDetailsCard from "./PriceDetailsCard";
+import CancellationPolicyCard from "./CancellationPolicyCard";
+import RewardsCard from "./RewardsCard";
+import FinePrintCard from "./FinePrintCard";
+import SavingsBanner from "./SavingsBanner";
+import { hotelBookingSuccessPath, hotelBookingFailedPath } from "./hotelBookingPaths";
+import {
+  useBookHotelMutation,
+  useLazyCalculateHotelPriceQuery,
+  useLazyGetHotelBookingQuery,
+  type HotelPassenger,
+} from "@/redux/features/hotels/hotelsApi";
+import {
+  useLoginMutation,
+  useSendOtpMutation,
+} from "@/redux/features/auth/authApi";
+import { toast } from "sonner";
+import type { IPackage } from "@/types/hotels";
 
 interface HotelBookingData {
   hotelId: string;
@@ -28,7 +45,7 @@ interface HotelBookingData {
   hotelName: string;
   starRating: number;
   hotelImage?: string;
-  package: any;
+  package: IPackage;
   checkIn: string;
   checkOut: string;
   nights: number;
@@ -38,11 +55,30 @@ interface HotelBookingData {
 
 const HotelBookingPage = () => {
   const t = useTranslations("HotelBooking");
-  const tHotelsCard = useTranslations("HotelsCard");
   const router = useRouter();
+
   const [hotelData, setHotelData] = useState<HotelBookingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
+  const [paymentRedirectUrl, setPaymentRedirectUrl] = useState<string | null>(null);
+  const [isVerifyingPayment, setIsVerifyingPayment] = useState(false);
+  const [isLoginRequiredDialogOpen, setIsLoginRequiredDialogOpen] = useState(false);
+  const [pendingBookingData, setPendingBookingData] = useState<BookingFormValues | null>(null);
+  const [loginPhoneMeta, setLoginPhoneMeta] = useState<string | null>(null);
+  const [loginOtpDigits, setLoginOtpDigits] = useState(["", "", "", ""]);
+  const [loginError, setLoginError] = useState("");
+  const loginOtpRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const [activeBookingId, setActiveBookingId] = useState<string | null>(null);
+  const isVerifyingPaymentRef = useRef(false);
+
+  const [calculatePrice, calculatePriceState] = useLazyCalculateHotelPriceQuery();
+  const [bookHotel] = useBookHotelMutation();
+  const [getHotelBooking] = useLazyGetHotelBookingQuery();
+  const [login, { isLoading: isSendingLoginOtp }] = useLoginMutation();
+  const [sendOtp, { isLoading: isVerifyingLoginOtp }] = useSendOtpMutation();
+
+  const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
     try {
@@ -57,27 +93,298 @@ const HotelBookingPage = () => {
     }
   }, []);
 
-  const handleBookingSubmit = async (data: BookingFormValues) => {
+  // Trigger loyalty price calculation once hotel data is loaded
+  useEffect(() => {
+    if (!hotelData) return;
+    const originalPrice = Number(hotelData.package?.price?.finalPrice || 0);
+    if (!originalPrice) return;
+
+    calculatePrice({ originalPrice, module: "hotels", points: false }).catch(
+      (error) => console.error("Hotel price calculation error:", error),
+    );
+  }, [hotelData, calculatePrice]);
+
+  // Listen for payment completion inside the iframe
+  useEffect(() => {
+    const onPaymentMessage = (event: MessageEvent) => {
+      if (!isPaymentDialogOpen) return;
+      const data = event.data;
+      if (!data || typeof data !== "object") return;
+      const url = String((data as { url?: string }).url || "").toLowerCase();
+      const bookingId = activeBookingId || sessionStorage.getItem(HOTEL_BOOKING_ID_KEY);
+
+      if (!bookingId) {
+        console.error("Payment finished but booking id is missing.");
+        setIsPaymentDialogOpen(false);
+        setIsVerifyingPayment(false);
+        if (hotelData) {
+          router.replace(hotelBookingFailedPath(hotelData.hotelId, hotelData.uuid));
+        } else {
+          router.push("/hotels");
+        }
+        return;
+      }
+
+      if (url.includes("gita.sa")) {
+        setPaymentRedirectUrl(null);
+        void verifyBookingAfterPayment(bookingId);
+      }
+    };
+
+    window.addEventListener("message", onPaymentMessage);
+    return () => window.removeEventListener("message", onPaymentMessage);
+  }, [activeBookingId, isPaymentDialogOpen, router, hotelData]);
+
+  const verifyBookingAfterPayment = async (bookingId: string) => {
+    if (isVerifyingPaymentRef.current) return;
+    isVerifyingPaymentRef.current = true;
+    setIsVerifyingPayment(true);
+
+    try {
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          const result = await getHotelBooking(bookingId, false).unwrap();
+          if (result?.data) {
+            setIsPaymentDialogOpen(false);
+            if (hotelData) {
+              router.replace(
+                hotelBookingSuccessPath(hotelData.hotelId, hotelData.uuid),
+              );
+            } else {
+              router.push("/hotels");
+            }
+            return;
+          }
+        } catch (error) {
+          console.error(`Hotel booking verification attempt ${attempt} failed:`, error);
+        }
+        if (attempt < 3) await sleep(3000);
+      }
+      setIsPaymentDialogOpen(false);
+      if (hotelData) {
+        router.replace(hotelBookingFailedPath(hotelData.hotelId, hotelData.uuid));
+      } else {
+        router.push("/hotels");
+      }
+    } finally {
+      isVerifyingPaymentRef.current = false;
+      setIsVerifyingPayment(false);
+    }
+  };
+
+  /** Strip every character that isn't a-z, A-Z or space (backend validation). */
+  const sanitizeName = (name: string) =>
+    name.replace(/[^a-zA-Z ]/g, "").trim();
+
+  /**
+   * Build the passengers array from form guests + package room data.
+   *
+   * Allocation  = the room's `id` (from IPackageRoom).
+   * leadPaxID   = "pax-1" (first passenger).
+   * Children    = no email/phone, but get Age from the room's kidsAges array.
+   */
+  const buildPassengers = (
+    data: BookingFormValues,
+    pkg: IPackage,
+    fullPhone: string,
+  ): HotelPassenger[] => {
+    const rooms = pkg.rooms || [];
+    const numRooms = rooms.length || 1;
+    const totalAdults = hotelData?.adults ?? 0;
+    const totalChildren = hotelData?.children ?? 0;
+
+    const passengers: HotelPassenger[] = [];
+    let guestIndex = 0;
+
+    for (let i = 0; i < numRooms; i++) {
+      const room = rooms[i];
+      const roomAllocation = room?.id ?? "";
+      const adultsInRoom =
+        Math.floor(totalAdults / numRooms) + (i < totalAdults % numRooms ? 1 : 0);
+      const childrenInRoom =
+        Math.floor(totalChildren / numRooms) + (i < totalChildren % numRooms ? 1 : 0);
+
+      // Adults in this room
+      for (let a = 0; a < adultsInRoom; a++) {
+        const guest = data.guests[guestIndex];
+        const paxId = `pax-${guestIndex + 1}`;
+        passengers.push({
+          Id: paxId,
+          Allocation: roomAllocation,
+          Email: { Value: data.email.trim() },
+          Telephone: { PhoneNumber: fullPhone },
+          PersonDetails: {
+            Name: {
+              GivenName: sanitizeName(guest?.firstName ?? ""),
+              Surname: sanitizeName(guest?.lastName ?? ""),
+              NamePrefix: "Mr.",
+            },
+            Type: 0,
+          },
+        });
+        guestIndex++;
+      }
+
+      // Children in this room — no email/phone, Age comes from room.kidsAges
+      for (let c = 0; c < childrenInRoom; c++) {
+        const guest = data.guests[guestIndex];
+        const age = room?.kidsAges?.[c] ?? 0;
+        const paxId = `pax-${guestIndex + 1}`;
+        passengers.push({
+          Id: paxId,
+          Allocation: roomAllocation,
+          PersonDetails: {
+            Name: {
+              GivenName: sanitizeName(guest?.firstName ?? ""),
+              Surname: sanitizeName(guest?.lastName ?? ""),
+              NamePrefix: "Mstr.",
+            },
+            Type: 1,
+            Age: age,
+          },
+        });
+        guestIndex++;
+      }
+    }
+
+    return passengers;
+  };
+
+  const submitBookingWithAuth = async (data: BookingFormValues) => {
+    if (!hotelData) return;
+
+    const calculatedData = calculatePriceState.data?.data;
+    const paymentGateway = calculatedData?.payment_gateways?.[0];
+
+    if (!calculatedData || !paymentGateway) {
+      toast.error("Unable to validate latest price. Please try again.");
+      return;
+    }
+
+    // Build full phone number (country code + local digits)
+    const phoneDigits = data.phone.trim().replace(/\D/g, "");
+    const countryCodeDigits = data.phoneCountryCode.replace(/\D/g, "");
+    const fullPhone = phoneDigits.startsWith(countryCodeDigits)
+      ? phoneDigits
+      : `${countryCodeDigits}${phoneDigits}`;
+
+    const pkg = hotelData.package;
+    const passengers = buildPassengers(data, pkg, fullPhone);
+    const leadPax = passengers[0];
+
     setIsSubmitting(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await bookHotel({
+        paymentGateway,
+        uuid: hotelData.uuid,
+        hotelID: Number(hotelData.hotelId),
+        packageID: pkg.packageId,
+        leadPaxID: leadPax?.Id ?? "pax-1",
+        leadPaxAllocation: leadPax?.Allocation ?? "",
+        passengers,
+      }).unwrap();
 
-      // Generate booking ID
-      const generatedId = `HTL-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+      setActiveBookingId(String(response.bookingId || ""));
+      sessionStorage.setItem(HOTEL_BOOKING_ID_KEY, String(response.bookingId || ""));
+      sessionStorage.setItem(HOTEL_BOOKING_FORM_DATA_KEY, JSON.stringify(data));
+      sessionStorage.setItem("HOTEL_BOOKING_PRICE_DATA", JSON.stringify(calculatedData));
 
-      // Persist to sessionStorage so data survives locale switch
-      sessionStorage.setItem("HOTEL_BOOKING_ID", generatedId);
-      sessionStorage.setItem("HOTEL_BOOKING_FORM_DATA", JSON.stringify(data));
+      if (response.redirectUrl) {
+        setPaymentRedirectUrl(response.redirectUrl);
+        setIsVerifyingPayment(false);
+        setIsPaymentDialogOpen(true);
+        return;
+      }
 
-      // Navigate to dedicated success route
-      router.push(
-        `/hotels/${hotelData?.hotelId}/${hotelData?.uuid}/booking/success`,
+      router.replace(
+        hotelBookingSuccessPath(hotelData.hotelId, hotelData.uuid),
       );
     } catch (error) {
-      console.error("Booking error:", error);
+      console.error("Hotel booking error:", error);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleBookingSubmit = async (data: BookingFormValues) => {
+    const authToken = getCookie("auth-token");
+    if (!authToken) {
+      setIsSubmitting(true);
+      const normalizedPhone = data.phone.trim().replace(/[^\d+]/g, "");
+      if (!/^\+?\d{8,15}$/.test(normalizedPhone)) {
+        toast.error("Please enter a valid phone number.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const phoneWithCode = normalizedPhone.startsWith("+")
+        ? normalizedPhone
+        : `+${normalizedPhone}`;
+
+      setPendingBookingData(data);
+      setLoginError("");
+      setLoginOtpDigits(["", "", "", ""]);
+      setLoginPhoneMeta(phoneWithCode);
+
+      try {
+        await login({ login: phoneWithCode, type: "PHONE" }).unwrap();
+        setIsLoginRequiredDialogOpen(true);
+      } catch (error: any) {
+        toast.error(error?.data?.message || "Failed to send OTP.");
+      } finally {
+        setIsSubmitting(false);
+      }
+      return;
+    }
+
+    await submitBookingWithAuth(data);
+  };
+
+  const handleLoginOtpChange = (index: number, rawValue: string) => {
+    const value = rawValue.replace(/\D/g, "").slice(0, 1);
+    const updatedDigits = [...loginOtpDigits];
+    updatedDigits[index] = value;
+    setLoginOtpDigits(updatedDigits);
+    if (value && index < loginOtpRefs.current.length - 1) {
+      loginOtpRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleLoginOtpKeyDown = (
+    index: number,
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === "Backspace" && !loginOtpDigits[index] && index > 0) {
+      loginOtpRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleVerifyBookingLoginOtp = async () => {
+    if (!loginPhoneMeta) return;
+    setLoginError("");
+
+    const otp = loginOtpDigits.join("");
+    if (!/^\d{4}$/.test(otp)) {
+      setLoginError("Please enter the 4-digit OTP.");
+      return;
+    }
+
+    try {
+      await sendOtp({
+        field: loginPhoneMeta.replace("+", ""),
+        otp,
+        type: "PHONE",
+      }).unwrap();
+
+      setIsLoginRequiredDialogOpen(false);
+
+      if (pendingBookingData) {
+        const bookingData = pendingBookingData;
+        setPendingBookingData(null);
+        await submitBookingWithAuth(bookingData);
+      }
+    } catch (error: any) {
+      setLoginError(error?.data?.message || "Invalid OTP, please try again.");
     }
   };
 
@@ -86,7 +393,6 @@ const HotelBookingPage = () => {
       <div className="container my-24">
         <div className="space-y-4">
           <div className="h-8 bg-gray-200 rounded-lg w-64 animate-pulse" />
-          <div className="h-48 bg-gray-200 rounded-2xl animate-pulse" />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-4">
               <div className="h-48 bg-gray-200 rounded-2xl animate-pulse" />
@@ -120,187 +426,179 @@ const HotelBookingPage = () => {
     );
   }
 
-  // Show Form + Hotel Details
   const item = hotelData;
   const pkg = item.package;
-  const packageImages =
-    pkg.images && pkg.images.length > 0
-      ? pkg.images
-      : pkg.rooms?.[0]?.images || [];
+  const firstRoom = pkg?.rooms?.[0];
 
-  const totalPrice = Number(pkg?.price?.finalPrice || 0);
-  const pricePerNight = item.nights > 0 ? totalPrice / item.nights : totalPrice;
+  const finalPrice = Number(pkg?.price?.finalPrice || 0);
+  const roomsCount = pkg?.rooms?.length || 1;
+  const adultsCount = firstRoom?.adultsCount || item.adults || 1;
 
-  const infoBadges = [
-    {
-      key: "dates",
-      icon: <FaCalendar size={13} />,
-      label: `${item.checkIn} - ${item.checkOut}`,
-    },
-    {
-      key: "nights",
-      icon: <FaClock size={13} />,
-      label: `${item.nights} ${item.nights === 1 ? tHotelsCard("night") : tHotelsCard("nights")}`,
-    },
-    {
-      key: "guests",
-      icon: <FaUser size={13} />,
-      label: `${item.adults} ${item.adults === 1 ? tHotelsCard("adult") : tHotelsCard("adults")}${item.children > 0 ? `, ${item.children} ${item.children === 1 ? tHotelsCard("child") : tHotelsCard("children")}` : ""}`,
-    },
-  ];
+  const grandTotal = finalPrice;
+  const cancellationFee = grandTotal * 0.25;
+  const totalSavings = Number(pkg?.price?.originalPrice || 0) - finalPrice;
 
   return (
-    <div className="container my-24">
-      {/* Header */}
-      <h1 className="text-24 font-bold mb-6">{t("title")}</h1>
-
-      {/* ===== Hotel Details - Full Width Top Section ===== */}
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden mb-6">
-        <div className="flex flex-col md:flex-row">
-          {/* Hotel Image */}
-          <div className="relative w-full md:w-[320px] h-[200px] md:h-auto shrink-0 overflow-hidden">
-            {item.hotelImage && (
-              <Image
-                fill
-                className="object-cover"
-                src={item.hotelImage}
-                alt={item.hotelName}
-                priority
-              />
-            )}
-          </div>
-
-          {/* Hotel Info */}
-          <div className="flex-1 p-4 md:p-5 flex flex-col gap-3">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <h2 className="text-20 font-bold">{item.hotelName}</h2>
-              <StarRating rating={item.starRating} />
-            </div>
-
-            {/* Info Badges */}
-            <div className="flex flex-wrap items-center gap-2">
-              {infoBadges.map((badge) => (
-                <div
-                  key={badge.key}
-                  className="flex items-center gap-1.5 bg-primary/5 text-primary rounded-lg px-3 py-2 text-13 font-medium"
-                >
-                  {badge.icon}
-                  <span>{badge.label}</span>
-                </div>
-              ))}
-              {pkg?.refundability !== undefined &&
-                (pkg.refundability === 1 ? (
-                  <span className="inline-flex items-center gap-1 text-green-600 text-13 bg-green-50 rounded-lg px-3 py-2">
-                    {pkg.refundableText || t("refundable")}
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1 text-red-600 text-13 bg-red-50 rounded-lg px-3 py-2">
-                    {pkg.refundableText || t("nonRefundable")}
-                  </span>
-                ))}
-            </div>
-            {/* Package Images */}
-            {packageImages.length > 0 && (
-              <div className="mt-2">
-                <PackageImages isSmall={true} selectedImages={packageImages} />
-              </div>
-            )}
-            {/* Room Summary */}
-            {pkg?.rooms?.length > 0 && (
-              <div className="flex flex-col gap-2 mt-1">
-                {pkg.rooms.map((room: any, idx: number) => (
-                  <div
-                    key={room.id || idx}
-                    className="bg-gray-50 rounded-xl p-3 border border-gray-200"
-                  >
-                    <h4 className="text-16 font-bold mb-2 line-clamp-1">
-                      {room.roomName}
-                    </h4>
-                    <div className="grid grid-cols-2 gap-3 text-14">
-                      {room.roomType && (
-                        <div className="flex items-center gap-2">
-                          <IoMdBed
-                            size={18}
-                            className="text-primary min-w-[18px]"
-                          />
-                          <span className="text-gray-600">
-                            {tHotelsCard("bedType")} {room.roomType}
-                          </span>
-                        </div>
-                      )}
-                      {room.roomBasis && (
-                        <div className="flex items-center gap-2">
-                          <FaUtensils
-                            size={13}
-                            className="text-primary min-w-[13px]"
-                          />
-                          <span className="text-gray-600">
-                            {tHotelsCard("meals")} {room.roomBasis}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* ===== Form + Price Summary Grid ===== */}
+    <div className="container max-w-[1200px]! mx-auto my-24">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left: Contact Info + Guest Info Form */}
+        {/* Left: Guest Info Form */}
         <div className="lg:col-span-2">
+          <SavingsBanner totalSavings={totalSavings} />
+
           <HotelBookingForm
             adults={item.adults}
             children={item.children}
             rooms={pkg?.rooms || []}
             isSubmitting={isSubmitting}
             onSubmit={handleBookingSubmit}
+            memberRewards={{
+              checkIn: item.checkIn,
+              refundableText: pkg?.refundableText,
+              showFreeCancellation: pkg?.refundability === 1,
+            }}
           />
         </div>
 
-        {/* Right: Price Summary (Sticky) */}
+        {/* Right: Hotel Summary Cards */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden sticky top-12">
-            {/* Summary Header */}
-            <div className="px-4 md:px-5 py-3 bg-gray-100 border-b border-gray-200">
-              <h3 className="text-16 font-bold">{t("priceSummary")}</h3>
-            </div>
+          <div className="space-y-4 lg:sticky lg:top-12">
+            <HotelDetailsCard
+              hotelName={item.hotelName}
+              hotelImage={item.hotelImage}
+              starRating={item.starRating}
+              firstRoom={firstRoom}
+              adultsCount={adultsCount}
+              refundability={pkg?.refundability}
+              refundableText={pkg?.refundableText}
+            />
 
-            <div className="p-4 flex flex-col gap-4">
-              {/* Price Per Night */}
-              <div className="flex items-center justify-between text-14 font-medium text-gray-500">
-                <span>{t("pricePerNight")}</span>
-                <div className="flex items-center gap-1 rtl:flex-row-reverse">
-                  <CurrencySymbol size="sm" />
-                  {formatePrice(pricePerNight)}
-                </div>
-              </div>
+            <DatesCard
+              checkIn={item.checkIn}
+              checkOut={item.checkOut}
+              nights={item.nights}
+              roomsCount={roomsCount}
+            />
 
-              {/* Nights */}
-              <div className="flex items-center justify-between text-14 font-medium text-gray-500">
-                <span>{tHotelsCard("nights")}</span>
-                <span>{item.nights}</span>
-              </div>
+            <PriceDetailsCard
+              roomsCount={roomsCount}
+              nights={item.nights}
+              calculatedData={calculatePriceState.data?.data}
+              isCalculating={calculatePriceState.isFetching}
+              fallbackTotal={grandTotal}
+            />
 
-              <div className="border-t border-dashed border-gray-300" />
+            <CancellationPolicyCard
+              checkIn={item.checkIn}
+              cancellationFee={cancellationFee}
+            />
 
-              {/* Total Price */}
-              <div className="flex items-center justify-between">
-                <span className="text-16 font-bold">{t("totalPrice")}</span>
-                <div className="flex items-center gap-1 rtl:flex-row-reverse">
-                  <CurrencySymbol size="md" />
-                  <span className="text-24 font-bold text-primary">
-                    {formatePrice(totalPrice)}
-                  </span>
-                </div>
-              </div>
-            </div>
+            <RewardsCard grandTotal={calculatePriceState.data?.data?.total?.value ?? grandTotal} />
+
+            <FinePrintCard />
           </div>
         </div>
       </div>
+
+      {/* ===== OTP / Login Dialog ===== */}
+      <Dialog
+        open={isLoginRequiredDialogOpen}
+        onOpenChange={(open) => {
+          setIsLoginRequiredDialogOpen(open);
+          if (!open) {
+            setLoginError("");
+            setLoginOtpDigits(["", "", "", ""]);
+          }
+        }}
+      >
+        <DialogContent className="max-w-md rounded-2xl p-6">
+          <DialogHeader className="space-y-2 text-center">
+            <DialogTitle className="text-2xl font-bold text-slate-900">
+              Enter OTP
+            </DialogTitle>
+            <DialogDescription className="text-sm text-slate-600">
+              Enter the 4-digit OTP sent to your phone to continue booking.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-3">
+            <div className="flex items-center justify-center gap-3">
+              {loginOtpDigits.map((digit, index) => (
+                <input
+                  key={index}
+                  ref={(el) => {
+                    loginOtpRefs.current[index] = el;
+                  }}
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={digit}
+                  onChange={(event) =>
+                    handleLoginOtpChange(index, event.target.value)
+                  }
+                  onKeyDown={(event) => handleLoginOtpKeyDown(index, event)}
+                  className="h-12 w-12 rounded-lg border border-[#d7dce3] bg-white text-center text-lg font-semibold text-slate-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                />
+              ))}
+            </div>
+            {loginError ? (
+              <p className="text-sm font-medium text-red-500">{loginError}</p>
+            ) : null}
+          </div>
+
+          <DialogFooter className="mt-4 flex-col gap-3 sm:flex-col sm:justify-stretch">
+            <Button
+              type="button"
+              className="h-11 w-full"
+              disabled={isSendingLoginOtp || isVerifyingLoginOtp}
+              onClick={() => void handleVerifyBookingLoginOtp()}
+            >
+              {isVerifyingLoginOtp ? "Verifying..." : "Verify OTP"}
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              className="h-11 w-full"
+              onClick={() => setIsLoginRequiredDialogOpen(false)}
+            >
+              Cancel
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* ===== Payment Iframe Dialog ===== */}
+      <Dialog
+        open={isPaymentDialogOpen}
+        onOpenChange={(open) => {
+          if (open) setIsPaymentDialogOpen(true);
+        }}
+      >
+        <DialogContent
+          className="min-w-screen min-h-screen rounded-none border-none p-0 overflow-hidden"
+          showCloseButton={false}
+          onEscapeKeyDown={(event) => event.preventDefault()}
+          onPointerDownOutside={(event) => event.preventDefault()}
+          onInteractOutside={(event) => event.preventDefault()}
+        >
+          {isVerifyingPayment ? (
+            <div className="flex h-full w-full items-center justify-center bg-white">
+              <div className="flex flex-col items-center gap-3 text-center">
+                <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                <p className="text-base font-medium text-gray-700">
+                  Verifying your payment, please wait...
+                </p>
+              </div>
+            </div>
+          ) : paymentRedirectUrl ? (
+            <iframe
+              src={paymentRedirectUrl}
+              title="Hotel payment"
+              className="w-full h-full border-0"
+              allow="payment *"
+            />
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

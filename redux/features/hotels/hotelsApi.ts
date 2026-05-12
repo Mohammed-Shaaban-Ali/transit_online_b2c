@@ -10,6 +10,33 @@ import {
 import { getCookie } from "cookies-next";
 import { NEXT_LOCALE } from "@/constants";
 import { Locale } from "next-intl";
+import { LoyaltyCalculatePriceResponse } from "@/redux/features/flights/flightsApi";
+
+export interface HotelPassenger {
+  Id: string;
+  Allocation: string;
+  Email?: { Value: string };
+  Telephone?: { PhoneNumber: string };
+  PersonDetails: {
+    Name: {
+      GivenName: string;
+      Surname: string;
+      NamePrefix: string;
+    };
+    Type: 0 | 1;
+    Age?: number;
+  };
+}
+
+export interface HotelBookRequest {
+  paymentGateway: string;
+  uuid: string;
+  hotelID: number;
+  packageID: string;
+  leadPaxID: string;
+  leadPaxAllocation: string;
+  passengers: HotelPassenger[];
+}
 
 // Types for hotel package revalidation
 export interface RevalidatePackagesParams {
@@ -133,6 +160,30 @@ const hotelsApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
+    bookHotel: builder.mutation<
+      {
+        success: boolean;
+        message: string;
+        bookingId: number;
+        redirectUrl: string;
+      },
+      HotelBookRequest
+    >({
+      query: (data) => ({
+        url: `/api/hotels/b2c/book`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    getHotelBooking: builder.query<SuccessResponse<any>, string>({
+      query: (bookingId) => ({
+        url: `/api/iati/bookings/${bookingId}`,
+        method: "GET",
+      }),
+      keepUnusedDataFor: 0,
+    }),
   }),
 });
 
@@ -143,6 +194,9 @@ export const {
   useGetCurrenciesQuery,
   useRevalidateHotelPackagesMutation,
   useChangeHotelPackageMutation,
+  useBookHotelMutation,
+  useGetHotelBookingQuery,
+  useLazyGetHotelBookingQuery,
 } = hotelsApi;
 
 const hotelsApi2 = baseApi2.injectEndpoints({
@@ -154,7 +208,22 @@ const hotelsApi2 = baseApi2.injectEndpoints({
         body: data,
       }),
     }),
+
+    calculateHotelPrice: builder.query<
+      LoyaltyCalculatePriceResponse,
+      { originalPrice: number; module: "hotels"; points?: boolean }
+    >({
+      query: (params) => ({
+        url: "/api/loyalty/calculate-price",
+        method: "GET",
+        params,
+      }),
+      keepUnusedDataFor: 0,
+    }),
   }),
 });
 
-export const { useSubmitQuotationMutation } = hotelsApi2;
+export const {
+  useSubmitQuotationMutation,
+  useLazyCalculateHotelPriceQuery,
+} = hotelsApi2;

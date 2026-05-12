@@ -6,12 +6,13 @@ import { z } from "zod";
 import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { FaUser, FaChild } from "react-icons/fa";
-import { MdEmail, MdPhone } from "react-icons/md";
+import { FaChild } from "react-icons/fa";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import HotelMemberRewardsAndSpecialRequests from "./HotelMemberRewardsAndSpecialRequests";
+import HotelBookingTrustFooter from "./HotelBookingTrustFooter";
 
-// Types
 export interface GuestData {
-  title: "mr" | "mrs" | "ms";
   firstName: string;
   lastName: string;
   type: "adult" | "child";
@@ -20,6 +21,7 @@ export interface GuestData {
 export interface BookingFormValues {
   email: string;
   phone: string;
+  phoneCountryCode: string;
   guests: GuestData[];
 }
 
@@ -31,47 +33,20 @@ interface RoomGuestDistribution {
   guestStartIndex: number;
 }
 
+/** Passed from hotel booking page to render rewards + special requests above submit. */
+export interface HotelMemberRewardsFormContext {
+  checkIn: string;
+  refundableText?: string;
+  showFreeCancellation: boolean;
+}
+
 interface HotelBookingFormProps {
   adults: number;
   children: number;
   rooms: any[];
   isSubmitting?: boolean;
   onSubmit: (data: BookingFormValues) => void;
-}
-
-// Title Selector Component
-function TitleSelector({
-  value,
-  onChange,
-  t,
-}: {
-  value: "mr" | "mrs" | "ms";
-  onChange: (val: "mr" | "mrs" | "ms") => void;
-  t: ReturnType<typeof useTranslations>;
-}) {
-  const titles: { value: "mr" | "mrs" | "ms"; label: string }[] = [
-    { value: "mr", label: t("mr") },
-    { value: "mrs", label: t("mrs") },
-    { value: "ms", label: t("ms") },
-  ];
-
-  return (
-    <div className="flex gap-2">
-      {titles.map((item) => (
-        <button
-          key={item.value}
-          type="button"
-          onClick={() => onChange(item.value)}
-          className={`flex-1 py-2.5 px-3 rounded-lg text-14 font-bold border-2 transition-all duration-200 cursor-pointer ${value === item.value
-            ? "bg-primary text-white border-primary"
-            : "bg-white text-gray-600 border-gray-200 hover:border-primary/50"
-            }`}
-        >
-          {item.label}
-        </button>
-      ))}
-    </div>
-  );
+  memberRewards?: HotelMemberRewardsFormContext;
 }
 
 export default function HotelBookingForm({
@@ -80,6 +55,7 @@ export default function HotelBookingForm({
   rooms,
   isSubmitting = false,
   onSubmit,
+  memberRewards,
 }: HotelBookingFormProps) {
   const t = useTranslations("BookingForm");
 
@@ -106,14 +82,11 @@ export default function HotelBookingForm({
     guestIndex += adultsInRoom + childrenInRoom;
   }
 
-  const totalGuests = adults + childrenCount;
-
   // Build default guests array
   const defaultGuests: GuestData[] = [];
   for (const room of roomDistribution) {
     for (let a = 0; a < room.adults; a++) {
       defaultGuests.push({
-        title: "mr",
         firstName: "",
         lastName: "",
         type: "adult",
@@ -121,7 +94,6 @@ export default function HotelBookingForm({
     }
     for (let c = 0; c < room.children; c++) {
       defaultGuests.push({
-        title: "mr",
         firstName: "",
         lastName: "",
         type: "child",
@@ -131,15 +103,24 @@ export default function HotelBookingForm({
 
   // Zod schema
   const bookingSchema = z.object({
-    email: z.string().min(1, t("validation.emailRequired")).email(t("validation.emailInvalid")),
-    phone: z.string().min(5, t("validation.phoneRequired")),
+    email: z
+      .string()
+      .min(1, t("validation.emailRequired"))
+      .email(t("validation.emailInvalid")),
+    phone: z.string().min(8, t("validation.phoneInvalid")),
+    phoneCountryCode: z.string().min(1),
     guests: z.array(
       z.object({
-        title: z.enum(["mr", "mrs", "ms"]),
-        firstName: z.string().min(1, t("validation.firstNameRequired")),
-        lastName: z.string().min(1, t("validation.lastNameRequired")),
+        firstName: z
+          .string()
+          .min(1, t("validation.firstNameRequired"))
+          .regex(/^[a-zA-Z ]+$/, t("validation.englishLettersOnly")),
+        lastName: z
+          .string()
+          .min(1, t("validation.lastNameRequired"))
+          .regex(/^[a-zA-Z ]+$/, t("validation.englishLettersOnly")),
         type: z.enum(["adult", "child"]),
-      })
+      }),
     ),
   });
 
@@ -154,153 +135,210 @@ export default function HotelBookingForm({
     defaultValues: {
       email: "",
       phone: "",
+      phoneCountryCode: "20",
       guests: defaultGuests,
     },
   });
 
-  const watchEmail = watch("email");
-  const watchPhone = watch("phone");
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-      {/* Contact Information Section */}
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div className="flex items-center gap-2 px-4 md:px-5 py-3 bg-gray-100 border-b border-gray-200">
-          <MdEmail size={18} className="text-primary" />
-          <h3 className="text-16 font-bold">{t("contactInfo")}</h3>
+      {/* ===== Who's staying? Section ===== */}
+      <div className="bg-white">
+        <div className="mb-4">
+          <h2 className="text-24 font-bold text-slate-900 mb-1">
+            {t("whosStaying")}
+          </h2>
+          <p className="text-14 text-gray-600">{t("guestNamesMatchValidID")}</p>
         </div>
 
-        <div className="p-4 md:p-5 flex flex-col gap-5">
-          {/* Email */}
-          <FloatingLabelInput
-            id="email"
-            label={t("email")}
-            type="email"
-            register={register("email")}
-            watchValue={watchEmail}
-            error={errors.email?.message}
-            icon={<MdEmail size={16} />}
-          />
-
-          {/* Phone */}
-          <FloatingLabelInput
-            id="phone"
-            label={t("phoneNumber")}
-            type="tel"
-            register={register("phone")}
-            watchValue={watchPhone}
-            error={errors.phone?.message}
-            icon={<MdPhone size={16} />}
-          />
-        </div>
-      </div>
-
-      {/* Guest Information Section */}
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div className="flex items-center gap-2 px-4 md:px-5 py-3 bg-gray-100 border-b border-gray-200">
-          <FaUser size={16} className="text-primary" />
-          <h3 className="text-16 font-bold">{t("guestInfo")}</h3>
-        </div>
-
-        <div className="p-4 md:p-5 flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
           {roomDistribution.map((room) => {
-            const roomGuests: { guestIndex: number; type: "adult" | "child" }[] = [];
+            const roomGuests: {
+              guestIndex: number;
+              type: "adult" | "child";
+              localIdx: number;
+            }[] = [];
             let idx = room.guestStartIndex;
+            let localIdx = 1;
             for (let a = 0; a < room.adults; a++) {
-              roomGuests.push({ guestIndex: idx++, type: "adult" });
+              roomGuests.push({
+                guestIndex: idx++,
+                type: "adult",
+                localIdx: localIdx++,
+              });
             }
             for (let c = 0; c < room.children; c++) {
-              roomGuests.push({ guestIndex: idx++, type: "child" });
+              roomGuests.push({
+                guestIndex: idx++,
+                type: "child",
+                localIdx: localIdx++,
+              });
             }
 
             return (
-              <div key={room.roomIndex} className="flex flex-col gap-4">
-                {/* Room Header */}
+              <div key={room.roomIndex} className="flex flex-col gap-5">
+                {/* Room header — only if more than one room */}
                 {numRooms > 1 && (
-                  <h4 className="text-16 font-bold text-primary text-center">
+                  <h4 className="text-16 font-bold text-primary">
                     {t("room")} {room.roomIndex + 1}
                   </h4>
                 )}
 
-                {roomGuests.map((guest, gIdx) => {
-                  const guestTitle = watch(`guests.${guest.guestIndex}.title`);
-
-                  return (
-                    <div
-                      key={guest.guestIndex}
-                      className="border border-gray-200 rounded-xl p-4 flex flex-col gap-3"
-                    >
-                      {/* Guest type badge */}
-                      <div className="flex items-center gap-2 mb-1">
-                        {guest.type === "adult" ? (
-                          <FaUser size={12} className="text-primary" />
-                        ) : (
+                {roomGuests.map((guest) => (
+                  <div key={guest.guestIndex} className="flex flex-col gap-3">
+                    {/* Guest tag — only when more than one guest in total */}
+                    {(adults + childrenCount > 1 || guest.type === "child") && (
+                      <div className="flex items-center gap-2">
+                        {guest.type === "child" && (
                           <FaChild size={12} className="text-orange-500" />
                         )}
                         <span className="text-13 font-bold text-gray-600">
-                          {guest.type === "adult"
-                            ? t("adult")
-                            : t("child")}{" "}
-                          {gIdx + 1}
+                          {guest.type === "adult" ? t("adult") : t("child")}{" "}
+                          {guest.localIdx}
                         </span>
                       </div>
+                    )}
 
-                      {/* Title Selector */}
-                      <TitleSelector
-                        value={guestTitle || "mr"}
-                        onChange={(val) =>
-                          setValue(`guests.${guest.guestIndex}.title`, val)
+                    {/* Name Fields */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <FloatingLabelInput
+                        id={`guests.${guest.guestIndex}.firstName`}
+                        label={t("firstName")}
+                        // placeholder={t("useOnlyEnglishLetters")}
+                        register={register(
+                          `guests.${guest.guestIndex}.firstName`,
+                        )}
+                        watchValue={watch(
+                          `guests.${guest.guestIndex}.firstName`,
+                        )}
+                        error={
+                          errors.guests?.[guest.guestIndex]?.firstName?.message
                         }
-                        t={t}
+                        inputClassName="font-medium text-slate-900 placeholder:font-normal placeholder:text-gray-400"
+                        containerClassName="h-[68px] bg-white border-gray-300 rounded-lg"
+                        labelClassName="font-medium text-slate-500"
                       />
-
-                      {/* Name Fields */}
-                      <div className="grid grid-cols-2 gap-3">
-                        <FloatingLabelInput
-                          id={`guests.${guest.guestIndex}.firstName`}
-                          label={t("firstName")}
-                          register={register(
-                            `guests.${guest.guestIndex}.firstName`
-                          )}
-                          watchValue={watch(
-                            `guests.${guest.guestIndex}.firstName`
-                          )}
-                          error={
-                            errors.guests?.[guest.guestIndex]?.firstName
-                              ?.message
-                          }
-                        />
-                        <FloatingLabelInput
-                          id={`guests.${guest.guestIndex}.lastName`}
-                          label={t("lastName")}
-                          register={register(
-                            `guests.${guest.guestIndex}.lastName`
-                          )}
-                          watchValue={watch(
-                            `guests.${guest.guestIndex}.lastName`
-                          )}
-                          error={
-                            errors.guests?.[guest.guestIndex]?.lastName?.message
-                          }
-                        />
-                      </div>
+                      <FloatingLabelInput
+                        id={`guests.${guest.guestIndex}.lastName`}
+                        label={t("lastName")}
+                        // placeholder={t("useOnlyEnglishLetters")}
+                        register={register(
+                          `guests.${guest.guestIndex}.lastName`,
+                        )}
+                        watchValue={watch(
+                          `guests.${guest.guestIndex}.lastName`,
+                        )}
+                        error={
+                          errors.guests?.[guest.guestIndex]?.lastName?.message
+                        }
+                        inputClassName="font-medium text-slate-900 placeholder:font-normal placeholder:text-gray-400"
+                        containerClassName="h-[68px] bg-white border-gray-300 rounded-lg"
+                        labelClassName="font-medium text-slate-500"
+                      />
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             );
           })}
+
+          {/* ===== Email + Phone Row ===== */}
+          <div className="">
+            <h4 className="text-16 font-bold mb-2">Contact Information</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Email */}
+              <div>
+                <FloatingLabelInput
+                  id="email"
+                  label={t("email")}
+                  type="email"
+                  register={register("email")}
+                  watchValue={watch("email")}
+                  error={errors.email?.message}
+                  inputClassName="font-medium text-slate-900"
+                  containerClassName="h-[68px] bg-white border-gray-300 rounded-lg"
+                  labelClassName="font-medium text-slate-500"
+                />
+                {!errors.email && (
+                  <p className="text-13 text-gray-600 mt-1.5 ms-1">
+                    {t("bookingConfirmationSent")}
+                  </p>
+                )}
+              </div>
+
+              {/* Phone */}
+              <div className="relative">
+                <label
+                  htmlFor="phone"
+                  className="pointer-events-none absolute -top-2 start-5 z-10 rounded-md bg-white px-2 text-[12px] font-medium text-black/50"
+                >
+                  {t("phoneNumber")}
+                </label>
+                <PhoneInput
+                  country="eg"
+                  value={watch("phone").replace("+", "")}
+                  onChange={(value, country: { dialCode?: string }) => {
+                    const dialCode = (country?.dialCode || "20").replace(
+                      /\D/g,
+                      "",
+                    );
+                    const normalizedPhone = value.replace(/^\+/, "");
+                    setValue("phone", `+${normalizedPhone}`, {
+                      shouldValidate: true,
+                    });
+                    setValue("phoneCountryCode", dialCode, {
+                      shouldValidate: true,
+                    });
+                  }}
+                  inputProps={{
+                    id: "phone",
+                    autoComplete: "tel",
+                    name: "phone",
+                  }}
+                  enableSearch
+                  containerClass="!w-full ![direction:ltr]"
+                  inputClass={`!w-full !h-[58px] !pl-14 !pr-3 !rounded-lg !border !text-slate-900 !font-medium !text-left ${
+                    errors.phone ? "!border-red-500" : "!border-gray-300"
+                  }`}
+                  buttonClass={`!rounded-s-lg !bg-white ${
+                    errors.phone ? "!border-red-500" : "!border-gray-300"
+                  }`}
+                  dropdownClass="!text-slate-900"
+                />
+                <input type="hidden" {...register("phone")} />
+                <input type="hidden" {...register("phoneCountryCode")} />
+                {errors.phone?.message && (
+                  <p className="text-13 text-red-500 mt-1.5 ms-1 flex items-center gap-1">
+                    <span className="inline-flex w-4 h-4 items-center justify-center rounded-full border border-red-500 text-[10px] font-bold">
+                      !
+                    </span>
+                    {errors.phone.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      {memberRewards ? (
+        <HotelMemberRewardsAndSpecialRequests
+          checkIn={memberRewards.checkIn}
+          refundableText={memberRewards.refundableText}
+          showFreeCancellation={memberRewards.showFreeCancellation}
+        />
+      ) : null}
 
       {/* Submit Button */}
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full h-14 rounded-xl text-16 font-bold text-white"
+        className="w-full h-14 text-16 font-bold text-white"
       >
         {isSubmitting ? t("submitting") : t("bookNow")}
       </Button>
+
+      <HotelBookingTrustFooter />
     </form>
   );
 }

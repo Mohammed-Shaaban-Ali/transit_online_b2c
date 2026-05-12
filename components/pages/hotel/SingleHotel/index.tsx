@@ -37,6 +37,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
   const [nights, setNights] = useState<number | undefined>(undefined);
   const [adults, setAdults] = useState<number | undefined>(undefined);
   const [children, setChildren] = useState<number | undefined>(undefined);
+  const [roomsCount, setRoomsCount] = useState(1);
   const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
   const [mapDialogOpen, setMapDialogOpen] = useState(false);
 
@@ -105,6 +106,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
       setNights(calculatedNights);
     }
     if (searchData?.rooms) {
+      setRoomsCount(Math.max(1, searchData.rooms.length));
       setAdults(
         searchData?.rooms?.reduce(
           (sum: number, room: any) => sum + room.AdultsCount,
@@ -180,6 +182,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
         night={Number(nights || 0)}
         adults={Number(adults || 0)}
         children={Number(children || 0)}
+        roomsCount={roomsCount}
       />
       <GuestReviewsSection />
 

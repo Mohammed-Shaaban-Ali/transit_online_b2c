@@ -51,11 +51,11 @@ export interface LoyaltyCalculatePriceResponse {
 
 interface LoyaltyCalculatePriceRequest {
   originalPrice: number;
-  module: "flights";
-  points: boolean;
-  provider: string;
-  carrierAirlineCode: string;
-  operatorAirlineCode: string;
+  module: "flights" | "hotels";
+  points?: boolean;
+  provider?: string;
+  carrierAirlineCode?: string;
+  operatorAirlineCode?: string;
   returnProvider?: string;
   returnCarrierAirlineCode?: string;
   returnOperatorAirlineCode?: string;
@@ -175,8 +175,6 @@ const flightsApi2 = baseApi2.injectEndpoints({
       }),
       keepUnusedDataFor: 0,
     }),
-
-
   }),
 });
 

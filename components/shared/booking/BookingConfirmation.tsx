@@ -78,19 +78,6 @@ export default function BookingConfirmation({
   const tHotelsCard = useTranslations("HotelsCard");
   const router = useRouter();
 
-  const getTitleLabel = (title: string) => {
-    switch (title) {
-      case "mr":
-        return tForm("mr");
-      case "mrs":
-        return tForm("mrs");
-      case "ms":
-        return tForm("ms");
-      default:
-        return "";
-    }
-  };
-
   return (
     <>
       {/* Keyframes */}
@@ -334,8 +321,7 @@ export default function BookingConfirmation({
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="text-14 font-bold truncate">
-                          {getTitleLabel(guest.title)} {guest.firstName}{" "}
-                          {guest.lastName}
+                          {guest.firstName} {guest.lastName}
                         </div>
                         <div className="text-12 text-gray-400">
                           {guest.type === "adult"

@@ -2,7 +2,7 @@
 
 import { useRouter } from "@/i18n/navigation";
 import { useState, useMemo } from "react";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaChild } from "react-icons/fa";
 import { IoMdBed } from "react-icons/io";
 import { BsCheckCircleFill, BsCameraFill } from "react-icons/bs";
 import { HiLightningBolt } from "react-icons/hi";
@@ -131,6 +131,7 @@ const RoomImageSlider = ({ images }: { images: string[] }) => {
 const RoomGroup = ({
   group,
   night,
+  roomsCount,
   adults,
   children,
   isPreview,
@@ -139,6 +140,7 @@ const RoomGroup = ({
 }: {
   group: GroupedPackage;
   night: number;
+  roomsCount: number;
   adults: number;
   children: number;
   isPreview: boolean;
@@ -249,7 +251,20 @@ const RoomGroup = ({
                   (1 - Number(finalPrice) / Number(originalPrice)) * 100,
                 )
               : 0;
-            const adultsCount = pkg.rooms?.[0]?.adultsCount || adults;
+            const sumAdults =
+              pkg.rooms?.reduce(
+                (sum: number, room: any) =>
+                  sum + (Number(room?.adultsCount) || 0),
+                0,
+              ) ?? 0;
+            const sumChildren =
+              pkg.rooms?.reduce(
+                (sum: number, room: any) =>
+                  sum + (room?.kidsAges?.length ?? 0),
+                0,
+              ) ?? 0;
+            const displayAdults = sumAdults > 0 ? sumAdults : adults;
+            const displayChildren = sumChildren > 0 ? sumChildren : children;
             const isRefundable = pkg.refundability === 1;
 
             return (
@@ -305,22 +320,60 @@ const RoomGroup = ({
                     />
                     <span>{t("prepayOnline")}</span>
                   </div>
+
+                  {/* Mobile: occupancy (same as Sleeps column) */}
+                  <div className="md:hidden flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-gray-700 pt-1">
+                    <span className="inline-flex items-center gap-1">
+                      <FaUser size={12} className="text-gray-600 shrink-0" />
+                      {displayAdults}{" "}
+                      {displayAdults === 1 ? t("adult") : t("adults")}
+                    </span>
+                    {displayChildren > 0 ? (
+                      <span className="inline-flex items-center gap-1">
+                        <FaChild
+                          size={11}
+                          className="text-orange-500 shrink-0"
+                        />
+                        {displayChildren}{" "}
+                        {displayChildren === 1 ? t("child") : t("children")}
+                      </span>
+                    ) : null}
+                  </div>
                 </div>
 
                 {/* ── Sleeps ── */}
                 <div
-                  className="hidden md:flex px-2 py-3 items-center justify-center gap-1
-                border-x
-                "
+                  className="hidden md:flex px-2 py-3 flex-col items-center justify-center gap-1.5 border-x text-center"
+                  title={
+                    displayChildren > 0
+                      ? `${displayAdults} ${displayAdults === 1 ? t("adult") : t("adults")}, ${displayChildren} ${displayChildren === 1 ? t("child") : t("children")}`
+                      : `${displayAdults} ${displayAdults === 1 ? t("adult") : t("adults")}`
+                  }
                 >
-                  <div className="flex items-center gap-0.5">
-                    {Array.from({
-                      length: Math.min(Math.max(adultsCount, 1), 4),
-                    }).map((_, i) => (
-                      <FaUser key={i} size={13} className="text-gray-600" />
-                    ))}
+                  <div className="flex items-center gap-1 text-[13px] text-gray-800">
+                    <FaUser size={13} className="text-gray-600 shrink-0" />
+                    <span>
+                      {displayAdults}{" "}
+                      {displayAdults === 1 ? t("adult") : t("adults")}
+                    </span>
                   </div>
-                  <Info size={13} className="text-gray-400 cursor-pointer" />
+                  {displayChildren > 0 ? (
+                    <div className="flex items-center gap-1 text-[13px] text-gray-800">
+                      <FaChild
+                        size={12}
+                        className="text-orange-500 shrink-0"
+                      />
+                      <span>
+                        {displayChildren}{" "}
+                        {displayChildren === 1 ? t("child") : t("children")}
+                      </span>
+                    </div>
+                  ) : null}
+                  <Info
+                    size={13}
+                    className="text-gray-400 cursor-pointer shrink-0"
+                    aria-hidden
+                  />
                 </div>
 
                 {/* ── Today's Price ── */}
@@ -353,9 +406,10 @@ const RoomGroup = ({
                   </div>
 
                   <div className="text-gray-500 text-[11px] text-end leading-snug">
-                    {t("totalPrice")}: <CurrencySymbol size="sm" />
-                    {formatePrice(Number(finalPrice) * night)}
-                    <br />1 room × {night} {t("nights")} {t("inclTaxes")}
+                    {t("roomNightsInclTaxes", {
+                      roomCount: roomsCount,
+                      nightCount: night,
+                    })}
                   </div>
 
                   {!isPreview && (
@@ -407,6 +461,7 @@ const AvailableRooms = ({
   hotel,
   isPreview = false,
   night,
+  roomsCount,
   adults,
   children,
 }: {
@@ -421,6 +476,7 @@ const AvailableRooms = ({
   };
   isPreview?: boolean;
   night: number;
+  roomsCount: number;
   adults: number;
   children: number;
 }) => {
@@ -512,6 +568,7 @@ const AvailableRooms = ({
           key={groupIndex}
           group={group}
           night={night}
+          roomsCount={roomsCount}
           adults={adults}
           children={children}
           isPreview={isPreview}

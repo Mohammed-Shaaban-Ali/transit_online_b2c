@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "ak-d.tripcdn.com",
       },
+      {
+        protocol: "https",
+        hostname: "dimg04.tripcdn.com",
+      },
     ],
   },
 };
