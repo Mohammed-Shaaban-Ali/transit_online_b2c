@@ -58,12 +58,15 @@ export default function HotelBookingCard({ booking }: HotelBookingCardProps) {
   const t = useTranslations("MyBooking");
   const router = useRouter();
 
-  const statusInfo =
-    statusMap[booking.payment_status?.toLowerCase()] ??
-    statusMap[booking.status?.toLowerCase()] ?? {
-      text: booking.status ?? "",
-      className: "text-gray-500",
-    };
+  const bookingStatusInfo = statusMap[booking.status?.toLowerCase()] ?? {
+    text: booking.status ?? "",
+    className: "text-gray-500",
+  };
+
+  const paymentStatusInfo = statusMap[booking.payment_status?.toLowerCase()] ?? {
+    text: booking.payment_status ?? "",
+    className: "text-gray-500",
+  };
 
   const pkg = booking.package;
   const firstRoom = pkg?.rooms?.[0];
@@ -120,9 +123,27 @@ export default function HotelBookingCard({ booking }: HotelBookingCardProps) {
             })}
           </span>
         </div>
-        <span className={`text-14 font-semibold ${statusInfo.className}`}>
-          {statusInfo.text}
-        </span>
+        <div className="flex items-center gap-3">
+          {booking.status && (
+            <span className="text-13 text-gray-400">
+              Booking:{" "}
+              <span className={`font-semibold ${bookingStatusInfo.className}`}>
+                {bookingStatusInfo.text}
+              </span>
+            </span>
+          )}
+          {booking.status && booking.payment_status && (
+            <span className="text-gray-200">|</span>
+          )}
+          {booking.payment_status && (
+            <span className="text-13 text-gray-400">
+              Payment:{" "}
+              <span className={`font-semibold ${paymentStatusInfo.className}`}>
+                {paymentStatusInfo.text}
+              </span>
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Body */}
