@@ -7,8 +7,7 @@ import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { FaChild } from "react-icons/fa";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+import PhoneInput from "@/components/shared/form/PhoneInput";
 import HotelMemberRewardsAndSpecialRequests from "./HotelMemberRewardsAndSpecialRequests";
 import HotelBookingTrustFooter from "./HotelBookingTrustFooter";
 
@@ -59,7 +58,6 @@ export default function HotelBookingForm({
 }: HotelBookingFormProps) {
   const t = useTranslations("BookingForm");
 
-  // Calculate guest distribution per room
   const numRooms = rooms?.length || 1;
   const roomDistribution: RoomGuestDistribution[] = [];
 
@@ -82,26 +80,16 @@ export default function HotelBookingForm({
     guestIndex += adultsInRoom + childrenInRoom;
   }
 
-  // Build default guests array
   const defaultGuests: GuestData[] = [];
   for (const room of roomDistribution) {
     for (let a = 0; a < room.adults; a++) {
-      defaultGuests.push({
-        firstName: "",
-        lastName: "",
-        type: "adult",
-      });
+      defaultGuests.push({ firstName: "", lastName: "", type: "adult" });
     }
     for (let c = 0; c < room.children; c++) {
-      defaultGuests.push({
-        firstName: "",
-        lastName: "",
-        type: "child",
-      });
+      defaultGuests.push({ firstName: "", lastName: "", type: "child" });
     }
   }
 
-  // Zod schema
   const bookingSchema = z.object({
     email: z
       .string()
@@ -161,23 +149,14 @@ export default function HotelBookingForm({
             let idx = room.guestStartIndex;
             let localIdx = 1;
             for (let a = 0; a < room.adults; a++) {
-              roomGuests.push({
-                guestIndex: idx++,
-                type: "adult",
-                localIdx: localIdx++,
-              });
+              roomGuests.push({ guestIndex: idx++, type: "adult", localIdx: localIdx++ });
             }
             for (let c = 0; c < room.children; c++) {
-              roomGuests.push({
-                guestIndex: idx++,
-                type: "child",
-                localIdx: localIdx++,
-              });
+              roomGuests.push({ guestIndex: idx++, type: "child", localIdx: localIdx++ });
             }
 
             return (
               <div key={room.roomIndex} className="flex flex-col gap-5">
-                {/* Room header — only if more than one room */}
                 {numRooms > 1 && (
                   <h4 className="text-16 font-bold text-primary">
                     {t("room")} {room.roomIndex + 1}
@@ -186,7 +165,6 @@ export default function HotelBookingForm({
 
                 {roomGuests.map((guest) => (
                   <div key={guest.guestIndex} className="flex flex-col gap-3">
-                    {/* Guest tag — only when more than one guest in total */}
                     {(adults + childrenCount > 1 || guest.type === "child") && (
                       <div className="flex items-center gap-2">
                         {guest.type === "child" && (
@@ -199,21 +177,13 @@ export default function HotelBookingForm({
                       </div>
                     )}
 
-                    {/* Name Fields */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <FloatingLabelInput
                         id={`guests.${guest.guestIndex}.firstName`}
                         label={t("firstName")}
-                        // placeholder={t("useOnlyEnglishLetters")}
-                        register={register(
-                          `guests.${guest.guestIndex}.firstName`,
-                        )}
-                        watchValue={watch(
-                          `guests.${guest.guestIndex}.firstName`,
-                        )}
-                        error={
-                          errors.guests?.[guest.guestIndex]?.firstName?.message
-                        }
+                        register={register(`guests.${guest.guestIndex}.firstName`)}
+                        watchValue={watch(`guests.${guest.guestIndex}.firstName`)}
+                        error={errors.guests?.[guest.guestIndex]?.firstName?.message}
                         inputClassName="font-medium text-slate-900 placeholder:font-normal placeholder:text-gray-400"
                         containerClassName="h-[68px] bg-white border-gray-300 rounded-lg"
                         labelClassName="font-medium text-slate-500"
@@ -221,16 +191,9 @@ export default function HotelBookingForm({
                       <FloatingLabelInput
                         id={`guests.${guest.guestIndex}.lastName`}
                         label={t("lastName")}
-                        // placeholder={t("useOnlyEnglishLetters")}
-                        register={register(
-                          `guests.${guest.guestIndex}.lastName`,
-                        )}
-                        watchValue={watch(
-                          `guests.${guest.guestIndex}.lastName`,
-                        )}
-                        error={
-                          errors.guests?.[guest.guestIndex]?.lastName?.message
-                        }
+                        register={register(`guests.${guest.guestIndex}.lastName`)}
+                        watchValue={watch(`guests.${guest.guestIndex}.lastName`)}
+                        error={errors.guests?.[guest.guestIndex]?.lastName?.message}
                         inputClassName="font-medium text-slate-900 placeholder:font-normal placeholder:text-gray-400"
                         containerClassName="h-[68px] bg-white border-gray-300 rounded-lg"
                         labelClassName="font-medium text-slate-500"
@@ -243,7 +206,7 @@ export default function HotelBookingForm({
           })}
 
           {/* ===== Email + Phone Row ===== */}
-          <div className="">
+          <div>
             <h4 className="text-16 font-bold mb-2">Contact Information</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Email */}
@@ -267,54 +230,22 @@ export default function HotelBookingForm({
               </div>
 
               {/* Phone */}
-              <div className="relative">
-                <label
-                  htmlFor="phone"
-                  className="pointer-events-none absolute -top-2 start-5 z-10 rounded-md bg-white px-2 text-[12px] font-medium text-black/50"
-                >
-                  {t("phoneNumber")}
-                </label>
+              <div>
                 <PhoneInput
-                  country="eg"
-                  value={watch("phone").replace("+", "")}
-                  onChange={(value, country: { dialCode?: string }) => {
-                    const dialCode = (country?.dialCode || "20").replace(
-                      /\D/g,
-                      "",
-                    );
-                    const normalizedPhone = value.replace(/^\+/, "");
-                    setValue("phone", `+${normalizedPhone}`, {
+                  value={watch("phone")}
+                  label={t("phoneNumber")}
+                  error={errors.phone?.message}
+                  onChange={(phone, dialCode, isValid) => {
+                    setValue("phone", isValid ? phone : "", {
                       shouldValidate: true,
                     });
                     setValue("phoneCountryCode", dialCode, {
                       shouldValidate: true,
                     });
                   }}
-                  inputProps={{
-                    id: "phone",
-                    autoComplete: "tel",
-                    name: "phone",
-                  }}
-                  enableSearch
-                  containerClass="!w-full ![direction:ltr]"
-                  inputClass={`!w-full !h-[58px] !pl-14 !pr-3 !rounded-lg !border !text-slate-900 !font-medium !text-left ${
-                    errors.phone ? "!border-red-500" : "!border-gray-300"
-                  }`}
-                  buttonClass={`!rounded-s-lg !bg-white ${
-                    errors.phone ? "!border-red-500" : "!border-gray-300"
-                  }`}
-                  dropdownClass="!text-slate-900"
                 />
                 <input type="hidden" {...register("phone")} />
                 <input type="hidden" {...register("phoneCountryCode")} />
-                {errors.phone?.message && (
-                  <p className="text-13 text-red-500 mt-1.5 ms-1 flex items-center gap-1">
-                    <span className="inline-flex w-4 h-4 items-center justify-center rounded-full border border-red-500 text-[10px] font-bold">
-                      !
-                    </span>
-                    {errors.phone.message}
-                  </p>
-                )}
               </div>
             </div>
           </div>

@@ -4,8 +4,7 @@ import type { UseFormReturn } from "react-hook-form";
 import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
 import type { FlightBookingFormValues } from "@/components/pages/flights-test/FlightBookingPage/FlightBookingForm";
 import { useTranslations } from "next-intl";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+import PhoneInput from "@/components/shared/form/PhoneInput";
 
 interface ContactInformationSectionProps {
   form: UseFormReturn<FlightBookingFormValues>;
@@ -54,47 +53,23 @@ export default function ContactInformationSection({
           labelClassName="font-medium text-slate-500"
         />
 
-        <div className="relative ">
-          <label
-            htmlFor="phone"
-            className="pointer-events-none absolute -top-2 start-5 z-10 rounded-md bg-white px-2 text-[12px] font-medium text-black/50"
-          >
-            {t("mobilePhone")}
-          </label>
+        <div>
           <PhoneInput
-            country="eg"
-            value={watch("phone").replace("+", "")}
-            onChange={(value, country: { dialCode?: string }) => {
-              const dialCode = (country?.dialCode || "20").replace(/\D/g, "");
-              const normalizedPhone = value.replace(/^\+/, "");
-              setValue("phone", `+${normalizedPhone}`, {
+            value={watch("phone")}
+            label={t("mobilePhone")}
+            error={errors.phone?.message}
+            defaultCountryCode="eg"
+            onChange={(phone, dialCode, isValid) => {
+              setValue("phone", isValid ? phone : "", {
                 shouldValidate: true,
               });
               setValue("phoneCountryCode", dialCode, {
                 shouldValidate: true,
               });
             }}
-            inputProps={{
-              id: "phone",
-              autoComplete: "tel",
-              name: "phone",
-            }}
-            enableSearch
-            containerClass="!w-full ![direction:ltr]"
-            inputClass="!w-full !h-[58px] !pl-14 !pr-3 !rounded-md !border !border-gray-300 !text-slate-900 !font-medium !text-left"
-            buttonClass="!border-gray-300 !bg-white !rounded-s-md "
-            dropdownClass="!text-slate-900"
           />
           <input type="hidden" {...register("phone")} />
           <input type="hidden" {...register("phoneCountryCode")} />
-          {errors.phone?.message && (
-            <p
-              title={errors.phone.message}
-              className="line-clamp-1 text-xs font-medium text-red-500"
-            >
-              {errors.phone.message}
-            </p>
-          )}
         </div>
       </div>
     </div>

@@ -6,9 +6,7 @@ import { getCookie } from "cookies-next";
 import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+import PhoneInput from "@/components/shared/form/PhoneInput";
 import loginImage1 from "@/public/images/login/login.png";
 import loginImage2 from "@/public/images/login/login2.png";
 import loginImage3 from "@/public/images/login/login3.png";
@@ -166,44 +164,31 @@ export default function LoginPage() {
               className="mt-10 flex flex-col gap-8"
             >
               {step === "identifier" ? (
-                <div className="space-y-2">
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-[#1aa4ea]"
-                  >
-                    {t("fields.identifier.label")}
-                  </label>
+                <div>
                   <PhoneInput
-                    country="sa"
                     value={watch("phone")}
-                    onChange={(value) =>
-                      setValue("phone", value, { shouldValidate: true })
-                    }
-                    inputProps={{
-                      id: "phone",
-                      autoComplete: "tel",
-                      name: "phone",
+                    label={t("fields.identifier.label")}
+                    error={errors.phone?.message}
+                    defaultCountryCode="sa"
+                    onChange={(phone, _dialCode, isValid) => {
+                      setValue("phone", isValid ? phone : "", {
+                        shouldValidate: true,
+                      });
                     }}
-                    enableSearch
-                    containerClass="!w-full ![direction:ltr]"
-                    inputClass="!w-full !h-[52px] !pl-14 !pr-3 !rounded-lg !border-primary !text-slate-900 !font-medium !text-left"
-                    buttonClass="!border-primary !bg-white "
-                    dropdownClass="!text-slate-900"
                   />
                   <input
                     type="hidden"
                     {...register("phone", {
                       required: t("validation.identifierRequired"),
-                      validate: (value) =>
-                        /^\d{8,15}$/.test(value.trim()) ||
-                        t("validation.identifierInvalid"),
+                      validate: (value) => {
+                        const digits = value.trim().replace(/\D/g, "");
+                        return (
+                          (digits.length >= 8 && digits.length <= 15) ||
+                          t("validation.identifierInvalid")
+                        );
+                      },
                     })}
                   />
-                  {errors.phone?.message ? (
-                    <p className="text-sm font-medium text-red-500">
-                      {errors.phone.message}
-                    </p>
-                  ) : null}
                 </div>
               ) : (
                 <div className="space-y-2 w-fit mx-auto">
