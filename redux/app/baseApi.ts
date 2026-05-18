@@ -1,9 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getCookie } from "cookies-next";
-import {
-  NEXT_LOCALE,
-  API_TOKEN_COOKIE,
-} from "@/constants";
+import { NEXT_LOCALE, API_TOKEN_COOKIE } from "@/constants";
 import { toast } from "sonner";
 import { Locale } from "next-intl";
 import { refreshApiToken } from "@/utils/refreshApiToken";
@@ -117,7 +114,7 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
                   const retryResult = await queryFn(
                     retryRequest as any,
                     api,
-                    extraOptions
+                    extraOptions,
                   );
                   resolve(retryResult);
                 } catch (err) {
@@ -160,7 +157,7 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
           const retryResult = await queryFn(
             retryRequest as any,
             api,
-            extraOptions
+            extraOptions,
           );
           return retryResult;
         }
@@ -173,18 +170,22 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
       }
     }
 
-
     // Handle other errors
     if (!!result.error) {
       const err = result.error?.data as ErrorResponse;
       const errorMessage = err.msg || err.message || "Something went wrong";
       const url = (args as any).url;
       const notToastUrls = [
+        "/api/hotels/b2c/search-hotels",
+        "/api/hotels/b2c/packages",
+        "/api/sabre/search",
+        "/api/iati/search",
         "/api/sabre/fare",
         "/api/iati/fare",
-        "/api/hotels/b2c/packages",
+        "/api/hotels/b2c/hotel-packages",
+        "/api/hotels/b2c/book",
         "/api/auth/login",
-        "/api/auth/send-otp",
+        "/api/auth/verify-otp",
       ];
       if (notToastUrls.includes(url)) {
         return result;
@@ -213,6 +214,8 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
         "/api/iati/fare",
         "/api/hotels/b2c/hotel-packages",
         "/api/hotels/b2c/book",
+        "/api/auth/login",
+        "/api/auth/verify-otp",
       ];
 
       if (notToastUrls.includes(url)) {
@@ -234,13 +237,13 @@ const baseQueryWithInterceptor2 = createBaseQueryWithInterceptor(baseQuery2);
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithInterceptor,
-  tagTypes: ["locale",],
+  tagTypes: ["locale"],
   endpoints: () => ({}),
 });
 
 export const baseApi2 = createApi({
   reducerPath: "api2",
   baseQuery: baseQueryWithInterceptor2,
-  tagTypes: ["locale",],
+  tagTypes: ["locale"],
   endpoints: () => ({}),
 });

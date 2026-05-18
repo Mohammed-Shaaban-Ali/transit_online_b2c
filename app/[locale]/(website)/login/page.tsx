@@ -63,6 +63,14 @@ export default function LoginPage() {
     },
   });
 
+  useEffect(() => {
+    if (step !== "otp") return;
+    const frameId = requestAnimationFrame(() => {
+      otpRefs.current[0]?.focus();
+    });
+    return () => cancelAnimationFrame(frameId);
+  }, [step]);
+
   const onIdentifierSubmit = async (values: LoginFormValues) => {
     setServerError("");
     const normalizedPhone = values.phone.trim();
