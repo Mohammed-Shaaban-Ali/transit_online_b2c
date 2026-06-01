@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import PhoneInput from "@/components/shared/form/PhoneInput";
-import loginImage1 from "@/public/images/login/login.png";
+import loginImage1 from "@/public/images/login/login.jpeg";
 import loginImage2 from "@/public/images/login/login2.png";
 import loginImage3 from "@/public/images/login/login3.png";
 import loginImage5 from "@/public/images/login/login5.png";
