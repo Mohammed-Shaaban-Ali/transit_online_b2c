@@ -11,7 +11,6 @@ import HotelsInfo from "@/components/pages/hotels-test/HotelsInfo";
 import NewNavbar from "@/components/shared/Navbar/NewNavbar";
 
 type Props = {};
-
 async function page({}: Props) {
   const t = await getTranslations("HotelsTestPage.TopHotels");
 
