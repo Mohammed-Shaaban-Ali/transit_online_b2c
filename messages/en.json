@@ -747,7 +747,7 @@
         "trustSecurePayment": "Secure payment",
         "bookingAgreement": "By submitting this booking, I acknowledge that I have read and agree to <terms>Terms of Use</terms> and <privacy>Privacy Statement</privacy>.",
         "siteBrand": "Transit",
-        "yourTripIsProtected": "Your trip is protected",
+        "yourTripIsProtected": "Your gita is protected",
         "savedTravelerInfoNote": "Traveler and contact information may be saved for faster booking next time. You can update or remove it anytime from your account settings.",
         "validation": {
             "emailRequired": "Email is required",
@@ -849,7 +849,7 @@
             "tripCoins": "Trip Coins + {count}"
         },
         "flightBookingForm": {
-            "termsPrefix": "I have read and agreed to the following Trip.com booking terms and conditions:",
+            "termsPrefix": "I have read and agreed to the following gita.com booking terms and conditions:",
             "flightBookingPolicies": "Flight Booking Policies",
             "privacyStatement": "Privacy Statement",
             "total": "Total",
@@ -1517,9 +1517,9 @@
             "highestPriceValue": "US$894"
         },
         "HotelsInfo": {
-            "title": "Hotels on Trip.com",
+            "title": "Hotels on gita.com",
             "perfectStayTitle": "A Perfect Stay For Every Traveler",
-            "perfectStayText": "Your hotel choice can elevate your travel from good to unforgettable. At Trip.com, we simplify the process of finding accommodations that match your style, budget, and needs—whether it's a luxury resort, a cozy B&B, or a budget-friendly hostel.",
+            "perfectStayText": "Your hotel choice can elevate your travel from good to unforgettable. At gita.com, we simplify the process of finding accommodations that match your style, budget, and needs—whether it's a luxury resort, a cozy B&B, or a budget-friendly hostel.",
             "trendingDestinationsLabel": "Trending Hotel Destinations:",
             "regionAsia": "Asia",
             "regionChina": "China",
@@ -1541,10 +1541,10 @@
             "link_melbourne": "Melbourne Hotels",
             "link_goldcoast": "Gold Coast Hotels",
             "link_sydney": "Sydney Hotels",
-            "whyBookTitle": "Why Book Hotels with Trip.com?",
+            "whyBookTitle": "Why Book Hotels with gita.com?",
             "whyBook1": "Best Price Guarantee: Found a cheaper rate? We'll refund the difference.",
             "whyBook2": "Trusted by Millions: Rave reviews highlight our reliability, see ratings from millions of travelers!",
-            "whyBook3Label": "Trip.com hotel promo codes",
+            "whyBook3Label": "gita.com hotel promo codes",
             "whyBook3Pre": "Exclusive Promotions: Use",
             "whyBook3Post": "for extra savings.",
             "whyBook4Pre": "24/7 Global Support: Assistance with",
@@ -1560,8 +1560,8 @@
             "tab_topDestinations": "Top Destinations",
             "tab_nearAttractions": "Hotels near Attractions",
             "tab_exploreMore": "Explore more",
-            "tab_latestTrends": "Trip.com Latest Trends",
-            "tab_luxuryHotels": "Trip.Best Luxury Hotels",
+            "tab_latestTrends": "gita.com Latest Trends",
+            "tab_luxuryHotels": "gita.Best Luxury Hotels",
             "tab_moreTypes": "More Accommodation Types",
             "link_shanghai": "Hotels in Shanghai",
             "link_guangzhou": "Hotels in Guangzhou",
@@ -1702,11 +1702,11 @@
             "card1Title": "Travelers' favorite",
             "card1Description": "Join over 300 million travelers worldwide who fly with us",
             "card2Title": "Customer support available 24/7",
-            "card2Description": "Get assistance from a Trip.com customer support agent in approximately 30 seconds. Anytime, anywhere.",
+            "card2Description": "Get assistance from a gita.com customer support agent in approximately 30 seconds. Anytime, anywhere.",
             "card3Title": "Transparent pricing",
             "card3Description": "No surprises. All taxes and fees included, what you see is what you pay.",
             "card4Title": "Earn double rewards",
-            "card4Description": "Earn both airline miles and Trip Coins to use on your next trip"
+            "card4Description": "Earn both airline miles and gita Coins to use on your next trip"
         },
         "TrendingNow": {
             "title": "Get a glimpse of what's trending now",
@@ -1724,7 +1724,7 @@
             "title": "Get free flight status updates on the go",
             "feature1": "Track over 110,000 global flights in real time",
             "feature2": "Easily navigate airports with check-in counter, boarding gate, and baggage claim info",
-            "feature3": "Stay up-to-date with flight alerts and gate changes to keep your trip on track",
+            "feature3": "Stay up-to-date with flight alerts and gate changes to keep your gita on track",
             "qrCodeAlt": "QR code",
             "appStoreAlt": "Download on App Store",
             "googlePlayAlt": "Get it on Google Play",
@@ -1738,12 +1738,12 @@
             "banner3Alt": "China Southern Airlines banner"
         },
         "WhyBook": {
-            "title": "Why Book Flights with Trip.com",
+            "title": "Why Book Flights with gita.com",
             "flightsToSuitYouTitle": "Flights to Suit You",
-            "flightsToSuitYouText": "Ready to jet off? Booking a flight is the first step to an exciting getaway. However, with so many things to consider, finding cheap flights is not always the easiest of tasks. That's why, at Trip.com, we've made things simple. Letting you search and compare flights from thousands of different airlines to destinations all over the world, it's never",
-            "flightsToSuitYouTextExpanded": "Ready to jet off? Booking a flight is the first step to an exciting getaway. However, with so many things to consider, finding cheap flights is not always the easiest of tasks. That's why, at Trip.com, we've made things simple. Letting you search and compare flights from thousands of different airlines to destinations all over the world, it's never been easier to find flight tickets to suit you. From economy to first-class airline tickets, direct to connecting flights and return and one-way tickets, you can filter your search to suit your plans and budget. Whether it's for a long-haul family holiday, romantic weekend break, or a professional business trip, in just a few clicks you can be on your way to your chosen destination.",
+            "flightsToSuitYouText": "Ready to jet off? Booking a flight is the first step to an exciting getaway. However, with so many things to consider, finding cheap flights is not always the easiest of tasks. That's why, at gita.com, we've made things simple. Letting you search and compare flights from thousands of different airlines to destinations all over the world, it's never",
+            "flightsToSuitYouTextExpanded": "Ready to jet off? Booking a flight is the first step to an exciting getaway. However, with so many things to consider, finding cheap flights is not always the easiest of tasks. That's why, at gita.com, we've made things simple. Letting you search and compare flights from thousands of different airlines to destinations all over the world, it's never been easier to find flight tickets to suit you. From economy to first-class airline tickets, direct to connecting flights and return and one-way tickets, you can filter your search to suit your plans and budget. Whether it's for a long-haul family holiday, romantic weekend break, or a professional business trip, in just a few clicks you can be on your way to your chosen destination.",
             "bookCheapTitle": "Book Cheap Flights Today",
-            "bookCheapText": "There are plenty of other ways you can save money on flights, too. You can look out for our flight flash sales, sign up to price alerts which let you know when flight prices have dropped, and download the Trip.com app to get money off. Joining the Trip.com loyalty program also gives you access to exclusive member-only offers. Not only that, but you can also earn Trip Coins which can be redeemed on your next booking.",
+            "bookCheapText": "There are plenty of other ways you can save money on flights, too. You can look out for our flight flash sales, sign up to price alerts which let you know when flight prices have dropped, and download the gita.com app to get money off. Joining the gita.com loyalty program also gives you access to exclusive member-only offers. Not only that, but you can also earn gita Coins which can be redeemed on your next booking.",
             "showMore": "Show More",
             "showLess": "Show Less"
         },
@@ -1755,8 +1755,8 @@
             "item2Content": "Many airline websites have made it simpler to identify the inexpensive days to fly by displaying a \"calendar view\" booking system. This system allows you to scan prices ranging across the week that you are searching.",
             "item3Title": "Consider flights with less-popular departure times",
             "item3Content": "You may also get a bargain flight if you're willing to fly at an early hour. It may well be less expensive to fly at 6 am than at later times due to that time spot being less popular. The only problem you could face is getting to the airport at this time; make sure that public transport is running if you can't take a taxi or get a lift to the airport.",
-            "item4Title": "Find a better price on the Trip.com app",
-            "item4Content": "This may sound like I'm stating the obvious, but you'd be surprised at the number of people who settle for a price without first shopping around and doing some research. We suggest you have a look for bargains on the Trip.com app.",
+            "item4Title": "Find a better price on the gita.com app",
+            "item4Content": "This may sound like I'm stating the obvious, but you'd be surprised at the number of people who settle for a price without first shopping around and doing some research. We suggest you have a look for bargains on the gita.com app.",
             "item5Title": "Book early instead of waiting until the last minute",
             "item5Content": "Don't get fooled into thinking that last-minute deals are necessarily the best option for cheap flight tickets because they seldom are. The smart move is to book early, even as far as a year in advance if that is possible for the flight you require. Flight tickets have a tendency to be cheaper when they are first released - which is normally about a year before the flight - so have a look online as soon as the flights you want are available.",
             "item6Title": "Use a credit card in a wiser way",
@@ -1769,7 +1769,7 @@
             "item9Content": "Before booking, check baggage policies, seat selection charges, and airport transfer costs. A low fare can quickly increase with extras, so always compare the final total price."
         },
         "Recommended": {
-            "title": "Recommended by Trip.com",
+            "title": "Recommended by gita.com",
             "tab_destinations": "Flights to Popular Destinations",
             "tab_routes": "Popular Flights Routes",
             "tab_airlines": "Popular Airlines",
@@ -1850,7 +1850,7 @@
                 "travelInspiration": "Travel Inspiration",
                 "map": "Map",
                 "deals": "Deals",
-                "rewards": "Trip.com Rewards",
+                "rewards": "gita.com Rewards",
                 "app": "App"
             }
         },
@@ -1906,7 +1906,7 @@
         },
         "home": {
             "hero": {
-                "title": "Your Trip Starts Here",
+                "title": "Your gita Starts Here",
                 "heroAlt": "Hero section",
                 "badges": {
                     "securePayment": "Secure payment",
@@ -1959,7 +1959,7 @@
                 "from": "From"
             },
             "moments": {
-                "title": "Unforgettable trip moments in Shanghai",
+                "title": "Unforgettable gita moments in Shanghai",
                 "previousSlide": "Previous slide",
                 "nextSlide": "Next slide",
                 "like": "Like",
@@ -1976,7 +1976,7 @@
                 "seeImageAlt": "Travel app preview",
                 "title": "Your all-in-one travel app",
                 "appOnlyDeals": "App-only deals",
-                "easyPlanning": "Easy trip planning",
+                "easyPlanning": "Easy gita planning",
                 "qrAlt": "QR code to download the app",
                 "dailyUsers": "Daily users",
                 "dailyDownloads": "Daily downloads",

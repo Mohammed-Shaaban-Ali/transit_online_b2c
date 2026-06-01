@@ -117,7 +117,10 @@ function FlightDatePicker({
   };
 
   // Handle date value change from Ark UI DatePicker
-  const handleDateChange = (details: { value: { toString: () => string }[], valueAsString: string[] }) => {
+  const handleDateChange = (details: {
+    value: { toString: () => string }[];
+    valueAsString: string[];
+  }) => {
     if (tripType === "roundTrip") {
       if (details.value.length >= 1) {
         const startDate = new Date(details.value[0].toString());
@@ -158,7 +161,9 @@ function FlightDatePicker({
       }
       return values.length > 0 ? values : [parseDate(new Date())];
     } else {
-      return departureDate ? [parseDate(new Date(departureDate))] : [parseDate(new Date())];
+      return departureDate
+        ? [parseDate(new Date(departureDate))]
+        : [parseDate(new Date())];
     }
   };
 
@@ -194,8 +199,8 @@ function FlightDatePicker({
     }
   }, [openCalendarByDefault]);
 
-  // One way = always 1 month, Round trip = 1 month on mobile, 2 months on desktop
-  const numOfMonths = tripType === "oneWay" ? 1 : (isMobile ? 1 : 2);
+  // One way = always 1 month, Round gita = 1 month on mobile, 2 months on desktop
+  const numOfMonths = tripType === "oneWay" ? 1 : isMobile ? 1 : 2;
 
   const calendarPanel = (
     <div className="flex flex-col">
@@ -222,8 +227,9 @@ function FlightDatePicker({
               view="day"
               className={cn(
                 "flex relative",
-                numOfMonths > 1 && "divide-x divide-gray-200 rtl:divide-x-reverse",
-                "rtl:flex-row-reverse"
+                numOfMonths > 1 &&
+                  "divide-x divide-gray-200 rtl:divide-x-reverse",
+                "rtl:flex-row-reverse",
               )}
             >
               <nav className="absolute border-transparent w-full top-0 flex rtl:flex-row-reverse justify-between px-3 z-10">
@@ -245,7 +251,9 @@ function FlightDatePicker({
                             <span>
                               {new Intl.DateTimeFormat(locale, {
                                 month: "long",
-                              }).format(offset.visibleRange.start.toDate("UTC"))}{" "}
+                              }).format(
+                                offset.visibleRange.start.toDate("UTC"),
+                              )}{" "}
                               {offset.visibleRange.start.year}
                             </span>
                           </DatePicker.ViewTrigger>
@@ -292,7 +300,7 @@ function FlightDatePicker({
                                         "not-data-in-range:rounded-lg",
                                         "data-selected:data-today:after:bg-white",
                                         "data-range-start:data-today:after:bg-white",
-                                        "data-range-end:data-today:after:bg-white"
+                                        "data-range-end:data-today:after:bg-white",
                                       )}
                                     >
                                       {day.day}
@@ -331,7 +339,10 @@ function FlightDatePicker({
                           .map((months, id) => (
                             <DatePicker.TableRow key={id}>
                               {months.map((month, id) => (
-                                <DatePicker.TableCell key={id} value={month.value}>
+                                <DatePicker.TableCell
+                                  key={id}
+                                  value={month.value}
+                                >
                                   <DatePicker.TableCellTrigger className="w-16 h-10 text-sm text-gray-900 hover:bg-gray-100 rounded-lg transition-colors data-selected:bg-primary data-selected:text-white flex items-center justify-center font-medium">
                                     {month.label}
                                   </DatePicker.TableCellTrigger>
@@ -389,33 +400,36 @@ function FlightDatePicker({
     <div className="col-span-1 relative w-full" ref={containerRef}>
       {!calendarOnly && (
         <div className="relative flex w-full items-center px-4 h-16 bg-transparent transition-all duration-300">
-        <label
-          htmlFor="flightDate"
-          className={`absolute transition-all font-bold duration-200 pointer-events-none ${isActive
-            ? "-top-0.5 text-gray-500"
-            : "top-1/2 -translate-y-1/2 text-gray-500"
+          <label
+            htmlFor="flightDate"
+            className={`absolute transition-all font-bold duration-200 pointer-events-none ${
+              isActive
+                ? "-top-0.5 text-gray-500"
+                : "top-1/2 -translate-y-1/2 text-gray-500"
             }`}
-        >
-          {tripType === "roundTrip" ? t("departureReturn") : t("departure")}
-        </label>
-
-        <div className="flex items-center   gap-0 relative w-full">
-          <FaCalendarAlt
-            size={16}
-            className={`absolute top-[15px] start-0 ${isActive ? "text-gray-400" : "text-transparent"
-              }`}
-          />
-          <div
-            className={`w-full font-bold text-nowrap text-black bg-transparent border-none outline-none p-0 cursor-pointer ${isActive ? "mt-4 ps-6 pe-32" : ""
-              }`}
-            onClick={() => {
-              setShowCalendar(true);
-              setIsFocused(true);
-            }}
           >
-            {displayValue || (isActive ? t("selectDates") : "")}
+            {tripType === "roundTrip" ? t("departureReturn") : t("departure")}
+          </label>
+
+          <div className="flex items-center   gap-0 relative w-full">
+            <FaCalendarAlt
+              size={16}
+              className={`absolute top-[15px] start-0 ${
+                isActive ? "text-gray-400" : "text-transparent"
+              }`}
+            />
+            <div
+              className={`w-full font-bold text-nowrap text-black bg-transparent border-none outline-none p-0 cursor-pointer ${
+                isActive ? "mt-4 ps-6 pe-32" : ""
+              }`}
+              onClick={() => {
+                setShowCalendar(true);
+                setIsFocused(true);
+              }}
+            >
+              {displayValue || (isActive ? t("selectDates") : "")}
+            </div>
           </div>
-        </div>
 
           {/* Calendar popup */}
           {showCalendar && (
@@ -423,7 +437,7 @@ function FlightDatePicker({
               className={cn(
                 "absolute top-full left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 ",
                 "bg-white border border-gray-200 rounded-xl shadow-2xl z-50 overflow-hidden",
-                tripType === "oneWay" ? "max-w-[360px]" : "max-w-[680px]"
+                tripType === "oneWay" ? "max-w-[360px]" : "max-w-[680px]",
               )}
             >
               {calendarPanel}
@@ -436,7 +450,7 @@ function FlightDatePicker({
         <div
           className={cn(
             "bg-white border border-gray-200 rounded-xl shadow-2xl z-50 overflow-hidden",
-            tripType === "oneWay" ? "max-w-[360px]" : "max-w-[680px]"
+            tripType === "oneWay" ? "max-w-[360px]" : "max-w-[680px]",
           )}
         >
           {calendarPanel}
@@ -445,12 +459,18 @@ function FlightDatePicker({
 
       {/* Error messages */}
       {!calendarOnly && departureDateError && (
-        <p title={departureDateError} className="absolute -bottom-1.5 start-4 text-xs  text-red-500 font-medium line-clamp-1">
+        <p
+          title={departureDateError}
+          className="absolute -bottom-1.5 start-4 text-xs  text-red-500 font-medium line-clamp-1"
+        >
           {departureDateError}
         </p>
       )}
       {!calendarOnly && returnDateError && (
-        <p title={returnDateError} className="absolute -bottom-1.5 start-4 text-xs text-red-500 font-medium line-clamp-1">
+        <p
+          title={returnDateError}
+          className="absolute -bottom-1.5 start-4 text-xs text-red-500 font-medium line-clamp-1"
+        >
           {returnDateError}
         </p>
       )}

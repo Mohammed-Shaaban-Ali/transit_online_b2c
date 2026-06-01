@@ -10,7 +10,7 @@ type Props = {
   fare: FareOption;
   isSelected: boolean;
   onSelect: () => void;
-  /** Small label under price (e.g. segment / trip type). */
+  /** Small label under price (e.g. segment / gita type). */
   tripLabel?: string;
   className?: string;
 };
@@ -38,7 +38,9 @@ export function FareCard({
     >
       <div className="flex items-start justify-between mb-3">
         <div className="min-w-0">
-          <p className="text-[14px] sm:text-[16px] font-bold truncate">{fare.cabinClass}</p>
+          <p className="text-[14px] sm:text-[16px] font-bold truncate">
+            {fare.cabinClass}
+          </p>
           {fare.fareType?.trim() ? (
             <p className="text-[12px] sm:text-[14px] text-gray-500 truncate">
               {fare.fareType}
@@ -105,7 +107,9 @@ export function FareCard({
           </span>
         </div>
         {tripLabel ? (
-          <p className="text-[10px] sm:text-[11px] text-gray-500 mt-0.5">{tripLabel}</p>
+          <p className="text-[10px] sm:text-[11px] text-gray-500 mt-0.5">
+            {tripLabel}
+          </p>
         ) : null}
       </div>
 

@@ -5,7 +5,7 @@ import Discover from "./Discover";
 import Hotels from "./Hotels";
 import Round from "./Round";
 import Recommended from "./Recommended";
-import Trip from "./Trip";
+import gita from "./Trip";
 import Exclusive from "./Exclusive";
 import Moments from "./Moments";
 import TravelApp from "./TravelApp";

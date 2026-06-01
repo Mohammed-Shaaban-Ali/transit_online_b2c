@@ -86,7 +86,7 @@ export default function StaticFiltersPanel() {
             "Suite",
             "Oceanview room",
             "Balcony",
-            "Trip.com Parent-child Room",
+            "gita.com Parent-child Room",
             "Lake view room",
             "Loft",
             "Room With Projector",
@@ -96,7 +96,7 @@ export default function StaticFiltersPanel() {
             "Mahjong/Games Room",
             "Room With Waterbed",
             "Room With Round Bed",
-            "Trip.com Cinema Room",
+            "gita.com Cinema Room",
             "Deep Sleep Themed Room",
             "Bed in dormitory",
           ].map((s) => ({ key: s, label: s }))}
@@ -221,7 +221,7 @@ export default function StaticFiltersPanel() {
       </StaticFilterSection>
 
       <StaticFilterSection title="Discounts">
-        <StaticCheckboxList items={["Extra Trip Coin Rewards"]} />
+        <StaticCheckboxList items={["Extra gita Coin Rewards"]} />
       </StaticFilterSection>
 
       <StaticFilterSection title="Brand">

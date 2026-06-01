@@ -18,7 +18,6 @@ import {
   useSendOtpMutation,
 } from "@/redux/features/auth/authApi";
 import { Button } from "@/components/ui/button";
-
 interface LoginFormValues {
   phone: string;
   otp: string;

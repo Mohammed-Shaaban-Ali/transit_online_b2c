@@ -48,7 +48,7 @@ const moments: Moment[] = [
     id: 2,
     image: hotelImage2,
     alt: "China travel calendar infographic",
-    title: "Planning a trip to China? Save this travel calendar! 🗓️",
+    title: "Planning a gita to China? Save this travel calendar! 🗓️",
     username: "TripGenie",
     avatar: avatar2,
     verified: true,

@@ -37,7 +37,8 @@ function page() {
     router.replace(`${pathname}?${params.toString()}`);
   };
 
-  const { data: bookingsData, isLoading: isBookingsLoading } = useGetMyBookingQuery();
+  const { data: bookingsData, isLoading: isBookingsLoading } =
+    useGetMyBookingQuery();
   const { data: hotelBookingsData, isLoading: isHotelBookingsLoading } =
     useGetHotelBookingsQuery();
   const t = useTranslations("MyBooking");
@@ -109,7 +110,9 @@ function page() {
           {/* Title row */}
           <div className="flex flex-col gap-3 border-b border-gray-100 pb-4 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-wrap items-center gap-5">
-              <h1 className="text-28 font-semibold leading-none">{t("title")}</h1>
+              <h1 className="text-28 font-semibold leading-none">
+                {t("title")}
+              </h1>
               <div className="inline-flex items-center gap-2 text-13 font-semibold text-primary">
                 <img
                   src="https://pages.trip.com/Accounts/onlineOrder/ic_service.png"
