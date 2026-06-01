@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import heroSection from "@/public/images/new_hone/heroSection.webp";
+import heroSection from "@/public/images/gita/heroimage.png";
 import Image from "next/image";
 import {
   BedDouble,
@@ -27,20 +27,20 @@ function Hero({}: Props) {
       disabled: false,
     },
     { key: "flights", title: t("tabs.flights"), icon: Plane, disabled: false },
-    { key: "trains", title: t("tabs.trains"), icon: Train, disabled: true },
-    { key: "cars", title: t("tabs.cars"), icon: Car, disabled: true },
-    {
-      key: "attractionsTours",
-      title: t("tabs.attractionsTours"),
-      icon: Landmark,
-      disabled: true,
-    },
-    {
-      key: "flightHotel",
-      title: t("tabs.flightHotel"),
-      icon: Building2,
-      disabled: true,
-    },
+    // { key: "trains", title: t("tabs.trains"), icon: Train, disabled: true },
+    // { key: "cars", title: t("tabs.cars"), icon: Car, disabled: true },
+    // {
+    //   key: "attractionsTours",
+    //   title: t("tabs.attractionsTours"),
+    //   icon: Landmark,
+    //   disabled: true,
+    // },
+    // {
+    //   key: "flightHotel",
+    //   title: t("tabs.flightHotel"),
+    //   icon: Building2,
+    //   disabled: true,
+    // },
   ];
   const titles = [
     {
@@ -56,17 +56,20 @@ function Hero({}: Props) {
 
   return (
     <section
-      className={`relative w-full
+      className={`relative w-full px-3 md:px-4 
     
-    ${activeTab === "hotelsHomes" ? "h-[310px]" : "h-[380px]"}`}
+    ${activeTab === "hotelsHomes" ? "h-[380px] md:h-[320px]" : "h-[460px] md:h-[340px]"}`}
     >
-      <Image
-        src={heroSection}
-        alt={t("heroAlt")}
-        width={1000}
-        height={1000}
-        className="h-full w-full overflow-hidden rounded-2xl object-cover object-right"
-      />
+      <div className="relative h-full w-full">
+        <div className="absolute inset-0 bg-black/50 rounded-2xl"></div>
+        <Image
+          src={heroSection}
+          alt={t("heroAlt")}
+          width={1000}
+          height={1000}
+          className="h-full w-full overflow-hidden rounded-2xl object-cover object-right"
+        />
+      </div>
 
       <div className="absolute left-1/2 top-1/2 w-full max-w-[1200px] -translate-x-1/2 -translate-y-1/2 px-4">
         <div>
@@ -94,7 +97,11 @@ function Hero({}: Props) {
           </div>
 
           <div className="relative mx-auto translate-y-12">
-            <div className="relative z-20 mx-auto -mb-8 flex w-fit flex-wrap items-center justify-center gap-1.5 rounded-full bg-[#0f2146] p-1.5">
+            <div
+              className="relative z-20 mx-auto -mb-8 flex 
+            w-fit md:w-full max-w-[520px] 
+            flex-wrap items-center justify-start gap-1.5 rounded-full bg-[#2c2205]  p-1.5"
+            >
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 return (
@@ -108,7 +115,7 @@ function Hero({}: Props) {
                           ? "bg-white text-black!"
                           : "hover:bg-white/20"
                       }
-                      ${tab.disabled ? "opacity-50 cursor-not-allowed!" : ""}
+                      ${tab.disabled ? "opacity-0 hidden pointer-events-none" : ""}
                       `}
                     disabled={tab.disabled}
                   >

@@ -113,7 +113,7 @@ async function page({ searchParams }: Props) {
           <div className="mx-auto w-full max-w-[1200px] px-2 sm:px-5 md:px-0">
             {hasSearchParams && (
               <>
-                <FareDateSlider
+                {/* <FareDateSlider
                   departureDate={departureDate}
                   returnDate={returnDate}
                   tripType={tripType}
@@ -127,7 +127,7 @@ async function page({ searchParams }: Props) {
                     infants: String(infants),
                     cabinClass,
                   }}
-                />
+                /> */}
                 <ShowFareResultsSection
                   fromAirport={fromAirport}
                   toAirport={toAirport}
