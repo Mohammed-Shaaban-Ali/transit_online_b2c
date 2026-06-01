@@ -1,7 +1,7 @@
 import Service from "./Service";
 import Deals from "./Deals";
-import gita from "./Trip";
 import Recommended from "./Recommended";
+import Trip from "./Trip";
 
 export default function Mobile() {
   return (
