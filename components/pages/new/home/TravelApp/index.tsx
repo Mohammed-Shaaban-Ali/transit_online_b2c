@@ -28,19 +28,20 @@ function TravelApp({}: Props) {
       backdrop-blur-xs
       "
       ></div>
-      <div
+      {/* <div
         className="h-96 w-52 bg-primary ltr:rounded-r-full rtl:rounded-l-full 
       absolute
       ltr:-left-32 rtl:-right-32 top-1/2 -translate-y-1/2 overflow-hidden"
-      ></div>
-      <div className="h-96 w-[400px] bg-red-50 ltr:rounded-l-full rtl:rounded-r-full absolute end-0 top-1/2 -translate-y-1/2 overflow-hidden">
+      ></div> */}
+      {/* <div className="h-96 w-[400px] bg-red-50 ltr:rounded-l-full rtl:rounded-r-full absolute end-0 top-1/2 -translate-y-1/2 overflow-hidden">
         <Image
           src={SeeImage}
           alt={t("seeImageAlt")}
           fill
           className="object-cover"
         />
-      </div>
+
+      </div> */}
 
       {/* contant */}
 
@@ -116,7 +117,8 @@ function TravelApp({}: Props) {
                 sm:grid-cols-3 sm:gap-3"
                 >
                   <a
-                    href="#"
+                    href="https://apps.apple.com/eg/app/gita-flights-hotels-more/id6741498793"
+                    target="_blank"
                     className="block min-w-0 transition-opacity hover:opacity-90"
                     aria-label={t("appStoreAria")}
                   >
@@ -129,7 +131,7 @@ function TravelApp({}: Props) {
                     />
                   </a>
                   <a
-                    href="#"
+                    href="https://play.google.com/store/apps/details?id=com.eficta.flights&pcampaignid=web_share"
                     className="block min-w-0 transition-opacity hover:opacity-90"
                     aria-label={t("googlePlayAria")}
                   >

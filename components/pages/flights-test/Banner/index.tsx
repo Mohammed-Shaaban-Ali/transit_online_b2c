@@ -21,7 +21,12 @@ function Banner({}: Props) {
   return (
     <section className="relative w-full my-6">
       <div className="relative min-h-[400px] overflow-hidden">
-        <Image src={bannerImage} alt={t("bannerAlt")} fill className="object-cover" />
+        <Image
+          src={bannerImage}
+          alt={t("bannerAlt")}
+          fill
+          className="object-cover"
+        />
 
         <div className="absolute left-[10%] top-[24px] z-10 hidden lg:block lg:w-[280px] xl:w-[330px]">
           <Image
@@ -60,16 +65,27 @@ function Banner({}: Props) {
                 alt={t("qrCodeAlt")}
                 className="w-[120px] h-auto"
               />
-              <Image
-                src={iosImage}
-                alt={t("appStoreAlt")}
-                className="w-[120px] h-auto"
-              />
-              <Image
-                src={androidImage}
-                alt={t("googlePlayAlt")}
-                className="w-[120px] h-auto"
-              />
+
+              <a
+                href="https://apps.apple.com/eg/app/gita-flights-hotels-more/id6741498793"
+                target="_blank"
+              >
+                <Image
+                  src={iosImage}
+                  alt={t("appStoreAlt")}
+                  className="w-[120px] h-auto"
+                />
+              </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.eficta.flights&pcampaignid=web_share"
+                target="_blank"
+              >
+                <Image
+                  src={androidImage}
+                  alt={t("googlePlayAlt")}
+                  className="w-[120px] h-auto"
+                />
+              </a>
             </div>
           </div>
         </div>
