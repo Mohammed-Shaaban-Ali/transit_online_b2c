@@ -14,6 +14,17 @@ export interface IFeaturedDestination {
   updated_at: string;
 }
 
+export interface ITrip {
+  id: number;
+  title: string;
+  description: string;
+  img: string | null;
+  rate: number | null;
+  priority: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface IMeta {
   current_page: number;
   last_page: number;

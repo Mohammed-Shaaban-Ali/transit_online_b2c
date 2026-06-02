@@ -6,25 +6,27 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useLocale } from "next-intl";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { useGetFeaturedDestinationsQuery } from "@/redux/features/website/websiteApi";
+import { useGetTripsQuery } from "@/redux/features/website/websiteApi";
+import { ITrip } from "@/types/website";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import { IFeaturedDestination } from "@/types/website";
 
 type Props = Record<string, never>;
 
 const navButtonClass =
   "absolute top-1/2 z-10 flex h-10 w-10 shrink-0 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-[0_2px_12px_rgba(0,0,0,0.12)] transition-opacity hover:bg-primary hover:text-white hover:shadow-[0_4px_16px_rgba(0,0,0,0.14)] sm:h-11 sm:w-11";
 
-function FeaturedDestinations({}: Props) {
+const getTripImageUrl = (img: string | null) =>
+  img ? `https://gita.sa/storage/${img}` : "/images/gitalogo.png";
+
+function Trips({}: Props) {
   const locale = useLocale();
   const t = useTranslations("NewPage.home.round");
   const isRtl = locale === "ar";
-  const { data, isLoading } = useGetFeaturedDestinationsQuery({});
+  const { data, isLoading } = useGetTripsQuery({});
 
   const [showPrev, setShowPrev] = useState(false);
   const [showNext, setShowNext] = useState(false);
@@ -39,56 +41,45 @@ function FeaturedDestinations({}: Props) {
     setShowNext(!swiper.isEnd);
   }, []);
 
-  const visiblePosts = useMemo(() => data?.data.slice(0, 8) ?? [], [data]);
+  const visibleTrips = useMemo(() => data?.data.slice(0, 8) ?? [], [data]);
 
   return (
-    <section className="container mx-auto w-full min-w-0 max-w-[1200px]! overflow-x-clip py-6 ">
+    <section className="container mx-auto w-full min-w-0 max-w-[1200px]! overflow-x-clip py-6">
       <div className="mb-4 flex items-center justify-between gap-3">
-        <h2 className="text-[22px] font-bold leading-tight ">
-          {isRtl ? "واجهات مميزه" : "Featured Destinations"}
+        <h2 className="text-[22px] font-bold leading-tight">
+          {isRtl ? "أفضل العروض والخصومات" : "Best Offers & Discounts"}
         </h2>
-        <Link
-          href="/featured-destinations"
-          className="text-sm font-semibold text-primary hover:underline"
-        >
+        <Link href="/trips" className="text-sm font-semibold text-primary hover:underline">
           {t("viewMore")}
         </Link>
       </div>
 
-      <div className="relative min-w-0 max-w-full mx-2.5">
+      <div className="relative mx-2.5 min-w-0 max-w-full">
         <button
-          id="hotels-top-prev"
+          id="trips-top-prev"
           type="button"
           className={`${navButtonClass} ${showPrev ? "hidden sm:flex" : "hidden"}
              sm:start-2 translate-x-0 md:start-0 md:-translate-x-1/2
              md:rtl:start-0 md:rtl:translate-x-1/2`}
           aria-label={t("previousSlide")}
         >
-          <ChevronLeft
-            className="h-5 w-5 rtl:rotate-180"
-            strokeWidth={2.25}
-            aria-hidden
-          />
+          <ChevronLeft className="h-5 w-5 rtl:rotate-180" strokeWidth={2.25} aria-hidden />
         </button>
         <button
-          id="hotels-top-next"
+          id="trips-top-next"
           type="button"
           className={`${navButtonClass} ${showNext ? "hidden sm:flex" : "hidden"}
              end-0 sm:end-2 translate-x-0 md:end-0 md:translate-x-1/2
              md:rtl:end-0 md:rtl:-translate-x-1/2`}
           aria-label={t("nextSlide")}
         >
-          <ChevronRight
-            className="h-5 w-5 rtl:rotate-180"
-            strokeWidth={2.25}
-            aria-hidden
-          />
+          <ChevronRight className="h-5 w-5 rtl:rotate-180" strokeWidth={2.25} aria-hidden />
         </button>
 
         {isLoading ? (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {Array.from({ length: 4 }).map((_, index) => (
-              <FeaturedDestinationCardSkeleton key={index} />
+              <TripCardSkeleton key={index} />
             ))}
           </div>
         ) : (
@@ -96,8 +87,8 @@ function FeaturedDestinations({}: Props) {
             modules={[Navigation]}
             dir={isRtl ? "rtl" : "ltr"}
             navigation={{
-              prevEl: "#hotels-top-prev",
-              nextEl: "#hotels-top-next",
+              prevEl: "#trips-top-prev",
+              nextEl: "#trips-top-next",
             }}
             watchOverflow
             className="min-w-0 max-w-full"
@@ -121,18 +112,11 @@ function FeaturedDestinations({}: Props) {
               },
             }}
           >
-            {visiblePosts.map((post) => {
-              const imageUrl = `https://gita.sa/storage/${post.featured_image}`;
-              console.log(imageUrl);
-              return (
-                <SwiperSlide
-                  key={post.id}
-                  className="min-w-0 max-w-full h-full"
-                >
-                  <FeaturedDestinationCard post={post} />
-                </SwiperSlide>
-              );
-            })}
+            {visibleTrips.map((trip) => (
+              <SwiperSlide key={trip.id} className="h-full min-w-0 max-w-full">
+                <TripCard trip={trip} />
+              </SwiperSlide>
+            ))}
           </Swiper>
         )}
       </div>
@@ -140,43 +124,34 @@ function FeaturedDestinations({}: Props) {
   );
 }
 
-export default FeaturedDestinations;
+export default Trips;
 
-export const FeaturedDestinationCard = ({
-  post,
-}: {
-  post: IFeaturedDestination;
-}) => {
-  const imageUrl = `https://gita.sa/storage/${post.featured_image}`;
+export const TripCard = ({ trip }: { trip: ITrip }) => {
+  const imageUrl = getTripImageUrl(trip.img);
   return (
-    <div className=" bg-white rounded-lg border border-gray-300 p-2.5 h-full flex flex-col justify-between">
-      <Link
-        href={`/featured-destinations/${post.id}`}
-        className="group
-               transition-all duration-300 overflow-hidden "
-      >
-        <div className="relative overflow-hidden rounded-lg h-[140px] md:h-[160px]">
+    <div className="flex h-full flex-col justify-between rounded-lg border border-gray-300 bg-white p-2.5">
+      <Link href={`/trips/${trip.id}`} className="group overflow-hidden transition-all duration-300">
+        <div className="relative h-[140px] overflow-hidden rounded-lg md:h-[160px]">
           <Image
             src={imageUrl}
-            alt={post.title}
+            alt={trip.title}
             width={600}
             height={300}
-            className="h-[140px] md:h-[160px] w-full object-cover group-hover:scale-105 transition-all duration-300"
+            className="h-[140px] w-full object-cover transition-all duration-300 group-hover:scale-105 md:h-[160px]"
           />
         </div>
 
-        <div className="flex flex-col pt-3.5 gap-1">
-          <h3 className="text-16  font-semibold leading-tight text-black line-clamp-1">
-            {post.title}
-          </h3>
+        <div className="flex flex-col gap-1 pt-3.5">
+          <h3 className="text-16 line-clamp-1 font-semibold leading-tight text-black">{trip.title}</h3>
         </div>
       </Link>
     </div>
   );
 };
-export const FeaturedDestinationCardSkeleton = () => {
+
+export const TripCardSkeleton = () => {
   return (
-    <div className="rounded-lg border border-gray-300 p-2 animate-pulse">
+    <div className="animate-pulse rounded-lg border border-gray-300 p-2">
       <div className="h-[140px] rounded-lg bg-gray-200 sm:h-[160px]" />
       <div className="pt-2.5">
         <div className="h-4 w-4/5 rounded bg-gray-200" />

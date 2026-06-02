@@ -1,25 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import NewNavbar from "@/components/shared/Navbar/NewNavbar";
-import { useLocale } from "next-intl";
-import { useTranslations } from "next-intl";
-import { useGetFeaturedDestinationsQuery } from "@/redux/features/website/websiteApi";
-import { IFeaturedDestination } from "@/types/website";
-import {
-  FeaturedDestinationCard,
-  FeaturedDestinationCardSkeleton,
-} from "@/components/pages/new/home/FeaturedDestinations";
+import { useLocale, useTranslations } from "next-intl";
+import { useGetTripsQuery } from "@/redux/features/website/websiteApi";
+import { ITrip } from "@/types/website";
+import { TripCard, TripCardSkeleton } from "@/components/pages/new/home/Trips";
 
-function FeaturedDestinationsPage() {
+function TripsPage() {
   const t = useTranslations("NewPage.home.round");
   const locale = useLocale();
   const isRtl = locale === "ar";
   const [page, setPage] = useState(1);
-  const [items, setItems] = useState<IFeaturedDestination[]>([]);
+  const [items, setItems] = useState<ITrip[]>([]);
   const [isAppending, setIsAppending] = useState(false);
-  const { data, isLoading, isFetching } = useGetFeaturedDestinationsQuery({
+  const { data, isLoading, isFetching } = useGetTripsQuery({
     page: page || 1,
   });
   const meta = data?.meta;
@@ -60,20 +55,20 @@ function FeaturedDestinationsPage() {
       <NewNavbar isBgWhite />
       <section className="container mx-auto w-full max-w-[1200px]! px-3 pb-8 pt-28 md:pt-24">
         <h1 className="mb-5 text-[24px] font-bold leading-tight">
-          {isRtl ? "واجهات مميزه" : "Featured Destinations"}
+          {isRtl ? "أفضل العروض والخصومات" : "Best Offers & Discounts"}
         </h1>
 
         {loading ? (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {Array.from({ length: 6 }).map((_, index) => (
-              <FeaturedDestinationCardSkeleton key={index} />
+              <TripCardSkeleton key={index} />
             ))}
           </div>
         ) : (
           <>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {items.map((post) => (
-                <FeaturedDestinationCard post={post} key={post.id} />
+              {items.map((trip) => (
+                <TripCard trip={trip} key={trip.id} />
               ))}
             </div>
 
@@ -96,4 +91,4 @@ function FeaturedDestinationsPage() {
   );
 }
 
-export default FeaturedDestinationsPage;
+export default TripsPage;

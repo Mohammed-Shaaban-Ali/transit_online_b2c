@@ -4,6 +4,7 @@ import Hero from "./Hero";
 import Discover from "./Discover";
 import Hotels from "./Hotels";
 import FeaturedDestinations from "./FeaturedDestinations";
+import Trips from "./Trips";
 import Recommended from "./Recommended";
 import Trip from "./Trip";
 import Exclusive from "./Exclusive";
@@ -26,6 +27,7 @@ function Home({}: Props) {
         <Moments />
         <Hotels />
         <FeaturedDestinations />
+        <Trips />
       </section>
       <TravelApp />
       <section className="container max-w-[1200px]! mx-auto mb-6">
