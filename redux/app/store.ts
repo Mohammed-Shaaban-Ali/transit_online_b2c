@@ -13,7 +13,10 @@ export const store = configureStore({
     auth: authSlice.reducer,
   },
   middleware(getDefaultMiddleware) {
-    return getDefaultMiddleware().concat(baseApi.middleware, baseApi2.middleware);
+    return getDefaultMiddleware().concat(
+      baseApi.middleware,
+      baseApi2.middleware,
+    );
   },
 });
 

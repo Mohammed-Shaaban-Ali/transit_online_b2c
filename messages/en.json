@@ -1956,7 +1956,10 @@
                 "title": "Get around in Shanghai",
                 "previousSlide": "Previous slide",
                 "nextSlide": "Next slide",
-                "from": "From"
+                "from": "From",
+                "viewMore": "View more",
+                "loading": "Loading...",
+                "loadMore": "Load more"
             },
             "moments": {
                 "title": "Unforgettable gita moments in Shanghai",

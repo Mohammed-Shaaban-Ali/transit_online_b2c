@@ -3,7 +3,7 @@ import React from "react";
 import Hero from "./Hero";
 import Discover from "./Discover";
 import Hotels from "./Hotels";
-import Round from "./Round";
+import FeaturedDestinations from "./FeaturedDestinations";
 import Recommended from "./Recommended";
 import Trip from "./Trip";
 import Exclusive from "./Exclusive";
@@ -25,7 +25,7 @@ function Home({}: Props) {
         <Trip />
         <Moments />
         <Hotels />
-        <Round />
+        <FeaturedDestinations />
       </section>
       <TravelApp />
       <section className="container max-w-[1200px]! mx-auto mb-6">
