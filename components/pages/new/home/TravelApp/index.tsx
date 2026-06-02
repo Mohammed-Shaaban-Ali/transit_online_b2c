@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 import SeeImage from "@/public/images/new_hone/see.png";
-import qrcodeImage from "@/public/images/flights/Qrcode.png";
+import qrcodeImage from "@/public/images/flights/Qrcode.jpg";
 import iosImage from "@/public/images/flights/ios.png";
 import androidImage from "@/public/images/flights/android.png";
 

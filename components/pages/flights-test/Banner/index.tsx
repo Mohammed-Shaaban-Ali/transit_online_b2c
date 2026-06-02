@@ -1,6 +1,6 @@
 import Image from "next/image";
 import bannerImage from "@/public/images/flights/banner-bg.png";
-import qrcodeImage from "@/public/images/flights/Qrcode.png";
+import qrcodeImage from "@/public/images/flights/Qrcode.jpg";
 import iosImage from "@/public/images/flights/ios.png";
 import androidImage from "@/public/images/flights/android.png";
 import flightCardImage from "@/public/images/flights/flight-card.png";
