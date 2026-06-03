@@ -157,7 +157,6 @@ function HotelsTestHotelSearchForm({
 
   const onSubmit = async (data: HotelsTestFormValues) => {
     try {
-      console.log("onSubmit data", data);
       const all = form.getValues();
       const params = new URLSearchParams();
       if (data.country) params.append("country", data.country);

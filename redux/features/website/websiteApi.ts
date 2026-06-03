@@ -2,6 +2,7 @@ import { baseApi2, SuccessResponse } from "@/redux/app/baseApi";
 import {
   IFeaturedDestination,
   IFlightOffer,
+  IHotelOffer,
   IPaginationParams,
   IPaginationResponse,
   ITrip,
@@ -52,6 +53,18 @@ const websiteApi = baseApi2.injectEndpoints({
         };
       },
     }),
+    getHotelOffers: builder.query<
+      IPaginationResponse<IHotelOffer>,
+      IPaginationParams
+    >({
+      query: (params) => {
+        return {
+          url: `/api/hotels-offers/offers`,
+          method: "GET",
+          params,
+        };
+      },
+    }),
     getTrips: builder.query<IPaginationResponse<ITrip>, IPaginationParams>({
       query: (params) => {
         return {
@@ -85,6 +98,7 @@ export const {
   useGetFeaturedDestinationsQuery,
   useGetFeaturedDestinationDetailsQuery,
   useGetFlightOffersQuery,
+  useGetHotelOffersQuery,
   useGetTripsQuery,
   useGetTripDetailsQuery,
   useBookTripOfferMutation,

@@ -29,6 +29,21 @@ export interface IFlightOffer {
   updated_at: string;
 }
 
+export interface IHotelOffer {
+  id: number;
+  city_id: number;
+  city_name: string;
+  hotel_id: number;
+  hotel_name: string;
+  check_in: string;
+  check_out: string;
+  rating: number;
+  currency: string;
+  price: string;
+  price_for: string;
+  image: string;
+}
+
 export interface ITrip {
   id: number;
   title: string;

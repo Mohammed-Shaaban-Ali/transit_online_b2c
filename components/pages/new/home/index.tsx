@@ -3,6 +3,7 @@ import React from "react";
 import Hero from "./Hero";
 import Discover from "./Discover";
 import Hotels from "./Hotels";
+import HotelsOffers from "./HotelsOffers";
 import FlightsOffers from "./FlightsOffers";
 import FeaturedDestinations from "./FeaturedDestinations";
 import Trips from "./Trips";
@@ -22,11 +23,12 @@ function Home({}: Props) {
     >
       <Hero />
       <section className="container max-w-[1200px]! mx-auto mt-20 md:mt-16 mb-6 ">
-        <Exclusive />
+        {/* <Exclusive />
         <Discover />
         <Trip />
         <Moments />
-        <Hotels />
+        <Hotels /> */}
+        <HotelsOffers />
         <FlightsOffers />
         <FeaturedDestinations />
         <Trips />
