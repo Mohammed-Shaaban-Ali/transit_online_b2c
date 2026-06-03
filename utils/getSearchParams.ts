@@ -15,10 +15,31 @@ export const getSearchParamsData = (): searchHotelsParams | undefined => {
   const lng = searchParams.get("lng");
   const roomsParam = searchParams.get("rooms");
 
-  // If URL params are available, use them
+  const parseRooms = () => {
+    if (!roomsParam) return [{ AdultsCount: 2, KidsAges: [] as number[] }];
+    try {
+      const parsed = JSON.parse(roomsParam);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    } catch {
+      /* default below */
+    }
+    return [{ AdultsCount: 2, KidsAges: [] as number[] }];
+  };
+
+  // Hotel offers / package flow: dates + rooms only (no map coordinates)
+  if (checkIn && checkOut && !lat && !lng) {
+    return {
+      country,
+      checkIn,
+      checkOut,
+      location: { latitude: 0, longitude: 0 },
+      radiusInMeters: 10000,
+      rooms: parseRooms(),
+    };
+  }
+
+  // Full hotel search: dates + map location
   if (checkIn && checkOut && lat && lng) {
-    const rooms = roomsParam ? JSON.parse(roomsParam) : [{ AdultsCount: 2, KidsAges: [] }];
-    
     return {
       country,
       checkIn,
@@ -28,7 +49,7 @@ export const getSearchParamsData = (): searchHotelsParams | undefined => {
         longitude: parseFloat(lng),
       },
       radiusInMeters: 10000,
-      rooms,
+      rooms: parseRooms(),
     };
   }
 

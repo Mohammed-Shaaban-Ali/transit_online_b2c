@@ -10,6 +10,11 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useGetHotelOffersQuery } from "@/redux/features/website/websiteApi";
 import { IHotelOffer } from "@/types/website";
+import { localStorageHotelKey } from "@/constants";
+import {
+  buildHotelOfferDetailsHref,
+  mapOfferToHotelStorage,
+} from "@/utils/hotels/hotelOfferDetails";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -134,6 +139,14 @@ function HotelsOffers({}: Props) {
 
 export default HotelsOffers;
 
+function persistOfferHotel(offer: IHotelOffer) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(
+    localStorageHotelKey,
+    JSON.stringify(mapOfferToHotelStorage(offer)),
+  );
+}
+
 export const HotelOfferCard = ({
   offer,
   isRtl,
@@ -142,7 +155,12 @@ export const HotelOfferCard = ({
   isRtl: boolean;
 }) => {
   return (
-    <div className="flex h-full flex-col justify-between rounded-xl border border-gray-200 bg-white p-2.5">
+    <Link
+      href={buildHotelOfferDetailsHref(offer)}
+      onClick={() => persistOfferHotel(offer)}
+      className="group flex h-full flex-col justify-between rounded-xl border border-gray-200
+       bg-white p-2.5 transition-shadow hover:border-gray-300 "
+    >
       <div className="overflow-hidden">
         <div className="relative h-[140px] overflow-hidden rounded-lg md:h-[160px]">
           <Image
@@ -150,23 +168,24 @@ export const HotelOfferCard = ({
             alt={offer.hotel_name}
             width={600}
             height={300}
-            className="h-[140px] w-full object-cover md:h-[160px]"
+            className="h-[140px] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] 
+            md:h-[160px]"
           />
         </div>
 
         <div className="flex flex-1 flex-col justify-between gap-2 pt-3.5">
-          <h3 className="text-16 line-clamp-2 font-semibold leading-tight text-black">
+          <h3 className="text-16 line-clamp-1 font-semibold leading-tight text-black ">
             {offer.hotel_name} - {offer.city_name}
           </h3>
           <p className="text-end text-sm font-bold text-primary">
             {isRtl ? "ابتداءً من" : "Starting from"}{" "}
             <span>
-              {offer.price} {isRtl ? "﷼" : offer.currency}
+              {offer.price} {offer.currency}
             </span>
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

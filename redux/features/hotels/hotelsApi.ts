@@ -40,7 +40,7 @@ export interface HotelBookRequest {
 
 // Types for hotel package revalidation
 export interface RevalidatePackagesParams {
-  country: string;
+  country?: string;
   checkIn: string;
   checkOut: string;
   hotelIds: number[];
