@@ -40,6 +40,9 @@ function FeaturedDestinations({}: Props) {
   }, []);
 
   const visiblePosts = useMemo(() => data?.data.slice(0, 8) ?? [], [data]);
+  if (!isLoading && visiblePosts.length === 0) {
+    return null;
+  }
 
   return (
     <section className="container mx-auto w-full min-w-0 max-w-[1200px]! overflow-x-clip py-6 ">
