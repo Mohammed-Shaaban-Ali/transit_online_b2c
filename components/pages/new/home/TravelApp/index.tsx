@@ -15,7 +15,7 @@ function TravelApp({}: Props) {
   const t = useTranslations("NewPage.home.travelApp");
 
   return (
-    <section className="relative w-full h-[400px] overflow-hidden">
+    <section className="relative w-full min-h-[400px] overflow-hidden">
       <Image
         src={heroSection}
         alt={t("heroAlt")}
@@ -113,13 +113,13 @@ function TravelApp({}: Props) {
                 </div>
 
                 <div
-                  className="mx-auto grid max-w-[140px] grid-cols-2 gap-2.5 sm:mx-0 sm:max-w-none 
-                sm:grid-cols-3 sm:gap-3"
+                  className="mx-auto flex flex-wrap justify-start gap-2.5 sm:mx-0 
+                 sm:gap-3"
                 >
                   <a
                     href="https://apps.apple.com/eg/app/gita-flights-hotels-more/id6741498793"
                     target="_blank"
-                    className="block min-w-0 transition-opacity hover:opacity-90"
+                    className="block  transition-opacity hover:opacity-90 w-[140px]"
                     aria-label={t("appStoreAria")}
                   >
                     <Image
@@ -132,7 +132,7 @@ function TravelApp({}: Props) {
                   </a>
                   <a
                     href="https://play.google.com/store/apps/details?id=com.eficta.flights&pcampaignid=web_share"
-                    className="block min-w-0 transition-opacity hover:opacity-90"
+                    className="block  transition-opacity hover:opacity-90 w-[140px]"
                     aria-label={t("googlePlayAria")}
                   >
                     <Image
