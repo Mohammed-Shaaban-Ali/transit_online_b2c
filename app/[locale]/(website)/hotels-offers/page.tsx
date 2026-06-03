@@ -58,7 +58,7 @@ function HotelsOffersPage() {
       <NewNavbar isBgWhite />
       <section className="container mx-auto w-full max-w-[1200px]! px-3 pb-8 pt-28 md:pt-24">
         <h1 className="mb-5 text-[24px] font-bold leading-tight">
-          {isRtl ? "االفناد الأكثر تقييماً" : "Most Rated Hotels"}
+          {isRtl ? "الفناد الأكثر تقييماً" : "Most Rated Hotels"}
         </h1>
 
         {loading ? (

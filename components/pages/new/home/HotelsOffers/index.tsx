@@ -49,7 +49,7 @@ function HotelsOffers({}: Props) {
     <section className="container mx-auto w-full min-w-0 max-w-[1200px]! overflow-x-clip py-6">
       <div className="mb-4 flex items-center justify-between gap-3">
         <h2 className="text-[22px] font-bold leading-tight">
-          {isRtl ? "االفناد الأكثر تقييماً" : "Most Rated Hotels"}
+          {isRtl ? "الفناد الأكثر تقييماً" : "Most Rated Hotels"}
         </h2>
         <Link
           href="/hotels-offers"
