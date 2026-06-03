@@ -82,10 +82,10 @@ function FeaturedDestinationsPage() {
                 <button
                   type="button"
                   onClick={handleLoadMore}
-                  disabled={loadingMore}
+                  disabled={isFetching}
                   className="rounded-md bg-primary px-5 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {loadingMore ? t("loading") : t("loadMore")}
+                  {isFetching ? t("loading") : t("loadMore")}
                 </button>
               </div>
             ) : null}

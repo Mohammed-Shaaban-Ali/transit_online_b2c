@@ -49,7 +49,10 @@ function Trips({}: Props) {
         <h2 className="text-[22px] font-bold leading-tight">
           {isRtl ? "أفضل العروض والخصومات" : "Best Offers & Discounts"}
         </h2>
-        <Link href="/trips" className="text-sm font-semibold text-primary hover:underline">
+        <Link
+          href="/trips"
+          className="text-sm font-semibold text-primary hover:underline"
+        >
           {t("viewMore")}
         </Link>
       </div>
@@ -63,7 +66,11 @@ function Trips({}: Props) {
              md:rtl:start-0 md:rtl:translate-x-1/2`}
           aria-label={t("previousSlide")}
         >
-          <ChevronLeft className="h-5 w-5 rtl:rotate-180" strokeWidth={2.25} aria-hidden />
+          <ChevronLeft
+            className="h-5 w-5 rtl:rotate-180"
+            strokeWidth={2.25}
+            aria-hidden
+          />
         </button>
         <button
           id="trips-top-next"
@@ -73,7 +80,11 @@ function Trips({}: Props) {
              md:rtl:end-0 md:rtl:-translate-x-1/2`}
           aria-label={t("nextSlide")}
         >
-          <ChevronRight className="h-5 w-5 rtl:rotate-180" strokeWidth={2.25} aria-hidden />
+          <ChevronRight
+            className="h-5 w-5 rtl:rotate-180"
+            strokeWidth={2.25}
+            aria-hidden
+          />
         </button>
 
         {isLoading ? (
@@ -112,7 +123,7 @@ function Trips({}: Props) {
               },
             }}
           >
-            {visibleTrips.map((trip) => (
+            {visibleTrips?.map((trip) => (
               <SwiperSlide key={trip.id} className="h-full min-w-0 max-w-full">
                 <TripCard trip={trip} />
               </SwiperSlide>
@@ -129,8 +140,11 @@ export default Trips;
 export const TripCard = ({ trip }: { trip: ITrip }) => {
   const imageUrl = getTripImageUrl(trip.img);
   return (
-    <div className="flex h-full flex-col justify-between rounded-lg border border-gray-300 bg-white p-2.5">
-      <Link href={`/trips/${trip.id}`} className="group overflow-hidden transition-all duration-300">
+    <div className="flex h-full flex-col justify-between rounded-xl border border-gray-300 bg-white p-2.5">
+      <Link
+        href={`/trips/${trip.id}`}
+        className="group overflow-hidden transition-all duration-300"
+      >
         <div className="relative h-[140px] overflow-hidden rounded-lg md:h-[160px]">
           <Image
             src={imageUrl}
@@ -142,7 +156,9 @@ export const TripCard = ({ trip }: { trip: ITrip }) => {
         </div>
 
         <div className="flex flex-col gap-1 pt-3.5">
-          <h3 className="text-16 line-clamp-1 font-semibold leading-tight text-black">{trip.title}</h3>
+          <h3 className="text-16 line-clamp-1 font-semibold leading-tight text-black">
+            {trip.title}
+          </h3>
         </div>
       </Link>
     </div>
@@ -151,7 +167,7 @@ export const TripCard = ({ trip }: { trip: ITrip }) => {
 
 export const TripCardSkeleton = () => {
   return (
-    <div className="animate-pulse rounded-lg border border-gray-300 p-2">
+    <div className="animate-pulse rounded-xl border border-gray-300 p-2">
       <div className="h-[140px] rounded-lg bg-gray-200 sm:h-[160px]" />
       <div className="pt-2.5">
         <div className="h-4 w-4/5 rounded bg-gray-200" />

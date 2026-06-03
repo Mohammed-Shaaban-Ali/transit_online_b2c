@@ -3,6 +3,7 @@ import React from "react";
 import Hero from "./Hero";
 import Discover from "./Discover";
 import Hotels from "./Hotels";
+import FlightsOffers from "./FlightsOffers";
 import FeaturedDestinations from "./FeaturedDestinations";
 import Trips from "./Trips";
 import Recommended from "./Recommended";
@@ -26,6 +27,7 @@ function Home({}: Props) {
         <Trip />
         <Moments />
         <Hotels />
+        <FlightsOffers />
         <FeaturedDestinations />
         <Trips />
       </section>

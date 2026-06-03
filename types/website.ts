@@ -14,6 +14,21 @@ export interface IFeaturedDestination {
   updated_at: string;
 }
 
+export interface IFlightOffer {
+  id: number;
+  from_airport: string;
+  to_airport: string;
+  departure_date: string;
+  return_date: string;
+  image: string;
+  title: string;
+  currency: string;
+  price: string;
+  description: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface ITrip {
   id: number;
   title: string;

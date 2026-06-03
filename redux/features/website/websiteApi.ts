@@ -1,6 +1,7 @@
 import { baseApi2, SuccessResponse } from "@/redux/app/baseApi";
 import {
   IFeaturedDestination,
+  IFlightOffer,
   IPaginationParams,
   IPaginationResponse,
   ITrip,
@@ -39,6 +40,18 @@ const websiteApi = baseApi2.injectEndpoints({
         };
       },
     }),
+    getFlightOffers: builder.query<
+      IPaginationResponse<IFlightOffer>,
+      IPaginationParams
+    >({
+      query: (params) => {
+        return {
+          url: `/api/flights-offers`,
+          method: "GET",
+          params,
+        };
+      },
+    }),
     getTrips: builder.query<IPaginationResponse<ITrip>, IPaginationParams>({
       query: (params) => {
         return {
@@ -57,18 +70,21 @@ const websiteApi = baseApi2.injectEndpoints({
         };
       },
     }),
-    bookTripOffer: builder.mutation<SuccessResponse<any>, BookTripOfferPayload>({
-      query: (body) => ({
-        url: "/api/booking-offer/mail",
-        method: "POST",
-        body,
-      }),
-    }),
+    bookTripOffer: builder.mutation<SuccessResponse<any>, BookTripOfferPayload>(
+      {
+        query: (body) => ({
+          url: "/api/booking-offer/mail",
+          method: "POST",
+          body,
+        }),
+      },
+    ),
   }),
 });
 export const {
   useGetFeaturedDestinationsQuery,
   useGetFeaturedDestinationDetailsQuery,
+  useGetFlightOffersQuery,
   useGetTripsQuery,
   useGetTripDetailsQuery,
   useBookTripOfferMutation,
