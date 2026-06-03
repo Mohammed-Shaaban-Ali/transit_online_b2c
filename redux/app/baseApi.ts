@@ -47,6 +47,7 @@ const createBaseQuery = (baseUrl: string) =>
 
       // Set b2c header
       headers.set("b2c", "1");
+      headers.set("is_website ", "1");
       headers.set("x-country", "EG");
       headers.set("x-currency", "EGP");
 
