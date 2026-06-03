@@ -49,7 +49,7 @@ function HotelsOffers({}: Props) {
     <section className="container mx-auto w-full min-w-0 max-w-[1200px]! overflow-x-clip py-6">
       <div className="mb-4 flex items-center justify-between gap-3">
         <h2 className="text-[22px] font-bold leading-tight">
-          {isRtl ? "الفناد الأكثر تقييماً" : "Most Rated Hotels"}
+          {isRtl ? "االفناد الأكثر تقييماً" : "Most Rated Hotels"}
         </h2>
         <Link
           href="/hotels-offers"
@@ -164,7 +164,11 @@ export const HotelOfferCard = ({
       <div className="overflow-hidden">
         <div className="relative h-[140px] overflow-hidden rounded-lg md:h-[160px]">
           <Image
-            src={offer.image}
+            src={
+              offer.image?.startsWith("http")
+                ? offer.image
+                : `https://gita.sa/storage/${offer.image}`
+            }
             alt={offer.hotel_name}
             width={600}
             height={300}
