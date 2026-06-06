@@ -14,8 +14,8 @@ import {
 import enFlag from "@/public/images/en_flag.webp";
 import arFlag from "@/public/images/ar_flag.webp";
 import { Locale, useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { routing } from "@/i18n/routing";
 import { useDispatch } from "react-redux";
 import { baseApi, baseApi2 } from "@/redux/app/baseApi";
 import { GoGlobe } from "react-icons/go";
@@ -27,7 +27,6 @@ type LocaleSwitcherProps = {
 function LocaleSwitcher({ variant = "default" }: LocaleSwitcherProps) {
   const t = useTranslations("Components.LocaleSwitcher");
   const locale = useLocale();
-  const pathname = usePathname();
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -56,9 +55,18 @@ function LocaleSwitcher({ variant = "default" }: LocaleSwitcherProps) {
   const handleLanguageChange = (newLang: string) => {
     setCurrentLang(newLang as Locale);
     const query = searchParams.toString();
-    router.replace(`${pathname}${query ? `?${query}` : ""}`, {
-      locale: newLang as Locale,
-    });
+
+    // Use the real browser URL so the country segment is preserved
+    // (the middleware rewrite is transparent to Next.js pathname hooks).
+    const localePattern = new RegExp(
+      `^/(${routing.locales.join("|")})(?=/|$)`,
+    );
+    const newPath = window.location.pathname.replace(
+      localePattern,
+      `/${newLang}`,
+    );
+
+    router.push(`${newPath}${query ? `?${query}` : ""}`);
   };
 
   const currentLanguage = Languages.find((lang) => lang.code === currentLang)!;

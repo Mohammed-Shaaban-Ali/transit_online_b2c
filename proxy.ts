@@ -75,14 +75,27 @@ export default function proxy(request: NextRequest) {
       return NextResponse.redirect(new URL(safeReturnTo, request.url));
     }
 
-    // Internally rewrite the URL to remove the country segment so that
-    // Next.js can route it to the correct page under app/[locale]/...
-    // The browser URL keeps showing /<locale>/<country>/...
-    const rewrittenUrl = request.nextUrl.clone();
-    rewrittenUrl.pathname =
+    // Strip the country segment, then let next-intl resolve the locale.
+    // Without intlMiddleware the locale falls back to defaultLocale ("ar").
+    const intlUrl = request.nextUrl.clone();
+    intlUrl.pathname =
       `/${locale}` + (restPath === "/" ? "" : restPath);
 
-    const response = NextResponse.rewrite(rewrittenUrl);
+    const intlRequest = new NextRequest(intlUrl, request);
+    const intlResponse = intlMiddleware(intlRequest);
+
+    if (!intlResponse.ok) {
+      return intlResponse;
+    }
+
+    // Internally rewrite to the next-intl target while keeping the browser URL
+    // at /<locale>/<country>/...
+    const rewriteTarget =
+      intlResponse.headers.get("x-middleware-rewrite") ?? intlUrl.toString();
+
+    const response = NextResponse.rewrite(new URL(rewriteTarget), {
+      headers: intlResponse.headers,
+    });
 
     // Persist the chosen country for future visits
     response.cookies.set(COUNTRY_COOKIE, country, {
