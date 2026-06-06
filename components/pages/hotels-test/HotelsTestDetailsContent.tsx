@@ -10,6 +10,7 @@ import {
   getHotelsTestFormDefaultsFromUrl,
 } from "@/utils/hotelsTestSearchUrl";
 import { useHotelFilterRedux } from "@/hooks/useHotelFilterRedux";
+import { useCountry } from "@/hooks/useCountry";
 
 const HotelsTestHotelSearchForm = dynamic(
   () =>
@@ -29,6 +30,7 @@ export default function HotelsTestDetailsContent() {
     useSearchHotelsMutation();
   const { setHotels } = useHotelFilterRedux();
   const hotelsSetRef = useRef(false);
+  const country = useCountry();
 
   const queryString = searchParams.toString();
 
@@ -46,7 +48,7 @@ export default function HotelsTestDetailsContent() {
     if (!apiParams) return;
     hotelsSetRef.current = false;
     void searchHotels(apiParams).unwrap();
-  }, [apiParams, searchHotels]);
+  }, [apiParams, searchHotels, country]);
 
   const hotels = data?.data;
   const uuid = data?.uuid ?? "";

@@ -81,7 +81,7 @@ function SingleHotel({ hotelID, uuid }: Props) {
       packages: data?.packages || [],
       facilities: data?.hotelContent?.facilities || [],
       gallery: data?.hotelContent?.images || [],
-      price: parsedHotel?.price || 0,
+      price: cheapestPackage?.price?.finalPrice ?? parsedHotel?.price ?? 0,
       currency: cheapestPackage?.price?.currency || "EGP",
     };
 

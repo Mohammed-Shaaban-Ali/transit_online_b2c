@@ -1,10 +1,12 @@
 import { useCallback } from "react";
 import { useLocale } from "next-intl";
-import { CURRENCY_CONFIG, convertPrice } from "@/config/currency";
+import { convertPrice } from "@/config/currency";
+import { useCurrencyConfig } from "@/hooks/useCurrencyConfig";
 
 // Custom hook for flight utility functions
 export const useFlightUtils = () => {
   const locale = useLocale();
+  const currencyConfig = useCurrencyConfig();
 
   const formatTime = useCallback(
     (dateString: string): string => {
@@ -47,16 +49,16 @@ export const useFlightUtils = () => {
   );
 
   const formatPrice = useCallback(
-    (amount: number, currency: string = "EGP"): string => {
+    (amount: number): string => {
       const convertedAmount = convertPrice(amount);
       return new Intl.NumberFormat(locale === "ar" ? "ar-EG" : "en-US", {
         style: "currency",
-        currency: CURRENCY_CONFIG.currencyCode,
+        currency: currencyConfig.currencyCode,
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       }).format(convertedAmount);
     },
-    [locale]
+    [locale, currencyConfig]
   );
 
   return {

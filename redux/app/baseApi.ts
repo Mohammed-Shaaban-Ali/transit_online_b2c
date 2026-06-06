@@ -1,10 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getCookie } from "cookies-next";
-import { NEXT_LOCALE, API_TOKEN_COOKIE } from "@/constants";
+import { NEXT_LOCALE, API_TOKEN_COOKIE, COUNTRY_COOKIE } from "@/constants";
 import { toast } from "sonner";
 import { Locale } from "next-intl";
 import { refreshApiToken } from "@/utils/refreshApiToken";
 import { RootState } from "./store";
+import {
+  COUNTRIES_CONFIG,
+  DEFAULT_COUNTRY,
+  SUPPORTED_COUNTRIES,
+  Country,
+} from "@/config/countries";
 
 const API_URL = process.env.NEXT_PUBLIC_APP_EFICTA || "";
 const API_URL2 = process.env.NEXT_PUBLIC_APP_AIRPORTS || "";
@@ -48,8 +54,15 @@ const createBaseQuery = (baseUrl: string) =>
       // Set b2c header
       headers.set("b2c", "1");
       headers.set("is-website", "1");
-      headers.set("x-country", "EG");
-      headers.set("x-currency", "EGP");
+
+      const savedCountry = getCookie(COUNTRY_COOKIE) as string | undefined;
+      const countryKey: Country =
+        savedCountry && SUPPORTED_COUNTRIES.includes(savedCountry as Country)
+          ? (savedCountry as Country)
+          : DEFAULT_COUNTRY;
+      const countryConfig = COUNTRIES_CONFIG[countryKey];
+      headers.set("x-country", countryConfig.apiCode);
+      headers.set("x-currency", countryConfig.apiCurrency);
 
       // Set Content-Type if not already set
       if (!headers.get("Content-Type")) {

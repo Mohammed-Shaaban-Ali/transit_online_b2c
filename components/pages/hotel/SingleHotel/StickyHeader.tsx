@@ -1,11 +1,12 @@
 "use client";
 
 import { formatePrice } from "@/utils/formatePrice";
-import { CURRENCY_CONFIG } from "@/config/currency";
+import { useCurrencyConfig } from "@/hooks/useCurrencyConfig";
 import { useEffect, useState } from "react";
 
 export default function StickyHeader({ hotel }: { hotel?: any }) {
   const [isSticky, setIsSticky] = useState(false);
+  const currencyConfig = useCurrencyConfig();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,7 +39,7 @@ export default function StickyHeader({ hotel }: { hotel?: any }) {
           <div className="flex items-center gap-4">
             <div className="text-right">
               <div className="text-2xl font-bold text-primary">
-                {CURRENCY_CONFIG.currencySymbolEn} {formatePrice(hotel?.price || 0)}
+                {currencyConfig.currencySymbolEn} {formatePrice(hotel?.price || 0)}
               </div>
               <div className="text-xs text-gray-500">per night</div>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CURRENCY_CONFIG } from "@/config/currency";
+import { useCurrencyConfig } from "@/hooks/useCurrencyConfig";
 import { useLocale } from "next-intl";
 
 type Props = {
@@ -11,10 +11,11 @@ type Props = {
 
 function CurrencySymbol({ className = "", size = "md" }: Props) {
   const locale = useLocale();
+  const currencyConfig = useCurrencyConfig();
   const symbol =
     locale === "ar"
-      ? CURRENCY_CONFIG.currencySymbolAr
-      : CURRENCY_CONFIG.currencySymbolEn;
+      ? currencyConfig.currencySymbolAr
+      : currencyConfig.currencySymbolEn;
 
   const sizeClasses = {
     sm: "text-11 rtl:text-12 font-medium",

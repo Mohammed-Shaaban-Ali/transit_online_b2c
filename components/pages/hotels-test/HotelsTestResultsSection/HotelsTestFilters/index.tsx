@@ -5,7 +5,8 @@ import { useTranslations, useLocale } from "next-intl";
 import { useHotelFilterRedux } from "@/hooks/useHotelFilterRedux";
 import { SortOption } from "@/redux/features/hotels/hotelFilterSlice";
 import { HotelFilters } from "@/types/hotels";
-import { convertPrice, CURRENCY_CONFIG } from "@/config/currency";
+import { convertPrice } from "@/config/currency";
+import { useCurrencyConfig } from "@/hooks/useCurrencyConfig";
 import mapImage from "@/public/images/map.jpg";
 import StaticFiltersPanel from "@/components/pages/hotels-test/HotelsTestResultsSection/HotelsTestFilters/StaticFiltersPanel";
 import HotelSearchFilter from "@/components/pages/hotels-test/HotelsTestResultsSection/HotelsTestFilters/HotelSearchFilter";
@@ -24,10 +25,11 @@ export default function HotelsTestFilters({ filters }: Props) {
   const tSearch = useTranslations("HotelsList.SearchBox");
   const tFilters = useTranslations("HotelsList.Filters");
   const locale = useLocale();
+  const currencyConfig = useCurrencyConfig();
   const currencySymbol =
     locale === "ar"
-      ? CURRENCY_CONFIG.currencySymbolAr
-      : CURRENCY_CONFIG.currencySymbolEn;
+      ? currencyConfig.currencySymbolAr
+      : currencyConfig.currencySymbolEn;
 
   const {
     hotels,

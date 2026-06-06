@@ -3,9 +3,11 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "../LocaleSwitcher";
+import CountrySwitcher from "../CountrySwitcher";
 import logo from "@/public/images/gitalogo.png";
 import { Link } from "@/i18n/navigation";
 import UserMenu from "./UserMenu";
+import { SUPPORTED_COUNTRIES } from "@/config/countries";
 
 const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
   const t = useTranslations("Components.Navbar");
@@ -28,12 +30,21 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
 
   function normalizePathname(pathname: string): string {
     const parts = pathname.split("/").filter(Boolean);
+    let start = 0;
 
-    if (parts.length > 0 && ["en", "ar"].includes(parts[0] as "en" | "ar")) {
-      return "/" + parts.slice(1).join("/");
+    // Strip locale segment
+    if (parts.length > start && ["en", "ar"].includes(parts[start])) {
+      start++;
+    }
+    // Strip country segment
+    if (
+      parts.length > start &&
+      SUPPORTED_COUNTRIES.includes(parts[start] as (typeof SUPPORTED_COUNTRIES)[number])
+    ) {
+      start++;
     }
 
-    return pathname.startsWith("/") ? pathname : "/" + pathname;
+    return "/" + parts.slice(start).join("/");
   }
   const pathNameWithoutLocale = normalizePathname(pathname);
   const isBlack =
@@ -103,6 +114,7 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
       </div>
 
       <div className="relative z-10 flex shrink-0 items-center gap-2.5">
+        <CountrySwitcher isBlack={isBlack} />
         <LocaleSwitcher />
         <div className="hidden md:block">
           <UserMenu

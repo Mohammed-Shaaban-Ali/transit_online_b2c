@@ -1,30 +1,45 @@
 // ====================================
 // Currency Configuration
 // ====================================
-// Change the exchange rate here to update all prices across the app.
-// All prices from the API are in SAR (Saudi Riyal).
-// They will be converted to EGP (Egyptian Pound) using this rate.
+// Currency helpers based on the active country.
+// Country-specific values live in config/countries.ts.
 // ====================================
 
-export const CURRENCY_CONFIG = {
-  /** Exchange rate: 1 SAR = X EGP */
-  exchangeRate: 1,
+import {
+  COUNTRIES_CONFIG,
+  Country,
+  DEFAULT_COUNTRY,
+} from "./countries";
 
-  /** Currency code for display (e.g., "EGP") */
-  currencyCode: "EGP",
+export interface CurrencyConfig {
+  exchangeRate: number;
+  currencyCode: string;
+  currencySymbolAr: string;
+  currencySymbolEn: string;
+}
 
-  /** Currency symbol for Arabic (e.g., "ج.م") */
-  currencySymbolAr: "ج.م",
+/** Return the currency config for a given country code (case-insensitive). */
+export function getCurrencyConfig(
+  country: string = DEFAULT_COUNTRY
+): CurrencyConfig {
+  const key = country.toLowerCase() as Country;
+  const config = COUNTRIES_CONFIG[key] ?? COUNTRIES_CONFIG[DEFAULT_COUNTRY];
+  return {
+    exchangeRate: config.exchangeRate,
+    currencyCode: config.currencyCode,
+    currencySymbolAr: config.currencySymbolAr,
+    currencySymbolEn: config.currencySymbolEn,
+  };
+}
 
-  /** Currency symbol for English (e.g., "EGP") */
-  currencySymbolEn: "EGP",
-};
+/** Default currency config (Egypt) — kept for backward compatibility. */
+export const CURRENCY_CONFIG: CurrencyConfig = getCurrencyConfig(DEFAULT_COUNTRY);
 
 /**
- * Convert a price from SAR to EGP (or whatever target currency is configured).
- * @param priceInSAR - The price in Saudi Riyal
- * @returns The converted price
+ * Convert a price using the exchange rate of a given country.
+ * With the current setup the API already returns prices in the local
+ * currency, so the rate defaults to 1.
  */
-export const convertPrice = (priceInSAR: number): number => {
-  return priceInSAR * CURRENCY_CONFIG.exchangeRate;
+export const convertPrice = (price: number): number => {
+  return price * CURRENCY_CONFIG.exchangeRate;
 };

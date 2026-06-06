@@ -1,5 +1,6 @@
 export const NEXT_LOCALE = "NEXT_LOCALE";
 export const API_TOKEN_COOKIE = "api-token";
+export const COUNTRY_COOKIE = "country-pref";
 export const FLIGHT_BOOKING_KEY = "flight-booking-data";
 export const HOTEL_BOOKING_KEY = "hotel-booking-data";
 export const HOTEL_BOOKING_ID_KEY = "HOTEL_BOOKING_ID";
