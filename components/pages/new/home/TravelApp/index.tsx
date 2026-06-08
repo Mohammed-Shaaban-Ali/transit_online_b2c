@@ -85,7 +85,7 @@ function TravelApp({}: Props) {
               </div>
 
               <div className="flex min-w-0 flex-1 flex-col gap-4">
-                <div className="grid grid-cols-3 divide-x divide-white/40">
+                {/* <div className="grid grid-cols-3 divide-x divide-white/40">
                   <div className="px-2 text-start first:ps-0 ">
                     <p className="text-xl font-bold leading-none tracking-tight sm:text-3xl md:text-4xl">
                       1.8M+
@@ -110,7 +110,7 @@ function TravelApp({}: Props) {
                       {t("rating")}
                     </p>
                   </div>
-                </div>
+                </div> */}
 
                 <div
                   className="mx-auto flex flex-wrap justify-start gap-2.5 sm:mx-0 
