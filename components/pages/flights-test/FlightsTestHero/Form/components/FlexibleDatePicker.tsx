@@ -143,26 +143,25 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
   const footerLabel = getFooterLabel();
 
   return (
-    <div className="flex flex-col bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden w-[calc(100vw-32px)] sm:w-auto sm:min-w-[520px]">
+    <div className="flex flex-col bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden w-[calc(100vw-32px)] sm:w-auto sm:min-w-0">
       {/* Header */}
-      <div className="flex items-center justify-between gap-2 px-4 py-3 border-b border-gray-100 flex-wrap sm:px-5 sm:py-3.5 sm:gap-3">
-        <span className="text-[20px] font-bold text-gray-900">
+      <div className="flex items-center justify-between gap-1 px-2.5 py-1.5 border-b border-gray-100 flex-wrap sm:px-3 sm:py-2 sm:gap-1.5">
+        <span className="text-[14px] font-bold text-gray-900 sm:text-[15px]">
           {t("headerTitle")}
         </span>
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-1 flex-wrap">
           {tripType === "roundTrip" && (
             <>
               {[
                 { key: "next2weeks", label: t("next2weeks") },
                 { key: "nextMonth", label: t("nextMonth") },
-                ...upcomingMonths,
               ].map((btn) => (
                 <button
                   key={btn.key}
                   type="button"
                   onClick={() => handleQuickSelect(btn.key)}
                   className={cn(
-                    "rounded-lg px-4 py-2 text-[13px] font-medium transition-colors whitespace-nowrap",
+                    "rounded px-2 py-1 text-[10px] font-medium transition-colors whitespace-nowrap sm:px-2.5 sm:py-1 sm:text-[11px]",
                     activeQuick === btn.key
                       ? "bg-primary text-white hover:bg-primary/90"
                       : "bg-gray-100 text-gray-800 hover:bg-gray-200",
@@ -177,7 +176,7 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
       </div>
 
       {/* Calendar */}
-      <div className="flex justify-center px-2 pt-3 sm:px-4 sm:pt-4">
+      <div className="flex justify-center px-1 pt-1.5 sm:px-2 sm:pt-2">
         <DatePicker.Root
           key={`${tripType}-${numOfMonths}`}
           inline
@@ -204,12 +203,12 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                 "rtl:flex-row-reverse",
               )}
             >
-              <nav className="absolute border-transparent w-full top-0 flex rtl:flex-row-reverse justify-between px-2 z-10">
-                <DatePicker.PrevTrigger className="p-2 hover:bg-gray-100 rounded-md transition-colors text-gray-600">
-                  <ChevronLeftIcon className="w-5 h-5 rtl:rotate-180" />
+              <nav className="absolute border-transparent w-full top-0 flex rtl:flex-row-reverse justify-between px-0.5 z-10">
+                <DatePicker.PrevTrigger className="p-1 hover:bg-gray-100 rounded transition-colors text-gray-600">
+                  <ChevronLeftIcon className="w-3.5 h-3.5 rtl:rotate-180" />
                 </DatePicker.PrevTrigger>
-                <DatePicker.NextTrigger className="p-2 hover:bg-gray-100 rounded-md transition-colors text-gray-600">
-                  <ChevronRightIcon className="w-5 h-5 rtl:rotate-180" />
+                <DatePicker.NextTrigger className="p-1 hover:bg-gray-100 rounded transition-colors text-gray-600">
+                  <ChevronRightIcon className="w-3.5 h-3.5 rtl:rotate-180" />
                 </DatePicker.NextTrigger>
               </nav>
               <DatePicker.Context>
@@ -219,10 +218,10 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                     return (
                       <div
                         key={index}
-                        className="pb-3 w-full sm:w-auto sm:px-4"
+                        className="pb-1.5 w-full sm:w-auto sm:px-1.5"
                       >
-                        <DatePicker.ViewControl className="flex justify-center items-center mx-8 mb-3 h-10 sm:mx-10">
-                          <DatePicker.ViewTrigger className="z-20 text-[15px] font-bold text-gray-900 hover:bg-gray-100 px-2 py-1 rounded-md transition-colors sm:text-[16px]">
+                        <DatePicker.ViewControl className="flex justify-center items-center mx-5 mb-1.5 h-7 sm:mx-6">
+                          <DatePicker.ViewTrigger className="z-20 text-[12px] font-bold text-gray-900 hover:bg-gray-100 px-1 py-0.5 rounded transition-colors sm:text-[13px]">
                             <span>
                               {new Intl.DateTimeFormat(locale, {
                                 month: "long",
@@ -242,9 +241,9 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                               {api.weekDays.map((weekDay, id) => (
                                 <DatePicker.TableHeader
                                   key={id}
-                                  className="text-[11px] font-semibold  h-8 text-center sm:text-[13px] sm:w-[52px] sm:h-9"
+                                  className="text-[9px] font-semibold h-6 text-center sm:text-[10px] sm:w-[32px] sm:h-7"
                                 >
-                                  {weekDay.short ?? weekDay.narrow}
+                                  {weekDay.narrow ?? weekDay.short}
                                 </DatePicker.TableHeader>
                               ))}
                             </DatePicker.TableRow>
@@ -261,8 +260,8 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
                                   >
                                     <DatePicker.TableCellTrigger
                                       className={cn(
-                                        "relative w-full h-[38px] text-[13px] sm:w-[52px] sm:h-[44px] sm:text-[15px] transition-colors flex items-center justify-center font-semibold cursor-pointer",
-                                        "data-today:before:content-['▸'] data-today:before:absolute data-today:before:left-1 data-today:before:top-1/2 data-today:before:-translate-y-1/2 data-today:before:text-[8px] data-today:before:text-primary data-today:before:leading-none",
+                                        "relative w-full h-[30px] text-[11px] sm:w-[32px] sm:h-[32px] sm:text-[12px] transition-colors flex items-center justify-center font-semibold cursor-pointer",
+                                        "data-today:before:content-['▸'] data-today:before:absolute data-today:before:left-0.5 data-today:before:top-1/2 data-today:before:-translate-y-1/2 data-today:before:text-[7px] data-today:before:text-primary data-today:before:leading-none",
                                         "data-outside-range:text-gray-300 data-outside-range:pointer-events-none data-outside-range:bg-transparent!",
                                         "data-disabled:text-gray-300 data-disabled:pointer-events-none data-disabled:cursor-not-allowed",
                                         "data-unavailable:text-gray-300 data-unavailable:pointer-events-none data-unavailable:cursor-not-allowed data-unavailable:line-through",
@@ -375,19 +374,19 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
       </div>
 
       {/* Footer */}
-      <div className="flex flex-col  items-end gap-3 px-4 py-3 border-t border-gray-100  sm:px-5 sm:py-4">
+      <div className="flex flex-col items-end gap-1.5 px-2.5 py-2 border-t border-gray-100 sm:px-3 sm:py-2.5">
         <div className="min-w-0 flex-1 ">
           {footerLabel ? (
             <>
-              <p className="text-[13px] sm:text-[15px] font-bold text-gray-900 truncate">
+              <p className="text-[11px] sm:text-[12px] font-bold text-gray-900 truncate">
                 {footerLabel}
               </p>
-              <p className="text-[11px] sm:text-[12px] text-gray-400 mt-0.5 text-end">
+              <p className="text-[9px] sm:text-[10px] text-gray-400 mt-0.5 text-end">
                 {t("allDatesLocalTime")}
               </p>
             </>
           ) : (
-            <p className="text-[12px] sm:text-[13px] text-gray-400">
+            <p className="text-[10px] sm:text-[11px] text-gray-400">
               {t("selectDateToContinue")}
             </p>
           )}
@@ -396,8 +395,8 @@ function FlexibleDatePicker({ form, onConfirm }: Props) {
           type="button"
           onClick={onConfirm}
           disabled={!departureDate}
-          className="rounded-md bg-primary px-4 py-2.5 sm:px-6 sm:py-3 
-          text-[13px] sm:text-[14px] font-semibold text-white 
+          className="rounded bg-primary px-3 py-1.5 sm:px-4 sm:py-2 
+          text-[11px] sm:text-[12px] font-semibold text-white 
           transition-colors hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap"
         >
           {t("confirmDeparture")}
