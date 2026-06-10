@@ -824,6 +824,7 @@
             "passportNumberRequired": "رقم وثيقة السفر مطلوب",
             "nationalityRequired": "الجنسية مطلوبة",
             "passportExpiryRequired": "تاريخ إنتهاء الوثيقة مطلوب",
+            "passportExpiryBeforeTravel": "يجب أن يكون تاريخ انتهاء جواز السفر في موعد السفر أو بعده",
             "phoneInvalid": "يرجى إدخال رقم هاتف صحيح"
         }
     },

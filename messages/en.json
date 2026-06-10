@@ -824,6 +824,7 @@
             "passportNumberRequired": "Passport number is required",
             "nationalityRequired": "Nationality is required",
             "passportExpiryRequired": "Document expiry date is required",
+            "passportExpiryBeforeTravel": "Passport expiry date must be on or after the travel date",
             "phoneInvalid": "Please enter a valid phone number"
         }
     },

@@ -13,12 +13,14 @@ interface PassengerInformationSectionProps {
   defaultPassengers: FlightPassengerData[];
   form: UseFormReturn<FlightBookingFormValues>;
   isRTL: boolean;
+  minPassportExpiryDate: Date;
 }
 
 export default function PassengerInformationSection({
   defaultPassengers,
   form,
   isRTL,
+  minPassportExpiryDate,
 }: PassengerInformationSectionProps) {
   const t = useTranslations("FlightBookingPageNested.passengerInformation");
   const {
@@ -171,7 +173,7 @@ export default function PassengerInformationSection({
                   }}
                   isRTL={isRTL}
                   error={errors.passengers?.[pIdx]?.passportExpiry?.message}
-                  minDate={new Date()}
+                  minDate={minPassportExpiryDate}
                   containerClassName="h-[68px] bg-white border-[#d7dce3] rounded-lg"
                   labelClassName="font-medium text-slate-500"
                 />

@@ -38,6 +38,24 @@ export interface FlightBookingFormValues {
 
 const FLIGHT_BOOKING_FORM_DRAFT_KEY = "FLIGHT_BOOKING_FORM_DRAFT";
 
+const toDateOnlyString = (value: string) => value.split("T")[0];
+
+const getLatestTravelDateString = (flights: FlightDirection[]) => {
+  let latest: string | null = null;
+
+  for (const flight of flights) {
+    const depDate = flight.legs?.[0]?.departure_info?.date;
+    if (!depDate) continue;
+
+    const dateOnly = toDateOnlyString(depDate);
+    if (!latest || dateOnly > latest) {
+      latest = dateOnly;
+    }
+  }
+
+  return latest;
+};
+
 interface FlightBookingFormProps {
   adults: number;
   children: number;
@@ -115,6 +133,23 @@ export default function FlightBookingForm({
 
     return passengers;
   }, [adults, childrenCount, infants]);
+
+  const latestTravelDate = useMemo(
+    () => getLatestTravelDateString(flights),
+    [flights],
+  );
+
+  const minPassportExpiryDate = useMemo(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (!latestTravelDate) return today;
+
+    const travelDate = new Date(latestTravelDate);
+    travelDate.setHours(0, 0, 0, 0);
+
+    return travelDate > today ? travelDate : today;
+  }, [latestTravelDate]);
 
   // Zod schema
   const bookingSchema = z.object({
@@ -197,6 +232,18 @@ export default function FlightBookingForm({
           code: z.ZodIssueCode.custom,
           path: ["passengers", index, "dateOfBirth"],
           message: "Infant must be under 2 years old",
+        });
+      }
+
+      if (
+        passenger.passportExpiry &&
+        latestTravelDate &&
+        passenger.passportExpiry < latestTravelDate
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["passengers", index, "passportExpiry"],
+          message: t("validation.passportExpiryBeforeTravel"),
         });
       }
     });
@@ -292,6 +339,7 @@ export default function FlightBookingForm({
         defaultPassengers={defaultPassengers}
         form={form}
         isRTL={isRTL}
+        minPassportExpiryDate={minPassportExpiryDate}
       />
 
       <ContactInformationSection form={form} />
