@@ -1,7 +1,10 @@
 "use client";
 
+import { useId } from "react";
+import { Check } from "lucide-react";
 import { TripType } from "../types";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 type Props = {
   tripType: TripType;
@@ -16,6 +19,7 @@ function TripOptionsRow({
   onTripTypeChange,
   onNonstopChange,
 }: Props) {
+  const tripTypeGroupName = useId();
   const t = useTranslations("FlightsTestForm.TripOptions");
 
   const TRIP_TYPES: { value: TripType; label: string }[] = [
@@ -50,21 +54,47 @@ function TripOptionsRow({
         <label className="flex items-center gap-2 cursor-pointer">
           <input
             type="radio"
-            name="tripTypeDesktop"
+            name={tripTypeGroupName}
             value="roundTrip"
             checked={tripType === "roundTrip"}
             onChange={() => onTripTypeChange("roundTrip")}
+            className="peer sr-only"
           />
+          <span
+            className={cn(
+              "flex h-4 w-4 items-center justify-center rounded-full border-2 transition-colors",
+              tripType === "roundTrip"
+                ? "border-primary bg-primary"
+                : "border-gray-400 bg-white",
+            )}
+          >
+            {tripType === "roundTrip" && (
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+            )}
+          </span>
           {t("roundTripDesktop")}
         </label>
         <label className="flex items-center gap-2 cursor-pointer">
           <input
             type="radio"
-            name="tripTypeDesktop"
+            name={tripTypeGroupName}
             value="oneWay"
             checked={tripType === "oneWay"}
             onChange={() => onTripTypeChange("oneWay")}
+            className="peer sr-only"
           />
+          <span
+            className={cn(
+              "flex h-4 w-4 items-center justify-center rounded-full border-2 transition-colors",
+              tripType === "oneWay"
+                ? "border-primary bg-primary"
+                : "border-gray-400 bg-white",
+            )}
+          >
+            {tripType === "oneWay" && (
+              <span className="h-1.5 w-1.5 rounded-full bg-white" />
+            )}
+          </span>
           {t("oneWay")}
         </label>
 
@@ -73,7 +103,18 @@ function TripOptionsRow({
             type="checkbox"
             checked={nonstop}
             onChange={(e) => onNonstopChange(e.target.checked)}
+            className="peer sr-only"
           />
+          <span
+            className={cn(
+              "flex h-4 w-4 items-center justify-center rounded-sm border-2 transition-colors",
+              nonstop
+                ? "border-primary bg-primary"
+                : "border-gray-400 bg-white",
+            )}
+          >
+            {nonstop && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
+          </span>
           {t("nonstop")}
         </label>
       </div>
