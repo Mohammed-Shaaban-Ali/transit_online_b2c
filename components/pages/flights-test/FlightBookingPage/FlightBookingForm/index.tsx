@@ -9,11 +9,11 @@ import { useLocale } from "next-intl";
 import PassengerInformationSection from "@/components/pages/flights-test/FlightBookingPage/FlightBookingForm/PassengerInformationSection";
 import ContactInformationSection from "@/components/pages/flights-test/FlightBookingPage/FlightBookingForm/ContactInformationSection";
 import BaggageAllowance from "./BaggageAllowance";
-import CheckedBaggageProtection from "./CheckedBaggageProtection";
-import CancellationsChangesSection from "./CancellationsChangesSection";
-import StayDiscountsSection from "./StayDiscountsSection";
-import FreePromoCodesSection from "./FreePromoCodesSection";
-import PromoCodesSection from "./PromoCodesSection";
+// import CheckedBaggageProtection from "./CheckedBaggageProtection";
+// import CancellationsChangesSection from "./CancellationsChangesSection";
+// import StayDiscountsSection from "./StayDiscountsSection";
+// import FreePromoCodesSection from "./FreePromoCodesSection";
+// import PromoCodesSection from "./PromoCodesSection";
 import { FlightDirection } from "@/types/flightTypes";
 
 // Types
@@ -344,11 +344,11 @@ export default function FlightBookingForm({
 
       <ContactInformationSection form={form} />
       <BaggageAllowance flights={flights} />
-      <CheckedBaggageProtection />
-      <CancellationsChangesSection />
-      <StayDiscountsSection />
-      <FreePromoCodesSection />
-      <PromoCodesSection />
+      {/* <CheckedBaggageProtection /> */}
+      {/* <CancellationsChangesSection /> */}
+      {/* <StayDiscountsSection /> */}
+      {/* <FreePromoCodesSection /> */}
+      {/* <PromoCodesSection /> */}
 
       <section className="space-y-4">
         <p className="text-[14px] md:text-[16px]">

@@ -186,12 +186,12 @@ const PriceDetailsCard = ({
               </span>
               <span className="text-primary">{t("free")}</span>
             </div>
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <span className="underline decoration-dashed underline-offset-4">
                 {t("checkedBaggage")}
               </span>
               <span className="text-primary">{t("free")}</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

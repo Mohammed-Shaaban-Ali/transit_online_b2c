@@ -9,20 +9,20 @@ import { hotelSeachTypes } from "@/types/hotels";
 import { useTranslations } from "next-intl";
 
 import AvailableRooms from "./AvailableRooms";
-import Facilities from "./Facilities";
+// import Facilities from "./Facilities";
 import GalleryOne from "./GalleryOne";
-import HotelRoomsTabs from "./HotelRoomsTabs";
-import GuestReviewsSection from "./GuestReviewsSection";
-import HotelLocationSection from "./HotelLocationSection";
-import HotelServicesAmenitiesSection from "./HotelServicesAmenitiesSection";
-import HotelPropertyPoliciesSection from "./HotelPropertyPoliciesSection";
-import HotelFinePrintSection from "./HotelFinePrintSection";
+// import HotelRoomsTabs from "./HotelRoomsTabs";
+// import GuestReviewsSection from "./GuestReviewsSection";
+// import HotelLocationSection from "./HotelLocationSection";
+// import HotelServicesAmenitiesSection from "./HotelServicesAmenitiesSection";
+// import HotelPropertyPoliciesSection from "./HotelPropertyPoliciesSection";
+// import HotelFinePrintSection from "./HotelFinePrintSection";
 import SingleHotelSkeleton from "./Skeleton";
 import { getSearchParamsData } from "@/utils/getSearchParams";
 import { Button } from "@/components/ui/button";
 import ExpiredDialog from "@/components/shared/ExpiredDialog";
 import { localStorageHotelKey } from "@/constants";
-import NearbyProperties from "./NearbyProperties";
+// import NearbyProperties from "./NearbyProperties";
 import HotelMapDialog from "./HotelMapDialog";
 
 type Props = {
@@ -169,22 +169,31 @@ function SingleHotel({ hotelID, uuid }: Props) {
     !Number.isNaN(Number(mapLat)) &&
     !Number.isNaN(Number(mapLng));
 
+  const scrollToRooms = () => {
+    document
+      .getElementById("hotel-rooms-section")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <section className="my-12 container max-w-[1200px]! mx-auto px-4 ">
       <GalleryOne
         hotel={hotelData}
         nights={nights}
         onOpenMap={canOpenMapDialog ? () => setMapDialogOpen(true) : undefined}
+        onSelectRooms={scrollToRooms}
       />
-      <HotelRoomsTabs />
-      <AvailableRooms
-        hotel={hotelData as any}
-        night={Number(nights || 0)}
-        adults={Number(adults || 0)}
-        children={Number(children || 0)}
-        roomsCount={roomsCount}
-      />
-      <GuestReviewsSection />
+      {/* <HotelRoomsTabs /> */}
+      <div id="hotel-rooms-section" className="scroll-mt-24">
+        <AvailableRooms
+          hotel={hotelData as any}
+          night={Number(nights || 0)}
+          adults={Number(adults || 0)}
+          children={Number(children || 0)}
+          roomsCount={roomsCount}
+        />
+      </div>
+      {/* <GuestReviewsSection /> */}
 
       {/* {data?.hotelContent?.descriptions &&
         data?.hotelContent?.descriptions.length > 0 && (
@@ -219,21 +228,21 @@ function SingleHotel({ hotelID, uuid }: Props) {
           </section>
         )} */}
 
-      <Facilities amenities={hotelData?.facilities as any} />
+      {/* <Facilities amenities={hotelData?.facilities as any} /> */}
 
-      <HotelLocationSection
+      {/* <HotelLocationSection
         latitude={hotelData?.location?.latitude}
         longitude={hotelData?.location?.longitude}
         onShowMap={canOpenMapDialog ? () => setMapDialogOpen(true) : undefined}
-      />
+      /> */}
 
-      <HotelServicesAmenitiesSection />
+      {/* <HotelServicesAmenitiesSection /> */}
 
-      <HotelPropertyPoliciesSection />
+      {/* <HotelPropertyPoliciesSection /> */}
 
-      <HotelFinePrintSection />
+      {/* <HotelFinePrintSection /> */}
 
-      <NearbyProperties />
+      {/* <NearbyProperties /> */}
 
       {canOpenMapDialog && (
         <HotelMapDialog

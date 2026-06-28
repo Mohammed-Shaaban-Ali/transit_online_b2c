@@ -30,13 +30,13 @@ function ActionButtonsRow({ compact = false, className, onSearch }: Props) {
 
   return (
     <div className={cn("mt-4 flex items-center justify-end gap-4", className)}>
-      <button
+      {/* <button
         type="button"
         className="min-w-[120px] rounded-sm border border-primary px-8 h-[58px] text-[20px] text-primary 
         transition-colors duration-200 hover:bg-primary/10"
       >
         {t("flightAndHotel")}
-      </button>
+      </button> */}
       <button
         type="button"
         onClick={onSearch}

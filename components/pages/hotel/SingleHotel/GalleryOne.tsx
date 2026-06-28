@@ -9,9 +9,9 @@ import {
   Share2,
   CheckCircle,
   ChevronRight,
-  Train,
-  Plane,
-  TrainFront,
+  // Train,
+  // Plane,
+  // TrainFront,
 } from "lucide-react";
 import PriceCell from "@/components/shared/PriceCell";
 import StarRating from "@/components/shared/StarRating";
@@ -19,41 +19,42 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useLocale, useTranslations } from "next-intl";
 
-const STATIC_SURROUNDINGS = [
-  { Icon: Train, label: "Metro: Shangcheng Road", distance: "440 m" },
-  { Icon: Train, label: "Metro: South Pudong Road", distance: "700 m" },
-  {
-    Icon: Plane,
-    label: "Airport: Shanghai Hongqiao International",
-    distance: "22.6 km",
-  },
-  {
-    Icon: Plane,
-    label: "Airport: Shanghai Pudong International",
-    distance: "36.3 km",
-  },
-  {
-    Icon: TrainFront,
-    label: "Train: Shanghai Railway Station",
-    distance: "9.4 km",
-  },
-];
+// const STATIC_SURROUNDINGS = [
+//   { Icon: Train, label: "Metro: Shangcheng Road", distance: "440 m" },
+//   { Icon: Train, label: "Metro: South Pudong Road", distance: "700 m" },
+//   {
+//     Icon: Plane,
+//     label: "Airport: Shanghai Hongqiao International",
+//     distance: "22.6 km",
+//   },
+//   {
+//     Icon: Plane,
+//     label: "Airport: Shanghai Pudong International",
+//     distance: "36.3 km",
+//   },
+//   {
+//     Icon: TrainFront,
+//     label: "Train: Shanghai Railway Station",
+//     distance: "9.4 km",
+//   },
+// ];
 
-function getRatingLabel(score: number) {
-  if (score >= 9) return "outstanding";
-  if (score >= 8) return "excellent";
-  if (score >= 7) return "veryGood";
-  return "good";
-}
+// function getRatingLabel(score: number) {
+//   if (score >= 9) return "outstanding";
+//   if (score >= 8) return "excellent";
+//   if (score >= 7) return "veryGood";
+//   return "good";
+// }
 
 type GalleryOneProps = {
   hotel: any;
   nights?: number;
   /** Opens embedded map dialog when coordinates exist */
   onOpenMap?: () => void;
+  onSelectRooms?: () => void;
 };
 
-export default function GalleryOne({ hotel, nights, onOpenMap }: GalleryOneProps) {
+export default function GalleryOne({ hotel, nights, onOpenMap, onSelectRooms }: GalleryOneProps) {
   const t = useTranslations("GalleryOne");
   const locale = useLocale();
   const [isOpen, setOpen] = useState(false);
@@ -62,9 +63,9 @@ export default function GalleryOne({ hotel, nights, onOpenMap }: GalleryOneProps
 
   const allImages = hotel?.gallery || [];
   const facilities: any[] = hotel?.facilities || [];
-  const starRating = hotel?.starRating ? Number(hotel.starRating) : 0;
-  const ratingScore = starRating > 0 ? Math.min(10, starRating * 2) : 0;
-  const ratingLabelKey = getRatingLabel(ratingScore);
+  // const starRating = hotel?.starRating ? Number(hotel.starRating) : 0;
+  // const ratingScore = starRating > 0 ? Math.min(10, starRating * 2) : 0;
+  // const ratingLabelKey = getRatingLabel(ratingScore);
   const highlightFacilities = facilities.slice(0, 6);
   const amenitiesFacilities = showAllAmenities
     ? facilities
@@ -129,7 +130,7 @@ export default function GalleryOne({ hotel, nights, onOpenMap }: GalleryOneProps
                   <span>{t("wePriceMatch")}</span>
                 </div>
               </div>
-              <Button size="lg" className="h-14">
+              <Button size="lg" className="h-14" onClick={onSelectRooms}>
                 {t("selectRooms")}
               </Button>
             </div>
@@ -256,10 +257,9 @@ export default function GalleryOne({ hotel, nights, onOpenMap }: GalleryOneProps
             </div>
           </div>
 
-          {/* Amenities + Rating Section */}
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left: Highlights + Amenities Grid */}
-            <div className="lg:col-span-2 space-y-4 border-e">
+          {/* Amenities Section */}
+          <div className="mt-10">
+            <div className="space-y-4">
               {/* Travel Essentials row */}
               {facilities.length > 0 && (
                 <>
@@ -349,8 +349,7 @@ export default function GalleryOne({ hotel, nights, onOpenMap }: GalleryOneProps
             </div>
 
             {/* Right: Rating + Surroundings */}
-            <div className="space-y-3">
-              {/* Rating Card */}
+            {/* <div className="space-y-3">
               <div className="">
                 <div className="flex flex-col items-start gap-2">
                   <div className="flex items-center gap-2">
@@ -376,7 +375,6 @@ export default function GalleryOne({ hotel, nights, onOpenMap }: GalleryOneProps
                 </div>
               </div>
 
-              {/* Surroundings */}
               <div className="border-t rounded-lg py-4">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-16 h-9 rounded overflow-hidden bg-blue-50 border border-blue-100 shrink-0 flex items-center justify-center">
@@ -425,7 +423,7 @@ export default function GalleryOne({ hotel, nights, onOpenMap }: GalleryOneProps
                   </span>
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Full Gallery Dialog */}

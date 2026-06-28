@@ -3,22 +3,23 @@
 import { useRouter } from "@/i18n/navigation";
 import { useState, useMemo } from "react";
 import { FaUser, FaChild } from "react-icons/fa";
-import { IoMdBed } from "react-icons/io";
+// import { IoMdBed } from "react-icons/io";
 import { BsCheckCircleFill, BsCameraFill } from "react-icons/bs";
 import { HiLightningBolt } from "react-icons/hi";
-import { MdCreditCard, MdSmokeFree, MdSecurity } from "react-icons/md";
+import { MdCreditCard } from "react-icons/md";
+// import { MdSmokeFree, MdSecurity } from "react-icons/md";
 import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
   ChevronUp,
   Info,
-  Building2,
-  Ruler,
-  Wifi,
-  Wind,
-  Bath,
-  Layers,
+  // Building2,
+  // Ruler,
+  // Wifi,
+  // Wind,
+  // Bath,
+  // Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -180,15 +181,15 @@ const RoomGroup = ({
           <RoomImageSlider images={packageImages} />
 
           {/* Bed type */}
-          {firstRoom?.roomType && (
+          {/* {firstRoom?.roomType && (
             <div className="mt-3 flex items-center gap-2 font-bold text-[15px] text-gray-800">
               <IoMdBed size={22} className="text-gray-700 min-w-[22px]" />
               <span>{firstRoom.roomType}</span>
             </div>
-          )}
+          )} */}
 
           {/* Static amenities grid */}
-          <div className="mt-2.5 grid grid-cols-2 gap-x-3 gap-y-1.5 text-[13px] text-gray-600">
+          {/* <div className="mt-2.5 grid grid-cols-2 gap-x-3 gap-y-1.5 text-[13px] text-gray-600">
             <div className="flex items-center gap-1.5">
               <Building2 size={14} className="text-primary min-w-[14px]" />
               <span className="text-primary font-medium">City view</span>
@@ -217,12 +218,12 @@ const RoomGroup = ({
               <Bath size={13} className="text-gray-500 min-w-[13px]" />
               <span>Private bathroom</span>
             </div>
-          </div>
+          </div> */}
 
           {/* Room Details link */}
-          <button className="mt-3 text-[13px] font-bold text-primary hover:underline">
+          {/* <button className="mt-3 text-[13px] font-bold text-primary hover:underline">
             {t("roomDetails")}
-          </button>
+          </button> */}
         </div>
 
         {/* ── Right: packages table — HAS its own border ── */}
@@ -297,13 +298,13 @@ const RoomGroup = ({
                     </div>
                   )}
 
-                  <div className="flex items-center gap-1.5 text-[13px] text-teal-600">
+                  {/* <div className="flex items-center gap-1.5 text-[13px] text-teal-600">
                     <MdSecurity
                       size={15}
                       className="text-teal-500 min-w-[15px]"
                     />
                     <span>{t("lateCheckout")}</span>
-                  </div>
+                  </div> */}
 
                   <div className="flex items-center gap-1.5 text-[13px] text-teal-600">
                     <HiLightningBolt

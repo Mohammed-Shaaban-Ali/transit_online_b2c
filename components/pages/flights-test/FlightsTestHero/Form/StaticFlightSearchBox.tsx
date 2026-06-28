@@ -276,9 +276,7 @@ function StaticFlightSearchBox({
     >
       <TripOptionsRow
         tripType={tripType}
-        nonstop={nonstop}
         onTripTypeChange={(nextTripType) => setTripType(nextTripType)}
-        onNonstopChange={setNonstop}
       />
 
       {/* Mobile layout */}

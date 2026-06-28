@@ -1,23 +1,19 @@
 "use client";
 
 import { useId } from "react";
-import { Check } from "lucide-react";
+// import { Check } from "lucide-react";
 import { TripType } from "../types";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 type Props = {
   tripType: TripType;
-  nonstop: boolean;
   onTripTypeChange: (tripType: TripType) => void;
-  onNonstopChange: (value: boolean) => void;
 };
 
 function TripOptionsRow({
   tripType,
-  nonstop,
   onTripTypeChange,
-  onNonstopChange,
 }: Props) {
   const tripTypeGroupName = useId();
   const t = useTranslations("FlightsTestForm.TripOptions");
@@ -98,7 +94,7 @@ function TripOptionsRow({
           {t("oneWay")}
         </label>
 
-        <label className="ms-2 flex items-center gap-2 cursor-pointer">
+        {/* <label className="ms-2 flex items-center gap-2 cursor-pointer">
           <input
             type="checkbox"
             checked={nonstop}
@@ -116,7 +112,7 @@ function TripOptionsRow({
             {nonstop && <Check className="h-3 w-3 text-white" strokeWidth={3} />}
           </span>
           {t("nonstop")}
-        </label>
+        </label> */}
       </div>
     </>
   );
