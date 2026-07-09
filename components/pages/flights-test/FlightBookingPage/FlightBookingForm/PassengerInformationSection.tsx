@@ -3,11 +3,13 @@
 import type { UseFormReturn } from "react-hook-form";
 import FloatingLabelInput from "@/components/shared/form/FloatingLabelInput";
 import NationalitySelect from "@/components/shared/NationalitySelect";
+import PassportUpload from "@/components/shared/PassportUpload";
 import { useTranslations } from "next-intl";
 import type {
   FlightBookingFormValues,
   FlightPassengerData,
 } from "@/components/pages/flights-test/FlightBookingPage/FlightBookingForm";
+import type { MappedPassportFields } from "@/types/passportTypes";
 
 interface PassengerInformationSectionProps {
   defaultPassengers: FlightPassengerData[];
@@ -29,6 +31,37 @@ export default function PassengerInformationSection({
     setValue,
     formState: { errors },
   } = form;
+
+  const applyPassportFields = (
+    passengerIndex: number,
+    fields: MappedPassportFields,
+  ) => {
+    const options = { shouldDirty: true, shouldValidate: true } as const;
+
+    setValue(`passengers.${passengerIndex}.firstName`, fields.firstName, options);
+    setValue(`passengers.${passengerIndex}.lastName`, fields.lastName, options);
+    setValue(
+      `passengers.${passengerIndex}.dateOfBirth`,
+      fields.dateOfBirth,
+      options,
+    );
+    setValue(`passengers.${passengerIndex}.gender`, fields.gender, options);
+    setValue(
+      `passengers.${passengerIndex}.passportNumber`,
+      fields.passportNumber,
+      options,
+    );
+    setValue(
+      `passengers.${passengerIndex}.nationality`,
+      fields.nationality,
+      options,
+    );
+    setValue(
+      `passengers.${passengerIndex}.passportExpiry`,
+      fields.passportExpiry,
+      options,
+    );
+  };
 
   return (
     <div>
@@ -55,9 +88,15 @@ export default function PassengerInformationSection({
                 <h4 className="text-[18px] font-bold text-slate-900">
                   {`Passenger ${pIdx + 1}`}
                 </h4>
-                <span className="rounded-md bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">
-                  {String(passengerType).toUpperCase()}
-                </span>
+                <div className="flex items-center gap-2">
+                  <PassportUpload
+                    variant="compact"
+                    onSuccess={(fields) => applyPassportFields(pIdx, fields)}
+                  />
+                  <span className="rounded-md bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-700">
+                    {String(passengerType).toUpperCase()}
+                  </span>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

@@ -1,6 +1,7 @@
 import { baseApi, baseApi2, SuccessResponse } from "@/redux/app/baseApi";
 import { FlightFareResponse } from "@/types/fareTypes";
 import { FlightSearchResponse } from "@/types/flightTypes";
+import type { PassportReadResponse } from "@/types/passportTypes";
 
 export interface FlightSearchParams {
   fromAirport: string;
@@ -175,14 +176,23 @@ const flightsApi2 = baseApi2.injectEndpoints({
       }),
       keepUnusedDataFor: 0,
     }),
+    readPassport: builder.mutation<PassportReadResponse, File>({
+      query: (file) => {
+        const formData = new FormData();
+        formData.append("passport", file);
+
+        return {
+          url: "/api/flights-services/v1/passport-read",
+          method: "POST",
+          body: formData,
+        };
+      },
+    }),
   }),
 });
 
-export const {
-
-  useLazyCalculateFlightPriceQuery,
-
-} = flightsApi2;
+export const { useLazyCalculateFlightPriceQuery, useReadPassportMutation } =
+  flightsApi2;
 
 export const {
   useSearchFlightsIatiQuery,

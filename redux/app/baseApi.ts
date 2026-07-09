@@ -35,7 +35,7 @@ export interface SuccessResponse<DataType = any> {
 const createBaseQuery = (baseUrl: string) =>
   fetchBaseQuery({
     baseUrl,
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers, { getState, endpoint }) => {
       const apiToken = getCookie(API_TOKEN_COOKIE) as string;
       const language = (getCookie(NEXT_LOCALE) as Locale) || "en";
       const token = (getState() as RootState).auth.token;
@@ -63,6 +63,12 @@ const createBaseQuery = (baseUrl: string) =>
       const countryConfig = COUNTRIES_CONFIG[countryKey];
       headers.set("x-country", countryConfig.apiCode);
       headers.set("x-currency", countryConfig.apiCurrency);
+
+      // Skip JSON Content-Type for multipart uploads
+      if (endpoint === "readPassport") {
+        headers.delete("Content-Type");
+        return headers;
+      }
 
       // Set Content-Type if not already set
       if (!headers.get("Content-Type")) {

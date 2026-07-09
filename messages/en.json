@@ -774,6 +774,18 @@
         "backToHome": "Back to Home",
         "searchMore": "Search More Hotels"
     },
+    "PassportUpload": {
+        "title": "Upload passport photo",
+        "hint": "Upload a clear passport image to auto-fill passenger details.",
+        "uploadButton": "Upload passport",
+        "compactLabel": "Scan passport",
+        "compactFilled": "Passport scanned",
+        "uploading": "Reading passport...",
+        "success": "Passport details filled successfully",
+        "readError": "Could not read passport. Please try again or enter details manually.",
+        "invalidFileType": "Please upload a JPG, PNG, WEBP, or PDF file.",
+        "fileTooLarge": "File must be smaller than {size} MB."
+    },
     "FlightBooking": {
         "title": "Book Your Flight",
         "noFlightData": "No Flight Selected",
