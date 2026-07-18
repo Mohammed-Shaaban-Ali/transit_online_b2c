@@ -7,7 +7,7 @@ import {
   CarFront,
   FerrisWheel,
   Hotel,
-  Map,
+  IdCard,
   Plane,
   PlaneTakeoff,
   TrainFront,
@@ -61,16 +61,21 @@ export default function Service() {
     },
     { label: t("flights"), icon: Plane, href: "/flights", active: true },
     {
-      label: t("flightHotel"),
-      icon: Hotel,
+      label: t("licenses"),
+      icon: IdCard,
+      href: "/licenses",
+      active: true,
     },
     { label: t("trains"), icon: TrainFront },
   ];
   const secondRow: MobileServiceItem[] = [
+    {
+      label: t("flightHotel"),
+      icon: Hotel,
+    },
     { label: t("carRentals"), icon: CarFront },
     { label: t("airportTransfers"), icon: PlaneTakeoff },
     { label: t("attractionsTours"), icon: FerrisWheel },
-    { label: t("travelGuides"), icon: Map },
   ];
 
   return (

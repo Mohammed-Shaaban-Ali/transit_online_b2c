@@ -5,6 +5,10 @@ export const FLIGHT_BOOKING_KEY = "flight-booking-data";
 export const HOTEL_BOOKING_KEY = "hotel-booking-data";
 export const HOTEL_BOOKING_ID_KEY = "HOTEL_BOOKING_ID";
 export const HOTEL_BOOKING_FORM_DATA_KEY = "HOTEL_BOOKING_FORM_DATA";
+export const LICENSE_BOOKING_FORM_DATA_KEY = "LICENSE_BOOKING_FORM_DATA";
+export const LICENSE_BOOKING_ID_KEY = "LICENSE_BOOKING_ID";
+export const LICENSE_BOOKING_PRICE_DATA_KEY = "LICENSE_BOOKING_PRICE_DATA";
+export const LICENSE_BOOKING_OUTCOME_KEY = "LICENSE_BOOKING_OUTCOME";
 
 export const localStorageHotelSearchKey = `hotel-search-b2c`;
 export const localStorageHotelRecentSearchesKey = `hotel-search-recent-b2c`;

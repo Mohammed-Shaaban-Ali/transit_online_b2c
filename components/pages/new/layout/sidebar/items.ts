@@ -8,6 +8,7 @@ import {
     FerrisWheel,
     Flag,
     Hotel,
+    IdCard,
     Lightbulb,
     Luggage,
     MapPinned,
@@ -40,6 +41,12 @@ const getSidebarItems = (t: SidebarT): SidebarItem[][] => [
             label: t("flights"),
             href: "/flights",
             icon: Plane,
+            disabled: false,
+        },
+        {
+            label: t("licenses"),
+            href: "/licenses",
+            icon: IdCard,
             disabled: false,
         },
         {

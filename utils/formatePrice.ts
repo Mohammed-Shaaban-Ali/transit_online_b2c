@@ -16,3 +16,14 @@ export const formatePriceFixed = (price: number): number => {
 export const formatePriceRaw = (price: number): number => {
   return Math.ceil(price);
 };
+
+export const formatCheckoutBalance = (
+  value: number,
+  locale: string = "en-US",
+): string => {
+  const amount = convertPrice(Number(value) || 0);
+  return amount.toLocaleString(locale === "ar" ? "ar-EG" : "en-US", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 10,
+  });
+};

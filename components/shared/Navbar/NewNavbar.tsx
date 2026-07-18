@@ -26,6 +26,10 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
       label: t("flights"),
       href: "/flights",
     },
+    {
+      label: t("licenses"),
+      href: "/licenses",
+    },
   ];
 
   function normalizePathname(pathname: string): string {
@@ -51,6 +55,7 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
     isBgWhite ||
     (pathNameWithoutLocale.includes("hotels") &&
       pathNameWithoutLocale.includes("details")) ||
+    pathNameWithoutLocale.startsWith("/licenses/result") ||
     pathNameWithoutLocale.endsWith("my-booking");
 
   const linkClass = (isActive: boolean, isBlack: boolean) =>

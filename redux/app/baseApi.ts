@@ -65,7 +65,7 @@ const createBaseQuery = (baseUrl: string) =>
       headers.set("x-currency", countryConfig.apiCurrency);
 
       // Skip JSON Content-Type for multipart uploads
-      if (endpoint === "readPassport") {
+      if (endpoint === "readPassport" || endpoint === "bookLicense") {
         headers.delete("Content-Type");
         return headers;
       }
@@ -206,6 +206,7 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
         "/api/hotels/b2c/book",
         "/api/auth/login",
         "/api/auth/verify-otp",
+        "/api/licenses/book",
       ];
       if (notToastUrls.includes(url)) {
         return result;
@@ -236,6 +237,7 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
         "/api/hotels/b2c/book",
         "/api/auth/login",
         "/api/auth/verify-otp",
+        "/api/licenses/book",
       ];
 
       if (notToastUrls.includes(url)) {

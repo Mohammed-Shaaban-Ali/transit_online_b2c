@@ -172,7 +172,8 @@
             "home": "Home",
             "hotels": "Hotels",
             "flights": "Flights",
-            "toggleMenu": "Toggle menu"
+            "toggleMenu": "Toggle menu",
+            "licenses": "Licenses"
         },
         "Footer": {
             "home": "Home",
@@ -1864,7 +1865,8 @@
                 "map": "Map",
                 "deals": "Deals",
                 "rewards": "gita.com Rewards",
-                "app": "App"
+                "app": "App",
+                "licenses": "International License"
             }
         },
         "navbar": {
@@ -2011,7 +2013,8 @@
                 "carRentals": "Car Rentals",
                 "airportTransfers": "Airport Transfers",
                 "attractionsTours": "Attractions & Tours",
-                "travelGuides": "Travel guides"
+                "travelGuides": "Travel guides",
+                "licenses": "International License"
             },
             "deals": {
                 "title": "Limited-time deals",
@@ -2104,6 +2107,106 @@
                 "giftCards": "Gift Cards",
                 "promoCodes": "Promo Codes"
             }
+        }
+    },
+    "LicenseBooking": {
+        "title": "International Driving License",
+        "subtitle": "Enter your details and upload the required documents to get your international license.",
+        "heroImageAlt": "International driving license",
+        "welcomeTitle": "Congratulations, you're with us!",
+        "welcomeSubtitle": "Enter your details and get your international license",
+        "requirementsTitle": "License requirements",
+        "contactInfo": "Contact information",
+        "fullName": "Full name",
+        "email": "Email",
+        "nationalAddress": "National address",
+        "nationalAddressPlaceholder": "Add the national address or its code",
+        "phone": "Phone number",
+        "requiredFiles": "Required files",
+        "passportPhoto": "Passport photo",
+        "passportPhotoHint": "Attach passport photo from here",
+        "localLicensePhoto": "Saudi license photo",
+        "localLicensePhotoHint": "Attach Saudi license photo from here",
+        "personalPhoto": "Personal photo (uncovered head)",
+        "personalPhotoHint": "Attach personal photo with white background from here",
+        "personalPhotoRequirement": "Personal photo with uncovered head and white background",
+        "discountCode": "Discount code",
+        "discountCodePlaceholder": "Enter discount code here",
+        "apply": "Apply",
+        "applying": "Applying...",
+        "clearCoupon": "Clear coupon",
+        "removeFile": "Remove file",
+        "choosePaymentMethod": "Choose the payment method that suits you",
+        "payWithBalance": "Pay with balance",
+        "availableBalance": "Available",
+        "tamara": "Tamara",
+        "priceDetails": "Price details",
+        "internationalLicense": "International driving license",
+        "total": "Total",
+        "payNow": "Pay now",
+        "submitting": "Processing...",
+        "priceValidationError": "Unable to verify the latest price. Please try again.",
+        "insufficientBalanceDescription": "The total exceeds your available balance. Please choose another payment method.",
+        "outcomeSuccessTitle": "License booking confirmed",
+        "outcomeSuccessDescription": "Thank you. Your international license request was submitted successfully. You will receive a confirmation email shortly.",
+        "outcomeFailedTitle": "Payment could not be completed",
+        "outcomeFailedDescription": "Something went wrong or your payment could not be verified. You can try again from this page.",
+        "bookingReference": "Booking reference",
+        "contactSummary": "Contact summary",
+        "outcomeTryAgain": "Try again",
+        "backToHome": "Back to home",
+        "backToForm": "Back to form",
+        "noBookingData": "No booking data",
+        "noBookingDataDescription": "We could not find your license booking details. Please start a new request.",
+        "faq": {
+            "title": "Frequently asked questions",
+            "items": {
+                "driveInsideSaudi": {
+                    "question": "Can I drive with an international license inside Saudi Arabia?",
+                    "answer": "No, you must use a Saudi license inside Saudi Arabia."
+                },
+                "validityPeriod": {
+                    "question": "What is the validity period of the international license?",
+                    "answer": "Validity is linked to the residence permit validity (for residents) or the local license validity."
+                },
+                "withoutSaudiLicense": {
+                    "question": "Can I issue an international license without a Saudi license?",
+                    "answer": "No, you must have a valid Saudi driving license."
+                },
+                "validityOutside": {
+                    "question": "Is the international license alone enough to drive outside Saudi Arabia?",
+                    "answer": "No, you must carry both the international license and the original Saudi license together."
+                },
+                "processingTime": {
+                    "question": "How long does it take to issue the international license?",
+                    "answer": "It depends on the delivery method: electronic with shipping takes 2 to 5 days, and branch pickup is usually same day."
+                },
+                "permittedCountries": {
+                    "question": "How many countries allow driving with an international license?",
+                    "answer": "More than 150 countries."
+                },
+                "vehicleCategories": {
+                    "question": "Which vehicle categories can be driven with an international license?",
+                    "answer": "The vehicles you can drive internationally match the categories allowed on your local license (for example, category B)."
+                },
+                "citizensAndResidents": {
+                    "question": "Is the service available for Saudis and residents?",
+                    "answer": "Yes."
+                }
+            }
+        },
+        "validation": {
+            "nameRequired": "Full name is required",
+            "emailRequired": "Email is required",
+            "emailInvalid": "Please enter a valid email address",
+            "addressRequired": "National address is required",
+            "phoneInvalid": "Enter a valid phone number",
+            "passportRequired": "Passport photo is required",
+            "localLicenseRequired": "Saudi license photo is required",
+            "personalPhotoRequired": "Personal photo is required",
+            "filesRequired": "Please upload all required files",
+            "invalidFileType": "Only JPEG, PNG, or WebP images are allowed",
+            "fileTooLarge": "File must be smaller than {size}MB"
         }
     }
 }

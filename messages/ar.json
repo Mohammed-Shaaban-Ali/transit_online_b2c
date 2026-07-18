@@ -172,7 +172,8 @@
             "home": "الرئيسية",
             "hotels": "الفنادق",
             "flights": "الطيران",
-            "toggleMenu": "تبديل القائمة"
+            "toggleMenu": "تبديل القائمة",
+            "licenses": "الرخصة الدولية"
         },
         "Footer": {
             "home": "الرئيسية",
@@ -1864,7 +1865,8 @@
                 "map": "الخريطة",
                 "deals": "العروض",
                 "rewards": "مكافآت gita.com",
-                "app": "التطبيق"
+                "app": "التطبيق",
+                "licenses": "الرخصة الدولية"
             }
         },
         "navbar": {
@@ -2011,7 +2013,8 @@
                 "carRentals": "تأجير سيارات",
                 "airportTransfers": "التنقّل من/إلى المطار",
                 "attractionsTours": "الأنشطة والجولات",
-                "travelGuides": "أدلة السفر"
+                "travelGuides": "أدلة السفر",
+                "licenses": "الرخصة الدولية"
             },
             "deals": {
                 "title": "عروض لفترة محدودة",
@@ -2104,6 +2107,106 @@
                 "giftCards": "بطاقات الهدايا",
                 "promoCodes": "أكواد الخصم"
             }
+        }
+    },
+    "LicenseBooking": {
+        "title": "الرخصة الدولية",
+        "subtitle": "أدخل بياناتك وارفع المستندات المطلوبة للحصول على رخصتك الدولية.",
+        "heroImageAlt": "الرخصة الدولية للقيادة",
+        "welcomeTitle": "تهانينا وصلت معانا!",
+        "welcomeSubtitle": "أدخل بياناتك واحصل على رخصتك الدولية",
+        "requirementsTitle": "متطلبات الرخصة",
+        "contactInfo": "بيانات التواصل",
+        "fullName": "الإسم بالكامل",
+        "email": "البريد الإلكتروني",
+        "nationalAddress": "العنوان الوطني",
+        "nationalAddressPlaceholder": "أضف العنوان الوطني أو الكود الخاص به",
+        "phone": "رقم الهاتف",
+        "requiredFiles": "الملفات المطلوبة",
+        "passportPhoto": "صورة الجواز",
+        "passportPhotoHint": "أرفق صورة الجواز من هنا",
+        "localLicensePhoto": "صورة الرخصة السعودية",
+        "localLicensePhotoHint": "أرفق صورة الرخصة السعودية من هنا",
+        "personalPhoto": "صورة شخصية مكشوفة الرأس",
+        "personalPhotoHint": "أرفق صورة شخصية بخلفية بيضاء من هنا",
+        "personalPhotoRequirement": "صورة شخصية مكشوفة الرأس بخلفية بيضاء",
+        "discountCode": "كود الخصم",
+        "discountCodePlaceholder": "أدخل كود الخصم هنا",
+        "apply": "تطبيق",
+        "applying": "جاري التطبيق...",
+        "clearCoupon": "مسح الكود",
+        "removeFile": "إزالة الملف",
+        "choosePaymentMethod": "اختر طريقة الدفع التي تناسبك",
+        "payWithBalance": "الدفع من الرصيد",
+        "availableBalance": "المتاح",
+        "tamara": "تمارا",
+        "priceDetails": "تفاصيل السعر",
+        "internationalLicense": "الرخصة الدولية",
+        "total": "الإجمالي",
+        "payNow": "ادفع الآن",
+        "submitting": "جاري المعالجة...",
+        "priceValidationError": "تعذر التحقق من السعر الحالي. يرجى المحاولة مرة أخرى.",
+        "insufficientBalanceDescription": "المبلغ يتجاوز رصيدك المتاح. يرجى اختيار طريقة دفع أخرى.",
+        "outcomeSuccessTitle": "تم تأكيد طلب الرخصة",
+        "outcomeSuccessDescription": "شكراً لك. تم إرسال طلب الرخصة الدولية بنجاح. ستصلك رسالة تأكيد قريباً.",
+        "outcomeFailedTitle": "تعذر إتمام الدفع",
+        "outcomeFailedDescription": "حدث خطأ أو تعذر التحقق من الدفع. يمكنك المحاولة مرة أخرى من هذه الصفحة.",
+        "bookingReference": "رقم الطلب",
+        "contactSummary": "ملخص التواصل",
+        "outcomeTryAgain": "حاول مرة أخرى",
+        "backToHome": "العودة للرئيسية",
+        "backToForm": "العودة للنموذج",
+        "noBookingData": "لا توجد بيانات حجز",
+        "noBookingDataDescription": "لم نتمكن من العثور على تفاصيل طلب الرخصة. يرجى بدء طلب جديد.",
+        "faq": {
+            "title": "الأسئلة الشائعة",
+            "items": {
+                "driveInsideSaudi": {
+                    "question": "هل يمكنني القيادة بالرخصة الدولية داخل السعودية؟",
+                    "answer": "لا، يجب استخدام الرخصة السعودية داخل السعودية."
+                },
+                "validityPeriod": {
+                    "question": "ما هي مدة صلاحية الرخصة الدولية؟",
+                    "answer": "مدة الصلاحية مرتبطة بمدة صلاحية الإقامة (للمقيمين) أو صلاحية الرخصة المحلية."
+                },
+                "withoutSaudiLicense": {
+                    "question": "هل يمكن إصدار الرخصة الدولية بدون رخصة سعودية؟",
+                    "answer": "لا، يجب أن تكون لديك رخصة قيادة سعودية سارية."
+                },
+                "validityOutside": {
+                    "question": "هل تكفي الرخصة الدولية وحدها للقيادة خارج السعودية؟",
+                    "answer": "لا، يجب حمل كل من الرخصة الدولية والرخصة السعودية الأصلية معاً."
+                },
+                "processingTime": {
+                    "question": "كم يستغرق إصدار الرخصة الدولية؟",
+                    "answer": "يختلف حسب طريقة الاستلام: إلكترونياً مع الشحن من 2 إلى 5 أيام، والاستلام من الفرع غالباً في نفس اليوم."
+                },
+                "permittedCountries": {
+                    "question": "عدد الدول المسموح فيها القيادة بالرخصة الدولية؟",
+                    "answer": "أكثر من 150 دولة."
+                },
+                "vehicleCategories": {
+                    "question": "فئات المركبات المسموح قيادتها بالرخصة الدولية؟",
+                    "answer": "المركبات التي تستطيع قيادتها دولياً هي نفس الفئات المسموح بها في رخصتك المحلية (مثل الفئة B)."
+                },
+                "citizensAndResidents": {
+                    "question": "هل الخدمة متاحة للسعوديين والمقيمين؟",
+                    "answer": "نعم."
+                }
+            }
+        },
+        "validation": {
+            "nameRequired": "الإسم بالكامل مطلوب",
+            "emailRequired": "البريد الإلكتروني مطلوب",
+            "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+            "addressRequired": "العنوان الوطني مطلوب",
+            "phoneInvalid": "أدخل رقم هاتف صحيح",
+            "passportRequired": "صورة الجواز مطلوبة",
+            "localLicenseRequired": "صورة الرخصة السعودية مطلوبة",
+            "personalPhotoRequired": "الصورة الشخصية مطلوبة",
+            "filesRequired": "يرجى رفع جميع الملفات المطلوبة",
+            "invalidFileType": "يُسمح فقط بصور JPEG أو PNG أو WebP",
+            "fileTooLarge": "يجب أن يكون حجم الملف أقل من {size} ميجابايت"
         }
     }
 }

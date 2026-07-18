@@ -47,13 +47,16 @@ export interface LoyaltyCalculatePriceResponse {
     usePoints: boolean;
     currency: string;
     payment_gateways: string[];
+    available_balance?: number;
   };
 }
 
 interface LoyaltyCalculatePriceRequest {
   originalPrice: number;
-  module: "flights" | "hotels";
+  module: "flights" | "hotels" | "licenses";
   points?: boolean;
+  paymentMethod?: string;
+  couponCode?: string;
   provider?: string;
   carrierAirlineCode?: string;
   operatorAirlineCode?: string;
