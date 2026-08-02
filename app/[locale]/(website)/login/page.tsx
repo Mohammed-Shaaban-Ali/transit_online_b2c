@@ -70,6 +70,14 @@ export default function LoginPage() {
     return () => cancelAnimationFrame(frameId);
   }, [step]);
 
+  const getApiErrorMessage = (error: any, fallback: string) => {
+    const status = error?.status;
+    if (typeof status === "number" && status >= 500) {
+      return "Server Error";
+    }
+    return error?.data?.message || fallback;
+  };
+
   const onIdentifierSubmit = async (values: LoginFormValues) => {
     setServerError("");
     const normalizedPhone = values.phone.trim();
@@ -86,7 +94,7 @@ export default function LoginPage() {
       setValue("otp", "");
       setOtpDigits(["", "", "", ""]);
     } catch (error: any) {
-      setServerError(error?.data?.message || t("errors.failedToSendOtp"));
+      setServerError(getApiErrorMessage(error, t("errors.failedToSendOtp")));
     }
   };
 
@@ -123,7 +131,7 @@ export default function LoginPage() {
       }).unwrap();
       router.replace(redirectAfterLogin);
     } catch (error: any) {
-      setServerError(error?.data?.message || t("errors.invalidOtp"));
+      setServerError(getApiErrorMessage(error, t("errors.invalidOtp")));
     }
   };
 
