@@ -37,15 +37,13 @@ export default function CountrySwitcher({ isBlack = false }: Props) {
   const handleCountryChange = (newCountry: Country) => {
     if (newCountry === currentCountry) return;
 
-    // Persist the choice in cookie for one year
     setCookie(COUNTRY_COOKIE, newCountry, {
       maxAge: 60 * 60 * 24 * 365,
       path: "/",
       sameSite: "lax",
     });
 
-    // Always use window.location.pathname – it holds the real browser URL
-    // even when the Next.js middleware has internally rewritten the request.
+    // Real browser URL keeps /[locale]/[country]/... (middleware rewrite is transparent)
     const browserPath = window.location.pathname;
     const escaped = currentCountry.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const newPath = browserPath.replace(
@@ -56,10 +54,9 @@ export default function CountrySwitcher({ isBlack = false }: Props) {
     const targetPath =
       newPath !== browserPath ? newPath : `/${locale}/${newCountry}`;
 
-    // Preserve search params (e.g. flight/hotel search query strings)
+    // Soft nav like LocaleSwitcher — no full reload
     router.push(targetPath + window.location.search);
 
-    // Reset cached API data so queries re-run with the new country/currency headers
     dispatch(baseApi.util.resetApiState());
     dispatch(baseApi2.util.resetApiState());
   };
@@ -85,11 +82,7 @@ export default function CountrySwitcher({ isBlack = false }: Props) {
         <ChevronDownIcon className="size-3.5 opacity-60" />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent
-        // align={isRTL ? "start" : "end"}
-        sideOffset={8}
-        className="min-w-[160px]"
-      >
+      <DropdownMenuContent sideOffset={8} className="min-w-[160px]">
         {SUPPORTED_COUNTRIES.map((country) => {
           const info = COUNTRY_LABELS[country];
           const name = locale === "ar" ? info.ar : info.en;
@@ -100,7 +93,6 @@ export default function CountrySwitcher({ isBlack = false }: Props) {
               className="cursor-pointer hover:bg-primary/10 focus:bg-primary/10"
             >
               <div className="flex w-full items-center gap-2">
-                {/* <span className="text-base leading-none">{info.flag}</span> */}
                 <span className="flex-1">{name}</span>
                 {country === currentCountry && (
                   <CheckIcon className="size-4 text-primary" />

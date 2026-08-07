@@ -3,12 +3,17 @@ import { Rubik } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 import ReduxProvider from "@/providers/redux-provider";
+import { CountryProvider } from "@/providers/country-provider";
 import { Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import SetToken from "@/components/layout/SetToken";
 import Loading from "./loading";
 import { metadata } from "@/constants/metadata";
+import { COUNTRY_COOKIE } from "@/constants";
+import { DEFAULT_COUNTRY } from "@/config/countries";
+import { parseCountryCookie } from "@/utils/countryPath";
 
 const rubik = Rubik({
   subsets: ["latin", "arabic"],
@@ -50,6 +55,11 @@ export default async function RootLayout({
     console.error("Failed to fetch API token:", error);
   }
 
+  const cookieStore = await cookies();
+  const country =
+    parseCountryCookie(cookieStore.get(COUNTRY_COOKIE)?.value) ??
+    DEFAULT_COUNTRY;
+
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <head>
@@ -66,15 +76,17 @@ export default async function RootLayout({
         <SetToken token={apiToken} />
         <NextIntlClientProvider>
           <ReduxProvider>
-            <Suspense fallback={<Loading />}>
-              {children}
-              <Toaster
-                position="top-center"
-                richColors
-                duration={3000}
-                theme="light"
-              />
-            </Suspense>
+            <CountryProvider country={country}>
+              <Suspense fallback={<Loading />}>
+                {children}
+                <Toaster
+                  position="top-center"
+                  richColors
+                  duration={3000}
+                  theme="light"
+                />
+              </Suspense>
+            </CountryProvider>
           </ReduxProvider>
         </NextIntlClientProvider>
       </body>

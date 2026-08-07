@@ -85,6 +85,23 @@ export default function proxy(request: NextRequest) {
     const intlResponse = intlMiddleware(intlRequest);
 
     if (!intlResponse.ok) {
+      // next-intl redirects are country-less (/ar/...); put country back so the
+      // browser never lands on a path that re-enters the cookie-redirect branch.
+      const location = intlResponse.headers.get("location");
+      if (location) {
+        try {
+          const locUrl = new URL(location, request.url);
+          const locParsed = parseLocaleCountry(locUrl.pathname);
+          if (locParsed && !locParsed.country) {
+            locUrl.pathname =
+              `/${locParsed.locale}/${country}` +
+              (locParsed.restPath === "/" ? "" : locParsed.restPath);
+            return NextResponse.redirect(locUrl);
+          }
+        } catch {
+          // fall through to raw intl response
+        }
+      }
       return intlResponse;
     }
 
@@ -108,6 +125,8 @@ export default function proxy(request: NextRequest) {
   }
 
   // ── No country in URL — redirect to add it ───────────────────────────────
+  // Prefer cookie; default eg. Do not cache: App Router can reuse a stale
+  // redirect to /eg after the user switched to /sa (cookie already updated).
   const saved = request.cookies.get(COUNTRY_COOKIE)?.value;
   const targetCountry: Country =
     saved && SUPPORTED_COUNTRIES.includes(saved as Country)
@@ -118,7 +137,12 @@ export default function proxy(request: NextRequest) {
   redirectUrl.pathname =
     `/${locale}/${targetCountry}` + (restPath === "/" ? "" : restPath);
 
-  return NextResponse.redirect(redirectUrl);
+  const response = NextResponse.redirect(redirectUrl);
+  response.headers.set(
+    "Cache-Control",
+    "private, no-cache, no-store, max-age=0, must-revalidate",
+  );
+  return response;
 }
 
 export const config = {

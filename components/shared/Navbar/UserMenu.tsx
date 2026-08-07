@@ -6,7 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/app/hooks";
 import { logoutUser } from "@/redux/features/auth/authSlice";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useCountry } from "@/hooks/useCountry";
 
 interface UserMenuProps {
   wrapperClassName?: string;
@@ -31,8 +31,8 @@ export default function UserMenu({
 }: UserMenuProps) {
   const t = useTranslations("NewPage.navbar");
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const locale = useLocale();
+  const country = useCountry();
   const user = useAppSelector((state) => state.auth.user);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement | null>(null);
@@ -67,7 +67,7 @@ export default function UserMenu({
   const handleLogout = () => {
     dispatch(logoutUser());
     setIsProfileMenuOpen(false);
-    router.push(`/${locale}`);
+    window.location.assign(`/${locale}/${country}`);
   };
 
   if (!user) {
