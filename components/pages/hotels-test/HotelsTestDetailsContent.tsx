@@ -31,6 +31,7 @@ export default function HotelsTestDetailsContent() {
   const { setHotels } = useHotelFilterRedux();
   const hotelsSetRef = useRef(false);
   const country = useCountry();
+  const [forceLoading, setForceLoading] = useState(false);
 
   const queryString = searchParams.toString();
 
@@ -47,8 +48,17 @@ export default function HotelsTestDetailsContent() {
   useEffect(() => {
     if (!apiParams) return;
     hotelsSetRef.current = false;
-    void searchHotels(apiParams).unwrap();
+    void searchHotels(apiParams)
+      .unwrap()
+      .finally(() => setForceLoading(false));
   }, [apiParams, searchHotels, country]);
+
+  // If search params did not change, the effect above won't run — don't leave skeletons stuck.
+  useEffect(() => {
+    if (!forceLoading || isLoading) return;
+    const id = window.setTimeout(() => setForceLoading(false), 400);
+    return () => window.clearTimeout(id);
+  }, [forceLoading, isLoading, queryString]);
 
   const hotels = data?.data;
   const uuid = data?.uuid ?? "";
@@ -91,7 +101,7 @@ export default function HotelsTestDetailsContent() {
 
   const roomsCount = apiParams ? apiParams.rooms.length : undefined;
 
-  const showLoading = Boolean(apiParams && isLoading);
+  const showLoading = Boolean(apiParams && (isLoading || forceLoading));
 
   const [formBarHeight, setFormBarHeight] = useState(0);
   const formBarRef = useRef<HTMLDivElement>(null);
@@ -157,6 +167,7 @@ export default function HotelsTestDetailsContent() {
                 initialValues={formDefaults}
                 primaryBorder
                 stayOnPage
+                onSearchStart={() => setForceLoading(true)}
               />
             </div>
           </div>

@@ -6,7 +6,10 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { useForm, type Resolver } from "react-hook-form";
 import { FaSearch } from "react-icons/fa";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { flushSync } from "react-dom";
+import Image from "next/image";
+import logoMoving from "@/public/images/gitalogo.png";
 import { localStorageHotelSearchKey } from "@/constants";
 import {
   pushHotelRecentSearch,
@@ -67,6 +70,8 @@ type HotelsTestHotelSearchFormProps = {
    * instead of router.push (which would create a new history entry back to the hero page).
    */
   stayOnPage?: boolean;
+  /** Fired immediately when a valid search is submitted (before navigation / storage work). */
+  onSearchStart?: () => void;
   className?: string;
 };
 
@@ -74,11 +79,13 @@ function HotelsTestHotelSearchForm({
   initialValues,
   primaryBorder = false,
   stayOnPage = false,
+  onSearchStart,
   className,
 }: HotelsTestHotelSearchFormProps) {
   const router = useRouter();
   const tv = useTranslations("Components.HotelSearchBox");
   const t = useTranslations("HotelsTestPage.HotelSearchForm");
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const schema = useMemo(
     () =>
@@ -156,6 +163,12 @@ function HotelsTestHotelSearchForm({
   };
 
   const onSubmit = async (data: HotelsTestFormValues) => {
+    // Paint loader immediately before localStorage / router work (soft nav keeps old UI otherwise).
+    flushSync(() => {
+      setIsNavigating(true);
+      onSearchStart?.();
+    });
+
     try {
       const all = form.getValues();
       const params = new URLSearchParams();
@@ -202,63 +215,84 @@ function HotelsTestHotelSearchForm({
 
       if (stayOnPage) {
         router.replace(`/hotels/details?${params.toString()}`);
+        // Parent shows results skeletons via onSearchStart; don't keep full-page overlay.
+        setIsNavigating(false);
       } else {
         router.push(`/hotels/details?${params.toString()}`);
+        // Keep overlay until this page unmounts after navigation.
       }
     } catch (e) {
       console.error(e);
+      setIsNavigating(false);
     }
   };
 
   const onInvalid = (errors: object) => {
     console.log("onInvalid errors", errors);
+    setIsNavigating(false);
     void form.trigger();
   };
 
+  const busy = isNavigating || form.formState.isSubmitting;
+
   return (
-    <form
-      onSubmit={form.handleSubmit(onSubmit, onInvalid)}
-      className={cn(
-        "w-full",
-        className,
-        !primaryBorder ? "rounded-md sm:p-3 bg-white" : "",
-      )}
-      noValidate
-    >
-      <div
-        className={cn(
-          "flex  w-full min-w-0 flex-col overflow-hidden rounded-md border bg-white",
-          primaryBorder ? "border-primary border-2" : "border-gray-300",
-          "lg:flex-row lg:items-stretch gap-2 md:gap-0",
-          "p-2",
-        )}
-      >
-        <WhereToPopover form={form} onApplyRecent={applyRecent} />
-        <SegmentDivider />
-        <StayDateRangePopover form={form} />
-        <SegmentDivider />
-        <OccupancySteppersPopover form={form} />
-        <SegmentDivider />
-        <div
-          className="flex w-full shrink-0 items-stretch self-stretch  
-        lg:w-auto lg:min-w-[132px] md:ms-2 lg:max-w-[200px]"
-        >
-          <Button
-            type="submit"
-            disabled={form.formState.isSubmitting}
-            className={cn(
-              "h-full  w-full flex-1 flex items-center justify-center gap-2 rounded-md ",
-              "border-0 bg-primary text-[16px] font-bold text-white shadow-none",
-              "hover:bg-primary/80 disabled:opacity-50",
-              "min-h-[48px]  lg:min-h-[50px]",
-            )}
-          >
-            <FaSearch className="size-4 shrink-0 text-white" />
-            {form.formState.isSubmitting ? t("searching") : t("search")}
-          </Button>
+    <>
+      {isNavigating && !stayOnPage ? (
+        <div className="fixed inset-0 z-[200] flex h-screen w-screen items-center justify-center overflow-hidden bg-white">
+          <Image
+            src={logoMoving}
+            alt="logo"
+            width={800}
+            height={800}
+            className="h-20 w-20"
+            priority
+          />
         </div>
-      </div>
-    </form>
+      ) : null}
+      <form
+        onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+        className={cn(
+          "w-full",
+          className,
+          !primaryBorder ? "rounded-md sm:p-3 bg-white" : "",
+        )}
+        noValidate
+      >
+        <div
+          className={cn(
+            "flex  w-full min-w-0 flex-col overflow-hidden rounded-md border bg-white",
+            primaryBorder ? "border-primary border-2" : "border-gray-300",
+            "lg:flex-row lg:items-stretch gap-2 md:gap-0",
+            "p-2",
+          )}
+        >
+          <WhereToPopover form={form} onApplyRecent={applyRecent} />
+          <SegmentDivider />
+          <StayDateRangePopover form={form} />
+          <SegmentDivider />
+          <OccupancySteppersPopover form={form} />
+          <SegmentDivider />
+          <div
+            className="flex w-full shrink-0 items-stretch self-stretch  
+        lg:w-auto lg:min-w-[132px] md:ms-2 lg:max-w-[200px]"
+          >
+            <Button
+              type="submit"
+              disabled={busy}
+              className={cn(
+                "h-full  w-full flex-1 flex items-center justify-center gap-2 rounded-md ",
+                "border-0 bg-primary text-[16px] font-bold text-white shadow-none",
+                "hover:bg-primary/80 disabled:opacity-50",
+                "min-h-[48px]  lg:min-h-[50px]",
+              )}
+            >
+              <FaSearch className="size-4 shrink-0 text-white" />
+              {busy ? t("searching") : t("search")}
+            </Button>
+          </div>
+        </div>
+      </form>
+    </>
   );
 }
 
