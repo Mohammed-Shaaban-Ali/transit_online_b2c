@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import {
   useSearchFlightsIatiQuery,
@@ -126,16 +127,34 @@ function applyFilters(
 }
 
 function ShowFareResultsSection({
-  fromAirport,
-  toAirport,
-  departureDate,
-  returnDate,
-  adults,
-  children,
-  infants,
-  cabinClass,
-  nonstop,
+  fromAirport: fromAirportProp,
+  toAirport: toAirportProp,
+  departureDate: departureDateProp,
+  returnDate: returnDateProp,
+  adults: adultsProp,
+  children: childrenProp,
+  infants: infantsProp,
+  cabinClass: cabinClassProp,
+  nonstop: _nonstopProp,
 }: Props) {
+  const searchParams = useSearchParams();
+  // Prefer live URL so a new search updates immediately (don't wait on RSC props).
+  const fromAirport = searchParams.get("from") || fromAirportProp;
+  const toAirport = searchParams.get("to") || toAirportProp;
+  const departureDate =
+    searchParams.get("departureDate") || departureDateProp;
+  const returnDate =
+    searchParams.get("returnDate") || returnDateProp || undefined;
+  const adults = Number(searchParams.get("adults") || adultsProp || 1);
+  const children = Number(searchParams.get("children") || childrenProp || 0);
+  const infants = Number(searchParams.get("infants") || infantsProp || 0);
+  const cabinClass =
+    searchParams.get("cabinClass") === "BUSINESS"
+      ? "BUSINESS"
+      : searchParams.get("cabinClass") === "ECONOMY"
+        ? "ECONOMY"
+        : cabinClassProp;
+
   const dispatch = useDispatch();
   const t = useTranslations("ShowFarePage.Results");
   const tCard = useTranslations("ShowFarePage.FlightCard");
@@ -193,10 +212,11 @@ function ShowFareResultsSection({
     ],
   );
 
-  const { data: iatiData, isFetching: isIatiFetching } =
+  // Use currentData (not data) so a new search does not keep showing the previous results.
+  const { currentData: iatiData, isFetching: isIatiFetching } =
     useSearchFlightsIatiQuery(searchBody);
 
-  const { data: sabreData, isFetching: isSabreFetching } =
+  const { currentData: sabreData, isFetching: isSabreFetching } =
     useSearchFlightsSabreQuery(searchBody);
 
   const mergedData = useMemo(() => {

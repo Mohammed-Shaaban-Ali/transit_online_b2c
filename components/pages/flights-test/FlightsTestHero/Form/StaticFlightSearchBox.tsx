@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { flushSync } from "react-dom";
+import Image from "next/image";
 import { ArrowRightLeft, ArrowUpDown } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { format } from "date-fns";
 import { useRouter } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import { formatDateToString } from "@/utils/formatDateToString";
 import TripOptionsRow from "./components/TripOptionsRow";
 import CitySelectorPopover from "./components/CitySelectorPopover";
@@ -23,6 +26,7 @@ import {
 import { cn } from "@/lib/utils";
 import { MdCalendarMonth } from "react-icons/md";
 import { useTranslations } from "next-intl";
+import logoMoving from "@/public/images/gitalogo.png";
 
 function buildFlightSearchSchema(
   v: ReturnType<typeof useTranslations<"FlightsTestForm.Validation">>,
@@ -121,9 +125,16 @@ function StaticFlightSearchBox({
   initialValues,
 }: Props) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const t = useTranslations("FlightsTestForm");
   const v = useTranslations("FlightsTestForm.Validation");
   const flightSearchSchema = buildFlightSearchSchema(v);
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  const liveQuery = searchParams.toString();
+  useEffect(() => {
+    setIsNavigating(false);
+  }, [liveQuery]);
 
   const [tripType, setTripType] = useState<TripType>(
     initialValues?.tripType || "roundTrip",
@@ -237,6 +248,8 @@ function StaticFlightSearchBox({
 
   const handleSearch = () => {
     form.handleSubmit((data) => {
+      flushSync(() => setIsNavigating(true));
+
       const formattedData = {
         ...data,
         departureDate: formatDateToString(data.departureDate),
@@ -263,17 +276,35 @@ function StaticFlightSearchBox({
       }
       params.set("cabinClass", formattedData.cabinClass);
 
-      router.push(`${submitPath}?${params.toString()}`);
+      const nextQuery = params.toString();
+      router.push(`${submitPath}?${nextQuery}`);
+      // Same criteria → URL won't change, so clear overlay ourselves.
+      if (liveQuery === nextQuery) {
+        setIsNavigating(false);
+      }
     })();
   };
 
   return (
-    <div
-      className={cn(
-        "mt-0 md:mt-3 w-full rounded-[8px] bg-white p-3 pt-2 md:p-5",
-        className,
-      )}
-    >
+    <>
+      {isNavigating ? (
+        <div className="fixed inset-0 z-[200] flex h-screen w-screen items-center justify-center overflow-hidden bg-white">
+          <Image
+            src={logoMoving}
+            alt="logo"
+            width={800}
+            height={800}
+            className="h-20 w-20"
+            priority
+          />
+        </div>
+      ) : null}
+      <div
+        className={cn(
+          "mt-0 md:mt-3 w-full rounded-[8px] bg-white p-3 pt-2 md:p-5",
+          className,
+        )}
+      >
       <TripOptionsRow
         tripType={tripType}
         onTripTypeChange={(nextTripType) => setTripType(nextTripType)}
@@ -498,6 +529,7 @@ function StaticFlightSearchBox({
         <ActionButtonsRow onSearch={handleSearch} className="hidden md:flex" />
       )}
     </div>
+    </>
   );
 }
 

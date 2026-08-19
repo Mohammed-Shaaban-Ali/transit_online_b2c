@@ -4,6 +4,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "SF Arabic";
+  src: url("/fonts/sf-arabic/sf-arabic-variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -47,6 +55,7 @@
   --color-secondary: var(--secondary);
   --color-secondary-light: var(--secondary-light);
   --color-primary-light: var(--primary-light);
+  --font-sans: "SF Arabic", Arial, sans-serif;
 }
 
 :root {
@@ -103,6 +112,15 @@
 
   html {
     font-size: 90%;
+    font-family: "SF Arabic", Arial, sans-serif;
+  }
+
+  body,
+  button,
+  input,
+  select,
+  textarea {
+    font-family: "SF Arabic", Arial, sans-serif;
   }
 
   .container {

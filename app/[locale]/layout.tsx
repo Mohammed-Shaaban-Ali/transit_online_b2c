@@ -1,5 +1,4 @@
 import "./globals.css";
-import { Rubik } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -14,13 +13,6 @@ import { metadata } from "@/constants/metadata";
 import { COUNTRY_COOKIE } from "@/constants";
 import { DEFAULT_COUNTRY } from "@/config/countries";
 import { parseCountryCookie } from "@/utils/countryPath";
-
-const rubik = Rubik({
-  subsets: ["latin", "arabic"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
-  variable: "--font-rubik",
-});
 
 // export const metadata: Metadata = {
 //   title: "Eficta Online B2C",
@@ -72,7 +64,7 @@ export default async function RootLayout({
           content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
       </head>
-      <body className={`${rubik.className} antialiased`}>
+      <body className="antialiased">
         <SetToken token={apiToken} />
         <NextIntlClientProvider>
           <ReduxProvider>
