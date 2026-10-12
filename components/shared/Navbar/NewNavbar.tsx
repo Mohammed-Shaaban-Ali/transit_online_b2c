@@ -1,17 +1,29 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { Menu } from "lucide-react";
 import LocaleSwitcher from "../LocaleSwitcher";
 import CountrySwitcher from "../CountrySwitcher";
 import logo from "@/public/images/gitalogo.png";
 import { Link } from "@/i18n/navigation";
 import UserMenu from "./UserMenu";
 import { SUPPORTED_COUNTRIES } from "@/config/countries";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
   const t = useTranslations("Components.Navbar");
   const pathname = usePathname();
+  const locale = useLocale();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = [
     {
@@ -77,6 +89,13 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
         : ""
     }`;
 
+  const mobileLinkClass = (isActive: boolean) =>
+    `rounded-lg px-4 py-3 text-16 font-semibold transition-colors ${
+      isActive
+        ? "bg-primary/10 text-primary"
+        : "text-gray-700 hover:bg-gray-100 hover:text-black"
+    }`;
+
   return (
     <header
       className={`absolute left-0 right-0 z-50 flex w-full items-center justify-between gap-2 px-2 py-3 sm:px-4 sm:py-4
@@ -104,9 +123,7 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
           />
         </Link>
 
-        <nav
-          className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-4 sm:gap-7 md:static md:translate-x-0 md:translate-y-0"
-        >
+        <nav className="hidden items-center gap-4 sm:gap-7 md:flex">
           {links.map((link) => {
             const isActive = pathNameWithoutLocale === link.href;
             return (
@@ -140,6 +157,65 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
             }`}
           />
         </div>
+
+        <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+          <SheetTrigger asChild>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className={`md:hidden size-9 shrink-0 ${
+                isBlack
+                  ? "text-black hover:bg-black/5"
+                  : "text-white hover:bg-white/15"
+              }`}
+              aria-label={t("toggleMenu")}
+            >
+              <Menu className="size-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent
+            side={locale === "ar" ? "right" : "left"}
+            className="flex w-[min(100vw-2rem,20rem)] flex-col gap-0 p-0"
+          >
+            <SheetHeader className="border-b border-gray-100 px-5 py-4 text-start">
+              <SheetTitle className="sr-only">{t("toggleMenu")}</SheetTitle>
+              <Image
+                src={logo}
+                alt="logo"
+                width={120}
+                height={40}
+                className="h-10 w-auto object-contain"
+              />
+            </SheetHeader>
+
+            <nav className="flex flex-col gap-1 p-4">
+              {links.map((link) => {
+                const isActive = pathNameWithoutLocale === link.href;
+                return (
+                  <Link
+                    href={link.href}
+                    key={link.label}
+                    onClick={() => setMobileOpen(false)}
+                    className={mobileLinkClass(isActive)}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="mt-auto border-t border-gray-100 p-4 md:hidden">
+              <UserMenu
+                wrapperClassName="relative w-full"
+                triggerClassName="inline-flex w-full items-center justify-center gap-2 rounded-md border border-gray-200 bg-white px-3 py-2.5 text-sm font-medium text-black transition-colors hover:bg-gray-50"
+                avatarClassName="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary"
+                nameClassName="max-w-[160px] truncate"
+                signInClassName="inline-flex w-full items-center justify-center rounded-md bg-primary px-3 py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-primary/90"
+              />
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );
