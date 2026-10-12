@@ -1,2212 +1,2453 @@
 {
-    "HomePage": {
-        "title": "مرحبا بك في الصفحة الرئيسية!"
+  "HomePage": {
+    "title": "مرحبا بك في الصفحة الرئيسية!"
+  },
+  "HotelsPage": {
+    "title": "الفنادق",
+    "imageAlt": "صورة رئيسية للفنادق"
+  },
+  "Home": {
+    "Lastsearched": {
+      "title": "آخر عمليات البحث",
+      "imageAlt": "آخر عمليات البحث",
+      "destination": "{city}",
+      "passengers": "{adults} بالغ، {children} طفل",
+      "date": "{date}"
     },
-    "HotelsPage": {
-        "title": "الفنادق",
-        "imageAlt": "صورة رئيسية للفنادق"
+    "PopularDestinations": {
+      "title": "الأكثر شعبية",
+      "subtitle": "الوجهات",
+      "destination": "{name}",
+      "activities": "{tours} جولة، {activities} نشاط"
     },
-    "Home": {
-        "Lastsearched": {
-            "title": "آخر عمليات البحث",
-            "imageAlt": "آخر عمليات البحث",
-            "destination": "{city}",
-            "passengers": "{adults} بالغ، {children} طفل",
-            "date": "{date}"
-        },
-        "PopularDestinations": {
-            "title": "الأكثر شعبية",
-            "subtitle": "الوجهات",
-            "destination": "{name}",
-            "activities": "{tours} جولة، {activities} نشاط"
-        },
-        "RecommendedHotel": {
-            "title": "الأكثر توصية",
-            "subtitle": "الفنادق",
-            "imageAlt": "فندق",
-            "addToFavorites": "إضافة إلى المفضلة",
-            "hotelName": "{name}",
-            "hotelDescription": "{description}",
-            "night": "ليلة",
-            "location": "{location}"
-        },
-        "OurPackages": {
-            "title": "باقاتنا",
-            "subtitle": "",
-            "description": "استمتع بأفضل العروض والباقات",
-            "imageAlt": "باقة",
-            "packageName": "اسم الباقة",
-            "activities": "{tours} جولة، {activities} نشاط"
-        },
-        "Hero": {
-            "title": "دعنا نستكشف العالم",
-            "hotel": "الفنادق",
-            "flight": "الطيران",
-            "imageAlt": "صورة رئيسية"
-        }
+    "RecommendedHotel": {
+      "title": "الأكثر توصية",
+      "subtitle": "الفنادق",
+      "imageAlt": "فندق",
+      "addToFavorites": "إضافة إلى المفضلة",
+      "hotelName": "{name}",
+      "hotelDescription": "{description}",
+      "night": "ليلة",
+      "location": "{location}"
     },
-    "Components": {
-        "HeaderShared": {
-            "viewMore": "عرض المزيد"
-        },
-        "Parts": {
-            "Map": {
-                "show_on_map": "عرض على الخريطة",
-                "show_hotels_on_map": "عرض {count} فندق على الخريطة",
-                "hotels_found": "تم العثور على {count} فندق",
-                "hotels_found_with_location": "تم العثور على {count} أماكن إقامة في {location}",
-                "hotel_locations": "مواقع الفنادق"
-            }
-        },
-        "HotelSearchBox": {
-            "search": "بحث",
-            "searching": "جاري البحث...",
-            "validation": {
-                "countryRequired": "البلد مطلوب",
-                "countryEmpty": "لا يمكن أن يكون البلد فارغًا",
-                "checkInRequired": "تاريخ الوصول مطلوب",
-                "checkInPast": "لا يمكن أن يكون تاريخ الوصول في الماضي",
-                "checkOutRequired": "تاريخ الذهاب مطلوب",
-                "checkOutAfterCheckIn": "يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول",
-                "locationRequired": "يرجى اختيار موقع"
-            },
-            "LocationSearch": {
-                "destination": "الوجهة",
-                "loading": "جاري التحميل...",
-                "noResults": "لم يتم العثور على نتائج"
-            },
-            "CheckIn": {
-                "label": "تاريخ الوصول"
-            },
-            "CheckOut": {
-                "label": "تاريخ الذهاب"
-            },
-            "DatePicker": {
-                "headerTitle": "اختر تواريخ الإقامة",
-                "next2weeks": "الأسبوعان القادمان",
-                "nextMonth": "الشهر القادم",
-                "selectCheckOut": "اختر تاريخ المغادرة",
-                "selectDateToContinue": "اختر تاريخ الوصول والمغادرة للمتابعة",
-                "allDatesLocalTime": "جميع التواريخ بتوقيتك المحلي",
-                "confirm": "تم",
-                "nightsCount": "{count, plural, zero {# ليلة} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}"
-            },
-            "hero": {
-                "whereTo": "إلى أين؟",
-                "recentSearches": "عمليات البحث الأخيرة",
-                "popularDestinations": "وجهات شائعة",
-                "nightsBadge": "{count, plural, zero {# ليلة} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}",
-                "occupancySummary": "{rooms} {roomsWord}، {adults} {adultsLabel}، {children} {childrenLabel}"
-            },
-            "done": "تم",
-            "GuestSearch": {
-                "guestsAndRooms": "الضيوف والغرف",
-                "roomNo": "الغرفة رقم {number}",
-                "removeRoom": "إزالة الغرفة",
-                "adults": "البالغون:",
-                "children": "الأطفال:",
-                "childAge": "عمر الطفل {number}",
-                "year": "سنة",
-                "years": "سنوات",
-                "old": "من العمر",
-                "guest": "ضيف",
-                "guests": "ضيوف",
-                "room": "غرفة",
-                "rooms": "غرف",
-                "adultsLabel": "بالغ",
-                "childrenNoun": "أطفال",
-                "select": "تحديد",
-                "guestsInRooms": "{guests} {guestLabel} في {rooms} {roomLabel}",
-                "adultsInRooms": "{adults} {adultsLabel} في {rooms} {roomLabel}"
-            }
-        },
-        "FlightSearchBox": {
-            "search": "بحث",
-            "validation": {
-                "fromAirportRequired": "مطار الذهاب مطلوب",
-                "toAirportRequired": "مطار الوصول مطلوب",
-                "departureDateRequired": "تاريخ الذهاب مطلوب",
-                "departureDatePast": "لا يمكن أن يكون تاريخ الذهاب في الماضي",
-                "returnDateRequired": "تاريخ العودة مطلوب للرحلة ذهاب وعودة",
-                "returnDateAfter": "يجب أن يكون تاريخ العودة بعد تاريخ الذهاب",
-                "airportsMustBeDifferent": "يجب أن يكون مطار الذهاب مختلف عن مطار الوصول"
-            },
-            "FromAirport": {
-                "label": "من",
-                "loading": "جاري التحميل...",
-                "noResults": "لم يتم العثور على نتائج"
-            },
-            "ToAirport": {
-                "label": "إلى",
-                "loading": "جاري التحميل...",
-                "noResults": "لم يتم العثور على نتائج"
-            },
-            "FlightDatePicker": {
-                "departure": "الذهاب",
-                "departureReturn": "الذهاب - العودة",
-                "selectDates": "اختر التواريخ",
-                "selectReturn": "اختر تاريخ العودة",
-                "roundTrip": "ذهاب وعودة",
-                "oneWay": "ذهاب فقط",
-                "done": "تم",
-                "return": "العودة"
-            },
-            "FlightPassenger": {
-                "passengers": "الركاب",
-                "guests": "ضيوف",
-                "adults": "بالغون",
-                "children": "أطفال",
-                "infants": "رضع",
-                "adultsDescription": "12+ سنة",
-                "childrenDescription": "2-11 سنة",
-                "infantsDescription": "أقل من سنتين",
-                "cabinClass": "فئة المقصورة",
-                "economy": "اقتصادية",
-                "business": "رجال الأعمال",
-                "apply": "تطبيق"
-            }
-        },
-        "Navbar": {
-            "logout": "تسجيل الخروج",
-            "myBooking": "حجوزاتي",
-            "home": "الرئيسية",
-            "hotels": "الفنادق",
-            "flights": "الطيران",
-            "toggleMenu": "تبديل القائمة",
-            "licenses": "الرخصة الدولية"
-        },
-        "Footer": {
-            "home": "الرئيسية",
-            "hotels": "الفنادق",
-            "flights": "الطيران",
-            "description": "لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد. لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد، لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد، لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد",
-            "location": "السعودية، الرياض"
-        },
-        "LocaleSwitcher": {
-            "arabic": "العربية",
-            "english": "الإنجليزية"
-        },
-        "PriceCell": {
-            "night": "ليلة",
-            "nights": "ليله"
-        }
+    "OurPackages": {
+      "title": "باقاتنا",
+      "subtitle": "",
+      "description": "استمتع بأفضل العروض والباقات",
+      "imageAlt": "باقة",
+      "packageName": "اسم الباقة",
+      "activities": "{tours} جولة، {activities} نشاط"
     },
-    "HotelsList": {
-        "searchPrompt": {
-            "title": "ابدأ البحث عن الفنادق",
-            "description": "يرجى استخدام صندوق البحث أعلاه للعثور على الفنادق. أدخل وجهتك وتواريخ الوصول والذهاب وعدد الضيوف للبدء."
-        },
-        "NoHotelsFound": {
-            "title": "لم يتم العثور على فنادق",
-            "description": "لم نتمكن من العثور على أي فنادق تطابق معايير البحث الخاصة بك. جرب تعديل الفلاتر الخاصة بك.",
-            "resetFilters": "إعادة تعيين الفلاتر"
-        },
-        "HotelCard": {
-            "hotelName": "اسم الفندق",
-            "breakfastIncluded": "الإفطار مشمول",
-            "night": "ليلة",
-            "nights": "ليله",
-            "adult": "بالغ",
-            "adults": "بالغون",
-            "child": "طفل",
-            "children": "أطفال"
-        },
-        "Sidebar": {
-            "searchHotel": "البحث عن فندق",
-            "starRating": "التصنيف بالنجوم",
-            "hotelChain": "سلسلة الفنادق",
-            "propertyType": "نوع العقار",
-            "sortBy": "ترتيب حسب",
-            "budgetPerNight": "ميزانيتك لكل ليلة",
-            "facilities": "المرافق"
-        },
-        "MobileSidebar": {
-            "filters": "الفلاتر",
-            "close": "إغلاق",
-            "search": "ابحث عن فندق معين",
-            "propertiesFound": "{count} عقار",
-            "sort": "ترتيب",
-            "sortBy": "ترتيب حسب",
-            "sortRecommended": "موصى به",
-            "sortPriceLow": "الأقل سعراً",
-            "sortPriceHigh": "الأعلى سعراً",
-            "sortRatingLow": "الأقل تقييماً",
-            "sortRatingHigh": "الأعلى تقييماً"
-        },
-        "PriceSlider": {
-            "minPrice": "الحد الأدنى للسعر $",
-            "maxPrice": "الحد الأقصى للسعر $"
-        },
-        "SearchBox": {
-            "placeholder": "مثال: Best Western"
-        },
-        "Filters": {
-            "showMore": "عرض المزيد",
-            "showLess": "عرض أقل"
-        },
-        "error": {
-            "title": "خطأ في تحميل الفنادق",
-            "titleFlight": "خطأ في تحميل الطيران",
-            "description": "حدثت مشكلة أثناء تحميل نتائج الفنادق. يرجى المحاولة مرة أخرى لاحقاً."
-        }
+    "Hero": {
+      "title": "دعنا نستكشف العالم",
+      "hotel": "الفنادق",
+      "flight": "الطيران",
+      "imageAlt": "صورة رئيسية"
+    }
+  },
+  "Components": {
+    "HeaderShared": {
+      "viewMore": "عرض المزيد"
     },
-    "SingleHotel": {
-        "error": {
-            "title": "خطأ",
-            "message": "حدث خطأ أثناء تحميل تفاصيل الفندق",
-            "tryAgain": "يرجى المحاولة مرة أخرى لاحقًا",
-            "goHome": "الذهاب  إلى الرئيسية",
-            "searchHotels": "البحث عن الفنادق"
-        },
-        "overview": "نظرة عامة",
-        "map": "الخريطة",
-        "showMore": "عرض المزيد",
-        "showLess": "عرض أقل"
+    "Parts": {
+      "Map": {
+        "show_on_map": "عرض على الخريطة",
+        "show_hotels_on_map": "عرض {count} فندق على الخريطة",
+        "hotels_found": "تم العثور على {count} فندق",
+        "hotels_found_with_location": "تم العثور على {count} أماكن إقامة في {location}",
+        "hotel_locations": "مواقع الفنادق"
+      }
     },
-    "HotelRoomsTabs": {
-        "ariaTabs": "أقسام تفاصيل الفندق",
-        "ariaFilters": "تصفية الغرف",
-        "tabs": {
-            "rooms": "الغرف",
-            "reviews": "تقييمات الضيوف",
-            "amenities": "الخدمات والمرافق",
-            "policies": "السياسات"
-        },
-        "filters": {
-            "freeCancellation": "إلغاء مجاني",
-            "instantConfirmation": "تأكيد فوري",
-            "roomsWithWindows": "غرف بنافذة",
-            "prepayOnline": "دفع مسبق عبر الإنترنت",
-            "hotelPackage": "باقة الفندق",
-            "payAtHotel": "الدفع في الفندق"
-        },
-        "placeholders": {
-            "reviews": "محتوى تقييمات الضيوف سيظهر هنا.",
-            "amenities": "تفاصيل الخدمات والمرافق ستظهر هنا.",
-            "policies": "سياسات الفندق ستظهر هنا."
-        }
-    },
-    "GuestReviews": {
-        "title": "تقييمات الضيوف",
-        "ratingLabel": "ممتاز",
-        "reviewCount": "{count} تقييم",
-        "streak": "{count} ضيفًا على التوالي أعطوا إقامتهم تقييمًا إيجابيًا.",
-        "categories": {
-            "cleanliness": "النظافة",
-            "amenities": "المرافق",
-            "location": "الموقع",
-            "service": "الخدمة"
-        },
-        "compareNote": "متوسط مقارنةً بفنادق مشابهة في شنغهاي",
-        "aiSummaryTitle": "ملخص التقييمات",
-        "aiPowered": "مدعوم بالذكاء الاصطناعي",
-        "feedbackHelpful": "تقييم مفيد",
-        "feedbackNotHelpful": "تقييم غير مفيد",
-        "whatGuestsSay": "ماذا يقول الضيوف",
-        "originalText": "النص الأصلي",
-        "translationByGoogle": " الترجمة مقدمة من Google",
-        "showAllReviews": "عرض كل التقييمات",
-        "summaries": {
-            "location": {
-                "title": "سهولة الوصول:",
-                "body": "يذكر الضيوف قرب محطات المترو، لوجيازوي، الوِفْد، ومعالم وسط المدينة.",
-                "basedOn": "(استنادًا إلى تقييم واحد)"
-            },
-            "facilities": {
-                "title": "مرافق حديثة وذكية:",
-                "body": "تشير تقييمات عديدة إلى تجديدات حديثة ومساعدات ذكية داخل الغرف ومعدات عصرية.",
-                "basedOn": "(استنادًا إلى 231 تقييمًا)"
-            },
-            "service": {
-                "title": "خدمة جيدة:",
-                "body": "يُوصف موظفو الاستقبال بأنهم ودودون وسريعو الاستجابة؛ ويذكر بعض الضيوف توصيل الطعام بالروبوت.",
-                "basedOn": ""
-            },
-            "hygiene": {
-                "title": "نظافة ممتازة:",
-                "body": "غالبًا ما تُوصف الغرف بأنها نظيفة مع تنظيف فوري.",
-                "basedOn": "(استنادًا إلى 564 تقييمًا)"
-            },
-            "environment": {
-                "title": "بيئة مريحة:",
-                "body": "يقدّر الضيوف الديكور البسيط والإضاءة الطبيعية حيث تتوفر وتهوية جيدة.",
-                "basedOn": "(استنادًا إلى 541 تقييمًا)"
-            },
-            "suggestion": {
-                "title": "اقتراحات الضيوف:",
-                "body": "عدد أقل من التقييمات يذكر راحة الفرش، ضوضاء الشارع أو التجديد، وجودة الهواء كنقاط للتحسين.",
-                "basedOn": "(استنادًا إلى 10 تقييمات)"
-            }
-        },
-        "reviews": {
-            "chalermpan": {
-                "initials": "CZ",
-                "name": "Chalermpan Zu",
-                "date": "28 أبريل 2026",
-                "body": "فوجئنا بالمدخل الذي كان قيد الإنشاء، ولم نجد لافتة الفندق رغم وقوفنا أمامه. بعد الوصول إلى الردهة في الطابق الخامس كان رائحة السجائر كثيفة، بينما داخل الغرفة كانت أقل. بعد الخروج طوال المساء أصبحت الرائحة قوية في الغرفة. الإيجابيات: مساحة الغرفة والسرير والنظافة واهتمام الموظفين."
-            },
-            "liona": {
-                "initials": "L",
-                "name": "liona777",
-                "date": "25 أبريل 2026",
-                "body": "البيئة: يوجد تجديد أسفل الطابق من 8 صباحًا حتى 6 مساءً والضوضاء عالية وتُسمع في كل الغرف. الغرف بلا نوافذ ورائحة التجديد قوية، وبدون نوافذ لا تتبدد الرائحة مما جعل حلقي يزعجني بعد ليلة واحدة. حوالي عشر دقائق سيرًا إلى محطة سينشري أفينيو مترو، وقريب من الوِفْد بالتاكسي."
-            },
-            "guest": {
-                "initials": "G",
-                "name": "ضيف",
-                "date": "19 أبريل 2026",
-                "body": "الغرفة كانت نظيفة جدًا بلا روائح. قارنت تقييمات عدة فروع وهذا كان الوحيد بلا مشاكل صحية. بعد الإقامة كان فعلًا كما قالوا؛ حتى الحمام كان نظيفًا. بسبب ضوضاء تجديد في طوابق أخرى نقلني الاستقبال فورًا لغرفة أخرى وتابعوا الوضع. تشعر بجديتهم في حل مشاكل العملاء. هذه الخدمة..."
-            }
-        }
-    },
-    "HotelLocation": {
-        "title": "الموقع",
-        "transport": "المواصلات",
-        "shopping": "التسوق",
-        "landmarks": "المعالم",
-        "dining": "المطاعم",
-        "showOnMap": "عرض على الخريطة"
-    },
-    "HotelServicesAmenities": {
-        "pageTitle": "الخدمات والمرافق",
-        "popularTitle": "أشهر المرافق",
-        "moreTitle": "المزيد من المرافق",
-        "tags": {
-            "free": "مجاني",
-            "additionalCharge": "برسوم إضافية"
-        },
-        "popular": {
-            "publicParking": "موقف عام",
-            "serviceRobots": "روبوتات خدمة",
-            "laundryRoom": "غرفة غسيل",
-            "luggageStorage": "تخزين أمتعة",
-            "wakeUpCall": "خدمة منبه",
-            "taxiBooking": "حجز تاكسي",
-            "wifiPublic": "واي فاي في المناطق العامة"
-        },
-        "categories": {
-            "internet": "الإنترنت",
-            "parking": "الموقف",
-            "transportation": "النقل",
-            "frontDesk": "خدمات الاستقبال",
-            "publicAreas": "المناطق العامة",
-            "cleaning": "خدمات التنظيف",
-            "children": "مرافق الأطفال",
-            "accessibility": "إمكانية الوصول",
-            "safety": "السلامة والأمن"
-        },
-        "more": {
-            "wifiPublic": "واي فاي في المناطق العامة",
-            "parkingDescription": "موقف عام (ليس للضيوف فقط) خارج الموقع، برسوم حوالي 10 يوان صيني في الساعة (نحو 1.47 دولار أمريكي). الحجز غير متاح.",
-            "publicParking": "موقف عام",
-            "taxiBooking": "حجز تاكسي",
-            "expressCheckin": "تسجيل دخول ومغادرة سريع",
-            "safeFrontDesk": "خزينة في الاستقبال",
-            "luggageStorage": "تخزين أمتعة",
-            "wakeUpCall": "خدمة منبه",
-            "translationTools": "أدوات ترجمة متاحة",
-            "electronicId": "قارئ هوية إلكتروني لتسجيل الدخول",
-            "waterPurifier": "منقي مياه",
-            "elevator": "مصعد",
-            "ventilation": "نظام تهوية",
-            "vendingMachines": "آلات بيع",
-            "serviceRobots": "روبوتات خدمة",
-            "noSmokingPublic": "ممنوع التدخين في المناطق العامة",
-            "nonSmokingFloor": "طابق غير مدخن",
-            "clothesDryer": "مجفف ملابس",
-            "clothesSteamer": "مكواة بخار للملابس",
-            "laundryRoom": "غرفة غسيل",
-            "ironingService": "خدمة كي",
-            "laundryOnSite": "خدمة غسيل في الموقع",
-            "childrenSlippers": "شباشب أطفال",
-            "childrenToothbrushes": "فرش أسنان أطفال",
-            "stairFreeEntrance": "مدخل رئيسي بلا سلالم",
-            "firstAid": "حقيبة إسعافات أولية",
-            "fireAlarm": "إنذار حريق",
-            "keycard": "دخول ببطاقة",
-            "fireExtinguisher": "طفاية حريق",
-            "securityPersonnel": "أمن",
-            "intruderAlarm": "إنذار تسلل",
-            "smokeDetector": "كاشف دخان",
-            "cctv": "كاميرات مراقبة في الأماكن العامة",
-            "carbonMonoxide": "إنذار أول أكسيد الكربون"
-        }
-    },
-    "HotelPropertyPolicies": {
-        "title": "سياسات العقار",
-        "checkInOut": {
-            "label": "أوقات تسجيل الوصول والمغادرة",
-            "checkInLabel": "تسجيل الوصول:",
-            "checkInValue": "بعد 14:30",
-            "checkOutLabel": "تسجيل المغادرة:",
-            "checkOutValue": "قبل 12:00",
-            "frontDesk": "ساعات الاستقبال: على مدار الساعة"
-        },
-        "guestsAccepted": {
-            "label": "الضيوف المقبولون",
-            "body": "يُرحّب بالضيوف من جميع الدول والمناطق في هذا العقار"
-        },
-        "childPolicies": {
-            "label": "سياسة الأطفال",
-            "line1": "يُرحّب بالأطفال من جميع الأعمار في هذا العقار.",
-            "line2": "يمكن للأطفال من عمر 0 إلى 17 سنة الإقامة مجانًا إذا لم تكن هناك حاجة لسرير إضافي."
-        },
-        "cribs": {
-            "label": "مهود وأسرّة إضافية",
-            "body": "لا يمكن إضافة مهود أو أسرّة إضافية لأي نوع من الغرف."
-        },
-        "breakfast": {
-            "label": "الإفطار",
-            "body": "لا يُقدَّم إفطار"
-        },
-        "deposit": {
-            "label": "سياسة التأمين",
-            "depositWord": "تأمين",
-            "body": "لا يُطلب تأمين من العقار"
-        },
-        "pets": {
-            "label": "الحيوانات الأليفة",
-            "body": "غير مسموح بالحيوانات الأليفة"
-        },
-        "serviceAnimals": {
-            "label": "حيوانات الخدمة",
-            "body": "غير مسموح بحيوانات الخدمة"
-        },
-        "ageRequirements": {
-            "label": "متطلبات العمر",
-            "body": "يجب أن يكون الضيف الرئيسي الذي يسجّل الوصول بعمر 18 عامًا على الأقل"
-        },
-        "payingAtHotel": {
-            "label": "الدفع في الفندق"
-        },
-        "payments": {
-            "wechat": "WeChat Pay",
-            "unionPay": "UnionPay",
-            "alipay": "Alipay",
-            "cash": "نقدًا"
-        }
-    },
-    "HotelFinePrint": {
-        "title": "ملاحظات قانونية",
-        "cityNotes": "ملاحظات المدينة",
-        "cityNotesBody": "لتنفيذ أحكام \"لوائح بلدية شنغهاي لإدارة النفايات المنزلية\" وتشجيع تقليل النفايات المنزلية من المصدر، أصدرت إدارة الثقافة والسياحة البلدية في شنغهاي \"آراء التنفيذ بشأن حظر تقديم مستلزمات يومية لمرة واحدة في غرف الفنادق في شنغهاي\". اعتبارًا من 1 يوليو 2019، لن توفر غرف الفنادق في شنغهاي بعد الآن بشكل استباقي مستلزمات يومية لمرة واحدة مثل فرش الأسنان، أمشاط الإستحمام، إسفنج الاستحمام، ماكينات الحلاقة، مبارد الأظافر، وملمع الأحذية. يُرجى الاستفسار من الفندق عند الحاجة."
-    },
-    "AvailableRooms": {
-        "noRooms": "لا توجد غرف متاحة في الوقت الحالي",
-        "title": "الغرف المتاحة",
-        "bedType": "نوع السرير:",
-        "meals": "الوجبات:",
-        "onlyOnePackage": "باقة واحدة فقط",
-        "packagesAvailable": "باقات متاحة",
-        "guests": "الضيوف",
-        "adult": "بالغ",
-        "adults": "بالغون",
-        "child": "طفل",
-        "children": "أطفال",
-        "nights": "ليله",
-        "startWith": "يبدأ من",
-        "roomOptions": "خيارات الغرفة",
-        "package": "باقة",
-        "refundable": "قابل للاسترداد",
-        "nonRefundable": "غير قابل للاسترداد",
-        "selectPackage": "متابعة الحجز",
-        "packageImages": "صور الباقة",
-        "packageImage": "باقة",
-        "packageImageAlt": "صورة الباقة {index}",
-        "more": "اخرى",
-        "yourChoices": "خياراتك",
-        "sleeps": "ينام",
-        "todayPrice": "سعر اليوم",
-        "freeCancellation": "إلغاء مجاني",
-        "instantConfirmation": "تأكيد فوري",
-        "prepayOnline": "الدفع المسبق أونلاين",
-        "specialDiscount": "خصم خاص",
-        "off": "خصم",
-        "totalPrice": "السعر الإجمالي",
-        "inclTaxes": "شامل الضرائب والرسوم",
-        "roomNightsInclTaxes": "{roomCount, plural, one {غرفة واحدة} other {# غرف}} × {nightCount, plural, one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}} شامل الضرائب والرسوم",
-        "reserve": "احجز",
-        "showMoreRates": "عرض {count} أسعار إضافية",
-        "showLess": "عرض أقل",
-        "from": "من",
-        "roomDetails": "تفاصيل الغرفة",
-        "lateCheckout": "تسجيل مغادرة متأخر",
-        "validation": {
-            "datesRequired": "يرجى اختيار تواريخ الوصول والذهاب"
-        }
-    },
-    "Facilities": {
-        "title": "المرافق",
-        "noFacilities": "لا توجد مرافق متاحة",
-        "facility": "مرفق"
-    },
-    "GalleryOne": {
-        "seeAllPhotos": "عرض جميع الصور ({count})",
-        "hotelImageAlt": "صورة الفندق {index}",
-        "showOnMap": "عرض على الخريطة",
-        "wePriceMatch": "نضمن أفضل سعر",
-        "selectRooms": "اختر الغرف",
-        "travelEssentials": "المميزات الأساسية",
-        "amenities": "المرافق",
-        "allAmenities": "جميع المرافق",
-        "more": "المزيد",
-        "outstanding": "رائع",
-        "excellent": "ممتاز",
-        "veryGood": "جيد جداً",
-        "good": "جيد",
-        "reviewQuote": "الغرفة كانت مثالية تماماً، نظيفة للغاية مما جعل الإقامة مريحة جداً.",
-        "allReviews": "جميع التقييمات ({count})",
-        "surroundings": "المحيط",
-        "viewOnMap": "عرض على الخريطة"
-    },
-    "SuccessDialog": {
-        "roomAdded": "تم إضافة الغرفة إلى السلة بنجاح",
-        "flightAdded": "تم إضافة الرحلة إلى السلة بنجاح",
-        "roomMessage": "يمكنك الذهاب  إلى السلة لإكمال عملية إنشاء هذه الغرفة",
-        "flightMessage": "يمكنك الذهاب  إلى السلة لإكمال عملية إنشاء هذه الرحلة",
-        "goToCart": "الذهاب  إلى السلة",
-        "goBack": "استكمال البحث"
-    },
-    "Flights": {
-        "title": "الطيران",
-        "imageAlt": "صورة رئيسية للرحلات"
-    },
-    "FlightsList": {
-        "searchPrompt": {
-            "title": "ابدأ البحث عن الطيران",
-            "description": "يرجى استخدام صندوق البحث أعلاه للعثور على الطيران. أدخل مطارات الذهاب والوصول والتواريخ وعدد الركاب للبدء."
-        },
-        "noFlights": {
-            "title": "لم يتم العثور على رحلات",
-            "description": "لم يتم العثور على رحلات. يرجى تجربة معايير بحث مختلفة."
-        },
-        "loadingMore": "جاري تحميل المزيد من الطيران...",
-        "error": {
-            "title": "خطأ في تحميل الطيران",
-            "description": "حدث خطأ أثناء تحميل نتائج الطيران. يرجى المحاولة مرة أخرى."
-        },
-        "noResults": {
-            "title": "لم يتم العثور على رحلات",
-            "description": "لم نتمكن من العثور على أي رحلات تطابق معايير البحث الخاصة بك. يرجى تعديل الفلاتر أو البحث مرة أخرى."
-        }
-    },
-    "FlightSidebar": {
-        "filterResults": "تصفية النتائج",
-        "flightsFound": "تم العثور على {count} {flightLabel}",
-        "flight": "رحلة",
-        "flights": "رحلات",
-        "stops": "التوقفات",
-        "travelTime": "وقت السفر",
-        "providers": "مزودو الخدمة",
-        "sortBy": "ترتيب حسب",
-        "priceRange": "نطاق السعر",
-        "airlines": "شركات الطيران",
-        "direct": "مباشر",
-        "flightNumber": "رقم الرحلة",
-        "filterByFlightNumber": "تصفية برقم الرحلة"
-    },
-    "FlightMobileSidebar": {
-        "filterFlights": "تصفية الطيران"
-    },
-    "RouteDisplay": {
-        "flights": "رحلات"
-    },
-    "SelectedFlightView": {
-        "backToList": "العودة إلى قائمة الطيران",
-        "noReturnFlights": "لا توجد رحلات عودة تطابق الفلاتر الخاصة بك. يرجى تعديل الفلاتر."
-    },
-    "FlightPriceSlider": {
-        "minPrice": "الحد الأدنى للسعر",
-        "maxPrice": "الحد الأقصى للسعر"
-    },
-    "TimeFilter": {
-        "goingTimeFrom": "وقت الذهاب من {city}",
-        "arrivalTimeTo": "وقت الوصول إلى {city}",
-        "before6am": "قبل الساعة 6 صباحًا",
-        "6am12pm": "6 صباحًا - 12 ظهرًا",
-        "12pm6pm": "12 ظهرًا - 6 مساءً",
-        "after6pm": "بعد الساعة 6 مساءً"
-    },
-    "FlightProperties": {
-        "loading": "جاري التحميل..."
-    },
-    "FlightDetails": {
-        "offerSelection": "اختيار العرض",
-        "selectedDepartureFlight": "1. رحلة الذهاب المحتارة",
-        "selectedReturnFlight": "2. رحلة العودة المحتارة",
-        "backToDeparture": "العودة إلى الذهاب",
+    "HotelSearchBox": {
+      "search": "بحث",
+      "searching": "جاري البحث...",
+      "validation": {
+        "countryRequired": "البلد مطلوب",
+        "countryEmpty": "لا يمكن أن يكون البلد فارغًا",
+        "checkInRequired": "تاريخ الوصول مطلوب",
+        "checkInPast": "لا يمكن أن يكون تاريخ الوصول في الماضي",
+        "checkOutRequired": "تاريخ الذهاب مطلوب",
+        "checkOutAfterCheckIn": "يجب أن يكون تاريخ المغادرة بعد تاريخ الوصول",
+        "locationRequired": "يرجى اختيار موقع"
+      },
+      "LocationSearch": {
+        "destination": "الوجهة",
         "loading": "جاري التحميل...",
-        "loadingDetails": "يرجى الانتظار بينما نقوم بتحميل تفاصيل الرحلة...",
-        "errorTitle": "خطأ في تحميل تفاصيل الرحلة",
-        "errorDescription": "حدث خطأ أثناء تحميل تفاصيل الرحلة. يرجى المحاولة مرة أخرى لاحقًا.",
-        "totalPrice": "السعر الإجمالي",
-        "buyPrice": "سعر الشراء",
-        "sellPrice": "سعر البيع",
-        "enterSellPrice": "أدخل سعر البيع",
-        "addToCart": "إضافة إلى السلة",
-        "continue": "استمر",
-        "updateFlight": "تحديث الرحلة",
-        "updating": "جاري التحديث...",
-        "updateSuccess": "تم تحديث الرحلة بنجاح",
-        "updateError": "فشل تحديث الرحلة",
-        "failedToAdd": "فشل في إضافة الرحلة إلى السلة",
-        "chooseDepartureTravelPackage": "اختر الباقة المناسبة لرحلة الذهاب",
-        "chooseReturnTravelPackage": "اختر الباقة المناسبة لرحلة العودة",
-        "expiredFlightsMessage": "هذا البحث غير متاح حالاً بسبب انتهاء صلاحيته. يرجى تحديث البحث لرؤية النتائج المحدثة.",
-        "continueToBooking": "استمرار إلى الحجز"
-    },
-    "HotelBooking": {
-        "title": "احجز فندقك",
-        "noHotelData": "لم يتم اختيار فندق",
-        "noHotelDataDescription": "يبدو أنك لم تختر فندقاً بعد. يرجى العودة إلى صفحة البحث واختيار فندق.",
-        "backToSearch": "العودة إلى البحث",
-        "roomDetails": "تفاصيل الغرفة",
-        "priceSummary": "ملخص السعر",
-        "pricePerNight": "السعر لكل ليلة",
-        "totalPrice": "السعر الإجمالي",
-        "refundable": "قابل للاسترداد",
-        "nonRefundable": "غير قابل للاسترداد",
-        "excellent": "ممتاز",
-        "reviews": "تقييم",
-        "freeWifi": "واي فاي مجاني",
-        "nonSmoking": "غير مخصص للتدخين",
-        "noWindows": "بدون نوافذ",
-        "floor": "الطابق",
-        "freeCancellation": "إلغاء مجاني",
-        "checkIn": "تسجيل الدخول",
-        "checkOut": "تسجيل الخروج",
-        "before": "قبل",
+        "noResults": "لم يتم العثور على نتائج"
+      },
+      "CheckIn": {
+        "label": "تاريخ الوصول"
+      },
+      "CheckOut": {
+        "label": "تاريخ الذهاب"
+      },
+      "DatePicker": {
+        "headerTitle": "اختر تواريخ الإقامة",
+        "next2weeks": "الأسبوعان القادمان",
+        "nextMonth": "الشهر القادم",
+        "selectCheckOut": "اختر تاريخ المغادرة",
+        "selectDateToContinue": "اختر تاريخ الوصول والمغادرة للمتابعة",
+        "allDatesLocalTime": "جميع التواريخ بتوقيتك المحلي",
+        "confirm": "تم",
+        "nightsCount": "{count, plural, zero {# ليلة} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}"
+      },
+      "hero": {
+        "whereTo": "إلى أين؟",
+        "recentSearches": "عمليات البحث الأخيرة",
+        "popularDestinations": "وجهات شائعة",
+        "nightsBadge": "{count, plural, zero {# ليلة} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}",
+        "occupancySummary": "{rooms} {roomsWord}، {adults} {adultsLabel}، {children} {childrenLabel}"
+      },
+      "done": "تم",
+      "GuestSearch": {
+        "guestsAndRooms": "الضيوف والغرف",
+        "roomNo": "الغرفة رقم {number}",
+        "removeRoom": "إزالة الغرفة",
+        "adults": "البالغون:",
+        "children": "الأطفال:",
+        "childAge": "عمر الطفل {number}",
+        "year": "سنة",
+        "years": "سنوات",
+        "old": "من العمر",
+        "guest": "ضيف",
+        "guests": "ضيوف",
         "room": "غرفة",
         "rooms": "غرف",
-        "priceDetails": "تفاصيل السعر",
-        "priceBeforeDiscount": "السعر قبل الخصم",
-        "specialDiscount": "خصم خاص",
-        "specialPropertyRate": "سعر خاص للعقار",
-        "vat": "ضريبة القيمة المضافة",
-        "total": "الإجمالي",
-        "propertyCurrency": "عملة العقار",
-        "youSavedOnThisBooking": "لقد وفرت {amount} على هذا الحجز",
-        "wePriceMatch": "نضمن لك أفضل سعر",
-        "cancellationPolicy": "سياسة الإلغاء",
-        "cancellationFee": "رسوم الإلغاء",
-        "after": "بعد",
-        "cancellationNote1": "سيتم خصم رسوم الإلغاء إذا لم تقم بتسجيل الوصول. إذا قمت بتطبيق خصم على حجزك، سيتم احتساب رسوم الإلغاء بناءً على المبلغ المدفوع.",
-        "cancellationNote2": "جميع الأوقات بالتوقيت المحلي للفندق.",
-        "rewards": "المكافآت",
-        "earnTripCoinsPrefix": "اكسب",
-        "earnTripCoinsSuffix": "بعد إقامتك.",
-        "tripCoins": "نقطة سفر",
-        "finePrint": "الشروط والأحكام",
-        "showMore": "عرض المزيد",
-        "showLess": "عرض أقل",
-        "youSavedTotal": "لقد وفرت إجمالي {amount}!",
-        "instantConfirmation": "تأكيد فوري",
-        "memberRewards": "مكافآت الأعضاء",
-        "memberRewardsInfo": "مزايا قد تنطبق على هذه الإقامة، وفق توفر الفندق وسياسته.",
-        "memberRewardsInfoAria": "عن مكافآت الأعضاء",
-        "lateCheckoutTitle": "تسجيل خروج متأخر",
-        "lateCheckoutDescription": "استمتع بوقت إضافي في يوم المغادرة الأخير، حسب التوفر",
-        "freeCancellationMemberNote": "إلغاء مجاني قبل الساعة {time}، {date} (بتوقيت الفندق المحلي)",
-        "specialRequests": "طلبات خاصة",
-        "optional": "(اختياري)",
-        "specialRequestsDisclaimer": "سيبذل الفندق قصارى جهده، دون ضمان تلبية جميع الطلبات.",
-        "elevatorProximity": "القرب من المصعد",
-        "awayFromElevator": "بعيداً عن المصعد",
-        "nearElevator": "قريب من المصعد",
-        "otherRequests": "طلبات أخرى",
-        "otherRequestsPlaceholder": "مثال: طابق مرتفع، غرفة هادئة، سريران منفصلان",
-        "outcomeSuccessTitle": "تم تأكيد الحجز",
-        "outcomeSuccessDescription": "شكراً لك. تم تأكيد حجزك. ستصلك رسالة تأكيد على بريدك قريباً.",
-        "outcomeFailedTitle": "تعذر إتمام الحجز",
-        "outcomeFailedDescription": "حدث خطأ أو تعذر التحقق من الدفع. يمكنك المحاولة مرة أخرى من هذه الصفحة.",
-        "bookingReference": "مرجع الحجز",
-        "travelersAndContact": "المسافرون وبيانات التواصل",
-        "outcomeTryAgain": "إعادة المحاولة"
+        "adultsLabel": "بالغ",
+        "childrenNoun": "أطفال",
+        "select": "تحديد",
+        "guestsInRooms": "{guests} {guestLabel} في {rooms} {roomLabel}",
+        "adultsInRooms": "{adults} {adultsLabel} في {rooms} {roomLabel}"
+      }
     },
-    "BookingForm": {
-        "contactInfo": "بيانات التواصل",
-        "email": "البريد الإلكتروني *",
-        "phone": "رقم الهاتف *",
-        "phoneNumber": "رقم الهاتف *",
-        "guestInfo": "بيانات النزلاء",
-        "whosStaying": "من سيقيم؟",
-        "guestNamesMatchValidID": "يجب أن تتطابق أسماء النزلاء مع الهوية المستخدمة عند تسجيل الوصول.",
-        "useOnlyEnglishLetters": "استخدم الأحرف الإنجليزية فقط",
-        "bookingConfirmationSent": "سيتم إرسال تأكيد الحجز على هذا البريد",
-        "validPhoneNumber": "أدخل رقم هاتف صحيح",
-        "room": "غرفة",
-        "adult": "بالغ",
-        "child": "طفل",
-        "mr": "السيد",
-        "mrs": "السيدة",
-        "ms": "آنسة",
-        "firstName": "الإسم الأول *",
-        "lastName": "الإسم الأخير *",
-        "bookNow": "تأكيد الحجز",
-        "submitting": "جاري الحجز...",
-        "trustPriceMatch": "نضمن لك أفضل سعر",
-        "trustSecurePayment": "دفع آمن",
-        "bookingAgreement": "بإرسال هذا الحجز، أقر بأنني قرأت ووافقت على <terms>شروط الاستخدام</terms> و<privacy>بيان الخصوصية</privacy>.",
-        "siteBrand": "ترانزيت",
-        "yourTripIsProtected": "رحلتك محمية",
-        "savedTravelerInfoNote": "قد تُحفظ بيانات المسافرين والتواصل لتسهيل الحجز لاحقاً. يمكنك تعديلها أو حذفها في أي وقت من إعدادات حسابك.",
-        "validation": {
-            "emailRequired": "البريد الإلكتروني مطلوب",
-            "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
-            "phoneRequired": "رقم الهاتف مطلوب",
-            "phoneInvalid": "أدخل رقم هاتف صحيح",
-            "firstNameRequired": "الإسم الأول مطلوب",
-            "lastNameRequired": "الإسم الأخير مطلوب",
-            "englishLettersOnly": "استخدم الأحرف الإنجليزية فقط (a-z, A-Z)"
-        }
-    },
-    "BookingConfirmation": {
-        "title": "تم الحجز بنجاح!",
-        "description": "تم تأكيد حجزك بنجاح. يمكنك الاحتفاظ برقم الحجز للمراجعة.",
-        "bookingId": "رقم الحجز",
-        "bookingSummary": "ملخص الحجز",
-        "hotel": "الفندق",
-        "checkIn": "تاريخ الوصول",
-        "checkOut": "تاريخ المغادرة",
-        "nights": "عدد الليالي",
-        "totalPrice": "السعر الإجمالي",
-        "contactInfo": "بيانات التواصل",
-        "guests": "النزلاء",
-        "backToHome": "العودة للرئيسية",
-        "searchMore": "البحث عن فنادق أخرى"
-    },
-    "PassportUpload": {
-        "title": "رفع صورة جواز السفر",
-        "hint": "ارفع صورة واضحة لجواز السفر لملء بيانات المسافر تلقائيًا.",
-        "uploadButton": "رفع جواز السفر",
-        "compactLabel": "مسح الجواز",
-        "compactFilled": "تم المسح",
-        "uploading": "جاري قراءة جواز السفر...",
-        "success": "تم ملء بيانات جواز السفر بنجاح",
-        "readError": "تعذرت قراءة جواز السفر. حاول مرة أخرى أو أدخل البيانات يدويًا.",
-        "invalidFileType": "يرجى رفع ملف بصيغة JPG أو PNG أو WEBP أو PDF.",
-        "fileTooLarge": "يجب أن يكون حجم الملف أقل من {size} ميجابايت."
-    },
-    "FlightBooking": {
-        "title": "احجز رحلتك",
-        "noFlightData": "لم يتم اختيار رحلة",
-        "noFlightDataDescription": "يبدو أنك لم تختر رحلة بعد. يرجى العودة إلى صفحة البحث واختيار رحلة.",
-        "backToSearch": "العودة إلى البحث",
-        "priceSummary": "ملخص السعر",
-        "route": "المسار",
-        "passengers": "الركاب",
-        "totalPrice": "السعر الإجمالي",
-        "bookingNav": {
-            "pointsAria": "نقاط المكافآت: {count}",
-            "accountAria": "قائمة الحساب"
-        }
-    },
-    "FlightBookingForm": {
-        "contactInfo": "بيانات التواصل",
-        "fullName": "الإسم بالكامل",
-        "email": "البريد الإلكتروني",
-        "emailPlaceholder": "example@gmail.com",
-        "phone": "رقم الهاتف",
-        "phonePlaceholder": "5XXXXXXXX",
-        "passengerInfo": "بيانات المسافرين",
-        "adult": "بالغ",
-        "child": "طفل",
-        "infant": "رضيع",
-        "firstName": "الإسم الأول",
-        "firstNamePlaceholder": "باللغة الإنجليزية حسب وثيقة السفر",
-        "lastName": "الإسم الأخير",
-        "lastNamePlaceholder": "باللغة الإنجليزية حسب وثيقة السفر",
-        "dateOfBirth": "تاريخ الميلاد",
-        "gender": "الجنس",
-        "male": "ذكر",
-        "female": "أنثى",
-        "documents": "الوثائق",
-        "passportNumber": "رقم وثيقة السفر",
-        "nationality": "الجنسية",
-        "passportExpiry": "تاريخ إنتهاء الوثيقة",
-        "bookNow": "تأكيد الحجز",
-        "submitting": "جاري الحجز...",
-        "validation": {
-            "fullNameRequired": "الإسم بالكامل مطلوب",
-            "emailRequired": "البريد الإلكتروني مطلوب",
-            "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
-            "phoneRequired": "رقم الهاتف مطلوب",
-            "firstNameRequired": "الإسم الأول مطلوب",
-            "lastNameRequired": "الإسم الأخير مطلوب",
-            "dateOfBirthRequired": "تاريخ الميلاد مطلوب",
-            "passportNumberRequired": "رقم وثيقة السفر مطلوب",
-            "nationalityRequired": "الجنسية مطلوبة",
-            "passportExpiryRequired": "تاريخ إنتهاء الوثيقة مطلوب",
-            "passportExpiryBeforeTravel": "يجب أن يكون تاريخ انتهاء جواز السفر في موعد السفر أو بعده",
-            "phoneInvalid": "يرجى إدخال رقم هاتف صحيح"
-        }
-    },
-    "FlightBookingPageNested": {
-        "bookingSteps": {
-            "step1": "أدخل بياناتك",
-            "step2": "اختر مقعدك",
-            "step3": "خصص رحلتك",
-            "step4": "أكمل الدفع"
-        },
-        "priceDetails": {
-            "title": "تفاصيل السعر",
-            "tickets": "التذاكر ({count} بالغ)",
-            "adultPassenger": "البالغون (المسافر 1)",
-            "fare": "سعر التذكرة",
-            "taxesFees": "الضرائب والرسوم",
-            "baggage": "الأمتعة",
-            "personalItem": "حقيبة شخصية",
-            "carryOnBaggage": "أمتعة المقصورة",
-            "checkedBaggage": "أمتعة مشحونة",
-            "free": "مجانًا",
-            "total": "الإجمالي",
-            "tripCoins": "Trip Coins + {count}"
-        },
-        "flightBookingForm": {
-            "termsPrefix": "لقد قرأت ووافقت على شروط وأحكام حجز gita.com التالية:",
-            "flightBookingPolicies": "سياسات حجز الطيران",
-            "privacyStatement": "بيان الخصوصية",
-            "total": "الإجمالي",
-            "next": "التالي",
-            "awardWinning": "حائز على جوائز",
-            "supportIn30s": "دعم خلال حوالي 30 ثانية",
-            "rewardsForBooking": "مكافآت على الحجز"
-        },
-        "contactInformation": {
-            "title": "بيانات التواصل",
-            "contactName": "اسم جهة الاتصال *",
-            "email": "البريد الإلكتروني *",
-            "mobilePhone": "هاتف الجوال *"
-        },
-        "passengerInformation": {
-            "title": "من المسافر؟",
-            "signIn": "سجل الدخول",
-            "signInSuffix": "لحجز أسهل",
-            "passenger": "المسافر",
-            "givenNames": "الاسم الأول *",
-            "lastName": "اسم العائلة *",
-            "genderOnId": "الجنس في الهوية *",
-            "male": "ذكر",
-            "female": "أنثى",
-            "dateOfBirth": "تاريخ الميلاد *",
-            "nationality": "الجنسية (البلد/المنطقة) *",
-            "passportNumber": "رقم جواز السفر *",
-            "passportExpiry": "تاريخ انتهاء جواز السفر *",
-            "idType": "نوع الهوية *",
-            "select": "اختر",
-            "passport": "جواز سفر",
-            "nationalId": "هوية وطنية",
-            "residencePermit": "تصريح إقامة",
-            "idNumber": "رقم الهوية *",
-            "idHint": ". أدخل اسم المسافر كما هو تمامًا في وثيقة الهوية",
-            "frequentFlyerProgram": "برنامج المسافر الدائم (اختياري)",
-            "saveAndAddPassenger": "حفظ وإضافة مسافر"
-        },
-        "baggageAllowance": {
-            "title": "سماح الأمتعة",
-            "subtitle": "خذ كل ما تحتاجه لرحلتك.",
-            "baggagePolicies": "سياسات الأمتعة",
-            "departure": "المغادرة",
-            "arrival": "الوصول",
-            "personalItem": "حقيبة شخصية",
-            "personalItemSize": "(25 × 33 × 20 سم)",
-            "carryOnBaggage": "أمتعة المقصورة",
-            "carryOnBaggageSize": "(55 × 38 × 20 سم)",
-            "checkedBaggage": "أمتعة مشحونة",
-            "checkedBaggageSize": "الحد الأقصى لمقاس الحقيبة (الطول + العرض + الارتفاع) لكل حقيبة 159 سم",
-            "passenger1": "المسافر 1",
-            "carryOnAllowance": "قطعة واحدة، إجمالي 7 كجم تشمل أمتعة المقصورة",
-            "personalItemAllowance": "قطعة واحدة، إجمالي 7 كجم تشمل الحقيبة الشخصية",
-            "checkedPieces": "3 قطع"
-        },
-        "checkedBaggageProtection": {
-            "title": "حماية الأمتعة المشحونة",
-            "descriptionPrefix": "ستكون أمتعتك المشحونة محمية طوال رحلتك. إذا فُقدت أمتعتك، يرجى الإبلاغ خلال 24 ساعة من وصول الرحلة. سنتتبع أمتعتك المفقودة لمدة 96 ساعة. إذا تعذر العثور عليها، ستحصل على تعويض",
-            "compensationAmount": "1,000.00 دولار أمريكي.",
-            "viewMore": "عرض المزيد",
-            "priceAmount": "5.00 دولار أمريكي",
-            "priceSuffix": "/للشخص",
-            "selectAriaLabel": "اختيار حماية الأمتعة المشحونة"
-        },
-        "cancellationsChanges": {
-            "title": "الإلغاءات والتعديلات",
-            "cancellationsTitle": "الإلغاءات",
-            "cancellationsDescription": "سياسة الإلغاء: من 117 دولار أمريكي",
-            "changesTitle": "التعديلات",
-            "changesDescription": "سياسة التعديل: من 106 دولار أمريكي",
-            "details": "التفاصيل",
-            "included": "مشمول"
-        },
-        "stayDiscounts": {
-            "title": "خصومات الإقامة",
-            "item1Title": "كود مستخدم جديد (الحجز الأول)",
-            "item1Offer": "خصم 10% (حتى 10.00 دولار أمريكي)",
-            "item2Title": "كود مستخدم جديد (الحجز الثاني...)",
-            "item2Offer": "خصم 5% (حتى 6.00 دولار أمريكي)",
-            "item3Title": "عرض حصري للمسافرين",
-            "item3Offer": "حتى 25% خصم"
-        },
-        "freePromoCodes": {
-            "title": "أكوادك الترويجية المجانية",
-            "item1": "كود خصم تأجير السيارات - 5%",
-            "item2": "خصم 5% على الأنشطة والجولات",
-            "item3": "خصم 12% على النقل من وإلى المطار",
-            "item4": "خصم 10% على النقل من وإلى المطار",
-            "claimFreePromoCode": "احصل على كود ترويجي مجاني",
-            "viewDetails": "عرض التفاصيل",
-            "claimed": "تم الاستلام"
-        },
-        "promoCodes": {
-            "title": "الأكواد الترويجية",
-            "toggleAriaLabel": "تبديل نموذج الكود الترويجي",
-            "selectEnter": "اختر/أدخل",
-            "placeholder": "يرجى إدخال الكود الترويجي",
-            "verify": "تحقق"
-        }
-    },
-    "FlightBookingConfirmation": {
-        "title": "تم حجز الرحلة بنجاح!",
-        "description": "تم تأكيد حجز رحلتك بنجاح. يمكنك الاحتفاظ برقم الحجز للمراجعة.",
-        "bookingId": "رقم الحجز",
-        "flightSummary": "ملخص الرحلة",
-        "contactInfo": "بيانات التواصل",
-        "passengers": "المسافرون",
-        "backToHome": "العودة للرئيسية",
-        "searchMore": "البحث عن رحلات أخرى"
-    },
-    "FlightBookingSuccessPage": {
-        "totalAmount": "المبلغ الإجمالي",
-        "bookingTotal": "إجمالي الحجز",
-        "paymentMethodNote": "يرجى ملاحظة أنه لا يمكن تغيير طريقة الدفع بعد اكتمال العملية",
-        "adults": "البالغون",
-        "ticketFare": "سعر التذكرة",
-        "taxesAndFees": "الضرائب والرسوم",
-        "promoCode": "كود الخصم"
-    },
-    "BookingDetails": {
-        "Payment": {
-            "successfulPayment": "الدفع ناجح",
-            "failedPayment": "الدفع فشل",
-            "paymentCompleted": "تم إكمال الدفع بنجاح",
-            "paymentNotCompleted": "لم يتم إكمال الدفع",
-            "successDescription": "تم تأكيد حجزك الآن وتم إصدار التذكرة الإلكترونية.",
-            "failureDescription": "تعذر إكمال حجزك. يرجى المحاولة مرة أخرى."
-        },
-        "FlightDetails": {
-            "title": "تفاصيل الرحلة",
-            "cancellationAndChangePolicies": "سياسات الإلغاء والتغيير",
-            "baggageAllowance": "سماح الأمتعة",
-            "bookingInfo": "معلومات الحجز",
-            "allTimesLocal": "جميع الأوقات بالتوقيت المحلي",
-            "stopLayover": "توقف / انتظار",
-            "notAvailable": "غير متاح"
-        },
-        "AddOns": {
-            "title": "الإضافات",
-            "promoCode": "كود الخصم"
-        },
-        "PassengerInformation": {
-            "title": "معلومات المسافرين",
-            "firstName": "الاسم الأول",
-            "lastName": "اسم العائلة",
-            "idType": "نوع الهوية",
-            "passport": "جواز السفر",
-            "idNumber": "رقم الهوية",
-            "nationality": "الجنسية (الدولة/المنطقة)",
-            "gender": "الجنس",
-            "dateOfBirth": "تاريخ الميلاد",
-            "male": "ذكر",
-            "female": "أنثى",
-            "adult": "بالغ",
-            "child": "طفل",
-            "infant": "رضيع",
-            "notAvailable": "غير متاح",
-            "fallbackDob": "٧ فبراير ٢٠٠٣"
-        },
-        "ContactInformation": {
-            "title": "معلومات التواصل",
-            "email": "البريد الإلكتروني",
-            "phone": "الهاتف"
-        },
-        "CustomerSupport": {
-            "title": "دعم العملاء",
-            "supportIn30s": "دعم خلال حوالي 30 ثانية",
-            "questionPendingPayment": "كيف أكمل دفعة معلقة؟",
-            "questionPaymentCompleted": "هل اكتملت عملية الدفع بنجاح؟",
-            "questionCreditCardIssue": "لماذا لم أستطع الدفع ببطاقة الائتمان؟",
-            "questionOtherHelp": "الحصول على مساعدة في أمر آخر"
-        },
-        "FeaturedProperties": {
-            "title": "عقارات مميزة في دبي",
-            "showMore": "عرض المزيد",
-            "previousSlide": "الشريحة السابقة",
-            "nextSlide": "الشريحة التالية",
-            "reviews": "تقييم",
-            "view": "عرض"
-        }
-    },
-    "DefaultOfferDisplay": {
-        "departureFlight": "رحلة الذهاب",
-        "returnFlight": "رحلة العودة",
-        "defaultOffer": "العرض الافتراضي",
-        "selected": "مختاره",
-        "selectPackage": "اختر الباقة",
-        "travelEssentials": "أساسيات السفر",
-        "cabinBaggage": "أمتعة المقصورة",
-        "checkedBaggage": "الأمتعة المسجلة",
-        "notIncluded": "غير متضمن"
-    },
-    "OfferCard": {
-        "selected": "مختاره",
-        "selectPackage": "اختر الباقة",
-        "travelEssentials": "أساسيات السفر",
-        "cabinBaggage": "أمتعة المقصورة",
-        "checkedBaggage": "الأمتعة المسجلة",
-        "returnPackage": "باقة العودة",
-        "travelPackage": "باقة السفر"
-    },
-    "CartPage": {
-        "bookingInformation": "معلومات الحجز",
-        "title": "العنوان",
-        "client": "العميل",
-        "quotation": "ربط بعرض السعر",
-        "titleRequired": "العنوان مطلوب",
-        "clientRequired": "العميل مطلوب",
-        "setSellPriceError": "يرجى تعيين سعر البيع لجميع العناصر",
-        "submitBookingError": "فشل في إرسال الحجز"
-    },
-    "CartEmpty": {
-        "title": "سلة التسوق الخاصة بك فارغة",
-        "description": "أضف فنادق أو رحلات إلى سلة التسوق للمتابعة",
-        "browseFlights": "تصفح الطيران",
-        "browseHotels": "تصفح الفنادق"
-    },
-    "SuccessfulBooking": {
-        "title": "تم إرسال الحجز بنجاح!",
-        "description": "تم إنشاء وإرسال عرض الأسعار الخاص بك. تم مسح السلة.",
-        "browseMoreHotels": "الذهاب إلى الرئيسية",
-        "createNewBooking": "إنشاء حجز جديد"
-    },
-    "ContractView": {
-        "userContractFor": "العقد الخاص بالمستخدم",
-        "copyForWhatsApp": "نسخ للواتساب",
-        "copied": "تم النسخ!",
-        "copiedToClipboard": "تم النسخ للحافظة",
-        "hotels": "الفنادق",
-        "flights": "الطيران",
-        "night": "ليلة",
-        "nights": "ليالي",
-        "adult": "بالغ",
-        "adults": "بالغين",
-        "child": "طفل",
-        "children": "أطفال",
-        "infant": "رضيع",
-        "infants": "رضع",
-        "bedType": "نوع السرير",
-        "meals": "الوجبات",
+    "FlightSearchBox": {
+      "search": "بحث",
+      "validation": {
+        "fromAirportRequired": "مطار الذهاب مطلوب",
+        "toAirportRequired": "مطار الوصول مطلوب",
+        "departureDateRequired": "تاريخ الذهاب مطلوب",
+        "departureDatePast": "لا يمكن أن يكون تاريخ الذهاب في الماضي",
+        "returnDateRequired": "تاريخ العودة مطلوب للرحلة ذهاب وعودة",
+        "returnDateAfter": "يجب أن يكون تاريخ العودة بعد تاريخ الذهاب",
+        "airportsMustBeDifferent": "يجب أن يكون مطار الذهاب مختلف عن مطار الوصول"
+      },
+      "FromAirport": {
+        "label": "من",
+        "loading": "جاري التحميل...",
+        "noResults": "لم يتم العثور على نتائج"
+      },
+      "ToAirport": {
+        "label": "إلى",
+        "loading": "جاري التحميل...",
+        "noResults": "لم يتم العثور على نتائج"
+      },
+      "FlightDatePicker": {
         "departure": "الذهاب",
-        "return": "العودة",
-        "totalPrice": "السعر الإجمالي",
-        "SummaryCard": {
-            "bookingDetails": "تفاصيل الحجز",
-            "contractStatus": "حالة العقد",
-            "status_pending": "قيد الانتظار",
-            "status_approved": "معتمد",
-            "status_confirmed": "مؤكد",
-            "status_cancelled": "ملغى",
-            "status_deleted": "محذوف",
-            "bookingNumber": "رقم الحجز",
-            "bookingDate": "تاريخ الحجز",
-            "phoneNumber": "رقم الهاتف",
-            "employeeName": "اسم الموظف",
-            "totalPrice": "السعر الإجمالي",
-            "totalBuyPrice": "السعر الإجمالي للشراء",
-            "notAvailable": "---"
-        }
-    },
-    "SummaryCard": {
-        "totalBuy": "إجمالي الشراء",
-        "totalSell": "إجمالي البيع",
-        "sending": "جاري الإرسال...",
-        "createContract": "إنشاء عقد"
-    },
-    "RemoveAllDialog": {
-        "removeAll": "إزالة الكل",
-        "title": "إزالة جميع العناصر",
-        "description": "هل أنت متأكد أنك تريد حذف جميع العناصر من سلة التسوق؟ لا يمكن التراجع عن هذا الإجراء.",
-        "cancel": "إلغاء",
-        "removeAllButton": "إزالة الكل"
-    },
-    "FlightsAndHotelsList": {
-        "hotels": "الفنادق",
-        "flights": "الطيران"
-    },
-    "HotelsCard": {
-        "hotel": "فندق",
-        "hotelName": "اسم الفندق",
-        "enterSellPrice": "أدخل سعر البيع",
-        "sellPriceRequired": "سعر البيع مطلوب",
-        "night": "ليلة",
-        "nights": "ليله",
-        "adult": "بالغ",
-        "adults": "بالغين",
-        "child": "طفل",
+        "departureReturn": "الذهاب - العودة",
+        "selectDates": "اختر التواريخ",
+        "selectReturn": "اختر تاريخ العودة",
+        "roundTrip": "ذهاب وعودة",
+        "oneWay": "ذهاب فقط",
+        "done": "تم",
+        "return": "العودة"
+      },
+      "FlightPassenger": {
+        "passengers": "الركاب",
+        "guests": "ضيوف",
+        "adults": "بالغون",
         "children": "أطفال",
-        "package": "باقة",
-        "bedType": "نوع السرير",
-        "meals": "الوجبات",
-        "guests": "الضيوف",
-        "more": "أخرى",
-        "revalidatePrice": "تحديث السعر",
-        "revalidationResult": "نتيجة تحديث السعر",
-        "priceUnchanged": "السعر لم يتغير",
-        "priceUnchangedDesc": "سعر الباقة لا يزال كما هو.",
-        "priceChanged": "تغير السعر",
-        "oldPrice": "السعر القديم",
-        "newPrice": "السعر الجديد",
-        "updatePrice": "تحديث السعر",
-        "updating": "جاري التحديث...",
-        "cancel": "إلغاء",
-        "close": "إغلاق",
-        "packageNotFound": "الباقة غير متاحة",
-        "packageNotFoundDesc": "الباقة المختارة لم تعد متاحة. هل تريد اختيار باقة أخرى؟",
-        "keepCurrent": "الإبقاء على الحالي",
-        "selectNewPackage": "اختيار باقة جديدة",
-        "availablePackages": "الباقات المتاحة",
-        "roomOptions": "خيارات الغرفة",
-        "backToPackages": "العودة للباقات",
-        "selectPackage": "اختيار الباقة",
-        "selecting": "جاري الاختيار...",
-        "onlyOnePackage": "خيار واحد فقط",
-        "packagesAvailable": "خيارات متاحة",
-        "startWith": "يبدأ من",
-        "refundable": "قابل للاسترداد",
-        "nonRefundable": "غير قابل للاسترداد",
-        "priceUpdated": "تم تحديث السعر بنجاح",
-        "priceUpdateError": "فشل في تحديث السعر",
-        "packageChanged": "تم تغيير الباقة بنجاح",
-        "packageChangeError": "فشل في تغيير الباقة",
-        "revalidationError": "فشل في تحديث السعر",
-        "buyPrice": "سعر الشراء",
-        "currentSellPrice": "سعر البيع الحالي",
-        "newSellPrice": "سعر البيع الجديد",
-        "enterNewSellPrice": "أدخل سعر البيع الجديد",
-        "profit": "الربح",
-        "sar": "ج.م",
-        "supplier": "المورد",
-        "sellPrice": "سعر البيع",
-        "enterSellPriceForPackage": "أدخل سعر البيع للباقة المختارة",
-        "confirmAndUpdate": "تحديث",
-        "until": "حتى"
+        "infants": "رضع",
+        "adultsDescription": "12+ سنة",
+        "childrenDescription": "2-11 سنة",
+        "infantsDescription": "أقل من سنتين",
+        "cabinClass": "فئة المقصورة",
+        "economy": "اقتصادية",
+        "business": "رجال الأعمال",
+        "apply": "تطبيق"
+      }
+    },
+    "Navbar": {
+      "logout": "تسجيل الخروج",
+      "myBooking": "حجوزاتي",
+      "home": "الرئيسية",
+      "hotels": "الفنادق",
+      "flights": "الطيران",
+      "toggleMenu": "تبديل القائمة",
+      "licenses": "الرخصة الدولية",
+      "cruises": "كروز"
+    },
+    "Footer": {
+      "home": "الرئيسية",
+      "hotels": "الفنادق",
+      "flights": "الطيران",
+      "description": "لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد. لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد، لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد، لوريم إيبسوم هو ببساطة نص شكلي يستخدم في صناعة الطباعة والتنضيد",
+      "location": "السعودية، الرياض"
+    },
+    "LocaleSwitcher": {
+      "arabic": "العربية",
+      "english": "الإنجليزية"
+    },
+    "PriceCell": {
+      "night": "ليلة",
+      "nights": "ليله"
+    }
+  },
+  "HotelsList": {
+    "searchPrompt": {
+      "title": "ابدأ البحث عن الفنادق",
+      "description": "يرجى استخدام صندوق البحث أعلاه للعثور على الفنادق. أدخل وجهتك وتواريخ الوصول والذهاب وعدد الضيوف للبدء."
+    },
+    "NoHotelsFound": {
+      "title": "لم يتم العثور على فنادق",
+      "description": "لم نتمكن من العثور على أي فنادق تطابق معايير البحث الخاصة بك. جرب تعديل الفلاتر الخاصة بك.",
+      "resetFilters": "إعادة تعيين الفلاتر"
+    },
+    "HotelCard": {
+      "hotelName": "اسم الفندق",
+      "breakfastIncluded": "الإفطار مشمول",
+      "night": "ليلة",
+      "nights": "ليله",
+      "adult": "بالغ",
+      "adults": "بالغون",
+      "child": "طفل",
+      "children": "أطفال"
+    },
+    "Sidebar": {
+      "searchHotel": "البحث عن فندق",
+      "starRating": "التصنيف بالنجوم",
+      "hotelChain": "سلسلة الفنادق",
+      "propertyType": "نوع العقار",
+      "sortBy": "ترتيب حسب",
+      "budgetPerNight": "ميزانيتك لكل ليلة",
+      "facilities": "المرافق"
+    },
+    "MobileSidebar": {
+      "filters": "الفلاتر",
+      "close": "إغلاق",
+      "search": "ابحث عن فندق معين",
+      "propertiesFound": "{count} عقار",
+      "sort": "ترتيب",
+      "sortBy": "ترتيب حسب",
+      "sortRecommended": "موصى به",
+      "sortPriceLow": "الأقل سعراً",
+      "sortPriceHigh": "الأعلى سعراً",
+      "sortRatingLow": "الأقل تقييماً",
+      "sortRatingHigh": "الأعلى تقييماً"
+    },
+    "PriceSlider": {
+      "minPrice": "الحد الأدنى للسعر $",
+      "maxPrice": "الحد الأقصى للسعر $"
+    },
+    "SearchBox": {
+      "placeholder": "مثال: Best Western"
+    },
+    "Filters": {
+      "showMore": "عرض المزيد",
+      "showLess": "عرض أقل"
+    },
+    "error": {
+      "title": "خطأ في تحميل الفنادق",
+      "titleFlight": "خطأ في تحميل الطيران",
+      "description": "حدثت مشكلة أثناء تحميل نتائج الفنادق. يرجى المحاولة مرة أخرى لاحقاً."
+    }
+  },
+  "SingleHotel": {
+    "error": {
+      "title": "خطأ",
+      "message": "حدث خطأ أثناء تحميل تفاصيل الفندق",
+      "tryAgain": "يرجى المحاولة مرة أخرى لاحقًا",
+      "goHome": "الذهاب  إلى الرئيسية",
+      "searchHotels": "البحث عن الفنادق"
+    },
+    "overview": "نظرة عامة",
+    "map": "الخريطة",
+    "showMore": "عرض المزيد",
+    "showLess": "عرض أقل"
+  },
+  "HotelRoomsTabs": {
+    "ariaTabs": "أقسام تفاصيل الفندق",
+    "ariaFilters": "تصفية الغرف",
+    "tabs": {
+      "rooms": "الغرف",
+      "reviews": "تقييمات الضيوف",
+      "amenities": "الخدمات والمرافق",
+      "policies": "السياسات"
+    },
+    "filters": {
+      "freeCancellation": "إلغاء مجاني",
+      "instantConfirmation": "تأكيد فوري",
+      "roomsWithWindows": "غرف بنافذة",
+      "prepayOnline": "دفع مسبق عبر الإنترنت",
+      "hotelPackage": "باقة الفندق",
+      "payAtHotel": "الدفع في الفندق"
+    },
+    "placeholders": {
+      "reviews": "محتوى تقييمات الضيوف سيظهر هنا.",
+      "amenities": "تفاصيل الخدمات والمرافق ستظهر هنا.",
+      "policies": "سياسات الفندق ستظهر هنا."
+    }
+  },
+  "GuestReviews": {
+    "title": "تقييمات الضيوف",
+    "ratingLabel": "ممتاز",
+    "reviewCount": "{count} تقييم",
+    "streak": "{count} ضيفًا على التوالي أعطوا إقامتهم تقييمًا إيجابيًا.",
+    "categories": {
+      "cleanliness": "النظافة",
+      "amenities": "المرافق",
+      "location": "الموقع",
+      "service": "الخدمة"
+    },
+    "compareNote": "متوسط مقارنةً بفنادق مشابهة في شنغهاي",
+    "aiSummaryTitle": "ملخص التقييمات",
+    "aiPowered": "مدعوم بالذكاء الاصطناعي",
+    "feedbackHelpful": "تقييم مفيد",
+    "feedbackNotHelpful": "تقييم غير مفيد",
+    "whatGuestsSay": "ماذا يقول الضيوف",
+    "originalText": "النص الأصلي",
+    "translationByGoogle": " الترجمة مقدمة من Google",
+    "showAllReviews": "عرض كل التقييمات",
+    "summaries": {
+      "location": {
+        "title": "سهولة الوصول:",
+        "body": "يذكر الضيوف قرب محطات المترو، لوجيازوي، الوِفْد، ومعالم وسط المدينة.",
+        "basedOn": "(استنادًا إلى تقييم واحد)"
+      },
+      "facilities": {
+        "title": "مرافق حديثة وذكية:",
+        "body": "تشير تقييمات عديدة إلى تجديدات حديثة ومساعدات ذكية داخل الغرف ومعدات عصرية.",
+        "basedOn": "(استنادًا إلى 231 تقييمًا)"
+      },
+      "service": {
+        "title": "خدمة جيدة:",
+        "body": "يُوصف موظفو الاستقبال بأنهم ودودون وسريعو الاستجابة؛ ويذكر بعض الضيوف توصيل الطعام بالروبوت.",
+        "basedOn": ""
+      },
+      "hygiene": {
+        "title": "نظافة ممتازة:",
+        "body": "غالبًا ما تُوصف الغرف بأنها نظيفة مع تنظيف فوري.",
+        "basedOn": "(استنادًا إلى 564 تقييمًا)"
+      },
+      "environment": {
+        "title": "بيئة مريحة:",
+        "body": "يقدّر الضيوف الديكور البسيط والإضاءة الطبيعية حيث تتوفر وتهوية جيدة.",
+        "basedOn": "(استنادًا إلى 541 تقييمًا)"
+      },
+      "suggestion": {
+        "title": "اقتراحات الضيوف:",
+        "body": "عدد أقل من التقييمات يذكر راحة الفرش، ضوضاء الشارع أو التجديد، وجودة الهواء كنقاط للتحسين.",
+        "basedOn": "(استنادًا إلى 10 تقييمات)"
+      }
+    },
+    "reviews": {
+      "chalermpan": {
+        "initials": "CZ",
+        "name": "Chalermpan Zu",
+        "date": "28 أبريل 2026",
+        "body": "فوجئنا بالمدخل الذي كان قيد الإنشاء، ولم نجد لافتة الفندق رغم وقوفنا أمامه. بعد الوصول إلى الردهة في الطابق الخامس كان رائحة السجائر كثيفة، بينما داخل الغرفة كانت أقل. بعد الخروج طوال المساء أصبحت الرائحة قوية في الغرفة. الإيجابيات: مساحة الغرفة والسرير والنظافة واهتمام الموظفين."
+      },
+      "liona": {
+        "initials": "L",
+        "name": "liona777",
+        "date": "25 أبريل 2026",
+        "body": "البيئة: يوجد تجديد أسفل الطابق من 8 صباحًا حتى 6 مساءً والضوضاء عالية وتُسمع في كل الغرف. الغرف بلا نوافذ ورائحة التجديد قوية، وبدون نوافذ لا تتبدد الرائحة مما جعل حلقي يزعجني بعد ليلة واحدة. حوالي عشر دقائق سيرًا إلى محطة سينشري أفينيو مترو، وقريب من الوِفْد بالتاكسي."
+      },
+      "guest": {
+        "initials": "G",
+        "name": "ضيف",
+        "date": "19 أبريل 2026",
+        "body": "الغرفة كانت نظيفة جدًا بلا روائح. قارنت تقييمات عدة فروع وهذا كان الوحيد بلا مشاكل صحية. بعد الإقامة كان فعلًا كما قالوا؛ حتى الحمام كان نظيفًا. بسبب ضوضاء تجديد في طوابق أخرى نقلني الاستقبال فورًا لغرفة أخرى وتابعوا الوضع. تشعر بجديتهم في حل مشاكل العملاء. هذه الخدمة..."
+      }
+    }
+  },
+  "HotelLocation": {
+    "title": "الموقع",
+    "transport": "المواصلات",
+    "shopping": "التسوق",
+    "landmarks": "المعالم",
+    "dining": "المطاعم",
+    "showOnMap": "عرض على الخريطة"
+  },
+  "HotelServicesAmenities": {
+    "pageTitle": "الخدمات والمرافق",
+    "popularTitle": "أشهر المرافق",
+    "moreTitle": "المزيد من المرافق",
+    "tags": {
+      "free": "مجاني",
+      "additionalCharge": "برسوم إضافية"
+    },
+    "popular": {
+      "publicParking": "موقف عام",
+      "serviceRobots": "روبوتات خدمة",
+      "laundryRoom": "غرفة غسيل",
+      "luggageStorage": "تخزين أمتعة",
+      "wakeUpCall": "خدمة منبه",
+      "taxiBooking": "حجز تاكسي",
+      "wifiPublic": "واي فاي في المناطق العامة"
+    },
+    "categories": {
+      "internet": "الإنترنت",
+      "parking": "الموقف",
+      "transportation": "النقل",
+      "frontDesk": "خدمات الاستقبال",
+      "publicAreas": "المناطق العامة",
+      "cleaning": "خدمات التنظيف",
+      "children": "مرافق الأطفال",
+      "accessibility": "إمكانية الوصول",
+      "safety": "السلامة والأمن"
+    },
+    "more": {
+      "wifiPublic": "واي فاي في المناطق العامة",
+      "parkingDescription": "موقف عام (ليس للضيوف فقط) خارج الموقع، برسوم حوالي 10 يوان صيني في الساعة (نحو 1.47 دولار أمريكي). الحجز غير متاح.",
+      "publicParking": "موقف عام",
+      "taxiBooking": "حجز تاكسي",
+      "expressCheckin": "تسجيل دخول ومغادرة سريع",
+      "safeFrontDesk": "خزينة في الاستقبال",
+      "luggageStorage": "تخزين أمتعة",
+      "wakeUpCall": "خدمة منبه",
+      "translationTools": "أدوات ترجمة متاحة",
+      "electronicId": "قارئ هوية إلكتروني لتسجيل الدخول",
+      "waterPurifier": "منقي مياه",
+      "elevator": "مصعد",
+      "ventilation": "نظام تهوية",
+      "vendingMachines": "آلات بيع",
+      "serviceRobots": "روبوتات خدمة",
+      "noSmokingPublic": "ممنوع التدخين في المناطق العامة",
+      "nonSmokingFloor": "طابق غير مدخن",
+      "clothesDryer": "مجفف ملابس",
+      "clothesSteamer": "مكواة بخار للملابس",
+      "laundryRoom": "غرفة غسيل",
+      "ironingService": "خدمة كي",
+      "laundryOnSite": "خدمة غسيل في الموقع",
+      "childrenSlippers": "شباشب أطفال",
+      "childrenToothbrushes": "فرش أسنان أطفال",
+      "stairFreeEntrance": "مدخل رئيسي بلا سلالم",
+      "firstAid": "حقيبة إسعافات أولية",
+      "fireAlarm": "إنذار حريق",
+      "keycard": "دخول ببطاقة",
+      "fireExtinguisher": "طفاية حريق",
+      "securityPersonnel": "أمن",
+      "intruderAlarm": "إنذار تسلل",
+      "smokeDetector": "كاشف دخان",
+      "cctv": "كاميرات مراقبة في الأماكن العامة",
+      "carbonMonoxide": "إنذار أول أكسيد الكربون"
+    }
+  },
+  "HotelPropertyPolicies": {
+    "title": "سياسات العقار",
+    "checkInOut": {
+      "label": "أوقات تسجيل الوصول والمغادرة",
+      "checkInLabel": "تسجيل الوصول:",
+      "checkInValue": "بعد 14:30",
+      "checkOutLabel": "تسجيل المغادرة:",
+      "checkOutValue": "قبل 12:00",
+      "frontDesk": "ساعات الاستقبال: على مدار الساعة"
+    },
+    "guestsAccepted": {
+      "label": "الضيوف المقبولون",
+      "body": "يُرحّب بالضيوف من جميع الدول والمناطق في هذا العقار"
+    },
+    "childPolicies": {
+      "label": "سياسة الأطفال",
+      "line1": "يُرحّب بالأطفال من جميع الأعمار في هذا العقار.",
+      "line2": "يمكن للأطفال من عمر 0 إلى 17 سنة الإقامة مجانًا إذا لم تكن هناك حاجة لسرير إضافي."
+    },
+    "cribs": {
+      "label": "مهود وأسرّة إضافية",
+      "body": "لا يمكن إضافة مهود أو أسرّة إضافية لأي نوع من الغرف."
+    },
+    "breakfast": {
+      "label": "الإفطار",
+      "body": "لا يُقدَّم إفطار"
+    },
+    "deposit": {
+      "label": "سياسة التأمين",
+      "depositWord": "تأمين",
+      "body": "لا يُطلب تأمين من العقار"
+    },
+    "pets": {
+      "label": "الحيوانات الأليفة",
+      "body": "غير مسموح بالحيوانات الأليفة"
+    },
+    "serviceAnimals": {
+      "label": "حيوانات الخدمة",
+      "body": "غير مسموح بحيوانات الخدمة"
+    },
+    "ageRequirements": {
+      "label": "متطلبات العمر",
+      "body": "يجب أن يكون الضيف الرئيسي الذي يسجّل الوصول بعمر 18 عامًا على الأقل"
+    },
+    "payingAtHotel": {
+      "label": "الدفع في الفندق"
+    },
+    "payments": {
+      "wechat": "WeChat Pay",
+      "unionPay": "UnionPay",
+      "alipay": "Alipay",
+      "cash": "نقدًا"
+    }
+  },
+  "HotelFinePrint": {
+    "title": "ملاحظات قانونية",
+    "cityNotes": "ملاحظات المدينة",
+    "cityNotesBody": "لتنفيذ أحكام \"لوائح بلدية شنغهاي لإدارة النفايات المنزلية\" وتشجيع تقليل النفايات المنزلية من المصدر، أصدرت إدارة الثقافة والسياحة البلدية في شنغهاي \"آراء التنفيذ بشأن حظر تقديم مستلزمات يومية لمرة واحدة في غرف الفنادق في شنغهاي\". اعتبارًا من 1 يوليو 2019، لن توفر غرف الفنادق في شنغهاي بعد الآن بشكل استباقي مستلزمات يومية لمرة واحدة مثل فرش الأسنان، أمشاط الإستحمام، إسفنج الاستحمام، ماكينات الحلاقة، مبارد الأظافر، وملمع الأحذية. يُرجى الاستفسار من الفندق عند الحاجة."
+  },
+  "AvailableRooms": {
+    "noRooms": "لا توجد غرف متاحة في الوقت الحالي",
+    "title": "الغرف المتاحة",
+    "bedType": "نوع السرير:",
+    "meals": "الوجبات:",
+    "onlyOnePackage": "باقة واحدة فقط",
+    "packagesAvailable": "باقات متاحة",
+    "guests": "الضيوف",
+    "adult": "بالغ",
+    "adults": "بالغون",
+    "child": "طفل",
+    "children": "أطفال",
+    "nights": "ليله",
+    "startWith": "يبدأ من",
+    "roomOptions": "خيارات الغرفة",
+    "package": "باقة",
+    "refundable": "قابل للاسترداد",
+    "nonRefundable": "غير قابل للاسترداد",
+    "selectPackage": "متابعة الحجز",
+    "packageImages": "صور الباقة",
+    "packageImage": "باقة",
+    "packageImageAlt": "صورة الباقة {index}",
+    "more": "اخرى",
+    "yourChoices": "خياراتك",
+    "sleeps": "ينام",
+    "todayPrice": "سعر اليوم",
+    "freeCancellation": "إلغاء مجاني",
+    "instantConfirmation": "تأكيد فوري",
+    "prepayOnline": "الدفع المسبق أونلاين",
+    "specialDiscount": "خصم خاص",
+    "off": "خصم",
+    "totalPrice": "السعر الإجمالي",
+    "inclTaxes": "شامل الضرائب والرسوم",
+    "roomNightsInclTaxes": "{roomCount, plural, one {غرفة واحدة} other {# غرف}} × {nightCount, plural, one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}} شامل الضرائب والرسوم",
+    "reserve": "احجز",
+    "showMoreRates": "عرض {count} أسعار إضافية",
+    "showLess": "عرض أقل",
+    "from": "من",
+    "roomDetails": "تفاصيل الغرفة",
+    "lateCheckout": "تسجيل مغادرة متأخر",
+    "validation": {
+      "datesRequired": "يرجى اختيار تواريخ الوصول والذهاب"
+    }
+  },
+  "Facilities": {
+    "title": "المرافق",
+    "noFacilities": "لا توجد مرافق متاحة",
+    "facility": "مرفق"
+  },
+  "GalleryOne": {
+    "seeAllPhotos": "عرض جميع الصور ({count})",
+    "hotelImageAlt": "صورة الفندق {index}",
+    "showOnMap": "عرض على الخريطة",
+    "wePriceMatch": "نضمن أفضل سعر",
+    "selectRooms": "اختر الغرف",
+    "travelEssentials": "المميزات الأساسية",
+    "amenities": "المرافق",
+    "allAmenities": "جميع المرافق",
+    "more": "المزيد",
+    "outstanding": "رائع",
+    "excellent": "ممتاز",
+    "veryGood": "جيد جداً",
+    "good": "جيد",
+    "reviewQuote": "الغرفة كانت مثالية تماماً، نظيفة للغاية مما جعل الإقامة مريحة جداً.",
+    "allReviews": "جميع التقييمات ({count})",
+    "surroundings": "المحيط",
+    "viewOnMap": "عرض على الخريطة"
+  },
+  "SuccessDialog": {
+    "roomAdded": "تم إضافة الغرفة إلى السلة بنجاح",
+    "flightAdded": "تم إضافة الرحلة إلى السلة بنجاح",
+    "roomMessage": "يمكنك الذهاب  إلى السلة لإكمال عملية إنشاء هذه الغرفة",
+    "flightMessage": "يمكنك الذهاب  إلى السلة لإكمال عملية إنشاء هذه الرحلة",
+    "goToCart": "الذهاب  إلى السلة",
+    "goBack": "استكمال البحث"
+  },
+  "Flights": {
+    "title": "الطيران",
+    "imageAlt": "صورة رئيسية للرحلات"
+  },
+  "FlightsList": {
+    "searchPrompt": {
+      "title": "ابدأ البحث عن الطيران",
+      "description": "يرجى استخدام صندوق البحث أعلاه للعثور على الطيران. أدخل مطارات الذهاب والوصول والتواريخ وعدد الركاب للبدء."
+    },
+    "noFlights": {
+      "title": "لم يتم العثور على رحلات",
+      "description": "لم يتم العثور على رحلات. يرجى تجربة معايير بحث مختلفة."
+    },
+    "loadingMore": "جاري تحميل المزيد من الطيران...",
+    "error": {
+      "title": "خطأ في تحميل الطيران",
+      "description": "حدث خطأ أثناء تحميل نتائج الطيران. يرجى المحاولة مرة أخرى."
+    },
+    "noResults": {
+      "title": "لم يتم العثور على رحلات",
+      "description": "لم نتمكن من العثور على أي رحلات تطابق معايير البحث الخاصة بك. يرجى تعديل الفلاتر أو البحث مرة أخرى."
+    }
+  },
+  "FlightSidebar": {
+    "filterResults": "تصفية النتائج",
+    "flightsFound": "تم العثور على {count} {flightLabel}",
+    "flight": "رحلة",
+    "flights": "رحلات",
+    "stops": "التوقفات",
+    "travelTime": "وقت السفر",
+    "providers": "مزودو الخدمة",
+    "sortBy": "ترتيب حسب",
+    "priceRange": "نطاق السعر",
+    "airlines": "شركات الطيران",
+    "direct": "مباشر",
+    "flightNumber": "رقم الرحلة",
+    "filterByFlightNumber": "تصفية برقم الرحلة"
+  },
+  "FlightMobileSidebar": {
+    "filterFlights": "تصفية الطيران"
+  },
+  "RouteDisplay": {
+    "flights": "رحلات"
+  },
+  "SelectedFlightView": {
+    "backToList": "العودة إلى قائمة الطيران",
+    "noReturnFlights": "لا توجد رحلات عودة تطابق الفلاتر الخاصة بك. يرجى تعديل الفلاتر."
+  },
+  "FlightPriceSlider": {
+    "minPrice": "الحد الأدنى للسعر",
+    "maxPrice": "الحد الأقصى للسعر"
+  },
+  "TimeFilter": {
+    "goingTimeFrom": "وقت الذهاب من {city}",
+    "arrivalTimeTo": "وقت الوصول إلى {city}",
+    "before6am": "قبل الساعة 6 صباحًا",
+    "6am12pm": "6 صباحًا - 12 ظهرًا",
+    "12pm6pm": "12 ظهرًا - 6 مساءً",
+    "after6pm": "بعد الساعة 6 مساءً"
+  },
+  "FlightProperties": {
+    "loading": "جاري التحميل..."
+  },
+  "FlightDetails": {
+    "offerSelection": "اختيار العرض",
+    "selectedDepartureFlight": "1. رحلة الذهاب المحتارة",
+    "selectedReturnFlight": "2. رحلة العودة المحتارة",
+    "backToDeparture": "العودة إلى الذهاب",
+    "loading": "جاري التحميل...",
+    "loadingDetails": "يرجى الانتظار بينما نقوم بتحميل تفاصيل الرحلة...",
+    "errorTitle": "خطأ في تحميل تفاصيل الرحلة",
+    "errorDescription": "حدث خطأ أثناء تحميل تفاصيل الرحلة. يرجى المحاولة مرة أخرى لاحقًا.",
+    "totalPrice": "السعر الإجمالي",
+    "buyPrice": "سعر الشراء",
+    "sellPrice": "سعر البيع",
+    "enterSellPrice": "أدخل سعر البيع",
+    "addToCart": "إضافة إلى السلة",
+    "continue": "استمر",
+    "updateFlight": "تحديث الرحلة",
+    "updating": "جاري التحديث...",
+    "updateSuccess": "تم تحديث الرحلة بنجاح",
+    "updateError": "فشل تحديث الرحلة",
+    "failedToAdd": "فشل في إضافة الرحلة إلى السلة",
+    "chooseDepartureTravelPackage": "اختر الباقة المناسبة لرحلة الذهاب",
+    "chooseReturnTravelPackage": "اختر الباقة المناسبة لرحلة العودة",
+    "expiredFlightsMessage": "هذا البحث غير متاح حالاً بسبب انتهاء صلاحيته. يرجى تحديث البحث لرؤية النتائج المحدثة.",
+    "continueToBooking": "استمرار إلى الحجز"
+  },
+  "HotelBooking": {
+    "title": "احجز فندقك",
+    "noHotelData": "لم يتم اختيار فندق",
+    "noHotelDataDescription": "يبدو أنك لم تختر فندقاً بعد. يرجى العودة إلى صفحة البحث واختيار فندق.",
+    "backToSearch": "العودة إلى البحث",
+    "roomDetails": "تفاصيل الغرفة",
+    "priceSummary": "ملخص السعر",
+    "pricePerNight": "السعر لكل ليلة",
+    "totalPrice": "السعر الإجمالي",
+    "refundable": "قابل للاسترداد",
+    "nonRefundable": "غير قابل للاسترداد",
+    "excellent": "ممتاز",
+    "reviews": "تقييم",
+    "freeWifi": "واي فاي مجاني",
+    "nonSmoking": "غير مخصص للتدخين",
+    "noWindows": "بدون نوافذ",
+    "floor": "الطابق",
+    "freeCancellation": "إلغاء مجاني",
+    "checkIn": "تسجيل الدخول",
+    "checkOut": "تسجيل الخروج",
+    "before": "قبل",
+    "room": "غرفة",
+    "rooms": "غرف",
+    "priceDetails": "تفاصيل السعر",
+    "priceBeforeDiscount": "السعر قبل الخصم",
+    "specialDiscount": "خصم خاص",
+    "specialPropertyRate": "سعر خاص للعقار",
+    "vat": "ضريبة القيمة المضافة",
+    "total": "الإجمالي",
+    "propertyCurrency": "عملة العقار",
+    "youSavedOnThisBooking": "لقد وفرت {amount} على هذا الحجز",
+    "wePriceMatch": "نضمن لك أفضل سعر",
+    "cancellationPolicy": "سياسة الإلغاء",
+    "cancellationFee": "رسوم الإلغاء",
+    "after": "بعد",
+    "cancellationNote1": "سيتم خصم رسوم الإلغاء إذا لم تقم بتسجيل الوصول. إذا قمت بتطبيق خصم على حجزك، سيتم احتساب رسوم الإلغاء بناءً على المبلغ المدفوع.",
+    "cancellationNote2": "جميع الأوقات بالتوقيت المحلي للفندق.",
+    "rewards": "المكافآت",
+    "earnTripCoinsPrefix": "اكسب",
+    "earnTripCoinsSuffix": "بعد إقامتك.",
+    "tripCoins": "نقطة سفر",
+    "finePrint": "الشروط والأحكام",
+    "showMore": "عرض المزيد",
+    "showLess": "عرض أقل",
+    "youSavedTotal": "لقد وفرت إجمالي {amount}!",
+    "instantConfirmation": "تأكيد فوري",
+    "memberRewards": "مكافآت الأعضاء",
+    "memberRewardsInfo": "مزايا قد تنطبق على هذه الإقامة، وفق توفر الفندق وسياسته.",
+    "memberRewardsInfoAria": "عن مكافآت الأعضاء",
+    "lateCheckoutTitle": "تسجيل خروج متأخر",
+    "lateCheckoutDescription": "استمتع بوقت إضافي في يوم المغادرة الأخير، حسب التوفر",
+    "freeCancellationMemberNote": "إلغاء مجاني قبل الساعة {time}، {date} (بتوقيت الفندق المحلي)",
+    "specialRequests": "طلبات خاصة",
+    "optional": "(اختياري)",
+    "specialRequestsDisclaimer": "سيبذل الفندق قصارى جهده، دون ضمان تلبية جميع الطلبات.",
+    "elevatorProximity": "القرب من المصعد",
+    "awayFromElevator": "بعيداً عن المصعد",
+    "nearElevator": "قريب من المصعد",
+    "otherRequests": "طلبات أخرى",
+    "otherRequestsPlaceholder": "مثال: طابق مرتفع، غرفة هادئة، سريران منفصلان",
+    "outcomeSuccessTitle": "تم تأكيد الحجز",
+    "outcomeSuccessDescription": "شكراً لك. تم تأكيد حجزك. ستصلك رسالة تأكيد على بريدك قريباً.",
+    "outcomeFailedTitle": "تعذر إتمام الحجز",
+    "outcomeFailedDescription": "حدث خطأ أو تعذر التحقق من الدفع. يمكنك المحاولة مرة أخرى من هذه الصفحة.",
+    "bookingReference": "مرجع الحجز",
+    "travelersAndContact": "المسافرون وبيانات التواصل",
+    "outcomeTryAgain": "إعادة المحاولة"
+  },
+  "BookingForm": {
+    "contactInfo": "بيانات التواصل",
+    "email": "البريد الإلكتروني *",
+    "phone": "رقم الهاتف *",
+    "phoneNumber": "رقم الهاتف *",
+    "guestInfo": "بيانات النزلاء",
+    "whosStaying": "من سيقيم؟",
+    "guestNamesMatchValidID": "يجب أن تتطابق أسماء النزلاء مع الهوية المستخدمة عند تسجيل الوصول.",
+    "useOnlyEnglishLetters": "استخدم الأحرف الإنجليزية فقط",
+    "bookingConfirmationSent": "سيتم إرسال تأكيد الحجز على هذا البريد",
+    "validPhoneNumber": "أدخل رقم هاتف صحيح",
+    "room": "غرفة",
+    "adult": "بالغ",
+    "child": "طفل",
+    "mr": "السيد",
+    "mrs": "السيدة",
+    "ms": "آنسة",
+    "firstName": "الإسم الأول *",
+    "lastName": "الإسم الأخير *",
+    "bookNow": "تأكيد الحجز",
+    "submitting": "جاري الحجز...",
+    "trustPriceMatch": "نضمن لك أفضل سعر",
+    "trustSecurePayment": "دفع آمن",
+    "bookingAgreement": "بإرسال هذا الحجز، أقر بأنني قرأت ووافقت على <terms>شروط الاستخدام</terms> و<privacy>بيان الخصوصية</privacy>.",
+    "siteBrand": "ترانزيت",
+    "yourTripIsProtected": "رحلتك محمية",
+    "savedTravelerInfoNote": "قد تُحفظ بيانات المسافرين والتواصل لتسهيل الحجز لاحقاً. يمكنك تعديلها أو حذفها في أي وقت من إعدادات حسابك.",
+    "validation": {
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneInvalid": "أدخل رقم هاتف صحيح",
+      "firstNameRequired": "الإسم الأول مطلوب",
+      "lastNameRequired": "الإسم الأخير مطلوب",
+      "englishLettersOnly": "استخدم الأحرف الإنجليزية فقط (a-z, A-Z)"
+    }
+  },
+  "BookingConfirmation": {
+    "title": "تم الحجز بنجاح!",
+    "description": "تم تأكيد حجزك بنجاح. يمكنك الاحتفاظ برقم الحجز للمراجعة.",
+    "bookingId": "رقم الحجز",
+    "bookingSummary": "ملخص الحجز",
+    "hotel": "الفندق",
+    "checkIn": "تاريخ الوصول",
+    "checkOut": "تاريخ المغادرة",
+    "nights": "عدد الليالي",
+    "totalPrice": "السعر الإجمالي",
+    "contactInfo": "بيانات التواصل",
+    "guests": "النزلاء",
+    "backToHome": "العودة للرئيسية",
+    "searchMore": "البحث عن فنادق أخرى"
+  },
+  "PassportUpload": {
+    "title": "رفع صورة جواز السفر",
+    "hint": "ارفع صورة واضحة لجواز السفر لملء بيانات المسافر تلقائيًا.",
+    "uploadButton": "رفع جواز السفر",
+    "compactLabel": "مسح الجواز",
+    "compactFilled": "تم المسح",
+    "uploading": "جاري قراءة جواز السفر...",
+    "success": "تم ملء بيانات جواز السفر بنجاح",
+    "readError": "تعذرت قراءة جواز السفر. حاول مرة أخرى أو أدخل البيانات يدويًا.",
+    "invalidFileType": "يرجى رفع ملف بصيغة JPG أو PNG أو WEBP أو PDF.",
+    "fileTooLarge": "يجب أن يكون حجم الملف أقل من {size} ميجابايت."
+  },
+  "FlightBooking": {
+    "title": "احجز رحلتك",
+    "noFlightData": "لم يتم اختيار رحلة",
+    "noFlightDataDescription": "يبدو أنك لم تختر رحلة بعد. يرجى العودة إلى صفحة البحث واختيار رحلة.",
+    "backToSearch": "العودة إلى البحث",
+    "priceSummary": "ملخص السعر",
+    "route": "المسار",
+    "passengers": "الركاب",
+    "totalPrice": "السعر الإجمالي",
+    "bookingNav": {
+      "pointsAria": "نقاط المكافآت: {count}",
+      "accountAria": "قائمة الحساب"
+    }
+  },
+  "FlightBookingForm": {
+    "contactInfo": "بيانات التواصل",
+    "fullName": "الإسم بالكامل",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "example@gmail.com",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "5XXXXXXXX",
+    "passengerInfo": "بيانات المسافرين",
+    "adult": "بالغ",
+    "child": "طفل",
+    "infant": "رضيع",
+    "firstName": "الإسم الأول",
+    "firstNamePlaceholder": "باللغة الإنجليزية حسب وثيقة السفر",
+    "lastName": "الإسم الأخير",
+    "lastNamePlaceholder": "باللغة الإنجليزية حسب وثيقة السفر",
+    "dateOfBirth": "تاريخ الميلاد",
+    "gender": "الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "documents": "الوثائق",
+    "passportNumber": "رقم وثيقة السفر",
+    "nationality": "الجنسية",
+    "passportExpiry": "تاريخ إنتهاء الوثيقة",
+    "bookNow": "تأكيد الحجز",
+    "submitting": "جاري الحجز...",
+    "validation": {
+      "fullNameRequired": "الإسم بالكامل مطلوب",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "firstNameRequired": "الإسم الأول مطلوب",
+      "lastNameRequired": "الإسم الأخير مطلوب",
+      "dateOfBirthRequired": "تاريخ الميلاد مطلوب",
+      "passportNumberRequired": "رقم وثيقة السفر مطلوب",
+      "nationalityRequired": "الجنسية مطلوبة",
+      "passportExpiryRequired": "تاريخ إنتهاء الوثيقة مطلوب",
+      "passportExpiryBeforeTravel": "يجب أن يكون تاريخ انتهاء جواز السفر في موعد السفر أو بعده",
+      "phoneInvalid": "يرجى إدخال رقم هاتف صحيح"
+    }
+  },
+  "FlightBookingPageNested": {
+    "bookingSteps": {
+      "step1": "أدخل بياناتك",
+      "step2": "اختر مقعدك",
+      "step3": "خصص رحلتك",
+      "step4": "أكمل الدفع"
+    },
+    "priceDetails": {
+      "title": "تفاصيل السعر",
+      "tickets": "التذاكر ({count} بالغ)",
+      "adultPassenger": "البالغون (المسافر 1)",
+      "fare": "سعر التذكرة",
+      "taxesFees": "الضرائب والرسوم",
+      "baggage": "الأمتعة",
+      "personalItem": "حقيبة شخصية",
+      "carryOnBaggage": "أمتعة المقصورة",
+      "checkedBaggage": "أمتعة مشحونة",
+      "free": "مجانًا",
+      "total": "الإجمالي",
+      "tripCoins": "Trip Coins + {count}"
+    },
+    "flightBookingForm": {
+      "termsPrefix": "لقد قرأت ووافقت على شروط وأحكام حجز gita.com التالية:",
+      "flightBookingPolicies": "سياسات حجز الطيران",
+      "privacyStatement": "بيان الخصوصية",
+      "total": "الإجمالي",
+      "next": "التالي",
+      "awardWinning": "حائز على جوائز",
+      "supportIn30s": "دعم خلال حوالي 30 ثانية",
+      "rewardsForBooking": "مكافآت على الحجز"
+    },
+    "contactInformation": {
+      "title": "بيانات التواصل",
+      "contactName": "اسم جهة الاتصال *",
+      "email": "البريد الإلكتروني *",
+      "mobilePhone": "هاتف الجوال *"
+    },
+    "passengerInformation": {
+      "title": "من المسافر؟",
+      "signIn": "سجل الدخول",
+      "signInSuffix": "لحجز أسهل",
+      "passenger": "المسافر",
+      "givenNames": "الاسم الأول *",
+      "lastName": "اسم العائلة *",
+      "genderOnId": "الجنس في الهوية *",
+      "male": "ذكر",
+      "female": "أنثى",
+      "dateOfBirth": "تاريخ الميلاد *",
+      "nationality": "الجنسية (البلد/المنطقة) *",
+      "passportNumber": "رقم جواز السفر *",
+      "passportExpiry": "تاريخ انتهاء جواز السفر *",
+      "idType": "نوع الهوية *",
+      "select": "اختر",
+      "passport": "جواز سفر",
+      "nationalId": "هوية وطنية",
+      "residencePermit": "تصريح إقامة",
+      "idNumber": "رقم الهوية *",
+      "idHint": ". أدخل اسم المسافر كما هو تمامًا في وثيقة الهوية",
+      "frequentFlyerProgram": "برنامج المسافر الدائم (اختياري)",
+      "saveAndAddPassenger": "حفظ وإضافة مسافر"
+    },
+    "baggageAllowance": {
+      "title": "سماح الأمتعة",
+      "subtitle": "خذ كل ما تحتاجه لرحلتك.",
+      "baggagePolicies": "سياسات الأمتعة",
+      "departure": "المغادرة",
+      "arrival": "الوصول",
+      "personalItem": "حقيبة شخصية",
+      "personalItemSize": "(25 × 33 × 20 سم)",
+      "carryOnBaggage": "أمتعة المقصورة",
+      "carryOnBaggageSize": "(55 × 38 × 20 سم)",
+      "checkedBaggage": "أمتعة مشحونة",
+      "checkedBaggageSize": "الحد الأقصى لمقاس الحقيبة (الطول + العرض + الارتفاع) لكل حقيبة 159 سم",
+      "passenger1": "المسافر 1",
+      "carryOnAllowance": "قطعة واحدة، إجمالي 7 كجم تشمل أمتعة المقصورة",
+      "personalItemAllowance": "قطعة واحدة، إجمالي 7 كجم تشمل الحقيبة الشخصية",
+      "checkedPieces": "3 قطع"
+    },
+    "checkedBaggageProtection": {
+      "title": "حماية الأمتعة المشحونة",
+      "descriptionPrefix": "ستكون أمتعتك المشحونة محمية طوال رحلتك. إذا فُقدت أمتعتك، يرجى الإبلاغ خلال 24 ساعة من وصول الرحلة. سنتتبع أمتعتك المفقودة لمدة 96 ساعة. إذا تعذر العثور عليها، ستحصل على تعويض",
+      "compensationAmount": "1,000.00 دولار أمريكي.",
+      "viewMore": "عرض المزيد",
+      "priceAmount": "5.00 دولار أمريكي",
+      "priceSuffix": "/للشخص",
+      "selectAriaLabel": "اختيار حماية الأمتعة المشحونة"
+    },
+    "cancellationsChanges": {
+      "title": "الإلغاءات والتعديلات",
+      "cancellationsTitle": "الإلغاءات",
+      "cancellationsDescription": "سياسة الإلغاء: من 117 دولار أمريكي",
+      "changesTitle": "التعديلات",
+      "changesDescription": "سياسة التعديل: من 106 دولار أمريكي",
+      "details": "التفاصيل",
+      "included": "مشمول"
+    },
+    "stayDiscounts": {
+      "title": "خصومات الإقامة",
+      "item1Title": "كود مستخدم جديد (الحجز الأول)",
+      "item1Offer": "خصم 10% (حتى 10.00 دولار أمريكي)",
+      "item2Title": "كود مستخدم جديد (الحجز الثاني...)",
+      "item2Offer": "خصم 5% (حتى 6.00 دولار أمريكي)",
+      "item3Title": "عرض حصري للمسافرين",
+      "item3Offer": "حتى 25% خصم"
+    },
+    "freePromoCodes": {
+      "title": "أكوادك الترويجية المجانية",
+      "item1": "كود خصم تأجير السيارات - 5%",
+      "item2": "خصم 5% على الأنشطة والجولات",
+      "item3": "خصم 12% على النقل من وإلى المطار",
+      "item4": "خصم 10% على النقل من وإلى المطار",
+      "claimFreePromoCode": "احصل على كود ترويجي مجاني",
+      "viewDetails": "عرض التفاصيل",
+      "claimed": "تم الاستلام"
+    },
+    "promoCodes": {
+      "title": "الأكواد الترويجية",
+      "toggleAriaLabel": "تبديل نموذج الكود الترويجي",
+      "selectEnter": "اختر/أدخل",
+      "placeholder": "يرجى إدخال الكود الترويجي",
+      "verify": "تحقق"
+    }
+  },
+  "FlightBookingConfirmation": {
+    "title": "تم حجز الرحلة بنجاح!",
+    "description": "تم تأكيد حجز رحلتك بنجاح. يمكنك الاحتفاظ برقم الحجز للمراجعة.",
+    "bookingId": "رقم الحجز",
+    "flightSummary": "ملخص الرحلة",
+    "contactInfo": "بيانات التواصل",
+    "passengers": "المسافرون",
+    "backToHome": "العودة للرئيسية",
+    "searchMore": "البحث عن رحلات أخرى"
+  },
+  "FlightBookingSuccessPage": {
+    "totalAmount": "المبلغ الإجمالي",
+    "bookingTotal": "إجمالي الحجز",
+    "paymentMethodNote": "يرجى ملاحظة أنه لا يمكن تغيير طريقة الدفع بعد اكتمال العملية",
+    "adults": "البالغون",
+    "ticketFare": "سعر التذكرة",
+    "taxesAndFees": "الضرائب والرسوم",
+    "promoCode": "كود الخصم"
+  },
+  "BookingDetails": {
+    "Payment": {
+      "successfulPayment": "الدفع ناجح",
+      "failedPayment": "الدفع فشل",
+      "paymentCompleted": "تم إكمال الدفع بنجاح",
+      "paymentNotCompleted": "لم يتم إكمال الدفع",
+      "successDescription": "تم تأكيد حجزك الآن وتم إصدار التذكرة الإلكترونية.",
+      "failureDescription": "تعذر إكمال حجزك. يرجى المحاولة مرة أخرى."
+    },
+    "FlightDetails": {
+      "title": "تفاصيل الرحلة",
+      "cancellationAndChangePolicies": "سياسات الإلغاء والتغيير",
+      "baggageAllowance": "سماح الأمتعة",
+      "bookingInfo": "معلومات الحجز",
+      "allTimesLocal": "جميع الأوقات بالتوقيت المحلي",
+      "stopLayover": "توقف / انتظار",
+      "notAvailable": "غير متاح"
+    },
+    "AddOns": {
+      "title": "الإضافات",
+      "promoCode": "كود الخصم"
+    },
+    "PassengerInformation": {
+      "title": "معلومات المسافرين",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "idType": "نوع الهوية",
+      "passport": "جواز السفر",
+      "idNumber": "رقم الهوية",
+      "nationality": "الجنسية (الدولة/المنطقة)",
+      "gender": "الجنس",
+      "dateOfBirth": "تاريخ الميلاد",
+      "male": "ذكر",
+      "female": "أنثى",
+      "adult": "بالغ",
+      "child": "طفل",
+      "infant": "رضيع",
+      "notAvailable": "غير متاح",
+      "fallbackDob": "٧ فبراير ٢٠٠٣"
+    },
+    "ContactInformation": {
+      "title": "معلومات التواصل",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف"
+    },
+    "CustomerSupport": {
+      "title": "دعم العملاء",
+      "supportIn30s": "دعم خلال حوالي 30 ثانية",
+      "questionPendingPayment": "كيف أكمل دفعة معلقة؟",
+      "questionPaymentCompleted": "هل اكتملت عملية الدفع بنجاح؟",
+      "questionCreditCardIssue": "لماذا لم أستطع الدفع ببطاقة الائتمان؟",
+      "questionOtherHelp": "الحصول على مساعدة في أمر آخر"
+    },
+    "FeaturedProperties": {
+      "title": "عقارات مميزة في دبي",
+      "showMore": "عرض المزيد",
+      "previousSlide": "الشريحة السابقة",
+      "nextSlide": "الشريحة التالية",
+      "reviews": "تقييم",
+      "view": "عرض"
+    }
+  },
+  "DefaultOfferDisplay": {
+    "departureFlight": "رحلة الذهاب",
+    "returnFlight": "رحلة العودة",
+    "defaultOffer": "العرض الافتراضي",
+    "selected": "مختاره",
+    "selectPackage": "اختر الباقة",
+    "travelEssentials": "أساسيات السفر",
+    "cabinBaggage": "أمتعة المقصورة",
+    "checkedBaggage": "الأمتعة المسجلة",
+    "notIncluded": "غير متضمن"
+  },
+  "OfferCard": {
+    "selected": "مختاره",
+    "selectPackage": "اختر الباقة",
+    "travelEssentials": "أساسيات السفر",
+    "cabinBaggage": "أمتعة المقصورة",
+    "checkedBaggage": "الأمتعة المسجلة",
+    "returnPackage": "باقة العودة",
+    "travelPackage": "باقة السفر"
+  },
+  "CartPage": {
+    "bookingInformation": "معلومات الحجز",
+    "title": "العنوان",
+    "client": "العميل",
+    "quotation": "ربط بعرض السعر",
+    "titleRequired": "العنوان مطلوب",
+    "clientRequired": "العميل مطلوب",
+    "setSellPriceError": "يرجى تعيين سعر البيع لجميع العناصر",
+    "submitBookingError": "فشل في إرسال الحجز"
+  },
+  "CartEmpty": {
+    "title": "سلة التسوق الخاصة بك فارغة",
+    "description": "أضف فنادق أو رحلات إلى سلة التسوق للمتابعة",
+    "browseFlights": "تصفح الطيران",
+    "browseHotels": "تصفح الفنادق"
+  },
+  "SuccessfulBooking": {
+    "title": "تم إرسال الحجز بنجاح!",
+    "description": "تم إنشاء وإرسال عرض الأسعار الخاص بك. تم مسح السلة.",
+    "browseMoreHotels": "الذهاب إلى الرئيسية",
+    "createNewBooking": "إنشاء حجز جديد"
+  },
+  "ContractView": {
+    "userContractFor": "العقد الخاص بالمستخدم",
+    "copyForWhatsApp": "نسخ للواتساب",
+    "copied": "تم النسخ!",
+    "copiedToClipboard": "تم النسخ للحافظة",
+    "hotels": "الفنادق",
+    "flights": "الطيران",
+    "night": "ليلة",
+    "nights": "ليالي",
+    "adult": "بالغ",
+    "adults": "بالغين",
+    "child": "طفل",
+    "children": "أطفال",
+    "infant": "رضيع",
+    "infants": "رضع",
+    "bedType": "نوع السرير",
+    "meals": "الوجبات",
+    "departure": "الذهاب",
+    "return": "العودة",
+    "totalPrice": "السعر الإجمالي",
+    "SummaryCard": {
+      "bookingDetails": "تفاصيل الحجز",
+      "contractStatus": "حالة العقد",
+      "status_pending": "قيد الانتظار",
+      "status_approved": "معتمد",
+      "status_confirmed": "مؤكد",
+      "status_cancelled": "ملغى",
+      "status_deleted": "محذوف",
+      "bookingNumber": "رقم الحجز",
+      "bookingDate": "تاريخ الحجز",
+      "phoneNumber": "رقم الهاتف",
+      "employeeName": "اسم الموظف",
+      "totalPrice": "السعر الإجمالي",
+      "totalBuyPrice": "السعر الإجمالي للشراء",
+      "notAvailable": "---"
+    }
+  },
+  "SummaryCard": {
+    "totalBuy": "إجمالي الشراء",
+    "totalSell": "إجمالي البيع",
+    "sending": "جاري الإرسال...",
+    "createContract": "إنشاء عقد"
+  },
+  "RemoveAllDialog": {
+    "removeAll": "إزالة الكل",
+    "title": "إزالة جميع العناصر",
+    "description": "هل أنت متأكد أنك تريد حذف جميع العناصر من سلة التسوق؟ لا يمكن التراجع عن هذا الإجراء.",
+    "cancel": "إلغاء",
+    "removeAllButton": "إزالة الكل"
+  },
+  "FlightsAndHotelsList": {
+    "hotels": "الفنادق",
+    "flights": "الطيران"
+  },
+  "HotelsCard": {
+    "hotel": "فندق",
+    "hotelName": "اسم الفندق",
+    "enterSellPrice": "أدخل سعر البيع",
+    "sellPriceRequired": "سعر البيع مطلوب",
+    "night": "ليلة",
+    "nights": "ليله",
+    "adult": "بالغ",
+    "adults": "بالغين",
+    "child": "طفل",
+    "children": "أطفال",
+    "package": "باقة",
+    "bedType": "نوع السرير",
+    "meals": "الوجبات",
+    "guests": "الضيوف",
+    "more": "أخرى",
+    "revalidatePrice": "تحديث السعر",
+    "revalidationResult": "نتيجة تحديث السعر",
+    "priceUnchanged": "السعر لم يتغير",
+    "priceUnchangedDesc": "سعر الباقة لا يزال كما هو.",
+    "priceChanged": "تغير السعر",
+    "oldPrice": "السعر القديم",
+    "newPrice": "السعر الجديد",
+    "updatePrice": "تحديث السعر",
+    "updating": "جاري التحديث...",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "packageNotFound": "الباقة غير متاحة",
+    "packageNotFoundDesc": "الباقة المختارة لم تعد متاحة. هل تريد اختيار باقة أخرى؟",
+    "keepCurrent": "الإبقاء على الحالي",
+    "selectNewPackage": "اختيار باقة جديدة",
+    "availablePackages": "الباقات المتاحة",
+    "roomOptions": "خيارات الغرفة",
+    "backToPackages": "العودة للباقات",
+    "selectPackage": "اختيار الباقة",
+    "selecting": "جاري الاختيار...",
+    "onlyOnePackage": "خيار واحد فقط",
+    "packagesAvailable": "خيارات متاحة",
+    "startWith": "يبدأ من",
+    "refundable": "قابل للاسترداد",
+    "nonRefundable": "غير قابل للاسترداد",
+    "priceUpdated": "تم تحديث السعر بنجاح",
+    "priceUpdateError": "فشل في تحديث السعر",
+    "packageChanged": "تم تغيير الباقة بنجاح",
+    "packageChangeError": "فشل في تغيير الباقة",
+    "revalidationError": "فشل في تحديث السعر",
+    "buyPrice": "سعر الشراء",
+    "currentSellPrice": "سعر البيع الحالي",
+    "newSellPrice": "سعر البيع الجديد",
+    "enterNewSellPrice": "أدخل سعر البيع الجديد",
+    "profit": "الربح",
+    "sar": "ج.م",
+    "supplier": "المورد",
+    "sellPrice": "سعر البيع",
+    "enterSellPriceForPackage": "أدخل سعر البيع للباقة المختارة",
+    "confirmAndUpdate": "تحديث",
+    "until": "حتى"
+  },
+  "FlightCard": {
+    "departure": "الذهاب",
+    "return": "العودة",
+    "from": "من",
+    "to": "إلى",
+    "cabin": "المقصورة",
+    "business": "رجال الأعمال",
+    "economy": "اقتصادية",
+    "adult": "بالغ",
+    "adults": "بالغين",
+    "child": "طفل",
+    "children": "أطفال",
+    "infant": "رضيع",
+    "infants": "رضع",
+    "direct": "مباشر",
+    "enterSellPrice": "أدخل سعر البيع",
+    "sellPriceRequired": "سعر البيع مطلوب",
+    "airportStopover": "توقف في المطار",
+    "duration": "المدة",
+    "cabinBaggage": "أمتعة المقصورة",
+    "checkedBaggage": "الأمتعة المسجلة",
+    "unavailable": "غير متاح",
+    "selected": "مختاره",
+    "supplier": "المورد",
+    "totalPrice": "السعر الإجمالي",
+    "chooseFlight": "اختر الرحلة",
+    "revalidateFlight": "إعادة تحقق الرحلة"
+  },
+  "CartSheet": {
+    "openCart": "فتح السلة",
+    "cartItems": "عناصر السلة ({count})",
+    "hotel": "فندق",
+    "hotels": "فنادق",
+    "flight": "رحلة",
+    "flights": "رحلات",
+    "cartEmpty": "سلة التسوق الخاصة بك فارغة",
+    "checkout": "الدفع"
+  },
+  "HotelsSection": {
+    "hotels": "الفنادق",
+    "removeFromCart": "إزالة من السلة"
+  },
+  "FlightsSection": {
+    "flights": "الطيران"
+  },
+  "GuestsSection": {
+    "title": "معلومات الضيوف",
+    "addGuest": "إضافة ضيف",
+    "noGuests": "لم يتم إضافة ضيوف بعد. انقر على 'إضافة ضيف' لإضافة معلومات الضيف.",
+    "guest": "ضيف",
+    "leadGuest": "الضيف الرئيسي",
+    "name": "الاسم",
+    "guestType": "نوع الضيف",
+    "adult": "بالغ",
+    "child": "طفل",
+    "infant": "رضيع",
+    "birthDate": "تاريخ الميلاد",
+    "passportNumber": "رقم جواز السفر",
+    "passportCountry": "بلد جواز السفر",
+    "nationality": "الجنسية",
+    "issueDate": "تاريخ الإصدار",
+    "expiryDate": "تاريخ الانتهاء",
+    "uploadPassport": "رفع جواز السفر لملء البيانات تلقائياً",
+    "passportUploadSuccess": "تم تعبئة بيانات جواز السفر بنجاح",
+    "passportUploadError": "فشل قراءة جواز السفر. جرّب صورة أخرى.",
+    "passportUploadErrorType": "يرجى اختيار ملف صورة",
+    "passportUploadErrorParse": "تعذر قراءة بيانات جواز السفر من الصورة"
+  },
+  "LoginPage": {
+    "title": "تسجيل الدخول إلى حسابك",
+    "emailLabel": "عنوان البريد الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "signIn": "تسجيل الدخول",
+    "signingIn": "جاري تسجيل الدخول...",
+    "validation": {
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صحيح",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل"
+    }
+  },
+  "Pagination": {
+    "previous": "السابق",
+    "next": "التالي",
+    "morePages": "المزيد من الصفحات",
+    "goToPreviousPage": "الذهاب إلى الصفحة السابقة",
+    "goToNextPage": "الذهاب إلى الصفحة التالية",
+    "rowsPerPage": "عدد الصفوف:",
+    "showing": "عرض {start} - {end} من {total} عنصر"
+  },
+  "ShowFarePage": {
+    "FareDateSlider": {
+      "previousDates": "التواريخ السابقة",
+      "nextDates": "التواريخ التالية",
+      "selected": "محدد",
+      "view": "عرض"
+    },
+    "FlightSectionHeader": {
+      "selectDeparture": "اختر رحلة الذهاب",
+      "selectReturn": "اختر رحلة العودة",
+      "roundTripPrice": "متوسط سعر رحلة الذهاب والإياب للمسافر، شامل الضرائب والرسوم",
+      "oneWayPrice": "متوسط السعر للمسافر، شامل الضرائب والرسوم",
+      "depart": "الذهاب",
+      "change": "تغيير",
+      "changeFlight": "تغيير الرحلة",
+      "flightsFound": "تم العثور على {count} رحلة"
+    },
+    "QuickFilter": {
+      "nonstopFirst": "بدون توقف أولاً",
+      "recommended": "موصى به",
+      "cheapest": "الأرخص",
+      "sortBy": "ترتيب حسب",
+      "fastest": "الأسرع",
+      "filters": "الفلاتر"
+    },
+    "Results": {
+      "loadingMore": "جاري تحميل المزيد من النتائج...",
+      "noFlights": "لم يتم العثور على رحلات تطابق بحثك.",
+      "noReturnFlights": "لم يتم العثور على رحلات عودة لهذه الرحلة.",
+      "showResults": "عرض النتائج",
+      "filtersTitle": "الفلاتر",
+      "closeFilters": "إغلاق الفلاتر",
+      "departuresFrom": "رحلات الذهاب من {airport}",
+      "returnsFrom": "رحلات العودة من {airport}"
+    },
+    "Filters": {
+      "stops": "التوقفات",
+      "direct": "مباشر",
+      "stop": "توقف",
+      "airlines": "شركات الطيران",
+      "times": "المواعيد",
+      "departureTime": "وقت المغادرة",
+      "arrivalTime": "وقت الوصول",
+      "price": "السعر",
+      "providers": "مزودو الخدمة"
     },
     "FlightCard": {
-        "departure": "الذهاب",
-        "return": "العودة",
-        "from": "من",
-        "to": "إلى",
-        "cabin": "المقصورة",
-        "business": "رجال الأعمال",
-        "economy": "اقتصادية",
-        "adult": "بالغ",
-        "adults": "بالغين",
-        "child": "طفل",
-        "children": "أطفال",
-        "infant": "رضيع",
-        "infants": "رضع",
-        "direct": "مباشر",
-        "enterSellPrice": "أدخل سعر البيع",
-        "sellPriceRequired": "سعر البيع مطلوب",
-        "airportStopover": "توقف في المطار",
-        "duration": "المدة",
-        "cabinBaggage": "أمتعة المقصورة",
-        "checkedBaggage": "الأمتعة المسجلة",
-        "unavailable": "غير متاح",
-        "selected": "مختاره",
-        "supplier": "المورد",
-        "totalPrice": "السعر الإجمالي",
-        "chooseFlight": "اختر الرحلة",
-        "revalidateFlight": "إعادة تحقق الرحلة"
+      "nonstop": "بدون توقف",
+      "stop": "توقف واحد",
+      "stops": "{count} توقفات",
+      "select": "اختر",
+      "exclusiveFare": "سعر حصري",
+      "airline": "شركة الطيران",
+      "economyClass": "الدرجة الاقتصادية"
     },
-    "CartSheet": {
-        "openCart": "فتح السلة",
-        "cartItems": "عناصر السلة ({count})",
-        "hotel": "فندق",
-        "hotels": "فنادق",
-        "flight": "رحلة",
-        "flights": "رحلات",
-        "cartEmpty": "سلة التسوق الخاصة بك فارغة",
-        "checkout": "الدفع"
-    },
-    "HotelsSection": {
-        "hotels": "الفنادق",
-        "removeFromCart": "إزالة من السلة"
-    },
-    "FlightsSection": {
-        "flights": "الطيران"
-    },
-    "GuestsSection": {
-        "title": "معلومات الضيوف",
-        "addGuest": "إضافة ضيف",
-        "noGuests": "لم يتم إضافة ضيوف بعد. انقر على 'إضافة ضيف' لإضافة معلومات الضيف.",
-        "guest": "ضيف",
-        "leadGuest": "الضيف الرئيسي",
-        "name": "الاسم",
-        "guestType": "نوع الضيف",
-        "adult": "بالغ",
-        "child": "طفل",
-        "infant": "رضيع",
-        "birthDate": "تاريخ الميلاد",
-        "passportNumber": "رقم جواز السفر",
-        "passportCountry": "بلد جواز السفر",
-        "nationality": "الجنسية",
-        "issueDate": "تاريخ الإصدار",
-        "expiryDate": "تاريخ الانتهاء",
-        "uploadPassport": "رفع جواز السفر لملء البيانات تلقائياً",
-        "passportUploadSuccess": "تم تعبئة بيانات جواز السفر بنجاح",
-        "passportUploadError": "فشل قراءة جواز السفر. جرّب صورة أخرى.",
-        "passportUploadErrorType": "يرجى اختيار ملف صورة",
-        "passportUploadErrorParse": "تعذر قراءة بيانات جواز السفر من الصورة"
-    },
-    "LoginPage": {
-        "title": "تسجيل الدخول إلى حسابك",
-        "emailLabel": "عنوان البريد الإلكتروني",
-        "passwordLabel": "كلمة المرور",
-        "signIn": "تسجيل الدخول",
-        "signingIn": "جاري تسجيل الدخول...",
-        "validation": {
-            "emailRequired": "البريد الإلكتروني مطلوب",
-            "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صحيح",
-            "passwordRequired": "كلمة المرور مطلوبة",
-            "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل"
-        }
-    },
-    "Pagination": {
-        "previous": "السابق",
-        "next": "التالي",
-        "morePages": "المزيد من الصفحات",
-        "goToPreviousPage": "الذهاب إلى الصفحة السابقة",
-        "goToNextPage": "الذهاب إلى الصفحة التالية",
-        "rowsPerPage": "عدد الصفوف:",
-        "showing": "عرض {start} - {end} من {total} عنصر"
-    },
-    "ShowFarePage": {
-        "FareDateSlider": {
-            "previousDates": "التواريخ السابقة",
-            "nextDates": "التواريخ التالية",
-            "selected": "محدد",
-            "view": "عرض"
-        },
-        "FlightSectionHeader": {
-            "selectDeparture": "اختر رحلة الذهاب",
-            "selectReturn": "اختر رحلة العودة",
-            "roundTripPrice": "متوسط سعر رحلة الذهاب والإياب للمسافر، شامل الضرائب والرسوم",
-            "oneWayPrice": "متوسط السعر للمسافر، شامل الضرائب والرسوم",
-            "depart": "الذهاب",
-            "change": "تغيير",
-            "changeFlight": "تغيير الرحلة",
-            "flightsFound": "تم العثور على {count} رحلة"
-        },
-        "QuickFilter": {
-            "nonstopFirst": "بدون توقف أولاً",
-            "recommended": "موصى به",
-            "cheapest": "الأرخص",
-            "sortBy": "ترتيب حسب",
-            "fastest": "الأسرع",
-            "filters": "الفلاتر"
-        },
-        "Results": {
-            "loadingMore": "جاري تحميل المزيد من النتائج...",
-            "noFlights": "لم يتم العثور على رحلات تطابق بحثك.",
-            "noReturnFlights": "لم يتم العثور على رحلات عودة لهذه الرحلة.",
-            "showResults": "عرض النتائج",
-            "filtersTitle": "الفلاتر",
-            "closeFilters": "إغلاق الفلاتر",
-            "departuresFrom": "رحلات الذهاب من {airport}",
-            "returnsFrom": "رحلات العودة من {airport}"
-        },
-        "Filters": {
-            "stops": "التوقفات",
-            "direct": "مباشر",
-            "stop": "توقف",
-            "airlines": "شركات الطيران",
-            "times": "المواعيد",
-            "departureTime": "وقت المغادرة",
-            "arrivalTime": "وقت الوصول",
-            "price": "السعر",
-            "providers": "مزودو الخدمة"
-        },
-        "FlightCard": {
-            "nonstop": "بدون توقف",
-            "stop": "توقف واحد",
-            "stops": "{count} توقفات",
-            "select": "اختر",
-            "exclusiveFare": "سعر حصري",
-            "airline": "شركة الطيران",
-            "economyClass": "الدرجة الاقتصادية"
-        },
-        "FareDialog": {
-            "depart": "الذهاب",
-            "return": "العودة",
-            "duration": "المدة",
-            "flightTime": "مدة الرحلة",
-            "transferIn": "ترانزيت في {city} {time}",
-            "next": "التالي",
-            "footer": {
-                "roundTrip": "ذهاب وعودة",
-                "departurePackage": "باقة الذهاب",
-                "total": "الإجمالي"
-            },
-            "sliderTripLabel": {
-                "roundTripTotal": "إجمالي الذهاب والعودة",
-                "departureFare": "سعر الذهاب",
-                "oneWayTotal": "إجمالي الذهاب"
-            },
-            "stepTitle": {
-                "reviewFare": "مراجعة السعر",
-                "chooseReturnPackage": "اختر باقة سعر العودة",
-                "chooseDeparturePackage": "اختر باقة سعر الذهاب",
-                "chooseFare": "اختر السعر"
-            },
-            "sliderNav": {
-                "previousFares": "الأسعار السابقة",
-                "nextFares": "الأسعار التالية"
-            },
-            "fareCard": {
-                "baggage": "الأمتعة",
-                "carryOn": "أمتعة المقصورة",
-                "checked": "الأمتعة المسجلة",
-                "notIncluded": "غير مشمول"
-            }
-        }
-    },
-    "HotelsTestPage": {
-        "HotelSearchForm": {
-            "nightsBadge": "{count} ليالي",
-            "whereTo": "إلى أين؟",
-            "selectDates": "اختر التواريخ",
-            "selectCheckOut": "اختر تاريخ المغادرة",
-            "recentSearches": "عمليات البحث الأخيرة",
-            "allCities": "جميع المدن",
-            "searching": "جاري البحث…",
-            "noResults": "لا توجد نتائج",
-            "loadingCities": "جاري تحميل المدن…",
-            "room": "غرفة",
-            "rooms": "غرف",
-            "adult": "بالغ",
-            "adults": "بالغون",
-            "adultsHint": "18+ سنة",
-            "child": "طفل",
-            "children": "أطفال",
-            "childrenHint": "0-17 سنة",
-            "done": "تم",
-            "search": "بحث",
-            "detailsTitle": "نتائج البحث",
-            "detailsMissingParams": "معاملات البحث غير مكتملة. ابدأ البحث من صفحة اختبار الفنادق.",
-            "detailsHint": "معايير بحثك موجودة في عنوان الصفحة (query). يمكنك لاحقاً ربط قائمة النتائج هنا.",
-            "detailsLoading": "جاري تحميل النتائج…",
-            "detailsError": "تعذر تحميل النتائج. حاول مرة أخرى.",
-            "clearDestination": "مسح الوجهة",
-            "decreaseQuantity": "تقليل",
-            "increaseQuantity": "زيادة",
-            "addRoom": "إضافة غرفة",
-            "dateRangePartial": "{date} – …"
-        },
-        "ResultsSection": {
-            "filters": "عوامل التصفية",
-            "showResults": "عرض النتائج",
-            "noHotelsFromApi": "لم يُعثر على فنادق."
-        },
-        "HotelCard": {
-            "occupancyRooms": "{count, plural, zero {لا غرف} one {غرفة واحدة} two {غرفتان} few {# غرف} many {# غرفة} other {# غرف}}",
-            "occupancyAdults": "{count, plural, zero {لا بالغين} one {بالغ واحد} two {بالغان} few {# بالغين} many {# بالغاً} other {# بالغ}}",
-            "occupancyChildren": "{count, plural, zero {لا أطفال} one {طفل واحد} two {طفلان} few {# أطفال} many {# طفلاً} other {# طفل}}",
-            "noImage": "لا صورة",
-            "saveToWishlist": "حفظ في المفضلة",
-            "freeCancellation": "إلغاء مجاني",
-            "cancellationShort": "إلغاء مجاني",
-            "checkAvailability": "تحقق من التوفر",
-            "ratingOutstanding": "ممتاز",
-            "ratingExcellent": "رائع جداً",
-            "ratingVeryGood": "جيد جداً",
-            "ratingGood": "جيد",
-            "reviews": "{count} تقييم",
-            "totalInclTaxes": "الإجمالي (شامل الضرائب والرسوم):",
-            "breakfastIncluded": "يشمل الإفطار",
-            "stayTotalLine": "{total} إجمالي · {nights, plural, zero {لا ليالي} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}",
-            "totalPriceLabel": "السعر الإجمالي:",
-            "roomNightsInclTaxes": "{roomCount, plural, one {غرفة واحدة} other {# غرف}} × {nightCount, plural, one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}} شامل الضرائب والرسوم",
-            "specialDiscountBadge": "خصم خاص",
-            "percentOffBadge": "خصم 25٪",
-            "paymentsEasyReach": "تقبل معظم بطاقات الدفع - سهل الوصول",
-            "lastBookedStatic": "آخر حجز منذ 7 دقائق"
-        },
-        "Hero": {
-            "title": "فنادق ومساكن",
-            "heroImageAlt": "صورة رئيسية للبحث عن الفنادق"
-        },
-        "WelcomeAboard": {
-            "title": "أهلاً بك! استمتع بخصم {discount}% على الإقامات!",
-            "perk1": "احصل على رمز ترويجي ووفّر حتى 10%",
-            "perk2": "نزّل التطبيق للحصول على رمز ترويجي إضافي بخصم 5% (حد أقصى 6 دولار)",
-            "usePromoCode": "استخدم رمزك الترويجي",
-            "claimDiscount": "احصل على الخصم"
-        },
-        "WhatNew": {
-            "title": "الجديد لدينا",
-            "banner1Title": "عروض فنادق العلامات التجارية",
-            "banner2Title": "خصم حتى 20% على الفنادق الجديدة",
-            "banner2Description": "احجز إقامات جديدة",
-            "banner3Title": "حان وقت السفر",
-            "banner3Description": "عروض تفتح لك عالماً من السفر!",
-            "banner4Title": "عروض فنادق العلامات التجارية",
-            "banner4Description": "احصل على خصم حتى 30% على علاماتك التجارية المفضلة",
-            "banner5Title": "خصم حتى 20% على الفنادق الجديدة",
-            "banner5Description": "احجز إقامات جديدة",
-            "banner6Title": "حان وقت السفر",
-            "banner6Description": "عروض تفتح لك عالماً من السفر!",
-            "banner1Alt": "بانر عروض الفنادق",
-            "banner2Alt": "بانر خصم الفنادق الجديدة",
-            "banner3Alt": "بانر حان وقت السفر",
-            "banner4Alt": "بانر عروض الفنادق",
-            "banner5Alt": "بانر خصم الفنادق الجديدة",
-            "banner6Alt": "بانر حان وقت السفر"
-        },
-        "PriceMatch": {
-            "appStoreRating": "4.8/5",
-            "appStoreReviews": "206,715 تقييم",
-            "googlePlayRating": "4.7/5",
-            "googlePlayReviews": "20,234 تقييم",
-            "appStoreAlt": "App Store",
-            "googlePlayAlt": "Google Play",
-            "pricMatchTitle": "نطابق الأسعار",
-            "priceMatchDesc": "نسعى لتقديم أفضل سعر ممكن لك. إذا وجدت خياراً أرخص في مكان آخر، سنعيد الفرق.",
-            "rewardsTitle": "اكسب مكافآت على سفرك",
-            "rewardsDesc": "احصل على مكافآت تُوفّر المال مع كل حجز، بلا حدود لكيفية إنفاقها",
-            "priceMatchIconAlt": "أيقونة مطابقة الأسعار",
-            "rewardsIconAlt": "أيقونة المكافآت"
-        },
-        "TopHotels": {
-            "title1": "أفضل الفنادق الفاخرة 5 نجوم",
-            "title2": "عقارات مناسبة للميزانية حول العالم",
-            "title3": "أكثر دور الضيافة رواجاً حول العالم",
-            "reviews": "{count} تقييم",
-            "from": "يبدأ من",
-            "previousSlide": "الشريحة السابقة",
-            "nextSlide": "الشريحة التالية",
-            "fromCityCenter": "{distance} من وسط المدينة",
-            "hotel1Alt": "لاكشري هوم لاندمارك 81",
-            "hotel1Name": "لاكشري هوم لاندمارك",
-            "hotel1Address": "لاندمارك 81، 720A ديان بيان فو",
-            "hotel1Distance": "3.24 كم",
-            "hotel2Alt": "فندق ريغال المطار",
-            "hotel2Name": "فندق ريغال المطار",
-            "hotel2Address": "رقم 9 طريق تشيونغ تات، مطار هونج كونج الدولي، تشيك لاب كوك",
-            "hotel2Distance": "24.17 كم",
-            "hotel3Alt": "فندق رويال بينجا",
-            "hotel3Name": "فندق رويال بينجا – فندق عائلي",
-            "hotel3Address": "39 سوكومفيت سوي 5، خلونغ توي نيا، واثانا",
-            "hotel3Distance": "3.81 كم",
-            "hotel4Alt": "فندق توين تاورز",
-            "hotel4Name": "فندق توين تاورز",
-            "hotel4Address": "88 شارع راما السادس، خوانغ رونغ مانغ",
-            "hotel4Distance": "2.01 كم",
-            "hotel5Alt": "فندق القصر الكبير",
-            "hotel5Name": "فندق القصر الكبير",
-            "hotel5Address": "12 طريق القصر، وسط بانكوك",
-            "hotel5Distance": "1.5 كم",
-            "hotel6Alt": "منتجع سيسايد",
-            "hotel6Name": "منتجع سيسايد للصحة والعافية",
-            "hotel6Address": "أوشن درايف، شاطئ فوكيت",
-            "hotel6Distance": "0.3 كم"
-        },
-        "PropertiesAtAGlance": {
-            "title": "العقارات في لمحة",
-            "totalProperties": "إجمالي العقارات",
-            "totalPropertiesValue": "1,531,898",
-            "numberOfReviews": "عدد التقييمات",
-            "numberOfReviewsValue": "158,109,482",
-            "lowestPrice": "أدنى سعر",
-            "lowestPriceValue": "8 دولار",
-            "highestPrice": "أعلى سعر",
-            "highestPriceValue": "894 دولار"
-        },
-        "HotelsInfo": {
-            "title": "الفنادق على gita.com",
-            "perfectStayTitle": "إقامة مثالية لكل مسافر",
-            "perfectStayText": "يمكن لاختيار الفندق أن يرفع تجربة سفرك من جيدة إلى لا تُنسى. في gita.com، نُبسّط لك عملية البحث عن أماكن إقامة تناسب أسلوبك وميزانيتك واحتياجاتك—سواء كان ذلك منتجعاً فاخراً، أو بيتاً للضيافة، أو فندقاً اقتصادياً.",
-            "trendingDestinationsLabel": "الوجهات الفندقية الرائجة:",
-            "regionAsia": "آسيا",
-            "regionChina": "الصين",
-            "regionEurope": "أوروبا",
-            "regionAmericas": "الأمريكتان",
-            "regionOceania": "أوقيانوسيا",
-            "link_tokyo": "فنادق طوكيو",
-            "link_bangkok": "فنادق بانكوك",
-            "link_indianapolis": "فنادق إنديانابوليس",
-            "link_beijing": "فنادق بكين",
-            "link_shanghai": "فنادق شنغهاي",
-            "link_guangzhou": "فنادق قوانغتشو",
-            "link_london": "فنادق لندن",
-            "link_paris": "فنادق باريس",
-            "link_istanbul": "فنادق إسطنبول",
-            "link_lasvegas": "فنادق لاس فيغاس",
-            "link_miami": "فنادق ميامي",
-            "link_chicago": "فنادق شيكاغو",
-            "link_melbourne": "فنادق ملبورن",
-            "link_goldcoast": "فنادق الساحل الذهبي",
-            "link_sydney": "فنادق سيدني",
-            "whyBookTitle": "لماذا تحجز فنادقك مع gita.com؟",
-            "whyBook1": "ضمان أفضل سعر: وجدت سعراً أرخص؟ سنعيد الفرق.",
-            "whyBook2": "موثوق من الملايين: تقييمات رائعة تبرز موثوقيتنا، اطّلع على تقييمات ملايين المسافرين!",
-            "whyBook3Label": "رموز الخصم لفنادق gita.com",
-            "whyBook3Pre": "عروض حصرية: استخدم",
-            "whyBook3Post": "لتوفير إضافي.",
-            "whyBook4Pre": "دعم عالمي 24/7: مساعدة في",
-            "whyBook4RefundsLabel": "الاسترداد",
-            "whyBook4Mid": "أو تغيير الحجوزات—في أي وقت وأي مكان. فريق",
-            "whyBook4SupportLabel": "خدمة العملاء",
-            "whyBook4Post": "متاح على مدار الساعة للإجابة على جميع استفساراتك.",
-            "showMore": "عرض المزيد",
-            "showLess": "عرض أقل"
-        },
-        "Recommendations": {
-            "title": "توصيات",
-            "tab_topDestinations": "أبرز الوجهات",
-            "tab_nearAttractions": "فنادق قرب المعالم",
-            "tab_exploreMore": "اكتشف المزيد",
-            "tab_latestTrends": "أحدث اتجاهات gita.com",
-            "tab_luxuryHotels": "أفضل الفنادق الفاخرة",
-            "tab_moreTypes": "أنواع إقامة أخرى",
-            "link_shanghai": "فنادق شنغهاي",
-            "link_guangzhou": "فنادق قوانغتشو",
-            "link_bangkok": "فنادق بانكوك",
-            "link_beijing": "فنادق بكين",
-            "link_shenzhen": "فنادق شنجن",
-            "link_hongkong": "فنادق هونج كونج",
-            "link_tokyo": "فنادق طوكيو",
-            "link_chongqing": "فنادق تشونغتشينغ",
-            "link_hochiminh": "فنادق مدينة هو تشي منه",
-            "link_seoul": "فنادق سيول",
-            "link_eiffel": "فنادق قرب برج إيفل",
-            "link_timessquare": "فنادق قرب تايمز سكوير",
-            "link_bigben": "فنادق قرب بيغ بن",
-            "link_colosseum": "فنادق قرب الكولوسيوم",
-            "link_burjkhalifa": "فنادق قرب برج خليفة",
-            "link_operahouse": "فنادق قرب دار أوبرا سيدني",
-            "link_sagrada": "فنادق قرب ساغرادا فاميليا",
-            "link_louvre": "فنادق قرب متحف اللوفر",
-            "link_tajmahal": "فنادق قرب تاج محل",
-            "link_libertystature": "فنادق قرب تمثال الحرية",
-            "link_beachfront": "فنادق على الشاطئ",
-            "link_mountain": "منتجعات جبلية",
-            "link_citycenter": "فنادق وسط المدينة",
-            "link_airport": "فنادق قرب المطار",
-            "link_boutique": "فنادق بوتيك",
-            "link_allinclusive": "منتجعات شاملة",
-            "link_petfriendly": "فنادق ترحّب بالحيوانات الأليفة",
-            "link_family": "فنادق عائلية",
-            "link_romantic": "فنادق رومانسية",
-            "link_budget": "فنادق اقتصادية",
-            "link_trendingasia": "الرائج في آسيا",
-            "link_trendingeurope": "الرائج في أوروبا",
-            "link_trendingamericas": "الرائج في الأمريكتين",
-            "link_trendingme": "الرائج في الشرق الأوسط",
-            "link_trendingoceania": "الرائج في أوقيانوسيا",
-            "link_weekend": "وجهات نهاية الأسبوع",
-            "link_summer": "وجهات صيفية",
-            "link_winter": "ملاذات شتوية",
-            "link_hiddengems": "جواهر خفية",
-            "link_newopenings": "افتتاحات جديدة",
-            "link_paris5star": "فنادق 5 نجوم في باريس",
-            "link_dubai5star": "فنادق 5 نجوم في دبي",
-            "link_tokyo5star": "فنادق 5 نجوم في طوكيو",
-            "link_ny5star": "فنادق 5 نجوم في نيويورك",
-            "link_london5star": "فنادق 5 نجوم في لندن",
-            "link_singapore5star": "فنادق 5 نجوم في سنغافورة",
-            "link_bangkok5star": "فنادق 5 نجوم في بانكوك",
-            "link_sydney5star": "فنادق 5 نجوم في سيدني",
-            "link_maldives5star": "فنادق 5 نجوم في المالديف",
-            "link_rome5star": "فنادق 5 نجوم في روما",
-            "link_hostels": "نزل الشباب",
-            "link_apartments": "شقق",
-            "link_villas": "فيلات",
-            "link_guesthouses": "بيوت الضيافة",
-            "link_bnbs": "بيت وإفطار",
-            "link_motels": "موتيلات",
-            "link_resorts": "منتجعات",
-            "link_ryokans": "ريوكان",
-            "link_lodges": "أكواخ",
-            "link_capsule": "فنادق كبسولة"
-        }
-    },
-    "FlightsTestForm": {
-        "leavingFrom": "السفر من",
-        "goingTo": "السفر إلى",
-        "selectDates": "اختر التواريخ",
-        "search": "بحث",
-        "flightAndHotel": "طيران + فندق",
-        "TripOptions": {
-            "oneWay": "ذهاب فقط",
-            "roundTrip": "ذهاب وعودة",
-            "roundTripDesktop": "ذهاب وعودة",
-            "nonstop": "بدون توقف"
-        },
-        "CitySelector": {
-            "recentSearches": "عمليات البحث الأخيرة",
-            "allAirports": "جميع المطارات",
-            "searching": "جاري البحث...",
-            "noResults": "لا توجد نتائج",
-            "loadingAirports": "جاري تحميل المطارات..."
-        },
-        "Passengers": {
-            "passenger": "مسافر",
-            "passengers": "مسافرون",
-            "selectPassengersHint": "يرجى تحديد العدد الدقيق للمسافرين لعرض أفضل الأسعار",
-            "adults": "بالغون",
-            "adultsAge": "12+ سنة",
-            "children": "أطفال",
-            "childrenAge": "2-11 سنة",
-            "infantsLap": "رضع (على الحضن)",
-            "infantsAge": "أقل من سنتين",
-            "infantsAgeMobile": "أقل من سنتين وقت السفر",
-            "adultsAgeMobile": "12+ سنة وقت السفر",
-            "childrenAgeMobile": "2-11 سنة وقت السفر",
-            "economy": "اقتصادية",
-            "business": "رجال الأعمال",
-            "done": "تم",
-            "passengersTitle": "المسافرون",
-            "cabinClassTitle": "فئة المقصورة",
-            "flightSearchOptions": "خيارات البحث عن رحلة"
-        },
-        "DatePicker": {
-            "headerTitle": "اختر تواريخ المغادرة المرنة",
-            "next2weeks": "الأسبوعان القادمان",
-            "nextMonth": "الشهر القادم",
-            "depart": "المغادرة",
-            "selectReturn": "اختر تاريخ العودة",
-            "allDatesLocalTime": "جميع التواريخ بالتوقيت المحلي",
-            "selectDateToContinue": "اختر تاريخاً للمتابعة",
-            "confirmDeparture": "تأكيد تاريخ المغادرة"
-        },
-        "Validation": {
-            "selectDepartureAirport": "يرجى اختيار مطار الذهاب.",
-            "selectDestinationAirport": "يرجى اختيار مطار الوجهة.",
-            "selectDepartureDate": "يرجى اختيار تاريخ الذهاب.",
-            "departureDatePast": "لا يمكن أن يكون تاريخ الذهاب في الماضي.",
-            "selectReturnDate": "يرجى اختيار تاريخ العودة.",
-            "returnDateAfter": "يجب أن يكون تاريخ العودة بعد تاريخ الذهاب.",
-            "differentAirports": "يجب أن يكون مطار الذهاب مختلفاً عن مطار الوجهة."
-        }
-    },
-    "FlightsTestPage": {
-        "Hero": {
-            "title": "اكتشف أفضل عروض الطيران",
-            "subtitle": "رحلتك القادمة في انتظارك",
-            "mobileTitle": "الطيران"
-        },
-        "HeroQuickActions": {
-            "myBookings": "حجوزاتي",
-            "priceAlerts": "تنبيهات الأسعار",
-            "flightStatus": "حالة الرحلة",
-            "privateJet": "رحلات الطائرة الخاصة"
-        },
-        "TrustUs": {
-            "title": "ثق بنا لنوصلك إلى وجهتك",
-            "registerNow": "سجّل الآن",
-            "card1Title": "المفضل لدى المسافرين",
-            "card1Description": "انضم إلى أكثر من 300 مليون مسافر حول العالم يسافرون معنا",
-            "card2Title": "دعم العملاء متاح 24/7",
-            "card2Description": "احصل على المساعدة من وكيل دعم عملاء gita.com في حوالي 30 ثانية. في أي وقت وأي مكان.",
-            "card3Title": "أسعار شفافة",
-            "card3Description": "لا مفاجآت. جميع الضرائب والرسوم مشمولة، ما تراه هو ما ستدفعه.",
-            "card4Title": "اكسب مكافآت مضاعفة",
-            "card4Description": "اكسب أميال الطيران وعملات gita Coins لاستخدامها في رحلتك القادمة"
-        },
-        "TrendingNow": {
-            "title": "اطلع على أحدث الاتجاهات الرائجة",
-            "wonderfulThings": "أشياء رائعة تحدث",
-            "exploreWorld": "استكشف العالم",
-            "imageAlt": "أطفال يستمتعون برحلة طيران"
-        },
-        "PartnerAirlines": {
-            "title": "سافر مع شركات الطيران الشريكة لدينا",
-            "more": "المزيد",
-            "from": "من",
-            "classType": "اقتصادية"
-        },
-        "Banner": {
-            "title": "احصل على تحديثات حالة رحلتك مجاناً أينما كنت",
-            "feature1": "تتبع أكثر من 110,000 رحلة عالمية في الوقت الفعلي",
-            "feature2": "تنقل بسهولة في المطارات مع معلومات مكاتب تسجيل الوصول وبوابات الصعود واستلام الأمتعة",
-            "feature3": "ابق على اطلاع بتنبيهات الرحلات وتغييرات البوابات للحفاظ على مسار رحلتك",
-            "qrCodeAlt": "رمز QR",
-            "appStoreAlt": "تنزيل من App Store",
-            "googlePlayAlt": "احصل عليه من Google Play",
-            "bannerAlt": "بانر",
-            "flightCardAlt": "بطاقة الرحلة"
-        },
-        "Discover": {
-            "title": "اكتشف ما يحدث",
-            "banner1Alt": "عرض السفر إلى كوريا الجنوبية",
-            "banner2Alt": "بانر حان وقت السفر",
-            "banner3Alt": "بانر طيران الصين الجنوبية"
-        },
-        "WhyBook": {
-            "title": "لماذا تحجز رحلاتك مع gita.com",
-            "flightsToSuitYouTitle": "رحلات تناسبك",
-            "flightsToSuitYouText": "هل أنت مستعد للانطلاق؟ حجز رحلة الطيران هو الخطوة الأولى نحو إجازة مثيرة. ومع ذلك، مع كثرة الأمور التي يجب مراعاتها، لا تكون عملية البحث عن رحلات رخيصة دائماً سهلة. لذلك، في gita.com، جعلنا الأمور بسيطة. مما يتيح لك البحث ومقارنة الرحلات من آلاف شركات الطيران المختلفة إلى وجهات حول العالم، لم يكن",
-            "flightsToSuitYouTextExpanded": "هل أنت مستعد للانطلاق؟ حجز رحلة الطيران هو الخطوة الأولى نحو إجازة مثيرة. ومع ذلك، مع كثرة الأمور التي يجب مراعاتها، لا تكون عملية البحث عن رحلات رخيصة دائماً سهلة. لذلك، في gita.com، جعلنا الأمور بسيطة. مما يتيح لك البحث ومقارنة الرحلات من آلاف شركات الطيران المختلفة إلى وجهات حول العالم، لم يكن من الأسهل العثور على تذاكر الطيران التي تناسبك. من الاقتصادية إلى تذاكر الدرجة الأولى، والرحلات المباشرة إلى الرحلات عبر محطات، وتذاكر الذهاب والإياب وذهاب فقط، يمكنك تصفية بحثك ليناسب خططك وميزانيتك. سواء كانت إجازة عائلية طويلة، أو عطلة نهاية أسبوع رومانسية، أو رحلة عمل احترافية، يمكنك بنقرات قليلة الوصول إلى وجهتك المختارة.",
-            "bookCheapTitle": "احجز رحلات رخيصة اليوم",
-            "bookCheapText": "هناك طرق أخرى كثيرة لتوفير المال على رحلات الطيران أيضاً. يمكنك البحث عن تخفيضات الرحلات الفلاشية، والاشتراك في تنبيهات الأسعار التي تُعلمك عندما تنخفض أسعار الطيران، وتنزيل تطبيق gita.com للحصول على خصومات. كما يمنحك الانضمام إلى برنامج ولاء gita.com وصولاً إلى العروض الحصرية للأعضاء فقط. علاوة على ذلك، يمكنك كسب عملات gita Coins التي يمكن استبدالها في حجزك القادم.",
-            "showMore": "عرض المزيد",
-            "showLess": "عرض أقل"
-        },
-        "HowToBook": {
-            "title": "كيف تحجز رحلات طيران رخيصة؟",
-            "item1Title": "سافر خلال أيام العمل",
-            "item1Content": "يمكن أن يوفر لك اختيار السفر خلال أيام الأسبوع المال. الرحلات التي تغادر خلال هذه الفترة - خاصة أيام الثلاثاء والأربعاء - تكون أرخص، أساساً لأن هذه الأيام أقل شعبية للسفر.",
-            "item2Title": "اطلع على مواقع شركات الطيران",
-            "item2Content": "لقد سهّلت مواقع شركات الطيران الكثيرة تحديد الأيام الأرخص للسفر من خلال عرض نظام حجز \"عرض التقويم\". يتيح لك هذا النظام مسح الأسعار عبر الأسبوع الذي تبحث فيه.",
-            "item3Title": "فكّر في الرحلات ذات أوقات المغادرة الأقل شعبية",
-            "item3Content": "قد تحصل أيضاً على رحلة بسعر مناسب إذا كنت على استعداد للسفر في وقت مبكر. قد يكون السفر الساعة 6 صباحاً أقل تكلفة من الأوقات اللاحقة لأن هذا الوقت أقل شعبية. المشكلة الوحيدة التي قد تواجهها هي الوصول إلى المطار في هذا الوقت؛ تأكد من أن وسائل النقل العام تعمل إذا لم تتمكن من أخذ سيارة أجرة أو الحصول على مشوار إلى المطار.",
-            "item4Title": "ابحث عن سعر أفضل على تطبيق gita.com",
-            "item4Content": "قد يبدو هذا واضحاً، لكنك ستندهش من عدد الأشخاص الذين يقبلون سعراً دون التسوق المسبق وإجراء بعض البحث. نقترح عليك البحث عن الصفقات على تطبيق gita.com.",
-            "item5Title": "احجز مبكراً بدلاً من الانتظار حتى اللحظة الأخيرة",
-            "item5Content": "لا تنخدع بالاعتقاد بأن صفقات اللحظة الأخيرة هي بالضرورة الخيار الأفضل لتذاكر الطيران الرخيصة لأنها نادراً ما تكون كذلك. القرار الذكي هو الحجز مبكراً، حتى قبل عام إذا كان ذلك ممكناً للرحلة التي تريدها. تميل تذاكر الطيران إلى أن تكون أرخص عند إصدارها لأول مرة - وهو عادةً ما يكون قبل عام من الرحلة - لذا تحقق عبر الإنترنت بمجرد توفر الرحلات التي تريدها.",
-            "item6Title": "استخدم بطاقة الائتمان بطريقة أذكى",
-            "item6Content": "هناك الكثير من مزايا الدفع برحلة طيران ببطاقة ائتمان. إحدى المزايا هي أنك محمي عند إجراء مشتريات أكبر. تعرض بعض بطاقات الائتمان أميال طيران مقابل كل مبلغ ينفق، مما يوفر لك المزيد على تذاكر الطيران.",
-            "item7Title": "اختر رحلات بمحطة توقف",
-            "item7Content": "كثيراً ما تكون رحلات الترانزيت أرخص بكثير من الرحلات المباشرة. إذا سمح جدولك بذلك، قارن خيارات التوقف الواحد وقد تجد وفورات كبيرة مع الوصول براحة إلى وجهتك.",
-            "item8Title": "احجز عطلاً متكاملة قد تتضمن تذاكر طيران رخيصة",
-            "item8Content": "يمكن أن تقلل الصفقة المتكاملة أحياناً من التكلفة الإجمالية لرحلتك وإقامتك. تابع عروض الباقات، خاصة خلال العروض الموسمية والتخفيضات الفلاشية.",
-            "item9Title": "انتبه للتكاليف الخفية للرحلات الرخيصة",
-            "item9Content": "قبل الحجز، تحقق من سياسات الأمتعة ورسوم اختيار المقعد وتكاليف التنقل من وإلى المطار. يمكن أن يرتفع السعر المنخفض بسرعة مع الإضافات، لذا قارن دائماً السعر الإجمالي النهائي."
-        },
-        "Recommended": {
-            "title": "موصى به من gita.com",
-            "tab_destinations": "رحلات إلى الوجهات الشهيرة",
-            "tab_routes": "المسارات الجوية الشهيرة",
-            "tab_airlines": "شركات الطيران الشهيرة",
-            "tab_airports": "المطارات الشهيرة",
-            "tab_countries": "رحلات رخيصة إلى الدول الشهيرة",
-            "link_flightsBangkok": "رحلات إلى بانكوك",
-            "link_flightsManila": "رحلات إلى مانيلا",
-            "link_flightsShanghai": "رحلات إلى شنغهاي",
-            "link_flightsTokyo": "رحلات إلى طوكيو",
-            "link_flightsSeoul": "رحلات إلى سيول",
-            "link_flightsKL": "رحلات إلى كوالالمبور",
-            "link_flightsPhnomPenh": "رحلات إلى بنوم بنه",
-            "link_flightsHK": "رحلات إلى هونج كونج",
-            "link_flightsGuangzhou": "رحلات إلى قوانغتشو",
-            "link_flightsSingapore": "رحلات إلى سنغافورة",
-            "link_cairRiyadh": "القاهرة إلى الرياض",
-            "link_dubaiLondon": "دبي إلى لندن",
-            "link_jeddahCairo": "جدة إلى القاهرة",
-            "link_riyadhIstanbul": "الرياض إلى إسطنبول",
-            "link_abuDhabiBangkok": "أبوظبي إلى بانكوك",
-            "link_dohaManila": "الدوحة إلى مانيلا",
-            "link_kuwaitAmman": "الكويت إلى عمّان",
-            "link_riyadhDubai": "الرياض إلى دبي",
-            "link_dammamCairo": "الدمام إلى القاهرة",
-            "link_muscatDelhi": "مسقط إلى دلهي",
-            "link_saudia": "الخطوط السعودية",
-            "link_qatarAirways": "الخطوط القطرية",
-            "link_emirates": "طيران الإمارات",
-            "link_etihad": "الاتحاد للطيران",
-            "link_turkish": "الخطوط التركية",
-            "link_flynas": "فلاي ناس",
-            "link_flyadeal": "فلاي ديل",
-            "link_airArabia": "العربية للطيران",
-            "link_egyptair": "مصر للطيران",
-            "link_lufthansa": "لوفتهانزا",
-            "link_kingKhalid": "مطار الملك خالد الدولي",
-            "link_kingAbdulaziz": "مطار الملك عبدالعزيز الدولي",
-            "link_dubaiIntl": "مطار دبي الدولي",
-            "link_hamad": "مطار حمد الدولي",
-            "link_abuDhabiIntl": "مطار أبوظبي الدولي",
-            "link_cairoIntl": "مطار القاهرة الدولي",
-            "link_istanbul": "مطار إسطنبول",
-            "link_heathrow": "مطار هيثرو",
-            "link_suvarnabhumi": "مطار سوفارنابهومي",
-            "link_changi": "مطار سنغافورة تشانجي",
-            "link_flightsSaudi": "رحلات إلى السعودية",
-            "link_flightsUAE": "رحلات إلى الإمارات",
-            "link_flightsEgypt": "رحلات إلى مصر",
-            "link_flightsTurkey": "رحلات إلى تركيا",
-            "link_flightsThailand": "رحلات إلى تايلاند",
-            "link_flightsPhilippines": "رحلات إلى الفلبين",
-            "link_flightsIndia": "رحلات إلى الهند",
-            "link_flightsMalaysia": "رحلات إلى ماليزيا",
-            "link_flightsUK": "رحلات إلى بريطانيا",
-            "link_flightsItaly": "رحلات إلى إيطاليا"
-        }
-    },
-    "NewPage": {
-        "page": {
-            "logoAlt": "ترانزيت",
-            "searchPlaceholder": "إلى أين؟",
-            "searchAria": "بحث",
-            "openMenu": "فتح القائمة",
-            "menuTitle": "القائمة"
-        },
-        "sidebar": {
-            "mainNav": "التنقل الرئيسي",
-            "items": {
-                "hotelsHomes": "الفنادق والمساكن",
-                "flights": "الطيران",
-                "trains": "القطارات",
-                "cars": "السيارات",
-                "attractionsTours": "الأنشطة والجولات",
-                "flightHotel": "طيران + فندق",
-                "privateTours": "جولات خاصة",
-                "groupTours": "جولات جماعية",
-                "tripPlanner": "مخطط الرحلات",
-                "travelInspiration": "إلهام السفر",
-                "map": "الخريطة",
-                "deals": "العروض",
-                "rewards": "مكافآت gita.com",
-                "app": "التطبيق",
-                "licenses": "الرخصة الدولية"
-            }
-        },
-        "navbar": {
-            "expandSidebar": "توسيع الشريط الجانبي",
-            "collapseSidebar": "تصغير الشريط الجانبي",
-            "logoAlt": "ترانزيت",
-            "search": "بحث",
-            "searchPlaceholder": "وجهات، أنشطة، فنادق، و...",
-            "accountAndTools": "الحساب والأدوات",
-            "app": "التطبيق",
-            "listProperty": "أضف عقارك",
-            "customerSupport": "دعم العملاء",
-            "findBookings": "البحث عن الحجوزات",
-            "signInRegister": "تسجيل الدخول / إنشاء حساب",
-            "profile": "الملف الشخصي",
-            "myBooking": "حجوزاتي",
-            "logout": "تسجيل الخروج"
-        },
-        "login": {
-            "welcome": "مرحبًا",
-            "subtitle": {
-                "identifier": "سجّل الدخول باستخدام رقم الهاتف",
-                "otp": "أدخل رمز OTP المكوّن من 4 أرقام المرسل إلى رقم هاتفك"
-            },
-            "fields": {
-                "identifier": {
-                    "label": "رقم الهاتف"
-                },
-                "otp": {
-                    "label": "رمز OTP"
-                }
-            },
-            "validation": {
-                "identifierRequired": "رقم الهاتف مطلوب",
-                "identifierInvalid": "يرجى إدخال رقم هاتف صالح",
-                "otpRequired": "رمز OTP مطلوب",
-                "otpInvalid": "يجب أن يتكوّن رمز OTP من 4 أرقام بالضبط"
-            },
-            "errors": {
-                "failedToSendOtp": "فشل إرسال رمز OTP",
-                "invalidOtp": "رمز OTP غير صحيح، حاول مرة أخرى"
-            },
-            "actions": {
-                "changeIdentifier": "تغيير رقم الهاتف",
-                "sendingOtp": "جارٍ إرسال رمز OTP...",
-                "sendOtp": "إرسال رمز OTP",
-                "verifying": "جارٍ التحقق...",
-                "verifyOtp": "تأكيد رمز OTP"
-            },
-            "or": "أو",
-            "socialLoginAlt": "تسجيل الدخول"
-        },
-        "home": {
-            "hero": {
-                "title": "رحلتك تبدأ من هنا",
-                "heroAlt": "القسم الرئيسي",
-                "badges": {
-                    "securePayment": "دفع آمن",
-                    "support": "دعم خلال حوالي 30 ثانية"
-                },
-                "tabs": {
-                    "hotelsHomes": "الفنادق والمساكن",
-                    "flights": "الطيران",
-                    "trains": "القطارات",
-                    "cars": "السيارات",
-                    "attractionsTours": "الأنشطة والجولات",
-                    "flightHotel": "طيران + فندق"
-                }
-            },
-            "exclusive": {
-                "title": "حصري للمستخدمين الجدد",
-                "previousSlide": "الشريحة السابقة",
-                "nextSlide": "الشريحة التالية",
-                "moreAbout": "معلومات أكثر عن {category}",
-                "claimAll": "احصل على الكل",
-                "hotelsHomes": "الفنادق والمساكن",
-                "euTrains": "قطارات أوروبا",
-                "attractions": "الأنشطة",
-                "airportTransfers": "التنقّل من/إلى المطار",
-                "discount1": "خصم 10%",
-                "discount2": "خصم 5%",
-                "discount3": "خصم 8%",
-                "discount4": "خصم 12%",
-                "discount5": "خصم 15%",
-                "discount6": "خصم 18%",
-                "discount7": "خصم 20%",
-                "discount8": "خصم 22%"
-            },
-            "discover": {
-                "previousSlide": "الشريحة السابقة",
-                "nextSlide": "الشريحة التالية"
-            },
-            "hotels": {
-                "title": "استرخِ في فنادقنا المختارة في شنغهاي",
-                "previousSlide": "الشريحة السابقة",
-                "nextSlide": "الشريحة التالية",
-                "city": "شنغهاي",
-                "reviews": "{count} تقييم",
-                "from": "ابتداءً من"
-            },
-            "round": {
-                "title": "تنقّل بسهولة داخل شنغهاي",
-                "previousSlide": "الشريحة السابقة",
-                "nextSlide": "الشريحة التالية",
-                "from": "ابتداءً من",
-                "viewMore": "عرض المزيد",
-                "loading": "جاري التحميل...",
-                "loadMore": "تحميل المزيد"
-            },
-            "moments": {
-                "title": "لحظات رحلة لا تُنسى في شنغهاي",
-                "previousSlide": "الشريحة السابقة",
-                "nextSlide": "الشريحة التالية",
-                "like": "إعجاب",
-                "verified": "موثّق"
-            },
-            "trip": {
-                "title": "تنقّل بسهولة داخل شنغهاي",
-                "previousSlide": "الشريحة السابقة",
-                "nextSlide": "الشريحة التالية",
-                "badge": "رحلة متوسطة المدى"
-            },
-            "travelApp": {
-                "heroAlt": "بانر تطبيق السفر",
-                "seeImageAlt": "معاينة تطبيق السفر",
-                "title": "تطبيقك المتكامل للسفر",
-                "appOnlyDeals": "عروض خاصة بالتطبيق",
-                "easyPlanning": "تخطيط رحلة بسهولة",
-                "qrAlt": "رمز QR لتنزيل التطبيق",
-                "dailyUsers": "مستخدمون يوميًا",
-                "dailyDownloads": "تنزيلات يوميًا",
-                "rating": "التقييم",
-                "appStoreAria": "حمّل من App Store",
-                "googlePlayAria": "احصل عليه من Google Play",
-                "scanQr": "امسح رمز QR لتنزيل التطبيق"
-            }
-        },
-        "mobile": {
-            "service": {
-                "hotelsHomes": "الفنادق والمساكن",
-                "flights": "الطيران",
-                "flightHotel": "طيران + فندق",
-                "trains": "القطارات",
-                "carRentals": "تأجير سيارات",
-                "airportTransfers": "التنقّل من/إلى المطار",
-                "attractionsTours": "الأنشطة والجولات",
-                "travelGuides": "أدلة السفر",
-                "licenses": "الرخصة الدولية"
-            },
-            "deals": {
-                "title": "عروض لفترة محدودة",
-                "securePayment": "دفع آمن",
-                "support": "دعم خلال حوالي 30 ثانية"
-            },
-            "trip": {
-                "title": "استلهم رحلتك القادمة",
-                "card1": "ربيع الشرق الأوسط | عندما تزدهر الصحراء بالحياة",
-                "card2": "تألق برجي كوالالمبور التوأم",
-                "card3": "القاهرة! أمام الأهرامات! هذا الفندق مذهل",
-                "card4": "مصر | الإسكندرية ليست مرهقة على الإطلاق"
-            }
-        }
-    },
-    "QuotationTable": {
-        "bookingNumber": "رقم الحجز",
-        "title": "العنوان",
-        "summary": "ملخص الحالة",
-        "totalAmount": "المبلغ الاجمالي للبيع",
-        "total_buy": "المبلغ الاجمالي",
-        "clientName": "اسم العميل",
-        "rating": "التقييم",
-        "invoiceStatus": "حالة الفاتورة",
-        "quotationStatus": "الفاتورة",
-        "createdBy": "أضيف بواسطة",
-        "createdAt": "تاريخ الإضافة",
-        "source": "المصدر",
-        "noRating": "لا تقييم",
-        "noStatus": "-",
-        "sortBy": "ترتيب حسب",
-        "ascending": "تصاعدي",
-        "descending": "تنازلي",
-        "status": {
-            "paid": "مدفوع",
-            "unpaid": "غير مدفوع",
-            "pending": "قيد الانتظار",
-            "confirmed": "مؤكد",
-            "approved": "معتمد",
-            "cancelled": "ملغى",
-            "deleted": "محذوف",
-            "ordered": "تم الطلب",
-            "ordered+paid": "تم الطلب والدفع",
-            "partial": "دفع جزئي",
-            "refunded": "مسترد"
-        }
-    },
-    "MyBooking": {
-        "title": "حجوزاتي",
-        "travelWorryFree": "ضمان السفر بلا قلق",
-        "cantFindBooking": "لا يمكنك العثور على حجزك؟",
-        "tabs": {
-            "all": "الكل",
-            "awaitingPayment": "بانتظار الدفع",
-            "upcoming": "قادمة",
-            "awaitingReview": "بانتظار المراجعة"
-        },
-        "member": "عضو",
-        "loading": "جارٍ تحميل الحجوزات...",
-        "noBookings": "ليس لديك أي حجوزات أو لا يمكننا الوصول إلى حجوزاتك في هذا الوقت.",
-        "searchBookings": "بحث عن الحجوزات",
-        "bookingNumber": "رقم الحجز",
-        "bookingDate": "تاريخ الحجز",
-        "passengers": "راكب(ركاب)",
-        "status": {
-            "ticketed": "تم إصدار التذكرة",
-            "pending": "قيد الانتظار",
-            "cancelled": "ملغى"
-        },
-        "sidebar": {
-            "myBookings": "حجوزاتي",
-            "tabs": {
-                "all": "الكل",
-                "flights": "الطيران",
-                "hotels": "الفنادق",
-                "trains": "القطارات",
-                "carRentals": "تأجير سيارات",
-                "airportTransfers": "التنقل من/إلى المطار",
-                "attractionsTours": "الأنشطة والجولات",
-                "flightHotel": "طيران + فندق",
-                "privateTours": "جولات خاصة",
-                "tourPackages": "باقات الجولات"
-            },
-            "savedItems": {
-                "saved": "المحفوظ",
-                "account": "الحساب",
-                "myPosts": "منشوراتي",
-                "priceAlerts": "تنبيهات الأسعار",
-                "myCards": "بطاقاتي",
-                "giftCards": "بطاقات الهدايا",
-                "promoCodes": "أكواد الخصم"
-            }
-        }
-    },
-    "LicenseBooking": {
-        "title": "الرخصة الدولية",
-        "subtitle": "أدخل بياناتك وارفع المستندات المطلوبة للحصول على رخصتك الدولية.",
-        "heroImageAlt": "الرخصة الدولية للقيادة",
-        "welcomeTitle": "تهانينا وصلت معانا!",
-        "welcomeSubtitle": "أدخل بياناتك واحصل على رخصتك الدولية",
-        "requirementsTitle": "متطلبات الرخصة",
-        "contactInfo": "بيانات التواصل",
-        "fullName": "الإسم بالكامل",
-        "email": "البريد الإلكتروني",
-        "nationalAddress": "العنوان الوطني",
-        "nationalAddressPlaceholder": "أضف العنوان الوطني أو الكود الخاص به",
-        "phone": "رقم الهاتف",
-        "requiredFiles": "الملفات المطلوبة",
-        "passportPhoto": "صورة الجواز",
-        "passportPhotoHint": "أرفق صورة الجواز من هنا",
-        "localLicensePhoto": "صورة الرخصة السعودية",
-        "localLicensePhotoHint": "أرفق صورة الرخصة السعودية من هنا",
-        "personalPhoto": "صورة شخصية مكشوفة الرأس",
-        "personalPhotoHint": "أرفق صورة شخصية بخلفية بيضاء من هنا",
-        "personalPhotoRequirement": "صورة شخصية مكشوفة الرأس بخلفية بيضاء",
-        "discountCode": "كود الخصم",
-        "discountCodePlaceholder": "أدخل كود الخصم هنا",
-        "apply": "تطبيق",
-        "applying": "جاري التطبيق...",
-        "clearCoupon": "مسح الكود",
-        "removeFile": "إزالة الملف",
-        "choosePaymentMethod": "اختر طريقة الدفع التي تناسبك",
-        "payWithBalance": "الدفع من الرصيد",
-        "availableBalance": "المتاح",
-        "tamara": "تمارا",
-        "priceDetails": "تفاصيل السعر",
-        "internationalLicense": "الرخصة الدولية",
-        "total": "الإجمالي",
-        "payNow": "ادفع الآن",
-        "submitting": "جاري المعالجة...",
-        "priceValidationError": "تعذر التحقق من السعر الحالي. يرجى المحاولة مرة أخرى.",
-        "insufficientBalanceDescription": "المبلغ يتجاوز رصيدك المتاح. يرجى اختيار طريقة دفع أخرى.",
-        "outcomeSuccessTitle": "تم تأكيد طلب الرخصة",
-        "outcomeSuccessDescription": "شكراً لك. تم إرسال طلب الرخصة الدولية بنجاح. ستصلك رسالة تأكيد قريباً.",
-        "outcomeFailedTitle": "تعذر إتمام الدفع",
-        "outcomeFailedDescription": "حدث خطأ أو تعذر التحقق من الدفع. يمكنك المحاولة مرة أخرى من هذه الصفحة.",
-        "bookingReference": "رقم الطلب",
-        "contactSummary": "ملخص التواصل",
-        "outcomeTryAgain": "حاول مرة أخرى",
-        "backToHome": "العودة للرئيسية",
-        "backToForm": "العودة للنموذج",
-        "noBookingData": "لا توجد بيانات حجز",
-        "noBookingDataDescription": "لم نتمكن من العثور على تفاصيل طلب الرخصة. يرجى بدء طلب جديد.",
-        "faq": {
-            "title": "الأسئلة الشائعة",
-            "items": {
-                "driveInsideSaudi": {
-                    "question": "هل يمكنني القيادة بالرخصة الدولية داخل السعودية؟",
-                    "answer": "لا، يجب استخدام الرخصة السعودية داخل السعودية."
-                },
-                "validityPeriod": {
-                    "question": "ما هي مدة صلاحية الرخصة الدولية؟",
-                    "answer": "مدة الصلاحية مرتبطة بمدة صلاحية الإقامة (للمقيمين) أو صلاحية الرخصة المحلية."
-                },
-                "withoutSaudiLicense": {
-                    "question": "هل يمكن إصدار الرخصة الدولية بدون رخصة سعودية؟",
-                    "answer": "لا، يجب أن تكون لديك رخصة قيادة سعودية سارية."
-                },
-                "validityOutside": {
-                    "question": "هل تكفي الرخصة الدولية وحدها للقيادة خارج السعودية؟",
-                    "answer": "لا، يجب حمل كل من الرخصة الدولية والرخصة السعودية الأصلية معاً."
-                },
-                "processingTime": {
-                    "question": "كم يستغرق إصدار الرخصة الدولية؟",
-                    "answer": "يختلف حسب طريقة الاستلام: إلكترونياً مع الشحن من 2 إلى 5 أيام، والاستلام من الفرع غالباً في نفس اليوم."
-                },
-                "permittedCountries": {
-                    "question": "عدد الدول المسموح فيها القيادة بالرخصة الدولية؟",
-                    "answer": "أكثر من 150 دولة."
-                },
-                "vehicleCategories": {
-                    "question": "فئات المركبات المسموح قيادتها بالرخصة الدولية؟",
-                    "answer": "المركبات التي تستطيع قيادتها دولياً هي نفس الفئات المسموح بها في رخصتك المحلية (مثل الفئة B)."
-                },
-                "citizensAndResidents": {
-                    "question": "هل الخدمة متاحة للسعوديين والمقيمين؟",
-                    "answer": "نعم."
-                }
-            }
-        },
-        "validation": {
-            "nameRequired": "الإسم بالكامل مطلوب",
-            "emailRequired": "البريد الإلكتروني مطلوب",
-            "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
-            "addressRequired": "العنوان الوطني مطلوب",
-            "phoneInvalid": "أدخل رقم هاتف صحيح",
-            "passportRequired": "صورة الجواز مطلوبة",
-            "localLicenseRequired": "صورة الرخصة السعودية مطلوبة",
-            "personalPhotoRequired": "الصورة الشخصية مطلوبة",
-            "filesRequired": "يرجى رفع جميع الملفات المطلوبة",
-            "invalidFileType": "يُسمح فقط بصور JPEG أو PNG أو WebP",
-            "fileTooLarge": "يجب أن يكون حجم الملف أقل من {size} ميجابايت"
-        }
+    "FareDialog": {
+      "depart": "الذهاب",
+      "return": "العودة",
+      "duration": "المدة",
+      "flightTime": "مدة الرحلة",
+      "transferIn": "ترانزيت في {city} {time}",
+      "next": "التالي",
+      "footer": {
+        "roundTrip": "ذهاب وعودة",
+        "departurePackage": "باقة الذهاب",
+        "total": "الإجمالي"
+      },
+      "sliderTripLabel": {
+        "roundTripTotal": "إجمالي الذهاب والعودة",
+        "departureFare": "سعر الذهاب",
+        "oneWayTotal": "إجمالي الذهاب"
+      },
+      "stepTitle": {
+        "reviewFare": "مراجعة السعر",
+        "chooseReturnPackage": "اختر باقة سعر العودة",
+        "chooseDeparturePackage": "اختر باقة سعر الذهاب",
+        "chooseFare": "اختر السعر"
+      },
+      "sliderNav": {
+        "previousFares": "الأسعار السابقة",
+        "nextFares": "الأسعار التالية"
+      },
+      "fareCard": {
+        "baggage": "الأمتعة",
+        "carryOn": "أمتعة المقصورة",
+        "checked": "الأمتعة المسجلة",
+        "notIncluded": "غير مشمول"
+      }
     }
+  },
+  "HotelsTestPage": {
+    "HotelSearchForm": {
+      "nightsBadge": "{count} ليالي",
+      "whereTo": "إلى أين؟",
+      "selectDates": "اختر التواريخ",
+      "selectCheckOut": "اختر تاريخ المغادرة",
+      "recentSearches": "عمليات البحث الأخيرة",
+      "allCities": "جميع المدن",
+      "searching": "جاري البحث…",
+      "noResults": "لا توجد نتائج",
+      "loadingCities": "جاري تحميل المدن…",
+      "room": "غرفة",
+      "rooms": "غرف",
+      "adult": "بالغ",
+      "adults": "بالغون",
+      "adultsHint": "18+ سنة",
+      "child": "طفل",
+      "children": "أطفال",
+      "childrenHint": "0-17 سنة",
+      "done": "تم",
+      "search": "بحث",
+      "detailsTitle": "نتائج البحث",
+      "detailsMissingParams": "معاملات البحث غير مكتملة. ابدأ البحث من صفحة اختبار الفنادق.",
+      "detailsHint": "معايير بحثك موجودة في عنوان الصفحة (query). يمكنك لاحقاً ربط قائمة النتائج هنا.",
+      "detailsLoading": "جاري تحميل النتائج…",
+      "detailsError": "تعذر تحميل النتائج. حاول مرة أخرى.",
+      "clearDestination": "مسح الوجهة",
+      "decreaseQuantity": "تقليل",
+      "increaseQuantity": "زيادة",
+      "addRoom": "إضافة غرفة",
+      "dateRangePartial": "{date} – …"
+    },
+    "ResultsSection": {
+      "filters": "عوامل التصفية",
+      "showResults": "عرض النتائج",
+      "noHotelsFromApi": "لم يُعثر على فنادق."
+    },
+    "HotelCard": {
+      "occupancyRooms": "{count, plural, zero {لا غرف} one {غرفة واحدة} two {غرفتان} few {# غرف} many {# غرفة} other {# غرف}}",
+      "occupancyAdults": "{count, plural, zero {لا بالغين} one {بالغ واحد} two {بالغان} few {# بالغين} many {# بالغاً} other {# بالغ}}",
+      "occupancyChildren": "{count, plural, zero {لا أطفال} one {طفل واحد} two {طفلان} few {# أطفال} many {# طفلاً} other {# طفل}}",
+      "noImage": "لا صورة",
+      "saveToWishlist": "حفظ في المفضلة",
+      "freeCancellation": "إلغاء مجاني",
+      "cancellationShort": "إلغاء مجاني",
+      "checkAvailability": "تحقق من التوفر",
+      "ratingOutstanding": "ممتاز",
+      "ratingExcellent": "رائع جداً",
+      "ratingVeryGood": "جيد جداً",
+      "ratingGood": "جيد",
+      "reviews": "{count} تقييم",
+      "totalInclTaxes": "الإجمالي (شامل الضرائب والرسوم):",
+      "breakfastIncluded": "يشمل الإفطار",
+      "stayTotalLine": "{total} إجمالي · {nights, plural, zero {لا ليالي} one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}}",
+      "totalPriceLabel": "السعر الإجمالي:",
+      "roomNightsInclTaxes": "{roomCount, plural, one {غرفة واحدة} other {# غرف}} × {nightCount, plural, one {ليلة واحدة} two {ليلتان} few {# ليالٍ} many {# ليلة} other {# ليلة}} شامل الضرائب والرسوم",
+      "specialDiscountBadge": "خصم خاص",
+      "percentOffBadge": "خصم 25٪",
+      "paymentsEasyReach": "تقبل معظم بطاقات الدفع - سهل الوصول",
+      "lastBookedStatic": "آخر حجز منذ 7 دقائق"
+    },
+    "Hero": {
+      "title": "فنادق ومساكن",
+      "heroImageAlt": "صورة رئيسية للبحث عن الفنادق"
+    },
+    "WelcomeAboard": {
+      "title": "أهلاً بك! استمتع بخصم {discount}% على الإقامات!",
+      "perk1": "احصل على رمز ترويجي ووفّر حتى 10%",
+      "perk2": "نزّل التطبيق للحصول على رمز ترويجي إضافي بخصم 5% (حد أقصى 6 دولار)",
+      "usePromoCode": "استخدم رمزك الترويجي",
+      "claimDiscount": "احصل على الخصم"
+    },
+    "WhatNew": {
+      "title": "الجديد لدينا",
+      "banner1Title": "عروض فنادق العلامات التجارية",
+      "banner2Title": "خصم حتى 20% على الفنادق الجديدة",
+      "banner2Description": "احجز إقامات جديدة",
+      "banner3Title": "حان وقت السفر",
+      "banner3Description": "عروض تفتح لك عالماً من السفر!",
+      "banner4Title": "عروض فنادق العلامات التجارية",
+      "banner4Description": "احصل على خصم حتى 30% على علاماتك التجارية المفضلة",
+      "banner5Title": "خصم حتى 20% على الفنادق الجديدة",
+      "banner5Description": "احجز إقامات جديدة",
+      "banner6Title": "حان وقت السفر",
+      "banner6Description": "عروض تفتح لك عالماً من السفر!",
+      "banner1Alt": "بانر عروض الفنادق",
+      "banner2Alt": "بانر خصم الفنادق الجديدة",
+      "banner3Alt": "بانر حان وقت السفر",
+      "banner4Alt": "بانر عروض الفنادق",
+      "banner5Alt": "بانر خصم الفنادق الجديدة",
+      "banner6Alt": "بانر حان وقت السفر"
+    },
+    "PriceMatch": {
+      "appStoreRating": "4.8/5",
+      "appStoreReviews": "206,715 تقييم",
+      "googlePlayRating": "4.7/5",
+      "googlePlayReviews": "20,234 تقييم",
+      "appStoreAlt": "App Store",
+      "googlePlayAlt": "Google Play",
+      "pricMatchTitle": "نطابق الأسعار",
+      "priceMatchDesc": "نسعى لتقديم أفضل سعر ممكن لك. إذا وجدت خياراً أرخص في مكان آخر، سنعيد الفرق.",
+      "rewardsTitle": "اكسب مكافآت على سفرك",
+      "rewardsDesc": "احصل على مكافآت تُوفّر المال مع كل حجز، بلا حدود لكيفية إنفاقها",
+      "priceMatchIconAlt": "أيقونة مطابقة الأسعار",
+      "rewardsIconAlt": "أيقونة المكافآت"
+    },
+    "TopHotels": {
+      "title1": "أفضل الفنادق الفاخرة 5 نجوم",
+      "title2": "عقارات مناسبة للميزانية حول العالم",
+      "title3": "أكثر دور الضيافة رواجاً حول العالم",
+      "reviews": "{count} تقييم",
+      "from": "يبدأ من",
+      "previousSlide": "الشريحة السابقة",
+      "nextSlide": "الشريحة التالية",
+      "fromCityCenter": "{distance} من وسط المدينة",
+      "hotel1Alt": "لاكشري هوم لاندمارك 81",
+      "hotel1Name": "لاكشري هوم لاندمارك",
+      "hotel1Address": "لاندمارك 81، 720A ديان بيان فو",
+      "hotel1Distance": "3.24 كم",
+      "hotel2Alt": "فندق ريغال المطار",
+      "hotel2Name": "فندق ريغال المطار",
+      "hotel2Address": "رقم 9 طريق تشيونغ تات، مطار هونج كونج الدولي، تشيك لاب كوك",
+      "hotel2Distance": "24.17 كم",
+      "hotel3Alt": "فندق رويال بينجا",
+      "hotel3Name": "فندق رويال بينجا – فندق عائلي",
+      "hotel3Address": "39 سوكومفيت سوي 5، خلونغ توي نيا، واثانا",
+      "hotel3Distance": "3.81 كم",
+      "hotel4Alt": "فندق توين تاورز",
+      "hotel4Name": "فندق توين تاورز",
+      "hotel4Address": "88 شارع راما السادس، خوانغ رونغ مانغ",
+      "hotel4Distance": "2.01 كم",
+      "hotel5Alt": "فندق القصر الكبير",
+      "hotel5Name": "فندق القصر الكبير",
+      "hotel5Address": "12 طريق القصر، وسط بانكوك",
+      "hotel5Distance": "1.5 كم",
+      "hotel6Alt": "منتجع سيسايد",
+      "hotel6Name": "منتجع سيسايد للصحة والعافية",
+      "hotel6Address": "أوشن درايف، شاطئ فوكيت",
+      "hotel6Distance": "0.3 كم"
+    },
+    "PropertiesAtAGlance": {
+      "title": "العقارات في لمحة",
+      "totalProperties": "إجمالي العقارات",
+      "totalPropertiesValue": "1,531,898",
+      "numberOfReviews": "عدد التقييمات",
+      "numberOfReviewsValue": "158,109,482",
+      "lowestPrice": "أدنى سعر",
+      "lowestPriceValue": "8 دولار",
+      "highestPrice": "أعلى سعر",
+      "highestPriceValue": "894 دولار"
+    },
+    "HotelsInfo": {
+      "title": "الفنادق على gita.com",
+      "perfectStayTitle": "إقامة مثالية لكل مسافر",
+      "perfectStayText": "يمكن لاختيار الفندق أن يرفع تجربة سفرك من جيدة إلى لا تُنسى. في gita.com، نُبسّط لك عملية البحث عن أماكن إقامة تناسب أسلوبك وميزانيتك واحتياجاتك—سواء كان ذلك منتجعاً فاخراً، أو بيتاً للضيافة، أو فندقاً اقتصادياً.",
+      "trendingDestinationsLabel": "الوجهات الفندقية الرائجة:",
+      "regionAsia": "آسيا",
+      "regionChina": "الصين",
+      "regionEurope": "أوروبا",
+      "regionAmericas": "الأمريكتان",
+      "regionOceania": "أوقيانوسيا",
+      "link_tokyo": "فنادق طوكيو",
+      "link_bangkok": "فنادق بانكوك",
+      "link_indianapolis": "فنادق إنديانابوليس",
+      "link_beijing": "فنادق بكين",
+      "link_shanghai": "فنادق شنغهاي",
+      "link_guangzhou": "فنادق قوانغتشو",
+      "link_london": "فنادق لندن",
+      "link_paris": "فنادق باريس",
+      "link_istanbul": "فنادق إسطنبول",
+      "link_lasvegas": "فنادق لاس فيغاس",
+      "link_miami": "فنادق ميامي",
+      "link_chicago": "فنادق شيكاغو",
+      "link_melbourne": "فنادق ملبورن",
+      "link_goldcoast": "فنادق الساحل الذهبي",
+      "link_sydney": "فنادق سيدني",
+      "whyBookTitle": "لماذا تحجز فنادقك مع gita.com؟",
+      "whyBook1": "ضمان أفضل سعر: وجدت سعراً أرخص؟ سنعيد الفرق.",
+      "whyBook2": "موثوق من الملايين: تقييمات رائعة تبرز موثوقيتنا، اطّلع على تقييمات ملايين المسافرين!",
+      "whyBook3Label": "رموز الخصم لفنادق gita.com",
+      "whyBook3Pre": "عروض حصرية: استخدم",
+      "whyBook3Post": "لتوفير إضافي.",
+      "whyBook4Pre": "دعم عالمي 24/7: مساعدة في",
+      "whyBook4RefundsLabel": "الاسترداد",
+      "whyBook4Mid": "أو تغيير الحجوزات—في أي وقت وأي مكان. فريق",
+      "whyBook4SupportLabel": "خدمة العملاء",
+      "whyBook4Post": "متاح على مدار الساعة للإجابة على جميع استفساراتك.",
+      "showMore": "عرض المزيد",
+      "showLess": "عرض أقل"
+    },
+    "Recommendations": {
+      "title": "توصيات",
+      "tab_topDestinations": "أبرز الوجهات",
+      "tab_nearAttractions": "فنادق قرب المعالم",
+      "tab_exploreMore": "اكتشف المزيد",
+      "tab_latestTrends": "أحدث اتجاهات gita.com",
+      "tab_luxuryHotels": "أفضل الفنادق الفاخرة",
+      "tab_moreTypes": "أنواع إقامة أخرى",
+      "link_shanghai": "فنادق شنغهاي",
+      "link_guangzhou": "فنادق قوانغتشو",
+      "link_bangkok": "فنادق بانكوك",
+      "link_beijing": "فنادق بكين",
+      "link_shenzhen": "فنادق شنجن",
+      "link_hongkong": "فنادق هونج كونج",
+      "link_tokyo": "فنادق طوكيو",
+      "link_chongqing": "فنادق تشونغتشينغ",
+      "link_hochiminh": "فنادق مدينة هو تشي منه",
+      "link_seoul": "فنادق سيول",
+      "link_eiffel": "فنادق قرب برج إيفل",
+      "link_timessquare": "فنادق قرب تايمز سكوير",
+      "link_bigben": "فنادق قرب بيغ بن",
+      "link_colosseum": "فنادق قرب الكولوسيوم",
+      "link_burjkhalifa": "فنادق قرب برج خليفة",
+      "link_operahouse": "فنادق قرب دار أوبرا سيدني",
+      "link_sagrada": "فنادق قرب ساغرادا فاميليا",
+      "link_louvre": "فنادق قرب متحف اللوفر",
+      "link_tajmahal": "فنادق قرب تاج محل",
+      "link_libertystature": "فنادق قرب تمثال الحرية",
+      "link_beachfront": "فنادق على الشاطئ",
+      "link_mountain": "منتجعات جبلية",
+      "link_citycenter": "فنادق وسط المدينة",
+      "link_airport": "فنادق قرب المطار",
+      "link_boutique": "فنادق بوتيك",
+      "link_allinclusive": "منتجعات شاملة",
+      "link_petfriendly": "فنادق ترحّب بالحيوانات الأليفة",
+      "link_family": "فنادق عائلية",
+      "link_romantic": "فنادق رومانسية",
+      "link_budget": "فنادق اقتصادية",
+      "link_trendingasia": "الرائج في آسيا",
+      "link_trendingeurope": "الرائج في أوروبا",
+      "link_trendingamericas": "الرائج في الأمريكتين",
+      "link_trendingme": "الرائج في الشرق الأوسط",
+      "link_trendingoceania": "الرائج في أوقيانوسيا",
+      "link_weekend": "وجهات نهاية الأسبوع",
+      "link_summer": "وجهات صيفية",
+      "link_winter": "ملاذات شتوية",
+      "link_hiddengems": "جواهر خفية",
+      "link_newopenings": "افتتاحات جديدة",
+      "link_paris5star": "فنادق 5 نجوم في باريس",
+      "link_dubai5star": "فنادق 5 نجوم في دبي",
+      "link_tokyo5star": "فنادق 5 نجوم في طوكيو",
+      "link_ny5star": "فنادق 5 نجوم في نيويورك",
+      "link_london5star": "فنادق 5 نجوم في لندن",
+      "link_singapore5star": "فنادق 5 نجوم في سنغافورة",
+      "link_bangkok5star": "فنادق 5 نجوم في بانكوك",
+      "link_sydney5star": "فنادق 5 نجوم في سيدني",
+      "link_maldives5star": "فنادق 5 نجوم في المالديف",
+      "link_rome5star": "فنادق 5 نجوم في روما",
+      "link_hostels": "نزل الشباب",
+      "link_apartments": "شقق",
+      "link_villas": "فيلات",
+      "link_guesthouses": "بيوت الضيافة",
+      "link_bnbs": "بيت وإفطار",
+      "link_motels": "موتيلات",
+      "link_resorts": "منتجعات",
+      "link_ryokans": "ريوكان",
+      "link_lodges": "أكواخ",
+      "link_capsule": "فنادق كبسولة"
+    }
+  },
+  "FlightsTestForm": {
+    "leavingFrom": "السفر من",
+    "goingTo": "السفر إلى",
+    "selectDates": "اختر التواريخ",
+    "search": "بحث",
+    "flightAndHotel": "طيران + فندق",
+    "TripOptions": {
+      "oneWay": "ذهاب فقط",
+      "roundTrip": "ذهاب وعودة",
+      "roundTripDesktop": "ذهاب وعودة",
+      "nonstop": "بدون توقف"
+    },
+    "CitySelector": {
+      "recentSearches": "عمليات البحث الأخيرة",
+      "allAirports": "جميع المطارات",
+      "searching": "جاري البحث...",
+      "noResults": "لا توجد نتائج",
+      "loadingAirports": "جاري تحميل المطارات..."
+    },
+    "Passengers": {
+      "passenger": "مسافر",
+      "passengers": "مسافرون",
+      "selectPassengersHint": "يرجى تحديد العدد الدقيق للمسافرين لعرض أفضل الأسعار",
+      "adults": "بالغون",
+      "adultsAge": "12+ سنة",
+      "children": "أطفال",
+      "childrenAge": "2-11 سنة",
+      "infantsLap": "رضع (على الحضن)",
+      "infantsAge": "أقل من سنتين",
+      "infantsAgeMobile": "أقل من سنتين وقت السفر",
+      "adultsAgeMobile": "12+ سنة وقت السفر",
+      "childrenAgeMobile": "2-11 سنة وقت السفر",
+      "economy": "اقتصادية",
+      "business": "رجال الأعمال",
+      "done": "تم",
+      "passengersTitle": "المسافرون",
+      "cabinClassTitle": "فئة المقصورة",
+      "flightSearchOptions": "خيارات البحث عن رحلة"
+    },
+    "DatePicker": {
+      "headerTitle": "اختر تواريخ المغادرة المرنة",
+      "next2weeks": "الأسبوعان القادمان",
+      "nextMonth": "الشهر القادم",
+      "depart": "المغادرة",
+      "selectReturn": "اختر تاريخ العودة",
+      "allDatesLocalTime": "جميع التواريخ بالتوقيت المحلي",
+      "selectDateToContinue": "اختر تاريخاً للمتابعة",
+      "confirmDeparture": "تأكيد تاريخ المغادرة"
+    },
+    "Validation": {
+      "selectDepartureAirport": "يرجى اختيار مطار الذهاب.",
+      "selectDestinationAirport": "يرجى اختيار مطار الوجهة.",
+      "selectDepartureDate": "يرجى اختيار تاريخ الذهاب.",
+      "departureDatePast": "لا يمكن أن يكون تاريخ الذهاب في الماضي.",
+      "selectReturnDate": "يرجى اختيار تاريخ العودة.",
+      "returnDateAfter": "يجب أن يكون تاريخ العودة بعد تاريخ الذهاب.",
+      "differentAirports": "يجب أن يكون مطار الذهاب مختلفاً عن مطار الوجهة."
+    }
+  },
+  "FlightsTestPage": {
+    "Hero": {
+      "title": "اكتشف أفضل عروض الطيران",
+      "subtitle": "رحلتك القادمة في انتظارك",
+      "mobileTitle": "الطيران"
+    },
+    "HeroQuickActions": {
+      "myBookings": "حجوزاتي",
+      "priceAlerts": "تنبيهات الأسعار",
+      "flightStatus": "حالة الرحلة",
+      "privateJet": "رحلات الطائرة الخاصة"
+    },
+    "TrustUs": {
+      "title": "ثق بنا لنوصلك إلى وجهتك",
+      "registerNow": "سجّل الآن",
+      "card1Title": "المفضل لدى المسافرين",
+      "card1Description": "انضم إلى أكثر من 300 مليون مسافر حول العالم يسافرون معنا",
+      "card2Title": "دعم العملاء متاح 24/7",
+      "card2Description": "احصل على المساعدة من وكيل دعم عملاء gita.com في حوالي 30 ثانية. في أي وقت وأي مكان.",
+      "card3Title": "أسعار شفافة",
+      "card3Description": "لا مفاجآت. جميع الضرائب والرسوم مشمولة، ما تراه هو ما ستدفعه.",
+      "card4Title": "اكسب مكافآت مضاعفة",
+      "card4Description": "اكسب أميال الطيران وعملات gita Coins لاستخدامها في رحلتك القادمة"
+    },
+    "TrendingNow": {
+      "title": "اطلع على أحدث الاتجاهات الرائجة",
+      "wonderfulThings": "أشياء رائعة تحدث",
+      "exploreWorld": "استكشف العالم",
+      "imageAlt": "أطفال يستمتعون برحلة طيران"
+    },
+    "PartnerAirlines": {
+      "title": "سافر مع شركات الطيران الشريكة لدينا",
+      "more": "المزيد",
+      "from": "من",
+      "classType": "اقتصادية"
+    },
+    "Banner": {
+      "title": "احصل على تحديثات حالة رحلتك مجاناً أينما كنت",
+      "feature1": "تتبع أكثر من 110,000 رحلة عالمية في الوقت الفعلي",
+      "feature2": "تنقل بسهولة في المطارات مع معلومات مكاتب تسجيل الوصول وبوابات الصعود واستلام الأمتعة",
+      "feature3": "ابق على اطلاع بتنبيهات الرحلات وتغييرات البوابات للحفاظ على مسار رحلتك",
+      "qrCodeAlt": "رمز QR",
+      "appStoreAlt": "تنزيل من App Store",
+      "googlePlayAlt": "احصل عليه من Google Play",
+      "bannerAlt": "بانر",
+      "flightCardAlt": "بطاقة الرحلة"
+    },
+    "Discover": {
+      "title": "اكتشف ما يحدث",
+      "banner1Alt": "عرض السفر إلى كوريا الجنوبية",
+      "banner2Alt": "بانر حان وقت السفر",
+      "banner3Alt": "بانر طيران الصين الجنوبية"
+    },
+    "WhyBook": {
+      "title": "لماذا تحجز رحلاتك مع gita.com",
+      "flightsToSuitYouTitle": "رحلات تناسبك",
+      "flightsToSuitYouText": "هل أنت مستعد للانطلاق؟ حجز رحلة الطيران هو الخطوة الأولى نحو إجازة مثيرة. ومع ذلك، مع كثرة الأمور التي يجب مراعاتها، لا تكون عملية البحث عن رحلات رخيصة دائماً سهلة. لذلك، في gita.com، جعلنا الأمور بسيطة. مما يتيح لك البحث ومقارنة الرحلات من آلاف شركات الطيران المختلفة إلى وجهات حول العالم، لم يكن",
+      "flightsToSuitYouTextExpanded": "هل أنت مستعد للانطلاق؟ حجز رحلة الطيران هو الخطوة الأولى نحو إجازة مثيرة. ومع ذلك، مع كثرة الأمور التي يجب مراعاتها، لا تكون عملية البحث عن رحلات رخيصة دائماً سهلة. لذلك، في gita.com، جعلنا الأمور بسيطة. مما يتيح لك البحث ومقارنة الرحلات من آلاف شركات الطيران المختلفة إلى وجهات حول العالم، لم يكن من الأسهل العثور على تذاكر الطيران التي تناسبك. من الاقتصادية إلى تذاكر الدرجة الأولى، والرحلات المباشرة إلى الرحلات عبر محطات، وتذاكر الذهاب والإياب وذهاب فقط، يمكنك تصفية بحثك ليناسب خططك وميزانيتك. سواء كانت إجازة عائلية طويلة، أو عطلة نهاية أسبوع رومانسية، أو رحلة عمل احترافية، يمكنك بنقرات قليلة الوصول إلى وجهتك المختارة.",
+      "bookCheapTitle": "احجز رحلات رخيصة اليوم",
+      "bookCheapText": "هناك طرق أخرى كثيرة لتوفير المال على رحلات الطيران أيضاً. يمكنك البحث عن تخفيضات الرحلات الفلاشية، والاشتراك في تنبيهات الأسعار التي تُعلمك عندما تنخفض أسعار الطيران، وتنزيل تطبيق gita.com للحصول على خصومات. كما يمنحك الانضمام إلى برنامج ولاء gita.com وصولاً إلى العروض الحصرية للأعضاء فقط. علاوة على ذلك، يمكنك كسب عملات gita Coins التي يمكن استبدالها في حجزك القادم.",
+      "showMore": "عرض المزيد",
+      "showLess": "عرض أقل"
+    },
+    "HowToBook": {
+      "title": "كيف تحجز رحلات طيران رخيصة؟",
+      "item1Title": "سافر خلال أيام العمل",
+      "item1Content": "يمكن أن يوفر لك اختيار السفر خلال أيام الأسبوع المال. الرحلات التي تغادر خلال هذه الفترة - خاصة أيام الثلاثاء والأربعاء - تكون أرخص، أساساً لأن هذه الأيام أقل شعبية للسفر.",
+      "item2Title": "اطلع على مواقع شركات الطيران",
+      "item2Content": "لقد سهّلت مواقع شركات الطيران الكثيرة تحديد الأيام الأرخص للسفر من خلال عرض نظام حجز \"عرض التقويم\". يتيح لك هذا النظام مسح الأسعار عبر الأسبوع الذي تبحث فيه.",
+      "item3Title": "فكّر في الرحلات ذات أوقات المغادرة الأقل شعبية",
+      "item3Content": "قد تحصل أيضاً على رحلة بسعر مناسب إذا كنت على استعداد للسفر في وقت مبكر. قد يكون السفر الساعة 6 صباحاً أقل تكلفة من الأوقات اللاحقة لأن هذا الوقت أقل شعبية. المشكلة الوحيدة التي قد تواجهها هي الوصول إلى المطار في هذا الوقت؛ تأكد من أن وسائل النقل العام تعمل إذا لم تتمكن من أخذ سيارة أجرة أو الحصول على مشوار إلى المطار.",
+      "item4Title": "ابحث عن سعر أفضل على تطبيق gita.com",
+      "item4Content": "قد يبدو هذا واضحاً، لكنك ستندهش من عدد الأشخاص الذين يقبلون سعراً دون التسوق المسبق وإجراء بعض البحث. نقترح عليك البحث عن الصفقات على تطبيق gita.com.",
+      "item5Title": "احجز مبكراً بدلاً من الانتظار حتى اللحظة الأخيرة",
+      "item5Content": "لا تنخدع بالاعتقاد بأن صفقات اللحظة الأخيرة هي بالضرورة الخيار الأفضل لتذاكر الطيران الرخيصة لأنها نادراً ما تكون كذلك. القرار الذكي هو الحجز مبكراً، حتى قبل عام إذا كان ذلك ممكناً للرحلة التي تريدها. تميل تذاكر الطيران إلى أن تكون أرخص عند إصدارها لأول مرة - وهو عادةً ما يكون قبل عام من الرحلة - لذا تحقق عبر الإنترنت بمجرد توفر الرحلات التي تريدها.",
+      "item6Title": "استخدم بطاقة الائتمان بطريقة أذكى",
+      "item6Content": "هناك الكثير من مزايا الدفع برحلة طيران ببطاقة ائتمان. إحدى المزايا هي أنك محمي عند إجراء مشتريات أكبر. تعرض بعض بطاقات الائتمان أميال طيران مقابل كل مبلغ ينفق، مما يوفر لك المزيد على تذاكر الطيران.",
+      "item7Title": "اختر رحلات بمحطة توقف",
+      "item7Content": "كثيراً ما تكون رحلات الترانزيت أرخص بكثير من الرحلات المباشرة. إذا سمح جدولك بذلك، قارن خيارات التوقف الواحد وقد تجد وفورات كبيرة مع الوصول براحة إلى وجهتك.",
+      "item8Title": "احجز عطلاً متكاملة قد تتضمن تذاكر طيران رخيصة",
+      "item8Content": "يمكن أن تقلل الصفقة المتكاملة أحياناً من التكلفة الإجمالية لرحلتك وإقامتك. تابع عروض الباقات، خاصة خلال العروض الموسمية والتخفيضات الفلاشية.",
+      "item9Title": "انتبه للتكاليف الخفية للرحلات الرخيصة",
+      "item9Content": "قبل الحجز، تحقق من سياسات الأمتعة ورسوم اختيار المقعد وتكاليف التنقل من وإلى المطار. يمكن أن يرتفع السعر المنخفض بسرعة مع الإضافات، لذا قارن دائماً السعر الإجمالي النهائي."
+    },
+    "Recommended": {
+      "title": "موصى به من gita.com",
+      "tab_destinations": "رحلات إلى الوجهات الشهيرة",
+      "tab_routes": "المسارات الجوية الشهيرة",
+      "tab_airlines": "شركات الطيران الشهيرة",
+      "tab_airports": "المطارات الشهيرة",
+      "tab_countries": "رحلات رخيصة إلى الدول الشهيرة",
+      "link_flightsBangkok": "رحلات إلى بانكوك",
+      "link_flightsManila": "رحلات إلى مانيلا",
+      "link_flightsShanghai": "رحلات إلى شنغهاي",
+      "link_flightsTokyo": "رحلات إلى طوكيو",
+      "link_flightsSeoul": "رحلات إلى سيول",
+      "link_flightsKL": "رحلات إلى كوالالمبور",
+      "link_flightsPhnomPenh": "رحلات إلى بنوم بنه",
+      "link_flightsHK": "رحلات إلى هونج كونج",
+      "link_flightsGuangzhou": "رحلات إلى قوانغتشو",
+      "link_flightsSingapore": "رحلات إلى سنغافورة",
+      "link_cairRiyadh": "القاهرة إلى الرياض",
+      "link_dubaiLondon": "دبي إلى لندن",
+      "link_jeddahCairo": "جدة إلى القاهرة",
+      "link_riyadhIstanbul": "الرياض إلى إسطنبول",
+      "link_abuDhabiBangkok": "أبوظبي إلى بانكوك",
+      "link_dohaManila": "الدوحة إلى مانيلا",
+      "link_kuwaitAmman": "الكويت إلى عمّان",
+      "link_riyadhDubai": "الرياض إلى دبي",
+      "link_dammamCairo": "الدمام إلى القاهرة",
+      "link_muscatDelhi": "مسقط إلى دلهي",
+      "link_saudia": "الخطوط السعودية",
+      "link_qatarAirways": "الخطوط القطرية",
+      "link_emirates": "طيران الإمارات",
+      "link_etihad": "الاتحاد للطيران",
+      "link_turkish": "الخطوط التركية",
+      "link_flynas": "فلاي ناس",
+      "link_flyadeal": "فلاي ديل",
+      "link_airArabia": "العربية للطيران",
+      "link_egyptair": "مصر للطيران",
+      "link_lufthansa": "لوفتهانزا",
+      "link_kingKhalid": "مطار الملك خالد الدولي",
+      "link_kingAbdulaziz": "مطار الملك عبدالعزيز الدولي",
+      "link_dubaiIntl": "مطار دبي الدولي",
+      "link_hamad": "مطار حمد الدولي",
+      "link_abuDhabiIntl": "مطار أبوظبي الدولي",
+      "link_cairoIntl": "مطار القاهرة الدولي",
+      "link_istanbul": "مطار إسطنبول",
+      "link_heathrow": "مطار هيثرو",
+      "link_suvarnabhumi": "مطار سوفارنابهومي",
+      "link_changi": "مطار سنغافورة تشانجي",
+      "link_flightsSaudi": "رحلات إلى السعودية",
+      "link_flightsUAE": "رحلات إلى الإمارات",
+      "link_flightsEgypt": "رحلات إلى مصر",
+      "link_flightsTurkey": "رحلات إلى تركيا",
+      "link_flightsThailand": "رحلات إلى تايلاند",
+      "link_flightsPhilippines": "رحلات إلى الفلبين",
+      "link_flightsIndia": "رحلات إلى الهند",
+      "link_flightsMalaysia": "رحلات إلى ماليزيا",
+      "link_flightsUK": "رحلات إلى بريطانيا",
+      "link_flightsItaly": "رحلات إلى إيطاليا"
+    }
+  },
+  "NewPage": {
+    "page": {
+      "logoAlt": "ترانزيت",
+      "searchPlaceholder": "إلى أين؟",
+      "searchAria": "بحث",
+      "openMenu": "فتح القائمة",
+      "menuTitle": "القائمة"
+    },
+    "sidebar": {
+      "mainNav": "التنقل الرئيسي",
+      "items": {
+        "hotelsHomes": "الفنادق والمساكن",
+        "flights": "الطيران",
+        "trains": "القطارات",
+        "cars": "السيارات",
+        "attractionsTours": "الأنشطة والجولات",
+        "flightHotel": "طيران + فندق",
+        "privateTours": "جولات خاصة",
+        "groupTours": "جولات جماعية",
+        "tripPlanner": "مخطط الرحلات",
+        "travelInspiration": "إلهام السفر",
+        "map": "الخريطة",
+        "deals": "العروض",
+        "rewards": "مكافآت gita.com",
+        "app": "التطبيق",
+        "licenses": "الرخصة الدولية",
+        "cruises": "كروز"
+      }
+    },
+    "navbar": {
+      "expandSidebar": "توسيع الشريط الجانبي",
+      "collapseSidebar": "تصغير الشريط الجانبي",
+      "logoAlt": "ترانزيت",
+      "search": "بحث",
+      "searchPlaceholder": "وجهات، أنشطة، فنادق، و...",
+      "accountAndTools": "الحساب والأدوات",
+      "app": "التطبيق",
+      "listProperty": "أضف عقارك",
+      "customerSupport": "دعم العملاء",
+      "findBookings": "البحث عن الحجوزات",
+      "signInRegister": "تسجيل الدخول / إنشاء حساب",
+      "profile": "الملف الشخصي",
+      "myBooking": "حجوزاتي",
+      "logout": "تسجيل الخروج"
+    },
+    "login": {
+      "welcome": "مرحبًا",
+      "subtitle": {
+        "identifier": "سجّل الدخول باستخدام رقم الهاتف",
+        "otp": "أدخل رمز OTP المكوّن من 4 أرقام المرسل إلى رقم هاتفك"
+      },
+      "fields": {
+        "identifier": {
+          "label": "رقم الهاتف"
+        },
+        "otp": {
+          "label": "رمز OTP"
+        }
+      },
+      "validation": {
+        "identifierRequired": "رقم الهاتف مطلوب",
+        "identifierInvalid": "يرجى إدخال رقم هاتف صالح",
+        "otpRequired": "رمز OTP مطلوب",
+        "otpInvalid": "يجب أن يتكوّن رمز OTP من 4 أرقام بالضبط"
+      },
+      "errors": {
+        "failedToSendOtp": "فشل إرسال رمز OTP",
+        "invalidOtp": "رمز OTP غير صحيح، حاول مرة أخرى"
+      },
+      "actions": {
+        "changeIdentifier": "تغيير رقم الهاتف",
+        "sendingOtp": "جارٍ إرسال رمز OTP...",
+        "sendOtp": "إرسال رمز OTP",
+        "verifying": "جارٍ التحقق...",
+        "verifyOtp": "تأكيد رمز OTP"
+      },
+      "or": "أو",
+      "socialLoginAlt": "تسجيل الدخول"
+    },
+    "home": {
+      "hero": {
+        "title": "رحلتك تبدأ من هنا",
+        "heroAlt": "القسم الرئيسي",
+        "badges": {
+          "securePayment": "دفع آمن",
+          "support": "دعم خلال حوالي 30 ثانية"
+        },
+        "tabs": {
+          "hotelsHomes": "الفنادق والمساكن",
+          "flights": "الطيران",
+          "trains": "القطارات",
+          "cars": "السيارات",
+          "attractionsTours": "الأنشطة والجولات",
+          "flightHotel": "طيران + فندق",
+          "cruises": "كروز"
+        }
+      },
+      "exclusive": {
+        "title": "حصري للمستخدمين الجدد",
+        "previousSlide": "الشريحة السابقة",
+        "nextSlide": "الشريحة التالية",
+        "moreAbout": "معلومات أكثر عن {category}",
+        "claimAll": "احصل على الكل",
+        "hotelsHomes": "الفنادق والمساكن",
+        "euTrains": "قطارات أوروبا",
+        "attractions": "الأنشطة",
+        "airportTransfers": "التنقّل من/إلى المطار",
+        "discount1": "خصم 10%",
+        "discount2": "خصم 5%",
+        "discount3": "خصم 8%",
+        "discount4": "خصم 12%",
+        "discount5": "خصم 15%",
+        "discount6": "خصم 18%",
+        "discount7": "خصم 20%",
+        "discount8": "خصم 22%"
+      },
+      "discover": {
+        "previousSlide": "الشريحة السابقة",
+        "nextSlide": "الشريحة التالية"
+      },
+      "hotels": {
+        "title": "استرخِ في فنادقنا المختارة في شنغهاي",
+        "previousSlide": "الشريحة السابقة",
+        "nextSlide": "الشريحة التالية",
+        "city": "شنغهاي",
+        "reviews": "{count} تقييم",
+        "from": "ابتداءً من"
+      },
+      "round": {
+        "title": "تنقّل بسهولة داخل شنغهاي",
+        "previousSlide": "الشريحة السابقة",
+        "nextSlide": "الشريحة التالية",
+        "from": "ابتداءً من",
+        "viewMore": "عرض المزيد",
+        "loading": "جاري التحميل...",
+        "loadMore": "تحميل المزيد"
+      },
+      "moments": {
+        "title": "لحظات رحلة لا تُنسى في شنغهاي",
+        "previousSlide": "الشريحة السابقة",
+        "nextSlide": "الشريحة التالية",
+        "like": "إعجاب",
+        "verified": "موثّق"
+      },
+      "trip": {
+        "title": "تنقّل بسهولة داخل شنغهاي",
+        "previousSlide": "الشريحة السابقة",
+        "nextSlide": "الشريحة التالية",
+        "badge": "رحلة متوسطة المدى"
+      },
+      "travelApp": {
+        "heroAlt": "بانر تطبيق السفر",
+        "seeImageAlt": "معاينة تطبيق السفر",
+        "title": "تطبيقك المتكامل للسفر",
+        "appOnlyDeals": "عروض خاصة بالتطبيق",
+        "easyPlanning": "تخطيط رحلة بسهولة",
+        "qrAlt": "رمز QR لتنزيل التطبيق",
+        "dailyUsers": "مستخدمون يوميًا",
+        "dailyDownloads": "تنزيلات يوميًا",
+        "rating": "التقييم",
+        "appStoreAria": "حمّل من App Store",
+        "googlePlayAria": "احصل عليه من Google Play",
+        "scanQr": "امسح رمز QR لتنزيل التطبيق"
+      }
+    },
+    "mobile": {
+      "service": {
+        "hotelsHomes": "الفنادق والمساكن",
+        "flights": "الطيران",
+        "flightHotel": "طيران + فندق",
+        "trains": "القطارات",
+        "carRentals": "تأجير سيارات",
+        "airportTransfers": "التنقّل من/إلى المطار",
+        "attractionsTours": "الأنشطة والجولات",
+        "travelGuides": "أدلة السفر",
+        "licenses": "الرخصة الدولية",
+        "cruises": "كروز"
+      },
+      "deals": {
+        "title": "عروض لفترة محدودة",
+        "securePayment": "دفع آمن",
+        "support": "دعم خلال حوالي 30 ثانية"
+      },
+      "trip": {
+        "title": "استلهم رحلتك القادمة",
+        "card1": "ربيع الشرق الأوسط | عندما تزدهر الصحراء بالحياة",
+        "card2": "تألق برجي كوالالمبور التوأم",
+        "card3": "القاهرة! أمام الأهرامات! هذا الفندق مذهل",
+        "card4": "مصر | الإسكندرية ليست مرهقة على الإطلاق"
+      }
+    }
+  },
+  "QuotationTable": {
+    "bookingNumber": "رقم الحجز",
+    "title": "العنوان",
+    "summary": "ملخص الحالة",
+    "totalAmount": "المبلغ الاجمالي للبيع",
+    "total_buy": "المبلغ الاجمالي",
+    "clientName": "اسم العميل",
+    "rating": "التقييم",
+    "invoiceStatus": "حالة الفاتورة",
+    "quotationStatus": "الفاتورة",
+    "createdBy": "أضيف بواسطة",
+    "createdAt": "تاريخ الإضافة",
+    "source": "المصدر",
+    "noRating": "لا تقييم",
+    "noStatus": "-",
+    "sortBy": "ترتيب حسب",
+    "ascending": "تصاعدي",
+    "descending": "تنازلي",
+    "status": {
+      "paid": "مدفوع",
+      "unpaid": "غير مدفوع",
+      "pending": "قيد الانتظار",
+      "confirmed": "مؤكد",
+      "approved": "معتمد",
+      "cancelled": "ملغى",
+      "deleted": "محذوف",
+      "ordered": "تم الطلب",
+      "ordered+paid": "تم الطلب والدفع",
+      "partial": "دفع جزئي",
+      "refunded": "مسترد"
+    }
+  },
+  "MyBooking": {
+    "title": "حجوزاتي",
+    "travelWorryFree": "ضمان السفر بلا قلق",
+    "cantFindBooking": "لا يمكنك العثور على حجزك؟",
+    "tabs": {
+      "all": "الكل",
+      "awaitingPayment": "بانتظار الدفع",
+      "upcoming": "قادمة",
+      "awaitingReview": "بانتظار المراجعة"
+    },
+    "member": "عضو",
+    "loading": "جارٍ تحميل الحجوزات...",
+    "noBookings": "ليس لديك أي حجوزات أو لا يمكننا الوصول إلى حجوزاتك في هذا الوقت.",
+    "searchBookings": "بحث عن الحجوزات",
+    "bookingNumber": "رقم الحجز",
+    "bookingDate": "تاريخ الحجز",
+    "passengers": "راكب(ركاب)",
+    "status": {
+      "ticketed": "تم إصدار التذكرة",
+      "pending": "قيد الانتظار",
+      "cancelled": "ملغى",
+      "confirmed": "مؤكد",
+      "paid": "مدفوع",
+      "upcoming": "قادم",
+      "finished": "مكتمل",
+      "failed": "فشل",
+      "awaiting": "بانتظار",
+      "unpaid": "غير مدفوع",
+      "canceled": "ملغي",
+      "processing": "قيد المعالجة"
+    },
+    "sidebar": {
+      "myBookings": "حجوزاتي",
+      "tabs": {
+        "all": "الكل",
+        "flights": "الطيران",
+        "hotels": "الفنادق",
+        "trains": "القطارات",
+        "carRentals": "تأجير سيارات",
+        "airportTransfers": "التنقل من/إلى المطار",
+        "attractionsTours": "الأنشطة والجولات",
+        "flightHotel": "طيران + فندق",
+        "privateTours": "جولات خاصة",
+        "tourPackages": "باقات الجولات",
+        "cruises": "الرحلات البحرية"
+      },
+      "savedItems": {
+        "saved": "المحفوظ",
+        "account": "الحساب",
+        "myPosts": "منشوراتي",
+        "priceAlerts": "تنبيهات الأسعار",
+        "myCards": "بطاقاتي",
+        "giftCards": "بطاقات الهدايا",
+        "promoCodes": "أكواد الخصم"
+      }
+    },
+    "support": {
+      "button": "الدعم",
+      "title": "تواصل مع الدعم",
+      "bookingRef": "الحجز",
+      "reasonLabel": "بماذا تحتاج المساعدة؟",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "اشرح طلبك بالتفصيل...",
+      "reasons": {
+        "refund": "استرداد",
+        "cancel": "إلغاء",
+        "other": "أخرى"
+      },
+      "submit": "إرسال التذكرة",
+      "submitting": "جارٍ الإرسال...",
+      "cancel": "إلغاء",
+      "close": "إغلاق",
+      "successTitle": "تم إرسال التذكرة بنجاح",
+      "successMessage": "تم إرسال تذكرة الدعم بنجاح. سيقوم فريقنا بمراجعتها قريبًا.",
+      "viewTickets": "عرض تذاكر الدعم",
+      "missingBookingRef": "تعذر تحديد هذا الحجز. يرجى المحاولة لاحقًا.",
+      "bookingTypes": {
+        "cruise": "رحلة بحرية"
+      }
+    }
+  },
+  "LicenseBooking": {
+    "title": "الرخصة الدولية",
+    "subtitle": "أدخل بياناتك وارفع المستندات المطلوبة للحصول على رخصتك الدولية.",
+    "heroImageAlt": "الرخصة الدولية للقيادة",
+    "welcomeTitle": "تهانينا وصلت معانا!",
+    "welcomeSubtitle": "أدخل بياناتك واحصل على رخصتك الدولية",
+    "requirementsTitle": "متطلبات الرخصة",
+    "contactInfo": "بيانات التواصل",
+    "fullName": "الإسم بالكامل",
+    "email": "البريد الإلكتروني",
+    "nationalAddress": "العنوان الوطني",
+    "nationalAddressPlaceholder": "أضف العنوان الوطني أو الكود الخاص به",
+    "phone": "رقم الهاتف",
+    "requiredFiles": "الملفات المطلوبة",
+    "passportPhoto": "صورة الجواز",
+    "passportPhotoHint": "أرفق صورة الجواز من هنا",
+    "localLicensePhoto": "صورة الرخصة السعودية",
+    "localLicensePhotoHint": "أرفق صورة الرخصة السعودية من هنا",
+    "personalPhoto": "صورة شخصية مكشوفة الرأس",
+    "personalPhotoHint": "أرفق صورة شخصية بخلفية بيضاء من هنا",
+    "personalPhotoRequirement": "صورة شخصية مكشوفة الرأس بخلفية بيضاء",
+    "discountCode": "كود الخصم",
+    "discountCodePlaceholder": "أدخل كود الخصم هنا",
+    "apply": "تطبيق",
+    "applying": "جاري التطبيق...",
+    "clearCoupon": "مسح الكود",
+    "removeFile": "إزالة الملف",
+    "choosePaymentMethod": "اختر طريقة الدفع التي تناسبك",
+    "payWithBalance": "الدفع من الرصيد",
+    "availableBalance": "المتاح",
+    "tamara": "تمارا",
+    "priceDetails": "تفاصيل السعر",
+    "internationalLicense": "الرخصة الدولية",
+    "total": "الإجمالي",
+    "payNow": "ادفع الآن",
+    "submitting": "جاري المعالجة...",
+    "priceValidationError": "تعذر التحقق من السعر الحالي. يرجى المحاولة مرة أخرى.",
+    "insufficientBalanceDescription": "المبلغ يتجاوز رصيدك المتاح. يرجى اختيار طريقة دفع أخرى.",
+    "outcomeSuccessTitle": "تم تأكيد طلب الرخصة",
+    "outcomeSuccessDescription": "شكراً لك. تم إرسال طلب الرخصة الدولية بنجاح. ستصلك رسالة تأكيد قريباً.",
+    "outcomeFailedTitle": "تعذر إتمام الدفع",
+    "outcomeFailedDescription": "حدث خطأ أو تعذر التحقق من الدفع. يمكنك المحاولة مرة أخرى من هذه الصفحة.",
+    "bookingReference": "رقم الطلب",
+    "contactSummary": "ملخص التواصل",
+    "outcomeTryAgain": "حاول مرة أخرى",
+    "backToHome": "العودة للرئيسية",
+    "backToForm": "العودة للنموذج",
+    "noBookingData": "لا توجد بيانات حجز",
+    "noBookingDataDescription": "لم نتمكن من العثور على تفاصيل طلب الرخصة. يرجى بدء طلب جديد.",
+    "faq": {
+      "title": "الأسئلة الشائعة",
+      "items": {
+        "driveInsideSaudi": {
+          "question": "هل يمكنني القيادة بالرخصة الدولية داخل السعودية؟",
+          "answer": "لا، يجب استخدام الرخصة السعودية داخل السعودية."
+        },
+        "validityPeriod": {
+          "question": "ما هي مدة صلاحية الرخصة الدولية؟",
+          "answer": "مدة الصلاحية مرتبطة بمدة صلاحية الإقامة (للمقيمين) أو صلاحية الرخصة المحلية."
+        },
+        "withoutSaudiLicense": {
+          "question": "هل يمكن إصدار الرخصة الدولية بدون رخصة سعودية؟",
+          "answer": "لا، يجب أن تكون لديك رخصة قيادة سعودية سارية."
+        },
+        "validityOutside": {
+          "question": "هل تكفي الرخصة الدولية وحدها للقيادة خارج السعودية؟",
+          "answer": "لا، يجب حمل كل من الرخصة الدولية والرخصة السعودية الأصلية معاً."
+        },
+        "processingTime": {
+          "question": "كم يستغرق إصدار الرخصة الدولية؟",
+          "answer": "يختلف حسب طريقة الاستلام: إلكترونياً مع الشحن من 2 إلى 5 أيام، والاستلام من الفرع غالباً في نفس اليوم."
+        },
+        "permittedCountries": {
+          "question": "عدد الدول المسموح فيها القيادة بالرخصة الدولية؟",
+          "answer": "أكثر من 150 دولة."
+        },
+        "vehicleCategories": {
+          "question": "فئات المركبات المسموح قيادتها بالرخصة الدولية؟",
+          "answer": "المركبات التي تستطيع قيادتها دولياً هي نفس الفئات المسموح بها في رخصتك المحلية (مثل الفئة B)."
+        },
+        "citizensAndResidents": {
+          "question": "هل الخدمة متاحة للسعوديين والمقيمين؟",
+          "answer": "نعم."
+        }
+      }
+    },
+    "validation": {
+      "nameRequired": "الإسم بالكامل مطلوب",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+      "addressRequired": "العنوان الوطني مطلوب",
+      "phoneInvalid": "أدخل رقم هاتف صحيح",
+      "passportRequired": "صورة الجواز مطلوبة",
+      "localLicenseRequired": "صورة الرخصة السعودية مطلوبة",
+      "personalPhotoRequired": "الصورة الشخصية مطلوبة",
+      "filesRequired": "يرجى رفع جميع الملفات المطلوبة",
+      "invalidFileType": "يُسمح فقط بصور JPEG أو PNG أو WebP",
+      "fileTooLarge": "يجب أن يكون حجم الملف أقل من {size} ميجابايت"
+    }
+  },
+  "CruiseSearchForm": {
+    "regionLabel": "المنطقة",
+    "portLabel": "كود الميناء",
+    "datesLabel": "التواريخ",
+    "selectRegion": "اختر المنطقة",
+    "selectPort": "اختر الميناء",
+    "selectDates": "اختر التواريخ",
+    "selectDatesHint": "اختر شهرًا أو أكثر",
+    "confirmDates": "تأكيد التواريخ",
+    "monthsSelected": "{count, plural, zero {لا أشهر} one {شهر واحد} two {شهران} few {# أشهر} many {# شهرًا} other {# شهر}}",
+    "passengersLabel": "الركاب",
+    "search": "بحث",
+    "searching": "جاري البحث عن الرحلات البحرية...",
+    "adult": "بالغ",
+    "adults": "بالغين",
+    "child": "طفل",
+    "children": "أطفال",
+    "infant": "رضيع",
+    "infants": "رضع",
+    "regions": {
+      "allRegions": "جميع المناطق",
+      "redSea": "البحر الأحمر",
+      "arabianGulf": "الخليج العربي",
+      "mediterranean": "البحر الأبيض المتوسط",
+      "worldCruises": "رحلات عالمية"
+    },
+    "ports": {
+      "allPorts": "جميع الموانئ",
+      "jeddah": "جدة",
+      "dammam": "الدمام",
+      "yanbu": "ينبع",
+      "istanbul": "إسطنبول",
+      "alexandria": "الإسكندرية"
+    },
+    "validation": {
+      "selectDates": "يرجى اختيار شهر واحد على الأقل."
+    }
+  },
+  "CruisePage": {
+    "resultsTitle": "الرحلات البحرية المتاحة",
+    "resultsCount": "{count, plural, zero {لا توجد رحلات} one {رحلة واحدة متاحة} two {رحلتان متاحتان} few {# رحلات متاحة} many {# رحلة متاحة} other {# رحلة متاحة}}",
+    "noCruisesTitle": "لا توجد رحلات",
+    "noCruisesFound": "لم يتم العثور على رحلات مطابقة لمعايير بحثك.",
+    "emptyStateHint": "جرّب تغيير المنطقة أو الميناء أو الأشهر أو عدد الركاب.",
+    "searchErrorTitle": "فشل البحث",
+    "searchError": "تعذر البحث عن الرحلات البحرية. يرجى المحاولة مرة أخرى.",
+    "retrySearch": "إعادة المحاولة",
+    "Hero": {
+      "title": "كروز",
+      "subtitle": "احجز رحلتك البحرية القادمة",
+      "heroImageAlt": "صورة الكروز"
+    },
+    "Card": {
+      "defaultShip": "كروز",
+      "nights": "{count, plural, zero {لا ليالي} one {ليلة واحدة} two {ليلتان} few {# ليالي} many {# ليلة} other {# ليلة}}",
+      "roundTrip": "ذهاب وعودة",
+      "oneWay": "اتجاه واحد"
+    },
+    "Itinerary": {
+      "title": "خط سير الرحلة",
+      "back": "رجوع",
+      "ship": "السفينة",
+      "dates": "التواريخ",
+      "route": "المسار",
+      "daysCount": "{count, plural, zero {لا أيام} one {يوم واحد} two {يومان} few {# أيام} many {# يومًا} other {# يوم}}",
+      "dayAtSea": "يوم في البحر",
+      "arrival": "الوصول",
+      "departure": "المغادرة",
+      "shoreExcursions": "جولات برية",
+      "next": "التالي",
+      "loadError": "تعذر تحميل خط سير الرحلة. يرجى المحاولة مرة أخرى.",
+      "retry": "إعادة المحاولة",
+      "empty": "لا توجد تفاصيل لخط سير هذه الرحلة."
+    },
+    "Cabins": {
+      "title": "اختر كابينتك",
+      "back": "رجوع",
+      "cabinCount": "عدد المقصورات",
+      "distributeGuests": "توزيع الضيوف على المقصورات",
+      "cabinN": "مقصورة {n}",
+      "chooseCabin": "اختر كابينتك",
+      "upToGuests": "حتى {count} نزلاء",
+      "next": "التالي",
+      "apply": "تطبيق",
+      "loadError": "تعذر تحميل فئات الكابينة. يرجى المحاولة مرة أخرى.",
+      "empty": "لا توجد فئات كابينة متاحة لهذا الاختيار.",
+      "cabinFallback": "كابينة",
+      "adult": "بالغ",
+      "adults": "بالغ",
+      "child": "طفل",
+      "children": "أطفال",
+      "infant": "رضيع",
+      "infants": "رضع",
+      "adultN": "بالغ {n}",
+      "childN": "طفل {n}",
+      "infantN": "رضيع {n}",
+      "adultRequiredError": "يجب أن تحتوي كل مقصورة على بالغ واحد على الأقل.",
+      "pickCabinNumber": "اختر الكابينة",
+      "deck": "الطابق",
+      "deckAll": "الكل",
+      "details": "التفاصيل",
+      "guaranteeCabin": "كابينة الضمان",
+      "starboard": "ميمنة",
+      "port": "ميسرة",
+      "forward": "أمامي",
+      "aft": "خلفي",
+      "midship": "وسط السفينة",
+      "location": "الموقع",
+      "cabinDetails": "تفاصيل الكابينة",
+      "description": "الوصف",
+      "amenities": "المرافق",
+      "bedType": "نوع السرير {type}",
+      "chooseThisCabin": "اختيار هذه الكابينة",
+      "cabinsLoadError": "تعذر تحميل أرقام الكابينات. يرجى المحاولة مرة أخرى.",
+      "cabinsEmpty": "لا توجد كابينات متاحة لهذا الاختيار."
+    }
+  },
+  "CruiseBooking": {
+    "title": "بيانات الحجز",
+    "back": "رجوع",
+    "summaryTitle": "ملخص الحجز",
+    "contactTitle": "بيانات التواصل",
+    "guestsTitle": "بيانات المسافرين",
+    "fullName": "الإسم بالكامل",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "firstName": "الإسم الأول",
+    "lastName": "الإسم الأخير",
+    "namePlaceholder": "باللغة الإنجليزية حسب وثيقة السفر",
+    "birthDate": "تاريخ الميلاد",
+    "gender": "الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "nationality": "الجنسية",
+    "guestLabel": "مسافر {number} ({type})",
+    "adult": "بالغ",
+    "child": "طفل",
+    "infant": "رضيع",
+    "acceptTerms": "أوافق على الشروط و الأحكام و سياسة الخصوصية",
+    "paymentSummary": "ملخص الدفع",
+    "paymentMethod": "اختر طريقة الدفع التي تناسبك",
+    "payWithBalance": "الدفع من الرصيد",
+    "availableBalance": "المتاح",
+    "tamara": "تمارا",
+    "finalPrice": "السعر النهائي",
+    "profit": "الربح",
+    "cabins": "مقصورات",
+    "guests": "نزلاء",
+    "next": "التالي",
+    "submitting": "جاري الحجز...",
+    "noData": "لا توجد بيانات حجز كروز",
+    "noDataDescription": "يرجى الرجوع واختيار كابينات الرحلة أولاً.",
+    "backToSearch": "العودة للكروز",
+    "priceValidationError": "تعذر التحقق من السعر. يرجى المحاولة مرة أخرى.",
+    "insufficientBalance": "الرصيد غير كافٍ لهذا الحجز.",
+    "insufficientBalanceTitle": "رصيد غير كافٍ",
+    "insufficientBalanceDescription": "السعر الإجمالي يتجاوز رصيدك المتاح. اختر طريقة دفع أخرى أو ارجع للبحث.",
+    "insufficientBalanceNote": "الدفع من الرصيد غير متاح لأن الإجمالي تجاوز رصيدك.",
+    "priceChanged": "تغير السعر",
+    "priceChangedDescription": "تغير السعر الإجمالي. يمكنك المتابعة بالسعر الجديد أو الرجوع للبحث.",
+    "oldPrice": "السعر السابق",
+    "newPrice": "السعر الجديد",
+    "continueWithNewPrice": "المتابعة بالسعر الجديد",
+    "priceAndBalanceChanged": "تحديث السعر والرصيد",
+    "priceAndBalanceChangedDescription": "تغير السعر وأصبح أعلى من رصيدك. اختر طريقة دفع أخرى أو ارجع للبحث.",
+    "chooseAnotherPaymentMethod": "اختيار طريقة دفع أخرى",
+    "total": "الإجمالي",
+    "errors": {
+      "fullName": "أدخل الاسم بالكامل",
+      "fullNameTwoWords": "يجب أن يحتوي اسم التواصل على كلمتين على الأقل.",
+      "email": "أدخل بريداً إلكترونياً صالحاً",
+      "phone": "أدخل رقم هاتف صالح",
+      "firstName": "أدخل الاسم الأول",
+      "lastName": "أدخل الاسم الأخير",
+      "birthDate": "أدخل تاريخ الميلاد",
+      "nationality": "اختر الجنسية",
+      "terms": "يجب الموافقة على الشروط والأحكام"
+    },
+    "resultSuccessTitle": "تم الدفع وجاري تأكيد الحجز",
+    "resultSuccessDescription": "تم استلام الدفع بنجاح، وجاري تأكيد حجز الكروز. يمكنك متابعة الحالة من حجوزاتي.",
+    "resultFailedTitle": "تعذر إتمام الحجز",
+    "resultFailedDescription": "حدث خطأ أو تعذر التحقق من الدفع.",
+    "bookingReference": "رقم الحجز",
+    "viewMyBookings": "حجوزاتي",
+    "verifyingBooking": "جاري التحقق من الحجز...",
+    "bookingVerified": "تم التحقق من الحجز",
+    "tryAgain": "إعادة المحاولة"
+  },
+  "RorySearchForm": {
+    "passengersLabel": "المسافرون",
+    "Passengers": {
+      "passenger": "مسافر",
+      "passengers": "مسافرون",
+      "selectPassengersHint": "يرجى اختيار العدد الدقيق للمسافرين لعرض أفضل الأسعار",
+      "adults": "بالغون",
+      "adultsAge": "12+ سنة",
+      "children": "أطفال",
+      "childrenAge": "2-11 سنة",
+      "infantsLap": "رضع على الحجر",
+      "infantsAge": "أقل من سنتين",
+      "done": "تم"
+    }
+  }
 }

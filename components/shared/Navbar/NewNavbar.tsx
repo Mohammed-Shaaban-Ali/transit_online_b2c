@@ -27,6 +27,10 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
       href: "/flights",
     },
     {
+      label: t("cruises"),
+      href: "/cruises",
+    },
+    {
       label: t("licenses"),
       href: "/licenses",
     },

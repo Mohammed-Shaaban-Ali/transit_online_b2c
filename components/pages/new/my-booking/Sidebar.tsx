@@ -14,6 +14,7 @@ function MyBookingSidebar() {
     { label: t("tabs.all"), value: "all" },
     { label: t("tabs.flights"), value: "flights" },
     { label: t("tabs.hotels"), value: "hotels" },
+    { label: t("tabs.cruises"), value: "cruises" },
     { label: t("tabs.trains"), value: "trains" },
     { label: t("tabs.carRentals"), value: "car-rentals" },
     { label: t("tabs.airportTransfers"), value: "airport-transfers" },

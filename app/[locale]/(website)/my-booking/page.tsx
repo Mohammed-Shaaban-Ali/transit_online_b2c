@@ -8,15 +8,21 @@ import FlightBookingCard, {
 import HotelBookingCard, {
   HotelBookingCardSkeleton,
 } from "@/components/pages/new/my-booking/HotelBookingCard";
+import CruiseBookingCard, {
+  CruiseBookingCardSkeleton,
+} from "@/components/pages/new/my-booking/CruiseBookingCard";
 import React from "react";
 import { CircleHelp, Download, User, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGetMyBookingQuery } from "@/redux/features/auth/authApi";
 import { useGetHotelBookingsQuery } from "@/redux/features/hotels/hotelsApi";
+import { useGetAppBookingsQuery } from "@/redux/features/bookings/bookingsApi";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTranslations } from "next-intl";
-import { useRouter, usePathname } from "@/i18n/navigation";
+import { useRouter, usePathname, Link } from "@/i18n/navigation";
 import { useSearchParams } from "next/navigation";
+import { matchesBookingStatusFilter } from "@/utils/bookingStatusFilter";
+import type { AppCruiseBooking } from "@/types/appBookingsTypes";
 
 const STATUS_TABS = ["all", "awaiting-payment", "upcoming", "awaiting-review"];
 
@@ -41,24 +47,47 @@ function page() {
     useGetMyBookingQuery();
   const { data: hotelBookingsData, isLoading: isHotelBookingsLoading } =
     useGetHotelBookingsQuery();
+  const { data: appBookingsResponse, isLoading: isAppBookingsLoading } =
+    useGetAppBookingsQuery();
   const t = useTranslations("MyBooking");
 
   const bookings = bookingsData?.data ?? [];
   const hotelBookings = hotelBookingsData?.data ?? [];
+  const cruiseBookings: AppCruiseBooking[] = (
+    appBookingsResponse?.data?.cruises ?? []
+  ).filter((booking) =>
+    matchesBookingStatusFilter(
+      { status: booking.status, payment: booking.payment },
+      activeStatus,
+    ),
+  );
 
   // Determine which sections are visible based on sidebar ?tab=
   const showFlights = activeTab === "all" || activeTab === "flights";
   const showHotels = activeTab === "all" || activeTab === "hotels";
+  const showCruises = activeTab === "all" || activeTab === "cruises";
 
   const visibleFlights = showFlights ? bookings : [];
   const visibleHotels = showHotels ? hotelBookings : [];
+  const visibleCruises = showCruises ? cruiseBookings : [];
 
   const isFlightsLoading = showFlights && isBookingsLoading;
   const isHotelsLoading = showHotels && isHotelBookingsLoading;
-  const isAnyLoading = isFlightsLoading || isHotelsLoading;
+  const isCruisesLoading = showCruises && isAppBookingsLoading;
+  const isAnyLoading = isFlightsLoading || isHotelsLoading || isCruisesLoading;
 
   const hasNoBookings =
-    !isAnyLoading && visibleFlights.length === 0 && visibleHotels.length === 0;
+    !isAnyLoading &&
+    visibleFlights.length === 0 &&
+    visibleHotels.length === 0 &&
+    visibleCruises.length === 0;
+
+  const emptySearchHref =
+    activeTab === "cruises"
+      ? "/cruises"
+      : activeTab === "hotels"
+        ? "/hotels"
+        : "/flights";
 
   const topTabs = [
     { label: t("tabs.all"), value: "all" },
@@ -171,8 +200,8 @@ function page() {
                     <p className="text-16 font-bold leading-[1.45] text-gray-500">
                       {t("noBookings")}
                     </p>
-                    <Button type="button" className="mt-6 h-12">
-                      {t("searchBookings")}
+                    <Button type="button" className="mt-6 h-12" asChild>
+                      <Link href={emptySearchHref}>{t("searchBookings")}</Link>
                     </Button>
                   </div>
                 </div>
@@ -207,6 +236,21 @@ function page() {
               !isHotelBookingsLoading &&
               visibleHotels.map((booking: any) => (
                 <HotelBookingCard key={booking.id} booking={booking} />
+              ))}
+
+            {/* Cruise skeletons */}
+            {isCruisesLoading && (
+              <>
+                <CruiseBookingCardSkeleton />
+                <CruiseBookingCardSkeleton />
+              </>
+            )}
+
+            {/* Cruise cards */}
+            {showCruises &&
+              !isAppBookingsLoading &&
+              visibleCruises.map((booking) => (
+                <CruiseBookingCard key={booking.id} booking={booking} />
               ))}
           </div>
         </div>

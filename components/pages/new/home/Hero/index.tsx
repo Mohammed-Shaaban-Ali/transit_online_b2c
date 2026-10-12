@@ -8,11 +8,13 @@ import {
   Landmark,
   Plane,
   Search,
+  Ship,
   Train,
   ChevronDown,
 } from "lucide-react";
 import Form from "@/components/pages/flights-test/FlightsTestHero/Form";
 import HotelsTestHotelSearchForm from "@/components/pages/hotels-test/HotelsTestHero/Form/HotelsTestHotelSearchForm";
+import CruiseSearchForm from "@/components/pages/cruises/CruiseSearchForm";
 import { useTranslations } from "next-intl";
 
 type Props = {};
@@ -27,6 +29,12 @@ function Hero({}: Props) {
       disabled: false,
     },
     { key: "flights", title: t("tabs.flights"), icon: Plane, disabled: false },
+    {
+      key: "cruises",
+      title: t("tabs.cruises"),
+      icon: Ship,
+      disabled: false,
+    },
     // { key: "trains", title: t("tabs.trains"), icon: Train, disabled: true },
     // { key: "cars", title: t("tabs.cars"), icon: Car, disabled: true },
     // {
@@ -58,7 +66,13 @@ function Hero({}: Props) {
     <section
       className={`relative w-full px-3 md:px-4 
     
-    ${activeTab === "hotelsHomes" ? "h-[380px] md:h-[320px]" : "h-[460px] md:h-[340px]"}`}
+    ${
+      activeTab === "hotelsHomes"
+        ? "h-[380px] md:h-[320px]"
+        : activeTab === "cruises"
+          ? "h-[380px] md:h-[300px]"
+          : "h-[460px] md:h-[340px]"
+    }`}
     >
       <div className="relative h-full w-full">
         <div className="absolute inset-0 bg-black/50 rounded-2xl"></div>
@@ -133,6 +147,8 @@ function Hero({}: Props) {
             >
               {activeTab === "hotelsHomes" ? (
                 <HotelsTestHotelSearchForm className="mt-10" />
+              ) : activeTab === "cruises" ? (
+                <CruiseSearchForm className="mt-10" />
               ) : (
                 <Form />
               )}

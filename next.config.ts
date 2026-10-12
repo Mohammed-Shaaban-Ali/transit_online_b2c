@@ -28,6 +28,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "dimg04.tripcdn.com",
       },
+      {
+        protocol: "https",
+        hostname: "gp-aroya-cruise.oss-me-central-1.aliyuncs.com",
+      },
     ],
   },
 };

@@ -207,8 +207,17 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
         "/api/auth/login",
         "/api/auth/verify-otp",
         "/api/licenses/book",
+        "/api/cruises/ayroya/search",
+        "/api/cruises/aroya/search",
+        "/api/cruises/aroya/itinerary",
+        "/api/cruises/aroya/categories-multiple",
+        "/api/cruises/aroya/cabins-multiple",
+        "/api/cruises/aroya/book",
       ];
-      if (notToastUrls.includes(url)) {
+      if (
+        notToastUrls.includes(url) ||
+        url?.startsWith("/api/cruises/aroya/bookings/")
+      ) {
         return result;
       }
       // Don't show toast for 401/403 as we already handled them above
@@ -238,9 +247,18 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
         "/api/auth/login",
         "/api/auth/verify-otp",
         "/api/licenses/book",
+        "/api/cruises/ayroya/search",
+        "/api/cruises/aroya/search",
+        "/api/cruises/aroya/itinerary",
+        "/api/cruises/aroya/categories-multiple",
+        "/api/cruises/aroya/cabins-multiple",
+        "/api/cruises/aroya/book",
       ];
 
-      if (notToastUrls.includes(url)) {
+      if (
+        notToastUrls.includes(url) ||
+        url?.startsWith("/api/cruises/aroya/bookings/")
+      ) {
         return result;
       } else {
         const successMsg = (result.data as SuccessResponse<any>).msg;
@@ -259,13 +277,13 @@ const baseQueryWithInterceptor2 = createBaseQueryWithInterceptor(baseQuery2);
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithInterceptor,
-  tagTypes: ["locale"],
+  tagTypes: ["locale", "AppBookings", "Tickets"],
   endpoints: () => ({}),
 });
 
 export const baseApi2 = createApi({
   reducerPath: "api2",
   baseQuery: baseQueryWithInterceptor2,
-  tagTypes: ["locale"],
+  tagTypes: ["locale", "AppBookings", "Tickets"],
   endpoints: () => ({}),
 });

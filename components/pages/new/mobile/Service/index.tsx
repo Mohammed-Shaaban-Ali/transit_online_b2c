@@ -10,7 +10,7 @@ import {
   IdCard,
   Plane,
   PlaneTakeoff,
-  TrainFront,
+  Ship,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -66,7 +66,12 @@ export default function Service() {
       href: "/licenses",
       active: true,
     },
-    { label: t("trains"), icon: TrainFront },
+    {
+      label: t("cruises"),
+      icon: Ship,
+      href: "/cruises",
+      active: true,
+    },
   ];
   const secondRow: MobileServiceItem[] = [
     {

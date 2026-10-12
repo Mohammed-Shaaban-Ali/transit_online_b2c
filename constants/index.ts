@@ -9,6 +9,11 @@ export const LICENSE_BOOKING_FORM_DATA_KEY = "LICENSE_BOOKING_FORM_DATA";
 export const LICENSE_BOOKING_ID_KEY = "LICENSE_BOOKING_ID";
 export const LICENSE_BOOKING_PRICE_DATA_KEY = "LICENSE_BOOKING_PRICE_DATA";
 export const LICENSE_BOOKING_OUTCOME_KEY = "LICENSE_BOOKING_OUTCOME";
+export const CRUISE_BOOKING_KEY = "cruise-booking-data";
+export const CRUISE_BOOKING_ID_KEY = "CRUISE_BOOKING_ID";
+export const CRUISE_BOOKING_FORM_DATA_KEY = "CRUISE_BOOKING_FORM_DATA";
+export const CRUISE_BOOKING_PRICE_DATA_KEY = "CRUISE_BOOKING_PRICE_DATA";
+export const CRUISE_BOOKING_OUTCOME_KEY = "CRUISE_BOOKING_OUTCOME";
 
 export const localStorageHotelSearchKey = `hotel-search-b2c`;
 export const localStorageHotelRecentSearchesKey = `hotel-search-recent-b2c`;

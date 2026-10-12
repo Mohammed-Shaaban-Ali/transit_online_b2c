@@ -13,6 +13,8 @@ export interface AuthUser {
   roles: unknown[];
   type: string;
   chat: unknown;
+  /** Present on B2B company accounts; used by my-booking support tickets */
+  is_company_b2b_account?: boolean;
 }
 
 interface AuthState {

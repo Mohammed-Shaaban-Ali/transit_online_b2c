@@ -14,6 +14,7 @@ import {
     MapPinned,
     Plane,
     Route,
+    Ship,
     Smartphone,
     TrainFront,
 } from "lucide-react";
@@ -47,6 +48,12 @@ const getSidebarItems = (t: SidebarT): SidebarItem[][] => [
             label: t("licenses"),
             href: "/licenses",
             icon: IdCard,
+            disabled: false,
+        },
+        {
+            label: t("cruises"),
+            href: "/cruises",
+            icon: Ship,
             disabled: false,
         },
         {

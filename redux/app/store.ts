@@ -3,6 +3,10 @@ import { baseApi, baseApi2 } from "./baseApi";
 import hotelFilterSlice from "../features/hotels/hotelFilterSlice";
 import flightFilterSlice from "../features/flights/flightFilterSlice";
 import authSlice from "../features/auth/authSlice";
+import cruiseSearchSlice from "../features/cruises/cruiseSearchSlice";
+import "../features/cruises/cruisesApi";
+import "../features/bookings/bookingsApi";
+import "../features/tickets/ticketsApi";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +14,7 @@ export const store = configureStore({
     [baseApi2.reducerPath]: baseApi2.reducer,
     hotelFilter: hotelFilterSlice.reducer,
     flightFilter: flightFilterSlice.reducer,
+    cruiseSearch: cruiseSearchSlice.reducer,
     auth: authSlice.reducer,
   },
   middleware(getDefaultMiddleware) {
