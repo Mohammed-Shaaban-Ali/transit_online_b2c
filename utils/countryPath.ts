@@ -1,5 +1,6 @@
 import {
   SUPPORTED_COUNTRIES,
+  ACTIVE_COUNTRIES,
   DEFAULT_COUNTRY,
   type Country,
 } from "@/config/countries";
@@ -9,13 +10,20 @@ export function isCountry(value: string | undefined | null): value is Country {
   return !!value && SUPPORTED_COUNTRIES.includes(value as Country);
 }
 
+/** Only countries currently allowed (Saudi only for now). */
+export function isActiveCountry(
+  value: string | undefined | null,
+): value is Country {
+  return !!value && ACTIVE_COUNTRIES.includes(value as Country);
+}
+
 /**
  * Read country from a browser pathname: /[locale]/[country]/...
- * Returns null when the country segment is missing.
+ * Returns null when the country segment is missing or inactive (e.g. eg).
  */
 export function parseCountryFromPath(pathname: string): Country | null {
   const parts = pathname.split("/").filter(Boolean);
-  if (parts.length >= 2 && isCountry(parts[1])) {
+  if (parts.length >= 2 && isActiveCountry(parts[1])) {
     return parts[1];
   }
   return null;
@@ -24,7 +32,7 @@ export function parseCountryFromPath(pathname: string): Country | null {
 export function parseCountryCookie(
   value: string | undefined | null,
 ): Country | null {
-  return isCountry(value) ? value : null;
+  return isActiveCountry(value) ? value : null;
 }
 
 /** Resolve country from path, then cookie, then default. */

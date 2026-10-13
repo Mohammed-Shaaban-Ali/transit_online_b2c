@@ -7,7 +7,16 @@
 
 export const SUPPORTED_COUNTRIES = ["eg", "sa"] as const;
 export type Country = (typeof SUPPORTED_COUNTRIES)[number];
-export const DEFAULT_COUNTRY: Country = "eg";
+export const DEFAULT_COUNTRY: Country = "sa";
+
+/**
+ * Countries currently allowed in the URL / cookie.
+ * Only Saudi Arabia for now — uncomment "eg" to bring Egypt back.
+ */
+export const ACTIVE_COUNTRIES: readonly Country[] = [
+  // "eg",
+  "sa",
+];
 
 export interface CountryConfig {
   code: Country;

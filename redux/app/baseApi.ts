@@ -8,7 +8,7 @@ import { RootState } from "./store";
 import {
   COUNTRIES_CONFIG,
   DEFAULT_COUNTRY,
-  SUPPORTED_COUNTRIES,
+  ACTIVE_COUNTRIES,
   Country,
 } from "@/config/countries";
 
@@ -57,7 +57,7 @@ const createBaseQuery = (baseUrl: string) =>
 
       const savedCountry = getCookie(COUNTRY_COOKIE) as string | undefined;
       const countryKey: Country =
-        savedCountry && SUPPORTED_COUNTRIES.includes(savedCountry as Country)
+        savedCountry && ACTIVE_COUNTRIES.includes(savedCountry as Country)
           ? (savedCountry as Country)
           : DEFAULT_COUNTRY;
       const countryConfig = COUNTRIES_CONFIG[countryKey];

@@ -4,9 +4,16 @@ import { routing } from "./i18n/routing";
 import {
   SUPPORTED_COUNTRIES,
   DEFAULT_COUNTRY,
+  ACTIVE_COUNTRIES,
   Country,
 } from "./config/countries";
 import { COUNTRY_COOKIE } from "./constants";
+
+function isActiveCountry(value: string | null | undefined): value is Country {
+  return (
+    !!value && ACTIVE_COUNTRIES.includes(value as Country)
+  );
+}
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -61,6 +68,24 @@ export default function proxy(request: NextRequest) {
   }
 
   const { locale, country, restPath } = parsed;
+
+  // Force Saudi Arabia only — redirect inactive countries (e.g. /ar/eg → /ar/sa)
+  if (country && !isActiveCountry(country)) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname =
+      `/${locale}/${DEFAULT_COUNTRY}` + (restPath === "/" ? "" : restPath);
+    const response = NextResponse.redirect(redirectUrl);
+    response.cookies.set(COUNTRY_COOKIE, DEFAULT_COUNTRY, {
+      maxAge: 60 * 60 * 24 * 365,
+      path: "/",
+      sameSite: "lax",
+    });
+    response.headers.set(
+      "Cache-Control",
+      "private, no-cache, no-store, max-age=0, must-revalidate",
+    );
+    return response;
+  }
 
   if (country) {
     // ── Valid country in URL ─────────────────────────────────────────────────
@@ -125,13 +150,12 @@ export default function proxy(request: NextRequest) {
   }
 
   // ── No country in URL — redirect to add it ───────────────────────────────
-  // Prefer cookie; default eg. Do not cache: App Router can reuse a stale
-  // redirect to /eg after the user switched to /sa (cookie already updated).
+  // Prefer active cookie; otherwise DEFAULT_COUNTRY (sa). Inactive cookies
+  // (e.g. old "eg") are ignored so users always land on Saudi.
   const saved = request.cookies.get(COUNTRY_COOKIE)?.value;
-  const targetCountry: Country =
-    saved && SUPPORTED_COUNTRIES.includes(saved as Country)
-      ? (saved as Country)
-      : DEFAULT_COUNTRY;
+  const targetCountry: Country = isActiveCountry(saved)
+    ? saved
+    : DEFAULT_COUNTRY;
 
   const redirectUrl = request.nextUrl.clone();
   redirectUrl.pathname =

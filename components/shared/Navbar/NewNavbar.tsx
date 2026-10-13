@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Menu } from "lucide-react";
 import LocaleSwitcher from "../LocaleSwitcher";
-import CountrySwitcher from "../CountrySwitcher";
+// import CountrySwitcher from "../CountrySwitcher"; // temporarily hidden — Saudi only
 import logo from "@/public/images/gitalogo.png";
 import { Link } from "@/i18n/navigation";
 import UserMenu from "./UserMenu";
@@ -140,7 +140,7 @@ const NewNavbar = ({ isBgWhite = false }: { isBgWhite?: boolean }) => {
       </div>
 
       <div className="relative z-10 flex shrink-0 items-center gap-2.5">
-        <CountrySwitcher isBlack={isBlack} />
+        {/* <CountrySwitcher isBlack={isBlack} /> */}
         <LocaleSwitcher />
         <div className="hidden md:block">
           <UserMenu

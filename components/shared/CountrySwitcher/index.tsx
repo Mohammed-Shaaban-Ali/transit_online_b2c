@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { setCookie } from "cookies-next";
 import { baseApi, baseApi2 } from "@/redux/app/baseApi";
 import { COUNTRY_COOKIE } from "@/constants";
-import { SUPPORTED_COUNTRIES, Country } from "@/config/countries";
+import { Country } from "@/config/countries";
 import { useCountry } from "@/hooks/useCountry";
 
 type Props = {
@@ -27,6 +27,12 @@ const COUNTRY_LABELS: Record<
   eg: { ar: "مصر", en: "Egypt", flag: "🇪🇬" },
   sa: { ar: "السعودية", en: "Saudi Arabia", flag: "🇸🇦" },
 };
+
+/** Only Saudi Arabia is shown for now. Uncomment "eg" to bring Egypt back. */
+const VISIBLE_COUNTRIES: Country[] = [
+  // "eg",
+  "sa",
+];
 
 export default function CountrySwitcher({ isBlack = false }: Props) {
   const locale = useLocale();
@@ -83,7 +89,7 @@ export default function CountrySwitcher({ isBlack = false }: Props) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent sideOffset={8} className="min-w-[160px]">
-        {SUPPORTED_COUNTRIES.map((country) => {
+        {VISIBLE_COUNTRIES.map((country) => {
           const info = COUNTRY_LABELS[country];
           const name = locale === "ar" ? info.ar : info.en;
           return (
