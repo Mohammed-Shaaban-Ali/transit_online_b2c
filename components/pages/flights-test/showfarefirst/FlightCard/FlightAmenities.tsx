@@ -45,7 +45,7 @@ export default function FlightAmenities({
         sideOffset={8}
         className="w-72 p-4 rounded-lg"
       >
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex min-w-0 items-center gap-2 mb-2">
           <Image
             src={airlineLogo}
             alt={airline}
@@ -53,7 +53,9 @@ export default function FlightAmenities({
             height={24}
             className="shrink-0"
           />
-          <p className="text-[14px] font-semibold text-gray-900">{airline}</p>
+          <p className="min-w-0 truncate text-[14px] font-semibold text-gray-900" title={airline}>
+            {airline}
+          </p>
         </div>
 
         <p className="text-[13px] text-gray-500 mb-1 mt-3">{cabinClass}</p>

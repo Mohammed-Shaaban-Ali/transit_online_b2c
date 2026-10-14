@@ -30,21 +30,23 @@ function FilterCheckboxRow({
         className,
       )}
     >
-      <span className="flex items-center gap-2">
+      <span className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">
         <input
           type="checkbox"
           checked={checked}
           onChange={onCheckedChange}
           className={cn(
-            "h-5 w-5 border border-gray-400",
+            "h-5 w-5 shrink-0 border border-gray-400",
             checked ? "accent-[#0f172a]" : "accent-primary",
           )}
         />
-        {icon}
-        {label}
+        {icon ? <span className="shrink-0">{icon}</span> : null}
+        <span className="min-w-0 truncate" title={label}>
+          {label}
+        </span>
       </span>
 
-      {price && <span className="text-[14px] ">{price}</span>}
+      {price && <span className="shrink-0 text-[14px]">{price}</span>}
     </label>
   );
 }

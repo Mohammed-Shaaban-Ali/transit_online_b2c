@@ -87,7 +87,7 @@ export default function FlightItineraryRow({ flights }: Props) {
             return (
               <div key={idx}>
                 {/* Summary row */}
-                <div className="flex items-center gap-3 px-4 py-3.5 flex-wrap">
+                <div className="flex min-w-0 items-center gap-3 px-4 py-3.5 overflow-hidden">
                   <div className="shrink-0 size-8 flex items-center justify-center">
                     {logo ? (
                       <img
@@ -102,27 +102,27 @@ export default function FlightItineraryRow({ flights }: Props) {
                     )}
                   </div>
 
-                  <span className="text-[14px] font-semibold text-gray-800 whitespace-nowrap">
+                  <span className="min-w-0 truncate text-[14px] font-semibold text-gray-800">
                     {fromCity} ({fromCode})&nbsp;&nbsp;→&nbsp;&nbsp;{toCity} (
                     {toCode})
                   </span>
 
-                  <span className="text-gray-300 select-none">|</span>
+                  <span className="hidden sm:inline text-gray-300 select-none shrink-0">|</span>
 
-                  <span className="text-[13px] text-gray-500 whitespace-nowrap">
+                  <span className="hidden sm:inline shrink-0 text-[13px] text-gray-500 whitespace-nowrap">
                     {date}
                   </span>
 
-                  <span className="text-gray-300 select-none">|</span>
+                  <span className="hidden sm:inline text-gray-300 select-none shrink-0">|</span>
 
-                  <span className="text-[13px] text-gray-500 whitespace-nowrap">
+                  <span className="hidden sm:inline shrink-0 text-[13px] text-gray-500 whitespace-nowrap">
                     Duration {duration}
                   </span>
 
                   {stopCount > 0 && (
                     <>
-                      <span className="text-gray-300 select-none">|</span>
-                      <span className="text-[13px] text-gray-500 whitespace-nowrap">
+                      <span className="hidden sm:inline text-gray-300 select-none shrink-0">|</span>
+                      <span className="hidden sm:inline shrink-0 text-[13px] text-gray-500 whitespace-nowrap">
                         {stopCount === 1 ? "1 stop" : `${stopCount} stops`}
                       </span>
                     </>

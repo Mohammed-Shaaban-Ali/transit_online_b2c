@@ -112,13 +112,13 @@ function FlightCard({
     (flightData as any).availability ??
     undefined;
   return (
-    <article className="bg-white rounded-2xl sm:rounded-none overflow-hidden">
+    <article className="bg-white rounded-2xl sm:rounded-none overflow-hidden max-w-full">
       {/* ── Mobile layout (compact type scale: times & price dominant, meta smallest) ── */}
-      <div className="flex sm:hidden items-start gap-10 px-3 py-3.5">
+      <div className="flex sm:hidden items-start gap-3 px-3 py-3.5 min-w-0">
         {/* LEFT: times + airport codes + duration line + airlines */}
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 overflow-hidden">
           {/* Row 1: dep time — line — arr time+badge */}
-          <div className="flex items-start gap-1.5">
+          <div className="flex items-start gap-1.5 min-w-0">
             {/* Dep time + code */}
             <div className="shrink-0">
               <p className="text-[21px] font-bold leading-none tabular-nums text-gray-900">
@@ -176,7 +176,7 @@ function FlightCard({
           </div>
 
           {/* Row 2: airline names */}
-          <div className="mt-2 flex flex-wrap items-center gap-x-1 gap-y-0.5">
+          <div className="mt-2 flex min-w-0 items-center gap-x-1 overflow-hidden">
             {airlineLogo && (
               <img
                 src={airlineLogo}
@@ -186,14 +186,9 @@ function FlightCard({
                 className="shrink-0 rounded"
               />
             )}
-            {allAirlines.map((name, i) => (
-              <span key={name} className="text-[12px] text-gray-500">
-                {i > 0 && (
-                  <span className="mx-1 text-gray-300 select-none">|</span>
-                )}
-                {name}
-              </span>
-            ))}
+            <p className="min-w-0 truncate text-[12px] text-gray-500">
+              {allAirlines.filter(Boolean).join(" | ") || airlineName}
+            </p>
           </div>
         </div>
 
@@ -228,8 +223,8 @@ function FlightCard({
       </div>
 
       {/* Desktop layout */}
-      <div className="hidden sm:flex items-center gap-10 px-5 py-4">
-        <div className="flex items-center gap-3 min-w-[200px]">
+      <div className="hidden sm:flex items-center gap-4 md:gap-6 px-5 py-4 min-w-0">
+        <div className="flex w-[140px] max-w-[160px] shrink-0 items-center gap-2.5 min-w-0">
           <div className="flex size-10 items-center justify-center shrink-0">
             {airlineLogo && (
               <img
@@ -241,8 +236,10 @@ function FlightCard({
               />
             )}
           </div>
-          <div>
-            <p className="text-[14px]">{airlineName}</p>
+          <div className="min-w-0 flex-1 overflow-hidden">
+            <p className="truncate text-[14px]" title={airlineName}>
+              {airlineName}
+            </p>
             <FlightAmenities
               airline={airlineName}
               cabinClass={cabinClass}
@@ -263,8 +260,8 @@ function FlightCard({
           stops={stopsText}
         />
 
-        <div className="flex items-center gap-4 ms-auto">
-          <div className="text-end">
+        <div className="flex shrink-0 items-center gap-3 ms-auto">
+          <div className="min-w-0 text-end">
             <div className="text-[20px] font-bold text-primary flex items-center justify-end gap-1 rtl:flex-row-reverse">
               <CurrencySymbol size="lg" />
               <span className="tabular-nums">
@@ -272,9 +269,9 @@ function FlightCard({
                 {isReturn ? "+" : ""}
               </span>
             </div>
-            <p className="text-[12px] text-primary flex items-center gap-1 fill-primary">
-              <Users size={12} fill="currentColor" />
-              {t("exclusiveFare")}
+            <p className="text-[12px] text-primary flex items-center justify-end gap-1 fill-primary">
+              <Users size={12} className="shrink-0" fill="currentColor" />
+              <span className="truncate">{t("exclusiveFare")}</span>
             </p>
           </div>
           <button
@@ -286,7 +283,7 @@ function FlightCard({
                 onOpenFare?.(flightData);
               }
             }}
-            className="flex items-center gap-1 h-10 rounded bg-primary px-5 text-sm font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
+            className="flex shrink-0 items-center gap-1 h-10 rounded bg-primary px-5 text-sm font-semibold text-white transition-colors hover:bg-primary/90 cursor-pointer"
           >
             {t("select")} <ChevronRight size={16} className="rtl:rotate-180" />
           </button>

@@ -38,8 +38,8 @@ export default function FlightTimeline({
   const stopsCount = legs.length - 1;
 
   return (
-    <div className="flex flex-1 items-center gap-3 max-w-[320px]">
-      <div className="text-start">
+    <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3 max-w-full">
+      <div className="shrink-0 text-start">
         <p className="text-[20px] font-bold leading-tight">{departureTime}</p>
         <TooltipProvider delayDuration={150}>
           <Tooltip>
@@ -57,8 +57,8 @@ export default function FlightTimeline({
 
       <HoverCard openDelay={200} closeDelay={150}>
         <HoverCardTrigger asChild>
-          <div className="flex-1 px-2 cursor-pointer">
-            <p className="text-center text-[12px] text-gray-500 mb-1">
+          <div className="min-w-0 flex-1 px-1 sm:px-2 cursor-pointer">
+            <p className="truncate text-center text-[12px] text-gray-500 mb-1">
               {duration}
             </p>
             <div className="relative flex items-center">
@@ -78,7 +78,7 @@ export default function FlightTimeline({
               </div>
               <span className="size-[6px] rounded-full border border-gray-400 bg-gray-400 shrink-0" />
             </div>
-            <p className="text-center text-[12px] text-gray-500 mt-1">
+            <p className="truncate text-center text-[12px] text-gray-500 mt-1">
               {stops}
             </p>
           </div>
@@ -87,13 +87,13 @@ export default function FlightTimeline({
         <HoverCardContent
           align="center"
           sideOffset={10}
-          className="w-[420px] p-4 rounded-lg"
+          className="w-[min(420px,calc(100vw-2rem))] p-4 rounded-lg"
         >
           <FlightLeg legs={legs} />
         </HoverCardContent>
       </HoverCard>
 
-      <div className="text-end">
+      <div className="shrink-0 text-end">
         <p className="text-[20px] font-bold leading-tight">{arrivalTime}</p>
         <TooltipProvider delayDuration={150}>
           <Tooltip>

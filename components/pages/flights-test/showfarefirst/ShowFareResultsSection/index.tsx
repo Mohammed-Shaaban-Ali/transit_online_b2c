@@ -678,7 +678,7 @@ function ShowFareResultsSection({
 
   return (
     <>
-      <section className="mt-5 pb-5 grid grid-cols-1 gap-4 lg:grid-cols-[300px_1fr]">
+      <section className="mt-5 pb-5 grid grid-cols-1 gap-4 lg:grid-cols-[300px_1fr] min-w-0 overflow-x-hidden">
         <div className="hidden min-w-0 rounded-md  lg:block">
           <ShowFareFilters
             filteringOptions={currentFilteringOptions}
@@ -687,7 +687,7 @@ function ShowFareResultsSection({
           />
         </div>
 
-        <div className="min-w-0 overflow-hidden rounded-md max-lg:px-2 max-lg:pt-1.5 lg:max-w-none lg:bg-transparent lg:px-0 lg:pt-0">
+        <div className="min-w-0 overflow-x-hidden rounded-md max-lg:px-2 max-lg:pt-1.5 lg:max-w-none lg:bg-transparent lg:px-0 lg:pt-0">
           {/* Departure header - always visible */}
           {!showingReturns && (
             <FlightSectionHeader

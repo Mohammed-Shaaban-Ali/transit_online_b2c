@@ -125,10 +125,10 @@ async function page({ searchParams }: Props) {
         </div>
 
         <section
-          className="relative z-0 min-h-screen 
+          className="relative z-0 min-h-screen overflow-x-hidden
       rounded-t-[32px] bg-[#ebedf1]  md:pt-24"
         >
-          <div className="mx-auto w-full max-w-[1200px] px-2 sm:px-5 md:px-0">
+          <div className="mx-auto w-full max-w-[1200px] min-w-0 px-2 sm:px-5 md:px-0">
             {hasSearchParams && (
               <>
                 {/* <FareDateSlider
