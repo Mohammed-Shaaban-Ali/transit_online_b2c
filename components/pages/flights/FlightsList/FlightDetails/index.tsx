@@ -18,6 +18,10 @@ import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
 import { useTranslations } from "next-intl";
 import ErrorSection from "./ErrorSection";
 import { formatePrice } from "@/utils/formatePrice";
+import {
+  buildFlightBookingQuery,
+  flightRouteSeoFromFlights,
+} from "@/utils/seo";
 
 const FLIGHT_BOOKING_KEY = "flight-booking-data";
 
@@ -261,7 +265,13 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
       sessionStorage.setItem(FLIGHT_BOOKING_KEY, JSON.stringify(bookingData));
 
       onClose();
-      router.push("/flights/booking");
+      const routeSeo = flightRouteSeoFromFlights(
+        departureFlightData,
+        returnFlightData || null,
+      );
+      router.push(
+        `/flights/showfarefirst/booking${buildFlightBookingQuery(routeSeo)}`,
+      );
     } catch (error) {
       console.error("Error navigating to booking:", error);
     }

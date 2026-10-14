@@ -23,7 +23,10 @@ export {
 export {
   buildFlightResultsMetadata,
   buildFlightBookingMetadata,
+  getFlightDocumentTitle,
   flightRouteSeoFromFlights,
   buildFlightBookingQuery,
   readFlightRouteFromSearchParams,
+  type FlightBookingOutcome,
+  type FlightRouteSeoParams,
 } from "./flightDynamicMeta";

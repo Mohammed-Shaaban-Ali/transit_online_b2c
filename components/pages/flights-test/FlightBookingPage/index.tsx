@@ -37,7 +37,7 @@ import {
 import {
   buildFlightBookingQuery,
   flightRouteSeoFromFlights,
-  SITE_NAME,
+  getFlightDocumentTitle,
 } from "@/utils/seo";
 
 export interface FlightBookingData {
@@ -96,6 +96,33 @@ const FlightBookingPage = () => {
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
+  const getBookingOutcomeHref = (outcome: "success" | "failed") => {
+    const base =
+      outcome === "success"
+        ? "/flights/showfarefirst/booking/success"
+        : "/flights/showfarefirst/booking/failed";
+    const from = searchParams.get("from");
+    const to = searchParams.get("to");
+    if (from && to) {
+      const qs = new URLSearchParams();
+      qs.set("from", from);
+      qs.set("to", to);
+      const dep = searchParams.get("departureDate");
+      const ret = searchParams.get("returnDate");
+      if (dep) qs.set("departureDate", dep);
+      if (ret) qs.set("returnDate", ret);
+      return `${base}?${qs.toString()}`;
+    }
+    if (flightData?.departureFlightData) {
+      const route = flightRouteSeoFromFlights(
+        flightData.departureFlightData,
+        flightData.returnFlightData || null,
+      );
+      return `${base}${buildFlightBookingQuery(route)}`;
+    }
+    return base;
+  };
+
   const verifyBookingAfterPayment = async (bookingId: string) => {
     if (isVerifyingPaymentRef.current) return;
     isVerifyingPaymentRef.current = true;
@@ -111,7 +138,7 @@ const FlightBookingPage = () => {
             console.log(
               `Booking verification succeeded on attempt ${attempt}.`,
             );
-            router.push("/flights/showfarefirst/booking/success");
+            router.push(getBookingOutcomeHref("success"));
             return;
           }
         } catch (error) {
@@ -127,7 +154,7 @@ const FlightBookingPage = () => {
       }
 
       console.error("Booking verification failed after 3 attempts.");
-      router.push("/flights/showfarefirst/booking/failed");
+      router.push(getBookingOutcomeHref("failed"));
     } finally {
       isVerifyingPaymentRef.current = false;
       setIsVerifyingPayment(false);
@@ -158,27 +185,11 @@ const FlightBookingPage = () => {
     );
     if (!route.from || !route.to) return;
 
-    const isAr = locale === "ar";
-    const dep = route.departureDate
-      ? (() => {
-          const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(route.departureDate);
-          return m ? `${Number(m[2])}/${Number(m[3])}` : route.departureDate;
-        })()
-      : "";
-    const ret = route.returnDate
-      ? (() => {
-          const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(route.returnDate);
-          return m ? `${Number(m[2])}/${Number(m[3])}` : route.returnDate;
-        })()
-      : "";
-    const routeLabel = isAr
-      ? `${route.from} إلى ${route.to}`
-      : `${route.from} to ${route.to}`;
-    const dates = dep ? (ret ? `${dep} – ${ret}` : dep) : "";
-    const pageTitle = dates
-      ? `${isAr ? "حجز" : "Book"} ${routeLabel}, ${dates}`
-      : `${isAr ? "حجز" : "Book"} ${routeLabel}`;
-    document.title = `${SITE_NAME} | ${pageTitle}`;
+    document.title = getFlightDocumentTitle({
+      locale,
+      route,
+      outcome: "booking",
+    });
 
     const hasRouteInUrl =
       !!searchParams.get("from") && !!searchParams.get("to");
@@ -253,7 +264,7 @@ const FlightBookingPage = () => {
         console.error("Payment finished but booking id is missing.");
         setIsPaymentDialogOpen(false);
         setIsVerifyingPayment(false);
-        router.push("/flights/showfarefirst/booking/failed");
+        router.push(getBookingOutcomeHref("failed"));
         return;
       }
 

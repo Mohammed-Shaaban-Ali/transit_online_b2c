@@ -168,25 +168,79 @@ export function buildFlightResultsMetadata(options: {
   });
 }
 
+export type FlightBookingOutcome = "booking" | "success" | "failed";
+
+const BOOKING_OUTCOME_PATH: Record<FlightBookingOutcome, string> = {
+  booking: "/flights/showfarefirst/booking",
+  success: "/flights/showfarefirst/booking/success",
+  failed: "/flights/showfarefirst/booking/failed",
+};
+
+function bookingOutcomeCopy(
+  locale: string,
+  outcome: FlightBookingOutcome,
+): { prefix: string; fallback: string; keyword: string } {
+  const isAr = locale === "ar";
+  if (outcome === "success") {
+    return {
+      prefix: isAr ? "تم الحجز" : "Booking confirmed",
+      fallback: isAr ? "تم حجز الطيران" : "Flight booking confirmed",
+      keyword: isAr ? "تأكيد حجز طيران" : "flight booking confirmed",
+    };
+  }
+  if (outcome === "failed") {
+    return {
+      prefix: isAr ? "فشل الحجز" : "Booking failed",
+      fallback: isAr ? "فشل حجز الطيران" : "Flight booking failed",
+      keyword: isAr ? "فشل حجز طيران" : "flight booking failed",
+    };
+  }
+  return {
+    prefix: isAr ? "حجز" : "Book",
+    fallback: isAr ? "حجز الطيران" : "Flight Booking",
+    keyword: isAr ? "حجز طيران" : "flight booking",
+  };
+}
+
+/** Browser tab / metadata title including site name. */
+export function getFlightDocumentTitle(options: {
+  locale: string;
+  route: FlightRouteSeoParams;
+  outcome?: FlightBookingOutcome;
+}): string {
+  const outcome = options.outcome ?? "booking";
+  const copy = bookingOutcomeCopy(options.locale, outcome);
+  const pageTitle = buildFlightRouteTitle({
+    locale: options.locale,
+    ...options.route,
+    prefix: copy.prefix,
+    fallback: copy.fallback,
+  });
+  return `${SITE_NAME} | ${pageTitle}`;
+}
+
 export function buildFlightBookingMetadata(options: {
   locale: string;
   searchParams: Record<string, string | string[] | undefined>;
+  outcome?: FlightBookingOutcome;
 }): Metadata {
   const { locale, searchParams } = options;
+  const outcome = options.outcome ?? "booking";
   const isAr = locale === "ar";
   const route = readFlightRouteFromSearchParams(searchParams);
+  const copy = bookingOutcomeCopy(locale, outcome);
 
   const title = buildFlightRouteTitle({
     locale,
     ...route,
-    prefix: isAr ? "حجز" : "Book",
-    fallback: isAr ? "حجز الطيران" : "Flight Booking",
+    prefix: copy.prefix,
+    fallback: copy.fallback,
   });
 
   return buildPageMetadata({
     locale,
     page: "flightBooking",
-    path: "/flights/showfarefirst/booking",
+    path: BOOKING_OUTCOME_PATH[outcome],
     title,
     description: buildFlightRouteDescription({
       locale,
@@ -194,11 +248,8 @@ export function buildFlightBookingMetadata(options: {
       booking: true,
     }),
     indexable: false,
-    keywords: [
-      route.from,
-      route.to,
-      isAr ? "حجز طيران" : "flight booking",
-      SITE_NAME,
-    ].filter(Boolean) as string[],
+    keywords: [route.from, route.to, copy.keyword, SITE_NAME].filter(
+      Boolean,
+    ) as string[],
   });
 }

@@ -96,7 +96,7 @@ function FareDateSlider({
     }
     params.set("cabinClass", searchParams.cabinClass);
 
-    router.push(`/flights-test/showfarefirst?${params.toString()}`);
+    router.push(`/flights/showfarefirst?${params.toString()}`);
   };
 
   return (
