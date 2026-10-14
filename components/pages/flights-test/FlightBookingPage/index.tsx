@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { FlightDirection } from "@/types/flightTypes";
 import { FaPlane } from "react-icons/fa";
 import { Loader2 } from "lucide-react";
 import { getCookie } from "cookies-next";
-import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { FLIGHT_BOOKING_KEY } from "@/constants";
 import {
@@ -33,6 +34,11 @@ import {
   useLoginMutation,
   useSendOtpMutation,
 } from "@/redux/features/auth/authApi";
+import {
+  buildFlightBookingQuery,
+  flightRouteSeoFromFlights,
+  SITE_NAME,
+} from "@/utils/seo";
 
 export interface FlightBookingData {
   departureFareKey: string;
@@ -59,6 +65,8 @@ const FlightBookingPage = () => {
     "FlightBookingPageNested.flightBookingForm",
   );
   const router = useRouter();
+  const locale = useLocale();
+  const searchParams = useSearchParams();
 
   const [flightData, setFlightData] = useState<FlightBookingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -139,6 +147,47 @@ const FlightBookingPage = () => {
       setIsLoading(false);
     }
   }, []);
+
+  // Keep tab title + URL in sync with the selected flight (SEO / browser tab)
+  useEffect(() => {
+    if (!flightData?.departureFlightData) return;
+
+    const route = flightRouteSeoFromFlights(
+      flightData.departureFlightData,
+      flightData.returnFlightData || null,
+    );
+    if (!route.from || !route.to) return;
+
+    const isAr = locale === "ar";
+    const dep = route.departureDate
+      ? (() => {
+          const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(route.departureDate);
+          return m ? `${Number(m[2])}/${Number(m[3])}` : route.departureDate;
+        })()
+      : "";
+    const ret = route.returnDate
+      ? (() => {
+          const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(route.returnDate);
+          return m ? `${Number(m[2])}/${Number(m[3])}` : route.returnDate;
+        })()
+      : "";
+    const routeLabel = isAr
+      ? `${route.from} إلى ${route.to}`
+      : `${route.from} to ${route.to}`;
+    const dates = dep ? (ret ? `${dep} – ${ret}` : dep) : "";
+    const pageTitle = dates
+      ? `${isAr ? "حجز" : "Book"} ${routeLabel}, ${dates}`
+      : `${isAr ? "حجز" : "Book"} ${routeLabel}`;
+    document.title = `${SITE_NAME} | ${pageTitle}`;
+
+    const hasRouteInUrl =
+      !!searchParams.get("from") && !!searchParams.get("to");
+    if (!hasRouteInUrl) {
+      router.replace(
+        `/flights/showfarefirst/booking${buildFlightBookingQuery(route)}`,
+      );
+    }
+  }, [flightData, locale, router, searchParams]);
 
   useEffect(() => {
     const runPriceValidation = async () => {

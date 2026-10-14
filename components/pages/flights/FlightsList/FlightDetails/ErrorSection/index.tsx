@@ -3,21 +3,20 @@ import { useTranslations } from "next-intl";
 import React from "react";
 import { FaInfoCircle } from "react-icons/fa";
 
-type Props = { error: any };
+type Props = {
+  error: any;
+  onExpiredContinue?: () => void;
+};
 
-function ErrorSection({ error }: Props) {
+function ErrorSection({ error, onExpiredContinue }: Props) {
   const t = useTranslations("FlightDetails");
 
-  // Check if error status is EXPIRED_FLIGHTS
-  // RTK Query errors can have the status in different places
   const errorData = (error as any)?.data;
 
-  // If expired flights, show dialog instead of error message
   if (errorData?.error_code === "EXPIRED_FLIGHTS") {
-    return <ExpiredDialog isFlight={true} />;
+    return <ExpiredDialog isFlight={true} onContinue={onExpiredContinue} />;
   }
 
-  // Regular error display
   return (
     <div className="flex flex-col items-center justify-center p-5">
       <div

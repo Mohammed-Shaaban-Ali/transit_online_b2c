@@ -189,6 +189,17 @@ function ShowFareResultsSection({
     setFareReturnFlight(null);
   }, []);
 
+  /** After expired search: close fare UI and return to fresh departure results */
+  const handleExpiredContinue = useCallback(() => {
+    setFareDialogOpen(false);
+    setFareDepartureFlight(null);
+    setFareReturnFlight(null);
+    setSelectedDepartureData(null);
+    dispatch(setCurrentFilterType("departure"));
+    dispatch(setMatchingReturnFlights([]));
+    dispatch(setReturnFlightsActualPriceRange(null));
+  }, [dispatch]);
+
   const searchBody = useMemo(
     () => ({
       fromAirport,
@@ -825,6 +836,7 @@ function ShowFareResultsSection({
           <FareSelectionDialog
             open={fareDialogOpen}
             onClose={handleCloseFareDialog}
+            onExpiredContinue={handleExpiredContinue}
             departureFlight={fareDepartureFlight}
             returnFlight={fareReturnFlight}
             adults={adults}

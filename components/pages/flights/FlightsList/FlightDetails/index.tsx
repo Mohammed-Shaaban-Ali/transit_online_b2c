@@ -24,6 +24,8 @@ const FLIGHT_BOOKING_KEY = "flight-booking-data";
 interface FlightDetailsProps {
   isOpen: boolean;
   onClose: () => void;
+  /** When search expires — close sheet and return to fresh results */
+  onExpiredContinue?: () => void;
   departureFareKey: string;
   returnFareKey?: string;
   adults: number;
@@ -37,6 +39,7 @@ interface FlightDetailsProps {
 const FlightDetails: React.FC<FlightDetailsProps> = ({
   isOpen,
   onClose,
+  onExpiredContinue,
   departureFareKey,
   returnFareKey,
   adults,
@@ -334,7 +337,10 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
               </p>
             </div>
           ) : error ? (
-            <ErrorSection error={error} />
+            <ErrorSection
+              error={error}
+              onExpiredContinue={onExpiredContinue ?? onClose}
+            />
           ) : (
             data?.data && (
               <div className="h-full p-2 overflow-x-hidden">

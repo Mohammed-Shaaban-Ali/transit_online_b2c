@@ -20,4 +20,10 @@ export {
   buildHotelDetailMetadata,
   buildHotelBookingMetadata,
 } from "./hotelDynamicMeta";
-export { buildFlightResultsMetadata } from "./flightDynamicMeta";
+export {
+  buildFlightResultsMetadata,
+  buildFlightBookingMetadata,
+  flightRouteSeoFromFlights,
+  buildFlightBookingQuery,
+  readFlightRouteFromSearchParams,
+} from "./flightDynamicMeta";

@@ -10,7 +10,13 @@ import { baseApi } from "@/redux/app/baseApi";
 import { useAppDispatch } from "@/redux/app/hooks";
 import { useRouter } from "@/i18n/navigation";
 
-const ExpiredDialog = ({ isFlight = true }: { isFlight?: boolean }) => {
+type Props = {
+  isFlight?: boolean;
+  /** Close fare/details UI so user lands on fresh search results */
+  onContinue?: () => void;
+};
+
+const ExpiredDialog = ({ isFlight = true, onContinue }: Props) => {
   const [isDialogOpen, setIsDialogOpen] = useState(true);
   const t = useTranslations("FlightDetails");
   const router = useRouter();
@@ -18,25 +24,28 @@ const ExpiredDialog = ({ isFlight = true }: { isFlight?: boolean }) => {
 
   useEffect(() => {
     if (!isDialogOpen) {
-      if (!isFlight) router.push("/hotels");
-      else dispatch(baseApi.util.resetApiState());
+      if (!isFlight) {
+        router.push("/hotels");
+        return;
+      }
+      // Drop open fare/details first, then refresh search cache
+      onContinue?.();
+      dispatch(baseApi.util.resetApiState());
     }
-  }, [isDialogOpen, dispatch, isFlight, router]);
+  }, [isDialogOpen, dispatch, isFlight, router, onContinue]);
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={(open) => setIsDialogOpen(open)}>
       <DialogContent
         className="p-6 bg-white rounded-lg"
         onInteractOutside={(e) => {
-          // Prevent closing by clicking outside
           e.preventDefault();
         }}
         onEscapeKeyDown={(e) => {
-          // Prevent closing by pressing Escape
           e.preventDefault();
         }}
       >
         <div className="flex flex-col items-center text-center">
-          {/* Illustration - Person holding document */}
           <div className="mb-6 flex justify-center">
             <Image
               src={insurance}
@@ -47,12 +56,10 @@ const ExpiredDialog = ({ isFlight = true }: { isFlight?: boolean }) => {
             />
           </div>
 
-          {/* Error Message */}
           <p className="text-gray-800 text mb-6 leading-relaxed">
             {t("expiredFlightsMessage")}
           </p>
 
-          {/* Continue Button */}
           <Button
             onClick={() => setIsDialogOpen(false)}
             className="w-full"

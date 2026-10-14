@@ -21,10 +21,16 @@ import type { FareOption } from "../data/flights";
 import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
 import { formatePrice } from "@/utils/formatePrice";
 import { useTranslations } from "next-intl";
+import {
+  buildFlightBookingQuery,
+  flightRouteSeoFromFlights,
+} from "@/utils/seo";
 
 type Props = {
   open: boolean;
   onClose: () => void;
+  /** When search expires — close and show fresh results (not reopen fare) */
+  onExpiredContinue?: () => void;
   departureFlight: FlightDirection;
   returnFlight?: FlightDirection | null;
   adults: number;
@@ -38,6 +44,7 @@ type UiStep = "departure" | "return";
 export default function FareSelectionDialog({
   open,
   onClose,
+  onExpiredContinue,
   departureFlight,
   returnFlight,
   adults,
@@ -416,7 +423,13 @@ export default function FareSelectionDialog({
       sessionStorage.setItem(FLIGHT_BOOKING_KEY, JSON.stringify(bookingData));
 
       onClose();
-      router.push("/flights/showfarefirst/booking");
+      const routeSeo = flightRouteSeoFromFlights(
+        departureFlight,
+        returnFlight || null,
+      );
+      router.push(
+        `/flights/showfarefirst/booking${buildFlightBookingQuery(routeSeo)}`,
+      );
     } catch (e) {
       console.error(e);
     }
@@ -578,7 +591,12 @@ export default function FareSelectionDialog({
               </p>
             </div>
           )}
-          {!isFetching && error && <ErrorSection error={error} />}
+          {!isFetching && error && (
+            <ErrorSection
+              error={error}
+              onExpiredContinue={onExpiredContinue ?? onClose}
+            />
+          )}
           {showOfferPackages && currentFareOptions.length > 0 && (
             <FareSlider
               fares={currentFareOptions}

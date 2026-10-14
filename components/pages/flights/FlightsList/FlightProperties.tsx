@@ -480,6 +480,7 @@ const FlightProperties: React.FC<FlightPropertiesProps> = ({
           <FlightDetails
             isOpen={shouldShowFlightDetails}
             onClose={handleCloseFlightDetails}
+            onExpiredContinue={handleBackToList}
             departureFareKey={selectedFlight!.departureFareKey}
             returnFareKey={selectedFlight!.returnFareKey}
             adults={selectedFlight!.adults}
