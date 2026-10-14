@@ -153,9 +153,22 @@ export default function HotelsTestHotelCard({
   };
 
   const hotelName = locale === "ar" ? hotel.displayNameAr : hotel.displayName;
+  const seoParams = new URLSearchParams();
+  if (hotel.displayName) seoParams.set("hotelName", hotel.displayName);
+  if (hotel.displayNameAr) seoParams.set("hotelNameAr", hotel.displayNameAr);
+  const address = hotel.address || hotel.locationDetails;
+  if (address) seoParams.set("address", address);
+  if (hotel.defaultImage?.FullSize) {
+    seoParams.set("hotelImage", hotel.defaultImage.FullSize);
+  }
+  if (hotel.starRating != null) {
+    seoParams.set("starRating", String(hotel.starRating));
+  }
+  const seoQuery = seoParams.toString();
+
   return (
     <Link
-      href={`/hotels/details/${hotel.id}/${uuid}`}
+      href={`/hotels/details/${hotel.id}/${uuid}${seoQuery ? `?${seoQuery}` : ""}`}
       onClick={persistHotelAndNavigate}
       className="group flex flex-row items-stretch overflow-hidden rounded-lg border
         border-gray-200 bg-white font-sans transition-shadow duration-200

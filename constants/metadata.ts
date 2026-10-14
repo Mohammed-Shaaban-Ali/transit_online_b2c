@@ -1,58 +1,8 @@
 import type { Metadata } from "next";
+import { buildRootMetadata, getSiteUrl } from "@/utils/seo";
 
-export const domain = "https://eficta-online-b2c.vercel.app/en";
+/** @deprecated Prefer getSiteUrl() from @/utils/seo */
+export const domain = getSiteUrl();
 
-export const metadata: Metadata = {
-  title: "Gita Online B2C",
-  description: "Gita Online B2C",
-
-  keywords: ["Gita Online B2C"],
-
-  openGraph: {
-    title: "Gita Online B2C",
-    description: "Gita Online B2C",
-    url: domain,
-    siteName: "Gita Online B2C",
-    locale: "en_US",
-    type: "website",
-    images: [
-      {
-        url: `/transit_logos/transit_logo_q.png`,
-        width: 1200,
-        height: 630,
-        alt: "Gita Online B2C",
-      },
-    ],
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Gita Online B2C",
-    description: "Gita Online B2C",
-    images: [
-      {
-        url: `/eficta_logos/eficta_logo-removebg-preview.png            `,
-        width: 1200,
-        height: 630,
-        alt: "Gita Online B2C",
-      },
-    ],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-snippet": -1,
-      "max-image-preview": "large",
-      "max-video-preview": -1,
-    },
-  },
-
-  metadataBase: new URL(domain),
-  alternates: {
-    canonical: domain,
-  },
-};
+/** Fallback static metadata (locale layout uses generateMetadata). */
+export const metadata: Metadata = buildRootMetadata("en");

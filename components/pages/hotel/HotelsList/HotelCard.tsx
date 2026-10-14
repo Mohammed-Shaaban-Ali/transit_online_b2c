@@ -46,9 +46,22 @@ const HotelCard = ({
       f?.name?.toLowerCase().includes("breakfast")
     ) || false;
 
+  const seoParams = new URLSearchParams();
+  if (hotel.displayName) seoParams.set("hotelName", hotel.displayName);
+  if (hotel.displayNameAr) seoParams.set("hotelNameAr", hotel.displayNameAr);
+  const address = hotel.address || hotel.locationDetails;
+  if (address) seoParams.set("address", address);
+  if (hotel.defaultImage?.FullSize) {
+    seoParams.set("hotelImage", hotel.defaultImage.FullSize);
+  }
+  if (hotel.starRating != null) {
+    seoParams.set("starRating", String(hotel.starRating));
+  }
+  const seoQuery = seoParams.toString();
+
   return (
     <Link
-      href={`/hotels/${hotel.id}/${uuid}`}
+      href={`/hotels/${hotel.id}/${uuid}${seoQuery ? `?${seoQuery}` : ""}`}
       onClick={onSeeAvailability}
       className="bg-white border border-gray-200 rounded-lg overflow-hidden p-2 
       group

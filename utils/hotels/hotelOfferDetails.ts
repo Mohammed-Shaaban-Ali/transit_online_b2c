@@ -1,5 +1,6 @@
 import type { hotelSeachTypes } from "@/types/hotels";
 import type { IHotelOffer } from "@/types/website";
+import { appendHotelSeoParams } from "./hotelSeoQuery";
 
 export const DEFAULT_HOTEL_OFFER_ROOMS: {
   AdultsCount: number;
@@ -45,7 +46,16 @@ export function buildHotelOfferSearchParams(
 
 /** Intermediate details route: server fetches uuid then redirects to /[uuid]. */
 export function buildHotelOfferDetailsHref(offer: IHotelOffer): string {
-  const params = buildHotelOfferSearchParams(offer.check_in, offer.check_out);
+  const params = appendHotelSeoParams(
+    buildHotelOfferSearchParams(offer.check_in, offer.check_out),
+    {
+      hotelName: offer.hotel_name,
+      hotelNameAr: offer.hotel_name,
+      address: offer.city_name,
+      hotelImage: offer.image,
+      starRating: offer.rating,
+    },
+  );
   return `/hotels/details/${offer.hotel_id}?${params.toString()}`;
 }
 

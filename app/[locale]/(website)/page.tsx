@@ -1,5 +1,8 @@
 import NewNavbar from "@/components/shared/Navbar/NewNavbar";
 import Home from "@/components/pages/new/home";
+import { createPageGenerateMetadata } from "@/utils/seo";
+
+export const generateMetadata = createPageGenerateMetadata("home");
 
 type Props = {};
 

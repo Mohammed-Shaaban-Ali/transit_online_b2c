@@ -9,6 +9,9 @@ import WhatNew from "@/components/pages/hotels-test/WhatNew";
 import PropertiesAtAGlance from "@/components/pages/hotels-test/PropertiesAtAGlance";
 import HotelsInfo from "@/components/pages/hotels-test/HotelsInfo";
 import NewNavbar from "@/components/shared/Navbar/NewNavbar";
+import { createPageGenerateMetadata } from "@/utils/seo";
+
+export const generateMetadata = createPageGenerateMetadata("hotels");
 
 type Props = {};
 async function page({}: Props) {

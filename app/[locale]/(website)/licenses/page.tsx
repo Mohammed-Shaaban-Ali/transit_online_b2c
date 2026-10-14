@@ -1,6 +1,9 @@
 import LicenseBookingPage from "@/components/pages/licenses/LicenseBookingPage";
 import LicenseHero from "@/components/pages/licenses/LicenseHero";
 import NewNavbar from "@/components/shared/Navbar/NewNavbar";
+import { createPageGenerateMetadata } from "@/utils/seo";
+
+export const generateMetadata = createPageGenerateMetadata("licenses");
 
 export default function Page() {
   return (

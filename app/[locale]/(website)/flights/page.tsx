@@ -9,6 +9,9 @@ import Banner from "@/components/pages/flights-test/Banner";
 import TrendingNow from "@/components/pages/flights-test/TrendingNow";
 import FloatingSideActions from "@/components/pages/flights-test/FloatingSideActions";
 import NewNavbar from "@/components/shared/Navbar/NewNavbar";
+import { createPageGenerateMetadata } from "@/utils/seo";
+
+export const generateMetadata = createPageGenerateMetadata("flights");
 
 type Props = {};
 

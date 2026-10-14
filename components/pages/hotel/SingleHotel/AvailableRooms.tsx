@@ -28,7 +28,8 @@ import { toast } from "sonner";
 import CurrencySymbol from "@/components/shared/PriceCell/CurrencySymbol";
 import { useTranslations } from "next-intl";
 import { formatePrice } from "@/utils/formatePrice";
-import { localStorageHotelSearchKey, HOTEL_BOOKING_KEY } from "@/constants";
+import { localStorageHotelKey, HOTEL_BOOKING_KEY } from "@/constants";
+import { appendHotelSeoParams } from "@/utils/hotels/hotelSeoQuery";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 
@@ -469,6 +470,8 @@ const AvailableRooms = ({
   hotel: {
     packages: any[];
     displayName?: string;
+    displayNameAr?: string;
+    address?: string;
     starRating?: number;
     defaultImage?: any;
     id?: string;
@@ -489,15 +492,13 @@ const AvailableRooms = ({
 
   const handleSelectPackage = (pkg: any) => {
     const searchParams = getSearchParamsData();
-    const hotelLocalStorage = localStorage.getItem(localStorageHotelSearchKey);
     let hotelData: any = null;
 
-    if (hotelLocalStorage) {
-      try {
-        hotelData = JSON.parse(hotelLocalStorage);
-      } catch (error) {
-        console.error("Error parsing hotel data:", error);
-      }
+    try {
+      const raw = localStorage.getItem(localStorageHotelKey);
+      if (raw) hotelData = JSON.parse(raw);
+    } catch (error) {
+      console.error("Error parsing hotel data:", error);
     }
 
     if (!searchParams?.checkIn || !searchParams?.checkOut) {
@@ -505,13 +506,27 @@ const AvailableRooms = ({
       return;
     }
 
+    const hotelName =
+      hotel?.displayName || hotelData?.displayName || "Hotel";
+    const hotelNameAr =
+      hotel?.displayNameAr || hotelData?.displayNameAr || hotelName;
+    const address =
+      hotel?.address ||
+      hotel?.locationDetails ||
+      hotelData?.address ||
+      hotelData?.locationDetails;
+    const hotelImage =
+      hotel?.defaultImage?.FullSize || hotelData?.defaultImage?.FullSize;
+    const starRating = Number(
+      hotel?.starRating || hotelData?.starRating || 0,
+    );
+
     const bookingData = {
       hotelId: hotel_Id,
       uuid: uuid,
-      hotelName: hotelData?.displayName || hotel?.displayName || "Hotel",
-      starRating: Number(hotelData?.starRating || hotel?.starRating || 0),
-      hotelImage:
-        hotelData?.defaultImage?.FullSize || hotel?.defaultImage?.FullSize,
+      hotelName,
+      starRating,
+      hotelImage,
       package: pkg,
       checkIn: searchParams.checkIn,
       checkOut: searchParams.checkOut,
@@ -521,7 +536,22 @@ const AvailableRooms = ({
     };
 
     sessionStorage.setItem(HOTEL_BOOKING_KEY, JSON.stringify(bookingData));
-    router.push(`/hotels/details/${hotel_Id}/${uuid}/booking`);
+
+    const currentQuery =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search)
+        : new URLSearchParams();
+    const seoQuery = appendHotelSeoParams(currentQuery, {
+      hotelName,
+      hotelNameAr,
+      address,
+      hotelImage,
+      starRating,
+    });
+
+    router.push(
+      `/hotels/details/${hotel_Id}/${uuid}/booking?${seoQuery.toString()}`,
+    );
   };
 
   const groupedPackages = useMemo(() => {

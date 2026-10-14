@@ -1,5 +1,6 @@
 import { redirect } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
+import type { Metadata } from "next";
 import { fetchHotelPackagesServer } from "@/utils/hotels/fetchHotelPackagesServer";
 import {
   buildHotelDetailsUuidHref,
@@ -7,25 +8,53 @@ import {
   normalizeHotelDate,
   parseRoomsSearchParam,
 } from "@/utils/hotels/hotelOfferDetails";
+import {
+  appendHotelSeoParams,
+  readHotelSeoFromSearchParams,
+} from "@/utils/hotels/hotelSeoQuery";
+import { buildHotelDetailMetadata } from "@/utils/seo";
 import NewNavbar from "@/components/shared/Navbar/NewNavbar";
 import { Link } from "@/i18n/navigation";
 
 type PageProps = {
-  params: Promise<{ hotel_Id: string }>;
-  searchParams: Promise<{
-    checkIn?: string;
-    checkOut?: string;
-    rooms?: string;
-  }>;
+  params: Promise<{ locale?: string; hotel_Id: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const { hotel_Id, locale: localeParam } = await params;
+  const resolvedSearch = await searchParams;
+  const locale = localeParam || (await getLocale());
+  const seoFields = readHotelSeoFromSearchParams(resolvedSearch);
+
+  return buildHotelDetailMetadata({
+    locale,
+    hotelId: hotel_Id,
+    path: `/hotels/details/${hotel_Id}`,
+    seoFields,
+  });
+}
 
 export default async function HotelDetailsBootstrapPage({
   params,
   searchParams,
 }: PageProps) {
   const { hotel_Id } = await params;
-  const { checkIn, checkOut, rooms: roomsParam } = await searchParams;
+  const resolvedSearch = await searchParams;
+  const checkIn = Array.isArray(resolvedSearch.checkIn)
+    ? resolvedSearch.checkIn[0]
+    : resolvedSearch.checkIn;
+  const checkOut = Array.isArray(resolvedSearch.checkOut)
+    ? resolvedSearch.checkOut[0]
+    : resolvedSearch.checkOut;
+  const roomsParam = Array.isArray(resolvedSearch.rooms)
+    ? resolvedSearch.rooms[0]
+    : resolvedSearch.rooms;
   const locale = await getLocale();
+  const seoFields = readHotelSeoFromSearchParams(resolvedSearch);
 
   if (!checkIn || !checkOut) {
     return (
@@ -96,10 +125,9 @@ export default async function HotelDetailsBootstrapPage({
     );
   }
 
-  const query = buildHotelOfferSearchParams(
-    normalizedCheckIn,
-    normalizedCheckOut,
-    rooms,
+  const query = appendHotelSeoParams(
+    buildHotelOfferSearchParams(normalizedCheckIn, normalizedCheckOut, rooms),
+    seoFields,
   );
 
   redirect({

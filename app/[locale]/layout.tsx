@@ -9,16 +9,21 @@ import { Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import SetToken from "@/components/layout/SetToken";
 import Loading from "./loading";
-import { metadata } from "@/constants/metadata";
 import { COUNTRY_COOKIE } from "@/constants";
 import { DEFAULT_COUNTRY } from "@/config/countries";
 import { parseCountryCookie } from "@/utils/countryPath";
+import { buildRootMetadata } from "@/utils/seo";
+import type { Metadata } from "next";
 
-// export const metadata: Metadata = {
-//   title: "Eficta Online B2C",
-//   description: "Eficta Online B2C",
-// };
-export { metadata };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildRootMetadata(locale);
+}
+
 export default async function RootLayout({
   children,
   params,
@@ -58,11 +63,6 @@ export default async function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/icon.png" />
         <link rel="apple-touch-icon" href="/icon.png" />
-
-        <meta
-          name="robots"
-          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-        />
       </head>
       <body className="antialiased">
         <SetToken token={apiToken} />

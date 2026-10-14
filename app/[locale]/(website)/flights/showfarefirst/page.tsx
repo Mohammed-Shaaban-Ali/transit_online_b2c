@@ -1,14 +1,17 @@
 import FloatingSideActions from "@/components/pages/flights-test/FloatingSideActions";
 import StaticFlightSearchBox from "@/components/pages/flights-test/FlightsTestHero/Form/StaticFlightSearchBox";
-import FareDateSlider from "@/components/pages/flights-test/showfarefirst/FareDateSlider";
 import ShowFareResultsSection from "@/components/pages/flights-test/showfarefirst/ShowFareResultsSection";
 import type { TripType } from "@/components/pages/flights-test/FlightsTestHero/Form/types";
+import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import React from "react";
 import heroImage from "@/public/images/flights/flight_home_bg_v6.webp";
 import Image from "next/image";
 import NewNavbar from "@/components/shared/Navbar/NewNavbar";
+import { buildFlightResultsMetadata } from "@/utils/seo";
 
 type Props = {
+  params?: Promise<{ locale?: string }>;
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
@@ -21,8 +24,23 @@ const getParam = (
   return value;
 };
 
+export async function generateMetadata({
+  params,
+  searchParams,
+}: Props): Promise<Metadata> {
+  const localeParam = params ? (await params).locale : undefined;
+  const locale = localeParam || (await getLocale());
+  const resolvedSearch = (await searchParams) || {};
+
+  return buildFlightResultsMetadata({
+    locale,
+    searchParams: resolvedSearch,
+  });
+}
+
 async function page({ searchParams }: Props) {
   const params = (await searchParams) || {};
+
 
   const fromAirport = getParam(params, "from") || "";
   const toAirport = getParam(params, "to") || "";
