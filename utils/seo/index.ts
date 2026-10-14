@@ -1,4 +1,9 @@
-export { getSiteUrl, absoluteUrl, localizedPath } from "./siteUrl";
+export {
+  getSiteUrl,
+  absoluteUrl,
+  localizedPath,
+  PRODUCTION_SITE_URL,
+} from "./siteUrl";
 export {
   SITE_NAME,
   DEFAULT_OG_IMAGE,

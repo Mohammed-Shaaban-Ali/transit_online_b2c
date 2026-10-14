@@ -303,7 +303,7 @@ export const PAGE_SEO: Record<PageSeoKey, PageSeoConfig> = {
   },
 };
 
-/** Static public paths included in sitemap (no locale prefix). */
+/** Static public paths included in sitemap.xml (no locale prefix). */
 export const SITEMAP_PATHS = [
   "/",
   "/hotels",
