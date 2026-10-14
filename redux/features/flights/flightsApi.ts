@@ -14,13 +14,24 @@ export interface FlightSearchParams {
   cabinClass: string;
 }
 
+export interface FlightSearchWithProviderParams extends FlightSearchParams {
+  provider: string;
+}
+
+export interface FlightProvidersResponse {
+  success: boolean;
+  data: {
+    flights: string[];
+  };
+}
+
 interface FlightFareRequest {
   departureFareKey: string;
   returnFareKey?: string;
   adults: number;
   children: number;
   infants: number;
-  provider?: "iati" | "sabre";
+  provider?: string;
 }
 
 export interface LoyaltyPriceBreakdownItem {
@@ -95,26 +106,17 @@ interface FlightBookRequest {
 
 const flightsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    searchFlightsIati: builder.query<FlightSearchResponse, FlightSearchParams>({
-      query: (data) => ({
-        url: `/api/iati/search`,
+    searchFlights: builder.query<
+      FlightSearchResponse,
+      FlightSearchWithProviderParams
+    >({
+      query: ({ provider, ...data }) => ({
+        url: `/api/${provider}/search`,
         method: "POST",
         body: data,
       }),
-      keepUnusedDataFor: 0, // Disable caching
-      //providesTags: ["locale"],
+      keepUnusedDataFor: 0,
     }),
-    searchFlightsSabre: builder.query<FlightSearchResponse, FlightSearchParams>(
-      {
-        query: (data) => ({
-          url: `/api/sabre/search`,
-          method: "POST",
-          body: data,
-        }),
-        keepUnusedDataFor: 0, // Disable caching
-        //providesTags: ["locale"],
-      }
-    ),
     getFlightFare: builder.mutation<FlightFareResponse, FlightFareRequest>({
       query: (data) => {
         const provider = data.provider || "iati";
@@ -167,7 +169,12 @@ const flightsApi = baseApi.injectEndpoints({
 
 const flightsApi2 = baseApi2.injectEndpoints({
   endpoints: (builder) => ({
-
+    getFlightProviders: builder.query<FlightProvidersResponse, void>({
+      query: () => ({
+        url: `/api/app/providers`,
+        method: "GET",
+      }),
+    }),
     calculateFlightPrice: builder.query<
       LoyaltyCalculatePriceResponse,
       LoyaltyCalculatePriceRequest
@@ -194,14 +201,15 @@ const flightsApi2 = baseApi2.injectEndpoints({
   }),
 });
 
-export const { useLazyCalculateFlightPriceQuery, useReadPassportMutation } =
-  flightsApi2;
+export const {
+  useGetFlightProvidersQuery,
+  useLazyCalculateFlightPriceQuery,
+  useReadPassportMutation,
+} = flightsApi2;
 
 export const {
-  useSearchFlightsIatiQuery,
-  useSearchFlightsSabreQuery,
-  useLazySearchFlightsIatiQuery,
-  useLazySearchFlightsSabreQuery,
+  useSearchFlightsQuery,
+  useLazySearchFlightsQuery,
   useGetFlightFareMutation,
   useBookFlightMutation,
   useGetFlightBookingQuery,

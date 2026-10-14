@@ -4,10 +4,6 @@ import { useEffect, useRef, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/i18n/navigation";
 import { useDispatch } from "react-redux";
-import {
-  useSearchFlightsIatiQuery,
-  useSearchFlightsSabreQuery,
-} from "@/redux/features/flights/flightsApi";
 import { skipToken } from "@reduxjs/toolkit/query/react";
 import Sidebar from "./Sidebar";
 import FlightProperties from "./FlightProperties";
@@ -21,12 +17,11 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/app/store";
 import { calculateReturnFlightFilterOptions } from "@/utils/returnFlightFilterUtils";
-import { mergeFlightFilterOptions } from "@/utils/mergeFlightFilterOptions";
-import { mergeFlightData } from "@/utils/mergeFlightData";
 import FlightSearchBox from "@/components/shared/FlightSearchBox";
 import { useTranslations } from "next-intl";
 import { localStorageFlightSearchKey } from "@/constants";
 import ErrorState from "@/components/shared/ErrorState";
+import { useMultiProviderFlightSearch } from "@/hooks/useMultiProviderFlightSearch";
 
 // Get last search from localStorage
 const getLastSearchFromStorage = (): {
@@ -144,67 +139,34 @@ const FlightsList = () => {
     }
   }, [hasSearchParams, hasAutoLoaded, router]);
 
-  // API calls - both endpoints
-  const searchParamsIati = hasSearchParams
+  // API calls – fetch providers, then search each dynamically
+  const flightSearchArg = hasSearchParams
     ? {
-      adults,
-      children,
-      infants,
-      cabinClass,
-      fromAirport,
-      toAirport,
-      departureDate,
-      ...(returnDate && { returnDate }),
-    }
-    : skipToken;
-
-  const searchParamsSabre = hasSearchParams
-    ? {
-      adults,
-      children,
-      infants,
-      cabinClass,
-      fromAirport,
-      toAirport,
-      departureDate,
-      ...(returnDate && { returnDate }),
-    }
+        adults,
+        children,
+        infants,
+        cabinClass,
+        fromAirport,
+        toAirport,
+        departureDate,
+        ...(returnDate && { returnDate }),
+      }
     : skipToken;
 
   const {
-    data: iatiData,
-    isFetching: isIatiFetching,
-    error: iatiError,
-  } = useSearchFlightsIatiQuery(searchParamsIati);
-  const {
-    data: sabreData,
-    isFetching: isSabreFetching,
-    error: sabreError,
-  } = useSearchFlightsSabreQuery(searchParamsSabre);
-
-  // Merge data from both endpoints
-  const mergedData = useMemo(() => {
-    if (!iatiData && !sabreData) return undefined;
-
-    const mergedFlights = mergeFlightData(iatiData?.data, sabreData?.data);
-    const mergedFilteringOptions = mergeFlightFilterOptions(
-      iatiData?.filteringOptions,
-      sabreData?.filteringOptions
-    );
-
-    return {
-      data: mergedFlights,
-      filteringOptions: mergedFilteringOptions,
-      sortingOptions:
-        iatiData?.sortingOptions || sabreData?.sortingOptions || [],
-      meta: iatiData?.meta || sabreData?.meta,
-    };
-  }, [iatiData, sabreData]);
+    mergedData,
+    isAnyFetching,
+    isAllFetching,
+    allProvidersFinished,
+    allProvidersFailed,
+    hasAnyData: hasAnyProviderData,
+    firstError,
+  } = useMultiProviderFlightSearch(flightSearchArg);
 
   // Determine loading and error states
-  const isFetching = isIatiFetching && isSabreFetching;
-  // Only treat as error if BOTH providers failed - if one has data, show it
-  const error = iatiError && sabreError ? (iatiError || sabreError) : undefined;
+  const isFetching = isAllFetching;
+  // Only treat as error if ALL providers failed - if one has data, show it
+  const error = allProvidersFailed ? firstError : undefined;
 
 
   // Get filtering options from merged data
@@ -333,8 +295,8 @@ const FlightsList = () => {
     );
   }, [mergedData]);
 
-  // Check if both providers have finished loading (regardless of data)
-  const bothProvidersFinished = !isIatiFetching && !isSabreFetching;
+  // Check if all providers have finished loading (regardless of data)
+  const bothProvidersFinished = allProvidersFinished;
 
   // Partial loading: we have actual flight data from at least one endpoint for current search, but one is still fetching
   const isPartialLoading = useMemo(() => {
@@ -342,14 +304,13 @@ const FlightsList = () => {
       hasSearchParams &&
       isDataForCurrentSearch &&
       hasActualFlightData &&
-      (isIatiFetching || isSabreFetching)
+      isAnyFetching
     );
   }, [
     hasSearchParams,
     isDataForCurrentSearch,
     hasActualFlightData,
-    isIatiFetching,
-    isSabreFetching,
+    isAnyFetching,
   ]);
 
   // Detect if this is a new search (search params changed)
@@ -375,20 +336,15 @@ const FlightsList = () => {
       mergedData?.data?.departure_flights &&
       mergedData.data.departure_flights.length > 0;
 
-    // Check if both providers finished loading
-    const allProvidersFinished = !isIatiFetching && !isSabreFetching;
-
     // Only update displayedDataSearchKey when:
     // 1. We have actual flight data from at least one endpoint, OR
-    // 2. Both providers have finished loading (even if no results)
+    // 2. All providers have finished loading (even if no results)
     // AND we're not in the middle of detecting a new search
     if (
       !isNew && // Not a new search (we already updated prevSearchKeyRef)
-      mergedData &&
-      (iatiData || sabreData) &&
       currentSearchKey !== "" &&
       currentSearchKey === prevSearchKeyRef.current &&
-      (hasFlights || allProvidersFinished) // Show data only if we have flights OR both finished
+      ((hasAnyProviderData && hasFlights) || allProvidersFinished)
     ) {
       // If we have data for the current search, update the displayed data key
       setDisplayedDataSearchKey((prev) => {
@@ -403,10 +359,8 @@ const FlightsList = () => {
     currentSearchKey,
     hasSearchParams,
     mergedData,
-    iatiData,
-    sabreData,
-    isIatiFetching,
-    isSabreFetching,
+    hasAnyProviderData,
+    allProvidersFinished,
   ]);
 
   // Initialize price range for return flights when matching returns are available
@@ -480,10 +434,10 @@ const FlightsList = () => {
   const isAnyLoading =
     hasSearchParams &&
     (isNewSearch ||
-      ((isIatiFetching || isSabreFetching) &&
+      (isAnyFetching &&
         (!isDataForCurrentSearch || !hasActualFlightData)));
 
-  // Show no results only when both providers finished and no flights found
+  // Show no results only when all providers finished and no flights found
   const showNoResults =
     hasSearchParams &&
     !isAnyLoading &&
@@ -520,12 +474,12 @@ const FlightsList = () => {
       <div className="my-6     ">
         <FlightSearchBox
           defaultValues={flightSearchDefaultValues}
-          isLoading={isIatiFetching || isSabreFetching}
+          isLoading={isAnyFetching}
         />
       </div>
 
-      {(iatiError && sabreError) ?
-        <ErrorState error={iatiError || sabreError} isHotel={false} />
+      {allProvidersFailed ?
+        <ErrorState error={firstError} isHotel={false} />
         : showSearchPrompt ? (
           /* Search Prompt Section */
           <div className="flex flex-col items-center justify-center py-16 px-4">

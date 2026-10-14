@@ -1,37 +1,25 @@
 import { FlightFilteringOptions } from "@/types/flightTypes";
 
+const emptyOptions: FlightFilteringOptions = {
+  minPrice: 0,
+  maxPrice: 50000,
+  airline: [],
+  stops: [],
+  provider: [],
+};
+
 /**
- * Merge filtering options from two endpoints (iati and sabre)
- * - Providers: merge and add counts if same provider exists in both
- * - minPrice: take the minimum of both
- * - maxPrice: take the maximum of both
- * - airline: merge and add counts
- * - stops: merge and add counts
+ * Merge filtering options from two provider responses.
  */
-export const mergeFlightFilterOptions = (
-  options1?: FlightFilteringOptions,
-  options2?: FlightFilteringOptions
+const mergeTwoFilterOptions = (
+  options1: FlightFilteringOptions,
+  options2: FlightFilteringOptions
 ): FlightFilteringOptions => {
-  if (!options1 && !options2) {
-    return {
-      minPrice: 0,
-      maxPrice: 50000,
-      airline: [],
-      stops: [],
-      provider: [],
-    };
-  }
-
-  if (!options1) return options2!;
-  if (!options2) return options1;
-
-  // Merge providers
   const providersMap = new Map<
     string,
     { id: string; text: string; count: number }
   >();
 
-  // Add providers from first options
   options1.provider?.forEach((provider) => {
     providersMap.set(provider.id, {
       id: provider.id,
@@ -40,14 +28,11 @@ export const mergeFlightFilterOptions = (
     });
   });
 
-  // Merge providers from second options
   options2.provider?.forEach((provider) => {
     if (providersMap.has(provider.id)) {
-      // If exists, add the count
       const existing = providersMap.get(provider.id)!;
       existing.count += provider.count || 0;
     } else {
-      // If new, add it
       providersMap.set(provider.id, {
         id: provider.id,
         text: provider.text,
@@ -56,7 +41,6 @@ export const mergeFlightFilterOptions = (
     }
   });
 
-  // Merge airlines
   const airlinesMap = new Map<
     string,
     { id?: string; count?: string; text?: string }
@@ -85,7 +69,6 @@ export const mergeFlightFilterOptions = (
     }
   });
 
-  // Merge stops
   const stopsMap = new Map<
     number,
     { id: number; text: string; count: number }
@@ -112,8 +95,6 @@ export const mergeFlightFilterOptions = (
     }
   });
 
-  // Calculate min and max price
-  // If one is undefined, use the other. If both exist, take min/max accordingly
   const minPrice1 = options1.minPrice ?? Infinity;
   const minPrice2 = options2.minPrice ?? Infinity;
   const maxPrice1 = options1.maxPrice ?? 0;
@@ -135,4 +116,23 @@ export const mergeFlightFilterOptions = (
       a.text.localeCompare(b.text)
     ),
   };
+};
+
+/**
+ * Merge filtering options from multiple provider endpoints.
+ * - Providers: merge and add counts if same provider exists in both
+ * - minPrice: take the minimum of all
+ * - maxPrice: take the maximum of all
+ * - airline: merge and add counts
+ * - stops: merge and add counts
+ */
+export const mergeFlightFilterOptions = (
+  ...allOptions: (FlightFilteringOptions | undefined)[]
+): FlightFilteringOptions => {
+  const valid = allOptions.filter(Boolean) as FlightFilteringOptions[];
+
+  if (!valid.length) return emptyOptions;
+  if (valid.length === 1) return valid[0];
+
+  return valid.slice(1).reduce(mergeTwoFilterOptions, valid[0]);
 };

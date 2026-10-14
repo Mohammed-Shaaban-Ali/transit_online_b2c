@@ -198,10 +198,6 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
       const notToastUrls = [
         "/api/hotels/b2c/search-hotels",
         "/api/hotels/b2c/packages",
-        "/api/sabre/search",
-        "/api/iati/search",
-        "/api/sabre/fare",
-        "/api/iati/fare",
         "/api/hotels/b2c/hotel-packages",
         "/api/hotels/b2c/book",
         "/api/auth/login",
@@ -214,8 +210,12 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
         "/api/cruises/aroya/cabins-multiple",
         "/api/cruises/aroya/book",
       ];
+      const isFlightProviderSearchOrFare = /^\/api\/[^/]+\/(search|fare)$/.test(
+        url || ""
+      );
       if (
         notToastUrls.includes(url) ||
+        isFlightProviderSearchOrFare ||
         url?.startsWith("/api/cruises/aroya/bookings/")
       ) {
         return result;
@@ -238,10 +238,6 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
       const notToastUrls = [
         "/api/hotels/b2c/search-hotels",
         "/api/hotels/b2c/packages",
-        "/api/sabre/search",
-        "/api/iati/search",
-        "/api/sabre/fare",
-        "/api/iati/fare",
         "/api/hotels/b2c/hotel-packages",
         "/api/hotels/b2c/book",
         "/api/auth/login",
@@ -254,9 +250,13 @@ const createBaseQueryWithInterceptor = (queryFn: typeof baseQuery) => {
         "/api/cruises/aroya/cabins-multiple",
         "/api/cruises/aroya/book",
       ];
+      const isFlightProviderSearchOrFare = /^\/api\/[^/]+\/(search|fare)$/.test(
+        url || ""
+      );
 
       if (
         notToastUrls.includes(url) ||
+        isFlightProviderSearchOrFare ||
         url?.startsWith("/api/cruises/aroya/bookings/")
       ) {
         return result;

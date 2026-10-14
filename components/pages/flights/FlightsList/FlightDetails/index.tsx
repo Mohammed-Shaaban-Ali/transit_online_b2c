@@ -66,16 +66,13 @@ const FlightDetails: React.FC<FlightDetailsProps> = ({
   const [showReturnOffers, setShowReturnOffers] = useState(false);
 
   // Determine provider from flight data endpoint immediately
-  const provider = useMemo((): "iati" | "sabre" => {
+  const provider = useMemo(() => {
     const endpoint =
       departureFlightData?.endpoint || returnFlightData?.endpoint;
     if (endpoint) {
-      const providerName = endpoint.toLowerCase();
-      if (providerName === "sabre" || providerName === "iati") {
-        return providerName as "iati" | "sabre";
-      }
+      return endpoint.toLowerCase();
     }
-    return "iati"; // Default to iati if endpoint not found
+    return "iati"; // Default if endpoint not found
   }, [departureFlightData?.endpoint, returnFlightData?.endpoint]);
 
   const [getFlightFare, { data, isLoading: isFetching, error }] =

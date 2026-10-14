@@ -3,10 +3,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useSearchFlightsIatiQuery,
-  useSearchFlightsSabreQuery,
-} from "@/redux/features/flights/flightsApi";
 import { RootState } from "@/redux/app/store";
 import {
   setPriceRange,
@@ -16,9 +12,8 @@ import {
   setMatchingReturnFlights,
   setReturnFlightsActualPriceRange,
 } from "@/redux/features/flights/flightFilterSlice";
-import { mergeFlightData } from "@/utils/mergeFlightData";
-import { mergeFlightFilterOptions } from "@/utils/mergeFlightFilterOptions";
 import { useReturnFlightsMap } from "@/hooks/useFlightData";
+import { useMultiProviderFlightSearch } from "@/hooks/useMultiProviderFlightSearch";
 import { calculateReturnFlightFilterOptions } from "@/utils/returnFlightFilterUtils";
 import { FlightDirection } from "@/types/flightTypes";
 import ShowFareFilters from "./ShowFareFilters";
@@ -223,29 +218,13 @@ function ShowFareResultsSection({
     ],
   );
 
-  // Use currentData (not data) so a new search does not keep showing the previous results.
-  const { currentData: iatiData, isFetching: isIatiFetching } =
-    useSearchFlightsIatiQuery(searchBody);
+  const {
+    mergedData,
+    isAnyFetching,
+    allProvidersFinished: isBothDone,
+    hasAnyData,
+  } = useMultiProviderFlightSearch(searchBody);
 
-  const { currentData: sabreData, isFetching: isSabreFetching } =
-    useSearchFlightsSabreQuery(searchBody);
-
-  const mergedData = useMemo(() => {
-    if (!iatiData && !sabreData) return undefined;
-    const mergedFlights = mergeFlightData(iatiData?.data, sabreData?.data);
-    const mergedFilterOptions = mergeFlightFilterOptions(
-      iatiData?.filteringOptions,
-      sabreData?.filteringOptions,
-    );
-    return {
-      data: mergedFlights,
-      filteringOptions: mergedFilterOptions,
-    };
-  }, [iatiData, sabreData]);
-
-  const isAnyFetching = isIatiFetching || isSabreFetching;
-  const isBothDone = !isIatiFetching && !isSabreFetching;
-  const hasAnyData = !!(iatiData || sabreData);
   const isFullLoading = isAnyFetching && !hasAnyData;
   const isPartialLoading = isAnyFetching && hasAnyData;
 
