@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { flushSync } from "react-dom";
+import { createPortal, flushSync } from "react-dom";
 import Image from "next/image";
 import { ArrowRightLeft, ArrowUpDown } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -287,18 +287,21 @@ function StaticFlightSearchBox({
 
   return (
     <>
-      {isNavigating ? (
-        <div className="fixed inset-0 z-[200] flex h-screen w-screen items-center justify-center overflow-hidden bg-white">
-          <Image
-            src={logoMoving}
-            alt="logo"
-            width={800}
-            height={800}
-            className="h-20 w-20"
-            priority
-          />
-        </div>
-      ) : null}
+      {isNavigating
+        ? createPortal(
+            <div className="fixed inset-0 z-[200] flex h-screen w-screen items-center justify-center overflow-hidden bg-white">
+              <Image
+                src={logoMoving}
+                alt="logo"
+                width={800}
+                height={800}
+                className="h-20 w-20"
+                priority
+              />
+            </div>,
+            document.body,
+          )
+        : null}
       <div
         className={cn(
           "mt-0 md:mt-3 w-full rounded-[8px] bg-white p-3 pt-2 md:p-5",

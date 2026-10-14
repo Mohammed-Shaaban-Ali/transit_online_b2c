@@ -7,7 +7,7 @@ import { useRouter } from "@/i18n/navigation";
 import { useForm, type Resolver } from "react-hook-form";
 import { FaSearch } from "react-icons/fa";
 import { useEffect, useMemo, useState } from "react";
-import { flushSync } from "react-dom";
+import { createPortal, flushSync } from "react-dom";
 import Image from "next/image";
 import logoMoving from "@/public/images/gitalogo.png";
 import { localStorageHotelSearchKey } from "@/constants";
@@ -237,18 +237,21 @@ function HotelsTestHotelSearchForm({
 
   return (
     <>
-      {isNavigating && !stayOnPage ? (
-        <div className="fixed inset-0 z-[200] flex h-screen w-screen items-center justify-center overflow-hidden bg-white">
-          <Image
-            src={logoMoving}
-            alt="logo"
-            width={800}
-            height={800}
-            className="h-20 w-20"
-            priority
-          />
-        </div>
-      ) : null}
+      {isNavigating && !stayOnPage
+        ? createPortal(
+            <div className="fixed inset-0 z-[200] flex h-screen w-screen items-center justify-center overflow-hidden bg-white">
+              <Image
+                src={logoMoving}
+                alt="logo"
+                width={800}
+                height={800}
+                className="h-20 w-20"
+                priority
+              />
+            </div>,
+            document.body,
+          )
+        : null}
       <form
         onSubmit={form.handleSubmit(onSubmit, onInvalid)}
         className={cn(
